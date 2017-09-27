@@ -1,0 +1,8 @@
+/* the humans responsible & colophon */
+/* humanstxt.org */
+
+/* TEAM */
+
+  Shopify: Max Hoffmann, Curtis Dulmage
+  Site: https://www.shopify.ca
+  Location: Ottawa, Ontario, Canada

@@ -1,0 +1,64 @@
+{
+  "name": "@shopify/draggable",
+  "version": "1.0.0-beta",
+  "private": false,
+  "license": "MIT",
+  "description": "The JavaScript Drag & Drop library your grandparents warned you about.",
+  "author": "Shopify <dev@shopify.com>",
+  "homepage": "https://github.com/Shopify/draggable#readme",
+  "repository": "https://github.com/Shopify/draggable",
+  "contributors": [
+    {
+      "name" : "Max Hoffmann",
+      "email" : "max.hoffmann@shopify.com"
+    },
+    {
+      "name" : "Curtis Dulmage",
+      "email" : "curtis.dulmage@shopify.com"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/Shopify/draggable/issues"
+  },
+  "keywords": [
+    "shopify",
+    "draggable",
+    "drag-and-drop",
+    "es6"
+  ],
+  "main": "./lib/draggable.js",
+  "scripts": {
+    "build": "webpack",
+    "prepublish": "npm run build",
+    "lint": "eslint ./src --max-warnings 0",
+    "test": "jest --config config.json",
+    "test-ci": "jest --config config.json --coverage"
+  },
+  "files": [
+    "lib/index.js"
+  ],
+  "devDependencies": {
+    "babel-core": "6.24.1",
+    "babel-preset-shopify": "16.0.2",
+    "esdoc-standard-plugin": "^1.0.0",
+    "babel-jest": "^20.0.3",
+    "babel-loader": "^7.0.0",
+    "esdoc": "latest",
+    "eslint": "3.17.x",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-shopify": "^15.2.0",
+    "jest": "^20.0.4",
+    "webpack": "^2.4.1"
+  },
+  "eslintConfig": {
+    "extends": "plugin:shopify/esnext",
+    "env": {}
+  },
+  "babel": {
+    "presets": [
+      [
+        "shopify/web"
+      ]
+    ]
+  }
+}

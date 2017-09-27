@@ -1,0 +1,192 @@
+[
+  {
+    "name": "Scrollable#hasDefinedScrollableElements",
+    "filePath": "src/Draggable/Plugins/Scrollable/Scrollable.js",
+    "lines": [
+      {
+        "lineNumber": 127,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 128,
+        "line": "   * Returns true if at least one scrollable element have been defined via options"
+      },
+      {
+        "lineNumber": 129,
+        "line": "   * @param {HTMLElement} target"
+      },
+      {
+        "lineNumber": 130,
+        "line": "   * @return {Boolean}"
+      },
+      {
+        "lineNumber": 131,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 132,
+        "line": "  hasDefinedScrollableElements() {"
+      }
+    ],
+    "codeParams": [],
+    "docParams": [
+      "target"
+    ]
+  },
+  {
+    "name": "DragSensor#[onMouseUp]",
+    "filePath": "src/Draggable/Sensors/DragSensor/DragSensor.js",
+    "lines": [
+      {
+        "lineNumber": 213,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 214,
+        "line": "   * Mouse up handler"
+      },
+      {
+        "lineNumber": 215,
+        "line": "   * @private"
+      },
+      {
+        "lineNumber": 216,
+        "line": "   * @param {Event} event - Mouse up event"
+      },
+      {
+        "lineNumber": 217,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 218,
+        "line": "  [onMouseUp]() {"
+      }
+    ],
+    "codeParams": [],
+    "docParams": [
+      "event"
+    ]
+  },
+  {
+    "name": "DragSensor#[reset]",
+    "filePath": "src/Draggable/Sensors/DragSensor/DragSensor.js",
+    "lines": [
+      {
+        "lineNumber": 222,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 223,
+        "line": "   * Mouse up handler"
+      },
+      {
+        "lineNumber": 224,
+        "line": "   * @private"
+      },
+      {
+        "lineNumber": 225,
+        "line": "   * @param {Event} event - Mouse up event"
+      },
+      {
+        "lineNumber": 226,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 227,
+        "line": "  [reset]() {"
+      }
+    ],
+    "codeParams": [],
+    "docParams": [
+      "event"
+    ]
+  },
+  {
+    "name": "Snappable#[onDragStop]",
+    "filePath": "src/Plugins/Snappable/Snappable.js",
+    "lines": [
+      {
+        "lineNumber": 75,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 76,
+        "line": "   * Drag stop handler"
+      },
+      {
+        "lineNumber": 77,
+        "line": "   * @private"
+      },
+      {
+        "lineNumber": 78,
+        "line": "   * @param {DragStopEvent} event - Drag stop event"
+      },
+      {
+        "lineNumber": 79,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 80,
+        "line": "  [onDragStop]() {"
+      }
+    ],
+    "codeParams": [],
+    "docParams": [
+      "event"
+    ]
+  },
+  {
+    "name": "closest",
+    "filePath": "src/shared/utils/closest/closest.js",
+    "lines": [
+      {
+        "lineNumber": 6,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 7,
+        "line": " * Get the closest parent element of a given element that matches the given"
+      },
+      {
+        "lineNumber": 8,
+        "line": " * selector string or matching function"
+      },
+      {
+        "lineNumber": 9,
+        "line": " *"
+      },
+      {
+        "lineNumber": 10,
+        "line": " * @param {Element} element The child element to find a parent of"
+      },
+      {
+        "lineNumber": 11,
+        "line": " * @param {String|Function} selector The string or function to use to match"
+      },
+      {
+        "lineNumber": 12,
+        "line": " *     the parent element"
+      },
+      {
+        "lineNumber": 13,
+        "line": " * @return {Element|null}"
+      },
+      {
+        "lineNumber": 14,
+        "line": " */"
+      },
+      {
+        "lineNumber": 15,
+        "line": "export default function closest(element, value) {"
+      }
+    ],
+    "codeParams": [
+      "element",
+      "value"
+    ],
+    "docParams": [
+      "element",
+      "selector"
+    ]
+  }
+]

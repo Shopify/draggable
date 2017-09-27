@@ -1,5 +1,5 @@
 <a href="https://circleci.com/gh/Shopify/draggable">
-  <img src="https://circleci.com/gh/Shopify/draggable.svg?style=shield&circle-token=28089dd4db57728014bfc2eedd2034c209784cdf" title="CircleCI status" alt="CircleCI status">
+  <img src="https://circleci.com/gh/Shopify/draggable.svg?style=shield&circle-token=bd97f87d63e330e3b4b186ef11d8223889ef925f" title="CircleCI status" alt="CircleCI status">
 </a>
 
 <a href="https://shopify.github.io/draggable" title="Visit Draggable website">

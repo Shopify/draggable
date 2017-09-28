@@ -410,7 +410,7 @@ swappable.on('snap:out', () => console.log('snap:out'));
 
 Contributions are more than welcome, the code base is still new and needs more love.
 
-1. Clone the repo: `git clone git@github.com:Shopify/draggable`
+1. Clone the repo: `git clone https://github.com/Shopify/draggable.git`
 2. `cd draggable`
 3. `yarn install` or `npm install`
 4. Run tests with `yarn test` or `npm run test`

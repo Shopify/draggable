@@ -372,8 +372,8 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
   plugins: [Collidable]
 });
 
-swappable.on('collidable:in', () => console.log('collidable:in'))
-swappable.on('collidable:out', () => console.log('collidable:out'));
+draggable.on('collidable:in', () => console.log('collidable:in'))
+draggable.on('collidable:out', () => console.log('collidable:out'));
 ```
 
 ### Snappable
@@ -402,8 +402,8 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
   plugins: [Snappable]
 });
 
-swappable.on('snap:in', () => console.log('snap:in'))
-swappable.on('snap:out', () => console.log('snap:out'));
+draggable.on('snap:in', () => console.log('snap:in'))
+draggable.on('snap:out', () => console.log('snap:out'));
 ```
 
 ## Contributing

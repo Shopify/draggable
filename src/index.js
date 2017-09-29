@@ -3,12 +3,18 @@ import Sortable from './sortable';
 import Swappable from './swappable';
 import Droppable from './droppable';
 import AbstractEvent from './events/abstract-event';
+import Snappable from './behaviour/snappable';
+import Collidable from './behaviour/collidable';
 
-export {Draggable};
-export {Sortable};
-export {Swappable};
-export {Droppable};
-export {AbstractEvent};
+export {
+  Draggable,
+  Sortable,
+  Swappable,
+  Droppable,
+  Snappable,
+  Collidable,
+  AbstractEvent,
+};
 
 export function createEventClass(options) {
   function EventConstructor() { return null; }

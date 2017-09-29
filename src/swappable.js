@@ -51,19 +51,20 @@ export default class Swappable {
   }
 
   _onDragOver(event) {
-    if (event.over === event.source) {
+    if (event.over === event.source || event.canceled()) {
       return;
     }
 
-    if (event.canceled()) {
-      return;
-    }
-
+    // swap originally swapped element back
     if (this.lastOver && this.lastOver !== event.over) {
       swap(this.lastOver, event.source);
     }
 
-    this.lastOver = event.over;
+    if (this.lastOver === event.over) {
+      this.lastOver = null;
+    } else {
+      this.lastOver = event.over;
+    }
 
     swap(event.source, event.over);
 

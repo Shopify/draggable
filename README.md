@@ -2,27 +2,30 @@
   <img src="https://circleci.com/gh/Shopify/draggable.svg?style=shield&circle-token=bd97f87d63e330e3b4b186ef11d8223889ef925f" title="CircleCI status" alt="CircleCI status">
 </a>
 
+<hr/>
+
 <a href="https://shopify.github.io/draggable" title="Visit Draggable website">
   <img src="https://user-images.githubusercontent.com/643944/30787041-84ccc1aa-a14e-11e7-982d-972978185636.png" alt="">
 </a>
+
 <hr/>
 
-**Warning: Draggable is still in beta version**
+**Warning: Draggable is currently in beta**
 
-Get complete control over drag and drop behavior with Draggable! Draggable abstracts
-native browser events into a complex API to create a custom drag and drop experience.
+Get complete control over drag and drop behaviour with Draggable! Draggable abstracts
+native browser events into a comprehensive API to create a custom drag and drop experience.
 `Draggable` comes with additional modules: `Sortable`, `Droppable`, `Swappable`. Draggable
-itself does not perform any sorting behavior while dragging, but does the heavy lifting, e.g.
+itself does not perform any sorting behaviour while dragging, but does the heavy lifting, e.g.
 creates mirror, emits events, manages sensor events, makes elements draggable.
 
 The additional modules are built on top of `Draggable` and therefore provide a similar API
-interface, read the documentation below.
+interface, for more information read the documentation below.
 
 **Features**
 - Works with native drag, mouse, touch and force touch events
-- Can extend dragging behavior by hooking into draggables event life cycle
+- Can extend dragging behaviour by hooking into draggables event life cycle
 - Can extend drag detection by adding sensors to draggable
-- The library is modular, so you can require what you need only
+- The library is targeted ES6 first
 
 ## Table of Contents
 
@@ -54,7 +57,10 @@ interface, read the documentation below.
 * [Plugins](#plugins)
   * [Collidable](#collidable)
   * [Snappable](#snappable)
+* [Known issues](#known-issues)
 * [Contributing](#contributing)
+* [Roadmap](#roadmap)
+* [Copyright](#copyright)
 
 ## Install
 
@@ -74,49 +80,49 @@ yarn add @shopify/draggable
 
 ### API
 
-**`new Draggable(containers: Array[HTMLElement]|NodeList, options: Object): Draggable`**
+**`new Draggable(containers: Array[HTMLElement]|NodeList, options: Object): Draggable`**  
 To create a draggable instance you need to specify the containers that hold draggable items, e.g.
 `[document.body]` would work too. The second argument is an options object, which is described
 below.
 
-**`draggable.on(eventName: String, listener: Function): Draggable`**
+**`draggable.on(eventName: String, listener: Function): Draggable`**  
 Draggable is an event emitter, so you can register callbacks for events. Draggable
 also supports method chaining.
 
-**`draggable.off(eventName: String, listener: Function): Draggable`**
+**`draggable.off(eventName: String, listener: Function): Draggable`**  
 You can unregister listeners by using `.off()`, make sure to provide the same callback.
 
-**`draggable.trigger(eventName: String, event: AbstractEvent): Draggable`**
+**`draggable.trigger(eventName: String, event: AbstractEvent): Draggable`**  
 You can trigger events through draggable. This is used to fire events internally or by
 extensions of Draggable.
 
-**`draggable.destroy(): void`**
+**`draggable.destroy(): void`**  
 Detaches all sensors and listeners, and cleans up after itself.
 
 ### Options
 
-**`draggable {String}`**
+**`draggable {String}`**  
 A css selector for draggable elements within the `containers` specified. By default it will
 look for an element with `.draggable-source` class. Default: `.draggable-source`
 
-**`handle {String}`**
+**`handle {String}`**  
 Specify a css selector for a handle element if you don't want to allow drag action
 on the entire element. Default: `null`
 
-**`delay {Number}`**
+**`delay {Number}`**  
 If you want to delay a drag start you can specify delay in milliseconds. This can be useful
 for draggable elements within scrollable containers. Default: `0`
 
-**`native {Boolean}`**
-If enabled Draggable will use the browsers native drag events to detect drag behavior. By default
-it will use mouse events to detect drag behavior. You can only customize the mirror element when
+**`native {Boolean}`**  
+If enabled Draggable will use the browsers native drag events to detect drag behaviour. By default
+it will use mouse events to detect drag behaviour. You can only customize the mirror element when
 using mouse events, otherwise mirror will be `null` in events. Default: `false`
 
-**`plugins {Array[Plugin]}`**
-Plugins add behavior to Draggable by hooking into its life cycle, e.g. one of the default
+**`plugins {Array[Plugin]}`**  
+Plugins add behaviour to Draggable by hooking into its life cycle, e.g. one of the default
 plugins controls the mirror movement. Default: `[Mirror, Accessibility]`
 
-**`classes {Object}`**
+**`classes {Object}`**  
 Draggable adds classes to elements to indicate state. These classes can be used to add styling
 on elements in certain states.
 
@@ -169,23 +175,23 @@ three events on top of the draggable events: `sortable:start`, `sortable:sorted`
 
 ### API
 
-**`new Sortable(containers: Array[HTMLElement]|NodeList, options: Object): Sortable`**
+**`new Sortable(containers: Array[HTMLElement]|NodeList, options: Object): Sortable`**  
 To create a sortable instance you need to specify the containers that hold draggable items, e.g.
 `[document.body]` would work too. The second argument is an options object, which is described
 below.
 
-**`sortable.on(eventName: String, listener: Function): Sortable`**
+**`sortable.on(eventName: String, listener: Function): Sortable`**  
 Sortable uses Draggables event emitter, so you can register callbacks for events. Sortable
 also supports method chaining.
 
-**`sortable.off(eventName: String, listener: Function): Sortable`**
+**`sortable.off(eventName: String, listener: Function): Sortable`**  
 You can unregister listeners by using `.off()`, make sure to provide the same callback.
 
-**`sortable.trigger(eventName: String, event: AbstractEvent): Sortable`**
+**`sortable.trigger(eventName: String, event: AbstractEvent): Sortable`**  
 You can trigger events through sortable. This is used to fire events internally or by
 extensions of Draggable.
 
-**`sortable.destroy(): void`**
+**`sortable.destroy(): void`**  
 Detaches all sensors and listeners, and cleans up after itself.
 
 ### Options
@@ -226,28 +232,28 @@ three events on top of the draggable events: `sortable:start`, `sortable:sorted`
 
 ### API
 
-**`new Droppable(containers: Array[HTMLElement]|NodeList, options: Object): Droppable`**
+**`new Droppable(containers: Array[HTMLElement]|NodeList, options: Object): Droppable`**  
 To create a droppable instance you need to specify the containers that hold draggable items, e.g.
 `[document.body]` would work too. The second argument is an options object, which is described
 below.
 
-**`droppable.on(eventName: String, listener: Function): Droppable`**
+**`droppable.on(eventName: String, listener: Function): Droppable`**  
 Droppable uses Draggables event emitter, so you can register callbacks for events. Droppable
 also supports method chaining.
 
-**`droppable.off(eventName: String, listener: Function): Droppable`**
+**`droppable.off(eventName: String, listener: Function): Droppable`**  
 You can unregister listeners by using `.off()`, make sure to provide the same callback.
 
-**`droppable.trigger(eventName: String, event: AbstractEvent): Droppable`**
+**`droppable.trigger(eventName: String, event: AbstractEvent): Droppable`**  
 You can trigger events through droppable. This is used to fire events internally or by
 extensions of Draggable.
 
-**`droppable.destroy(): void`**
+**`droppable.destroy(): void`**  
 Detaches all sensors and listeners, and cleans up after itself.
 
 ### Options
 
-**`droppable {String|Array[HTMLElement]|NodeList|Function}`**
+**`droppable {String|Array[HTMLElement]|NodeList|Function}`**  
 A css selector string, an array of elements, a NodeList or a function returning elements for droppable
 elements within the `containers` specified.
 
@@ -288,23 +294,23 @@ so any draggable element that gets dragged over will be swapped with the source 
 
 ### API
 
-**`new Swappable(containers: Array[HTMLElement]|NodeList, options: Object): Swappable`**
+**`new Swappable(containers: Array[HTMLElement]|NodeList, options: Object): Swappable`**  
 To create a swappable instance you need to specify the containers that hold draggable items, e.g.
 `[document.body]` would work too. The second argument is an options object, which is described
 below.
 
-**`swappable.on(eventName: String, listener: Function): Swappable`**
+**`swappable.on(eventName: String, listener: Function): Swappable`**  
 Swappable uses Draggables event emitter, so you can register callbacks for events. Swappable
 also supports method chaining.
 
-**`swappable.off(eventName: String, listener: Function): Swappable`**
+**`swappable.off(eventName: String, listener: Function): Swappable`**  
 You can unregister listeners by using `.off()`, make sure to provide the same callback.
 
-**`swappable.trigger(eventName: String, event: AbstractEvent): Swappable`**
+**`swappable.trigger(eventName: String, event: AbstractEvent): Swappable`**  
 You can trigger events through swappable. This is used to fire events internally or by
 extensions of Draggable.
 
-**`droppable.destroy(): void`**
+**`droppable.destroy(): void`**  
 Detaches all sensors and listeners, and cleans up after itself.
 
 ### Options
@@ -346,11 +352,11 @@ Draggables ships with two optional plugins: `Collidable` & `Snappable`
 ### Collidable
 
 When you use the collidable plugin you can specify which elements you **can't** drag over
-and it will freeze the mirror movement for you.
+and it will freeze the mirror movement for you. These currently only work with `Sortable`, `Swappable` and `Droppable`.
 
 #### Options
 
-**`collidables {String|Array[HTMLElement]|NodeList|HTMLElement|Function}`**
+**`collidables {String|Array[HTMLElement]|NodeList|HTMLElement|Function}`**  
 A css selector string, an array of elements, a NodeList, a HTMLElement or a function returning elements for collidable
 elements.
 
@@ -364,16 +370,16 @@ elements.
 #### Example
 
 ```js
-import {Draggable, Collidable} from '@shopify/draggable';
+import {Sortable, Collidable} from '@shopify/draggable';
 
-const draggable = new Draggable(document.querySelectorAll('ul'), {
+const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
   collidables: '.other-list',
   plugins: [Collidable]
 });
 
-draggable.on('collidable:in', () => console.log('collidable:in'))
-draggable.on('collidable:out', () => console.log('collidable:out'));
+sortable.on('collidable:in', () => console.log('collidable:in'));
+sortable.on('collidable:out', () => console.log('collidable:out'));
 ```
 
 ### Snappable
@@ -395,16 +401,21 @@ _No options_
 #### Example
 
 ```js
-import {Draggable, Snappable} from '@shopify/draggable';
+import {Sortable, Snappable} from '@shopify/draggable';
 
-const draggable = new Draggable(document.querySelectorAll('ul'), {
+const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
   plugins: [Snappable]
 });
 
-draggable.on('snap:in', () => console.log('snap:in'))
-draggable.on('snap:out', () => console.log('snap:out'));
+sortable.on('snap:in', () => console.log('snap:in'));
+sortable.on('snap:out', () => console.log('snap:out'));
 ```
+
+## Known issues
+
+- Touch events freeze sometimes while dragging
+- Safari 11 uses force touch, but there are no visual guidelines on the website
 
 ## Contributing
 

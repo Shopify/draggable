@@ -192,6 +192,19 @@ describe('Draggable', () => {
     });
   });
 
+  describe('#on', () => {
+    test('it should add an event handler to the list of callbacks', () => {
+      const stubHandler = () => {};
+
+      expect('my:event' in draggable.callbacks).toBe(false);
+
+      draggable.on('my:event', stubHandler);
+
+      expect('my:event' in draggable.callbacks).toBe(true);
+      expect(draggable.callbacks['my:event']).toMatchObject([stubHandler]);
+    });
+  });
+
   test('triggers `drag:start` drag event on mousedown', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;

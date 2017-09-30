@@ -175,4 +175,43 @@ describe('Draggable', () => {
       .not
       .toContain('draggable-source--placed');
   });
+
+  test('adds `container:placed` classname to draggable container element on mouseup', () => {
+    const draggableElement = sandbox.querySelector('li');
+
+    triggerEvent(draggableElement, 'mousedown');
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    const container = sandbox.querySelector('ul');
+
+    triggerEvent(draggableElement, 'mouseup');
+
+    expect(container.classList)
+      .toContain('draggable-container--placed');
+  });
+
+  test('removes `container:placed` classname from draggable container element on mouseup', () => {
+    const draggableElement = sandbox.querySelector('li');
+
+    triggerEvent(draggableElement, 'mousedown');
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    const container = sandbox.querySelector('ul');
+
+    triggerEvent(draggableElement, 'mouseup');
+
+    expect(container.classList)
+      .toContain('draggable-container--placed');
+
+    // Wait for default draggable.options.placedTimeout delay
+    jest.runTimersToTime(800);
+
+    expect(container.classList)
+      .not
+      .toContain('draggable-container--placed');
+  });
 });

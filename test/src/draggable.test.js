@@ -1,5 +1,8 @@
 import Draggable from 'draggable';
-import {DragStartEvent} from 'events/drag-event';
+import {
+  DragStartEvent,
+  DragStopEvent
+} from 'events/drag-event';
 
 import {
   createSandbox,
@@ -41,6 +44,27 @@ describe('Draggable', () => {
 
     // Wait for delay
     jest.runTimersToTime(100);
+
+    expect(callback.mock.calls[0][0].type).toBe('drag:start');
+    expect(callback.mock.calls[0][0]).toBeInstanceOf(DragStartEvent);
+  });
+
+  test('should trigger `drag:start` drag event on dragstart', () => {
+    const draggableElement = sandbox.querySelector('li');
+    document.elementFromPoint = () => draggableElement;
+
+    const callback = jest.fn();
+    draggable.on('drag:start', callback);
+
+    // Wait for delay
+    triggerEvent(draggableElement, 'mousedown');
+
+    jest.runTimersToTime(100);
+
+    triggerEvent(draggableElement, 'dragstart', {
+      clientX: 10,
+      clientY: 10,
+    });
 
     expect(callback.mock.calls[0][0].type).toBe('drag:start');
     expect(callback.mock.calls[0][0]).toBeInstanceOf(DragStartEvent);

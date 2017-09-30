@@ -60,6 +60,41 @@ describe('Draggable', () => {
           .toBe(defaultOptions[key]);
       }
     });
+
+    test('should call Plugin#attach once on each of provided plugins', () => {
+      class StubPlugin {
+        constructor(draggable) {
+          this.numTimesAttachCalled = 0;
+          this.draggable = draggable;
+          this.wasAttached = false;
+        }
+
+        attach() {
+          this.numTimesAttachCalled++;
+          this.wasAttached = true;
+        }
+      }
+
+      const containers = sandbox.querySelectorAll('ul');
+      const newInstance = new Draggable(containers, {
+        plugins: [StubPlugin, StubPlugin, StubPlugin]
+      });
+
+      expect(newInstance.activePlugins.length).toBe(3);
+
+      newInstance.activePlugins.forEach((plugin) => {
+        expect(plugin).toBeInstanceOf(StubPlugin);
+      });
+
+      expect(newInstance.activePlugins[0].wasAttached).toBe(true);
+      expect(newInstance.activePlugins[0].numTimesAttachCalled).toBe(1);
+
+      expect(newInstance.activePlugins[1].wasAttached).toBe(true);
+      expect(newInstance.activePlugins[1].numTimesAttachCalled).toBe(1);
+
+      expect(newInstance.activePlugins[2].wasAttached).toBe(true);
+      expect(newInstance.activePlugins[2].numTimesAttachCalled).toBe(1);
+    });
   });
 
   test('triggers `drag:start` drag event on mousedown', () => {

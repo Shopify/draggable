@@ -33,6 +33,43 @@ const sampleMarkup = `
   </ul>
 `;
 
+/**
+ * A test stub for a Plugin
+ *
+ * @class StubPlugin
+ */
+class StubPlugin {
+  /**
+   * Constructor.
+   *
+   * @constructor
+   * @param {Draggable} draggable
+   */
+  constructor(draggable) {
+    this.numTimesAttachCalled = 0;
+    this.numTimesDetachCalled = 0;
+    this.draggable = draggable;
+    this.wasAttached = false;
+    this.wasDetached = false;
+  }
+
+  /**
+   * Stubbed attach method
+   */
+  attach() {
+    this.numTimesAttachCalled++;
+    this.wasAttached = true;
+  }
+
+  /**
+   * Stubbed detach method
+   */
+  detach() {
+    this.numTimesDetachCalled++;
+    this.wasDetached = true;
+  }
+}
+
 describe('Draggable', () => {
   let sandbox;
   let draggable;
@@ -67,19 +104,6 @@ describe('Draggable', () => {
     });
 
     test('should call Plugin#attach once on each of provided plugins', () => {
-      class StubPlugin {
-        constructor(draggable) {
-          this.numTimesAttachCalled = 0;
-          this.draggable = draggable;
-          this.wasAttached = false;
-        }
-
-        attach() {
-          this.numTimesAttachCalled++;
-          this.wasAttached = true;
-        }
-      }
-
       const containers = sandbox.querySelectorAll('ul');
       const newInstance = new Draggable(containers, {
         plugins: [StubPlugin, StubPlugin, StubPlugin]
@@ -133,6 +157,38 @@ describe('Draggable', () => {
       expect(new sensors[0]).toBeInstanceOf(TouchSensor);
       expect(new sensors[1]).toBeInstanceOf(ForceTouchSensor);
       expect(new sensors[2]).toBeInstanceOf(DragSensor);
+    });
+  });
+
+  describe('#destroy', () => {
+    test('triggers `draggable:destroy` event on destroy', () => {
+      const callback = jest.fn();
+      draggable.on('draggable:destroy', callback);
+
+      draggable.destroy();
+
+      const call = callback.mock.calls[0][0];
+      expect(call.type).toBe('draggable:destroy');
+      expect(call).toBeInstanceOf(DraggableDestroyEvent);
+      expect(call.draggable).toBe(draggable);
+    });
+
+    test('should call Plugin#detach once on each of provided plugins', () => {
+      const containers = sandbox.querySelectorAll('ul');
+      const newInstance = new Draggable(containers, {
+        plugins: [StubPlugin, StubPlugin, StubPlugin]
+      });
+
+      newInstance.destroy();
+
+      expect(newInstance.activePlugins[0].wasDetached).toBe(true);
+      expect(newInstance.activePlugins[0].numTimesDetachCalled).toBe(1);
+
+      expect(newInstance.activePlugins[1].wasDetached).toBe(true);
+      expect(newInstance.activePlugins[1].numTimesDetachCalled).toBe(1);
+
+      expect(newInstance.activePlugins[2].wasDetached).toBe(true);
+      expect(newInstance.activePlugins[2].numTimesDetachCalled).toBe(1);
     });
   });
 
@@ -209,18 +265,6 @@ describe('Draggable', () => {
     const sensorEvent = call.data.sensorEvent;
     expect(call.type).toBe('drag:stop');
     expect(call).toBeInstanceOf(DragStopEvent);
-  });
-
-  test('triggers `draggable:destroy` event on destroy', () => {
-    const callback = jest.fn();
-    draggable.on('draggable:destroy', callback);
-
-    draggable.destroy();
-
-    const call = callback.mock.calls[0][0];
-    expect(call.type).toBe('draggable:destroy');
-    expect(call).toBeInstanceOf(DraggableDestroyEvent);
-    expect(call.draggable).toBe(draggable);
   });
 
   test('adds `source:dragging` classname to draggable element on mousedown', () => {

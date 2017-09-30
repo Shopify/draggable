@@ -111,14 +111,28 @@ describe('Draggable', () => {
   });
 
   describe('#sensors', () => {
-    test('should return default sensors', () => {
+    test('should return default sensors for non-native (web) configuration', () => {
       const containers = sandbox.querySelectorAll('ul');
-      const newInstance = new Draggable(containers, {});
+      const newInstance = new Draggable(containers, {
+        native: false,
+      });
       const sensors = newInstance.sensors();
 
       expect(new sensors[0]).toBeInstanceOf(TouchSensor);
       expect(new sensors[1]).toBeInstanceOf(ForceTouchSensor);
       expect(new sensors[2]).toBeInstanceOf(MouseSensor);
+    });
+
+    test('should return native sensors for native (mobile) configuration', () => {
+      const containers = sandbox.querySelectorAll('ul');
+      const newInstance = new Draggable(containers, {
+        native: true,
+      });
+      const sensors = newInstance.sensors();
+
+      expect(new sensors[0]).toBeInstanceOf(TouchSensor);
+      expect(new sensors[1]).toBeInstanceOf(ForceTouchSensor);
+      expect(new sensors[2]).toBeInstanceOf(DragSensor);
     });
   });
 

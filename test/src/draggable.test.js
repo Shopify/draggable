@@ -1,9 +1,17 @@
-import Draggable from 'draggable';
+import Draggable,
+{
+  defaultOptions
+} from 'draggable';
+
+import Accessibility from 'core/accessibility';
+import Mirror from 'core/mirror';
+
 import {
   DragMoveEvent,
   DragStartEvent,
   DragStopEvent,
 } from 'events/drag-event';
+
 import {
   DraggableDestroyEvent,
 } from 'events/draggable-event';
@@ -36,6 +44,22 @@ describe('Draggable', () => {
 
   afterEach(() => {
     sandbox.parentNode.removeChild(sandbox);
+  });
+
+  describe('#constructor', () => {
+    test('should be an instance of Draggable', () => {
+      expect(draggable).toBeInstanceOf(Draggable);
+    });
+
+    test('should initialize with default options', () => {
+      const containers = sandbox.querySelectorAll('ul');
+      const newInstance = new Draggable(containers);
+
+      for (const key in defaultOptions) {
+        expect(newInstance.options[key])
+          .toBe(defaultOptions[key]);
+      }
+    });
   });
 
   test('triggers `drag:start` drag event on mousedown', () => {

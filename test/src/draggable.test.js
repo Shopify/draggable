@@ -21,6 +21,11 @@ import {
   triggerEvent,
 } from 'helper';
 
+import DragSensor from 'sensors/drag-sensor';
+import MouseSensor from 'sensors/mouse-sensor';
+import TouchSensor from 'sensors/touch-sensor';
+import ForceTouchSensor from 'sensors/force-touch-sensor';
+
 const sampleMarkup = `
   <ul>
     <li>First item</li>
@@ -94,6 +99,26 @@ describe('Draggable', () => {
 
       expect(newInstance.activePlugins[2].wasAttached).toBe(true);
       expect(newInstance.activePlugins[2].numTimesAttachCalled).toBe(1);
+    });
+
+    // TODO: Add coverage for calling Sensor#attach
+    test('should register sensors', () => {
+      const containers = sandbox.querySelectorAll('ul');
+      const newInstance = new Draggable(containers);
+
+      expect(newInstance.activeSensors.length).toBe(3);
+    });
+  });
+
+  describe('#sensors', () => {
+    test('should return default sensors', () => {
+      const containers = sandbox.querySelectorAll('ul');
+      const newInstance = new Draggable(containers, {});
+      const sensors = newInstance.sensors();
+
+      expect(new sensors[0]).toBeInstanceOf(TouchSensor);
+      expect(new sensors[1]).toBeInstanceOf(ForceTouchSensor);
+      expect(new sensors[2]).toBeInstanceOf(MouseSensor);
     });
   });
 

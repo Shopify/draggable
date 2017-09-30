@@ -238,6 +238,18 @@ describe('Draggable', () => {
       expect('my:event' in draggable.callbacks).toBe(true);
       expect(draggable.callbacks['my:event']).toMatchObject([]);
     });
+
+    test('should return draggable instance', () => {
+      const stubHandler = () => {};
+
+      draggable.on('my:event', stubHandler);
+
+      expect('my:event' in draggable.callbacks).toBe(true);
+
+      const returnValue = draggable.off('my:event', stubHandler);
+
+      expect(returnValue).toBe(draggable);
+    });
   });
 
   test('triggers `drag:start` drag event on mousedown', () => {

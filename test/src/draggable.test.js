@@ -45,8 +45,25 @@ describe('Draggable', () => {
     // Wait for delay
     jest.runTimersToTime(100);
 
-    expect(callback.mock.calls[0][0].type).toBe('drag:start');
-    expect(callback.mock.calls[0][0]).toBeInstanceOf(DragStartEvent);
+    const call = callback.mock.calls[0][0];
+    expect(call.type).toBe('drag:start');
+    expect(call).toBeInstanceOf(DragStartEvent);
+  });
+
+  test('should not trigger `drag:start` drag event on mousedown when button is 2', () => {
+    const draggableElement = sandbox.querySelector('li');
+    document.elementFromPoint = () => draggableElement;
+
+    const callback = jest.fn();
+    draggable.on('drag:start', callback);
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 2
+    });
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    expect(callback.mock.calls.length).toBe(0);
   });
 
   test('should trigger `drag:start` drag event on dragstart', () => {
@@ -61,12 +78,10 @@ describe('Draggable', () => {
 
     jest.runTimersToTime(100);
 
-    triggerEvent(draggableElement, 'dragstart', {
-      clientX: 10,
-      clientY: 10,
-    });
+    triggerEvent(draggableElement, 'dragstart');
 
-    expect(callback.mock.calls[0][0].type).toBe('drag:start');
-    expect(callback.mock.calls[0][0]).toBeInstanceOf(DragStartEvent);
+    const call = callback.mock.calls[0][0];
+    expect(call.type).toBe('drag:start');
+    expect(call).toBeInstanceOf(DragStartEvent);
   });
 });

@@ -203,6 +203,16 @@ describe('Draggable', () => {
       expect('my:event' in draggable.callbacks).toBe(true);
       expect(draggable.callbacks['my:event']).toMatchObject([stubHandler]);
     });
+
+    test('it should add an event handler to the list of callbacks', () => {
+      const stubHandler = () => {};
+
+      expect('my:event' in draggable.callbacks).toBe(false);
+
+      const returnValue = draggable.on('my:event', stubHandler);
+
+      expect(returnValue).toBe(draggable);
+    });
   });
 
   test('triggers `drag:start` drag event on mousedown', () => {

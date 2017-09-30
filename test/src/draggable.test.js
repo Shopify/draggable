@@ -204,7 +204,7 @@ describe('Draggable', () => {
       expect(draggable.callbacks['my:event']).toMatchObject([stubHandler]);
     });
 
-    test('it should add an event handler to the list of callbacks', () => {
+    test('should return draggable instance', () => {
       const stubHandler = () => {};
 
       expect('my:event' in draggable.callbacks).toBe(false);
@@ -212,6 +212,18 @@ describe('Draggable', () => {
       const returnValue = draggable.on('my:event', stubHandler);
 
       expect(returnValue).toBe(draggable);
+    });
+  });
+
+  describe('#off', () => {
+    test('should return null if event was not bound', () => {
+      const stubHandler = () => {};
+
+      expect('my:event' in draggable.callbacks).toBe(false);
+
+      const returnValue = draggable.off('my:event', stubHandler);
+
+      expect(returnValue).toBe(null);
     });
   });
 

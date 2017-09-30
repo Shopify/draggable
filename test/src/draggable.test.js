@@ -1,8 +1,12 @@
 import Draggable from 'draggable';
 import {
+  DragMoveEvent,
   DragStartEvent,
-  DragStopEvent
+  DragStopEvent,
 } from 'events/drag-event';
+import {
+  DraggableDestroyEvent,
+} from 'events/draggable-event';
 
 import {
   createSandbox,
@@ -50,25 +54,8 @@ describe('Draggable', () => {
     expect(call).toBeInstanceOf(DragStartEvent);
   });
 
-  test('should not trigger `drag:start` drag event on mousedown when button is 2', () => {
-    const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
-
-    const callback = jest.fn();
-    draggable.on('drag:start', callback);
-    triggerEvent(draggableElement, 'mousedown', {
-      button: 2
-    });
-
-    // Wait for delay
-    jest.runTimersToTime(100);
-
-    expect(callback.mock.calls.length).toBe(0);
-  });
-
   test('should trigger `drag:start` drag event on dragstart', () => {
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     const callback = jest.fn();
     draggable.on('drag:start', callback);
@@ -83,5 +70,58 @@ describe('Draggable', () => {
     const call = callback.mock.calls[0][0];
     expect(call.type).toBe('drag:start');
     expect(call).toBeInstanceOf(DragStartEvent);
+  });
+
+  test('triggers `drag:move` drag event on mousedown', () => {
+    const draggableElement = sandbox.querySelector('li');
+
+    triggerEvent(draggableElement, 'mousedown');
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    const callback = jest.fn();
+    draggable.on('drag:move', callback);
+    triggerEvent(draggableElement, 'mousemove', {
+      clientX: 39,
+      clientY: 82,
+    });
+
+    const call = callback.mock.calls[0][0];
+    const sensorEvent = call.data.sensorEvent;
+    expect(call.type).toBe('drag:move');
+    expect(call).toBeInstanceOf(DragMoveEvent);
+    expect(sensorEvent.clientX).toBe(39);
+    expect(sensorEvent.clientY).toBe(82);
+  });
+
+  test('triggers `drag:stop` drag event on mouseup', () => {
+    const draggableElement = sandbox.querySelector('li');
+
+    triggerEvent(draggableElement, 'mousedown');
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    const callback = jest.fn();
+    draggable.on('drag:stop', callback);
+    triggerEvent(draggableElement, 'mouseup');
+
+    const call = callback.mock.calls[0][0];
+    const sensorEvent = call.data.sensorEvent;
+    expect(call.type).toBe('drag:stop');
+    expect(call).toBeInstanceOf(DragStopEvent);
+  });
+
+  test('triggers `draggable:destroy` event on destroy', () => {
+    const callback = jest.fn();
+    draggable.on('draggable:destroy', callback);
+
+    draggable.destroy();
+
+    const call = callback.mock.calls[0][0];
+    expect(call.type).toBe('draggable:destroy');
+    expect(call).toBeInstanceOf(DraggableDestroyEvent);
+    expect(call.draggable).toBe(draggable);
   });
 });

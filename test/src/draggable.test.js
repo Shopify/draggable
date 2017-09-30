@@ -60,9 +60,9 @@ describe('Draggable', () => {
     const callback = jest.fn();
     draggable.on('drag:start', callback);
 
-    // Wait for delay
     triggerEvent(draggableElement, 'mousedown');
 
+    // Wait for delay
     jest.runTimersToTime(100);
 
     triggerEvent(draggableElement, 'dragstart');

@@ -124,4 +124,55 @@ describe('Draggable', () => {
     expect(call).toBeInstanceOf(DraggableDestroyEvent);
     expect(call.draggable).toBe(draggable);
   });
+
+  test('adds `source:dragging` classname to draggable element on mousedown', () => {
+    const draggableElement = sandbox.querySelector('li');
+
+    // Wait for delay
+    triggerEvent(draggableElement, 'mousedown');
+
+    jest.runTimersToTime(100);
+
+    expect(draggable.source.classList)
+      .toContain('draggable-source--is-dragging');
+  });
+
+  test('adds `source:placed` classname to draggable source element on mouseup', () => {
+    const draggableElement = sandbox.querySelector('li');
+
+    triggerEvent(draggableElement, 'mousedown');
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    const source = draggable.source;
+
+    triggerEvent(draggableElement, 'mouseup');
+
+    expect(source.classList)
+      .toContain('draggable-source--placed');
+  });
+
+  test('removes `source:placed` classname from draggable source element on mouseup', () => {
+    const draggableElement = sandbox.querySelector('li');
+
+    triggerEvent(draggableElement, 'mousedown');
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    const source = draggable.source;
+
+    triggerEvent(draggableElement, 'mouseup');
+
+    expect(source.classList)
+      .toContain('draggable-source--placed');
+
+    // Wait for default draggable.options.placedTimeout delay
+    jest.runTimersToTime(700);
+
+    expect(source.classList)
+      .not
+      .toContain('draggable-source--placed');
+  });
 });

@@ -34,7 +34,7 @@ import {
   MirrorDestroyEvent,
 } from './events/mirror-event';
 
-const defaults = {
+export const defaultOptions = {
   draggable: '.draggable-source',
   handle: null,
   delay: 0,
@@ -74,7 +74,7 @@ export default class Draggable {
    */
   constructor(containers = [], options = {}) {
     this.containers = containers;
-    this.options = Object.assign({}, defaults, options);
+    this.options = Object.assign({}, defaultOptions, options);
     this.activeSensors = [];
     this.activePlugins = [];
     this.callbacks = {};
@@ -463,7 +463,7 @@ export default class Draggable {
   }
 
   getClassNameFor(name) {
-    return this.options.classes[name] || defaults.classes[name];
+    return this.options.classes[name] || defaultOptions.classes[name];
   }
 
   closestContainer(target) {

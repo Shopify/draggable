@@ -128,12 +128,51 @@ describe('Draggable', () => {
   test('adds `source:dragging` classname to draggable element on mousedown', () => {
     const draggableElement = sandbox.querySelector('li');
 
-    // Wait for delay
     triggerEvent(draggableElement, 'mousedown');
 
+    // Wait for delay
     jest.runTimersToTime(100);
 
     expect(draggable.source.classList)
+      .toContain('draggable-source--is-dragging');
+  });
+
+  test('removes `source:dragging` classname from draggable element on mouseup', () => {
+    const draggableElement = sandbox.querySelector('li');
+
+    triggerEvent(draggableElement, 'mousedown');
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    const source = draggable.source;
+
+    expect(source.classList)
+      .toContain('draggable-source--is-dragging');
+
+    triggerEvent(draggableElement, 'mouseup');
+
+    expect(source.classList)
+      .not
+      .toContain('draggable-source--is-dragging');
+  });
+
+  test('removes `source:dragging` classname from draggable element on dragEvent.cancelled', () => {
+    const draggableElement = sandbox.querySelector('li');
+
+    draggable.on('drag:start', (event) => {
+      event.cancel();
+    });
+
+    triggerEvent(draggableElement, 'mousedown');
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    const source = draggable.source;
+
+    expect(source.classList)
+      .not
       .toContain('draggable-source--is-dragging');
   });
 

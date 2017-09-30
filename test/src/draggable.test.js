@@ -252,6 +252,39 @@ describe('Draggable', () => {
     });
   });
 
+  describe('#trigger', () => {
+    test('should invoke bound event', () => {
+      const handler = jest.fn();
+
+      draggable.on('my:event', handler);
+
+      draggable.trigger('my:event', 'expectedArg', 'expectedArg2');
+
+      expect(handler.mock.calls.length).toBe(1);
+      expect(handler.mock.calls[0].length).toBe(2);
+      expect(handler.mock.calls[0][0]).toBe('expectedArg');
+      expect(handler.mock.calls[0][1]).toBe('expectedArg2');
+    });
+  });
+
+  describe('#triggerEvent', () => {
+    test('should invoke bound event by its type', () => {
+      const handler = jest.fn();
+      const event = {
+        type: 'my:event',
+        value: 'expectedValue',
+      };
+
+      draggable.on('my:event', handler);
+
+      draggable.triggerEvent(event);
+
+      expect(handler.mock.calls.length).toBe(1);
+      expect(handler.mock.calls[0].length).toBe(1);
+      expect(handler.mock.calls[0][0]).toMatchObject(event);
+    });
+  });
+
   test('triggers `drag:start` drag event on mousedown', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;

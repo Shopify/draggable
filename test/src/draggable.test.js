@@ -193,7 +193,7 @@ describe('Draggable', () => {
   });
 
   describe('#on', () => {
-    test('it should add an event handler to the list of callbacks', () => {
+    test('should add an event handler to the list of callbacks', () => {
       const stubHandler = () => {};
 
       expect('my:event' in draggable.callbacks).toBe(false);
@@ -224,6 +224,19 @@ describe('Draggable', () => {
       const returnValue = draggable.off('my:event', stubHandler);
 
       expect(returnValue).toBe(null);
+    });
+
+    test('should remove event handler from the list of callbacks', () => {
+      const stubHandler = () => {};
+
+      draggable.on('my:event', stubHandler);
+
+      expect('my:event' in draggable.callbacks).toBe(true);
+
+      draggable.off('my:event', stubHandler);
+
+      expect('my:event' in draggable.callbacks).toBe(true);
+      expect(draggable.callbacks['my:event']).toMatchObject([]);
     });
   });
 

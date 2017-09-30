@@ -264,13 +264,12 @@ describe('Draggable', () => {
 
   test('adds `container:placed` classname to draggable container element on mouseup', () => {
     const draggableElement = sandbox.querySelector('li');
+    const container = sandbox.querySelector('ul');
 
     triggerEvent(draggableElement, 'mousedown');
 
     // Wait for delay
     jest.runTimersToTime(100);
-
-    const container = sandbox.querySelector('ul');
 
     triggerEvent(draggableElement, 'mouseup');
 
@@ -280,13 +279,12 @@ describe('Draggable', () => {
 
   test('removes `container:placed` classname from draggable container element on mouseup after delay', () => {
     const draggableElement = sandbox.querySelector('li');
+    const container = sandbox.querySelector('ul');
 
     triggerEvent(draggableElement, 'mousedown');
 
     // Wait for delay
     jest.runTimersToTime(100);
-
-    const container = sandbox.querySelector('ul');
 
     triggerEvent(draggableElement, 'mouseup');
 
@@ -299,5 +297,55 @@ describe('Draggable', () => {
     expect(container.classList)
       .not
       .toContain('draggable-container--placed');
+  });
+
+  test('adds `container:dragging` classname to draggable container element on mousedown', () => {
+    const draggableElement = sandbox.querySelector('li');
+    const container = sandbox.querySelector('ul');
+
+    triggerEvent(draggableElement, 'mousedown');
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    expect(container.classList)
+      .toContain('draggable-container--is-dragging');
+  });
+
+  test('removes `container:dragging` classname from draggable container element on mouseup', () => {
+    const draggableElement = sandbox.querySelector('li');
+    const container = sandbox.querySelector('ul');
+
+    triggerEvent(draggableElement, 'mousedown');
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    expect(container.classList)
+      .toContain('draggable-container--is-dragging');
+
+    triggerEvent(draggableElement, 'mouseup');
+
+    expect(container.classList)
+      .not
+      .toContain('draggable-container--is-dragging');
+  });
+
+  test('removes `container:dragging` classname from draggable container element on dragEvent.cancel()', () => {
+    const draggableElement = sandbox.querySelector('li');
+    const container = sandbox.querySelector('ul');
+
+    draggable.on('drag:start', (event) => {
+      event.cancel();
+    });
+
+    triggerEvent(draggableElement, 'mousedown');
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    expect(container.classList)
+      .not
+      .toContain('draggable-container--is-dragging');
   });
 });

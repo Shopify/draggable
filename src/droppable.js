@@ -10,7 +10,7 @@ const defaults = {
   classes: {
     'droppable:active': 'draggable-droppable--active',
     'droppable:occupied': 'draggable-droppable--occupied',
-  }
+  },
 };
 
 export default class Droppable {

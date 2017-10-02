@@ -6,15 +6,17 @@ import {
   DroppableOutEvent,
 } from './DroppableEvent';
 
-const classes = {
-  'droppable:active': 'draggable-droppable--active',
-  'droppable:occupied': 'draggable-droppable--occupied',
+const defaults = {
+  classes: {
+    'droppable:active': 'draggable-droppable--active',
+    'droppable:occupied': 'draggable-droppable--occupied',
+  }
 };
 
 export default class Droppable {
   constructor(containers = [], options = {}) {
     this.draggable = new Draggable(containers, options);
-    this.options = {...options};
+    this.options = Object.assign({}, defaults, options);
 
     this._onDragStart = this._onDragStart.bind(this);
     this._onDragMove = this._onDragMove.bind(this);
@@ -45,7 +47,7 @@ export default class Droppable {
   }
 
   getClassNameFor(name) {
-    return this.options.classes[name] || classes[name];
+    return this.options.classes[name] || defaults.classes[name];
   }
 
   _onDragStart(event) {

@@ -107,11 +107,11 @@ A css selector for draggable elements within the `containers` specified. By defa
 look for an element with `.draggable-source` class. Default: `.draggable-source`
 
 **`handle {String}`**  
-Specify a css selector for a handle element if you don't want to allow drag action
+Specify a `.css` selector for a handle element if you don't want to allow drag action
 on the entire element. Default: `null`
 
 **`delay {Number}`**  
-If you want to delay a drag start you can specify delay in milliseconds. This can be useful
+If you want to delay a `drag:start` you can specify delay in milliseconds. This can be useful
 for draggable elements within scrollable containers. Default: `0`
 
 **`native {Boolean}`**  

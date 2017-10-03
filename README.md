@@ -227,9 +227,7 @@ new Sortable(document.querySelectorAll('ul'))
 ## Droppable
 
 Droppable allows you to declare draggable and droppable elements via options.
-
-Sortable allows you to reorder elements. It maintains the order internally and fires
-three events on top of the draggable events: `sortable:start`, `sortable:sorted` and `sortable:stop`.
+Droppable fires two events on top of the draggable events: `droppable:over` and `droppable:out`.
 
 ### API
 

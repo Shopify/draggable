@@ -123,6 +123,10 @@ using mouse events, otherwise mirror will be `null` in events. Default: `false`
 Plugins add behaviour to Draggable by hooking into its life cycle, e.g. one of the default
 plugins controls the mirror movement. Default: `[Mirror, Accessibility]`
 
+**`appendTo {String|HTMLElement|Function}`**  
+Draggable allows you to specify where the mirror should be appended to. You can specify a css
+selector, a HTMLElement or a function that returns a HTMLElement
+
 **`classes {Object}`**  
 Draggable adds classes to elements to indicate state. These classes can be used to add styling
 on elements in certain states.

@@ -122,7 +122,7 @@ export default class Droppable {
       this.lastDroppable.classList.remove(occupiedClass);
     }
 
-    droppable.appendChild(event.source);
+    droppable.appendChild(event.movableSource);
     droppable.classList.add(occupiedClass);
 
     return true;
@@ -140,7 +140,7 @@ export default class Droppable {
       return;
     }
 
-    this.initialDroppable.appendChild(event.source);
+    this.initialDroppable.appendChild(event.movableSource);
     this.lastDroppable.classList.remove(this.getClassNameFor('droppable:occupied'));
   }
 

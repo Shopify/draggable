@@ -5,6 +5,10 @@ export class MirrorEvent extends AbstractEvent {
     return this.data.source;
   }
 
+  get movableSource() {
+    return this.data.movableSource;
+  }
+
   get mirror() {
     return this.data.mirror;
   }

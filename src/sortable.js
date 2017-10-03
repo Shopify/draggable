@@ -61,7 +61,7 @@ export default class Sortable {
       return;
     }
 
-    const moves = move(event.source, event.over, event.overContainer);
+    const moves = move(event.movableSource, event.over, event.overContainer);
 
     if (!moves) {
       return;
@@ -76,11 +76,11 @@ export default class Sortable {
   }
 
   _onDragOver(event) {
-    if (event.over === event.source) {
+    if (event.over === event.movableSource) {
       return;
     }
 
-    const moves = move(event.source, event.over, event.overContainer);
+    const moves = move(event.movableSource, event.over, event.overContainer);
 
     if (!moves) {
       return;

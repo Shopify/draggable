@@ -31,7 +31,7 @@ interface, for more information read the documentation below.
 ## Table of Contents
 
 * [Install](#Install)
-* [Draggable](#draggable-1)
+* [Draggable](#draggable)
   * [API](#api)
   * [Options](#options)
   * [Events](#events)

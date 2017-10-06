@@ -4,7 +4,7 @@ import {
 } from 'helper';
 
 import Draggable from './..';
-import {DragStartEvent} from './../../events/drag-event';
+import {DragStartEvent} from './../DragEvent';
 
 const sampleMarkup = `
   <ul>

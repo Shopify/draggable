@@ -1,5 +1,3 @@
-import MouseSensor from 'sensors/mouse-sensor';
-
 import {
   createSandbox,
   triggerEvent,
@@ -8,6 +6,8 @@ import {
   getSensorEventsByType,
   getLastSensorEventByType,
 } from 'helper';
+
+import MouseSensor from './..';
 
 const sampleMarkup = `
   <ul>

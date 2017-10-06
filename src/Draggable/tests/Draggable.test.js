@@ -1,10 +1,10 @@
-import Draggable from 'draggable';
-import {DragStartEvent} from 'events/drag-event';
-
 import {
   createSandbox,
   triggerEvent,
 } from 'helper';
+
+import Draggable from './..';
+import {DragStartEvent} from './../../events/drag-event';
 
 const sampleMarkup = `
   <ul>

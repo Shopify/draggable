@@ -1,5 +1,6 @@
-import Swappable from 'swappable';
 import {createSandbox, triggerEvent} from 'helper';
+
+import Swappable from './..';
 
 const sampleMarkup = `
   <ul>

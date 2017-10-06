@@ -1,4 +1,4 @@
-import Draggable from './draggable';
+import Draggable from './Draggable';
 
 import {
   SwappableStartEvent,

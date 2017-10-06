@@ -1,4 +1,4 @@
-import Draggable from './draggable';
+import Draggable from './Draggable';
 import Sortable from './sortable';
 import Swappable from './swappable';
 import Droppable from './droppable';

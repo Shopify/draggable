@@ -1,20 +1,20 @@
-import {closest} from './utils';
+import {closest} from './../utils';
 
-import Accessibility from './core/accessibility';
-import Mirror from './core/mirror';
+import Accessibility from './../core/accessibility';
+import Mirror from './../core/mirror';
 
-import Collidable from './behaviour/collidable';
-import Snappable from './behaviour/snappable';
+import Collidable from './../behaviour/collidable';
+import Snappable from './../behaviour/snappable';
 
-import DragSensor from './sensors/drag-sensor';
-import MouseSensor from './sensors/mouse-sensor';
-import TouchSensor from './sensors/touch-sensor';
-import ForceTouchSensor from './sensors/force-touch-sensor';
+import DragSensor from './../sensors/drag-sensor';
+import MouseSensor from './../sensors/mouse-sensor';
+import TouchSensor from './../sensors/touch-sensor';
+import ForceTouchSensor from './../sensors/force-touch-sensor';
 
 import {
   DraggableInitializedEvent,
   DraggableDestroyEvent,
-} from './events/draggable-event';
+} from './../events/draggable-event';
 
 import {
   DragStartEvent,
@@ -25,14 +25,14 @@ import {
   DragOverEvent,
   DragStopEvent,
   DragPressureEvent,
-} from './events/drag-event';
+} from './../events/drag-event';
 
 import {
   MirrorCreatedEvent,
   MirrorAttachedEvent,
   MirrorMoveEvent,
   MirrorDestroyEvent,
-} from './events/mirror-event';
+} from './../events/mirror-event';
 
 const defaults = {
   draggable: '.draggable-source',

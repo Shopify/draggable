@@ -1,4 +1,4 @@
-import {closest} from './../utils';
+import {closest} from './../Utils';
 
 import {
   CollidableInEvent,

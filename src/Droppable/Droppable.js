@@ -1,5 +1,5 @@
 import Draggable from './../Draggable';
-import {closest} from './../utils';
+import {closest} from './../Utils';
 
 import {
   DroppableOverEvent,

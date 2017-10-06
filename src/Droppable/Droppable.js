@@ -1,10 +1,10 @@
-import Draggable from './Draggable';
-import {closest} from './utils';
+import Draggable from './../Draggable';
+import {closest} from './../utils';
 
 import {
   DroppableOverEvent,
   DroppableOutEvent,
-} from './events/droppable-event';
+} from './../events/droppable-event';
 
 const classes = {
   'droppable:active': 'draggable-droppable--active',

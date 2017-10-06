@@ -14,12 +14,5 @@ export {
   Droppable,
   Snappable,
   Collidable,
-  AbstractEvent,
+  AbstractEvent as BaseEvent,
 };
-
-export function createEventClass(options) {
-  function EventConstructor() { return null; }
-  EventConstructor.prototype = AbstractEvent.prototype;
-  createEventClass.type = options.type;
-  return createEventClass;
-}

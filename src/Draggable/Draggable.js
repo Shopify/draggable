@@ -1,14 +1,13 @@
 import {closest} from 'shared/Utils';
 
 import {Accessibility, Mirror} from './Plugins';
-import {Collidable, Snappable} from './../Plugins';
 
 import {
   DragSensor,
   MouseSensor,
   TouchSensor,
   ForceTouchSensor,
-} from './../Sensors';
+} from './Sensors';
 
 import {
   DraggableInitializedEvent,
@@ -59,10 +58,6 @@ const defaults = {
 export default class Draggable {
   static get Plugins() {
     return {Accessibility, Mirror};
-  }
-
-  static get Behaviour() {
-    return {Collidable, Snappable};
   }
 
   /**

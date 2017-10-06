@@ -1,7 +1,6 @@
 import {closest} from './../Utils';
 
-import Accessibility from './../core/accessibility';
-import Mirror from './../core/mirror';
+import {Accessibility, Mirror} from './Plugins';
 
 import Collidable from './../behaviour/collidable';
 import Snappable from './../behaviour/snappable';

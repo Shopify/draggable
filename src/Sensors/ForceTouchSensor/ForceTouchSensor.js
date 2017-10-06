@@ -1,11 +1,11 @@
-import Sensor from './sensor';
+import Sensor from './../Sensor';
 
 import {
   DragStartSensorEvent,
   DragMoveSensorEvent,
   DragStopSensorEvent,
   DragPressureSensorEvent,
-} from './../events/sensor-event';
+} from './../../events/sensor-event';
 
 export default class ForceTouchSensor extends Sensor {
   constructor(containers = [], options = {}) {

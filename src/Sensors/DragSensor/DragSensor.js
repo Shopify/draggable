@@ -1,11 +1,11 @@
-import Sensor from './sensor';
-import {closest} from './../utils';
+import Sensor from './../Sensor';
+import {closest} from './../../utils';
 
 import {
   DragStartSensorEvent,
   DragMoveSensorEvent,
   DragStopSensorEvent,
-} from './../events/sensor-event';
+} from './../../events/sensor-event';
 
 export default class DragSensor extends Sensor {
   constructor(containers = [], options = {}) {

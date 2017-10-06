@@ -6,10 +6,12 @@ import Mirror from './../core/mirror';
 import Collidable from './../behaviour/collidable';
 import Snappable from './../behaviour/snappable';
 
-import DragSensor from './../sensors/drag-sensor';
-import MouseSensor from './../sensors/mouse-sensor';
-import TouchSensor from './../sensors/touch-sensor';
-import ForceTouchSensor from './../sensors/force-touch-sensor';
+import {
+  DragSensor,
+  MouseSensor,
+  TouchSensor,
+  ForceTouchSensor,
+} from './../Sensors';
 
 import {
   DraggableInitializedEvent,

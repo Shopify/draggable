@@ -1,10 +1,10 @@
-import Sensor from './sensor';
+import Sensor from './../Sensor';
 
 import {
   DragStartSensorEvent,
   DragMoveSensorEvent,
   DragStopSensorEvent,
-} from './../events/sensor-event';
+} from './../../events/sensor-event';
 
 export default class MouseSensor extends Sensor {
   constructor(containers = [], options = {}) {

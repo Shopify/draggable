@@ -1,4 +1,4 @@
-import {closest} from 'shared/Utils';
+import {closest} from 'shared/utils';
 
 import {Accessibility, Mirror} from './Plugins';
 

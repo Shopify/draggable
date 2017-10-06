@@ -1,5 +1,6 @@
+import {closest} from 'shared/Utils';
+
 import Sensor from './../Sensor';
-import {closest} from './../../Utils';
 
 import {
   DragStartSensorEvent,

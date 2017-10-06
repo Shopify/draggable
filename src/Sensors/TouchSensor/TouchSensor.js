@@ -5,7 +5,7 @@ import {
   DragStartSensorEvent,
   DragMoveSensorEvent,
   DragStopSensorEvent,
-} from './../../events/sensor-event';
+} from './../SensorEvent';
 
 export default class TouchSensor extends Sensor {
   constructor(containers = [], options = {}) {

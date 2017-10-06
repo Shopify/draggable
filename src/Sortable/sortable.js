@@ -4,7 +4,7 @@ import {
   SortableStartEvent,
   SortableSortedEvent,
   SortableStopEvent,
-} from './../events/sortable-event';
+} from './SortableEvent';
 
 export default class Sortable {
   constructor(containers = [], options = {}) {

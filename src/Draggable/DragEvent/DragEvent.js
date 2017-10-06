@@ -1,4 +1,4 @@
-import AbstractEvent from './abstract-event';
+import AbstractEvent from 'shared/AbstractEvent';
 
 export class DragEvent extends AbstractEvent {
   get source() {

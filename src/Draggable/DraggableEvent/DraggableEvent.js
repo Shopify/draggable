@@ -1,4 +1,4 @@
-import AbstractEvent from './abstract-event';
+import AbstractEvent from 'shared/AbstractEvent';
 
 export class DraggableEvent extends AbstractEvent {
   static type = 'draggable';

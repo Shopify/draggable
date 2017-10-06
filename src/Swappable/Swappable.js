@@ -4,7 +4,7 @@ import {
   SwappableStartEvent,
   SwappableSwappedEvent,
   SwappableStopEvent,
-} from './../events/swappable-event';
+} from './SwappableEvent';
 
 export default class Swappable {
   constructor(containers = [], options = {}) {

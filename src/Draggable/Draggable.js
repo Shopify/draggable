@@ -13,7 +13,7 @@ import {
 import {
   DraggableInitializedEvent,
   DraggableDestroyEvent,
-} from './../events/draggable-event';
+} from './DraggableEvent';
 
 import {
   DragStartEvent,
@@ -24,14 +24,14 @@ import {
   DragOverEvent,
   DragStopEvent,
   DragPressureEvent,
-} from './../events/drag-event';
+} from './DragEvent';
 
 import {
   MirrorCreatedEvent,
   MirrorAttachedEvent,
   MirrorMoveEvent,
   MirrorDestroyEvent,
-} from './../events/mirror-event';
+} from './MirrorEvent';
 
 const defaults = {
   draggable: '.draggable-source',

@@ -1,7 +1,7 @@
 import {
   SnapInEvent,
   SnapOutEvent,
-} from './../events/snappable-event';
+} from './../../events/snappable-event';
 
 export default class Snappable {
   constructor(draggable) {

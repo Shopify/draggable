@@ -1,9 +1,9 @@
-import {closest} from './../Utils';
+import {closest} from './../../Utils';
 
 import {
   CollidableInEvent,
   CollidableOutEvent,
-} from './../events/collidable-event';
+} from './../../events/collidable-event';
 
 export default class Collidable {
   constructor(draggable) {

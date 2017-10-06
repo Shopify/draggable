@@ -1,9 +1,7 @@
 import {closest} from './../Utils';
 
 import {Accessibility, Mirror} from './Plugins';
-
-import Collidable from './../behaviour/collidable';
-import Snappable from './../behaviour/snappable';
+import {Collidable, Snappable} from './../Plugins';
 
 import {
   DragSensor,

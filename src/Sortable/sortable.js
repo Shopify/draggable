@@ -1,10 +1,10 @@
-import Draggable from './Draggable';
+import Draggable from './../Draggable';
 
 import {
   SortableStartEvent,
   SortableSortedEvent,
   SortableStopEvent,
-} from './events/sortable-event';
+} from './../events/sortable-event';
 
 export default class Sortable {
   constructor(containers = [], options = {}) {

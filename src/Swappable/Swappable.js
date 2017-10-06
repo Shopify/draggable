@@ -1,10 +1,10 @@
-import Draggable from './Draggable';
+import Draggable from './../Draggable';
 
 import {
   SwappableStartEvent,
   SwappableSwappedEvent,
   SwappableStopEvent,
-} from './events/swappable-event';
+} from './../events/swappable-event';
 
 export default class Swappable {
   constructor(containers = [], options = {}) {

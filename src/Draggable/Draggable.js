@@ -228,6 +228,7 @@ export default class Draggable {
     const source = this.source;
 
     setTimeout(() => {
+      if (!this.dragging) { return; }
       source.style.display = 'none';
     }, 0);
 

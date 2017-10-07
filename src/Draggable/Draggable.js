@@ -162,8 +162,9 @@ export default class Draggable {
 
   trigger(type, ...args) {
     if (!this.callbacks[type]) { return; }
-    for (let i = this.callbacks[type].length - 1; i >= 0; i--) {
-      const callback = this.callbacks[type][i];
+    const callbacks = Array.from(this.callbacks[type]);
+    for (let i = callbacks.length - 1; i >= 0; i--) {
+      const callback = callbacks[i];
       callback(...args);
     }
   }

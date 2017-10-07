@@ -38,7 +38,7 @@ const defaults = {
   delay: 0,
   placedTimeout: 800,
   native: false,
-  plugins: [Mirror, Accessibility],
+  plugins: [],
   classes: {
     'container:dragging': 'draggable-container--is-dragging',
     'source:dragging': 'draggable-source--is-dragging',
@@ -56,9 +56,6 @@ const defaults = {
  * @module Draggable
  */
 export default class Draggable {
-  static get Plugins() {
-    return {Accessibility, Mirror};
-  }
 
   /**
    * Draggable constructor.
@@ -86,7 +83,7 @@ export default class Draggable {
       container.addEventListener('drag:pressure', this.dragPressure, true);
     }
 
-    for (const Plugin of this.options.plugins) {
+    for (const Plugin of [Mirror, Accessibility, ...this.options.plugins]) {
       const plugin = new Plugin(this);
       plugin.attach();
       this.activePlugins.push(plugin);

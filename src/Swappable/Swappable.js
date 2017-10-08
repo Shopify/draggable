@@ -51,7 +51,7 @@ export default class Swappable {
   }
 
   _onDragOver(event) {
-    if (event.over === event.movableSource || event.canceled()) {
+    if (event.over === event.movableSource || event.over === event.source || event.canceled()) {
       return;
     }
 

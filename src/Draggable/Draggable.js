@@ -206,6 +206,7 @@ export default class Draggable {
 
       const mirrorCreatedEvent = new MirrorCreatedEvent({
         source: this.source,
+        movableSource: this.movableSource,
         mirror: this.mirror,
         sourceContainer: container,
         sensorEvent,
@@ -213,6 +214,7 @@ export default class Draggable {
 
       const mirrorAttachedEvent = new MirrorAttachedEvent({
         source: this.source,
+        movableSource: this.movableSource,
         mirror: this.mirror,
         sourceContainer: container,
         sensorEvent,
@@ -225,14 +227,9 @@ export default class Draggable {
 
     this.source.parentNode.insertBefore(this.movableSource, this.source);
 
-    const source = this.source;
-
-    setTimeout(() => {
-      if (!this.dragging) { return; }
-      source.style.display = 'none';
-    }, 0);
-
+    this.source.style.display = 'none';
     this.source.classList.add(this.getClassNameFor('source:dragging'));
+    this.movableSource.classList.add(this.getClassNameFor('source:dragging'));
     this.sourceContainer.classList.add(this.getClassNameFor('container:dragging'));
     document.body.classList.add(this.getClassNameFor('body:dragging'));
 
@@ -270,6 +267,7 @@ export default class Draggable {
     }
 
     this.source.classList.remove(this.getClassNameFor('source:dragging'));
+    this.movableSource.classList.remove(this.getClassNameFor('source:dragging'));
     this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
     document.body.classList.remove(this.getClassNameFor('body:dragging'));
   }
@@ -403,6 +401,7 @@ export default class Draggable {
     this.source.style.display = '';
 
     this.source.classList.remove(this.getClassNameFor('source:dragging'));
+    this.movableSource.classList.remove(this.getClassNameFor('source:dragging'));
     this.source.classList.add(this.getClassNameFor('source:placed'));
     this.sourceContainer.classList.add(this.getClassNameFor('container:placed'));
     this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));

@@ -76,7 +76,7 @@ export default class Sortable {
   }
 
   _onDragOver(event) {
-    if (event.over === event.movableSource) {
+    if (event.over === event.movableSource || event.over === event.source) {
       return;
     }
 

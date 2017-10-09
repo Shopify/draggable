@@ -424,11 +424,7 @@ sortable.on('snap:out', () => console.log('snap:out'));
 
 Contributions are more than welcome, the code base is still new and needs more love.
 
-1. Clone the repo: `git clone https://github.com/Shopify/draggable.git`
-2. `cd draggable`
-3. `yarn install` or `npm install`
-4. Run tests with `yarn test` or `npm run test`
-5. Submit PR
+For more information, please checkout the [contribution document](https://github.com/Shopify/draggable/blob/master/CONTRIBUTION.md).
 
 ## Roadmap
 

@@ -51,13 +51,13 @@ export default class Swappable {
   }
 
   _onDragOver(event) {
-    if (event.over === event.movableSource || event.over === event.source || event.canceled()) {
+    if (event.over === event.originalSource || event.over === event.source || event.canceled()) {
       return;
     }
 
     // swap originally swapped element back
     if (this.lastOver && this.lastOver !== event.over) {
-      swap(this.lastOver, event.movableSource);
+      swap(this.lastOver, event.source);
     }
 
     if (this.lastOver === event.over) {
@@ -66,7 +66,7 @@ export default class Swappable {
       this.lastOver = event.over;
     }
 
-    swap(event.movableSource, event.over);
+    swap(event.source, event.over);
 
     // Let this cancel the actual swap
     const swappableSwappedEvent = new SwappableSwappedEvent({

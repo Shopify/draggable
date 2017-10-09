@@ -5,8 +5,8 @@ export class DragEvent extends AbstractEvent {
     return this.data.source;
   }
 
-  get movableSource() {
-    return this.data.movableSource;
+  get originalSource() {
+    return this.data.originalSource;
   }
 
   get mirror() {

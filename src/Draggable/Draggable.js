@@ -188,25 +188,25 @@ export default class Draggable {
     }
 
     // Find draggable source element
-    this.source = closest(target, this.options.draggable);
+    this.originalSource = closest(target, this.options.draggable);
     this.sourceContainer = container;
 
-    if (!this.source) {
+    if (!this.originalSource) {
       sensorEvent.cancel();
       return;
     }
 
     this.dragging = true;
 
-    this.movableSource = this.source.cloneNode(true);
+    this.source = this.originalSource.cloneNode(true);
 
     if (!isDragEvent(originalEvent)) {
-      const appendableContainer = this.getAppendableContainer({source: this.source});
+      const appendableContainer = this.getAppendableContainer({source: this.originalSource});
       this.mirror = this.source.cloneNode(true);
 
       const mirrorCreatedEvent = new MirrorCreatedEvent({
         source: this.source,
-        movableSource: this.movableSource,
+        originalSource: this.originalSource,
         mirror: this.mirror,
         sourceContainer: container,
         sensorEvent,
@@ -214,7 +214,7 @@ export default class Draggable {
 
       const mirrorAttachedEvent = new MirrorAttachedEvent({
         source: this.source,
-        movableSource: this.movableSource,
+        originalSource: this.originalSource,
         mirror: this.mirror,
         sourceContainer: container,
         sensorEvent,
@@ -225,11 +225,10 @@ export default class Draggable {
       this.triggerEvent(mirrorAttachedEvent);
     }
 
-    this.source.parentNode.insertBefore(this.movableSource, this.source);
+    this.originalSource.parentNode.insertBefore(this.source, this.originalSource);
 
-    this.source.style.display = 'none';
+    this.originalSource.style.display = 'none';
     this.source.classList.add(this.getClassNameFor('source:dragging'));
-    this.movableSource.classList.add(this.getClassNameFor('source:dragging'));
     this.sourceContainer.classList.add(this.getClassNameFor('container:dragging'));
     document.body.classList.add(this.getClassNameFor('body:dragging'));
 
@@ -237,7 +236,7 @@ export default class Draggable {
       const mirrorMoveEvent = new MirrorMoveEvent({
         source: this.source,
         mirror: this.mirror,
-        movableSource: this.movableSource,
+        originalSource: this.originalSource,
         sourceContainer: container,
         sensorEvent,
       });
@@ -251,7 +250,7 @@ export default class Draggable {
     const dragEvent = new DragStartEvent({
       source: this.source,
       mirror: this.mirror,
-      movableSource: this.movableSource,
+      originalSource: this.originalSource,
       sourceContainer: container,
       sensorEvent,
     });
@@ -267,7 +266,6 @@ export default class Draggable {
     }
 
     this.source.classList.remove(this.getClassNameFor('source:dragging'));
-    this.movableSource.classList.remove(this.getClassNameFor('source:dragging'));
     this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
     document.body.classList.remove(this.getClassNameFor('body:dragging'));
   }
@@ -284,7 +282,7 @@ export default class Draggable {
     const dragMoveEvent = new DragMoveEvent({
       source: this.source,
       mirror: this.mirror,
-      movableSource: this.movableSource,
+      originalSource: this.originalSource,
       sourceContainer: container,
       sensorEvent,
     });
@@ -299,7 +297,7 @@ export default class Draggable {
       const mirrorMoveEvent = new MirrorMoveEvent({
         source: this.source,
         mirror: this.mirror,
-        movableSource: this.movableSource,
+        originalSource: this.originalSource,
         sourceContainer: container,
         sensorEvent,
       });
@@ -318,7 +316,7 @@ export default class Draggable {
       const dragOutEvent = new DragOutEvent({
         source: this.source,
         mirror: this.mirror,
-        movableSource: this.movableSource,
+        originalSource: this.originalSource,
         sourceContainer: container,
         sensorEvent,
         over: this.currentOver,
@@ -334,7 +332,7 @@ export default class Draggable {
       const dragOutContainerEvent = new DragOutContainerEvent({
         source: this.source,
         mirror: this.mirror,
-        movableSource: this.movableSource,
+        originalSource: this.originalSource,
         sourceContainer: container,
         sensorEvent,
         overContainer: this.overContainer,
@@ -352,7 +350,7 @@ export default class Draggable {
       const dragOverContainerEvent = new DragOverContainerEvent({
         source: this.source,
         mirror: this.mirror,
-        movableSource: this.movableSource,
+        originalSource: this.originalSource,
         sourceContainer: container,
         sensorEvent,
         overContainer,
@@ -369,7 +367,7 @@ export default class Draggable {
       const dragOverEvent = new DragOverEvent({
         source: this.source,
         mirror: this.mirror,
-        movableSource: this.movableSource,
+        originalSource: this.originalSource,
         sourceContainer: container,
         sensorEvent,
         overContainer,
@@ -389,20 +387,19 @@ export default class Draggable {
     const dragStopEvent = new DragStopEvent({
       source: this.source,
       mirror: this.mirror,
-      movableSource: this.movableSource,
+      originalSource: this.originalSource,
       sensorEvent: event.sensorEvent,
       sourceContainer: this.sourceContainer,
     });
 
     this.triggerEvent(dragStopEvent);
 
-    this.movableSource.parentNode.insertBefore(this.source, this.movableSource);
-    this.movableSource.parentNode.removeChild(this.movableSource);
-    this.source.style.display = '';
+    this.source.parentNode.insertBefore(this.originalSource, this.source);
+    this.source.parentNode.removeChild(this.source);
+    this.originalSource.style.display = '';
 
     this.source.classList.remove(this.getClassNameFor('source:dragging'));
-    this.movableSource.classList.remove(this.getClassNameFor('source:dragging'));
-    this.source.classList.add(this.getClassNameFor('source:placed'));
+    this.originalSource.classList.add(this.getClassNameFor('source:placed'));
     this.sourceContainer.classList.add(this.getClassNameFor('container:placed'));
     this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
     document.body.classList.remove(this.getClassNameFor('body:dragging'));
@@ -430,7 +427,7 @@ export default class Draggable {
       }
     }
 
-    const lastSource = this.source;
+    const lastSource = this.originalSource;
     const lastSourceContainer = this.sourceContainer;
 
     setTimeout(() => {
@@ -445,7 +442,7 @@ export default class Draggable {
 
     this.source = null;
     this.mirror = null;
-    this.movableSource = null;
+    this.originalSource = null;
     this.currentOverContainer = null;
     this.currentOver = null;
     this.sourceContainer = null;

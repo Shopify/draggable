@@ -20,7 +20,7 @@ export default class Mirror {
       .off('mirror:move', this._onMirrorMove);
   }
 
-  _onMirrorCreated({mirror, movableSource, sensorEvent}) {
+  _onMirrorCreated({mirror, source, sensorEvent}) {
     const mirrorClass = this.draggable.getClassNameFor('mirror');
 
     const setState = (data) => {
@@ -28,7 +28,7 @@ export default class Mirror {
       return data;
     };
 
-    Promise.resolve({mirror, movableSource, sensorEvent, mirrorClass})
+    Promise.resolve({mirror, source, sensorEvent, mirrorClass})
       .then(computeMirrorDimensions)
       .then(calculateMirrorOffset)
       .then(addMirrorClasses)
@@ -45,22 +45,22 @@ export default class Mirror {
   }
 }
 
-function onMirrorCreated({mirror, movableSource}) {
-  Promise.resolve({mirror, movableSource})
+function onMirrorCreated({mirror, source}) {
+  Promise.resolve({mirror, source})
     .then(resetMirror)
     .catch();
 }
 
 function resetMirror(data) {
   return withPromise((resolve) => {
-    const {mirror, movableSource} = data;
+    const {mirror, source} = data;
 
     mirror.style.position = 'fixed';
     mirror.style.pointerEvents = 'none';
     mirror.style.top = 0;
     mirror.style.left = 0;
-    mirror.style.width = `${movableSource.offsetWidth}px`;
-    mirror.style.height = `${movableSource.offsetHeight}px`;
+    mirror.style.width = `${source.offsetWidth}px`;
+    mirror.style.height = `${source.offsetHeight}px`;
 
     resolve(data);
   });
@@ -68,8 +68,8 @@ function resetMirror(data) {
 
 function computeMirrorDimensions(data) {
   return withPromise((resolve) => {
-    const {movableSource} = data;
-    const sourceRect = movableSource.getBoundingClientRect();
+    const {source} = data;
+    const sourceRect = source.getBoundingClientRect();
     resolve({...data, sourceRect});
   });
 }

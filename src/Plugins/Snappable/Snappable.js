@@ -38,7 +38,7 @@ export default class Snappable {
       return;
     }
 
-    this.firstSource = event.movableSource;
+    this.firstSource = event.source;
   }
 
   _onDragStop() {
@@ -50,7 +50,7 @@ export default class Snappable {
       return;
     }
 
-    const source = event.movableSource || event.dragEvent.movableSource;
+    const source = event.source || event.dragEvent.source;
     const mirror = event.mirror || event.dragEvent.mirror;
 
     if (source === this.firstSource) {
@@ -86,7 +86,7 @@ export default class Snappable {
     }
 
     const mirror = event.mirror || event.dragEvent.mirror;
-    const source = event.movableSource || event.dragEvent.movableSource;
+    const source = event.source || event.dragEvent.source;
 
     const snapOutEvent = new SnapOutEvent({
       dragEvent: event,

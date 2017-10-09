@@ -286,8 +286,8 @@ const droppable = new Droppable(document.querySelectorAll('ul'), {
   droppable: '#dropzone',
 });
 
-droppable.on('droppable:over', () => console.log('sortable:start'))
-droppable.on('droppable:out', () => console.log('sortable:sorted'));
+droppable.on('droppable:over', () => console.log('droppable:over'))
+droppable.on('droppable:out', () => console.log('droppable:out'));
 ```
 
 ## Swappable

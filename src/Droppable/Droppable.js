@@ -10,13 +10,13 @@ const defaults = {
   classes: {
     'droppable:active': 'draggable-droppable--active',
     'droppable:occupied': 'draggable-droppable--occupied',
-  }
+  },
 };
 
 export default class Droppable {
   constructor(containers = [], options = {}) {
     this.draggable = new Draggable(containers, options);
-    this.options = Object.assign({}, defaults, options);
+    this.options = {...defaults, ...options};
 
     this._onDragStart = this._onDragStart.bind(this);
     this._onDragMove = this._onDragMove.bind(this);

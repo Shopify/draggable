@@ -54,7 +54,7 @@ export default class Droppable {
     }
 
     this.droppables = this._getDroppables();
-    const droppable = event.sensorEvent.target.closest(this.options.droppable);
+    const droppable = closest(event.sensorEvent.target, this.options.droppable);
 
     if (!droppable) {
       event.cancel();

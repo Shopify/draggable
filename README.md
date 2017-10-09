@@ -77,6 +77,12 @@ or via yarn:
 yarn add @shopify/draggable
 ```
 
+or via CDN
+
+```
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta/lib/draggable.js"></script>
+```
+
 ## Draggable
 
 ### API

@@ -33,7 +33,7 @@ describe('Swappable', () => {
 
     // Simulate drag start
     document.elementFromPoint = () => draggableElement;
-    triggerEvent(draggableElement, 'mousedown');
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
     // Wait for gesture delay
     jest.runTimersToTime(0);
 

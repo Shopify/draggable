@@ -37,7 +37,7 @@ describe('MouseSensor', () => {
   test('triggers `drag:start` sensor event on mousedown', () => {
     const draggable = sandbox.querySelector('li');
     document.elementFromPoint = () => draggable;
-    triggerEvent(draggable, 'mousedown');
+    triggerEvent(draggable, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(1);
@@ -49,7 +49,7 @@ describe('MouseSensor', () => {
   test('cancels `drag:start` event when canceling sensor event', () => {
     const draggable = sandbox.querySelector('li');
     document.elementFromPoint = () => draggable;
-    triggerEvent(draggable, 'mousedown');
+    triggerEvent(draggable, 'mousedown', {button: 0});
 
     sandbox.addEventListener('drag:start', (event) => {
       event.detail.cancel();
@@ -66,7 +66,7 @@ describe('MouseSensor', () => {
   test('does not trigger `drag:start` event releasing mouse before timeout', () => {
     const draggable = sandbox.querySelector('li');
     document.elementFromPoint = () => draggable;
-    triggerEvent(draggable, 'mousedown');
+    triggerEvent(draggable, 'mousedown', {button: 0});
     triggerEvent(document.body, 'mouseup');
 
     // Wait for delay
@@ -81,7 +81,7 @@ describe('MouseSensor', () => {
   test('triggers `drag:move` event while moving the mouse', () => {
     const draggable = sandbox.querySelector('li');
     document.elementFromPoint = () => draggable;
-    triggerEvent(draggable, 'mousedown');
+    triggerEvent(draggable, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(1);
@@ -96,7 +96,7 @@ describe('MouseSensor', () => {
   test('triggers `drag:stop` event when releasing mouse', () => {
     const draggable = sandbox.querySelector('li');
     document.elementFromPoint = () => draggable;
-    triggerEvent(draggable, 'mousedown');
+    triggerEvent(draggable, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(1);
@@ -122,7 +122,7 @@ describe('MouseSensor', () => {
   test('does not trigger `drag:start` event when clicking on none draggable element', () => {
     const draggable = sandbox.querySelector('li');
     document.elementFromPoint = () => draggable;
-    triggerEvent(document.body, 'mousedown');
+    triggerEvent(document.body, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(1);

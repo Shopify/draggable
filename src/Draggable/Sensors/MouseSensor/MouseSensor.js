@@ -14,6 +14,7 @@ export default class MouseSensor extends Sensor {
     this.mouseDown = false;
     this.currentContainer = null;
 
+    this._onContextMenuWhileDragging = this._onContextMenuWhileDragging.bind(this);
     this._onMouseDown = this._onMouseDown.bind(this);
     this._onMouseMove = this._onMouseMove.bind(this);
     this._onMouseUp = this._onMouseUp.bind(this);
@@ -38,7 +39,7 @@ export default class MouseSensor extends Sensor {
   }
 
   _onMouseDown(event) {
-    if (event.button === 2) {
+    if (event.button !== 0) {
       return;
     }
 
@@ -64,6 +65,10 @@ export default class MouseSensor extends Sensor {
 
       this.currentContainer = container;
       this.dragging = !dragStartEvent.canceled();
+
+      if (this.dragging) {
+        document.addEventListener('contextmenu', this._onContextMenuWhileDragging);
+      }
     }, this.options.delay);
   }
 
@@ -86,7 +91,12 @@ export default class MouseSensor extends Sensor {
   }
 
   _onMouseUp(event) {
-    this.mouseDown = false;
+    this.mouseDown = Boolean(this.openedContextMenu);
+
+    if (this.openedContextMenu) {
+      this.openedContextMenu = false;
+      return;
+    }
 
     if (!this.dragging) {
       return;
@@ -104,7 +114,14 @@ export default class MouseSensor extends Sensor {
 
     this.trigger(this.currentContainer, dragStopEvent);
 
+    document.removeEventListener('contextmenu', this._onContextMenuWhileDragging);
+
     this.currentContainer = null;
     this.dragging = false;
+  }
+
+  _onContextMenuWhileDragging(event) {
+    event.preventDefault();
+    this.openedContextMenu = true;
   }
 }

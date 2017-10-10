@@ -39,7 +39,7 @@ export default class MouseSensor extends Sensor {
   }
 
   _onMouseDown(event) {
-    if (event.button !== 0) {
+    if (event.button !== 0 || event.ctrlKey) {
       return;
     }
 

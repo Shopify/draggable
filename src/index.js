@@ -7,6 +7,8 @@ import Sortable from './Sortable';
 
 import {Snappable, Collidable} from './Plugins';
 
+import ForceTouchSensor from './Draggable/Sensors/ForceTouchSensor';
+
 export {
   Draggable,
   Sortable,
@@ -14,5 +16,6 @@ export {
   Droppable,
   Snappable,
   Collidable,
+  ForceTouchSensor,
   AbstractEvent as BaseEvent,
 };

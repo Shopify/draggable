@@ -6,7 +6,6 @@ import {
   DragSensor,
   MouseSensor,
   TouchSensor,
-  ForceTouchSensor,
 } from './Sensors';
 
 import {
@@ -173,7 +172,6 @@ export default class Draggable {
   sensors() {
     return [
       TouchSensor,
-      ForceTouchSensor,
       (this.options.native ? DragSensor : MouseSensor),
     ];
   }

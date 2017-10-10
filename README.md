@@ -80,7 +80,7 @@ yarn add @shopify/draggable
 or via CDN
 
 ```
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta/lib/draggable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.2/lib/draggable.js"></script>
 ```
 
 ## Draggable

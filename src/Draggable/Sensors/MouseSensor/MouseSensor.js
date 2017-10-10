@@ -68,6 +68,7 @@ export default class MouseSensor extends Sensor {
 
       if (this.dragging) {
         document.addEventListener('contextmenu', this._onContextMenuWhileDragging);
+        document.addEventListener('dragstart', preventNativeDragStart);
       }
     }, this.options.delay);
   }
@@ -115,6 +116,7 @@ export default class MouseSensor extends Sensor {
     this.trigger(this.currentContainer, dragStopEvent);
 
     document.removeEventListener('contextmenu', this._onContextMenuWhileDragging);
+    document.removeEventListener('dragstart', preventNativeDragStart);
 
     this.currentContainer = null;
     this.dragging = false;
@@ -124,4 +126,8 @@ export default class MouseSensor extends Sensor {
     event.preventDefault();
     this.openedContextMenu = true;
   }
+}
+
+function preventNativeDragStart(event) {
+  event.preventDefault();
 }

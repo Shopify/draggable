@@ -13,6 +13,12 @@ function createConfig({name, filename = name, source, path = ''}) {
       libraryTarget: 'umd',
       umdNamedDefine: true
     },
+    resolve: {
+      modules: [
+        'node_modules',
+        'src/',
+      ],
+    },
     module: {
       loaders: [
         {

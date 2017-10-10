@@ -1,10 +1,13 @@
-import Draggable from './draggable';
-import Sortable from './sortable';
-import Swappable from './swappable';
-import Droppable from './droppable';
-import AbstractEvent from './events/abstract-event';
-import Snappable from './behaviour/snappable';
-import Collidable from './behaviour/collidable';
+import AbstractEvent from 'shared/AbstractEvent';
+
+import Draggable from './Draggable';
+import Droppable from './Droppable';
+import Swappable from './Swappable';
+import Sortable from './Sortable';
+
+import {Snappable, Collidable} from './Plugins';
+
+import ForceTouchSensor from './Draggable/Sensors/ForceTouchSensor';
 
 export {
   Draggable,
@@ -13,12 +16,6 @@ export {
   Droppable,
   Snappable,
   Collidable,
-  AbstractEvent,
+  ForceTouchSensor,
+  AbstractEvent as BaseEvent,
 };
-
-export function createEventClass(options) {
-  function EventConstructor() { return null; }
-  EventConstructor.prototype = AbstractEvent.prototype;
-  createEventClass.type = options.type;
-  return createEventClass;
-}

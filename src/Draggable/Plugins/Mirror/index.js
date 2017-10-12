@@ -1,3 +1,6 @@
-import Mirror from './Mirror';
+import Mirror, {defaultOptions} from './Mirror';
 
 export default Mirror;
+export {
+  defaultOptions as defaultMirrorOption,
+};

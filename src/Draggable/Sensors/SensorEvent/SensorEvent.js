@@ -60,16 +60,6 @@ export class SensorEvent extends AbstractEvent {
   }
 
   /**
-   * Container that initiated the sensor
-   * @property overContainer
-   * @type {HTMLElement}
-   * @readonly
-   */
-  get overContainer() {
-    return this.data.overContainer;
-  }
-
-  /**
    * Trackpad pressure
    * @property pressure
    * @type {Number}
@@ -87,13 +77,6 @@ export class SensorEvent extends AbstractEvent {
  * @extends SensorEvent
  */
 export class DragStartSensorEvent extends SensorEvent {
-
-  /**
-   * Event type
-   * @property type
-   * @type {String}
-   * @static
-   */
   static type = 'drag:start';
 }
 
@@ -104,13 +87,6 @@ export class DragStartSensorEvent extends SensorEvent {
  * @extends SensorEvent
  */
 export class DragMoveSensorEvent extends SensorEvent {
-
-  /**
-   * Event type
-   * @property type
-   * @type {String}
-   * @static
-   */
   static type = 'drag:move';
 }
 
@@ -121,13 +97,6 @@ export class DragMoveSensorEvent extends SensorEvent {
  * @extends SensorEvent
  */
 export class DragStopSensorEvent extends SensorEvent {
-
-  /**
-   * Event type
-   * @property type
-   * @type {String}
-   * @static
-   */
   static type = 'drag:stop';
 }
 
@@ -138,12 +107,5 @@ export class DragStopSensorEvent extends SensorEvent {
  * @extends SensorEvent
  */
 export class DragPressureSensorEvent extends SensorEvent {
-
-  /**
-   * Event type
-   * @property type
-   * @type {String}
-   * @static
-   */
   static type = 'drag:pressure';
 }

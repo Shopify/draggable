@@ -21,7 +21,7 @@ describe('DragEvent', () => {
     test('should initialize with `type` of `event`', () => {
       const event = new DragEvent();
 
-      expect(event.type).toBe('event');
+      expect(event.type).toBe('drag');
     });
 
     test('should initialize with source', () => {

@@ -3,13 +3,31 @@
 Droppable is built on top of Draggable and allows you to declare draggable and droppable elements via options.
 Droppable fires two events on top of the draggable events: `droppable:over` and `droppable:out`.
 
+### Import
+
+```js
+import {Droppable} from '@shopify/draggable';
+```
+
+```js
+import Droppable from '@shopify/draggable/droppable';
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/draggable.bundle.js"></script>
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/droppable.js"></script>
+```
+
 ### API
 
-Check out Draggables API for the base API
+Check out [Draggables API](../Draggable#api) for the base API
 
 ### Options
 
-**`droppable {String|Array[HTMLElement]|NodeList|Function}`**  
+**`droppable {String|HTMLElement[]|NodeList|Function}`**  
 A css selector string, an array of elements, a NodeList or a function returning elements for droppable
 elements within the `containers` specified.
 

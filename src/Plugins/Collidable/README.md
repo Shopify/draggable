@@ -1,1 +1,51 @@
 ## Collidable
+
+When you use the collidable plugin you can specify which elements you **can't** drag over and it will freeze
+the mirror movement for you. These currently only work with `Sortable`, `Swappable` and `Droppable`.
+
+This plugin is not included by default, so make sure to import it before using.
+
+### Import
+
+```js
+import {Collidable} from '@shopify/draggable';
+```
+
+```js
+import Collidable from '@shopify/draggable/plugins/collidable';
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/draggable.bundle.js"></script>
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/plugins/collidable.js"></script>
+```
+
+### Options
+
+**`collidables {String|HTMLElement[]|NodeList|HTMLElement|Function}`**  
+A css selector string, an array of elements, a NodeList, a HTMLElement or a function returning elements for collidable elements.
+
+### Events
+
+| Name                  | Description                                                | Cancelable  | Cancelable action    |
+| --------------------- | ---------------------------------------------------------- | ----------- | -------------------- |
+| `collidable:in`       | Gets fired when dragging near a collidable element         | false       | -                    |
+| `collidable:out`      | Gets fired when dragging away from a collidable element    | false       | -                    |
+
+### Example
+
+```js
+import {Sortable, Plugins} from '@shopify/draggable';
+
+const sortable = new Sortable(document.querySelectorAll('ul'), {
+  draggable: 'li',
+  collidables: '.other-list',
+  plugins: [Plugins.Collidable]
+});
+
+sortable.on('collidable:in', () => console.log('collidable:in'));
+sortable.on('collidable:out', () => console.log('collidable:out'));
+```

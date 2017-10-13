@@ -89,7 +89,7 @@ export default class Droppable extends Draggable {
   /**
    * Returns class name for class identifier
    * @param {String} name - Name of class identifier
-   * @return {String}
+   * @return {String|null}
    */
   getClassNameFor(name) {
     return super.getClassNameFor(name) || classes[name];
@@ -221,7 +221,7 @@ export default class Droppable extends Draggable {
    * Returns closest droppable element for even target
    * @private
    * @param {HTMLElement} target - Event target
-   * @return {HTMLElement}
+   * @return {HTMLElement|null}
    */
   [closestDroppable](target) {
     if (!this.droppables) {
@@ -234,7 +234,7 @@ export default class Droppable extends Draggable {
   /**
    * Returns all current droppable elements for this draggable instance
    * @private
-   * @return {NodeList|HTMLElement[]}
+   * @return {NodeList|HTMLElement[]|Array}
    */
   [getDroppables]() {
     const droppables = this.options.droppable;

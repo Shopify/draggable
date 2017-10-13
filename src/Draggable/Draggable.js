@@ -276,7 +276,7 @@ export default class Draggable {
   /**
    * Returns class name for class identifier
    * @param {String} name - Name of class identifier
-   * @return {String}
+   * @return {String|null}
    */
   getClassNameFor(name) {
     return this.options.classes[name] || defaults.classes[name];

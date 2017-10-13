@@ -9,11 +9,19 @@ This plugin is not included by default, so make sure to import it before using.
 ### Import
 
 ```js
-import {SwapAnimation} from '@shopify/draggable/plugins/swap-animation';
+import {Plugins} from '@shopify/draggable';
+```
+
+```js
+import SwapAnimation from '@shopify/draggable/plugins/swap-animation';
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/draggable/plugins/swap-animation"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/plugins.js"></script>
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/plugins/swap-animation.js"></script>
 ```
 
 ### API

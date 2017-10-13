@@ -3,9 +3,27 @@
 Droppable is built on top of Draggable and allows you to swap elements by dragging over them. No order will be maintained (unlike Sortable),
 so any draggable element that gets dragged over will be swapped with the source element.
 
+### Import
+
+```js
+import {Swappable} from '@shopify/sortable';
+```
+
+```js
+import Swappable from '@shopify/draggable/swappable';
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/draggable.bundle.js"></script>
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/swappable.js"></script>
+```
+
 ### API
 
-Check out Draggables API for the base API
+Check out [Draggables API](../Draggable#api) for the base API
 
 ### Options
 

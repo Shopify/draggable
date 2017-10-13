@@ -45,6 +45,7 @@ module.exports = [
   createConfig({name: 'Plugins', filename: 'plugins', source: 'Plugins/index'}),
   createConfig({name: 'Collidable', filename: 'collidable', path: 'plugins/', source: 'Plugins/Collidable/index'}),
   createConfig({name: 'Snappable', filename: 'snappable', path: 'plugins/', source: 'Plugins/Snappable/index'}),
+  createConfig({name: 'SwapAnimation', filename: 'swap-animation', path: 'plugins/', source: 'Plugins/SwapAnimation/index'}),
 
   createConfig({name: 'utils', filename: 'utils', source: 'shared/utils/index'}),
 ];

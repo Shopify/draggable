@@ -1,5 +1,23 @@
 ## Draggable
 
+### Import
+
+```js
+import {Draggable} from '@shopify/draggable';
+```
+
+```js
+import Draggable from '@shopify/draggable/draggable';
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/draggable.bundle.js"></script>
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/draggable.js"></script>
+```
+
 ### API
 
 **`new Draggable(containers: HTMLElement[]|NodeList|HTMLElement, options: Object): Draggable`**  
@@ -77,20 +95,34 @@ on elements in certain states.
 
 ### Events
 
-| Name                  | Description                                                | Cancelable  | Cancelable action    |
-| --------------------- | ---------------------------------------------------------- | ----------- | -------------------- |
-| `drag:start`          | Gets fired when drag action begins                         | true        | Prevents drag start  |
-| `drag:move`           | Gets fired when moving a draggable around                  | false       | -                    |
-| `drag:over`           | Gets fired when dragging over other draggable              | false       | -                    |
-| `drag:over:container` | Gets fired when dragging over other draggable container    | false       | -                    |
-| `drag:out`            | Gets fired when dragging out of other draggable            | false       | -                    |
-| `drag:out:container`  | Gets fired when dragging out of other draggable container  | false       | -                    |
-| `drag:stop`           | Gets fired when draggable has been released                | false       | -                    |
-| `drag:pressure`       | Gets fired when using force touch on draggable element     | false       | -                    |
-| `mirror:created`      | Gets fired when draggable mirror gets created              | false       | -                    |
-| `mirror:attached`     | Gets fired when draggable mirror gets attached to DOM      | false       | -                    |
-| `mirror:move`         | Gets fired when draggable mirror moves                     | true        | Stop mirror movement |
-| `mirror:destroy`      | Gets fired when draggable mirror gets removed              | true        | Stop mirror removal  |
+| Name                                         | Description                                                | Cancelable  | Cancelable action    |
+| -------------------------------------------- | ---------------------------------------------------------- | ----------- | -------------------- |
+| [`drag:start`][dragstart]                    | Gets fired when drag action begins                         | true        | Prevents drag start  |
+| [`drag:move`][dragmove]                      | Gets fired when moving a draggable around                  | false       | -                    |
+| [`drag:over`][dragover]                      | Gets fired when dragging over other draggable              | false       | -                    |
+| [`drag:over:container`][dragovercontainer]   | Gets fired when dragging over other draggable container    | false       | -                    |
+| [`drag:out`][dragout]                        | Gets fired when dragging out of other draggable            | false       | -                    |
+| [`drag:out:container`][dragoutcontainer]     | Gets fired when dragging out of other draggable container  | false       | -                    |
+| [`drag:stop`][dragstop]                      | Gets fired when draggable has been released                | false       | -                    |
+| [`drag:pressure`][dragpressure]              | Gets fired when using force touch on draggable element     | false       | -                    |
+| [`mirror:created`][mirrorcreated]            | Gets fired when draggable mirror gets created              | false       | -                    |
+| [`mirror:attached`][mirrorattached]          | Gets fired when draggable mirror gets attached to DOM      | false       | -                    |
+| [`mirror:move`][mirrormove]                  | Gets fired when draggable mirror moves                     | true        | Stop mirror movement |
+| [`mirror:destroy`][mirrordestroy]            | Gets fired when draggable mirror gets removed              | true        | Stop mirror removal  |
+
+[dragstart]: DragEvent#dragstartevent
+[dragmove]: DragEvent#dragmoveevent
+[dragover]: DragEvent#dragoverevent
+[dragovercontainer]: DragEvent#dragovercontainer
+[dragout]: DragEvent#dragoutevent
+[dragoutcontainer]: DragEvent#dragoutcontainerevent
+[dragstop]: DragEvent#dragstopevent
+[dragpressure]: DragEvent#dragpressureevent
+
+[mirrorcreated]: MirrorEvent#mirrorcreatedevent
+[mirrorattached]: MirrorEvent#mirrorattachedevent
+[mirrormove]: MirrorEvent#mirrormoveevent
+[mirrordestroy]: MirrorEvent#mirrordestroyevent
 
 ### Classes
 

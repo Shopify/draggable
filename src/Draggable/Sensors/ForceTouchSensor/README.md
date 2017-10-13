@@ -18,10 +18,10 @@ This sensor only works for Macbook Pros with force touch trackpads
 To create a force touch sensor, specify the containers it should pay attention to. Sensors will always
 trigger sensor events on container element.
 
-**`touchSensor.attach(): void`**  
+**`forceTouchSensor.attach(): void`**  
 Attaches sensors to the DOM
 
-**`touchSensor.detach(): void`**  
+**`forceTouchSensor.detach(): void`**  
 Detaches sensors to the DOM
 
 ### Options

@@ -75,6 +75,7 @@ export default class Snappable {
     source.classList.remove(this.draggable.getClassNameFor('source:dragging'));
     source.classList.add(this.draggable.getClassNameFor('source:placed'));
 
+    // Need to cancel this in drag out
     setTimeout(() => {
       source.classList.remove(this.draggable.getClassNameFor('source:placed'));
     }, this.draggable.options.placedTimeout);

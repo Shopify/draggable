@@ -3,9 +3,27 @@
 Sortable is built on top of Draggable and allows you to reorder elements. It maintains the order internally and fires
 three events on top of the draggable events: `sortable:start`, `sortable:sorted` and `sortable:stop`.
 
+### Import
+
+```js
+import {Sortable} from '@shopify/sortable';
+```
+
+```js
+import Sortable from '@shopify/draggable/sortable';
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/draggable.bundle.js"></script>
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/sortable.js"></script>
+```
+
 ### API
 
-Check out Draggables API for the base API
+Check out [Draggables API](../Draggable#api) for the base API
 
 ### Options
 

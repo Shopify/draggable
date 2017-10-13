@@ -2,14 +2,34 @@ const ARIA_GRABBED = 'aria-grabbed';
 const ARIA_DROPEFFECT = 'aria-dropeffect';
 const TABINDEX = 'tabindex';
 
+/**
+ * __WIP__ Accessibility plugin
+ * @class Accessibility
+ * @module Accessibility
+ */
 export default class Accessibility {
+
+  /**
+   * Accessibility constructor.
+   * @constructs Accessibility
+   * @param {Draggable} draggable - Draggable instance
+   */
   constructor(draggable) {
+
+    /**
+     * Draggable instance
+     * @property draggable
+     * @type {Draggable}
+     */
     this.draggable = draggable;
 
     this._onInit = this._onInit.bind(this);
     this._onDestroy = this._onDestroy.bind(this);
   }
 
+  /**
+   * Attaches listeners to draggable
+   */
   attach() {
     this.draggable
       .on('init', this._onInit)
@@ -18,6 +38,9 @@ export default class Accessibility {
       .on('drag:stop', _onDragStop);
   }
 
+  /**
+   * Detaches listeners from draggable
+   */
   detach() {
     this.draggable
       .off('init', this._onInit)
@@ -26,6 +49,12 @@ export default class Accessibility {
       .off('drag:stop', _onDragStop);
   }
 
+  /**
+   * Intialize handler
+   * @private
+   * @param {Object} param
+   * @param {HTMLElement[]} param.containers
+   */
   _onInit({containers}) {
     for (const container of containers) {
       container.setAttribute(ARIA_DROPEFFECT, this.draggable.options.type);
@@ -37,6 +66,12 @@ export default class Accessibility {
     }
   }
 
+  /**
+   * Destroy handler handler
+   * @private
+   * @param {Object} param
+   * @param {HTMLElement[]} param.containers
+   */
   _onDestroy({containers}) {
     for (const container of containers) {
       container.removeAttribute(ARIA_DROPEFFECT);

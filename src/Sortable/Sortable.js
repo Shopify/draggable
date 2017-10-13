@@ -118,7 +118,7 @@ export default class Sortable extends Draggable {
 
     const sortableSortEvent = new SortableSortEvent({
       dragEvent: event,
-      oldIndex,
+      currentIndex: oldIndex,
       source,
       over,
     });
@@ -164,7 +164,7 @@ export default class Sortable extends Draggable {
 
     const sortableSortEvent = new SortableSortEvent({
       dragEvent: event,
-      oldIndex,
+      currentIndex: oldIndex,
       source,
       over,
     });

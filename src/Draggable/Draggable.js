@@ -243,9 +243,6 @@ export default class Draggable {
       this.triggerEvent(mirrorMoveEvent);
     }
 
-    // Find the closest scrollable parent
-    this.scrollableParent = closest(container, (element) => element.offsetHeight < element.scrollHeight);
-
     const dragEvent = new DragStartEvent({
       source: this.source,
       mirror: this.mirror,

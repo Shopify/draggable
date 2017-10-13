@@ -1,0 +1,50 @@
+## SwapAnimation
+
+The swap animation plugin currently only works with `Sortable`. It adds a swap animation on `sortable:sorted`,
+and animates both `source` and `over` via `translate3d`. It is currently possible to change the duration and
+the easing function of the animation.
+
+This plugin is not included by default, so make sure to import it before using.
+
+### Import
+
+```js
+import {SwapAnimation} from '@shopify/draggable/plugins/swap-animation';
+```
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/draggable/plugins/swap-animation"></script>
+```
+
+### API
+
+**`new SwapAnimation(draggable: Draggable): SwapAnimation`**  
+To create a swap animation plugin instance.
+
+### Options
+
+**`duration {Integer}`**  
+The duration option allows you to specify the animation during for a single swap. Default: `150`
+
+**`easingFunction {String}`**  
+The easing option allows you to specify an animation easing function. Default: `'ease-in-out'`
+
+### Examples
+
+```js
+import {Sortable, Plugins} from '@shopify/draggable';
+
+const sortable = new Sortable(document.querySelectorAll('ul'), {
+  draggable: 'li',
+  swapAnimation: {
+    duration: 200,
+    easingFunction: 'ease-in-out',
+  },
+  plugins: [Plugins.SwapAnimation],
+});
+```
+
+### Known issues
+
+- Only works with vertical lists
+- Animations are not staggering yet

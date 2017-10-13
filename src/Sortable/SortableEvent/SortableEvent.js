@@ -12,6 +12,10 @@ export class SortableStartEvent extends SortableEvent {
   get startIndex() {
     return this.data.startIndex;
   }
+
+  get startContainer() {
+    return this.data.startContainer;
+  }
 }
 
 export class SortableSortedEvent extends SortableEvent {
@@ -19,6 +23,22 @@ export class SortableSortedEvent extends SortableEvent {
 
   get moves() {
     return this.data.moves;
+  }
+
+  get oldIndex() {
+    return this.data.oldIndex;
+  }
+
+  get newIndex() {
+    return this.data.newIndex;
+  }
+
+  get oldContainer() {
+    return this.data.oldContainer;
+  }
+
+  get newContainer() {
+    return this.data.newContainer;
   }
 }
 
@@ -31,5 +51,13 @@ export class SortableStopEvent extends SortableEvent {
 
   get newIndex() {
     return this.data.newIndex;
+  }
+
+  get oldContainer() {
+    return this.data.oldContainer;
+  }
+
+  get newContainer() {
+    return this.data.newContainer;
   }
 }

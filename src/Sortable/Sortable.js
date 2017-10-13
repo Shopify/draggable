@@ -41,15 +41,25 @@ export default class Sortable {
     return this;
   }
 
+  index(element) {
+    return [...element.parentNode.children].filter((childElement) => {
+      return childElement !== this.originalSource && childElement !== this.mirror;
+    }).indexOf(element);
+  }
+
   _onDragStart(event) {
-    this.startIndex = index(event.source);
+    this.mirror = event.mirror;
+    this.originalSource = event.originalSource;
+    this.startContainer = event.source.parentNode;
+    this.startIndex = this.index(event.source);
 
     const sortableStartEvent = new SortableStartEvent({
       dragEvent: event,
       startIndex: this.startIndex,
+      startContainer: this.startContainer,
     });
 
-    this.draggable.trigger(sortableStartEvent);
+    this.draggable.triggerEvent(sortableStartEvent);
 
     if (sortableStartEvent.canceled()) {
       event.cancel();
@@ -61,15 +71,24 @@ export default class Sortable {
       return;
     }
 
-    const moves = move(event.source, event.over, event.overContainer);
+    const {source, over, overContainer} = event;
+    const oldIndex = this.index(source);
+
+    const moves = move(source, over, overContainer);
 
     if (!moves) {
       return;
     }
 
+    const {oldContainer, newContainer} = moves;
+    const newIndex = this.index(event.source);
+
     const sortableSortedEvent = new SortableSortedEvent({
       dragEvent: event,
-      moves,
+      oldIndex,
+      newIndex,
+      oldContainer,
+      newContainer,
     });
 
     this.draggable.triggerEvent(sortableSortedEvent);
@@ -80,15 +99,24 @@ export default class Sortable {
       return;
     }
 
-    const moves = move(event.source, event.over, event.overContainer);
+    const {source, over, overContainer} = event;
+    const oldIndex = this.index(source);
+
+    const moves = move(source, over, overContainer);
 
     if (!moves) {
       return;
     }
 
+    const {oldContainer, newContainer} = moves;
+    const newIndex = this.index(source);
+
     const sortableSortedEvent = new SortableSortedEvent({
       dragEvent: event,
-      moves,
+      oldIndex,
+      newIndex,
+      oldContainer,
+      newContainer,
     });
 
     this.draggable.triggerEvent(sortableSortedEvent);
@@ -98,13 +126,17 @@ export default class Sortable {
     const sortableStopEvent = new SortableStopEvent({
       dragEvent: event,
       oldIndex: this.startIndex,
-      newIndex: index(event.source),
+      newIndex: this.index(event.source),
+      oldContainer: this.startContainer,
+      newContainer: event.source.parentNode,
     });
 
     this.draggable.triggerEvent(sortableStopEvent);
 
     this.startIndex = null;
-    this.offset = null;
+    this.startContainer = null;
+    this.originalSource = null;
+    this.mirror = null;
   }
 }
 
@@ -130,11 +162,10 @@ function move(source, over, overContainer) {
 
 function moveInsideEmptyContainer(source, overContainer) {
   const oldContainer = source.parentNode;
-  const oldIndex = index(source);
 
   overContainer.appendChild(source);
 
-  return {oldIndex, newIndex: index(source), oldContainer, newContainer: overContainer};
+  return {oldContainer, newContainer: overContainer};
 }
 
 function moveWithinContainer(source, over) {
@@ -147,15 +178,13 @@ function moveWithinContainer(source, over) {
     source.parentNode.insertBefore(source, over);
   }
 
-  return {oldIndex, newIndex, oldContainer: source.parentNode, newContainer: source.parentNode};
+  return {oldContainer: source.parentNode, newContainer: source.parentNode};
 }
 
 function moveOutsideContainer(source, over) {
   const oldContainer = source.parentNode;
-  const oldIndex = index(source);
-  const newIndex = index(over);
 
   over.parentNode.insertBefore(source, over);
 
-  return {oldIndex, newIndex, oldContainer, newContainer: source.parentNode};
+  return {oldContainer, newContainer: source.parentNode};
 }

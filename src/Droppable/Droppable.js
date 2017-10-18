@@ -55,7 +55,7 @@ export default class Droppable {
       return;
     }
 
-    this.droppables = this._getDroppables();
+    this.droppables = [...this._getDroppables()];
     const droppable = closest(event.sensorEvent.target, this.options.droppable);
 
     if (!droppable) {
@@ -151,7 +151,7 @@ export default class Droppable {
       return null;
     }
 
-    return closest(target, (element) => Array.from(this.droppables).includes(element));
+    return closest(target, (element) => this.droppables.includes(element));
   }
 
   _getDroppables() {

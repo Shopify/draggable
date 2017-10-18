@@ -1,7 +1,7 @@
 export default class Sensor {
   constructor(containers = [], options = {}) {
-    this.containers = containers;
-    this.options = options;
+    this.containers = [...containers];
+    this.options = {...options};
   }
 
   attach() {

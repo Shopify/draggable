@@ -59,12 +59,12 @@ export default class Draggable {
   /**
    * Draggable constructor.
    * @constructs Draggable
-   * @param {Array|NodeList} containers - Draggable containers
+   * @param {Array[HTMLElement]|NodeList} containers - Draggable containers
    * @param {Object} options - Options for draggable
    */
   constructor(containers = [], options = {}) {
-    this.containers = containers;
-    this.options = Object.assign({}, defaults, options);
+    this.containers = [...containers];
+    this.options = {...defaults, ...options};
     this.activeSensors = [];
     this.activePlugins = [];
     this.callbacks = {};
@@ -158,7 +158,7 @@ export default class Draggable {
 
   trigger(type, ...args) {
     if (!this.callbacks[type]) { return; }
-    const callbacks = Array.from(this.callbacks[type]);
+    const callbacks = [...this.callbacks[type]];
     for (let i = callbacks.length - 1; i >= 0; i--) {
       const callback = callbacks[i];
       callback(...args);

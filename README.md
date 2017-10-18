@@ -430,7 +430,7 @@ sortable.on('snap:out', () => console.log('snap:out'));
 
 Contributions are more than welcome, the code base is still new and needs more love.
 
-For more information, please checkout the [contribution document](https://github.com/Shopify/draggable/blob/master/CONTRIBUTION.md).
+For more information, please checkout the [contributing document](https://github.com/Shopify/draggable/blob/master/CONTRIBUTING.md).
 
 ## Roadmap
 

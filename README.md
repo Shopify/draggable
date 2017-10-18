@@ -223,7 +223,7 @@ __Same as Draggable__
 
 ### Example
 
-This sample code will make list items draggable:
+This sample code will make list items sortable:
 
 ```js
 import {Sortable} from '@shopify/draggable';

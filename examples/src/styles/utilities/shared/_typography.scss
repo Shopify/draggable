@@ -1,0 +1,60 @@
+////
+/// Utilities shared
+/// Typography
+////
+
+// For truncating single line text.
+// @param {String} $display (optional) - The value to be used for `display`.
+// @param {Boolean} $descender-fix (optional) - Sometimes descenders are cutoff by overflow.
+@mixin text-truncate($display: block, $descender-fix: false) {
+  $padding-bottom: if($descender-fix, 0.25em, null);
+
+  display: $display;
+  padding-bottom: $padding-bottom;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+// For preventing any text selection.
+@mixin text-no-select {
+  pointer-events: none;
+  user-select: none;
+}
+
+// A better way to achieve `text-decoration: underline;` (allows for transitions)
+// @param {Number} $bottom (optional) - Allows for increasing / decreasing vertical positioning.
+// @param {Number} $weight (optional) - Weight of the underline (value to be used for `height`).
+@mixin link-underline($bottom: 0, $weight: 0.1rem) {
+  @if type-of($bottom) != number {
+    @error '#{$bottom} is not a number.';
+  }
+
+  @if type-of($weight) != number {
+    @error '#{$weight} is not a number.';
+  }
+
+  position: relative; // perhaps there should be a param to prevent overriding `position`?
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: $bottom;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    height: $weight;
+    background-color: currentColor;
+    opacity: 0;
+    transition: opacity get-duration() get-easing();
+  }
+
+  &:hover {
+    &::before {
+      opacity: 1;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+////
+/// Components
+/// PillSwitch variants
+////
+
+@import 'components/Patterns/props';
+
+.PillSwitch--isOn {
+  .PillSwitchTrack {
+    &::after {
+      opacity: 0;
+    }
+  }
+
+  .PillSwitchControl {
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: auto;
+    color: white;
+    background-color: get-color(brand, blue);
+    border-color: get-color(brand, blue);
+
+    &:focus,
+    &:hover,
+    &.draggable-mirror {
+      color: get-color(brand, blue);
+      background-color: white;
+    }
+
+    &:active {
+      color: get-color(brand, blue-dark);
+    }
+  }
+}

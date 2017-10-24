@@ -1,0 +1,31 @@
+{% extends 'views/templates/document.html' %}
+
+{% import 'components/Document/Head.html' as Head %}
+{% import 'components/Sidebar/Sidebar.html' as Sidebar %}
+{% import 'components/PageHeader/PageHeader.html' as PageHeader %}
+
+{#
+{% import 'content/Draggable/RestrictAxis/RestrictAxis.html' as RestrictAxis %}
+
+{% set ViewAttrs = {
+  id: 'RestrictAxis',
+  parent: 'Draggable',
+  child: 'Restrict axis',
+  subheading: '...'
+} %}
+
+{% block PageId %}{{ ViewAttrs.id }}{% endblock %}
+
+{% block head %}
+  {{ Head.render(ViewAttrs) }}
+{% endblock %}
+
+{% block sidebar %}
+  {{ Sidebar.render(ViewAttrs, DataPages) }}
+{% endblock %}
+
+{% block main %}
+  {{ PageHeader.render(ViewAttrs.parent, ViewAttrs.subheading) }}
+  {{ RestrictAxis.render(ViewAttrs.id) }}
+{% endblock %}
+#}

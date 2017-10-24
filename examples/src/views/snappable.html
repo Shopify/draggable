@@ -1,0 +1,29 @@
+{% extends 'views/templates/document.html' %}
+
+{% import 'components/Document/Head.html' as Head %}
+{% import 'components/Sidebar/Sidebar.html' as Sidebar %}
+{% import 'components/PageHeader/PageHeader.html' as PageHeader %}
+
+{% import 'content/Plugins/Snappable/Snappable.html' as Snappable %}
+
+{% set ViewAttrs = {
+  id: 'Snappable',
+  parent: 'Plugins',
+  child: 'Snappable',
+  subheading: 'Snappable turns draggable elements into suction cups. Drag an item close enough to another draggable and it will snap into place.'
+} %}
+
+{% block PageId %}{{ ViewAttrs.id }}{% endblock %}
+
+{% block head %}
+  {{ Head.render(ViewAttrs) }}
+{% endblock %}
+
+{% block sidebar %}
+  {{ Sidebar.render(ViewAttrs, DataPages) }}
+{% endblock %}
+
+{% block main %}
+  {{ PageHeader.render(ViewAttrs.parent, ViewAttrs.subheading) }}
+  {{ Snappable.render(ViewAttrs.id) }}
+{% endblock %}

@@ -1,0 +1,21 @@
+////
+/// Components
+/// Link variants
+////
+
+.Link--typeDark {
+  color: get-color(purple);
+
+  &:focus,
+  &:hover {
+    color: get-color(brand, yellow);
+  }
+
+  &:active {
+    color: get-color(brand, orange);
+  }
+}
+
+.Link--noWrap {
+  white-space: nowrap;
+}

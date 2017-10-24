@@ -1,0 +1,61 @@
+////
+/// Utilities global
+/// Functions
+////
+
+// Returns the url() function containing the path to the requested asset.
+// @param {String} $media-type - Type of asset you want to fetch.
+// @param {String} $filename - Filename including extension.
+// @return {String} url() with path - example: url('path/to/requested-asset.ftw')
+@function path-to-asset($media-type, $filename) {
+  $accepted-media-types: (
+    svg: 'svg',
+    image: 'img',
+    font: 'fonts',
+  );
+
+  $fetched-value: map-get($accepted-media-types, $media-type);
+
+  @if type-of($fetched-value) == string {
+    @return url('../#{$fetched-value}/#{$filename}');
+  } @else {
+    @error 'Media type `#{$media-type}` not found. Available types: #{available-names($accepted-media-types)}';
+  }
+}
+
+// Darkens the foreground color by the background color.
+// This is the same as the “multiply” filter in graphics apps.
+// @param {Color} $foreground - The color to darken.
+// @param {Color} $background - The background to base darkening on.
+// @return {Color} The modified color.
+@function color-multiply($foreground, $background: null) {
+  @if type-of($background) != color {
+    $background: #fff;
+  }
+
+  @return $foreground * $background / 255;
+}
+
+// Determine strength of inset shadow based on background color
+// @param {Color} $color - The color to match shadow opacity against
+// @return {Number} The decimal value of opacity
+@function inset-shadow($color) {
+  @if (lightness($color) > 80 or opacity($color) < 0.5) {
+    @return 0.1;
+  } @else {
+    @return 0.2;
+  }
+}
+
+// Column based max-width layout
+// @param {Number} $count - Number of columns this element should span
+@function columns($count: 1) {
+  @if type-of($count) != number or $count < 1 {
+    @error 'You did not provide a proper column count.';
+  }
+
+  $column-width: $count * get-layout-length(column);
+  $gutter-width: ($count - 1) * get-layout-length(gutter);
+
+  @return $column-width + $gutter-width;
+}

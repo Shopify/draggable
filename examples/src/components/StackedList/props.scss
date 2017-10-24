@@ -1,0 +1,42 @@
+////
+/// Components
+/// StackedList props
+////
+
+$stacked-list-header: (
+  padding-top: (
+    base: get-spacing(tighter) + (get-border() / 2),
+  ),
+  padding-bottom: (
+    base: get-spacing(tighter) + get-border(),
+  ),
+);
+
+@function stacked-list-header($group: $threads-default-value, $variant: $threads-default-value) {
+  @return threads-value-get($stacked-list-header, $group, $variant);
+}
+
+$stacked-list-item: (
+  base: (
+    base: 7.2rem,
+    desktop: 8.6rem,
+  ),
+  medium: (
+    base: 10rem,
+    desktop: 16.4rem,
+  ),
+  large: (
+    base: 14.4rem,
+    desktop: 20.2rem,
+  ),
+);
+
+@function stacked-list-item($group: $threads-default-value, $variant: $threads-default-value) {
+  @return threads-value-get($stacked-list-item, $group, $variant);
+}
+
+///
+/// Mixins
+@mixin stacked-list-scroll-height($size: stacked-list-item(), $rows: 6) {
+  height: ($size * $rows) - (get-border() * ($rows - 1));
+}

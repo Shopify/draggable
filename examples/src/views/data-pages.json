@@ -1,0 +1,37 @@
+{
+  "DataPages": [
+    {
+      "Draggable": [
+        "Drag events",
+        "~Restrict axis"
+      ]
+    },
+    {
+      "Droppable": [
+        "One and only",
+        "~Capacity"
+      ]
+    },
+    {
+      "Sortable": [
+        "Simple list",
+        "Transformed",
+        "Multiple containers"
+      ]
+    },
+    {
+      "Swappable": [
+        "Flexbox",
+        "Floated",
+        "Grid layout"
+      ]
+    },
+    {
+      "Plugins": [
+        "Collidable",
+        "Snappable",
+        "~Swap Animation"
+      ]
+    }
+  ]
+}

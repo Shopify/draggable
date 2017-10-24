@@ -6,51 +6,80 @@ import {
   SwappableStopEvent,
 } from './SwappableEvent';
 
-export default class Swappable {
+const onDragStart = Symbol('onDragStart');
+const onDragOver = Symbol('onDragOver');
+const onDragStop = Symbol('onDragStop');
+
+/**
+ * Swappable is built on top of Draggable and allows swapping of draggable elements.
+ * Order is irrelevant to Swappable.
+ * @class Swappable
+ * @module Swappable
+ * @extends Draggable
+ */
+export default class Swappable extends Draggable {
+
+  /**
+   * Swappable constructor.
+   * @constructs Swappable
+   * @param {HTMLElement[]|NodeList|HTMLElement} containers - Swappable containers
+   * @param {Object} options - Options for Swappable
+   */
   constructor(containers = [], options = {}) {
-    this.draggable = new Draggable(containers, options);
+    super(containers, options);
 
-    this._onDragStart = this._onDragStart.bind(this);
-    this._onDragOver = this._onDragOver.bind(this);
-    this._onDragStop = this._onDragStop.bind(this);
+    /**
+     * Last draggable element that was dragged over
+     * @property lastOver
+     * @type {HTMLElement}
+     */
+    this.lastOver = null;
 
-    this.draggable
-      .on('drag:start', this._onDragStart)
-      .on('drag:over', this._onDragOver)
-      .on('drag:stop', this._onDragStop);
+    this[onDragStart] = this[onDragStart].bind(this);
+    this[onDragOver] = this[onDragOver].bind(this);
+    this[onDragStop] = this[onDragStop].bind(this);
+
+    this
+      .on('drag:start', this[onDragStart])
+      .on('drag:over', this[onDragOver])
+      .on('drag:stop', this[onDragStop]);
   }
 
+  /**
+   * Destroys Swappable instance.
+   */
   destroy() {
-    this.draggable
+    super.destroy();
+
+    this
       .off('drag:start', this._onDragStart)
       .off('drag:over', this._onDragOver)
-      .off('drag:stop', this._onDragStop)
-      .destroy();
+      .off('drag:stop', this._onDragStop);
   }
 
-  on(type, callback) {
-    this.draggable.on(type, callback);
-    return this;
-  }
-
-  off(type, callback) {
-    this.draggable.off(type, callback);
-    return this;
-  }
-
-  _onDragStart(event) {
+  /**
+   * Drag start handler
+   * @private
+   * @param {DragStartEvent} event - Drag start event
+   */
+  [onDragStart](event) {
     const swappableStartEvent = new SwappableStartEvent({
       dragEvent: event,
     });
 
-    this.draggable.triggerEvent(swappableStartEvent);
+    this.trigger(swappableStartEvent);
 
     if (swappableStartEvent.canceled()) {
       event.cancel();
     }
   }
 
-  _onDragOver(event) {
+  /**
+   * Drag over handler
+   * @private
+   * @param {DragOverEvent} event - Drag over event
+   */
+  [onDragOver](event) {
     if (event.over === event.originalSource || event.over === event.source || event.canceled()) {
       return;
     }
@@ -74,15 +103,20 @@ export default class Swappable {
       swappedElement: event.over,
     });
 
-    this.draggable.triggerEvent(swappableSwappedEvent);
+    this.trigger(swappableSwappedEvent);
   }
 
-  _onDragStop(event) {
+  /**
+   * Drag stop handler
+   * @private
+   * @param {DragStopEvent} event - Drag stop event
+   */
+  [onDragStop](event) {
     const swappableStopEvent = new SwappableStopEvent({
       dragEvent: event,
     });
 
-    this.draggable.triggerEvent(swappableStopEvent);
+    this.trigger(swappableStopEvent);
     this.lastOver = null;
   }
 }

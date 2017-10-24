@@ -6,50 +6,86 @@ import {
   SortableStopEvent,
 } from './SortableEvent';
 
-export default class Sortable {
+const onDragStart = Symbol('onDragStart');
+const onDragOverContainer = Symbol('onDragOverContainer');
+const onDragOver = Symbol('onDragOver');
+const onDragStop = Symbol('onDragStop');
+
+/**
+ * Sortable is built on top of Draggable and allows sorting of draggable elements. Sortable will keep
+ * track of the original index and emits the new index as you drag over draggable elements.
+ * @class Sortable
+ * @module Sortable
+ * @extends Draggable
+ */
+export default class Sortable extends Draggable {
+
+  /**
+   * Sortable constructor.
+   * @constructs Sortable
+   * @param {HTMLElement[]|NodeList|HTMLElement} containers - Sortable containers
+   * @param {Object} options - Options for Sortable
+   */
   constructor(containers = [], options = {}) {
-    this.draggable = new Draggable(containers, options);
+    super(containers, options);
 
-    this._onDragStart = this._onDragStart.bind(this);
-    this._onDragOverContainer = this._onDragOverContainer.bind(this);
-    this._onDragOver = this._onDragOver.bind(this);
-    this._onDragStop = this._onDragStop.bind(this);
+    /**
+     * start index of source on drag start
+     * @property startIndex
+     * @type {Number}
+     */
+    this.startIndex = null;
 
-    this.draggable
-      .on('drag:start', this._onDragStart)
-      .on('drag:over:container', this._onDragOverContainer)
-      .on('drag:over', this._onDragOver)
-      .on('drag:stop', this._onDragStop);
+    /**
+     * start container on drag start
+     * @property startContainer
+     * @type {HTMLElement}
+     * @default null
+     */
+    this.startContainer = null;
+
+    this[onDragStart] = this[onDragStart].bind(this);
+    this[onDragOverContainer] = this[onDragOverContainer].bind(this);
+    this[onDragOver] = this[onDragOver].bind(this);
+    this[onDragStop] = this[onDragStop].bind(this);
+
+    this
+      .on('drag:start', this[onDragStart])
+      .on('drag:over:container', this[onDragOverContainer])
+      .on('drag:over', this[onDragOver])
+      .on('drag:stop', this[onDragStop]);
   }
 
+  /**
+   * Destroys Sortable instance.
+   */
   destroy() {
-    this.draggable
-      .off('drag:start', this._onDragStart)
-      .off('drag:over:container', this._onDragOverContainer)
-      .off('drag:over', this._onDragOver)
-      .off('drag:stop', this._onDragStop)
-      .destroy();
+    super.destroy();
+
+    this
+      .off('drag:start', this[onDragStart])
+      .off('drag:over:container', this[onDragOverContainer])
+      .off('drag:over', this[onDragOver])
+      .off('drag:stop', this[onDragStop]);
   }
 
-  on(type, callback) {
-    this.draggable.on(type, callback);
-    return this;
-  }
-
-  off(type, callback) {
-    this.draggable.off(type, callback);
-    return this;
-  }
-
+  /**
+   * Returns true index of element within its container during drag operation, i.e. excluding mirror and original source
+   * @param {HTMLElement} element - An element
+   * @return {Number}
+   */
   index(element) {
     return [...element.parentNode.children].filter((childElement) => {
       return childElement !== this.originalSource && childElement !== this.mirror;
     }).indexOf(element);
   }
 
-  _onDragStart(event) {
-    this.mirror = event.mirror;
-    this.originalSource = event.originalSource;
+  /**
+   * Drag start handler
+   * @private
+   * @param {DragStartEvent} event - Drag start event
+   */
+  [onDragStart](event) {
     this.startContainer = event.source.parentNode;
     this.startIndex = this.index(event.source);
 
@@ -59,14 +95,19 @@ export default class Sortable {
       startContainer: this.startContainer,
     });
 
-    this.draggable.triggerEvent(sortableStartEvent);
+    this.trigger(sortableStartEvent);
 
     if (sortableStartEvent.canceled()) {
       event.cancel();
     }
   }
 
-  _onDragOverContainer(event) {
+  /**
+   * Drag over container handler
+   * @private
+   * @param {DragOverContainerEvent} event - Drag over container event
+   */
+  [onDragOverContainer](event) {
     if (event.canceled()) {
       return;
     }
@@ -91,10 +132,15 @@ export default class Sortable {
       newContainer,
     });
 
-    this.draggable.triggerEvent(sortableSortedEvent);
+    this.trigger(sortableSortedEvent);
   }
 
-  _onDragOver(event) {
+  /**
+   * Drag over handler
+   * @private
+   * @param {DragOverEvent} event - Drag over event
+   */
+  [onDragOver](event) {
     if (event.over === event.originalSource || event.over === event.source) {
       return;
     }
@@ -119,10 +165,15 @@ export default class Sortable {
       newContainer,
     });
 
-    this.draggable.triggerEvent(sortableSortedEvent);
+    this.trigger(sortableSortedEvent);
   }
 
-  _onDragStop(event) {
+  /**
+   * Drag stop handler
+   * @private
+   * @param {DragStopEvent} event - Drag stop event
+   */
+  [onDragStop](event) {
     const sortableStopEvent = new SortableStopEvent({
       dragEvent: event,
       oldIndex: this.startIndex,
@@ -131,12 +182,10 @@ export default class Sortable {
       newContainer: event.source.parentNode,
     });
 
-    this.draggable.triggerEvent(sortableStopEvent);
+    this.trigger(sortableStopEvent);
 
     this.startIndex = null;
     this.startContainer = null;
-    this.originalSource = null;
-    this.mirror = null;
   }
 }
 

@@ -62,7 +62,7 @@ export default class Snappable {
       dragEvent: event,
     });
 
-    this.draggable.triggerEvent(snapInEvent);
+    this.draggable.trigger(snapInEvent);
 
     if (snapInEvent.canceled()) {
       return;
@@ -92,7 +92,7 @@ export default class Snappable {
       dragEvent: event,
     });
 
-    this.draggable.triggerEvent(snapOutEvent);
+    this.draggable.trigger(snapOutEvent);
 
     if (snapOutEvent.canceled()) {
       return;

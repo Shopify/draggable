@@ -1706,8 +1706,12 @@ esdoc-brand-plugin@^1.0.0:
     cheerio "0.22.0"
 
 esdoc-coverage-plugin@^1.0.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/esdoc-coverage-plugin/-/esdoc-coverage-plugin-1.1.0.tgz#3869869cd7f87891f972625787695a299aece45c"
+
+esdoc-ecmascript-proposal-plugin@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/esdoc-coverage-plugin/-/esdoc-coverage-plugin-1.0.0.tgz#b9680fada8cbb0740e6c9ca6aece84fb7d82caa6"
+  resolved "https://registry.yarnpkg.com/esdoc-ecmascript-proposal-plugin/-/esdoc-ecmascript-proposal-plugin-1.0.0.tgz#390dc5656ba8a2830e39dba3570d79138df2ffd9"
 
 esdoc-external-ecmascript-plugin@^1.0.0:
   version "1.0.0"
@@ -1724,12 +1728,12 @@ esdoc-integrate-test-plugin@^1.0.0:
   resolved "https://registry.yarnpkg.com/esdoc-integrate-test-plugin/-/esdoc-integrate-test-plugin-1.0.0.tgz#e2d0d00090f7f0c35e5d2f2c033327a79e53e409"
 
 esdoc-lint-plugin@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/esdoc-lint-plugin/-/esdoc-lint-plugin-1.0.0.tgz#e5662938df97f252480f46f56e1e09895a2a2385"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/esdoc-lint-plugin/-/esdoc-lint-plugin-1.0.1.tgz#87bee6403e676c087f61be92c452d60f2c6a70e5"
 
 esdoc-publish-html-plugin@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/esdoc-publish-html-plugin/-/esdoc-publish-html-plugin-1.0.0.tgz#d6b2c0a638b0e26b9fc4beaea7ced4beef800bc6"
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/esdoc-publish-html-plugin/-/esdoc-publish-html-plugin-1.1.0.tgz#093f8337aca169022572cb387ffcc3f470b02513"
   dependencies:
     babel-generator "6.11.4"
     cheerio "0.22.0"
@@ -1756,8 +1760,8 @@ esdoc-standard-plugin@^1.0.0:
     esdoc-unexported-identifier-plugin "^1.0.0"
 
 esdoc-type-inference-plugin@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/esdoc-type-inference-plugin/-/esdoc-type-inference-plugin-1.0.0.tgz#a0a10ee740a848ca865d0314e161a2016778e7a6"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/esdoc-type-inference-plugin/-/esdoc-type-inference-plugin-1.0.1.tgz#aabca78641f99bd1ece6f302f045bbd631be72f5"
 
 esdoc-undocumented-identifier-plugin@^1.0.0:
   version "1.0.0"

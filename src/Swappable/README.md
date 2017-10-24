@@ -1,32 +1,15 @@
 ## Swappable
 
-Swappable allows you to swap elements by dragging over them. No order will be maintained (unlike Sortable),
+Droppable is built on top of Draggable and allows you to swap elements by dragging over them. No order will be maintained (unlike Sortable),
 so any draggable element that gets dragged over will be swapped with the source element.
 
 ### API
 
-**`new Swappable(containers: Array[HTMLElement]|NodeList, options: Object): Swappable`**  
-To create a swappable instance you need to specify the containers that hold draggable items, e.g.
-`[document.body]` would work too. The second argument is an options object, which is described
-below.
-
-**`swappable.on(eventName: String, listener: Function): Swappable`**  
-Swappable uses Draggables event emitter, so you can register callbacks for events. Swappable
-also supports method chaining.
-
-**`swappable.off(eventName: String, listener: Function): Swappable`**  
-You can unregister listeners by using `.off()`, make sure to provide the same callback.
-
-**`swappable.trigger(eventName: String, event: AbstractEvent): Swappable`**  
-You can trigger events through swappable. This is used to fire events internally or by
-extensions of Draggable.
-
-**`droppable.destroy(): void`**  
-Detaches all sensors and listeners, and cleans up after itself.
+Check out Draggables API for the base API
 
 ### Options
 
-__Same as Draggable__
+Check out Draggables options for the base options
 
 ### Events
 
@@ -38,11 +21,11 @@ __Same as Draggable__
 
 ### Classes
 
-__Same as Draggable__
+Check out Draggables class identifiers
 
 ### Example
 
-This sample code will make list items draggable and allows to drop them inside another element:
+This sample code will make list items draggable and allows you to swap them with other draggable elements:
 
 ```js
 import {Swappable} from '@shopify/draggable';

@@ -40,6 +40,7 @@
   "devDependencies": {
     "babel-core": "6.24.1",
     "babel-preset-shopify": "16.0.2",
+    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
     "babel-jest": "^20.0.3",
     "babel-loader": "^7.0.0",

@@ -1,28 +1,11 @@
 ## Droppable
 
-Droppable allows you to declare draggable and droppable elements via options.
+Droppable is built on top of Draggable and allows you to declare draggable and droppable elements via options.
 Droppable fires two events on top of the draggable events: `droppable:over` and `droppable:out`.
 
 ### API
 
-**`new Droppable(containers: Array[HTMLElement]|NodeList, options: Object): Droppable`**  
-To create a droppable instance you need to specify the containers that hold draggable items, e.g.
-`[document.body]` would work too. The second argument is an options object, which is described
-below.
-
-**`droppable.on(eventName: String, listener: Function): Droppable`**  
-Droppable uses Draggables event emitter, so you can register callbacks for events. Droppable
-also supports method chaining.
-
-**`droppable.off(eventName: String, listener: Function): Droppable`**  
-You can unregister listeners by using `.off()`, make sure to provide the same callback.
-
-**`droppable.trigger(eventName: String, event: AbstractEvent): Droppable`**  
-You can trigger events through droppable. This is used to fire events internally or by
-extensions of Draggable.
-
-**`droppable.destroy(): void`**  
-Detaches all sensors and listeners, and cleans up after itself.
+Check out Draggables API for the base API
 
 ### Options
 
@@ -56,6 +39,6 @@ const droppable = new Droppable(document.querySelectorAll('ul'), {
   droppable: '#dropzone',
 });
 
-droppable.on('droppable:over', () => console.log('droppable:over'))
+droppable.on('droppable:over', () => console.log('droppable:over'));
 droppable.on('droppable:out', () => console.log('droppable:out'));
 ```

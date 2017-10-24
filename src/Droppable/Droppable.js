@@ -6,56 +6,106 @@ import {
   DroppableOutEvent,
 } from './DroppableEvent';
 
-const defaults = {
-  classes: {
-    'droppable:active': 'draggable-droppable--active',
-    'droppable:occupied': 'draggable-droppable--occupied',
-  },
+const onDragStart = Symbol('onDragStart');
+const onDragMove = Symbol('onDragMove');
+const onDragStop = Symbol('onDragStop');
+const drop = Symbol('drop');
+const release = Symbol('release');
+const closestDroppable = Symbol('closestDroppable');
+const getDroppables = Symbol('getDroppables');
+
+const classes = {
+  'droppable:active': 'draggable-droppable--active',
+  'droppable:occupied': 'draggable-droppable--occupied',
 };
 
-export default class Droppable {
+const defaults = {
+  droppable: '.draggable-droppable',
+};
+
+/**
+ * Droppable is built on top of Draggable and allows dropping draggable elements
+ * into droppable element
+ * @class Droppable
+ * @module Droppable
+ * @extends Draggable
+ */
+export default class Droppable extends Draggable {
+
+  /**
+   * Droppable constructor.
+   * @constructs Droppable
+   * @param {HTMLElement[]|NodeList|HTMLElement} containers - Droppable containers
+   * @param {Object} options - Options for Droppable
+   */
   constructor(containers = [], options = {}) {
-    this.draggable = new Draggable(containers, options);
-    this.options = {...defaults, ...options};
+    super(containers, options);
 
-    this._onDragStart = this._onDragStart.bind(this);
-    this._onDragMove = this._onDragMove.bind(this);
-    this._onDragStop = this._onDragStop.bind(this);
+    this.options = {...defaults, ...this.options};
 
-    this.draggable
-      .on('drag:start', this._onDragStart)
-      .on('drag:move', this._onDragMove)
-      .on('drag:stop', this._onDragStop);
+    /**
+     * All droppable elements on drag start
+     * @property droppables
+     * @type {HTMLElement[]}
+     */
+    this.droppables = null;
+
+    /**
+     * Last droppable element that the source was dropped into
+     * @property lastDroppable
+     * @type {HTMLElement}
+     */
+    this.lastDroppable = null;
+
+    /**
+     * Initial droppable element that the source was drag from
+     * @property initialDroppable
+     * @type {HTMLElement}
+     */
+    this.initialDroppable = null;
+
+    this[onDragStart] = this[onDragStart].bind(this);
+    this[onDragMove] = this[onDragMove].bind(this);
+    this[onDragStop] = this[onDragStop].bind(this);
+
+    this
+      .on('drag:start', this[onDragStart])
+      .on('drag:move', this[onDragMove])
+      .on('drag:stop', this[onDragStop]);
   }
 
+  /**
+   * Destroys Droppable instance.
+   */
   destroy() {
-    this.draggable
-      .off('drag:start', this._onDragStart)
-      .off('drag:move', this._onDragMove)
-      .off('drag:stop', this._onDragStop)
-      .destroy();
+    super.destroy();
+
+    this
+      .off('drag:start', this[onDragStart])
+      .off('drag:move', this[onDragMove])
+      .off('drag:stop', this[onDragStop]);
   }
 
-  on(type, callback) {
-    this.draggable.on(type, callback);
-    return this;
-  }
-
-  off(type, callback) {
-    this.draggable.off(type, callback);
-    return this;
-  }
-
+  /**
+   * Returns class name for class identifier
+   * @param {String} name - Name of class identifier
+   * @return {String}
+   */
   getClassNameFor(name) {
-    return this.options.classes[name] || defaults.classes[name];
+    return super.getClassNameFor(name) || classes[name];
   }
 
-  _onDragStart(event) {
+  /**
+   * Drag start handler
+   * @private
+   * @param {DragStartEvent} event - Drag start event
+   */
+  [onDragStart](event) {
     if (event.canceled()) {
       return;
     }
 
-    this.droppables = [...this._getDroppables()];
+    this.droppables = [...this[getDroppables]()];
     const droppable = closest(event.sensorEvent.target, this.options.droppable);
 
     if (!droppable) {
@@ -74,23 +124,33 @@ export default class Droppable {
     }
   }
 
-  _onDragMove(event) {
+  /**
+   * Drag move handler
+   * @private
+   * @param {DragMoveEvent} event - Drag move event
+   */
+  [onDragMove](event) {
     if (event.canceled()) {
       return;
     }
 
-    const droppable = this._closestDroppable(event.sensorEvent.target);
+    const droppable = this[closestDroppable](event.sensorEvent.target);
     const overEmptyDroppable = droppable && !droppable.classList.contains(this.getClassNameFor('droppable:occupied'));
 
-    if (overEmptyDroppable && this._drop(event, droppable)) {
+    if (overEmptyDroppable && this[drop](event, droppable)) {
       this.lastDroppable = droppable;
     } else if ((!droppable || droppable === this.initialDroppable) && this.lastDroppable) {
-      this._release(event);
+      this[release](event);
       this.lastDroppable = null;
     }
   }
 
-  _onDragStop() {
+  /**
+   * Drag stop handler
+   * @private
+   * @param {DragStopEvent} event - Drag stop event
+   */
+  [onDragStop]() {
     const occupiedClass = this.getClassNameFor('droppable:occupied');
 
     for (const droppable of this.droppables) {
@@ -106,13 +166,19 @@ export default class Droppable {
     this.initialDroppable = null;
   }
 
-  _drop(event, droppable) {
+  /**
+   * Drop method drops a draggable element into a droppable element
+   * @private
+   * @param {DragMoveEvent} event - Drag move event
+   * @param {HTMLElement} droppable - Droppable element to drop draggable into
+   */
+  [drop](event, droppable) {
     const droppableOverEvent = new DroppableOverEvent({
       dragEvent: event,
       droppable,
     });
 
-    this.draggable.triggerEvent(droppableOverEvent);
+    this.trigger(droppableOverEvent);
 
     if (droppableOverEvent.canceled()) {
       return false;
@@ -130,13 +196,18 @@ export default class Droppable {
     return true;
   }
 
-  _release(event) {
+  /**
+   * Release method moves the previously dropped element back into its original position
+   * @private
+   * @param {DragMoveEvent} event - Drag move event
+   */
+  [release](event) {
     const droppableOutEvent = new DroppableOutEvent({
       dragEvent: event,
       droppable: this.lastDroppable,
     });
 
-    this.draggable.triggerEvent(droppableOutEvent);
+    this.trigger(droppableOutEvent);
 
     if (droppableOutEvent.canceled()) {
       return;
@@ -146,7 +217,13 @@ export default class Droppable {
     this.lastDroppable.classList.remove(this.getClassNameFor('droppable:occupied'));
   }
 
-  _closestDroppable(target) {
+  /**
+   * Returns closest droppable element for even target
+   * @private
+   * @param {HTMLElement} target - Event target
+   * @return {HTMLElement}
+   */
+  [closestDroppable](target) {
     if (!this.droppables) {
       return null;
     }
@@ -154,7 +231,12 @@ export default class Droppable {
     return closest(target, (element) => this.droppables.includes(element));
   }
 
-  _getDroppables() {
+  /**
+   * Returns all current droppable elements for this draggable instance
+   * @private
+   * @return {NodeList|HTMLElement[]}
+   */
+  [getDroppables]() {
     const droppables = this.options.droppable;
 
     if (typeof droppables === 'string') {

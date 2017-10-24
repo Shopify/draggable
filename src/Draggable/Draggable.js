@@ -3,7 +3,6 @@ import {closest} from 'shared/utils';
 import {Accessibility, Mirror} from './Plugins';
 
 import {
-  DragSensor,
   MouseSensor,
   TouchSensor,
 } from './Sensors';
@@ -31,13 +30,20 @@ import {
   MirrorDestroyEvent,
 } from './MirrorEvent';
 
+const onDragStart = Symbol('onDragStart');
+const onDragMove = Symbol('onDragMove');
+const onDragStop = Symbol('onDragStop');
+const onDragPressure = Symbol('onDragPressure');
+const getAppendableContainer = Symbol('getAppendableContainer');
+const closestContainer = Symbol('closestContainer');
+
 const defaults = {
   draggable: '.draggable-source',
   handle: null,
   delay: 0,
   placedTimeout: 800,
-  native: false,
   plugins: [],
+  sensors: [],
   classes: {
     'container:dragging': 'draggable-container--is-dragging',
     'source:dragging': 'draggable-source--is-dragging',
@@ -52,6 +58,7 @@ const defaults = {
 
 /**
  * This is the core draggable library that does the heavy lifting
+ * @class Draggable
  * @module Draggable
  */
 export default class Draggable {
@@ -59,46 +66,66 @@ export default class Draggable {
   /**
    * Draggable constructor.
    * @constructs Draggable
-   * @param {Array[HTMLElement]|NodeList} containers - Draggable containers
+   * @param {HTMLElement[]|NodeList|HTMLElement} containers - Draggable containers
    * @param {Object} options - Options for draggable
    */
-  constructor(containers = [], options = {}) {
-    this.containers = [...containers];
+  constructor(containers = [document.body], options = {}) {
+
+    /**
+     * Draggable containers
+     * @property containers
+     * @type {HTMLElement[]}
+     */
+    if (containers instanceof NodeList || containers instanceof Array) {
+      this.containers = [...containers];
+    } else if (containers instanceof HTMLElement) {
+      this.containers = [containers];
+    } else {
+      throw new Error('Draggable containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`');
+    }
+
     this.options = {...defaults, ...options};
-    this.activeSensors = [];
-    this.activePlugins = [];
     this.callbacks = {};
+
+    /**
+     * Current drag state
+     * @property dragging
+     * @type {Boolean}
+     */
     this.dragging = false;
 
-    this.dragStart = this.dragStart.bind(this);
-    this.dragMove = this.dragMove.bind(this);
-    this.dragStop = this.dragStop.bind(this);
-    this.dragPressure = this.dragPressure.bind(this);
+    /**
+     * Active plugins
+     * @property plugins
+     * @type {Plugin[]}
+     */
+    this.plugins = [];
 
-    for (const container of this.containers) {
-      container.addEventListener('drag:start', this.dragStart, true);
-      container.addEventListener('drag:move', this.dragMove, true);
-      container.addEventListener('drag:stop', this.dragStop, true);
-      container.addEventListener('drag:pressure', this.dragPressure, true);
-    }
+    /**
+     * Active sensors
+     * @property sensors
+     * @type {Sensor[]}
+     */
+    this.sensors = [];
 
-    for (const Plugin of [Mirror, Accessibility, ...this.options.plugins]) {
-      const plugin = new Plugin(this);
-      plugin.attach();
-      this.activePlugins.push(plugin);
-    }
+    this[onDragStart] = this[onDragStart].bind(this);
+    this[onDragMove] = this[onDragMove].bind(this);
+    this[onDragStop] = this[onDragStop].bind(this);
+    this[onDragPressure] = this[onDragPressure].bind(this);
 
-    for (const Sensor of this.sensors()) {
-      const sensor = new Sensor(this.containers, options);
-      sensor.attach();
-      this.activeSensors.push(sensor);
-    }
+    document.addEventListener('drag:start', this[onDragStart], true);
+    document.addEventListener('drag:move', this[onDragMove], true);
+    document.addEventListener('drag:stop', this[onDragStop], true);
+    document.addEventListener('drag:pressure', this[onDragPressure], true);
+
+    this.addPlugin(...[Mirror, Accessibility, ...this.options.plugins]);
+    this.addSensor(...[MouseSensor, TouchSensor, ...this.options.sensors]);
 
     const draggableInitializedEvent = new DraggableInitializedEvent({
       draggable: this,
     });
 
-    this.triggerEvent(draggableInitializedEvent);
+    this.trigger(draggableInitializedEvent);
   }
 
   /**
@@ -106,30 +133,102 @@ export default class Draggable {
    * deactivates sensors and plugins
    */
   destroy() {
-    for (const container of this.containers) {
-      container.removeEventListener('drag:start', this.dragStart, true);
-      container.removeEventListener('drag:move', this.dragMove, true);
-      container.removeEventListener('drag:stop', this.dragStop, true);
-      container.removeEventListener('drag:pressure', this.dragPressure, true);
-    }
+    document.removeEventListener('drag:start', this.dragStart, true);
+    document.removeEventListener('drag:move', this.dragMove, true);
+    document.removeEventListener('drag:stop', this.dragStop, true);
+    document.removeEventListener('drag:pressure', this.dragPressure, true);
 
     const draggableDestroyEvent = new DraggableDestroyEvent({
       draggable: this,
     });
 
-    this.triggerEvent(draggableDestroyEvent);
+    this.trigger(draggableDestroyEvent);
 
-    for (const activePlugin of this.activePlugins) {
-      activePlugin.detach();
-    }
+    this.removePlugin(...this.plugins.map((plugin) => plugin.constructor));
+    this.removeSensor(...this.sensors.map((sensor) => sensor.constructor));
+  }
 
-    for (const activeSensor of this.activeSensors) {
-      activeSensor.detach();
-    }
+  /**
+   * Adds plugin to this draggable instance. This will end up calling the attach method of the plugin
+   * @param {...typeof Plugin} plugins - Plugins that you want attached to draggable
+   * @return {Draggable}
+   * @example draggable.addPlugin(CustomA11yPlugin, CustomMirrorPlugin)
+   */
+  addPlugin(...plugins) {
+    const activePlugins = plugins.map((Plugin) => new Plugin(this));
+    activePlugins.forEach((plugin) => plugin.attach());
+    this.plugins = [...this.plugins, ...activePlugins];
+    return this;
+  }
+
+  /**
+   * Removes plugins that are already attached to this draggable instance. This will end up calling
+   * the detach method of the plugin
+   * @param {...typeof Plugin} plugins - Plugins that you want detached from draggable
+   * @return {Draggable}
+   * @example draggable.removePlugin(MirrorPlugin, CustomMirrorPlugin)
+   */
+  removePlugin(...plugins) {
+    const removedPlugins = this.plugins.filter((plugin) => plugins.includes(plugin.constructor));
+    removedPlugins.forEach((plugin) => plugin.detach());
+    this.plugins = this.plugins.filter((plugin) => !plugins.includes(plugin.constructor));
+    return this;
+  }
+
+  /**
+   * Adds sensors to this draggable instance. This will end up calling the attach method of the sensor
+   * @param {...typeof Sensor} sensors - Sensors that you want attached to draggable
+   * @return {Draggable}
+   * @example draggable.addSensor(ForceTouchSensor, CustomSensor)
+   */
+  addSensor(...sensors) {
+    const activeSensors = sensors.map((Sensor) => new Sensor(this.containers, this.options));
+    activeSensors.forEach((sensor) => sensor.attach());
+    this.sensors = [...this.sensors, ...activeSensors];
+    return this;
+  }
+
+  /**
+   * Removes sensors that are already attached to this draggable instance. This will end up calling
+   * the detach method of the sensor
+   * @param {...typeof Sensor} sensors - Sensors that you want attached to draggable
+   * @return {Draggable}
+   * @example draggable.removeSensor(TouchSensor, DragSensor)
+   */
+  removeSensor(...sensors) {
+    const removedSensors = this.sensors.filter((sensor) => sensors.includes(sensor.constructor));
+    removedSensors.forEach((sensor) => sensor.detach());
+    this.sensors = this.sensors.filter((sensor) => !sensors.includes(sensor.constructor));
+    return this;
+  }
+
+  /**
+   * Adds container to this draggable instance
+   * @param {...HTMLElement} containers - Containers you want to add to draggable
+   * @return {Draggable}
+   * @example draggable.addPlugin(CustomA11yPlugin, CustomMirrorPlugin)
+   */
+  addContainer(...containers) {
+    this.containers = [...this.containers, ...containers];
+    return this;
+  }
+
+  /**
+   * Removes container from this draggable instance
+   * @param {...HTMLElement} containers - Containers you want to remove from draggable
+   * @return {Draggable}
+   * @example draggable.removePlugin(MirrorPlugin, CustomMirrorPlugin)
+   */
+  removeContainer(...containers) {
+    this.containers = this.containers.filter((container) => !containers.includes(container));
+    return this;
   }
 
   /**
    * Adds listener for draggable events
+   * @param {String} type - Event name
+   * @param {Function} callback - Event callback
+   * @return {Draggable}
    * @example draggable.on('drag:start', (dragEvent) => dragEvent.cancel());
    */
   on(type, callback) {
@@ -143,6 +242,9 @@ export default class Draggable {
 
   /**
    * Removes listener from draggable
+   * @param {String} type - Event name
+   * @param {Function} callback - Event callback
+   * @return {Draggable}
    * @example draggable.off('drag:start', handlerFunction);
    */
   off(type, callback) {
@@ -156,29 +258,51 @@ export default class Draggable {
     return this;
   }
 
-  trigger(type, ...args) {
-    if (!this.callbacks[type]) { return; }
-    const callbacks = [...this.callbacks[type]];
+  /**
+   * Triggers draggable event
+   * @param {AbstractEvent} event - Event instance
+   * @return {Draggable}
+   * @example draggable.trigger(event);
+   */
+  trigger(event) {
+    if (!this.callbacks[event.type]) { return null; }
+    const callbacks = [...this.callbacks[event.type]];
     for (let i = callbacks.length - 1; i >= 0; i--) {
       const callback = callbacks[i];
-      callback(...args);
+      callback(event);
     }
+    return this;
   }
 
   /**
-   * Active sensors
-   * @return {Array} sensors
+   * Returns class name for class identifier
+   * @param {String} name - Name of class identifier
+   * @return {String}
    */
-  sensors() {
-    return [
-      TouchSensor,
-      (this.options.native ? DragSensor : MouseSensor),
-    ];
+  getClassNameFor(name) {
+    return this.options.classes[name] || defaults.classes[name];
   }
 
-  dragStart(event) {
+  /**
+   * Returns true if this draggable instance is currently dragging
+   * @return {Boolean}
+   */
+  isDragging() {
+    return Boolean(this.dragging);
+  }
+
+  /**
+   * Drag start handler
+   * @private
+   * @param {Event} event - DOM Drag event
+   */
+  [onDragStart](event) {
     const sensorEvent = getSensorEvent(event);
     const {target, container, originalEvent} = sensorEvent;
+
+    if (!this.containers.includes(container)) {
+      return;
+    }
 
     if (this.options.handle && target && !closest(target, this.options.handle)) {
       sensorEvent.cancel();
@@ -199,7 +323,7 @@ export default class Draggable {
     this.source = this.originalSource.cloneNode(true);
 
     if (!isDragEvent(originalEvent)) {
-      const appendableContainer = this.getAppendableContainer({source: this.originalSource});
+      const appendableContainer = this[getAppendableContainer]({source: this.originalSource});
       this.mirror = this.source.cloneNode(true);
 
       const mirrorCreatedEvent = new MirrorCreatedEvent({
@@ -218,9 +342,9 @@ export default class Draggable {
         sensorEvent,
       });
 
-      this.triggerEvent(mirrorCreatedEvent);
+      this.trigger(mirrorCreatedEvent);
       appendableContainer.appendChild(this.mirror);
-      this.triggerEvent(mirrorAttachedEvent);
+      this.trigger(mirrorAttachedEvent);
     }
 
     this.originalSource.parentNode.insertBefore(this.source, this.originalSource);
@@ -240,7 +364,7 @@ export default class Draggable {
         sensorEvent,
       });
 
-      this.triggerEvent(mirrorMoveEvent);
+      this.trigger(mirrorMoveEvent);
     }
 
     const dragEvent = new DragStartEvent({
@@ -251,7 +375,7 @@ export default class Draggable {
       sensorEvent,
     });
 
-    this.triggerEvent(dragEvent);
+    this.trigger(dragEvent);
 
     if (!dragEvent.canceled()) {
       return;
@@ -266,11 +390,16 @@ export default class Draggable {
     document.body.classList.remove(this.getClassNameFor('body:dragging'));
   }
 
-  triggerEvent(event) {
-    return this.trigger(event.type, event);
-  }
+  /**
+   * Drag move handler
+   * @private
+   * @param {Event} event - DOM Drag event
+   */
+  [onDragMove](event) {
+    if (!this.dragging) {
+      return;
+    }
 
-  dragMove(event) {
     const sensorEvent = getSensorEvent(event);
     const {container} = sensorEvent;
     let target = sensorEvent.target;
@@ -283,7 +412,7 @@ export default class Draggable {
       sensorEvent,
     });
 
-    this.triggerEvent(dragMoveEvent);
+    this.trigger(dragMoveEvent);
 
     if (dragMoveEvent.canceled()) {
       sensorEvent.cancel();
@@ -298,11 +427,11 @@ export default class Draggable {
         sensorEvent,
       });
 
-      this.triggerEvent(mirrorMoveEvent);
+      this.trigger(mirrorMoveEvent);
     }
 
     target = closest(target, this.options.draggable);
-    const overContainer = sensorEvent.overContainer || this.closestContainer(sensorEvent.target);
+    const overContainer = sensorEvent.overContainer || this[closestContainer](sensorEvent.target);
     const isLeavingContainer = this.currentOverContainer && (overContainer !== this.currentOverContainer);
     const isLeavingDraggable = this.currentOver && (target !== this.currentOver);
     const isOverContainer = overContainer && (this.currentOverContainer !== overContainer);
@@ -318,7 +447,7 @@ export default class Draggable {
         over: this.currentOver,
       });
 
-      this.triggerEvent(dragOutEvent);
+      this.trigger(dragOutEvent);
 
       this.currentOver.classList.remove(this.getClassNameFor('draggable:over'));
       this.currentOver = null;
@@ -334,7 +463,7 @@ export default class Draggable {
         overContainer: this.overContainer,
       });
 
-      this.triggerEvent(dragOutContainerEvent);
+      this.trigger(dragOutContainerEvent);
 
       this.currentOverContainer.classList.remove(this.getClassNameFor('container:over'));
       this.currentOverContainer = null;
@@ -352,7 +481,7 @@ export default class Draggable {
         overContainer,
       });
 
-      this.triggerEvent(dragOverContainerEvent);
+      this.trigger(dragOverContainerEvent);
 
       this.currentOverContainer = overContainer;
     }
@@ -370,13 +499,22 @@ export default class Draggable {
         over: target,
       });
 
-      this.triggerEvent(dragOverEvent);
+      this.trigger(dragOverEvent);
 
       this.currentOver = target;
     }
   }
 
-  dragStop(event) {
+  /**
+   * Drag stop handler
+   * @private
+   * @param {Event} event - DOM Drag event
+   */
+  [onDragStop](event) {
+    if (!this.dragging) {
+      return;
+    }
+
     this.dragging = false;
 
     const sensorEvent = getSensorEvent(event);
@@ -388,7 +526,7 @@ export default class Draggable {
       sourceContainer: this.sourceContainer,
     });
 
-    this.triggerEvent(dragStopEvent);
+    this.trigger(dragStopEvent);
 
     this.source.parentNode.insertBefore(this.originalSource, this.source);
     this.source.parentNode.removeChild(this.source);
@@ -417,7 +555,7 @@ export default class Draggable {
         sensorEvent,
       });
 
-      this.triggerEvent(mirrorDestroyEvent);
+      this.trigger(mirrorDestroyEvent);
 
       if (!mirrorDestroyEvent.canceled()) {
         this.mirror.parentNode.removeChild(this.mirror);
@@ -445,7 +583,16 @@ export default class Draggable {
     this.sourceContainer = null;
   }
 
-  dragPressure(event) {
+  /**
+   * Drag pressure handler
+   * @private
+   * @param {Event} event - DOM Drag event
+   */
+  [onDragPressure](event) {
+    if (!this.dragging) {
+      return;
+    }
+
     const sensorEvent = getSensorEvent(event);
     const source = this.source || closest(sensorEvent.originalEvent.target, this.options.draggable);
 
@@ -455,10 +602,17 @@ export default class Draggable {
       pressure: sensorEvent.pressure,
     });
 
-    this.triggerEvent(dragPressureEvent);
+    this.trigger(dragPressureEvent);
   }
 
-  getAppendableContainer({source}) {
+  /**
+   * Returns appendable container for mirror based on the appendTo option
+   * @private
+   * @param {Object} options
+   * @param {HTMLElement} options.source - Current source
+   * @return {HTMLElement}
+   */
+  [getAppendableContainer]({source}) {
     const appendTo = this.options.appendTo;
 
     if (typeof appendTo === 'string') {
@@ -472,11 +626,13 @@ export default class Draggable {
     }
   }
 
-  getClassNameFor(name) {
-    return this.options.classes[name] || defaults.classes[name];
-  }
-
-  closestContainer(target) {
+  /**
+   * Returns closest container for target element
+   * @private
+   * @param {HTMLElement} target - A target element
+   * @return {String}
+   */
+  [closestContainer](target) {
     return closest(target, (element) => {
       for (const containerEl of this.containers) {
         if (element === containerEl) {

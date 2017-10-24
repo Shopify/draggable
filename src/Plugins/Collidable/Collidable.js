@@ -48,12 +48,12 @@ export default class Collidable {
 
     if (enteringCollidable) {
       if (this.lastCollidingElement) {
-        this.draggable.triggerEvent(collidableOutEvent);
+        this.draggable.trigger(collidableOutEvent);
       }
 
-      this.draggable.triggerEvent(collidableInEvent);
+      this.draggable.trigger(collidableInEvent);
     } else if (leavingCollidable) {
-      this.draggable.triggerEvent(collidableOutEvent);
+      this.draggable.trigger(collidableOutEvent);
     }
 
     this.lastCollidingElement = this.currentlyCollidingElement;
@@ -67,7 +67,7 @@ export default class Collidable {
     });
 
     if (lastCollidingElement) {
-      this.draggable.triggerEvent(collidableOutEvent);
+      this.draggable.trigger(collidableOutEvent);
     }
 
     this.lastCollidingElement = null;

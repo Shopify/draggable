@@ -7,52 +7,92 @@ import {
   DragPressureSensorEvent,
 } from './../SensorEvent';
 
+const onMouseForceWillBegin = Symbol('onMouseForceWillBegin');
+const onMouseForceDown = Symbol('onMouseForceDown');
+const onMouseDown = Symbol('onMouseDown');
+const onMouseForceChange = Symbol('onMouseForceChange');
+const onMouseMove = Symbol('onMouseMove');
+const onMouseUp = Symbol('onMouseUp');
+const onMouseForceGlobalChange = Symbol('onMouseForceGlobalChange');
+
+/**
+ * This sensor picks up native force touch events and dictates drag operations
+ * @class ForceTouchSensor
+ * @module ForceTouchSensor
+ * @extends Sensor
+ */
 export default class ForceTouchSensor extends Sensor {
+
+  /**
+   * ForceTouchSensor constructor.
+   * @constructs ForceTouchSensor
+   * @param {HTMLElement[]|NodeList|HTMLElement} containers - Containers
+   * @param {Object} options - Options
+   */
   constructor(containers = [], options = {}) {
     super(containers, options);
 
-    this.dragging = false;
+    /**
+     * Draggable element needs to be remembered to unset the draggable attribute after drag operation has completed
+     * @property mightDrag
+     * @type {Boolean}
+     */
     this.mightDrag = false;
-    this.currentContainer = null;
 
-    this._onMouseForceWillBegin = this._onMouseForceWillBegin.bind(this);
-    this._onMouseForceDown = this._onMouseForceDown.bind(this);
-    this._onMouseDown = this._onMouseDown.bind(this);
-    this._onMouseForceChange = this._onMouseForceChange.bind(this);
-    this._onMouseMove = this._onMouseMove.bind(this);
-    this._onMouseUp = this._onMouseUp.bind(this);
+    this[onMouseForceWillBegin] = this[onMouseForceWillBegin].bind(this);
+    this[onMouseForceDown] = this[onMouseForceDown].bind(this);
+    this[onMouseDown] = this[onMouseDown].bind(this);
+    this[onMouseForceChange] = this[onMouseForceChange].bind(this);
+    this[onMouseMove] = this[onMouseMove].bind(this);
+    this[onMouseUp] = this[onMouseUp].bind(this);
   }
 
+  /**
+   * Attaches sensors event listeners to the DOM
+   */
   attach() {
     for (const container of this.containers) {
-      container.addEventListener('webkitmouseforcewillbegin', this._onMouseForceWillBegin, false);
-      container.addEventListener('webkitmouseforcedown', this._onMouseForceDown, false);
-      container.addEventListener('mousedown', this._onMouseDown, true);
-      container.addEventListener('webkitmouseforcechanged', this._onMouseForceChange, false);
+      container.addEventListener('webkitmouseforcewillbegin', this[onMouseForceWillBegin], false);
+      container.addEventListener('webkitmouseforcedown', this[onMouseForceDown], false);
+      container.addEventListener('mousedown', this[onMouseDown], true);
+      container.addEventListener('webkitmouseforcechanged', this[onMouseForceChange], false);
     }
 
-    document.addEventListener('mousemove', this._onMouseMove);
-    document.addEventListener('mouseup', this._onMouseUp);
+    document.addEventListener('mousemove', this[onMouseMove]);
+    document.addEventListener('mouseup', this[onMouseUp]);
   }
 
+  /**
+   * Detaches sensors event listeners to the DOM
+   */
   detach() {
     for (const container of this.containers) {
-      container.removeEventListener('webkitmouseforcewillbegin', this._onMouseForceWillBegin, false);
-      container.removeEventListener('webkitmouseforcedown', this._onMouseForceDown, false);
-      container.removeEventListener('mousedown', this._onMouseDown, true);
-      container.removeEventListener('webkitmouseforcechanged', this._onMouseForceChange, false);
+      container.removeEventListener('webkitmouseforcewillbegin', this[onMouseForceWillBegin], false);
+      container.removeEventListener('webkitmouseforcedown', this[onMouseForceDown], false);
+      container.removeEventListener('mousedown', this[onMouseDown], true);
+      container.removeEventListener('webkitmouseforcechanged', this[onMouseForceChange], false);
     }
 
-    document.removeEventListener('mousemove', this._onMouseMove);
-    document.removeEventListener('mouseup', this._onMouseUp);
+    document.removeEventListener('mousemove', this[onMouseMove]);
+    document.removeEventListener('mouseup', this[onMouseUp]);
   }
 
-  _onMouseForceWillBegin(event) {
+  /**
+   * Mouse force will begin handler
+   * @private
+   * @param {Event} event - Mouse force will begin event
+   */
+  [onMouseForceWillBegin](event) {
     event.preventDefault();
     this.mightDrag = true;
   }
 
-  _onMouseForceDown(event) {
+  /**
+   * Mouse force down handler
+   * @private
+   * @param {Event} event - Mouse force down event
+   */
+  [onMouseForceDown](event) {
     if (this.dragging) {
       return;
     }
@@ -75,7 +115,12 @@ export default class ForceTouchSensor extends Sensor {
     this.mightDrag = false;
   }
 
-  _onMouseUp(event) {
+  /**
+   * Mouse up handler
+   * @private
+   * @param {Event} event - Mouse up event
+   */
+  [onMouseUp](event) {
     if (!this.dragging) {
       return;
     }
@@ -95,7 +140,12 @@ export default class ForceTouchSensor extends Sensor {
     this.mightDrag = false;
   }
 
-  _onMouseDown(event) {
+  /**
+   * Mouse down handler
+   * @private
+   * @param {Event} event - Mouse down event
+   */
+  [onMouseDown](event) {
     if (!this.mightDrag) {
       return;
     }
@@ -107,7 +157,12 @@ export default class ForceTouchSensor extends Sensor {
     event.preventDefault();
   }
 
-  _onMouseMove(event) {
+  /**
+   * Mouse move handler
+   * @private
+   * @param {Event} event - Mouse force will begin event
+   */
+  [onMouseMove](event) {
     if (!this.dragging) {
       return;
     }
@@ -125,7 +180,12 @@ export default class ForceTouchSensor extends Sensor {
     this.trigger(this.currentContainer, dragMoveEvent);
   }
 
-  _onMouseForceChange(event) {
+  /**
+   * Mouse force change handler
+   * @private
+   * @param {Event} event - Mouse force change event
+   */
+  [onMouseForceChange](event) {
     if (this.dragging) {
       return;
     }
@@ -145,7 +205,12 @@ export default class ForceTouchSensor extends Sensor {
     this.trigger(container, dragPressureEvent);
   }
 
-  _onMouseForceGlobalChange(event) {
+  /**
+   * Mouse force global change handler
+   * @private
+   * @param {Event} event - Mouse force global change event
+   */
+  [onMouseForceGlobalChange](event) {
     if (!this.dragging) {
       return;
     }

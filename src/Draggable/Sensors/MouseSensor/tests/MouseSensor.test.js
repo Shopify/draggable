@@ -119,7 +119,7 @@ describe('MouseSensor', () => {
     expect(getLastSensorEventByType('drag:start')).toBeUndefined();
   });
 
-  test('does not trigger `drag:start` event when clicking on none draggable element', () => {
+  xtest('does not trigger `drag:start` event when clicking on none draggable element', () => {
     const draggable = sandbox.querySelector('li');
     document.elementFromPoint = () => draggable;
     triggerEvent(document.body, 'mousedown', {button: 0});

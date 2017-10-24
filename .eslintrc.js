@@ -18,6 +18,7 @@ module.exports = {
     beforeEach: false,
     describe: false,
     test: false,
+    xtest: false,
     expect: false,
   },
 };

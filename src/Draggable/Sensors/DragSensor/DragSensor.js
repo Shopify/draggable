@@ -8,54 +8,90 @@ import {
   DragStopSensorEvent,
 } from './../SensorEvent';
 
+const onMouseDown = Symbol('onMouseDown');
+const onMouseUp = Symbol('onMouseUp');
+const onDragStart = Symbol('onDragStart');
+const onDragOver = Symbol('onDragOver');
+const onDragEnd = Symbol('onDragEnd');
+const onDrop = Symbol('onDrop');
+const reset = Symbol('reset');
+
+/**
+ * This sensor picks up native browser drag events and dictates drag operations
+ * @class DragSensor
+ * @module DragSensor
+ * @extends Sensor
+ */
 export default class DragSensor extends Sensor {
+
+  /**
+   * DragSensor constructor.
+   * @constructs DragSensor
+   * @param {HTMLElement[]|NodeList|HTMLElement} containers - Containers
+   * @param {Object} options - Options
+   */
   constructor(containers = [], options = {}) {
     super(containers, options);
 
-    this.dragging = false;
-    this.currentContainer = null;
+    /**
+     * Mouse down timer which will end up setting the draggable attribute, unless canceled
+     * @property mouseDownTimeout
+     * @type {Number}
+     */
+    this.mouseDownTimeout = null;
 
-    this._onMouseDown = this._onMouseDown.bind(this);
-    this._onMouseUp = this._onMouseUp.bind(this);
-    this._onDragStart = this._onDragStart.bind(this);
-    this._onDragOver = this._onDragOver.bind(this);
-    this._onDragEnd = this._onDragEnd.bind(this);
-    this._onDragDrop = this._onDragDrop.bind(this);
+    /**
+     * Draggable element needs to be remembered to unset the draggable attribute after drag operation has completed
+     * @property draggableElement
+     * @type {HTMLElement}
+     */
+    this.draggableElement = null;
+
+    /**
+     * Native draggable element could be links or images, their draggable state will be disabled during drag operation
+     * @property nativeDraggableElement
+     * @type {HTMLElement}
+     */
+    this.nativeDraggableElement = null;
+
+    this[onMouseDown] = this[onMouseDown].bind(this);
+    this[onMouseUp] = this[onMouseUp].bind(this);
+    this[onDragStart] = this[onDragStart].bind(this);
+    this[onDragOver] = this[onDragOver].bind(this);
+    this[onDragEnd] = this[onDragEnd].bind(this);
+    this[onDrop] = this[onDrop].bind(this);
   }
 
+  /**
+   * Attaches sensors event listeners to the DOM
+   */
   attach() {
-    for (const container of this.containers) {
-      container.addEventListener('mousedown', this._onMouseDown, true);
-      container.addEventListener('dragstart', this._onDragStart, false);
-      container.addEventListener('dragover', this._onDragOver, false);
-      container.addEventListener('dragend', this._onDragEnd, false);
-      container.addEventListener('drop', this._onDragDrop, false);
-    }
-
-    document.addEventListener('mouseup', this._onMouseUp, true);
+    document.addEventListener('mousedown', this[onMouseDown], true);
   }
 
+  /**
+   * Detaches sensors event listeners to the DOM
+   */
   detach() {
-    for (const container of this.containers) {
-      container.removeEventListener('mousedown', this._onMouseDown, true);
-      container.removeEventListener('dragstart', this._onDragStart, false);
-      container.removeEventListener('dragover', this._onDragOver, false);
-      container.removeEventListener('dragend', this._onDragEnd, false);
-      container.removeEventListener('drop', this._onDragDrop, false);
-    }
-
-    document.removeEventListener('mouseup', this._onMouseUp, true);
+    document.removeEventListener('mousedown', this[onMouseDown], true);
   }
 
-  // private
-
-  _onDragStart(event) {
+  /**
+   * Drag start handler
+   * @private
+   * @param {Event} event - Drag start event
+   */
+  [onDragStart](event) {
     // Need for firefox. "text" key is needed for IE
     event.dataTransfer.setData('text', '');
     event.dataTransfer.effectAllowed = this.options.type;
 
     const target = document.elementFromPoint(event.clientX, event.clientY);
-    this.currentContainer = event.currentTarget;
+    this.currentContainer = closest(event.target, this.containers);
+
+    if (!this.currentContainer) {
+      return;
+    }
 
     const dragStartEvent = new DragStartSensorEvent({
       clientX: event.clientX,
@@ -65,95 +101,153 @@ export default class DragSensor extends Sensor {
       originalEvent: event,
     });
 
-    this.trigger(this.currentContainer, dragStartEvent);
+    // Workaround
+    setTimeout(() => {
+      this.trigger(this.currentContainer, dragStartEvent);
 
-    if (dragStartEvent.canceled()) {
-      this.dragging = false;
-      // prevent drag event if fired event has been prevented
-      event.preventDefault();
-    } else {
-      this.dragging = true;
-    }
+      if (dragStartEvent.canceled()) {
+        this.dragging = false;
+      } else {
+        this.dragging = true;
+      }
+    }, 0);
   }
 
-  _onDragOver(event) {
+  /**
+   * Drag over handler
+   * @private
+   * @param {Event} event - Drag over event
+   */
+  [onDragOver](event) {
     if (!this.dragging) {
       return;
     }
 
     const target = document.elementFromPoint(event.clientX, event.clientY);
-    const container = event.currentTarget;
+    const container = this.currentContainer;
 
     const dragMoveEvent = new DragMoveSensorEvent({
       clientX: event.clientX,
       clientY: event.clientY,
       target,
-      container: this.currentContainer,
-      overContainer: container,
+      container,
       originalEvent: event,
     });
 
     this.trigger(container, dragMoveEvent);
 
-    // event.preventDefault();
-    // event.dataTransfer.dropEffect = 'copy';
-
     if (!dragMoveEvent.canceled()) {
       event.preventDefault();
-      // event.dataTransfer.dropEffect = this.options.type;
+      event.dataTransfer.dropEffect = this.options.type;
     }
   }
 
-  _onDragEnd(event) {
+  /**
+   * Drag end handler
+   * @private
+   * @param {Event} event - Drag end event
+   */
+  [onDragEnd](event) {
     if (!this.dragging) {
       return;
     }
 
-    // prevent click on drop if draggable contains a clickable element
-    event.preventDefault();
+    document.removeEventListener('mouseup', this[onMouseUp], true);
 
-    const container = event.currentTarget;
+    const target = document.elementFromPoint(event.clientX, event.clientY);
+    const container = this.currentContainer;
 
     const dragStopEvent = new DragStopSensorEvent({
       clientX: event.clientX,
       clientY: event.clientY,
-      originalEvent: event,
+      target,
       container,
+      originalEvent: event,
     });
 
     this.trigger(container, dragStopEvent);
 
     this.dragging = false;
+
+    this[reset]();
   }
 
-  _onDragDrop(event) { // eslint-disable-line class-methods-use-this
+  /**
+   * Drop handler
+   * @private
+   * @param {Event} event - Drop event
+   */
+  [onDrop](event) { // eslint-disable-line class-methods-use-this
     event.preventDefault();
   }
 
-  _onMouseDown(event) {
+  /**
+   * Mouse down handler
+   * @private
+   * @param {Event} event - Mouse down event
+   */
+  [onMouseDown](event) {
     // Firefox bug for inputs within draggables https://bugzilla.mozilla.org/show_bug.cgi?id=739071
     if ((event.target && (event.target.form || event.target.contenteditable))) {
       return;
     }
 
+    const nativeDraggableElement = closest(event.target, (element) => element.draggable);
+
+    if (nativeDraggableElement) {
+      nativeDraggableElement.draggable = false;
+      this.nativeDraggableElement = nativeDraggableElement;
+    }
+
+    document.addEventListener('mouseup', this[onMouseUp], true);
+    document.addEventListener('dragstart', this[onDragStart], false);
+    document.addEventListener('dragover', this[onDragOver], false);
+    document.addEventListener('dragend', this[onDragEnd], false);
+    document.addEventListener('drop', this[onDrop], false);
+
     const target = closest(event.target, this.options.draggable);
 
-    if (target) {
-      clearTimeout(this.mouseDownTimeout);
-
-      this.mouseDownTimeout = setTimeout(() => {
-        target.draggable = true;
-      }, this.options.delay);
+    if (!target) {
+      return;
     }
+
+    this.mouseDownTimeout = setTimeout(() => {
+      target.draggable = true;
+      this.draggableElement = target;
+    }, this.options.delay);
   }
 
-  _onMouseUp(event) {
+  /**
+   * Mouse up handler
+   * @private
+   * @param {Event} event - Mouse up event
+   */
+  [onMouseUp]() {
+    this[reset]();
+  }
+
+  /**
+   * Mouse up handler
+   * @private
+   * @param {Event} event - Mouse up event
+   */
+  [reset]() {
     clearTimeout(this.mouseDownTimeout);
 
-    const target = closest(event.target, this.options.draggable);
+    document.removeEventListener('mouseup', this[onMouseUp], true);
+    document.removeEventListener('dragstart', this[onDragStart], false);
+    document.removeEventListener('dragover', this[onDragOver], false);
+    document.removeEventListener('dragend', this[onDragEnd], false);
+    document.removeEventListener('drop', this[onDrop], false);
 
-    if (target) {
-      target.draggable = false;
+    if (this.nativeDraggableElement) {
+      this.nativeDraggableElement.draggable = true;
+      this.nativeDraggableElement = null;
+    }
+
+    if (this.draggableElement) {
+      this.draggableElement.draggable = false;
+      this.draggableElement = null;
     }
   }
 }

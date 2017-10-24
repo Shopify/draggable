@@ -35,7 +35,6 @@ const onDragMove = Symbol('onDragMove');
 const onDragStop = Symbol('onDragStop');
 const onDragPressure = Symbol('onDragPressure');
 const getAppendableContainer = Symbol('getAppendableContainer');
-const closestContainer = Symbol('closestContainer');
 
 const defaults = {
   draggable: '.draggable-source',
@@ -431,11 +430,12 @@ export default class Draggable {
     }
 
     target = closest(target, this.options.draggable);
-    const overContainer = sensorEvent.overContainer || this[closestContainer](sensorEvent.target);
+    const withinCorrectContainer = closest(sensorEvent.target, this.containers);
+    const overContainer = sensorEvent.overContainer || withinCorrectContainer;
     const isLeavingContainer = this.currentOverContainer && (overContainer !== this.currentOverContainer);
     const isLeavingDraggable = this.currentOver && (target !== this.currentOver);
     const isOverContainer = overContainer && (this.currentOverContainer !== overContainer);
-    const isOverDraggable = target && (this.currentOver !== target);
+    const isOverDraggable = withinCorrectContainer && target && (this.currentOver !== target);
 
     if (isLeavingDraggable) {
       const dragOutEvent = new DragOutEvent({
@@ -624,23 +624,6 @@ export default class Draggable {
     } else {
       return document.body;
     }
-  }
-
-  /**
-   * Returns closest container for target element
-   * @private
-   * @param {HTMLElement} target - A target element
-   * @return {String}
-   */
-  [closestContainer](target) {
-    return closest(target, (element) => {
-      for (const containerEl of this.containers) {
-        if (element === containerEl) {
-          return true;
-        }
-      }
-      return false;
-    });
   }
 }
 

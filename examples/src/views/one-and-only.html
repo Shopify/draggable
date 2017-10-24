@@ -1,0 +1,29 @@
+{% extends 'views/templates/document.html' %}
+
+{% import 'components/Document/Head.html' as Head %}
+{% import 'components/Sidebar/Sidebar.html' as Sidebar %}
+{% import 'components/PageHeader/PageHeader.html' as PageHeader %}
+
+{% import 'content/Droppable/OneAndOnly/OneAndOnly.html' as OneAndOnly %}
+
+{% set ViewAttrs = {
+  id: 'OneAndOnly',
+  parent: 'Droppable',
+  child: 'One and only',
+  subheading: 'Dropzones are intended to hold only one Droppable child. This example restricts each Droppable item to a specific Dropzone identifier.'
+} %}
+
+{% block PageId %}{{ ViewAttrs.id }}{% endblock %}
+
+{% block head %}
+  {{ Head.render(ViewAttrs) }}
+{% endblock %}
+
+{% block sidebar %}
+  {{ Sidebar.render(ViewAttrs, DataPages) }}
+{% endblock %}
+
+{% block main %}
+  {{ PageHeader.render(ViewAttrs.parent, ViewAttrs.subheading) }}
+  {{ OneAndOnly.render(ViewAttrs.id) }}
+{% endblock %}

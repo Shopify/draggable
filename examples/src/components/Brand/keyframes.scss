@@ -1,0 +1,110 @@
+////
+/// Components
+/// Brand keyframes
+////
+
+@keyframes logo-rainbow-mask {
+  0% {
+    fill: get-color(coal, dark);
+  }
+
+  25% {
+    fill: get-color(brand, purple);
+  }
+
+  50% {
+    fill: get-color(brand, red);
+  }
+
+  75% {
+    fill: get-color(brand, orange);
+  }
+}
+
+@keyframes logo-rainbow-purple {
+  0% {
+    fill: get-color(brand, purple);
+  }
+
+  25% {
+    fill: get-color(brand, red);
+  }
+
+  50% {
+    fill: get-color(brand, orange);
+  }
+
+  75% {
+    fill: get-color(coal, dark);
+  }
+}
+
+@keyframes logo-rainbow-red {
+  0% {
+    fill: get-color(brand, red);
+  }
+
+  25% {
+    fill: get-color(brand, orange);
+  }
+
+  50% {
+    fill: get-color(coal, dark);
+  }
+
+  75% {
+    fill: get-color(brand, purple);
+  }
+}
+
+@keyframes logo-rainbow-orange {
+  0% {
+    fill: get-color(brand, orange);
+  }
+
+  25% {
+    fill: get-color(coal, dark);
+  }
+
+  50% {
+    fill: get-color(brand, purple);
+  }
+
+  75% {
+    fill: get-color(brand, red);
+  }
+}
+
+@keyframes logo-outline-bounce {
+  25% {
+    transform: translate(-0.1rem, 0.1rem);
+  }
+
+  75% {
+    transform: translate(0.1rem, -0.1rem);
+  }
+}
+
+///
+/// Animation mixin
+@mixin logo-hover {
+  .Wave--colorMask {
+    animation: logo-rainbow-mask get-duration(slow) get-easing() infinite;
+  }
+
+  .Wave--colorPurple {
+    animation: logo-rainbow-purple get-duration(slow) get-easing() infinite;
+  }
+
+  .Wave--colorRed {
+    animation: logo-rainbow-red get-duration(slow) get-easing() infinite;
+  }
+
+  .Wave--colorOrange {
+    animation: logo-rainbow-orange get-duration(slow) get-easing() infinite;
+  }
+
+  .Hand {
+    animation: logo-outline-bounce get-duration(slow) linear infinite;
+  }
+}

@@ -1,0 +1,117 @@
+////
+/// Components
+/// PaperStack props
+////
+
+$paper-stack-block-name: unquote('PaperStackItem');
+$paper-stack-item-count: 4;
+
+///
+/// Size calc functions
+@function paper-stack-height($height, $spacing) {
+  @return $height - (
+    ($spacing / 2) * ($paper-stack-item-count - 1)
+  );
+}
+
+///
+/// Style prop maps
+$paper-stack-item: (
+  spacing: (
+    base: get-spacing(),
+    tablet: get-spacing(loose),
+    desktop: get-spacing(looser),
+  ),
+  width: (
+    base: 24rem,
+    tablet: 42rem,
+    desktop: 60rem,
+  ),
+  height: (
+    base: 38rem,
+    tablet: 58rem,
+    desktop: 78rem,
+  ),
+  transform: (
+    base: perspective(90rem) rotateX(60deg),
+    mirror: perspective(90rem) rotateX(58deg) scale(1.025),
+  ),
+);
+
+@function paper-stack-item($group: $threads-default-value, $variant: $threads-default-value) {
+  @return threads-value-get($paper-stack-item, $group, $variant);
+}
+
+$paper-stack-heading: (
+  size: (
+    base: 7.2rem,
+    tablet: 12rem,
+    desktop: 16rem,
+  ),
+  weight: 700,
+  leading: 1,
+  margin: 0.5em,
+);
+
+@function paper-stack-heading($group: $threads-default-value, $variant: $threads-default-value) {
+  @return threads-value-get($paper-stack-heading, $group, $variant);
+}
+
+$paper-stack-shadow: (
+  bottom: (
+    base: paper-stack-item(spacing) / 2,
+    tablet: paper-stack-item(spacing, tablet) / 2,
+    desktop: paper-stack-item(spacing, desktop) / 3,
+  ),
+  height: (
+    base: paper-stack-item(spacing),
+    tablet: paper-stack-item(spacing, tablet),
+    desktop: paper-stack-item(spacing, desktop),
+  ),
+  offset: (
+    base: 0.8rem,
+  ),
+);
+
+@function paper-stack-shadow($group: $threads-default-value, $variant: $threads-default-value) {
+  @return threads-value-get($paper-stack-shadow, $group, $variant);
+}
+
+$paper-stack: (
+  height: (
+    base: paper-stack-height(
+      paper-stack-item(height),
+      paper-stack-item(spacing)
+    ),
+    tablet: paper-stack-height(
+      paper-stack-item(height, tablet),
+      paper-stack-item(spacing, tablet)
+    ),
+    desktop: paper-stack-height(
+      paper-stack-item(height, desktop),
+      paper-stack-item(spacing, desktop)
+    ),
+  ),
+);
+
+@function paper-stack($group: $threads-default-value, $variant: $threads-default-value) {
+  @return threads-value-get($paper-stack, $group, $variant);
+}
+
+///
+/// Mixins
+@mixin paper-stack-item-offset($breakpoint: $threads-default-value) {
+  $adjusted-top-offset: -(
+    (paper-stack-item(width, $breakpoint) / $paper-stack-item-count) +
+    (paper-stack-item(spacing, $breakpoint) / 2)
+  );
+
+  @for $i from 1 through $paper-stack-item-count {
+    &:nth-child(#{$i}),
+    &.draggable--original ~ .PaperStackItem:nth-child(#{$i + 1}) {
+      top: $adjusted-top-offset;
+    }
+
+    $adjusted-top-offset: $adjusted-top-offset + paper-stack-item(spacing, $breakpoint);
+  }
+}

@@ -1,0 +1,25 @@
+////
+/// Components
+/// Svg
+////
+
+a.SvgContainer {
+  display: block;
+  color: black; // default to black
+}
+
+.SvgContainer {
+  .Svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  .Svg--heightAuto {
+    height: auto;
+  }
+}
+
+.Svg {
+  fill: currentColor;
+}

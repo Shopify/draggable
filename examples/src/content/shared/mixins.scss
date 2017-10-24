@@ -1,0 +1,25 @@
+////
+/// Content
+/// Shared mixins
+////
+
+/// Generate a selector chain to resolve draggable source layouts
+/// @param {ArgList} $nth-children - Any number of numeric values
+/// eg: (1, 2, 5, 7, 8, 9)
+@mixin draggable-source-layout($block-name, $nth-children...) {
+  $selector-chain: ();
+
+  @each $child in $nth-children {
+    $child-selector: unquote('.#{$block-name}:nth-child(#{$child})');
+    $adjacent-clone-selector: unquote(
+      '.#{$block-name}.draggable--original ~ .#{$block-name}:nth-child(#{$child + 1})'
+    );
+
+    $selector-chain: append($selector-chain, $child-selector, comma);
+    $selector-chain: append($selector-chain, $adjacent-clone-selector, comma);
+  }
+
+  #{$selector-chain} {
+    @content;
+  }
+}

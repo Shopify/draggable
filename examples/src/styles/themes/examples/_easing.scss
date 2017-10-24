@@ -1,0 +1,11 @@
+////
+/// Examples Theme
+/// Easing
+////
+
+$examples-easing-data: (
+  base: cubic-bezier(0.64, 0, 0.35, 1),
+  in: cubic-bezier(0.36, 0, 1, 1),
+  out: cubic-bezier(0, 0, 0.42, 1),
+  bungie: cubic-bezier(0.32, 1.46, 0.54, 1.28),
+);

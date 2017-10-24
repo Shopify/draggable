@@ -1,0 +1,30 @@
+////
+/// Components
+/// Patterns
+////
+
+@import './props';
+
+:root {
+  --pattern-bg-color: white;
+}
+
+@keyframes halftone {
+  from {
+    background-position: $halftone-bg-position-start;
+  }
+
+  to {
+    background-position: $halftone-bg-position-end;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

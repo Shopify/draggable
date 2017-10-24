@@ -1,0 +1,19 @@
+////
+/// Content
+/// Snappable
+////
+
+.Snappable {
+  .BlockLayout--typeGrid {
+    grid-template-columns: repeat(2, 1fr);
+
+    @media screen and (min-width: get-breakpoint(tablet)) {
+      grid-template-rows: repeat(4, columns() * 1.5);
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @media screen and (min-width: get-breakpoint(desktop)) {
+      grid-template-rows: repeat(4, columns(2));
+    }
+  }
+}

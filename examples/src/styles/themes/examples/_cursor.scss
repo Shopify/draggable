@@ -1,0 +1,37 @@
+////
+/// Examples Theme
+/// Cursor
+////
+
+$examples-cursor-data: (
+  base: #{
+    url('https://shopify.github.io/draggable/assets/img/cursor-auto.png'), auto
+  },
+  text: #{
+    url('https://shopify.github.io/draggable/assets/img/cursor-text.png'), text
+  },
+  pointer: (
+    base: #{
+      url('https://shopify.github.io/draggable/assets/img/cursor-pointer.png'), pointer
+    },
+    active: #{
+      url('https://shopify.github.io/draggable/assets/img/cursor-pointer-clicked.png'), pointer
+    },
+  ),
+  drag: (
+    base: #{
+      url('https://shopify.github.io/draggable/assets/img/cursor-drag.png'), auto
+    },
+    active: #{
+      url('https://shopify.github.io/draggable/assets/img/cursor-drag-clicked.png'), auto
+    },
+  ),
+  rock: (
+    base: #{
+      url('https://shopify.github.io/draggable/assets/img/cursor-rock.png'), pointer
+    },
+    active: #{
+      url('https://shopify.github.io/draggable/assets/img/cursor-rock-clicked.png'), pointer
+    },
+  ),
+);

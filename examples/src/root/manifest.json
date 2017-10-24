@@ -1,0 +1,28 @@
+{
+  "name": "Draggable Examples",
+  "short_name": "Draggable Examples",
+  "description": "A lightweight, responsive, modern drag & drop library.",
+  "dir": "auto",
+  "lang": "en-US",
+  "display": "standalone",
+  "orientation": "portrait",
+  "start_url": "/?homescreen=1",
+  "background_color": "#0042ff",
+  "icons": [
+    {
+      "src": "https://shopify.github.io/draggable/assets/img/favicons/android-chrome-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    },
+    {
+      "src": "https://shopify.github.io/draggable/assets/img/favicons/android-chrome-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "https://shopify.github.io/draggable/assets/img/favicons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

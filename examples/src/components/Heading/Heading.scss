@@ -1,0 +1,14 @@
+////
+/// Components
+/// Heading
+////
+
+@import './props';
+
+.Heading {
+  @include Heading;
+}
+
+.Subheading {
+  @include Subheading;
+}

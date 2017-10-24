@@ -1,0 +1,18 @@
+////
+/// Utilities global
+/// Layout
+////
+
+@import 'utilities/shared/layout';
+
+.flex-item-fix {
+  @include flex-item-fix;
+}
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.clearfix {
+  @include clearfix;
+}

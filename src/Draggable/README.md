@@ -57,7 +57,7 @@ on the entire element. Default: `null`
 
 **`delay {Number}`**  
 If you want to delay a drag start you can specify delay in milliseconds. This can be useful
-for draggable elements within scrollable containers. Default: `0`
+for draggable elements within scrollable containers. Default: `100`
 
 **`plugins {Plugin[]}`**  
 Plugins add behaviour to Draggable by hooking into its life cycle, e.g. one of the default

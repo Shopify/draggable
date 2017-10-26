@@ -35,7 +35,7 @@ describe('Swappable', () => {
     document.elementFromPoint = () => draggableElement;
     triggerEvent(draggableElement, 'mousedown', {button: 0});
     // Wait for gesture delay
-    jest.runTimersToTime(0);
+    jest.runTimersToTime(100);
 
     // Simulate drag move over the target
     document.elementFromPoint = () => target;

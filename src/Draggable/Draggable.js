@@ -39,7 +39,7 @@ const getAppendableContainer = Symbol('getAppendableContainer');
 const defaults = {
   draggable: '.draggable-source',
   handle: null,
-  delay: 0,
+  delay: 100,
   placedTimeout: 800,
   plugins: [],
   sensors: [],

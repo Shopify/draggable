@@ -35,6 +35,7 @@ function createConfig({name, filename = name, source, path = ''}) {
 
 module.exports = [
   createConfig({name: 'Draggable', filename: 'draggable.bundle', source: 'index'}),
+  createConfig({name: 'Draggable', filename: 'draggable.bundle.legacy', source: 'index.legacy'}),
 
   createConfig({name: 'Draggable', filename: 'draggable', source: 'Draggable/index'}),
   createConfig({name: 'Sortable', filename: 'sortable', source: 'Sortable/index'}),

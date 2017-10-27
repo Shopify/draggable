@@ -10,6 +10,18 @@ export class SwappableStartEvent extends SwappableEvent {
   static type = 'swappable:start';
 }
 
+export class SwappableSwapEvent extends SwappableEvent {
+  static type = 'swappable:swap';
+
+  get over() {
+    return this.data.over;
+  }
+
+  get overContainer() {
+    return this.data.overContainer;
+  }
+}
+
 export class SwappableSwappedEvent extends SwappableEvent {
   static type = 'swappable:swapped';
 

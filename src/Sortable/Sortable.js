@@ -2,6 +2,7 @@ import Draggable from './../Draggable';
 
 import {
   SortableStartEvent,
+  SortableSortEvent,
   SortableSortedEvent,
   SortableStopEvent,
 } from './SortableEvent';
@@ -115,6 +116,19 @@ export default class Sortable extends Draggable {
     const {source, over, overContainer} = event;
     const oldIndex = this.index(source);
 
+    const sortableSortEvent = new SortableSortEvent({
+      dragEvent: event,
+      oldIndex,
+      source,
+      over,
+    });
+
+    this.trigger(sortableSortEvent);
+
+    if (sortableSortEvent.canceled()) {
+      return;
+    }
+
     const moves = move(source, over, overContainer);
 
     if (!moves) {
@@ -147,6 +161,19 @@ export default class Sortable extends Draggable {
 
     const {source, over, overContainer} = event;
     const oldIndex = this.index(source);
+
+    const sortableSortEvent = new SortableSortEvent({
+      dragEvent: event,
+      oldIndex,
+      source,
+      over,
+    });
+
+    this.trigger(sortableSortEvent);
+
+    if (sortableSortEvent.canceled()) {
+      return;
+    }
 
     const moves = move(source, over, overContainer);
 

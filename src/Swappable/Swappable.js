@@ -2,6 +2,7 @@ import Draggable from './../Draggable';
 
 import {
   SwappableStartEvent,
+  SwappableSwapEvent,
   SwappableSwappedEvent,
   SwappableStopEvent,
 } from './SwappableEvent';
@@ -84,6 +85,18 @@ export default class Swappable extends Draggable {
       return;
     }
 
+    const swappableSwapEvent = new SwappableSwapEvent({
+      dragEvent: event,
+      over: event.over,
+      overContainer: event.overContainer,
+    });
+
+    this.trigger(swappableSwapEvent);
+
+    if (swappableSwapEvent.canceled()) {
+      return;
+    }
+
     // swap originally swapped element back
     if (this.lastOver && this.lastOver !== event.over) {
       swap(this.lastOver, event.source);
@@ -97,7 +110,6 @@ export default class Swappable extends Draggable {
 
     swap(event.source, event.over);
 
-    // Let this cancel the actual swap
     const swappableSwappedEvent = new SwappableSwappedEvent({
       dragEvent: event,
       swappedElement: event.over,

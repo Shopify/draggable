@@ -18,6 +18,22 @@ export class SortableStartEvent extends SortableEvent {
   }
 }
 
+export class SortableSortEvent extends SortableEvent {
+  static type = 'sortable:sort';
+
+  get oldIndex() {
+    return this.data.oldIndex;
+  }
+
+  get over() {
+    return this.data.oldIndex;
+  }
+
+  get overContainer() {
+    return this.data.newIndex;
+  }
+}
+
 export class SortableSortedEvent extends SortableEvent {
   static type = 'sortable:sorted';
 

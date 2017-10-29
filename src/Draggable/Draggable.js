@@ -36,7 +36,7 @@ const onDragStop = Symbol('onDragStop');
 const onDragPressure = Symbol('onDragPressure');
 const getAppendableContainer = Symbol('getAppendableContainer');
 
-const defaults = {
+export const defaultOptions = {
   draggable: '.draggable-source',
   handle: null,
   delay: 100,

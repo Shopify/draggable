@@ -1,5 +1,40 @@
 # Changelog
 
+## v1.0.0-beta.3 - ?
+
+### Added
+
+- Bundle split, draggable now exports multiple bundles
+  - Adds JS bundle per module
+  - Adds legacy bundle for IE11
+- Adds axis options for mirror plugin
+- Basic swap animation plugin
+- Draggables API is now accessible via inheritance for `Sortable`, `Swappable` and `Droppable`
+- Draggables API extended
+  - `addSensor` to add sensor dynamically
+  - `removeSensor` to remove a sensor dynamically
+  - `addPlugin` to add a plugin dynamically
+  - `removePlugin` to remove a plugin dynamically
+  - `addContainer` to add a container dynamically
+  - `removeContainer` to remove a container dynamically
+  - `isDragging` to check if instance is currently dragging
+- New `sortable:sort` event that can be canceled to prevent sorting
+- New `swappable:swap` event that can be canceled to prevent swapping
+- Added more documentation
+
+### Changes
+
+- `SortableSortedEvent` (`sortable:sorted`) now returns correct indexes
+- `SortableStartEvent` gets fired now
+- Plugins and Sensors are exported with namespace
+- Removes reflow by removing unused lookup of next scroll parent
+- Draggable delay option is now `100` by default, instead of `0`
+- Draggables private methods are now really private
+- Sensor improvements
+  - `TouchSensor` now prevents scrolling without preventDefault
+  - `MouseSensor` now prevents native elements to start dragging during delay
+  - All sensors now listen to document rather than each container
+
 ## v1.0.0-beta.2 - 2017-10-10
 
 ### Added

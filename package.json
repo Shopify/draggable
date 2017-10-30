@@ -38,19 +38,19 @@
     "lib/index.js"
   ],
   "devDependencies": {
-    "babel-core": "6.24.1",
-    "babel-preset-shopify": "16.0.2",
-    "babel-jest": "^20.0.3",
-    "babel-loader": "^7.0.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-shopify": "^16.0.2",
+    "babel-jest": "^21.2.0",
+    "babel-loader": "^7.1.2",
     "core-js": "^2.5.1",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
-    "esdoc": "latest",
-    "eslint": "3.17.x",
-    "eslint-loader": "^1.7.1",
-    "eslint-plugin-shopify": "^15.2.0",
-    "jest": "^20.0.4",
-    "webpack": "^2.4.1"
+    "esdoc": "^1.0.3",
+    "eslint": "^4.10.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-shopify": "^17.2.1",
+    "jest": "^21.2.1",
+    "webpack": "^3.8.1"
   },
   "eslintConfig": {
     "extends": "plugin:shopify/esnext",

@@ -1,13 +1,19 @@
 # Changelog
 
-## v1.0.0-beta.3 - ?
+## v1.0.0-beta.4 - ?
+
+### Added
+
+### Changed
+
+## v1.0.0-beta.3 - 2017-11-01
 
 ### Added
 
 - Bundle split, draggable now exports multiple bundles
   - Adds JS bundle per module
   - Adds legacy bundle for IE11
-- Adds axis options for mirror plugin
+- Adds axis & dimension constraint options for mirror plugin
 - Basic swap animation plugin
 - Draggables API is now accessible via inheritance for `Sortable`, `Swappable` and `Droppable`
 - Draggables API extended

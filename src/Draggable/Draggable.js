@@ -622,7 +622,7 @@ export default class Draggable {
     } else if (typeof appendTo === 'function') {
       return appendTo(source);
     } else {
-      return document.body;
+      return source.parentNode;
     }
   }
 }

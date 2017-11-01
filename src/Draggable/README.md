@@ -7,7 +7,7 @@ import {Draggable} from '@shopify/draggable';
 ```
 
 ```js
-import Draggable from '@shopify/draggable/draggable';
+import Draggable from '@shopify/draggable/lib/draggable';
 ```
 
 ```html

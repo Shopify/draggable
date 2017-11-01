@@ -12,7 +12,7 @@ import {Collidable} from '@shopify/draggable';
 ```
 
 ```js
-import Collidable from '@shopify/draggable/plugins/collidable';
+import Collidable from '@shopify/draggable/lib/plugins/collidable';
 ```
 
 ```html

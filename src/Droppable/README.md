@@ -10,7 +10,7 @@ import {Droppable} from '@shopify/draggable';
 ```
 
 ```js
-import Droppable from '@shopify/draggable/droppable';
+import Droppable from '@shopify/draggable/lib/droppable';
 ```
 
 ```html

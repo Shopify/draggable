@@ -13,7 +13,7 @@ import {Plugins} from '@shopify/draggable';
 ```
 
 ```js
-import SwapAnimation from '@shopify/draggable/plugins/swap-animation';
+import SwapAnimation from '@shopify/draggable/lib/plugins/swap-animation';
 ```
 
 ```html

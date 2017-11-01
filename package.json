@@ -26,7 +26,7 @@
     "drag-and-drop",
     "es6"
   ],
-  "main": "./lib/draggable.js",
+  "main": "./lib/draggable.bundle.js",
   "scripts": {
     "build": "webpack",
     "prepublish": "npm run build",
@@ -35,7 +35,7 @@
     "test-ci": "jest --config config.json --coverage"
   },
   "files": [
-    "lib/index.js"
+    "lib/**/*.js"
   ],
   "devDependencies": {
     "babel-core": "^6.26.0",

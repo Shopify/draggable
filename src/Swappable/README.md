@@ -1,6 +1,6 @@
 ## Swappable
 
-Droppable is built on top of Draggable and allows you to swap elements by dragging over them. No order will be maintained (unlike Sortable),
+Swappable is built on top of Draggable and allows you to swap elements by dragging over them. No order will be maintained (unlike Sortable),
 so any draggable element that gets dragged over will be swapped with the source element.
 
 ### Import
@@ -10,7 +10,7 @@ import {Swappable} from '@shopify/sortable';
 ```
 
 ```js
-import Swappable from '@shopify/draggable/swappable';
+import Swappable from '@shopify/draggable/lib/swappable';
 ```
 
 ```html

@@ -10,7 +10,7 @@ import {Sortable} from '@shopify/sortable';
 ```
 
 ```js
-import Sortable from '@shopify/draggable/sortable';
+import Sortable from '@shopify/draggable/lib/sortable';
 ```
 
 ```html

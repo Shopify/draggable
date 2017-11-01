@@ -12,7 +12,7 @@ import {Snappable} from '@shopify/draggable';
 ```
 
 ```js
-import Snappable from '@shopify/draggable/snappable';
+import Snappable from '@shopify/draggable/lib/snappable';
 ```
 
 ```html

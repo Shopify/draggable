@@ -11,6 +11,7 @@ const onDragStart = Symbol('onDragStart');
 const onDragOverContainer = Symbol('onDragOverContainer');
 const onDragOver = Symbol('onDragOver');
 const onDragStop = Symbol('onDragStop');
+const getContainerChildren = Symbol('getContainerChildren');
 
 /**
  * Sortable is built on top of Draggable and allows sorting of draggable elements. Sortable will keep
@@ -76,9 +77,7 @@ export default class Sortable extends Draggable {
    * @return {Number}
    */
   index(element) {
-    return [...element.parentNode.children].filter((childElement) => {
-      return childElement !== this.originalSource && childElement !== this.mirror;
-    }).indexOf(element);
+    return this[getContainerChildren](element.parentNode).indexOf(element);
   }
 
   /**
@@ -129,7 +128,8 @@ export default class Sortable extends Draggable {
       return;
     }
 
-    const moves = move(source, over, overContainer);
+    const children = this[getContainerChildren](overContainer);
+    const moves = move({source, over, overContainer, children});
 
     if (!moves) {
       return;
@@ -175,7 +175,8 @@ export default class Sortable extends Draggable {
       return;
     }
 
-    const moves = move(source, over, overContainer);
+    const children = this[getContainerChildren](overContainer);
+    const moves = move({source, over, overContainer, children});
 
     if (!moves) {
       return;
@@ -214,14 +215,26 @@ export default class Sortable extends Draggable {
     this.startIndex = null;
     this.startContainer = null;
   }
+
+  /**
+   * Returns children elements for a container, excluding the original source and mirror, if present
+   * @private
+   * @param {HTMLElement} container - a container element
+   * @return {HTMLElement[]}
+   */
+  [getContainerChildren](container) {
+    return [...container.children].filter((childElement) => {
+      return childElement !== this.originalSource && childElement !== this.mirror;
+    });
+  }
 }
 
 function index(element) {
   return Array.prototype.indexOf.call(element.parentNode.children, element);
 }
 
-function move(source, over, overContainer) {
-  const emptyOverContainer = !overContainer.children.length;
+function move({source, over, overContainer, children}) {
+  const emptyOverContainer = !children.length;
   const differentContainer = over && (source.parentNode !== over.parentNode);
   const sameContainer = over && (source.parentNode === over.parentNode);
 

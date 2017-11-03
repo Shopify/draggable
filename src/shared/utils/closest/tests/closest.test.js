@@ -1,8 +1,8 @@
-import {closest} from 'utils';
-
 import {
   createSandbox,
 } from 'helper';
+
+import closest from './../closest';
 
 const sampleMarkup = `
   <div class="tree">
@@ -46,6 +46,18 @@ describe('utils', () => {
     const element = sandbox.querySelector('.twig');
 
     expect(closest(element, '.leaf')).toBe(null);
+  });
+
+  test('should match element via callback', () => {
+    const element = sandbox.querySelector('.leaf');
+
+    function callback(currentElement) {
+      return currentElement
+        .classList
+        .contains('leaf');
+    }
+
+    expect(closest(element, callback)).toBe(element);
   });
 
   [

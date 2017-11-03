@@ -3,6 +3,15 @@ const matchFunction = Element.prototype.matches ||
                       Element.prototype.mozMatchesSelector ||
                       Element.prototype.msMatchesSelector;
 
+/**
+ * Get the closest parent element of a given element that matches the given
+ * selector string or matching function
+ *
+ * @param {Element} element The child element to find a parent of
+ * @param {String|Function} selector The string or function to use to match
+ *     the parent element
+ * @return {Element|null}
+ */
 export default function closest(element, value) {
   if (!element) {
     return null;

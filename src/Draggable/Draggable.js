@@ -83,7 +83,7 @@ export default class Draggable {
       throw new Error('Draggable containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`');
     }
 
-    this.options = {...defaults, ...options};
+    this.options = {...defaultOptions, ...options};
     this.callbacks = {};
 
     /**
@@ -279,7 +279,7 @@ export default class Draggable {
    * @return {String|null}
    */
   getClassNameFor(name) {
-    return this.options.classes[name] || defaults.classes[name];
+    return this.options.classes[name] || defaultOptions.classes[name];
   }
 
   /**

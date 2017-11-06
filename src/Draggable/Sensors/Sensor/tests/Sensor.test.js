@@ -14,8 +14,8 @@ describe('Sensor', () => {
       const expectedOptions = {expectedOptions: true};
       const sensor = new Sensor(expectedContainers, expectedOptions);
 
-      expect(sensor.containers).toBe(expectedContainers);
-      expect(sensor.options).toBe(expectedOptions);
+      expect(sensor.containers).toEqual(expectedContainers);
+      expect(sensor.options).toEqual(expectedOptions);
     });
   });
 

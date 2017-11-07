@@ -235,15 +235,15 @@ function index(element) {
 
 function move({source, over, overContainer, children}) {
   const emptyOverContainer = !children.length;
-  const differentContainer = over && (source.parentNode !== over.parentNode);
-  const sameContainer = over && (source.parentNode === over.parentNode);
+  const differentContainer = (source.parentNode !== overContainer);
+  const sameContainer = over && !differentContainer;
 
   if (emptyOverContainer) {
     return moveInsideEmptyContainer(source, overContainer);
   } else if (sameContainer) {
     return moveWithinContainer(source, over);
   } else if (differentContainer) {
-    return moveOutsideContainer(source, over);
+    return moveOutsideContainer(source, over, overContainer);
   } else {
     return null;
   }
@@ -270,10 +270,15 @@ function moveWithinContainer(source, over) {
   return {oldContainer: source.parentNode, newContainer: source.parentNode};
 }
 
-function moveOutsideContainer(source, over) {
+function moveOutsideContainer(source, over, overContainer) {
   const oldContainer = source.parentNode;
 
-  over.parentNode.insertBefore(source, over);
+  if (over) {
+    over.parentNode.insertBefore(source, over);
+  } else {
+    // need to figure out proper position
+    overContainer.appendChild(source);
+  }
 
   return {oldContainer, newContainer: source.parentNode};
 }

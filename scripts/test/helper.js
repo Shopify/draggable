@@ -1,4 +1,17 @@
-const sensorEventTypes = ['drag:start', 'drag:move', 'drag:stop'];
+/**
+ * Whitelist of sensor event types to keep track of.
+ *
+ * Helps avoid cluttering caught sensor events with unwanted events.
+ *
+ * @type {String[]}
+ * @final
+ */
+const sensorEventTypes = [
+  'drag:move',
+  'drag:start',
+  'drag:stop'
+];
+
 let sensorEvents = {};
 
 export function listenToSensorEvents() {
@@ -42,6 +55,14 @@ export function createSandbox(content) {
   return sandbox;
 }
 
+/**
+ * Trigger an event with provided configuration on a given element
+ *
+ * @param {Element} element Element to dispatch event upon
+ * @param {String} type The type of event to create
+ * @param {Object} data Additional context data to set on the event
+ * @return {Event}
+ */
 export function triggerEvent(element, type, data = {}) {
   const event = document.createEvent('Event');
   event.initEvent(type, true, true);
@@ -51,4 +72,5 @@ export function triggerEvent(element, type, data = {}) {
     }
   }
   element.dispatchEvent(event);
+  return event;
 }

@@ -100,16 +100,19 @@ function resetMirror({mirror, source, options, ...args}) {
     let offsetWidth;
 
     if (options.constrainDimensions) {
-      offsetHeight = source.offsetHeight;
-      offsetWidth = source.offsetWidth;
+      // Compute padding for source
+      offsetHeight = source.clientHeight;
+      offsetWidth = source.clientWidth;
     }
 
     mirror.style.position = 'fixed';
     mirror.style.pointerEvents = 'none';
     mirror.style.top = 0;
     mirror.style.left = 0;
+    mirror.style.margin = 0;
 
     if (options.constrainDimensions) {
+      // remove padding from dimensions
       mirror.style.height = `${offsetHeight}px`;
       mirror.style.width = `${offsetWidth}px`;
     }

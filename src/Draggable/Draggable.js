@@ -447,10 +447,10 @@ export default class Draggable {
         over: this.currentOver,
       });
 
-      this.trigger(dragOutEvent);
-
       this.currentOver.classList.remove(this.getClassNameFor('draggable:over'));
       this.currentOver = null;
+
+      this.trigger(dragOutEvent);
     }
 
     if (isLeavingContainer) {
@@ -463,10 +463,10 @@ export default class Draggable {
         overContainer: this.overContainer,
       });
 
-      this.trigger(dragOutContainerEvent);
-
       this.currentOverContainer.classList.remove(this.getClassNameFor('container:over'));
       this.currentOverContainer = null;
+
+      this.trigger(dragOutContainerEvent);
     }
 
     if (isOverContainer) {
@@ -481,9 +481,9 @@ export default class Draggable {
         overContainer,
       });
 
-      this.trigger(dragOverContainerEvent);
-
       this.currentOverContainer = overContainer;
+
+      this.trigger(dragOverContainerEvent);
     }
 
     if (isOverDraggable) {
@@ -499,9 +499,9 @@ export default class Draggable {
         over: target,
       });
 
-      this.trigger(dragOverEvent);
-
       this.currentOver = target;
+
+      this.trigger(dragOverEvent);
     }
   }
 

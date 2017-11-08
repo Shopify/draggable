@@ -380,6 +380,8 @@ export default class Draggable {
       return;
     }
 
+    this.dragging = false;
+
     if (this.mirror) {
       this.mirror.parentNode.removeChild(this.mirror);
     }

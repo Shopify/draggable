@@ -15,15 +15,15 @@ The base mirror event for all Mirror events that `Draggable` emits.
 Read-only property for the source element. This is a straight copy of the `originalSource`
 element, which can be moved around in the DOM.
 
-**`mirrorEvent.originalSource: String`**  
+**`mirrorEvent.originalSource: HTMLElement`**  
 Read-only property for the original source element that was picked up. This element never
 moves in the DOM and gets hidden on `drag:start`.
 
-**`mirrorEvent.mirror: String`**  
+**`mirrorEvent.mirror: HTMLElement`**  
 Read-only property for the mirror element, which is also a copy of the `originalSource` element.
 The mirror follows your mouse/touch movements.
 
-**`mirrorEvent.sourceContainer: String`**  
+**`mirrorEvent.sourceContainer: HTMLElement`**  
 Read-only property for the source elements container. This would be one of the containers that
 was passed into Draggable.
 

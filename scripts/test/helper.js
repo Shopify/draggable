@@ -74,3 +74,40 @@ export function triggerEvent(element, type, data = {}) {
   element.dispatchEvent(event);
   return event;
 }
+
+/**
+ * A stub of the Plugin class
+ *
+ * @class PluginStub
+ */
+export class PluginStub {
+
+  /**
+   * Constructor.
+   *
+   * @param {Draggable} draggable
+   */
+  constructor(draggable) {
+    this.attachWasCalled = false;
+    this.detachWasCalled = false;
+    this.draggable = draggable;
+    this.numTimesAttachCalled = 0;
+    this.numTimesDetachCalled = 0;
+  }
+
+  /**
+   * Set a testable property when `attach` is called
+   */
+  attach() {
+    this.attachWasCalled = true;
+    this.numTimesAttachCalled++;
+  }
+
+  /**
+   * Set a testable property when `detach` is called
+   */
+  detach() {
+    this.detachWasCalled = true;
+    this.numTimesDetachCalled++;
+  }
+}

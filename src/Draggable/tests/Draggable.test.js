@@ -1,5 +1,7 @@
 import {
   createSandbox,
+  triggerEvent,
+  PluginStub,
 } from 'helper';
 
 import Draggable, {
@@ -31,53 +33,16 @@ const sampleMarkup = `
   </ul>
 `;
 
-/**
- * A stub of the Plugin class
- *
- * @class PluginStub
- */
-class PluginStub {
-
-  /**
-   * Constructor.
-   *
-   * @param {Draggable} draggable
-   */
-  constructor(draggable) {
-    this.draggable = draggable;
-    this.numTimesAttachCalled = 0;
-    this.numTimesDetachCalled = 0;
-  }
-
-  /**
-   * Set a testable property when `attach` is called
-   */
-  attach() {
-    this.attachWasCalled = true;
-    this.numTimesAttachCalled++;
-  }
-
-  /**
-   * Set a testable property when `detach` is called
-   */
-  detach() {
-    this.detachWasCalled = true;
-    this.numTimesDetachCalled++;
-  }
-}
-
 describe('Draggable', () => {
   let sandbox;
-  let draggable;
+  let containers;
+  const expectedClientX = 39;
+  const expectedClientY = 82;
 
   beforeEach(() => {
     jest.useFakeTimers();
     sandbox = createSandbox(sampleMarkup);
-    const containers = sandbox.querySelectorAll('ul');
-    draggable = new Draggable(containers, {
-      draggable: 'li',
-      delay: 0,
-    });
+    containers = sandbox.querySelectorAll('ul');
   });
 
   afterEach(() => {
@@ -86,15 +51,19 @@ describe('Draggable', () => {
 
   describe('#constructor', () => {
     test('should be an instance of Draggable', () => {
+      const draggable = new Draggable(containers, {
+        draggable: 'li',
+        delay: 0,
+      });
+
       expect(draggable).toBeInstanceOf(Draggable);
     });
 
     test('should initialize with default options', () => {
-      const containers = sandbox.querySelectorAll('ul');
       const newInstance = new Draggable(containers);
 
       for (const key in defaultOptions) {
-        if (Object.prototype.hasOwnProperty.call(defaultOptions, key)) {
+        if (defaultOptions.hasOwnProperty(key)) {
           expect(newInstance.options[key])
             .toBe(defaultOptions[key]);
         }
@@ -102,8 +71,6 @@ describe('Draggable', () => {
     });
 
     test('should set containers', () => {
-      const containers = sandbox.querySelectorAll('ul');
-
       const newInstance = new Draggable(containers);
 
       expect(newInstance.containers)
@@ -111,23 +78,19 @@ describe('Draggable', () => {
     });
 
     test('should set single container if a list is not passed', () => {
-      const container = sandbox.querySelector('ul');
-
-      const newInstance = new Draggable(container);
+      const newInstance = new Draggable(containers[0]);
 
       expect(newInstance.containers)
-        .toMatchObject([container]);
+        .toMatchObject([containers[0]]);
     });
 
     test('should throw error if `containers` argument is wrong type', () => {
       expect(() => {
-        // eslint-disable-next-line no-new
-        new Draggable({});
+        return new Draggable({});
       }).toThrow();
 
       expect(() => {
-        // eslint-disable-next-line no-new
-        new Draggable('.li');
+        return new Draggable('.li');
       }).toThrow();
     });
 
@@ -160,6 +123,9 @@ describe('Draggable', () => {
 
       expect(customPlugin.attachWasCalled)
         .toBe(true);
+
+      expect(customPlugin.detachWasCalled)
+        .toBe(false);
     });
 
     test('should attach sensors', () => {
@@ -325,12 +291,13 @@ describe('Draggable', () => {
 
   describe('#trigger', () => {
     test('should invoke bound event', () => {
+      const newInstance = new Draggable(containers);
       const handler = jest.fn();
       const expectedEvent = new Event('my:event');
 
-      draggable.on('my:event', handler);
+      newInstance.on('my:event', handler);
 
-      draggable.trigger(expectedEvent);
+      newInstance.trigger(expectedEvent);
 
       expect(handler.mock.calls.length)
         .toBe(1);
@@ -344,15 +311,16 @@ describe('Draggable', () => {
   });
 
   test('triggers `drag:start` drag event on mousedown', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
     const callback = jest.fn();
-    draggable.on('drag:start', callback);
+    newInstance.on('drag:start', callback);
 
-    const event = new MouseEvent('mousedown');
-
-    draggableElement.dispatchEvent(event);
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
@@ -367,20 +335,21 @@ describe('Draggable', () => {
   });
 
   test('should trigger `drag:start` drag event on dragstart', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
     const callback = jest.fn();
-    draggable.on('drag:start', callback);
+    newInstance.on('drag:start', callback);
 
-    const event = new MouseEvent('mousedown');
-
-    draggableElement.dispatchEvent(event);
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
 
-    draggableElement.dispatchEvent(new MouseEvent('dragstart'));
+    triggerEvent(draggableElement, 'dragstart', {button: 0});
 
     const call = callback.mock.calls[0][0];
 
@@ -392,26 +361,24 @@ describe('Draggable', () => {
   });
 
   test('triggers `drag:move` drag event on mousedown', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    const expectedClientX = 39;
-    const expectedClientY = 82;
-
-    draggableElement.dispatchEvent(new MouseEvent('mousedown'));
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
 
     const callback = jest.fn();
-    draggable.on('drag:move', callback);
+    newInstance.on('drag:move', callback);
 
-    const event = new MouseEvent('mousemove', {
+    triggerEvent(document, 'mousemove', {
       clientX: expectedClientX,
       clientY: expectedClientY,
     });
-
-    document.dispatchEvent(event);
 
     const call = callback.mock.calls[0][0];
     const sensorEvent = call.data.sensorEvent;
@@ -423,25 +390,28 @@ describe('Draggable', () => {
       .toBeInstanceOf(DragMoveEvent);
 
     expect(sensorEvent.clientX)
-      .toBe(39);
+      .toBe(expectedClientX);
 
     expect(sensorEvent.clientY)
-      .toBe(82);
+      .toBe(expectedClientY);
   });
 
   test('triggers `drag:stop` drag event on mouseup', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    draggableElement.dispatchEvent(new MouseEvent('mousedown'));
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
 
     const callback = jest.fn();
-    draggable.on('drag:stop', callback);
+    newInstance.on('drag:stop', callback);
 
-    document.dispatchEvent(new MouseEvent('mouseup'));
+    triggerEvent(draggableElement, 'mouseup', {button: 0});
 
     const call = callback.mock.calls[0][0];
 
@@ -453,33 +423,39 @@ describe('Draggable', () => {
   });
 
   test('adds `source:dragging` classname to draggable element on mousedown', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    draggableElement.dispatchEvent(new MouseEvent('mousedown'));
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
 
-    expect(draggable.source.classList)
+    expect(newInstance.source.classList)
       .toContain('draggable-source--is-dragging');
   });
 
   test('removes `source:dragging` classname from draggable element on mouseup', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    draggableElement.dispatchEvent(new MouseEvent('mousedown'));
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
 
-    const source = draggable.source;
+    const source = newInstance.source;
 
     expect(source.classList)
       .toContain('draggable-source--is-dragging');
 
-    document.dispatchEvent(new MouseEvent('mouseup'));
+    triggerEvent(draggableElement, 'mouseup', {button: 0});
 
     expect(source.classList)
       .not
@@ -487,22 +463,25 @@ describe('Draggable', () => {
   });
 
   test('removes `source:dragging` classname from draggable element on dragEvent.cancel()', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    draggable.on('drag:start', (event) => {
-      expect(draggable.source.classList)
+    newInstance.on('drag:start', (event) => {
+      expect(newInstance.source.classList)
         .toContain('draggable-source--is-dragging');
 
       event.cancel();
     });
 
-    draggableElement.dispatchEvent(new MouseEvent('mousedown'));
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
 
-    const source = draggable.source;
+    const source = newInstance.source;
 
     expect(source.classList)
       .not
@@ -510,10 +489,13 @@ describe('Draggable', () => {
   });
 
   test('adds `body:dragging` classname to body on mousedown', () => {
+    (() => new Draggable(containers, {
+      draggable: 'li',
+    }))();
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    draggableElement.dispatchEvent(new MouseEvent('mousedown'));
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
@@ -523,10 +505,13 @@ describe('Draggable', () => {
   });
 
   test('removes `body:dragging` classname from body on mouseup', () => {
+    (() => new Draggable(containers, {
+      draggable: 'li',
+    }))();
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    draggableElement.dispatchEvent(new MouseEvent('mousedown'));
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
@@ -534,7 +519,7 @@ describe('Draggable', () => {
     expect(document.body.classList)
       .toContain('draggable--is-dragging');
 
-    document.dispatchEvent(new MouseEvent('mouseup'));
+    triggerEvent(document, 'mouseup', {button: 0});
 
     expect(document.body.classList)
       .not
@@ -542,17 +527,20 @@ describe('Draggable', () => {
   });
 
   test('removes `body:dragging` classname from body on dragEvent.cancel()', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    draggable.on('drag:start', (event) => {
+    newInstance.on('drag:start', (event) => {
       expect(document.body.classList)
         .toContain('draggable--is-dragging');
 
       event.cancel();
     });
 
-    draggableElement.dispatchEvent(new MouseEvent('mousedown'));
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
@@ -563,99 +551,105 @@ describe('Draggable', () => {
   });
 
   test('adds `container:placed` classname to draggable container element on mouseup', () => {
+    (() => new Draggable(containers, {
+      draggable: 'li',
+    }))();
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    const container = sandbox.querySelector('ul');
-
-    draggableElement.dispatchEvent(new MouseEvent('mousedown'));
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
 
-    document.dispatchEvent(new MouseEvent('mouseup'));
+    triggerEvent(draggableElement, 'mouseup', {button: 0});
 
-    expect(container.classList)
+    expect(containers[0].classList)
       .toContain('draggable-container--placed');
   });
 
   test('removes `container:placed` classname from draggable container element on mouseup after delay', () => {
+    (() => new Draggable(containers, {
+      draggable: 'li',
+    }))();
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    const container = sandbox.querySelector('ul');
-
-    draggableElement.dispatchEvent(new MouseEvent('mousedown'));
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
 
-    document.dispatchEvent(new MouseEvent('mouseup'));
+    triggerEvent(document, 'mouseup', {button: 0});
 
-    expect(container.classList)
+    expect(containers[0].classList)
       .toContain('draggable-container--placed');
 
     // Wait for default draggable.options.placedTimeout delay
     jest.runTimersToTime(800);
 
-    expect(container.classList)
+    expect(containers[0].classList)
       .not
       .toContain('draggable-container--placed');
   });
 
   test('adds `container:dragging` classname to draggable container element on mousedown', () => {
+    (() => new Draggable(containers, {
+      draggable: 'li',
+    }))();
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    const container = sandbox.querySelector('ul');
-
-    draggableElement.dispatchEvent(new MouseEvent('mousedown'));
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
 
-    expect(container.classList)
+    expect(containers[0].classList)
       .toContain('draggable-container--is-dragging');
   });
 
   test('removes `container:dragging` classname from draggable container element on mouseup', () => {
+    (() => new Draggable(containers, {
+      draggable: 'li',
+    }))();
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    const container = sandbox.querySelector('ul');
-
-    draggableElement.dispatchEvent(new MouseEvent('mousedown'));
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
 
-    expect(container.classList)
+    expect(containers[0].classList)
       .toContain('draggable-container--is-dragging');
 
-    document.dispatchEvent(new MouseEvent('mouseup'));
+    triggerEvent(document, 'mouseup', {button: 0});
 
-    expect(container.classList)
+    expect(containers[0].classList)
       .not
       .toContain('draggable-container--is-dragging');
   });
 
   test('removes `container:dragging` classname from draggable container element on dragEvent.cancel()', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
     const draggableElement = sandbox.querySelector('li');
-    const container = sandbox.querySelector('ul');
 
-    draggable.on('drag:start', (event) => {
-      expect(container.classList)
+    newInstance.on('drag:start', (event) => {
+      expect(containers[0].classList)
         .toContain('draggable-container--is-dragging');
 
       event.cancel();
     });
 
-    draggableElement.dispatchEvent(new MouseEvent('mousedown'));
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
     jest.runTimersToTime(100);
 
-    expect(container.classList)
+    expect(containers[0].classList)
       .not
       .toContain('draggable-container--is-dragging');
   });

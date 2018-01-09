@@ -8,15 +8,15 @@ This plugin is not included by default, so make sure to import it before using.
 ### Import
 
 ```js
-import {Snappable} from '@shopify/draggable';
+import {Plugins} from '@shopify/draggable';
 ```
 
 ```js
-import Snappable from '@shopify/draggable/lib/snappable';
+import Snappable from '@shopify/draggable/lib/plugins/snappable';
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/plugins.js"></script>
 ```
 
 ```html

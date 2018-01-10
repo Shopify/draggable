@@ -63,6 +63,16 @@ export const defaultOptions = {
 export default class Draggable {
 
   /**
+   * Default plugins draggable uses
+   * @static
+   * @property {Object} Plugins
+   * @property {Mirror} Plugins.Mirror
+   * @property {Accessibility} Plugins.Accessibility
+   * @type {Object}
+   */
+  static Plugins = {Mirror, Accessibility};
+
+  /**
    * Draggable constructor.
    * @constructs Draggable
    * @param {HTMLElement[]|NodeList|HTMLElement} containers - Draggable containers

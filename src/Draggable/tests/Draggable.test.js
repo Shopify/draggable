@@ -49,6 +49,14 @@ describe('Draggable', () => {
     sandbox.parentNode.removeChild(sandbox);
   });
 
+  describe('.Plugins', () => {
+    test('should be available statically', () => {
+      expect(Draggable.Plugins).toBeDefined();
+      expect(Draggable.Plugins.Mirror).toEqual(Mirror);
+      expect(Draggable.Plugins.Accessibility).toEqual(Accessibility);
+    });
+  });
+
   describe('#constructor', () => {
     test('should be an instance of Draggable', () => {
       const draggable = new Draggable(containers, {

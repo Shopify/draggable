@@ -132,10 +132,10 @@ export default class Draggable {
    * deactivates sensors and plugins
    */
   destroy() {
-    document.removeEventListener('drag:start', this.dragStart, true);
-    document.removeEventListener('drag:move', this.dragMove, true);
-    document.removeEventListener('drag:stop', this.dragStop, true);
-    document.removeEventListener('drag:pressure', this.dragPressure, true);
+    document.removeEventListener('drag:start', this[onDragStart], true);
+    document.removeEventListener('drag:move', this[onDragMove], true);
+    document.removeEventListener('drag:stop', this[onDragStop], true);
+    document.removeEventListener('drag:pressure', this[onDragPressure], true);
 
     const draggableDestroyEvent = new DraggableDestroyEvent({
       draggable: this,

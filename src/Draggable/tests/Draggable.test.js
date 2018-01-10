@@ -209,6 +209,23 @@ describe('Draggable', () => {
       expect(expectedPlugins[4].numTimesDetachCalled)
         .toBe(1);
     });
+
+    test('should remove all sensor event listeners', () => {
+      document.removeEventListener = jest.fn();
+
+      const newInstance = new Draggable();
+
+      newInstance.destroy();
+
+      const mockCalls = document.removeEventListener.mock.calls;
+
+      expect(mockCalls[0][0]).toEqual('drag:start');
+      expect(mockCalls[1][0]).toEqual('drag:move');
+      expect(mockCalls[2][0]).toEqual('drag:stop');
+      expect(mockCalls[3][0]).toEqual('drag:pressure');
+
+      document.removeEventListener.mockRestore();
+    });
   });
 
   describe('#on', () => {

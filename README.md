@@ -110,4 +110,4 @@ The roadmap for the official release is still in the works. More to come
 
 ## Copyright
 
-Copyright (c) 2017 Shopify. See LICENSE.md for further details.
+Copyright (c) 2018 Shopify. See LICENSE.md for further details.

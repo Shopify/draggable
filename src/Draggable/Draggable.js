@@ -1,6 +1,6 @@
 import {closest} from 'shared/utils';
 
-import {Accessibility, Mirror} from './Plugins';
+import {Accessibility, Mirror, AutoScroll} from './Plugins';
 
 import {
   MouseSensor,
@@ -68,9 +68,10 @@ export default class Draggable {
    * @property {Object} Plugins
    * @property {Mirror} Plugins.Mirror
    * @property {Accessibility} Plugins.Accessibility
+   * @property {AutoScroll} Plugins.AutoScroll
    * @type {Object}
    */
-  static Plugins = {Mirror, Accessibility};
+  static Plugins = {Mirror, Accessibility, AutoScroll};
 
   /**
    * Draggable constructor.
@@ -127,7 +128,7 @@ export default class Draggable {
     document.addEventListener('drag:stop', this[onDragStop], true);
     document.addEventListener('drag:pressure', this[onDragPressure], true);
 
-    this.addPlugin(...[Mirror, Accessibility, ...this.options.plugins]);
+    this.addPlugin(...[Mirror, Accessibility, AutoScroll, ...this.options.plugins]);
     this.addSensor(...[MouseSensor, TouchSensor, ...this.options.sensors]);
 
     const draggableInitializedEvent = new DraggableInitializedEvent({

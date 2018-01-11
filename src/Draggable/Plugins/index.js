@@ -1,8 +1,11 @@
-import Mirror, {defaultMirrorOption} from './Mirror';
+import Mirror, {defaultMirrorOptions} from './Mirror';
+import AutoScroll, {defaultAutoScrollOptions} from './AutoScroll';
 import Accessibility from './Accessibility';
 
 export {
   Mirror,
-  defaultMirrorOption,
+  defaultMirrorOptions,
+  AutoScroll,
+  defaultAutoScrollOptions,
   Accessibility,
 };

@@ -19,7 +19,11 @@ import {
   DraggableDestroyEvent,
 } from './../DraggableEvent';
 
-import {Accessibility, Mirror} from './../Plugins';
+import {
+  Accessibility,
+  Mirror,
+  AutoScroll,
+} from './../Plugins';
 
 import {
   MouseSensor,
@@ -54,6 +58,7 @@ describe('Draggable', () => {
       expect(Draggable.Plugins).toBeDefined();
       expect(Draggable.Plugins.Mirror).toEqual(Mirror);
       expect(Draggable.Plugins.Accessibility).toEqual(Accessibility);
+      expect(Draggable.Plugins.AutoScroll).toEqual(AutoScroll);
     });
   });
 
@@ -106,13 +111,16 @@ describe('Draggable', () => {
       const newInstance = new Draggable();
 
       expect(newInstance.plugins.length)
-        .toBe(2);
+        .toBe(3);
 
       expect(newInstance.plugins[0])
         .toBeInstanceOf(Mirror);
 
       expect(newInstance.plugins[1])
         .toBeInstanceOf(Accessibility);
+
+      expect(newInstance.plugins[2])
+        .toBeInstanceOf(AutoScroll);
     });
 
     test('should attach custom plugins', () => {
@@ -123,9 +131,9 @@ describe('Draggable', () => {
       });
 
       expect(newInstance.plugins.length)
-        .toBe(3);
+        .toBe(4);
 
-      const customPlugin = newInstance.plugins[2];
+      const customPlugin = newInstance.plugins[3];
 
       expect(customPlugin.draggable).toBe(newInstance);
 
@@ -199,12 +207,6 @@ describe('Draggable', () => {
 
       newInstance.destroy();
 
-      expect(expectedPlugins[2].detachWasCalled)
-        .toBe(true);
-
-      expect(expectedPlugins[2].numTimesDetachCalled)
-        .toBe(1);
-
       expect(expectedPlugins[3].detachWasCalled)
         .toBe(true);
 
@@ -215,6 +217,12 @@ describe('Draggable', () => {
         .toBe(true);
 
       expect(expectedPlugins[4].numTimesDetachCalled)
+        .toBe(1);
+
+      expect(expectedPlugins[5].detachWasCalled)
+        .toBe(true);
+
+      expect(expectedPlugins[5].numTimesDetachCalled)
         .toBe(1);
     });
 

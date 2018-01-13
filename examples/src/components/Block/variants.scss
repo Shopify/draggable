@@ -6,6 +6,12 @@
 @import 'utilities/shared/layout';
 @import 'components/Patterns/props';
 
+@keyframes test {
+  to {
+    transform: scale(0);
+  }
+}
+
 ///
 /// BlockLayout
 .BlockLayout--typeFlex,
@@ -114,17 +120,12 @@
     color: get-color(brand, blue);
   }
 
-/*
   &.draggable-source--placed .BlockContent {
-    &::before {
-      @include position-cover;
-      content: '';
-      display: block;
-      background-color: get-color(brand, blue);
+    &::after {
+      @include visible;
       animation: test get-duration() get-easing() both;
     }
   }
-*/
 
   &.draggable-mirror {
     z-index: get-z-index(overlay);
@@ -137,15 +138,6 @@
     }
   }
 }
-
-/*
-span:hover {
-  ~ .draggable-mirror .BlockContent {
-    background-color: get-color(brand, purple);
-    border-color: get-color(brand, purple);
-  }
-}
-*/
 
 ///
 /// Droppable

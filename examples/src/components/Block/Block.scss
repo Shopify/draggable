@@ -27,6 +27,14 @@
   background-color: get-color(coal, dark);
   border: get-border(thin) solid get-color(coal, dark);
 
+  &::after {
+    @include position-cover;
+    @include visible(false);
+    content: '';
+    display: block;
+    background-color: get-color(brand, blue);
+  }
+
   @media screen and (min-width: get-breakpoint(tablet)) {
     border-width: get-border();
   }

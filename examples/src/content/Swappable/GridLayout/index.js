@@ -18,9 +18,5 @@ export default function GridLayout() {
     },
   });
 
-  // --- Draggable events --- //
-  // swappable.on('drag:start', evt => console.log('Drag: Start', evt));
-  // swappable.on('drag:stop', evt => console.log('Drag: Stop', evt));
-
   return swappable;
 }

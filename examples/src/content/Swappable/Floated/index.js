@@ -23,10 +23,6 @@ export default function Floated() {
   // EXPERIMENT WITH MANAGING THE PLACED CLASS MYSELF
 
   // --- Draggable events --- //
-  swappable.on('drag:start', evt => {
-    // MAX WILL UPDATE THE LIB TO HAVE A NEW CLASS I CAN HOOK INTO
-    evt.originalSource.classList.add('Block--isCloned');
-  });
 
   /*
   // doesn't actually work... consult with Max
@@ -37,10 +33,5 @@ export default function Floated() {
     mirror.style.height = `${swappedHeight}px`;
   });
 */
-
-  swappable.on('drag:stop', evt => {
-    evt.originalSource.classList.remove('Block--isCloned');
-  });
-
   return swappable;
 }

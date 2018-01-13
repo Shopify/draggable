@@ -195,7 +195,7 @@
     }
   }
 
-  .StackedListItem--isCloned:first-child + .StackedListItem {
+  .draggable--original:first-child + .StackedListItem {
     margin-left: 0;
   }
 
@@ -271,7 +271,7 @@
     }
 
     + .StackedListItem,
-    + .StackedListItem--isCloned + .StackedListItem {
+    + .draggable--original + .StackedListItem {
       .StackedListContent::before {
         background-color: get-color(brand, blue);
         opacity: 1;

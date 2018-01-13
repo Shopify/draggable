@@ -108,7 +108,7 @@ $paper-stack: (
 
   @for $i from 1 through $paper-stack-item-count {
     &:nth-child(#{$i}),
-    &.PaperStackItem--isCloned ~ .PaperStackItem:nth-child(#{$i + 1}) {
+    &.draggable--original ~ .PaperStackItem:nth-child(#{$i + 1}) {
       top: $adjusted-top-offset;
     }
 

@@ -80,7 +80,7 @@
     margin-top: -(get-border());
   }
 
-  .StackedListItem--isCloned:first-child + & {
+  .draggable--original:first-child + & {
     margin-top: 0;
   }
 }

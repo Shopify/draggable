@@ -23,7 +23,7 @@ $floated-block-name: unquote('Block');
       }
     }
 
-    .Block--isCloned ~ .Block:nth-child(3) {
+    .draggable--original ~ .Block:nth-child(3) {
       .BlockContent {
         height: columns();
       }

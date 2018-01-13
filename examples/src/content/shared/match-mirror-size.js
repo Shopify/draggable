@@ -1,4 +1,4 @@
-export default function matchMirrorSize(dragEvent, draggableClass, cloneClass) {
+export default function matchMirrorSize(dragEvent, draggableClass) {
   dragEvent.overContainer.appendChild(dragEvent.mirror);
 
   let overElement;
@@ -6,7 +6,7 @@ export default function matchMirrorSize(dragEvent, draggableClass, cloneClass) {
   if (dragEvent.over) {
     overElement = dragEvent.over;
   } else {
-    overElement = dragEvent.overContainer.querySelector(`.${draggableClass}:not(.${cloneClass})`);
+    overElement = dragEvent.overContainer.querySelector(`.${draggableClass}:not(.draggable--original)`);
   }
 
   if (overElement) {

@@ -16,15 +16,5 @@ export default function Flexbox() {
     },
   });
 
-  // --- Draggable events --- //
-  swappable.on('drag:start', evt => {
-    // MAX WILL UPDATE THE LIB TO HAVE A NEW CLASS I CAN HOOK INTO
-    evt.originalSource.classList.add('Block--isCloned');
-  });
-
-  swappable.on('drag:stop', evt => {
-    evt.originalSource.classList.remove('Block--isCloned');
-  });
-
   return swappable;
 }

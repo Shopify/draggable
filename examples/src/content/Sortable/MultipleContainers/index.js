@@ -5,7 +5,6 @@ import matchMirrorSize from '../../shared/match-mirror-size';
 
 const Classes = {
   draggable: 'StackedListItem--isDraggable',
-  clone: 'StackedListItem--isCloned',
 };
 
 export default function MultipleContainers() {
@@ -29,7 +28,6 @@ export default function MultipleContainers() {
 
   // --- Draggable events --- //
   sortable.on('drag:start', evt => {
-    evt.originalSource.classList.add(Classes.clone);
     // this is inefficient and should be shared with my manageEmptyState code
     currentMediumChildren = containerTwo.querySelectorAll('.StackedListItem').length;
     lastOverContainer = evt.sourceContainer;
@@ -52,12 +50,8 @@ export default function MultipleContainers() {
       return;
     }
 
-    matchMirrorSize(evt.dragEvent, Classes.draggable, Classes.clone);
+    matchMirrorSize(evt.dragEvent, Classes.draggable);
     lastOverContainer = evt.dragEvent.overContainer;
-  });
-
-  sortable.on('drag:stop', evt => {
-    evt.originalSource.classList.remove(Classes.clone);
   });
 
   return sortable;

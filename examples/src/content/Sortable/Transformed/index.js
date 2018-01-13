@@ -18,14 +18,5 @@ export default function Transformed() {
     },
   });
 
-  // --- Draggable events --- //
-  sortable.on('drag:start', evt => {
-    evt.originalSource.classList.add('PaperStackItem--isCloned');
-  });
-
-  sortable.on('drag:stop', evt => {
-    evt.originalSource.classList.remove('PaperStackItem--isCloned');
-  });
-
   return sortable;
 }

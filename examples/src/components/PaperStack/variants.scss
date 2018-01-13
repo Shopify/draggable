@@ -7,7 +7,7 @@
 
 ///
 /// Draggable layout
-.PaperStackItem--isCloned:first-child + .PaperStackItem {
+.draggable--original:first-child + .PaperStackItem {
   .PaperStackContent::after {
     content: none;
   }

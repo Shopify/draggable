@@ -18,14 +18,5 @@ export default function SimpleList() {
     },
   });
 
-  // --- Draggable events --- //
-  sortable.on('drag:start', evt => {
-    evt.originalSource.classList.add('StackedListItem--isCloned');
-  });
-
-  sortable.on('drag:stop', evt => {
-    evt.originalSource.classList.remove('StackedListItem--isCloned');
-  });
-
   return sortable;
 }

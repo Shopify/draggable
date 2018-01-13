@@ -5,6 +5,7 @@ import matchMirrorSize from '../../shared/match-mirror-size';
 
 const Classes = {
   draggable: 'StackedListItem--isDraggable',
+  capacity: 'draggable-container-parent--capacity',
 };
 
 export default function MultipleContainers() {
@@ -21,27 +22,28 @@ export default function MultipleContainers() {
     },
   });
 
-  const containerTwo = document.getElementById('ContainerTwo');
   const containerTwoCapacity = 3;
+  const containerTwoParent = sortable.containers[1].parentNode;
   let currentMediumChildren;
+  let capacityReached;
   let lastOverContainer;
 
   // --- Draggable events --- //
   sortable.on('drag:start', evt => {
-    // this is inefficient and should be shared with my manageEmptyState code
-    currentMediumChildren = containerTwo.querySelectorAll('.StackedListItem').length;
+    currentMediumChildren = sortable.getDraggableElementsForContainer(sortable.containers[1]).length;
+    capacityReached = currentMediumChildren === containerTwoCapacity;
     lastOverContainer = evt.sourceContainer;
+    containerTwoParent.classList.toggle(Classes.capacity, capacityReached);
   });
 
   // This suprisingly does not work...
-  sortable.on('drag:over', evt => {
-    if (currentMediumChildren !== containerTwoCapacity) {
+  sortable.on('sortable:sort', evt => {
+    if (!capacityReached) {
       return;
     }
 
-    if (evt.overContainer === containerTwo) {
+    if (evt.dragEvent.overContainer === sortable.containers[1]) {
       evt.cancel();
-      console.log('#ContainerTwo capacity reached:', currentMediumChildren);
     }
   });
 

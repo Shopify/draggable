@@ -1,4 +1,5 @@
 export {
+  MirrorCreateEvent,
   MirrorCreatedEvent,
   MirrorAttachedEvent,
   MirrorMoveEvent,

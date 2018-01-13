@@ -24,6 +24,7 @@ import {
 } from './DragEvent';
 
 import {
+  MirrorCreateEvent,
   MirrorCreatedEvent,
   MirrorAttachedEvent,
   MirrorMoveEvent,
@@ -347,7 +348,16 @@ export default class Draggable {
 
     this.source = this.originalSource.cloneNode(true);
 
-    if (!isDragEvent(originalEvent)) {
+    const mirrorCreateEvent = new MirrorCreateEvent({
+      source: this.source,
+      originalSource: this.originalSource,
+      sourceContainer: container,
+      sensorEvent,
+    });
+
+    this.trigger(mirrorCreateEvent);
+
+    if (!isDragEvent(originalEvent) && !mirrorCreateEvent.canceled()) {
       const appendableContainer = this[getAppendableContainer]({source: this.originalSource});
       this.mirror = this.source.cloneNode(true);
 

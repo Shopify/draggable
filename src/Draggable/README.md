@@ -135,6 +135,7 @@ on elements in certain states.
 | `container:placed`   | Class added on the draggable container element on `drag:stop`        | `draggable-container--placed`      |
 | `draggable:over`     | Class added on draggable element you are dragging over               | `draggable--over`                  |
 | `container:over`     | Class added on draggable container element you are dragging over     | `draggable-container--over`        |
+| `source:original`    | Class added on the original source element, which is hidden on drag  | `draggable--original`              |
 | `mirror`             | Class added on the mirror element                                    | `draggable-mirror`                 |
 
 ### Example

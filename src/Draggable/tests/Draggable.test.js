@@ -686,4 +686,23 @@ describe('Draggable', () => {
       .not
       .toContain('draggable-container--is-dragging');
   });
+
+  test('adds and removes `source:original` on start and stop', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
+    const draggableElement = sandbox.querySelector('li');
+    document.elementFromPoint = () => draggableElement;
+
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBeTruthy();
+
+    triggerEvent(document, 'mouseup', {button: 0});
+
+    expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBeFalsy();
+  });
 });

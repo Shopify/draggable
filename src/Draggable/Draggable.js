@@ -51,6 +51,7 @@ export const defaultOptions = {
     'body:dragging': 'draggable--is-dragging',
     'draggable:over': 'draggable--over',
     'container:over': 'draggable-container--over',
+    'source:original': 'draggable--original',
     mirror: 'draggable-mirror',
   },
 };
@@ -357,6 +358,7 @@ export default class Draggable {
       this.trigger(mirrorAttachedEvent);
     }
 
+    this.originalSource.classList.add(this.getClassNameFor('source:original'));
     this.originalSource.parentNode.insertBefore(this.source, this.originalSource);
 
     this.originalSource.style.display = 'none';
@@ -546,6 +548,7 @@ export default class Draggable {
     this.originalSource.style.display = '';
 
     this.source.classList.remove(this.getClassNameFor('source:dragging'));
+    this.originalSource.classList.remove(this.getClassNameFor('source:original'));
     this.originalSource.classList.add(this.getClassNameFor('source:placed'));
     this.sourceContainer.classList.add(this.getClassNameFor('container:placed'));
     this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));

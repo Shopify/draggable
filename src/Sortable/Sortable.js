@@ -11,7 +11,6 @@ const onDragStart = Symbol('onDragStart');
 const onDragOverContainer = Symbol('onDragOverContainer');
 const onDragOver = Symbol('onDragOver');
 const onDragStop = Symbol('onDragStop');
-const getContainerChildren = Symbol('getContainerChildren');
 
 /**
  * Sortable is built on top of Draggable and allows sorting of draggable elements. Sortable will keep
@@ -77,7 +76,7 @@ export default class Sortable extends Draggable {
    * @return {Number}
    */
   index(element) {
-    return this[getContainerChildren](element.parentNode).indexOf(element);
+    return this.getDraggableElementsForContainer(element.parentNode).indexOf(element);
   }
 
   /**
@@ -128,7 +127,7 @@ export default class Sortable extends Draggable {
       return;
     }
 
-    const children = this[getContainerChildren](overContainer);
+    const children = this.getDraggableElementsForContainer(overContainer);
     const moves = move({source, over, overContainer, children});
 
     if (!moves) {
@@ -175,7 +174,7 @@ export default class Sortable extends Draggable {
       return;
     }
 
-    const children = this[getContainerChildren](overContainer);
+    const children = this.getDraggableElementsForContainer(overContainer);
     const moves = move({source, over, overContainer, children});
 
     if (!moves) {
@@ -214,18 +213,6 @@ export default class Sortable extends Draggable {
 
     this.startIndex = null;
     this.startContainer = null;
-  }
-
-  /**
-   * Returns children elements for a container, excluding the original source and mirror, if present
-   * @private
-   * @param {HTMLElement} container - a container element
-   * @return {HTMLElement[]}
-   */
-  [getContainerChildren](container) {
-    return [...container.children].filter((childElement) => {
-      return childElement !== this.originalSource && childElement !== this.mirror;
-    });
   }
 }
 

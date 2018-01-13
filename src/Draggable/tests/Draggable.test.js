@@ -343,6 +343,27 @@ describe('Draggable', () => {
     });
   });
 
+  describe('#getDraggableElementsForContainer', () => {
+    test('returns draggable elements, excluding mirror and original source', () => {
+      const newInstance = new Draggable(containers, {
+        draggable: 'li',
+      });
+      const draggableElement = sandbox.querySelector('li');
+      document.elementFromPoint = () => draggableElement;
+
+      triggerEvent(draggableElement, 'mousedown', {button: 0});
+
+      // Wait for delay
+      jest.runTimersToTime(100);
+
+      const containerChildren = newInstance.getDraggableElementsForContainer(draggableElement.parentNode);
+
+      expect(containerChildren.length).toEqual(2);
+
+      triggerEvent(draggableElement, 'mouseup', {button: 0});
+    });
+  });
+
   test('triggers `drag:start` drag event on mousedown', () => {
     const newInstance = new Draggable(containers, {
       draggable: 'li',

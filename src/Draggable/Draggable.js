@@ -303,6 +303,20 @@ export default class Draggable {
   }
 
   /**
+   * Returns draggable elements for a given container, excluding the mirror and
+   * original source element if present
+   * @param {HTMLElement} container
+   * @return {HTMLElement[]}
+   */
+  getDraggableElementsForContainer(container) {
+    const allDraggableElements = container.querySelectorAll(this.options.draggable);
+
+    return [...allDraggableElements].filter((childElement) => {
+      return childElement !== this.originalSource && childElement !== this.mirror;
+    });
+  }
+
+  /**
    * Drag start handler
    * @private
    * @param {Event} event - DOM Drag event

@@ -63,6 +63,9 @@ Returns class name for class identifier, check the classes table below for ident
 **`draggable.isDragging(): Boolean`**  
 Returns true or false, depending on this draggables dragging state.
 
+**`draggable.getDraggableElementsForContainer(container: HTMLElement): HTMLElement[]`**  
+Returns draggable elements for given container, excluding potential mirror or original source.
+
 ### Options
 
 **`draggable {String}`**  

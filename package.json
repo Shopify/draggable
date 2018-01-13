@@ -35,8 +35,10 @@
     "test-ci": "jest --config config.json --coverage"
   },
   "files": [
-    "lib/**/*.js"
+    "lib/**/*.js",
+    "index.d.ts"
   ],
+  "typings": "index.d.ts",
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-shopify": "^16.0.2",

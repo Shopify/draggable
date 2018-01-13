@@ -381,18 +381,6 @@ export default class Draggable {
     document.body.classList.add(this.getClassNameFor('body:dragging'));
     applyUserSelect(document.body, 'none');
 
-    if (this.mirror) {
-      const mirrorMoveEvent = new MirrorMoveEvent({
-        source: this.source,
-        mirror: this.mirror,
-        originalSource: this.originalSource,
-        sourceContainer: container,
-        sensorEvent,
-      });
-
-      this.trigger(mirrorMoveEvent);
-    }
-
     const dragEvent = new DragStartEvent({
       source: this.source,
       mirror: this.mirror,
@@ -403,19 +391,19 @@ export default class Draggable {
 
     this.trigger(dragEvent);
 
-    if (!dragEvent.canceled()) {
-      return;
+    if (dragEvent.canceled()) {
+      this.dragging = false;
+
+      if (this.mirror) {
+        this.mirror.parentNode.removeChild(this.mirror);
+      }
+
+      this.source.classList.remove(this.getClassNameFor('source:dragging'));
+      this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
+      document.body.classList.remove(this.getClassNameFor('body:dragging'));
+    } else {
+      requestAnimationFrame(() => this[onDragMove](event));
     }
-
-    this.dragging = false;
-
-    if (this.mirror) {
-      this.mirror.parentNode.removeChild(this.mirror);
-    }
-
-    this.source.classList.remove(this.getClassNameFor('source:dragging'));
-    this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
-    document.body.classList.remove(this.getClassNameFor('body:dragging'));
   }
 
   /**

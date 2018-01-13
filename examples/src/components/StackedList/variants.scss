@@ -57,7 +57,7 @@
     left: 0;
     display: block;
     height: get-border();
-    background-color: get-color(coal, dark);
+    background-color: currentColor;
     transition: opacity get-duration() get-easing();
   }
 
@@ -143,6 +143,7 @@
     height: stacked-list-item(base, desktop);
   }
 
+  // duplicated code... should be a mixin?
   &::after {
     content: '';
     position: absolute;
@@ -151,7 +152,7 @@
     bottom: 0;
     display: block;
     width: get-border();
-    background-color: get-color(coal, dark);
+    background-color: currentColor;
     transition: opacity get-duration() get-easing();
   }
 

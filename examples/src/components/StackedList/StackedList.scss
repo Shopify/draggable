@@ -93,7 +93,7 @@
   min-height: stacked-list-item();
   height: 100%;
   background-color: get-color(ash, light);
-  color: get-color(coal, dark);
+  color: currentColor;
   border: get-border() solid currentColor;
   transition:
     color get-duration(fast) get-easing(),
@@ -124,10 +124,8 @@
     left: -(get-border());
     display: block;
     height: get-border();
-    background-color: get-color(coal, dark);
+    background-color: currentColor;
     opacity: 0;
-    transition:
-      background-color get-duration(fast) get-easing(),
-      opacity get-duration(fast) get-easing();
+    transition: opacity get-duration(fast) get-easing();
   }
 }

@@ -344,6 +344,12 @@ export default class Draggable {
       return;
     }
 
+    if (this.lastPlacedSource && this.lastPlacedContainer) {
+      clearTimeout(this.placedTimeoutID);
+      this.lastPlacedSource.classList.remove(this.getClassNameFor('source:placed'));
+      this.lastPlacedContainer.classList.remove(this.getClassNameFor('container:placed'));
+    }
+
     this.dragging = true;
 
     this.source = this.originalSource.cloneNode(true);
@@ -590,17 +596,20 @@ export default class Draggable {
       }
     }
 
-    const lastSource = this.originalSource;
-    const lastSourceContainer = this.sourceContainer;
+    this.lastPlacedSource = this.originalSource;
+    this.lastPlacedContainer = this.sourceContainer;
 
-    setTimeout(() => {
-      if (lastSource) {
-        lastSource.classList.remove(this.getClassNameFor('source:placed'));
+    this.placedTimeoutID = setTimeout(() => {
+      if (this.lastPlacedSource) {
+        this.lastPlacedSource.classList.remove(this.getClassNameFor('source:placed'));
       }
 
-      if (lastSourceContainer) {
-        lastSourceContainer.classList.remove(this.getClassNameFor('container:placed'));
+      if (this.lastPlacedContainer) {
+        this.lastPlacedContainer.classList.remove(this.getClassNameFor('container:placed'));
       }
+
+      this.lastPlacedSource = null;
+      this.lastPlacedContainer = null;
     }, this.options.placedTimeout);
 
     this.source = null;

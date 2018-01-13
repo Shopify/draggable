@@ -129,6 +129,10 @@ export default class AutoScroll {
    * @private
    */
   [onDragMove](dragEvent) {
+    this.findScrollableElementFrame = requestAnimationFrame(() => {
+      this.scrollableElement = closestScrollableElement(dragEvent.sensorEvent.target);
+    });
+
     if (!this.scrollableElement) {
       return;
     }

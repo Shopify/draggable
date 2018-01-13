@@ -3,24 +3,20 @@ import Sortable from 'lib/sortable';
 /* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 import matchMirrorSize from '../../shared/match-mirror-size';
 
-function manageEmptyState(containers) {
-  const emptyClass = 'draggable-container--is-empty';
-
-  containers.forEach(container => {
-    const countChildren = container.querySelectorAll('.StackedListItem').length;
-    container.classList.toggle(emptyClass, countChildren <= 1);
-  });
-}
+const Classes = {
+  draggable: 'StackedListItem--isDraggable',
+  clone: 'StackedListItem--isCloned',
+};
 
 export default function MultipleContainers() {
-  const containers = document.querySelectorAll('#MultipleContainers .Container');
+  const containers = document.querySelectorAll('#MultipleContainers .StackedList');
 
   if (containers.length === 0) {
     return false;
   }
 
   const sortable = new Sortable(containers, {
-    draggable: '.StackedListItem--isDraggable',
+    draggable: `.${Classes.draggable}`,
     mirror: {
       constrainDimensions: true,
     },
@@ -33,7 +29,7 @@ export default function MultipleContainers() {
 
   // --- Draggable events --- //
   sortable.on('drag:start', evt => {
-    evt.originalSource.classList.add('StackedListItem--isCloned');
+    evt.originalSource.classList.add(Classes.clone);
     // this is inefficient and should be shared with my manageEmptyState code
     currentMediumChildren = containerTwo.querySelectorAll('.StackedListItem').length;
     lastOverContainer = evt.sourceContainer;
@@ -56,14 +52,12 @@ export default function MultipleContainers() {
       return;
     }
 
-    matchMirrorSize(evt.dragEvent);
-    manageEmptyState(containers);
-
+    matchMirrorSize(evt.dragEvent, Classes.draggable, Classes.clone);
     lastOverContainer = evt.dragEvent.overContainer;
   });
 
   sortable.on('drag:stop', evt => {
-    evt.originalSource.classList.remove('StackedListItem--isCloned');
+    evt.originalSource.classList.remove(Classes.clone);
   });
 
   return sortable;

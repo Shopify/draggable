@@ -17,10 +17,6 @@
   box-shadow: inset 0 0 0 get-border() currentColor;
   // transition causing some weird problems in Chrome
   transition: color get-duration(fast) get-easing();
-
-  &.draggable-container--is-empty.draggable-container--over {
-    color: get-color(brand, blue);
-  }
 }
 
 .StackedListHeader {
@@ -57,7 +53,7 @@
     @include Heading;
     @include HeadingSize4;
     @include text-no-select;
-    content: 'drag to container';
+    content: 'drop elements here';
     display: flex;
     align-items: center;
     justify-content: center;

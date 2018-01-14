@@ -1,3 +1,5 @@
+const canceled = Symbol('canceled');
+
 /**
  * All events fired by draggable inherit this class. You can call `cancel()` to
  * cancel a specific event or you can check if an event has been canceled by
@@ -26,8 +28,13 @@ export default class AbstractEvent {
    */
   static cancelable = false;
 
+  /**
+   * AbstractEvent constructor.
+   * @constructs AbstractEvent
+   * @param {object} data - Event data
+   */
   constructor(data) {
-    this._canceled = false;
+    this[canceled] = false;
     this.data = data;
   }
 
@@ -54,7 +61,7 @@ export default class AbstractEvent {
    * @abstract
    */
   cancel() {
-    this._canceled = true;
+    this[canceled] = true;
   }
 
   /**
@@ -63,6 +70,6 @@ export default class AbstractEvent {
    * @return {Boolean}
    */
   canceled() {
-    return Boolean(this._canceled);
+    return Boolean(this[canceled]);
   }
 }

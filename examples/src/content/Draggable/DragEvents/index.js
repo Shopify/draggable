@@ -26,6 +26,7 @@ export default function DragEvents() {
 
   const draggable = new Draggable(containers, {
     draggable: '.PillSwitchControl',
+    delay: 0,
   });
 
   let isToggled = false;

@@ -85,11 +85,11 @@ $grid-columns: 4;
     .BlockContent {
       border: 0;
     }
-  }
 
-  @for $i from 1 through length($grid-area-names) {
-    .BlockWrapper:nth-child(#{$i}) {
-      grid-area: nth($grid-area-names, $i);
+    @for $i from 1 through length($grid-area-names) {
+      .BlockWrapper:nth-child(#{$i}) {
+        grid-area: nth($grid-area-names, $i);
+      }
     }
   }
 

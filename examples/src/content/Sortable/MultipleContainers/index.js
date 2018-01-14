@@ -36,13 +36,14 @@ export default function MultipleContainers() {
     containerTwoParent.classList.toggle(Classes.capacity, capacityReached);
   });
 
-  // This suprisingly does not work...
   sortable.on('sortable:sort', evt => {
     if (!capacityReached) {
       return;
     }
 
-    if (evt.dragEvent.overContainer === sortable.containers[1]) {
+    const sourceIsCapacityContainer = evt.dragEvent.sourceContainer === sortable.containers[1];
+
+    if (!sourceIsCapacityContainer && evt.dragEvent.overContainer === sortable.containers[1]) {
       evt.cancel();
     }
   });

@@ -10,37 +10,23 @@
 ///
 /// Size variants
 .StackedListWrapper--sizeMedium {
-  .StackedListHeader {
-    min-height: stacked-list-item(medium);
-
-    @media screen and (min-width: get-breakpoint(desktop)) {
-      min-height: stacked-list-item(medium, desktop);
-    }
-  }
-
+  .StackedListHeader,
   .StackedListContent {
-    min-height: stacked-list-item(medium);
+    height: stacked-list-item(medium);
 
     @media screen and (min-width: get-breakpoint(desktop)) {
-      min-height: stacked-list-item(medium, desktop);
+      height: stacked-list-item(medium, desktop);
     }
   }
 }
 
 .StackedListWrapper--sizeLarge {
-  .StackedListHeader {
-    min-height: stacked-list-item(large);
-
-    @media screen and (min-width: get-breakpoint(desktop)) {
-      min-height: stacked-list-item(large, desktop);
-    }
-  }
-
+  .StackedListHeader,
   .StackedListContent {
-    min-height: stacked-list-item(large);
+    height: stacked-list-item(large);
 
     @media screen and (min-width: get-breakpoint(desktop)) {
-      min-height: stacked-list-item(large, desktop);
+      height: stacked-list-item(large, desktop);
     }
   }
 }
@@ -50,15 +36,7 @@
 /// Not to be paired with --axisHorizontal
 .StackedListWrapper--hasScrollIndicator {
   &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    display: block;
-    height: get-border();
-    background-color: currentColor;
-    transition: opacity get-duration() get-easing();
+    @include scroll-indicator;
   }
 
   // does not address :focus on child elements
@@ -137,29 +115,24 @@
 /// Has horizontal scrolling built-in
 .StackedListWrapper--axisHorizontal {
   display: flex;
-  height: stacked-list-item();
 
-  @media screen and (min-width: get-breakpoint(tablet)) {
-    height: stacked-list-item(base, desktop);
-  }
-
-  // duplicated code... should be a mixin?
   &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    display: block;
-    width: get-border();
-    background-color: currentColor;
-    transition: opacity get-duration() get-easing();
+    @include scroll-indicator(false);
   }
 
   // does not address :focus on child elements
   &:hover {
     &::after {
       opacity: 0.1;
+    }
+  }
+
+  .StackedListHeader,
+  .StackedListContent {
+    height: stacked-list-item();
+
+    @media screen and (min-width: get-breakpoint(tablet)) {
+      height: stacked-list-item(base, desktop);
     }
   }
 
@@ -182,7 +155,6 @@
   .StackedListItem {
     flex: 1 0 stacked-list-item(large);
     max-width: stacked-list-item(large) * 2;
-    height: 100%;
 
     &:nth-child(1n+2) {
       margin-top: 0;
@@ -220,18 +192,24 @@
   }
 
   &.StackedListWrapper--sizeMedium {
-    height: stacked-list-item(medium);
+    .StackedListHeader,
+    .StackedListContent {
+      height: stacked-list-item(medium);
 
-    @media screen and (min-width: get-breakpoint(tablet)) {
-      height: stacked-list-item(medium, desktop);
+      @media screen and (min-width: get-breakpoint(tablet)) {
+        height: stacked-list-item(medium, desktop);
+      }
     }
   }
 
   &.StackedListWrapper--sizeLarge {
-    height: stacked-list-item(large);
+    .StackedListHeader,
+    .StackedListContent {
+      height: stacked-list-item(large);
 
-    @media screen and (min-width: get-breakpoint(tablet)) {
-      height: stacked-list-item(large, desktop);
+      @media screen and (min-width: get-breakpoint(tablet)) {
+        height: stacked-list-item(large, desktop);
+      }
     }
   }
 }

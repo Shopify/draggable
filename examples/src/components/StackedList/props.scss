@@ -40,3 +40,23 @@ $stacked-list-item: (
 @mixin stacked-list-scroll-height($size: stacked-list-item(), $rows: 6) {
   height: ($size * $rows) - (get-border() * ($rows - 1));
 }
+
+@mixin scroll-indicator($vertical: true) {
+  content: '';
+  position: absolute;
+  display: block;
+  background-color: currentColor;
+  transition: color get-duration(fast) get-easing(), opacity get-duration() get-easing();
+
+  @if $vertical {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: get-border();
+  } @else {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: get-border();
+  }
+}

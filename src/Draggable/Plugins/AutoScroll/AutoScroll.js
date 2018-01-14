@@ -1,3 +1,4 @@
+import AbstractPlugin from 'shared/AbstractPlugin';
 import {closest} from 'shared/utils';
 
 export const onDragStart = Symbol('onDragStart');
@@ -22,7 +23,7 @@ export const defaultOptions = {
  * @class AutoScroll
  * @module AutoScroll
  */
-export default class AutoScroll {
+export default class AutoScroll extends AbstractPlugin {
 
   /**
    * AutoScroll constructor.
@@ -30,13 +31,7 @@ export default class AutoScroll {
    * @param {Draggable} draggable - Draggable instance
    */
   constructor(draggable) {
-
-    /**
-     * Draggable instance
-     * @property draggable
-     * @type {Draggable}
-     */
-    this.draggable = draggable;
+    super(draggable);
 
     /**
      * AutoScroll options

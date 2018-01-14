@@ -1,3 +1,5 @@
+import AbstractPlugin from 'shared/AbstractPlugin';
+
 const ARIA_GRABBED = 'aria-grabbed';
 const ARIA_DROPEFFECT = 'aria-dropeffect';
 const TABINDEX = 'tabindex';
@@ -7,7 +9,7 @@ const TABINDEX = 'tabindex';
  * @class Accessibility
  * @module Accessibility
  */
-export default class Accessibility {
+export default class Accessibility extends AbstractPlugin {
 
   /**
    * Accessibility constructor.
@@ -15,13 +17,7 @@ export default class Accessibility {
    * @param {Draggable} draggable - Draggable instance
    */
   constructor(draggable) {
-
-    /**
-     * Draggable instance
-     * @property draggable
-     * @type {Draggable}
-     */
-    this.draggable = draggable;
+    super(draggable);
 
     this._onInit = this._onInit.bind(this);
     this._onDestroy = this._onDestroy.bind(this);

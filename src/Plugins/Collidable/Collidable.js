@@ -1,3 +1,4 @@
+import AbstractPlugin from 'shared/AbstractPlugin';
 import {closest} from 'shared/utils';
 
 import {
@@ -5,9 +6,9 @@ import {
   CollidableOutEvent,
 } from './CollidableEvent';
 
-export default class Collidable {
+export default class Collidable extends AbstractPlugin {
   constructor(draggable) {
-    this.draggable = draggable;
+    super(draggable);
 
     this._onDragMove = this._onDragMove.bind(this);
     this._onDragStop = this._onDragStop.bind(this);

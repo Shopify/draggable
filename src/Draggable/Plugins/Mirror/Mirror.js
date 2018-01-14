@@ -1,12 +1,15 @@
+import AbstractPlugin from 'shared/AbstractPlugin';
+
 export const defaultOptions = {
   constrainDimensions: false,
   xAxis: true,
   yAxis: true,
 };
 
-export default class Mirror {
+export default class Mirror extends AbstractPlugin {
   constructor(draggable) {
-    this.draggable = draggable;
+    super(draggable);
+
     this.options = {
       ...defaultOptions,
       ...this.getOptions(),

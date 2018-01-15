@@ -6,7 +6,7 @@
 @import 'utilities/shared/layout';
 @import 'components/Patterns/props';
 
-@keyframes test {
+@keyframes block-placed {
   to {
     transform: scale(0);
   }
@@ -19,7 +19,12 @@
   margin-top: -#{get-border(thin)};
   margin-left: -#{get-border(thin)};
 
-  .Block {
+  > .BlockWrapper {
+    margin-top: get-border(thin);
+    margin-left: get-border(thin);
+  }
+
+  > .Block {
     padding-top: get-border(thin);
     padding-left: get-border(thin);
   }
@@ -28,7 +33,12 @@
     margin-top: -#{get-border()};
     margin-left: -#{get-border()};
 
-    .Block {
+    > .BlockWrapper {
+      margin-top: get-border();
+      margin-left: get-border();
+    }
+
+    > .Block {
       padding-top: get-border();
       padding-left: get-border();
     }
@@ -123,7 +133,7 @@
   &.draggable-source--placed .BlockContent {
     &::after {
       @include visible;
-      animation: test get-duration() get-easing() both;
+      animation: block-placed get-duration() get-easing() both;
     }
   }
 

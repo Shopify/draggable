@@ -10,13 +10,16 @@ $grid-rows: 6;
 $grid-columns: 4;
 
 .OneAndOnly {
-  .BlockLayout--typeFlex {
-    margin-bottom: get-border(thin);
-
-    @media screen and (min-width: get-breakpoint(tablet)) {
-      margin-bottom: get-border();
+  .BlockLayout {
+    .BlockWrapper {
+      .Block:nth-child(1n+3) {
+        min-height: 0;
+        height: 0;
+      }
     }
+  }
 
+  .BlockLayout--typeFlex {
     .BlockWrapper {
       flex: 1 1 calc(50% - #{get-layout-length(gutter)});
 
@@ -36,6 +39,7 @@ $grid-columns: 4;
       'e e f f'
       'e e g g'
       'h h h h';
+    margin-top: get-border(thin);
     border: get-border(thin) solid get-color(coal, dark);
     background-color: get-color(coal, dark);
 
@@ -49,6 +53,7 @@ $grid-columns: 4;
         'b d f g'
         'b e f h'
         'b e f h';
+      margin-top: get-border();
       border-width: get-border();
     }
 

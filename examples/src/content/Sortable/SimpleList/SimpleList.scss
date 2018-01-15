@@ -11,13 +11,13 @@
       @media screen and (min-width: get-breakpoint(desktop)) {
         display: flex;
         align-items: center;
-        min-height: stacked-list-item(medium);
+        height: stacked-list-item(medium);
       }
     }
 
     .StackedListContent {
       @media screen and (min-width: get-breakpoint(desktop)) {
-        min-height: stacked-list-item(medium);
+        height: stacked-list-item(medium);
       }
     }
   }

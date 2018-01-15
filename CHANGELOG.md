@@ -1,10 +1,36 @@
 # Changelog
 
-## v1.0.0-beta.4 - ?
+## v1.0.0-beta.5 - ?
 
 ### Added
 
 ### Changed
+
+## v1.0.0-beta.4 - 2018-01-15
+
+### Added
+
+- Default `Draggable` plugins get exposed statically on `Draggable.Plugins`
+- Default `AutoScroll` plugin for Draggable, which auto scrolls containers/viewport while dragging
+- `yarn watch` task for auto-building the library
+- `source:original` class option for Draggable
+- `Draggable#getDraggableElementsForContainer` method, which returns all draggable elements for a given container
+- `MirrorCreateEvent`, which allows for canceling mirror creation
+- `AbstractPlugin` to use as Base class for all Draggable plugins
+- More test coverage
+
+### Changed
+
+- Fixed `Sortable` sort logic by excluding mirror and original source elements in calculations
+- `Draggable` `appendTo` option now uses sources parent element as default, instead of `document.body`
+- `Draggable` appends over classes _after_ triggering over/out events
+- `Draggable` appends source into empty containers
+- Mirrors margin gets removed on creation in the mirror plugin
+- Fix for mirror when drag start gets canceled
+- Fixes memory leak in Draggable when calling `destroy()`
+- Fixes race condition for the `source:placed` class
+- Changed `AbstractEvent#_canceled` to use symbols for private instance variables
+- Some fixes for the documentation READMEs
 
 ## v1.0.0-beta.3 - 2017-11-01
 

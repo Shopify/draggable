@@ -12,7 +12,7 @@ $grid-columns: 4;
 .OneAndOnly {
   .BlockLayout {
     .BlockWrapper {
-      .Block:nth-child(1n+3) {
+      .Block:nth-child(1n+3):not(.draggable-source--is-dragging) {
         min-height: 0;
         height: 0;
       }

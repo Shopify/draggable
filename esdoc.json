@@ -1,0 +1,18 @@
+{
+  "source": "./src",
+  "destination": "./docs",
+  "plugins": [
+    {
+      "name": "esdoc-standard-plugin",
+      "option": {
+        "manual": {
+          "files": [
+            "./src/Draggable/README.md",
+            "./src/Sortable/README.md"
+          ]
+        }
+      }
+    },
+    {"name": "esdoc-ecmascript-proposal-plugin", "option": {"all": true}}
+  ]
+}

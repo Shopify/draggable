@@ -1,0 +1,17 @@
+////
+/// Components
+/// Handle props
+////
+
+$handle-size: 2rem;
+$handle-stroke-width: 0.4rem;
+$handle-center: ($handle-size / 2) - ($handle-stroke-width / 2);
+
+@mixin drag-handle-dragging {
+  background-color: white;
+
+  &::before,
+  &::after {
+    background-color: get-color(brand, blue);
+  }
+}

@@ -1,0 +1,24 @@
+////
+/// Examples Theme
+/// Font Stack
+////
+
+$examples-font-stack-data: (
+  base: #{
+    -apple-system,
+    'BlinkMacSystemFont',
+    'San Francisco',
+    'Roboto',
+    'Segoe UI',
+    'Helvetica Neue',
+    sans-serif
+  },
+  monospace: #{
+    'Courier',
+    'Menlo',
+    'Monaco',
+    'Consolas',
+    'Lucida Console',
+    monospace
+  },
+);

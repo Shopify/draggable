@@ -1,0 +1,29 @@
+{% extends 'views/templates/document.html' %}
+
+{% import 'components/Document/Head.html' as Head %}
+{% import 'components/Sidebar/Sidebar.html' as Sidebar %}
+{% import 'components/PageHeader/PageHeader.html' as PageHeader %}
+
+{% import 'content/Swappable/Flexbox/Flexbox.html' as Flexbox %}
+
+{% set ViewAttrs = {
+  id: 'Flexbox',
+  parent: 'Swappable',
+  child: 'Flexbox',
+  subheading: 'Maintaining layout while swapping direct children can be challenging. This example solves the problem using CSS nth-child and adjacent child rules.'
+} %}
+
+{% block PageId %}{{ ViewAttrs.id }}{% endblock %}
+
+{% block head %}
+  {{ Head.render(ViewAttrs) }}
+{% endblock %}
+
+{% block sidebar %}
+  {{ Sidebar.render(ViewAttrs, DataPages) }}
+{% endblock %}
+
+{% block main %}
+  {{ PageHeader.render(ViewAttrs.parent, ViewAttrs.subheading) }}
+  {{ Flexbox.render(ViewAttrs.id) }}
+{% endblock %}

@@ -1,0 +1,16 @@
+////
+/// Themes
+/// Merge Examples theme into Threads
+////
+
+@include threads-update-property('border', $examples-border-data);
+@include threads-update-property('breakpoint', $examples-breakpoint-data);
+@include threads-update-property('color', $examples-color-data);
+@include threads-update-property('cursor', $examples-cursor-data);
+@include threads-update-property('layout-length', $examples-layout-length-data);
+@include threads-update-property('duration', $examples-duration-data);
+@include threads-update-property('easing', $examples-easing-data);
+@include threads-update-property('font-stack', $examples-font-stack-data);
+@include threads-update-property('type-scale', $examples-type-scale-data);
+@include threads-update-property('spacing', $examples-spacing-data);
+@include threads-update-property('z-index', $examples-z-index-data);

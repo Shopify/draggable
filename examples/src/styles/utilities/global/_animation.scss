@@ -1,0 +1,100 @@
+////
+/// Utilities global
+/// Animation
+////
+
+///
+/// Common keyframe animations
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes hide {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+
+  99% {
+    left: 0;
+    opacity: 0;
+  }
+
+  100% {
+    left: -200%;
+    opacity: 0;
+  }
+}
+
+@keyframes svg-trace-stroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  60% {
+    opacity: 1;
+  }
+
+  90% {
+    transform: scale(1.4);
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes breathe {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.8;
+  }
+}
+
+@keyframes pop {
+    0% { opacity: 0; transform: scale(1); }
+   75% { opacity: 1; transform: scale(1.05); }
+  100% { transform: scale(1.02); }
+}
+
+@keyframes shake {
+    0% { transform: translate3d(0, 0, 0); }
+   25% { transform: translate3d(0.6rem, 0, 0); }
+   50% { transform: translate3d(-1rem, 0, 0); }
+   75% { transform: translate3d(0.4rem, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes zoom-out {
+  to {
+    transform: scale(0);
+  }
+}

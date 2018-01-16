@@ -1,0 +1,35 @@
+{% macro render(index, options = {}) %}
+  {% set classes = ['Plate'] %}
+
+  {% if options.level and (
+    options.level === 'Top' or options.level === 'Middle' or options.level === 'Bottom'
+  ) %}
+    {% set classes = (classes.push('Plate--level' + options.level), classes) %}
+  {% endif %}
+
+  {% set classes = (classes.push('Plate--isDraggable') if options.draggable, classes) %}
+  {% set classes = (classes.push(options.classes | join(' ')) if options.classes, classes) %}
+  {% set classes = classes | join(' ') | trim %}
+
+  {% if options.draggable %}
+    {% set openingTag = '<a href="#" class="' + classes + '" title="Click to drag">' %}
+    {% set closingTag = '</a>' %}
+  {% else %}
+    {% set openingTag = '<span class="' + classes + '">' %}
+    {% set closingTag = '</span>' %}
+  {% endif %}
+
+  {{ openingTag | safe }}
+    <div class="PlateShadowWrapper">
+      <div class="PlateShadow"></div>
+    </div>
+
+    <div class="PlateContent">
+      {% if options.heading %}
+        <h2 class="Heading Heading--size1 text-no-select">{{ options.heading }}</h2>
+      {% endif %}
+
+      <h3 class="Heading visually-hidden">{{ index }}</h3>
+    </div>
+  {{ closingTag | safe }}
+{% endmacro %}

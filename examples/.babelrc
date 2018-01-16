@@ -1,0 +1,9 @@
+{
+  "presets": [
+    ["shopify/web", {
+      "shopify/web": {
+        "modules": false
+      }
+    }]
+  ]
+}

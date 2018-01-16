@@ -1,0 +1,10 @@
+////
+/// Components
+/// Link
+////
+
+@import './props';
+
+.Link {
+  @include Link;
+}

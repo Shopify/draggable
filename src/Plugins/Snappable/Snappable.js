@@ -1,11 +1,13 @@
+import AbstractPlugin from 'shared/AbstractPlugin';
+
 import {
   SnapInEvent,
   SnapOutEvent,
 } from './SnappableEvent';
 
-export default class Snappable {
+export default class Snappable extends AbstractPlugin {
   constructor(draggable) {
-    this.draggable = draggable;
+    super(draggable);
 
     this._onDragStart = this._onDragStart.bind(this);
     this._onDragStop = this._onDragStop.bind(this);

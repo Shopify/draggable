@@ -1,12 +1,15 @@
+import AbstractPlugin from 'shared/AbstractPlugin';
+
 export const defaultOptions = {
   constrainDimensions: false,
   xAxis: true,
   yAxis: true,
 };
 
-export default class Mirror {
+export default class Mirror extends AbstractPlugin {
   constructor(draggable) {
-    this.draggable = draggable;
+    super(draggable);
+
     this.options = {
       ...defaultOptions,
       ...this.getOptions(),
@@ -100,16 +103,19 @@ function resetMirror({mirror, source, options, ...args}) {
     let offsetWidth;
 
     if (options.constrainDimensions) {
-      offsetHeight = source.offsetHeight;
-      offsetWidth = source.offsetWidth;
+      // Compute padding for source
+      offsetHeight = source.clientHeight;
+      offsetWidth = source.clientWidth;
     }
 
     mirror.style.position = 'fixed';
     mirror.style.pointerEvents = 'none';
     mirror.style.top = 0;
     mirror.style.left = 0;
+    mirror.style.margin = 0;
 
     if (options.constrainDimensions) {
+      // remove padding from dimensions
       mirror.style.height = `${offsetHeight}px`;
       mirror.style.width = `${offsetWidth}px`;
     }

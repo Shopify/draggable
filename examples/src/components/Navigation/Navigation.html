@@ -1,0 +1,9 @@
+{% import './NavList.html' as NavList %}
+
+{% macro render(ViewAttrs, DataPages) %}
+  <nav class="Navigation">
+    {% for SubNav in DataPages %}
+      {{ NavList.render(ViewAttrs, SubNav) }}
+    {% endfor %}
+  </nav>
+{% endmacro %}

@@ -19,7 +19,11 @@ import {
   DraggableDestroyEvent,
 } from './../DraggableEvent';
 
-import {Accessibility, Mirror} from './../Plugins';
+import {
+  Accessibility,
+  Mirror,
+  AutoScroll,
+} from './../Plugins';
 
 import {
   MouseSensor,
@@ -47,6 +51,15 @@ describe('Draggable', () => {
 
   afterEach(() => {
     sandbox.parentNode.removeChild(sandbox);
+  });
+
+  describe('.Plugins', () => {
+    test('should be available statically', () => {
+      expect(Draggable.Plugins).toBeDefined();
+      expect(Draggable.Plugins.Mirror).toEqual(Mirror);
+      expect(Draggable.Plugins.Accessibility).toEqual(Accessibility);
+      expect(Draggable.Plugins.AutoScroll).toEqual(AutoScroll);
+    });
   });
 
   describe('#constructor', () => {
@@ -98,13 +111,16 @@ describe('Draggable', () => {
       const newInstance = new Draggable();
 
       expect(newInstance.plugins.length)
-        .toBe(2);
+        .toBe(3);
 
       expect(newInstance.plugins[0])
         .toBeInstanceOf(Mirror);
 
       expect(newInstance.plugins[1])
         .toBeInstanceOf(Accessibility);
+
+      expect(newInstance.plugins[2])
+        .toBeInstanceOf(AutoScroll);
     });
 
     test('should attach custom plugins', () => {
@@ -115,9 +131,9 @@ describe('Draggable', () => {
       });
 
       expect(newInstance.plugins.length)
-        .toBe(3);
+        .toBe(4);
 
-      const customPlugin = newInstance.plugins[2];
+      const customPlugin = newInstance.plugins[3];
 
       expect(customPlugin.draggable).toBe(newInstance);
 
@@ -191,12 +207,6 @@ describe('Draggable', () => {
 
       newInstance.destroy();
 
-      expect(expectedPlugins[2].detachWasCalled)
-        .toBe(true);
-
-      expect(expectedPlugins[2].numTimesDetachCalled)
-        .toBe(1);
-
       expect(expectedPlugins[3].detachWasCalled)
         .toBe(true);
 
@@ -208,6 +218,29 @@ describe('Draggable', () => {
 
       expect(expectedPlugins[4].numTimesDetachCalled)
         .toBe(1);
+
+      expect(expectedPlugins[5].detachWasCalled)
+        .toBe(true);
+
+      expect(expectedPlugins[5].numTimesDetachCalled)
+        .toBe(1);
+    });
+
+    test('should remove all sensor event listeners', () => {
+      document.removeEventListener = jest.fn();
+
+      const newInstance = new Draggable();
+
+      newInstance.destroy();
+
+      const mockCalls = document.removeEventListener.mock.calls;
+
+      expect(mockCalls[0][0]).toEqual('drag:start');
+      expect(mockCalls[1][0]).toEqual('drag:move');
+      expect(mockCalls[2][0]).toEqual('drag:stop');
+      expect(mockCalls[3][0]).toEqual('drag:pressure');
+
+      document.removeEventListener.mockRestore();
     });
   });
 
@@ -307,6 +340,27 @@ describe('Draggable', () => {
 
       expect(handler.mock.calls[0][0])
         .toBe(expectedEvent);
+    });
+  });
+
+  describe('#getDraggableElementsForContainer', () => {
+    test('returns draggable elements, excluding mirror and original source', () => {
+      const newInstance = new Draggable(containers, {
+        draggable: 'li',
+      });
+      const draggableElement = sandbox.querySelector('li');
+      document.elementFromPoint = () => draggableElement;
+
+      triggerEvent(draggableElement, 'mousedown', {button: 0});
+
+      // Wait for delay
+      jest.runTimersToTime(100);
+
+      const containerChildren = newInstance.getDraggableElementsForContainer(draggableElement.parentNode);
+
+      expect(containerChildren.length).toEqual(2);
+
+      triggerEvent(draggableElement, 'mouseup', {button: 0});
     });
   });
 
@@ -652,5 +706,24 @@ describe('Draggable', () => {
     expect(containers[0].classList)
       .not
       .toContain('draggable-container--is-dragging');
+  });
+
+  test('adds and removes `source:original` on start and stop', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
+    const draggableElement = sandbox.querySelector('li');
+    document.elementFromPoint = () => draggableElement;
+
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBeTruthy();
+
+    triggerEvent(document, 'mouseup', {button: 0});
+
+    expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBeFalsy();
   });
 });

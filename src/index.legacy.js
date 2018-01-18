@@ -4,6 +4,7 @@ import 'core-js/fn/object/assign';
 import 'core-js/fn/array/includes';
 
 import AbstractEvent from 'shared/AbstractEvent';
+import AbstractPlugin from 'shared/AbstractPlugin';
 
 import * as Sensors from './Draggable/Sensors';
 import * as Plugins from './Plugins';
@@ -15,6 +16,7 @@ import Sortable from './Sortable';
 
 export {
   AbstractEvent as BaseEvent,
+  AbstractPlugin as BasePlugin,
   Sensors,
   Plugins,
 

@@ -1,11 +1,13 @@
+import AbstractPlugin from 'shared/AbstractPlugin';
+
 export const defaultOptions = {
   duration: 150,
   easingFunction: 'ease-in-out',
 };
 
-export default class SwapAnimation {
+export default class SwapAnimation extends AbstractPlugin {
   constructor(draggable) {
-    this.draggable = draggable;
+    super(draggable);
 
     this.options = {
       ...defaultOptions,

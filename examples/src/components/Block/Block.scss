@@ -1,0 +1,37 @@
+////
+/// Components
+/// Block
+////
+
+@import 'utilities/shared/layout';
+
+.BlockWrapper {
+  .Block {
+    height: 100%;
+  }
+}
+
+.Block {
+  position: relative;
+  display: block;
+}
+
+///
+/// Block Content
+.BlockContent {
+  @include flex-center;
+  min-height: columns();
+  height: 100%;
+  color: white;
+  background-color: get-color(coal, dark);
+  border: get-border(thin) solid get-color(coal, dark);
+
+  @media screen and (min-width: get-breakpoint(tablet)) {
+    border-width: get-border();
+  }
+
+  .Heading {
+    // vertical alignment
+    margin-top: -0.1em;
+  }
+}

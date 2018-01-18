@@ -76,9 +76,7 @@ export default class Sortable extends Draggable {
    * @return {Number}
    */
   index(element) {
-    return [...element.parentNode.children].filter((childElement) => {
-      return childElement !== this.originalSource && childElement !== this.mirror;
-    }).indexOf(element);
+    return this.getDraggableElementsForContainer(element.parentNode).indexOf(element);
   }
 
   /**
@@ -129,7 +127,8 @@ export default class Sortable extends Draggable {
       return;
     }
 
-    const moves = move(source, over, overContainer);
+    const children = this.getDraggableElementsForContainer(overContainer);
+    const moves = move({source, over, overContainer, children});
 
     if (!moves) {
       return;
@@ -175,7 +174,8 @@ export default class Sortable extends Draggable {
       return;
     }
 
-    const moves = move(source, over, overContainer);
+    const children = this.getDraggableElementsForContainer(overContainer);
+    const moves = move({source, over, overContainer, children});
 
     if (!moves) {
       return;
@@ -220,17 +220,17 @@ function index(element) {
   return Array.prototype.indexOf.call(element.parentNode.children, element);
 }
 
-function move(source, over, overContainer) {
-  const emptyOverContainer = !overContainer.children.length;
-  const differentContainer = over && (source.parentNode !== over.parentNode);
-  const sameContainer = over && (source.parentNode === over.parentNode);
+function move({source, over, overContainer, children}) {
+  const emptyOverContainer = !children.length;
+  const differentContainer = (source.parentNode !== overContainer);
+  const sameContainer = over && !differentContainer;
 
   if (emptyOverContainer) {
     return moveInsideEmptyContainer(source, overContainer);
   } else if (sameContainer) {
     return moveWithinContainer(source, over);
   } else if (differentContainer) {
-    return moveOutsideContainer(source, over);
+    return moveOutsideContainer(source, over, overContainer);
   } else {
     return null;
   }
@@ -257,10 +257,15 @@ function moveWithinContainer(source, over) {
   return {oldContainer: source.parentNode, newContainer: source.parentNode};
 }
 
-function moveOutsideContainer(source, over) {
+function moveOutsideContainer(source, over, overContainer) {
   const oldContainer = source.parentNode;
 
-  over.parentNode.insertBefore(source, over);
+  if (over) {
+    over.parentNode.insertBefore(source, over);
+  } else {
+    // need to figure out proper position
+    overContainer.appendChild(source);
+  }
 
   return {oldContainer, newContainer: source.parentNode};
 }

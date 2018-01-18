@@ -1,6 +1,6 @@
 {
   "name": "@shopify/draggable",
-  "version": "1.0.0-beta.3",
+  "version": "1.0.0-beta.4",
   "private": false,
   "license": "MIT",
   "description": "The JavaScript Drag & Drop library your grandparents warned you about.",
@@ -29,6 +29,7 @@
   "main": "./lib/draggable.bundle.js",
   "scripts": {
     "build": "webpack",
+    "watch": "webpack --watch",
     "prepublish": "npm run build",
     "lint": "eslint ./src --max-warnings 0",
     "test": "jest --config config.json",

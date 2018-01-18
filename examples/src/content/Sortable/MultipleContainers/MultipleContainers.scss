@@ -1,0 +1,55 @@
+////
+/// Content
+/// MultipleContainers
+////
+
+@import 'components/StackedList/props';
+
+$grid-columns: 8;
+
+.MultipleContainers {
+  @include centered-width(columns(5));
+  display: grid;
+  grid-gap: get-layout-length(gutter);
+  grid-template-columns: 100%;
+  grid-template-areas: 'a' 'b' 'c';
+
+  @media screen and (min-width: get-breakpoint('720p')) {
+    max-width: columns(7);
+  }
+
+  @media screen and (min-width: get-breakpoint()) {
+    max-width: none;
+  }
+
+  @media screen and (min-width: get-breakpoint(desktop)) {
+    grid-template-columns: repeat($grid-columns, 1fr);
+    grid-template-areas:
+      'a a a a a a a a'
+      'b b b b b c c c';
+  }
+
+  .Container {
+    &:nth-child(1) {
+      grid-area: a;
+    }
+
+    &:nth-child(2) {
+      grid-area: b;
+    }
+
+    &:nth-child(3) {
+      grid-area: c;
+    }
+  }
+
+  .draggable-mirror {
+    // prevent wacky horizontal height issue
+    max-height: stacked-list-item(base, desktop);
+    transition: width get-duration(fast) get-easing(), height get-duration(fast) get-easing();
+  }
+
+  .draggable--is-dragging & .draggable-container-parent--capacity {
+    color: get-color(brand, blue);
+  }
+}

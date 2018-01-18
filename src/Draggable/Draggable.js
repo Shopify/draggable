@@ -1,6 +1,6 @@
 import {closest} from 'shared/utils';
 
-import {Accessibility, Mirror} from './Plugins';
+import {Accessibility, Mirror, AutoScroll} from './Plugins';
 
 import {
   MouseSensor,
@@ -24,6 +24,7 @@ import {
 } from './DragEvent';
 
 import {
+  MirrorCreateEvent,
   MirrorCreatedEvent,
   MirrorAttachedEvent,
   MirrorMoveEvent,
@@ -51,6 +52,7 @@ export const defaultOptions = {
     'body:dragging': 'draggable--is-dragging',
     'draggable:over': 'draggable--over',
     'container:over': 'draggable-container--over',
+    'source:original': 'draggable--original',
     mirror: 'draggable-mirror',
   },
 };
@@ -61,6 +63,17 @@ export const defaultOptions = {
  * @module Draggable
  */
 export default class Draggable {
+
+  /**
+   * Default plugins draggable uses
+   * @static
+   * @property {Object} Plugins
+   * @property {Mirror} Plugins.Mirror
+   * @property {Accessibility} Plugins.Accessibility
+   * @property {AutoScroll} Plugins.AutoScroll
+   * @type {Object}
+   */
+  static Plugins = {Mirror, Accessibility, AutoScroll};
 
   /**
    * Draggable constructor.
@@ -117,7 +130,7 @@ export default class Draggable {
     document.addEventListener('drag:stop', this[onDragStop], true);
     document.addEventListener('drag:pressure', this[onDragPressure], true);
 
-    this.addPlugin(...[Mirror, Accessibility, ...this.options.plugins]);
+    this.addPlugin(...[Mirror, Accessibility, AutoScroll, ...this.options.plugins]);
     this.addSensor(...[MouseSensor, TouchSensor, ...this.options.sensors]);
 
     const draggableInitializedEvent = new DraggableInitializedEvent({
@@ -132,10 +145,10 @@ export default class Draggable {
    * deactivates sensors and plugins
    */
   destroy() {
-    document.removeEventListener('drag:start', this.dragStart, true);
-    document.removeEventListener('drag:move', this.dragMove, true);
-    document.removeEventListener('drag:stop', this.dragStop, true);
-    document.removeEventListener('drag:pressure', this.dragPressure, true);
+    document.removeEventListener('drag:start', this[onDragStart], true);
+    document.removeEventListener('drag:move', this[onDragMove], true);
+    document.removeEventListener('drag:stop', this[onDragStop], true);
+    document.removeEventListener('drag:pressure', this[onDragPressure], true);
 
     const draggableDestroyEvent = new DraggableDestroyEvent({
       draggable: this,
@@ -291,6 +304,20 @@ export default class Draggable {
   }
 
   /**
+   * Returns draggable elements for a given container, excluding the mirror and
+   * original source element if present
+   * @param {HTMLElement} container
+   * @return {HTMLElement[]}
+   */
+  getDraggableElementsForContainer(container) {
+    const allDraggableElements = container.querySelectorAll(this.options.draggable);
+
+    return [...allDraggableElements].filter((childElement) => {
+      return childElement !== this.originalSource && childElement !== this.mirror;
+    });
+  }
+
+  /**
    * Drag start handler
    * @private
    * @param {Event} event - DOM Drag event
@@ -317,11 +344,26 @@ export default class Draggable {
       return;
     }
 
+    if (this.lastPlacedSource && this.lastPlacedContainer) {
+      clearTimeout(this.placedTimeoutID);
+      this.lastPlacedSource.classList.remove(this.getClassNameFor('source:placed'));
+      this.lastPlacedContainer.classList.remove(this.getClassNameFor('container:placed'));
+    }
+
     this.dragging = true;
 
     this.source = this.originalSource.cloneNode(true);
 
-    if (!isDragEvent(originalEvent)) {
+    const mirrorCreateEvent = new MirrorCreateEvent({
+      source: this.source,
+      originalSource: this.originalSource,
+      sourceContainer: container,
+      sensorEvent,
+    });
+
+    this.trigger(mirrorCreateEvent);
+
+    if (!isDragEvent(originalEvent) && !mirrorCreateEvent.canceled()) {
       const appendableContainer = this[getAppendableContainer]({source: this.originalSource});
       this.mirror = this.source.cloneNode(true);
 
@@ -346,6 +388,7 @@ export default class Draggable {
       this.trigger(mirrorAttachedEvent);
     }
 
+    this.originalSource.classList.add(this.getClassNameFor('source:original'));
     this.originalSource.parentNode.insertBefore(this.source, this.originalSource);
 
     this.originalSource.style.display = 'none';
@@ -353,18 +396,6 @@ export default class Draggable {
     this.sourceContainer.classList.add(this.getClassNameFor('container:dragging'));
     document.body.classList.add(this.getClassNameFor('body:dragging'));
     applyUserSelect(document.body, 'none');
-
-    if (this.mirror) {
-      const mirrorMoveEvent = new MirrorMoveEvent({
-        source: this.source,
-        mirror: this.mirror,
-        originalSource: this.originalSource,
-        sourceContainer: container,
-        sensorEvent,
-      });
-
-      this.trigger(mirrorMoveEvent);
-    }
 
     const dragEvent = new DragStartEvent({
       source: this.source,
@@ -376,17 +407,19 @@ export default class Draggable {
 
     this.trigger(dragEvent);
 
-    if (!dragEvent.canceled()) {
-      return;
-    }
+    if (dragEvent.canceled()) {
+      this.dragging = false;
 
-    if (this.mirror) {
-      this.mirror.parentNode.removeChild(this.mirror);
-    }
+      if (this.mirror) {
+        this.mirror.parentNode.removeChild(this.mirror);
+      }
 
-    this.source.classList.remove(this.getClassNameFor('source:dragging'));
-    this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
-    document.body.classList.remove(this.getClassNameFor('body:dragging'));
+      this.source.classList.remove(this.getClassNameFor('source:dragging'));
+      this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
+      document.body.classList.remove(this.getClassNameFor('body:dragging'));
+    } else {
+      requestAnimationFrame(() => this[onDragMove](event));
+    }
   }
 
   /**
@@ -447,10 +480,10 @@ export default class Draggable {
         over: this.currentOver,
       });
 
-      this.trigger(dragOutEvent);
-
       this.currentOver.classList.remove(this.getClassNameFor('draggable:over'));
       this.currentOver = null;
+
+      this.trigger(dragOutEvent);
     }
 
     if (isLeavingContainer) {
@@ -463,10 +496,10 @@ export default class Draggable {
         overContainer: this.overContainer,
       });
 
-      this.trigger(dragOutContainerEvent);
-
       this.currentOverContainer.classList.remove(this.getClassNameFor('container:over'));
       this.currentOverContainer = null;
+
+      this.trigger(dragOutContainerEvent);
     }
 
     if (isOverContainer) {
@@ -481,9 +514,9 @@ export default class Draggable {
         overContainer,
       });
 
-      this.trigger(dragOverContainerEvent);
-
       this.currentOverContainer = overContainer;
+
+      this.trigger(dragOverContainerEvent);
     }
 
     if (isOverDraggable) {
@@ -499,9 +532,9 @@ export default class Draggable {
         over: target,
       });
 
-      this.trigger(dragOverEvent);
-
       this.currentOver = target;
+
+      this.trigger(dragOverEvent);
     }
   }
 
@@ -533,6 +566,7 @@ export default class Draggable {
     this.originalSource.style.display = '';
 
     this.source.classList.remove(this.getClassNameFor('source:dragging'));
+    this.originalSource.classList.remove(this.getClassNameFor('source:original'));
     this.originalSource.classList.add(this.getClassNameFor('source:placed'));
     this.sourceContainer.classList.add(this.getClassNameFor('container:placed'));
     this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
@@ -562,17 +596,20 @@ export default class Draggable {
       }
     }
 
-    const lastSource = this.originalSource;
-    const lastSourceContainer = this.sourceContainer;
+    this.lastPlacedSource = this.originalSource;
+    this.lastPlacedContainer = this.sourceContainer;
 
-    setTimeout(() => {
-      if (lastSource) {
-        lastSource.classList.remove(this.getClassNameFor('source:placed'));
+    this.placedTimeoutID = setTimeout(() => {
+      if (this.lastPlacedSource) {
+        this.lastPlacedSource.classList.remove(this.getClassNameFor('source:placed'));
       }
 
-      if (lastSourceContainer) {
-        lastSourceContainer.classList.remove(this.getClassNameFor('container:placed'));
+      if (this.lastPlacedContainer) {
+        this.lastPlacedContainer.classList.remove(this.getClassNameFor('container:placed'));
       }
+
+      this.lastPlacedSource = null;
+      this.lastPlacedContainer = null;
     }, this.options.placedTimeout);
 
     this.source = null;
@@ -622,7 +659,7 @@ export default class Draggable {
     } else if (typeof appendTo === 'function') {
       return appendTo(source);
     } else {
-      return document.body;
+      return source.parentNode;
     }
   }
 }

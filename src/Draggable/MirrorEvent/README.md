@@ -19,10 +19,6 @@ element, which can be moved around in the DOM.
 Read-only property for the original source element that was picked up. This element never
 moves in the DOM and gets hidden on `drag:start`.
 
-**`mirrorEvent.mirror: HTMLElement`**  
-Read-only property for the mirror element, which is also a copy of the `originalSource` element.
-The mirror follows your mouse/touch movements.
-
 **`mirrorEvent.sourceContainer: HTMLElement`**  
 Read-only property for the source elements container. This would be one of the containers that
 was passed into Draggable.
@@ -35,6 +31,18 @@ Read-only property for the original event  that triggered the sensor event.
 
 **`mirrorEvent.hasMirror(): Boolean`**  
 Checks if a mirror has been created. The mirror does not get created for `DragSensor` or `KeyboardSensor` events
+
+## MirrorCreateEvent
+
+`MirrorCreateEvent` gets triggered by `Draggable` before the mirror element gets created.
+
+| | |
+| --------------------- | ---------------------------------------------------------- |
+| **Specification**     | `MirrorEvent`                                              |
+| **Interface**         | `MirrorCreateEvent`                                       |
+| **Cancelable**        | true                                                       |
+| **Cancel action**     | Cancels the creation of the mirror element                 |
+| **type**              | `mirror:create`                                           |
 
 ## MirrorCreatedEvent
 
@@ -49,6 +57,12 @@ been created.
 | **Cancel action**     | -                                                          |
 | **type**              | `mirror:created`                                           |
 
+### API
+
+**`mirrorEvent.mirror: HTMLElement`**  
+Read-only property for the mirror element, which is also a copy of the `originalSource` element.
+The mirror follows your mouse/touch movements.
+
 ## MirrorAttachedEvent
 
 `MirrorAttachedEvent` gets triggered when the mirror has been appended to the DOM.
@@ -60,6 +74,12 @@ been created.
 | **Cancelable**        | false                                                      |
 | **Cancel action**     | -                                                          |
 | **type**              | `mirror:attached`                                          |
+
+### API
+
+**`mirrorEvent.mirror: HTMLElement`**  
+Read-only property for the mirror element, which is also a copy of the `originalSource` element.
+The mirror follows your mouse/touch movements.
 
 ## MirrorMoveEvent
 
@@ -73,6 +93,12 @@ been created.
 | **Cancel action**     | Stops mirror movement                                      |
 | **type**              | `drag:over`                                                |
 
+### API
+
+**`mirrorEvent.mirror: HTMLElement`**  
+Read-only property for the mirror element, which is also a copy of the `originalSource` element.
+The mirror follows your mouse/touch movements.
+
 ## MirrorDestroyEvent
 
 `MirrorDestroyEvent` gets triggered before the mirror gets removed from the DOM.
@@ -84,3 +110,9 @@ been created.
 | **Cancelable**        | true                                                       |
 | **Cancel action**     | Cancels the removal of the mirror from the DOM             |
 | **type**              | `mirror:destroy`                                           |
+
+### API
+
+**`mirrorEvent.mirror: HTMLElement`**  
+Read-only property for the mirror element, which is also a copy of the `originalSource` element.
+The mirror follows your mouse/touch movements.

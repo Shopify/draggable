@@ -11,11 +11,11 @@ import Draggable from '@shopify/draggable/lib/draggable';
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.4/lib/draggable.bundle.js"></script>
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.3/lib/draggable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.4/lib/draggable.js"></script>
 ```
 
 ### API
@@ -62,6 +62,9 @@ Returns class name for class identifier, check the classes table below for ident
 
 **`draggable.isDragging(): Boolean`**  
 Returns true or false, depending on this draggables dragging state.
+
+**`draggable.getDraggableElementsForContainer(container: HTMLElement): HTMLElement[]`**  
+Returns draggable elements for given container, excluding potential mirror or original source.
 
 ### Options
 
@@ -135,6 +138,7 @@ on elements in certain states.
 | `container:placed`   | Class added on the draggable container element on `drag:stop`        | `draggable-container--placed`      |
 | `draggable:over`     | Class added on draggable element you are dragging over               | `draggable--over`                  |
 | `container:over`     | Class added on draggable container element you are dragging over     | `draggable-container--over`        |
+| `source:original`    | Class added on the original source element, which is hidden on drag  | `draggable--original`              |
 | `mirror`             | Class added on the mirror element                                    | `draggable-mirror`                 |
 
 ### Example

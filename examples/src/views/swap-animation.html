@@ -1,0 +1,29 @@
+{% extends 'views/templates/document.html' %}
+
+{% import 'components/Document/Head.html' as Head %}
+{% import 'components/Sidebar/Sidebar.html' as Sidebar %}
+{% import 'components/PageHeader/PageHeader.html' as PageHeader %}
+
+{% import 'content/Plugins/SwapAnimation/SwapAnimation.html' as SwapAnimation %}
+
+{% set ViewAttrs = {
+  id: 'SwapAnimation',
+  parent: 'Plugins',
+  child: 'Swap Animation',
+  subheading: 'This example is currently waiting for SwapAnimation to support translating both X and Y coordinates.'
+} %}
+
+{% block PageId %}{{ ViewAttrs.id }}{% endblock %}
+
+{% block head %}
+  {{ Head.render(ViewAttrs) }}
+{% endblock %}
+
+{% block sidebar %}
+  {{ Sidebar.render(ViewAttrs, DataPages) }}
+{% endblock %}
+
+{% block main %}
+  {{ PageHeader.render(ViewAttrs.parent, ViewAttrs.subheading) }}
+  {{ SwapAnimation.render(ViewAttrs.id) }}
+{% endblock %}

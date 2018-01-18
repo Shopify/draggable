@@ -1,0 +1,29 @@
+{% extends 'views/templates/document.html' %}
+
+{% import 'components/Document/Head.html' as Head %}
+{% import 'components/Sidebar/Sidebar.html' as Sidebar %}
+{% import 'components/PageHeader/PageHeader.html' as PageHeader %}
+
+{% import 'content/Swappable/Floated/Floated.html' as Floated %}
+
+{% set ViewAttrs = {
+  id: 'Floated',
+  parent: 'Swappable',
+  child: 'Floated',
+  subheading: 'Floated layouts work just like the Flexbox example. A bit of clever CSS can help mitigate any layout conflicts while dragging.'
+} %}
+
+{% block PageId %}{{ ViewAttrs.id }}{% endblock %}
+
+{% block head %}
+  {{ Head.render(ViewAttrs) }}
+{% endblock %}
+
+{% block sidebar %}
+  {{ Sidebar.render(ViewAttrs, DataPages) }}
+{% endblock %}
+
+{% block main %}
+  {{ PageHeader.render(ViewAttrs.parent, ViewAttrs.subheading) }}
+  {{ Floated.render(ViewAttrs.id) }}
+{% endblock %}

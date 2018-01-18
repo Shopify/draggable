@@ -1,5 +1,8 @@
 ## Abstract event
 
+This is the base class for all events draggable emits. Inherit from this class for creating
+your own custom events.
+
 | | |
 | --------------------- | ---------------------------------------------------------- |
 | **Specification**     | `AbstractEvent`                                            |

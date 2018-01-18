@@ -12,6 +12,11 @@
     <div class="StackedListContent">
       <h4 class="Heading Heading--size4 text-no-select">{{ heading }}</h4>
       <div class="{{ iconClass }}"></div>
+
+      {% if options.draggable %}
+        <div class="Pattern Pattern--typeHalftone"></div>
+        <div class="Pattern Pattern--typePlaced"></div>
+      {% endif %}
     </div>
   </li>
 {% endmacro %}

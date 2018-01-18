@@ -3,6 +3,7 @@
 /// Block
 ////
 
+@import 'utilities/shared/functions';
 @import 'utilities/shared/layout';
 
 .BlockWrapper {
@@ -20,6 +21,7 @@
 /// Block Content
 .BlockContent {
   @include flex-center;
+  position: relative;
   min-height: columns();
   height: 100%;
   color: white;

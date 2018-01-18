@@ -10,6 +10,11 @@
   <li class="{{ classes }}" {{ tabIndex | safe }}>
     <div class="PaperStackContent">
       <h4 class="Heading text-no-select PaperStackHeading">{{ heading }}</h4>
+
+      {% if options.draggable %}
+        <div class="Pattern Pattern--typeHalftone"></div>
+        <div class="Pattern Pattern--typePlaced"></div>
+      {% endif %}
     </div>
   </li>
 {% endmacro %}

@@ -4,7 +4,6 @@
 ////
 
 @import 'utilities/shared/layout';
-@import 'components/shared/props';
 @import 'components/Patterns/props';
 
 ///
@@ -104,9 +103,6 @@
   cursor: get-cursor(drag);
 
   .BlockContent {
-    @include halftone-bg-placeholder;
-    @include draggable-placed-placeholder;
-    position: relative;
     color: get-color(coal, dark);
     background-color: white;
     border-color: currentColor;
@@ -123,12 +119,17 @@
   }
 
   &.draggable-source--is-dragging .BlockContent {
-    @include halftone-bg-animated;
     color: get-color(brand, blue);
+
+    .Pattern--typeHalftone {
+      @include pattern-halftone-animated;
+    }
   }
 
   &.draggable-source--placed .BlockContent {
-    @include draggable-placed-animated;
+    .Pattern--typePlaced {
+      @include pattern-placed-animated;
+    }
   }
 
   &.draggable-mirror {
@@ -151,11 +152,7 @@
   &.draggable-droppable--occupied {
     .Block--typeHollow,
     .Block--typeStripes {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      @include position-cover;
     }
   }
 }
@@ -163,6 +160,7 @@
 ///
 /// Collidable
 .Block--typeStripes {
+  // should be a native Draggable class name
   &.isColliding {
     .BlockContent {
       color: get-color(brand, red);

@@ -1,11 +1,7 @@
+{% import '../../../components/PillSwitch/PillSwitch.html' as PillSwitch %}
+
 {% macro render(id) %}
   <section id="{{ id }}" class="{{ id }}">
-    <article class="PillSwitch">
-      <div class="PillSwitchTrack"></div>
-
-      <a href="#" class="PillSwitchControl">
-        <p class="Heading Heading--sizeJumbo text-no-select" data-switch-off="off" data-switch-on="on">off</p>
-      </a>
-    </article>
+    {{ PillSwitch.render() }}
   </section>
 {% endmacro %}

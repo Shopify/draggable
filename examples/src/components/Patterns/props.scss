@@ -5,49 +5,10 @@
 
 @import 'utilities/shared/layout';
 
-@mixin pattern-bg-reset {
-  background-image: none;
-  background-color: transparent;
-  background-size: auto auto;
-}
-
-///
-/// Halftone
+$stripes-bg-size: 0.8rem;
 $halftone-bg-size: 1.2rem;
 $halftone-bg-position-start: 0 0, ($halftone-bg-size / 2) ($halftone-bg-size / 2);
 $halftone-bg-position-end: ($halftone-bg-size / 2) ($halftone-bg-size / 2), $halftone-bg-size $halftone-bg-size;
-
-/* stylelint-disable selector-pseudo-element-no-unknown */
-@mixin halftone-bg-placeholder($psuedo: before) {
-  &::#{unquote($psuedo)} {
-    @include position-cover;
-    content: '';
-    display: block;
-    pointer-events: none;
-
-    @content;
-  }
-}
-
-@mixin halftone-bg-animated($psuedo: before) {
-  &::#{unquote($psuedo)} {
-    background-image:
-      radial-gradient(currentColor 24%, transparent 25%),
-      radial-gradient(currentColor 24%, transparent 25%);
-    background-position: $halftone-bg-position-start;
-    background-size: $halftone-bg-size $halftone-bg-size;
-    animation:
-      halftone get-duration(slow) steps(3) infinite both,
-      fade-in get-duration() get-easing() both;
-
-    @content;
-  }
-}
-/* stylelint-enable selector-pseudo-element-no-unknown */
-
-///
-/// Stripes
-$stripes-bg-size: 0.8rem;
 
 @mixin stripes-bg {
   background-image: repeating-linear-gradient(
@@ -59,4 +20,20 @@ $stripes-bg-size: 0.8rem;
     var(--pattern-bg-color) 50%
   );
   background-size: $stripes-bg-size $stripes-bg-size;
+}
+
+@mixin pattern-bg-reset {
+  background-image: none;
+  background-color: transparent;
+  background-size: auto auto;
+}
+
+@mixin pattern-halftone-animated {
+  @include visible;
+  animation-play-state: running;
+}
+
+@mixin pattern-placed-animated {
+  @include visible;
+  animation: placed get-duration() get-easing() both;
 }

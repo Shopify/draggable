@@ -27,6 +27,11 @@
       {% if heading.length > 1 %}
         <h3 class="Heading Heading--size2 text-no-select">{{ heading }}</h3>
       {% endif %}
+
+      {% if options.draggable %}
+        <div class="Pattern Pattern--typeHalftone"></div>
+        <div class="Pattern Pattern--typePlaced"></div>
+      {% endif %}
     </div>
   {{ closingTag | safe }}
 {% endmacro %}

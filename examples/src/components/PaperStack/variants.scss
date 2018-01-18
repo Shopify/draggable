@@ -4,7 +4,7 @@
 ////
 
 @import './props';
-@import 'components/shared/props';
+@import 'components/Patterns/props';
 
 ///
 /// Draggable layout
@@ -20,8 +20,6 @@
   cursor: get-cursor(drag);
 
   .PaperStackContent {
-    @include halftone-bg-placeholder;
-    position: relative;
     color: get-color(coal, dark);
     background-color: white;
     border-color: currentColor;
@@ -50,16 +48,17 @@
     .PaperStackContent {
       color: get-color(brand, blue);
 
-      @include halftone-bg-animated;
+      .Pattern--typeHalftone {
+        @include pattern-halftone-animated;
+      }
     }
   }
 
   &.draggable-source--placed {
-    // applying both `::after` styles here,
-    // because the PaperStackContent needs both psuedo elements elsewhere
     .PaperStackContent {
-      @include draggable-placed-placeholder(before);
-      @include draggable-placed-animated(before);
+      .Pattern--typePlaced {
+        @include pattern-placed-animated;
+      }
     }
   }
 

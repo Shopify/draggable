@@ -15,7 +15,11 @@
   position: relative;
   color: get-color(coal, dark);
   box-shadow: inset 0 0 0 get-border() currentColor;
-  transition: color get-duration(fast) get-easing();
+  // `draggable-container-parent--capacity` changes the `color` on `StackedListWrapper`...
+  // This is supposed to "trickle" down and cause all children to transition color as well...
+  // Problem is, sometimes these transitions seem to collide and we don't get syncronised timing...
+  // Sadly, there is no way to target `box-shadow`'s color without the use of currentColor.
+  // transition: color get-duration(fast) get-easing();
 }
 
 .StackedListHeader,
@@ -117,8 +121,6 @@
     margin-left: get-spacing(tight);
   }
 
-  @include halftone-bg-placeholder(after);
-
   // top border psuedo element... solution to create a collapsed border
   // required to make the hover style highlight each side of the element
   &::before {
@@ -131,6 +133,8 @@
     height: get-border();
     background-color: currentColor;
     opacity: 0;
-    transition: color get-duration(fast) get-easing(), opacity get-duration(fast) get-easing();
+    transition:
+      color get-duration(fast) get-easing(),
+      opacity get-duration(fast) get-easing();
   }
 }

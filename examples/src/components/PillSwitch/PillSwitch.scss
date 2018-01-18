@@ -26,22 +26,10 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  // halftone is always animated and blue to mitigate slight transition inconsistency...
-  // ::after overlays it so its fine
   color: get-color(brand, blue);
   background-color: white;
   transform: rotate(-45deg);
   overflow: hidden;
-
-  @include halftone-bg-placeholder;
-  @include halftone-bg-animated {
-    height: pill-switch(size);
-    transform: rotate(45deg);
-
-    @media screen and (min-width: get-breakpoint(tablet)) {
-      height: pill-switch(size, tablet);
-    }
-  }
 
   &::after {
     content: '';
@@ -58,6 +46,18 @@
   @media screen and (min-width: get-breakpoint(tablet)) {
     @include pill-switch-track-layout('tablet');
     @include pill-switch-border(get-border(thick));
+  }
+
+  // halftone is always animated and blue to mitigate slight transition inconsistency...
+  // ::after overlays it so its fine
+  .Pattern--typeHalftone {
+    @include pattern-halftone-animated;
+    height: pill-switch(size);
+    transform: rotate(45deg);
+
+    @media screen and (min-width: get-breakpoint(tablet)) {
+      height: pill-switch(size, tablet);
+    }
   }
 }
 
@@ -97,7 +97,6 @@
   }
 
   &.draggable-source--is-dragging {
-    opacity: 0;
-    visibility: hidden;
+    @include visible(false);
   }
 }

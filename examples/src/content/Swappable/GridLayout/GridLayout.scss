@@ -3,6 +3,8 @@
 /// Grid Layout
 ////
 
+@import 'utilities/shared/functions';
+
 $grid-area-names: a, b, c, d, e, f, g;
 $grid-rows: 5;
 $grid-columns: 5;

@@ -4,7 +4,6 @@
 ////
 
 @import './props';
-@import 'components/shared/props';
 @import 'components/Handle/props';
 @import 'components/Patterns/props';
 
@@ -218,9 +217,7 @@
 ///
 /// Draggable variant
 .StackedListItem--isDraggable {
-  @include draggable-placed-placeholder;
   cursor: get-cursor(drag);
-  position: relative;
 
   .StackedListContent {
     background-color: white;
@@ -247,8 +244,11 @@
 
   &.draggable-source--is-dragging {
     .StackedListContent {
-      @include halftone-bg-animated(after);
       color: get-color(brand, blue);
+
+      .Pattern--typeHalftone {
+        @include pattern-halftone-animated;
+      }
     }
 
     + .StackedListItem,
@@ -261,7 +261,11 @@
   }
 
   &.draggable-source--placed {
-    @include draggable-placed-animated;
+    .StackedListContent {
+      .Pattern--typePlaced {
+        @include pattern-placed-animated;
+      }
+    }
   }
 
   &.draggable-mirror {

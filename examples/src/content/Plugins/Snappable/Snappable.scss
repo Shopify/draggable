@@ -3,6 +3,8 @@
 /// Snappable
 ////
 
+@import 'utilities/shared/functions';
+
 .Snappable {
   .BlockLayout--typeGrid {
     grid-template-columns: repeat(2, 1fr);

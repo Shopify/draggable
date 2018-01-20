@@ -127,7 +127,7 @@ label,
 select,
 summary,
 textarea,
-[role="button"] {
+[role='button'] {
   touch-action: manipulation;
 }
 
@@ -190,11 +190,11 @@ select {
 }
 
 button,
-[role="button"],
-input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  -webkit-appearance: button;
+[role='button'],
+input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+  -webkit-appearance: button; // stylelint-disable-line property-no-vendor-prefix
   cursor: pointer;
 }
 
@@ -213,27 +213,27 @@ input {
   line-height: normal;
 }
 
-input[type="radio"],
-input[type="checkbox"] {
+input[type='radio'],
+input[type='checkbox'] {
   box-sizing: border-box;
   padding: 0;
 }
 
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none; // stylelint-disable-line property-no-vendor-prefix
   margin: 0;
   height: auto;
 }
 
-input[type="search"] {
-  -webkit-appearance: textfield;
+input[type='search'] {
+  -webkit-appearance: textfield; // stylelint-disable-line property-no-vendor-prefix
   // box-sizing: content-box;
 }
 
-input[type="search"]::-webkit-search-decoration,
-input[type="search"]::-webkit-search-cancel-button {
-  -webkit-appearance: none;
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button {
+  -webkit-appearance: none; // stylelint-disable-line property-no-vendor-prefix
 }
 
 fieldset {
@@ -256,8 +256,8 @@ optgroup {
 }
 
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
+  -webkit-appearance: none; // stylelint-disable-line property-no-vendor-prefix
+  -moz-appearance: none; // stylelint-disable-line property-no-vendor-prefix
   cursor: pointer;
 }
 
@@ -271,10 +271,10 @@ textarea {
   border-radius: 0;
 }
 
-[tabindex="-1"]:focus {
+[tabindex='-1']:focus {
   // prevent focus outline on elements that cant be accessed via keyboard
   // remove red border for invalid entries
-  outline: none !important;
+  outline: none !important; // stylelint-disable-line declaration-no-important
 }
 
 select:focus {
@@ -288,6 +288,7 @@ button:focus {
   box-shadow: none;
 }
 
+/* stylelint-disable selector-no-vendor-prefix */
 ::-webkit-input-placeholder {
   box-shadow: none;
 }
@@ -300,6 +301,7 @@ button:focus {
 :-ms-input-placeholder {
   box-shadow: none;
 }
+/* stylelint-enable selector-no-vendor-prefix */
 
 ///
 /// Tables

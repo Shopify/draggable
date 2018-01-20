@@ -38,14 +38,14 @@ export default function DragEvents() {
   let headingText;
 
   // --- Draggable events --- //
-  draggable.on('drag:start', evt => {
+  draggable.on('drag:start', (evt) => {
     initialMousePosition = {
       x: evt.sensorEvent.clientX,
       y: evt.sensorEvent.clientY,
     };
   });
 
-  draggable.on('mirror:created', evt => {
+  draggable.on('mirror:created', (evt) => {
     containerRect = evt.sourceContainer.getBoundingClientRect();
     dragRect = evt.originalSource.getBoundingClientRect();
 
@@ -61,7 +61,7 @@ export default function DragEvents() {
     };
   });
 
-  draggable.on('drag:move', evt => {
+  draggable.on('drag:move', (evt) => {
     // Required to help restrict the draggable element to the container
     evt.cancel();
 

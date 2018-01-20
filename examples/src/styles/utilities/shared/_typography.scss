@@ -8,7 +8,6 @@
 // @param {Boolean} $descender-fix (optional) - Sometimes descenders are cutoff by overflow.
 @mixin text-truncate($display: block, $descender-fix: false) {
   $padding-bottom: if($descender-fix, 0.25em, null);
-
   display: $display;
   padding-bottom: $padding-bottom;
   max-width: 100%;
@@ -34,16 +33,15 @@
   @if type-of($weight) != number {
     @error '#{$weight} is not a number.';
   }
-
   position: relative; // perhaps there should be a param to prevent overriding `position`?
 
   &::before {
     content: '';
-    display: block;
     position: absolute;
     bottom: $bottom;
     left: 0;
     right: 0;
+    display: block;
     margin-left: auto;
     margin-right: auto;
     height: $weight;

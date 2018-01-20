@@ -30,7 +30,7 @@
 // @return {Color} The modified color.
 @function color-multiply($foreground, $background: null) {
   @if type-of($background) != color {
-    $background: #fff;
+    $background: #ffffff;
   }
 
   @return $foreground * $background / 255;

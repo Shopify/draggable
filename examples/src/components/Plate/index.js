@@ -90,14 +90,12 @@ export default class Plate {
   _translateEachPlate(x, y) {
     for (const plateLevel in this.plates) {
       if (!this.plates.hasOwnProperty(plateLevel)) {
-        return;
+        const translateX = flipSign(x * 2) * translateFactors[plateLevel];
+        const translateY = flipSign(y * 2) * translateFactors[plateLevel];
+
+        this.wrapper.style.setProperty(`--${plateLevel}-translate-x`, `${translateX}px`);
+        this.wrapper.style.setProperty(`--${plateLevel}-translate-y`, `${translateY}px`);
       }
-
-      const translateX = flipSign(x * 2) * translateFactors[plateLevel];
-      const translateY = flipSign(y * 2) * translateFactors[plateLevel];
-
-      this.wrapper.style.setProperty(`--${plateLevel}-translate-x`, `${translateX}px`);
-      this.wrapper.style.setProperty(`--${plateLevel}-translate-y`, `${translateY}px`);
     }
   }
 

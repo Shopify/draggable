@@ -27,7 +27,7 @@ export default function PluginsCollidable() {
   // --- Draggable events --- //
   droppable.on('collidable:in', ({collidingElement}) => {
     if (collidingElement.classList.contains(wallClass)) {
-      walls.forEach(wall => wall.classList.add('isColliding'));
+      walls.forEach((wall) => wall.classList.add('isColliding'));
     } else {
       collidingElement.classList.add('isColliding');
     }
@@ -35,7 +35,7 @@ export default function PluginsCollidable() {
 
   droppable.on('collidable:out', ({collidingElement}) => {
     if (collidingElement.classList.contains(wallClass)) {
-      walls.forEach(wall => wall.classList.remove('isColliding'));
+      walls.forEach((wall) => wall.classList.remove('isColliding'));
     } else {
       collidingElement.classList.remove('isColliding');
     }

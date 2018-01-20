@@ -20,11 +20,11 @@ export default function OneAndOnly() {
   let droppableOrigin;
 
   // --- Draggable events --- //
-  droppable.on('drag:start', evt => {
+  droppable.on('drag:start', (evt) => {
     droppableOrigin = evt.originalSource.parentNode.dataset.droppable;
   });
 
-  droppable.on('droppable:over', evt => {
+  droppable.on('droppable:over', (evt) => {
     if (droppableOrigin !== evt.droppable.dataset.droppable) {
       evt.cancel();
     }

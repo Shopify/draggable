@@ -29,14 +29,14 @@ export default function MultipleContainers() {
   let lastOverContainer;
 
   // --- Draggable events --- //
-  sortable.on('drag:start', evt => {
+  sortable.on('drag:start', (evt) => {
     currentMediumChildren = sortable.getDraggableElementsForContainer(sortable.containers[1]).length;
     capacityReached = currentMediumChildren === containerTwoCapacity;
     lastOverContainer = evt.sourceContainer;
     containerTwoParent.classList.toggle(Classes.capacity, capacityReached);
   });
 
-  sortable.on('sortable:sort', evt => {
+  sortable.on('sortable:sort', (evt) => {
     if (!capacityReached) {
       return;
     }
@@ -48,7 +48,7 @@ export default function MultipleContainers() {
     }
   });
 
-  sortable.on('sortable:sorted', evt => {
+  sortable.on('sortable:sorted', (evt) => {
     if (lastOverContainer === evt.dragEvent.overContainer) {
       return;
     }

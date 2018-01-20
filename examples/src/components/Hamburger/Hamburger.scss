@@ -52,8 +52,8 @@
   &::before,
   &::after {
     content: '';
-    display: block;
     top: 0;
+    display: block;
     transition: background-color get-duration() get-easing();
   }
 

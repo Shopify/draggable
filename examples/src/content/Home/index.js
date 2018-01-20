@@ -17,12 +17,12 @@ export default function Home() {
   const plates = new Plate(container);
 
   // --- Draggable events --- //
-  draggable.on('drag:start', evt => {
+  draggable.on('drag:start', (evt) => {
     plates.setThreshold();
     plates.setInitialMousePosition(evt.sensorEvent);
   });
 
-  draggable.on('drag:move', evt => {
+  draggable.on('drag:move', (evt) => {
     plates.dragWarp(evt.source, evt.sensorEvent);
   });
 

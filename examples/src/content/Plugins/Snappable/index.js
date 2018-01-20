@@ -20,7 +20,7 @@ export default function PluginsSnappable() {
   });
 
   // --- Draggable events --- //
-  swappable.on('drag:start', evt => {
+  swappable.on('drag:start', (evt) => {
     if (evt.originalSource.classList.contains('Block--typeStripes')) {
       evt.cancel();
     }

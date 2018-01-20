@@ -2,15 +2,15 @@ import webpack from 'webpack';
 import * as bundleAnalyzer from 'webpack-bundle-analyzer';
 
 export default function initPlugins() {
-  const PLUGINS = [];
+  const plugins = [];
 
-  PLUGINS.push(
+  plugins.push(
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'examples-vendor',
-      minChunks: module => /node_modules/.test(module.resource),
+      minChunks: (module) => /node_modules/.test(module.resource),
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'examples-runtime',
@@ -22,5 +22,5 @@ export default function initPlugins() {
     }),
   );
 
-  return PLUGINS;
+  return plugins;
 }

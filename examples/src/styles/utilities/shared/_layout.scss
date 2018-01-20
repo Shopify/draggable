@@ -131,7 +131,6 @@
   @if ($image != none or $image != '') {
     background-image: url($image);
   }
-
   background-color: $color;
   background-repeat: no-repeat;
   background-position: center center;

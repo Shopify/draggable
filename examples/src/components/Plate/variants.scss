@@ -112,7 +112,7 @@
     &:hover {
       .PlateContent,
       .PlateShadow::before {
-        animation-name: jelly-small;
+        animation-name: plate-small;
       }
     }
   }
@@ -131,7 +131,7 @@
     &:hover {
       .PlateContent,
       .PlateShadow::before {
-        animation-name: jelly-medium;
+        animation-name: plate-medium;
       }
     }
   }
@@ -150,7 +150,7 @@
     &:hover {
       .PlateContent,
       .PlateShadow::before {
-        animation-name: jelly-big;
+        animation-name: plate-big;
       }
     }
   }
@@ -165,21 +165,21 @@
   .Plate--levelBottom {
     .PlateContent,
     .PlateShadow::before {
-      animation-name: jelly-small;
+      animation-name: plate-small;
     }
   }
 
   .Plate--levelMiddle {
     .PlateContent,
     .PlateShadow::before {
-      animation-name: jelly-medium;
+      animation-name: plate-medium;
     }
   }
 
   .Plate--levelTop {
     .PlateContent,
     .PlateShadow::before {
-      animation-name: jelly-big;
+      animation-name: plate-big;
     }
   }
 }

@@ -3,10 +3,6 @@
 /// Animation
 ////
 
-@mixin breathe {
-  animation: breathe get-duration(slower) get-duration(fast) get-easing() alternate infinite both;
-}
-
-@mixin pop-animation {
-  animation: pop get-duration() get-easing(excite) both;
+@mixin jelly-animation {
+  animation: jelly get-duration(slower) linear both;
 }

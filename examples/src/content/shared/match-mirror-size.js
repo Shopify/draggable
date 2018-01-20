@@ -10,9 +10,11 @@ export default function matchMirrorSize(dragEvent, draggableClass) {
   }
 
   if (overElement) {
-    const overRect = overElement.getBoundingClientRect();
+    requestAnimationFrame(() => {
+      const overRect = overElement.getBoundingClientRect();
 
-    dragEvent.mirror.style.width = `${overRect.width}px`;
-    dragEvent.mirror.style.height = `${overRect.height}px`;
+      dragEvent.mirror.style.width = `${overRect.width}px`;
+      dragEvent.mirror.style.height = `${overRect.height}px`;
+    });
   }
 }

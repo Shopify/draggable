@@ -23,7 +23,9 @@ export default function Home() {
   });
 
   draggable.on('drag:move', (evt) => {
-    plates.dragWarp(evt.source, evt.sensorEvent);
+    requestAnimationFrame(() => {
+      plates.dragWarp(evt.source, evt.sensorEvent);
+    });
   });
 
   draggable.on('drag:stop', () => {

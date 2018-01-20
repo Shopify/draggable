@@ -3,7 +3,7 @@
 /// Plate keyframes
 ////
 
-@keyframes jelly-small {
+@keyframes plate-small {
   0%,
   100% {
     transform: scale(1, 1);
@@ -30,7 +30,7 @@
   }
 }
 
-@keyframes jelly-medium {
+@keyframes plate-medium {
   0%,
   100% {
     transform: scale(1, 1);
@@ -57,7 +57,7 @@
   }
 }
 
-@keyframes jelly-big {
+@keyframes plate-big {
   0%,
   100% {
     transform: scale(1, 1);

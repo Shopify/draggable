@@ -89,7 +89,7 @@ export default class Plate {
 
   _translateEachPlate(x, y) {
     for (const plateLevel in this.plates) {
-      if (!this.plates.hasOwnProperty(plateLevel)) {
+      if (this.plates.hasOwnProperty(plateLevel)) {
         const translateX = flipSign(x * 2) * translateFactors[plateLevel];
         const translateY = flipSign(y * 2) * translateFactors[plateLevel];
 

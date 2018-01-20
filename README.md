@@ -98,6 +98,19 @@ You can find the documentation for each module within their respective directori
 - [Swappable](src/Swappable)
   - [SwappableEvent](src/Swappable/SwappableEvent)
 
+## Running examples
+
+To run the examples locally run
+
+```
+$ yarn install
+$ yarn build
+$ yarn start
+```
+
+This will start a server that hosts the contents of `examples/`. It also watches for file
+changes from both `src/` and `examples/src` and reloads the browser.
+
 ## Contributing
 
 Contributions are more than welcome, the code base is still new and needs more love.

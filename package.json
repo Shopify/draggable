@@ -28,9 +28,11 @@
   ],
   "main": "./lib/draggable.bundle.js",
   "scripts": {
+    "start": "concurrently \"webpack --watch\" \"cd examples && yarn start\"",
     "build": "webpack",
     "watch": "webpack --watch",
     "prepublish": "npm run build",
+    "postinstall": "cd examples && yarn",
     "lint": "eslint ./src --max-warnings 0",
     "test": "jest --config config.json",
     "test-ci": "jest --config config.json --coverage"
@@ -43,6 +45,7 @@
     "babel-preset-shopify": "^16.0.2",
     "babel-jest": "^21.2.0",
     "babel-loader": "^7.1.2",
+    "concurrently": "^3.5.1",
     "core-js": "^2.5.1",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",

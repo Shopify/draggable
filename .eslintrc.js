@@ -1,10 +1,9 @@
 module.exports = {
   extends: [
-    'plugin:shopify/esnext'
+    'plugin:shopify/esnext',
   ],
-  globals: {},
-  "env": {
-    "browser": true
+  env: {
+    browser: true,
   },
   rules: {
     'import/no-unresolved': 'off',

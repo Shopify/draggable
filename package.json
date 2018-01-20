@@ -42,19 +42,19 @@
   ],
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-preset-shopify": "^16.0.2",
-    "babel-jest": "^21.2.0",
+    "babel-preset-shopify": "^16.2.0",
+    "babel-jest": "^22.1.0",
     "babel-loader": "^7.1.2",
     "concurrently": "^3.5.1",
-    "core-js": "^2.5.1",
+    "core-js": "^2.5.3",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
-    "esdoc": "^1.0.3",
-    "eslint": "^4.10.0",
+    "esdoc": "^1.0.4",
+    "eslint": "^4.16.0",
     "eslint-loader": "^1.9.0",
-    "eslint-plugin-shopify": "^17.2.1",
-    "jest": "^21.2.1",
-    "webpack": "^3.8.1"
+    "eslint-plugin-shopify": "^19.0.0",
+    "jest": "^22.1.4",
+    "webpack": "^3.10.0"
   },
   "eslintConfig": {
     "extends": "plugin:shopify/esnext",

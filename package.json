@@ -53,7 +53,7 @@
     "eslint": "^4.16.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-shopify": "^19.0.0",
-    "jest": "^22.1.4",
+    "jest": "^21.2.1",
     "webpack": "^3.10.0"
   },
   "eslintConfig": {

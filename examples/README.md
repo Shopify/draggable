@@ -9,10 +9,9 @@ For instance, our solution to resolving touch events required duplicating the `s
 ## Local development
 
 1. Clone the `draggable` repo: `git clone git@github.com:Shopify/draggable.git`.
-2. Run `yarn install && yarn build` in the root `draggable` directory.
-3. Change into the `examples` directory: `cd examples`.
-4. Run `yarn install && yarn build && yarn start`.
-5. You can now access the local site at `localhost:3000`.
+2. Run `yarn && yarn start` in the root `draggable` directory.
+    - (optional) `cd examples && yarn && yarn start` if you only care about seeing the Examples. Make sure you have run `yarn` in the `draggable` directory to generate the `lib` files.
+3. You can now access the local site at `http://localhost:3000`.
 
 ## Code style
 

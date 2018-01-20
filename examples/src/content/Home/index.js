@@ -23,9 +23,9 @@ export default function Home() {
   });
 
   draggable.on('drag:move', (evt) => {
-    requestAnimationFrame(() => {
-      plates.dragWarp(evt.source, evt.sensorEvent);
-    });
+    // rAF seems to cause the animation to get stuck?
+    // requestAnimationFrame(() => {});
+    plates.dragWarp(evt.source, evt.sensorEvent);
   });
 
   draggable.on('drag:stop', () => {

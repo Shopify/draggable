@@ -28,7 +28,7 @@
   ],
   "main": "./lib/draggable.bundle.js",
   "scripts": {
-    "start": "concurrently \"webpack --watch\" \"cd examples && yarn start\"",
+    "start": "concurrently \"webpack --watch\" \"cd examples && yarn build && yarn start\"",
     "build": "webpack",
     "watch": "webpack --watch",
     "prepublish": "npm run build",

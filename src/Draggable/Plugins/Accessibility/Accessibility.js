@@ -8,6 +8,7 @@ const TABINDEX = 'tabindex';
  * __WIP__ Accessibility plugin
  * @class Accessibility
  * @module Accessibility
+ * @extends AbstractPlugin
  */
 export default class Accessibility extends AbstractPlugin {
 

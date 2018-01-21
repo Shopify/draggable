@@ -1,7 +1,1 @@
-export {
-  MirrorCreateEvent,
-  MirrorCreatedEvent,
-  MirrorAttachedEvent,
-  MirrorMoveEvent,
-  MirrorDestroyEvent,
-} from './MirrorEvent';
+export * from './MirrorEvent';

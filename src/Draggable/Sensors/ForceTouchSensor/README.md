@@ -29,11 +29,6 @@ Detaches sensors to the DOM
 **`delay {Number}`**  
 This value will delay force touch start
 
-### Known issues
-
-When used in Safari with force touch track pad, make sure to add visual guidelines
-to the user to indicate that force needs to be used to start drag operation.
-
 ### Example
 
 ```js
@@ -43,3 +38,7 @@ const draggable = new Draggable(containers, {
   sensors: [Sensors.ForceTouchSensor],
 });
 ```
+
+### Caveats
+
+- When used in Safari with force touch track pad, make sure to add visual guidelines to the user to indicate that force needs to be used to start drag operation.

@@ -4,19 +4,25 @@ import AbstractPlugin from 'shared/AbstractPlugin';
 import * as Sensors from './Draggable/Sensors';
 import * as Plugins from './Plugins';
 
-import Draggable from './Draggable';
-import Droppable from './Droppable';
-import Swappable from './Swappable';
-import Sortable from './Sortable';
+export {
+  default as Draggable,
+} from './Draggable';
+
+export {
+  default as Droppable,
+} from './Droppable';
+
+export {
+  default as Swappable,
+} from './Swappable';
+
+export {
+  default as Sortable,
+} from './Sortable';
 
 export {
   AbstractEvent as BaseEvent,
   AbstractPlugin as BasePlugin,
   Sensors,
   Plugins,
-
-  Draggable,
-  Droppable,
-  Swappable,
-  Sortable,
 };

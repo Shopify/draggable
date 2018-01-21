@@ -1,5 +1,9 @@
 import Draggable from './Draggable';
-import {Accessibility, Mirror} from './Plugins';
 
-export {Accessibility, Mirror};
 export default Draggable;
+
+export * from './DragEvent';
+export * from './DraggableEvent';
+export * from './MirrorEvent';
+export * from './Plugins';
+export * from './Sensors';

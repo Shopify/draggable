@@ -22,6 +22,7 @@ export const defaultOptions = {
  * AutoScroll plugin which scrolls the closest scrollable parent
  * @class AutoScroll
  * @module AutoScroll
+ * @extends AbstractPlugin
  */
 export default class AutoScroll extends AbstractPlugin {
 

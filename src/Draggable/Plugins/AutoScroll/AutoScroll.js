@@ -111,6 +111,7 @@ export default class AutoScroll extends AbstractPlugin {
 
   /**
    * Drag start handler. Finds closest scrollable parent in separate frame
+   * @param {DragStartEvent} dragEvent
    * @private
    */
   [onDragStart](dragEvent) {
@@ -121,6 +122,7 @@ export default class AutoScroll extends AbstractPlugin {
 
   /**
    * Drag move handler. Remembers mouse position and initiates scrolling
+   * @param {DragMoveEvent} dragEvent
    * @private
    */
   [onDragMove](dragEvent) {

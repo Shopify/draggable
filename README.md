@@ -119,7 +119,7 @@ For more information, please checkout the [contributing document](https://github
 
 ## Roadmap
 
-The roadmap for the official release is still in the works. More to come
+We are currently working on `v1.0.0-beta.5`. Check out the [project board](https://github.com/Shopify/draggable/projects/3) to see tasks and follow progress on the release. Any Pull Requests should be pointed against the feature branch `v1.0.0-beta.5`.
 
 ## Copyright
 

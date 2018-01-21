@@ -100,6 +100,8 @@ on elements in certain states.
 
 | Name                                         | Description                                                | Cancelable  | Cancelable action        |
 | -------------------------------------------- | ---------------------------------------------------------- | ----------- | ------------------------ |
+| [`draggable:initialize`][draggableinit]      | Gets fired when draggable gets initialized                 | false       | -                        |
+| [`draggable:destroy`][draggabledest]         | Gets fired when draggable gets destroyed                   | false       | -                        |
 | [`drag:start`][dragstart]                    | Gets fired when drag action begins                         | true        | Prevents drag start      |
 | [`drag:move`][dragmove]                      | Gets fired when moving a draggable around                  | false       | -                        |
 | [`drag:over`][dragover]                      | Gets fired when dragging over other draggable              | false       | -                        |
@@ -113,6 +115,9 @@ on elements in certain states.
 | [`mirror:attached`][mirrorattached]          | Gets fired when draggable mirror gets attached to DOM      | false       | -                        |
 | [`mirror:move`][mirrormove]                  | Gets fired when draggable mirror moves                     | true        | Stop mirror movement     |
 | [`mirror:destroy`][mirrordestroy]            | Gets fired when draggable mirror gets removed              | true        | Stop mirror removal      |
+
+[draggableinit]: DraggableEvent#draggableinitializedevent
+[draggabledest]: DraggableEvent#draggabledestroydevent
 
 [dragstart]: DragEvent#dragstartevent
 [dragmove]: DragEvent#dragmoveevent

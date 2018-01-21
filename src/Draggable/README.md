@@ -98,20 +98,21 @@ on elements in certain states.
 
 ### Events
 
-| Name                                         | Description                                                | Cancelable  | Cancelable action    |
-| -------------------------------------------- | ---------------------------------------------------------- | ----------- | -------------------- |
-| [`drag:start`][dragstart]                    | Gets fired when drag action begins                         | true        | Prevents drag start  |
-| [`drag:move`][dragmove]                      | Gets fired when moving a draggable around                  | false       | -                    |
-| [`drag:over`][dragover]                      | Gets fired when dragging over other draggable              | false       | -                    |
-| [`drag:over:container`][dragovercontainer]   | Gets fired when dragging over other draggable container    | false       | -                    |
-| [`drag:out`][dragout]                        | Gets fired when dragging out of other draggable            | false       | -                    |
-| [`drag:out:container`][dragoutcontainer]     | Gets fired when dragging out of other draggable container  | false       | -                    |
-| [`drag:stop`][dragstop]                      | Gets fired when draggable has been released                | false       | -                    |
-| [`drag:pressure`][dragpressure]              | Gets fired when using force touch on draggable element     | false       | -                    |
-| [`mirror:created`][mirrorcreated]            | Gets fired when draggable mirror gets created              | false       | -                    |
-| [`mirror:attached`][mirrorattached]          | Gets fired when draggable mirror gets attached to DOM      | false       | -                    |
-| [`mirror:move`][mirrormove]                  | Gets fired when draggable mirror moves                     | true        | Stop mirror movement |
-| [`mirror:destroy`][mirrordestroy]            | Gets fired when draggable mirror gets removed              | true        | Stop mirror removal  |
+| Name                                         | Description                                                | Cancelable  | Cancelable action        |
+| -------------------------------------------- | ---------------------------------------------------------- | ----------- | ------------------------ |
+| [`drag:start`][dragstart]                    | Gets fired when drag action begins                         | true        | Prevents drag start      |
+| [`drag:move`][dragmove]                      | Gets fired when moving a draggable around                  | false       | -                        |
+| [`drag:over`][dragover]                      | Gets fired when dragging over other draggable              | false       | -                        |
+| [`drag:over:container`][dragovercontainer]   | Gets fired when dragging over other draggable container    | false       | -                        |
+| [`drag:out`][dragout]                        | Gets fired when dragging out of other draggable            | false       | -                        |
+| [`drag:out:container`][dragoutcontainer]     | Gets fired when dragging out of other draggable container  | false       | -                        |
+| [`drag:stop`][dragstop]                      | Gets fired when draggable has been released                | false       | -                        |
+| [`drag:pressure`][dragpressure]              | Gets fired when using force touch on draggable element     | false       | -                        |
+| [`mirror:create`][mirrorcreate]              | Gets fired before draggable mirror gets created            | true        | Prevents mirror creation |
+| [`mirror:created`][mirrorcreated]            | Gets fired when draggable mirror gets created              | false       | -                        |
+| [`mirror:attached`][mirrorattached]          | Gets fired when draggable mirror gets attached to DOM      | false       | -                        |
+| [`mirror:move`][mirrormove]                  | Gets fired when draggable mirror moves                     | true        | Stop mirror movement     |
+| [`mirror:destroy`][mirrordestroy]            | Gets fired when draggable mirror gets removed              | true        | Stop mirror removal      |
 
 [dragstart]: DragEvent#dragstartevent
 [dragmove]: DragEvent#dragmoveevent
@@ -122,6 +123,7 @@ on elements in certain states.
 [dragstop]: DragEvent#dragstopevent
 [dragpressure]: DragEvent#dragpressureevent
 
+[mirrorcreate]: MirrorEvent#mirrorcreateevent
 [mirrorcreated]: MirrorEvent#mirrorcreatedevent
 [mirrorattached]: MirrorEvent#mirrorattachedevent
 [mirrormove]: MirrorEvent#mirrormoveevent

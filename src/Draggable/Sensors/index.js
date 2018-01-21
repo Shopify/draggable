@@ -1,15 +1,7 @@
-import Sensor from './Sensor';
-import MouseSensor from './MouseSensor';
-import TouchSensor from './TouchSensor';
-import DragSensor from './DragSensor';
-import ForceTouchSensor from './ForceTouchSensor';
+export {default as Sensor} from './Sensor';
+export {default as MouseSensor} from './MouseSensor';
+export {default as TouchSensor} from './TouchSensor';
+export {default as DragSensor} from './DragSensor';
+export {default as ForceTouchSensor} from './ForceTouchSensor';
 
 export * from './SensorEvent';
-
-export {
-  Sensor,
-  MouseSensor,
-  TouchSensor,
-  DragSensor,
-  ForceTouchSensor,
-};

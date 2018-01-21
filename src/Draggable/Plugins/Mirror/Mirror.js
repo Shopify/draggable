@@ -1,41 +1,88 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
 
+export const onMirrorCreated = Symbol('onMirrorCreated');
+export const onMirrorMove = Symbol('onMirrorMove');
+
+/**
+ * Mirror default options
+ * @property {Object} defaultOptions
+ * @property {Boolean} defaultOptions.constrainDimensions
+ * @property {Boolean} defaultOptions.xAxis
+ * @property {Boolean} defaultOptions.yAxis
+ * @type {Object}
+ */
 export const defaultOptions = {
   constrainDimensions: false,
   xAxis: true,
   yAxis: true,
 };
 
+/**
+ * Mirror plugin which controls the mirror positioning while dragging
+ * @class Mirror
+ * @module Mirror
+ * @extends AbstractPlugin
+ */
 export default class Mirror extends AbstractPlugin {
+
+  /**
+   * Mirror constructor.
+   * @constructs Mirror
+   * @param {Draggable} draggable - Draggable instance
+   */
   constructor(draggable) {
     super(draggable);
 
+    /**
+     * Mirror options
+     * @property {Object} options
+     * @property {Boolean} options.constrainDimensions
+     * @property {Boolean} options.xAxis
+     * @property {Boolean} options.yAxis
+     * @type {Object}
+     */
     this.options = {
       ...defaultOptions,
       ...this.getOptions(),
     };
 
-    this.onMirrorCreated = this.onMirrorCreated.bind(this);
-    this.onMirrorMove = this.onMirrorMove.bind(this);
+    this[onMirrorCreated] = this[onMirrorCreated].bind(this);
+    this[onMirrorMove] = this[onMirrorMove].bind(this);
   }
 
+  /**
+   * Attaches plugins event listeners
+   */
   attach() {
     this.draggable
-      .on('mirror:created', this.onMirrorCreated)
-      .on('mirror:move', this.onMirrorMove);
+      .on('mirror:created', this[onMirrorCreated])
+      .on('mirror:move', this[onMirrorMove]);
   }
 
+  /**
+   * Detaches plugins event listeners
+   */
   detach() {
     this.draggable
-      .off('mirror:created', this.onMirrorCreated)
-      .off('mirror:move', this.onMirrorMove);
+      .off('mirror:created', this[onMirrorCreated])
+      .off('mirror:move', this[onMirrorMove]);
   }
 
+  /**
+   * Returns options passed through draggable
+   * @return {Object}
+   */
   getOptions() {
     return this.draggable.options.mirror || {};
   }
 
-  onMirrorCreated({mirror, source, sensorEvent}) {
+  /**
+   * Mirror created handler
+   * @param {MirrorCreatedEvent} mirrorEvent
+   * @return {Promise}
+   * @private
+   */
+  [onMirrorCreated]({mirror, source, sensorEvent}) {
     const mirrorClass = this.draggable.getClassNameFor('mirror');
 
     const setState = ({mirrorOffset, initialX, initialY, ...args}) => {
@@ -64,7 +111,13 @@ export default class Mirror extends AbstractPlugin {
       .then(setState);
   }
 
-  onMirrorMove({mirror, sensorEvent}) {
+  /**
+   * Mirror move handler
+   * @param {MirrorMoveEvent} mirrorEvent
+   * @return {Promise}
+   * @private
+   */
+  [onMirrorMove]({mirror, sensorEvent}) {
     const initialState = {
       mirror,
       sensorEvent,
@@ -79,6 +132,14 @@ export default class Mirror extends AbstractPlugin {
   }
 }
 
+/**
+ * Computes mirror dimensions based on the source element
+ * Adds sourceRect to state
+ * @param {Object} state
+ * @param {HTMLElement} state.source
+ * @return {Promise}
+ * @private
+ */
 function computeMirrorDimensions({source, ...args}) {
   return withPromise((resolve) => {
     const sourceRect = source.getBoundingClientRect();
@@ -86,6 +147,15 @@ function computeMirrorDimensions({source, ...args}) {
   });
 }
 
+/**
+ * Calculates mirror offset
+ * Adds mirrorOffset to state
+ * @param {Object} state
+ * @param {SensorEvent} state.sensorEvent
+ * @param {DOMRect} state.sourceRect
+ * @return {Promise}
+ * @private
+ */
 function calculateMirrorOffset({sensorEvent, sourceRect, ...args}) {
   return withPromise((resolve) => {
     const mirrorOffset = {
@@ -97,6 +167,15 @@ function calculateMirrorOffset({sensorEvent, sourceRect, ...args}) {
   });
 }
 
+/**
+ * Applys mirror styles
+ * @param {Object} state
+ * @param {HTMLElement} state.mirror
+ * @param {HTMLElement} state.source
+ * @param {Object} state.options
+ * @return {Promise}
+ * @private
+ */
 function resetMirror({mirror, source, options, ...args}) {
   return withPromise((resolve) => {
     let offsetHeight;
@@ -124,6 +203,14 @@ function resetMirror({mirror, source, options, ...args}) {
   });
 }
 
+/**
+ * Applys mirror class on mirror element
+ * @param {Object} state
+ * @param {HTMLElement} state.mirror
+ * @param {String} state.mirrorClass
+ * @return {Promise}
+ * @private
+ */
 function addMirrorClasses({mirror, mirrorClass, ...args}) {
   return withPromise((resolve) => {
     mirror.classList.add(mirrorClass);
@@ -131,6 +218,13 @@ function addMirrorClasses({mirror, mirrorClass, ...args}) {
   });
 }
 
+/**
+ * Removes source ID from cloned mirror element
+ * @param {Object} state
+ * @param {HTMLElement} state.mirror
+ * @return {Promise}
+ * @private
+ */
 function removeMirrorID({mirror, ...args}) {
   return withPromise((resolve) => {
     mirror.removeAttribute('id');
@@ -139,6 +233,18 @@ function removeMirrorID({mirror, ...args}) {
   });
 }
 
+/**
+ * Positions mirror with translate3d
+ * @param {Object} state
+ * @param {HTMLElement} state.mirror
+ * @param {SensorEvent} state.sensorEvent
+ * @param {Object} state.mirrorOffset
+ * @param {Number} state.initialY
+ * @param {Number} state.initialX
+ * @param {Object} state.options
+ * @return {Promise}
+ * @private
+ */
 function positionMirror({withFrame = false, initial = false} = {}) {
   return ({mirror, sensorEvent, mirrorOffset, initialY, initialX, options, ...args}) => {
     return withPromise((resolve) => {
@@ -173,6 +279,14 @@ function positionMirror({withFrame = false, initial = false} = {}) {
   };
 }
 
+/**
+ * Wraps functions in promise with potential animation frame option
+ * @param {Function} callback
+ * @param {Object} options
+ * @param {Boolean} options.raf
+ * @return {Promise}
+ * @private
+ */
 function withPromise(callback, {raf = false} = {}) {
   return new Promise((resolve, reject) => {
     if (raf) {

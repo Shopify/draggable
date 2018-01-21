@@ -40,10 +40,10 @@ Check out [Draggables events](../Draggable#events) for base events
 | [`swappable:swapped`][swappableswapped]  | Gets fired before the source gets swapped                  | false       | -                    |
 | [`swappable:stop`][swappablestop]        | Gets fired when dragging out of a droppable element        | false       | -                    |
 
-[swappablestart]: SwappableEvent#swappablestart
-[swappableswap]: SwappableEvent#swappableswap
-[swappableswapped]: SwappableEvent#swappableswapped
-[swappablestop]: SwappableEvent#swappablestop
+[swappablestart]: SwappableEvent#swappablestartevent
+[swappableswap]: SwappableEvent#swappableswapevent
+[swappableswapped]: SwappableEvent#swappableswappedevent
+[swappablestop]: SwappableEvent#swappablestopevent
 
 ### Classes
 

@@ -42,10 +42,10 @@ Check out [Draggables events](../Draggable#events) for base events
 | [`sortable:sorted`][sortablesorted]  | Gets fired when the source gets sorted in the DOM          | false       | -                    |
 | [`sortable:stop`][sortablestop]      | Gets fired when dragging over other draggable              | false       | -                    |
 
-[sortablestart]: SortableEvent#sortablestart
-[sortablesort]: SortableEvent#sortablesort
-[sortablesorted]: SortableEvent#sortablesorted
-[sortablestop]: SortableEvent#sortablestop
+[sortablestart]: SortableEvent#sortablestartevent
+[sortablesort]: SortableEvent#sortablesortevent
+[sortablesorted]: SortableEvent#sortablesortedevent
+[sortablestop]: SortableEvent#sortablestopevent
 
 ### Classes
 

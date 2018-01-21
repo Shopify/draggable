@@ -52,7 +52,16 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 });
 ```
 
-### Known issues
+### Plans
+
+- Add support for staggering animations
+- Add support bi-directional swap animations
+- Find cross-container animation solution
+- Add support for `Swappable` and `Droppable`
+
+### Caveats
 
 - Only works with vertical lists
-- Animations are not staggering yet
+- Only works within same container
+- Animations don't stagger
+- Only works with `Sortable`

@@ -6,12 +6,12 @@ export as namespace Draggable;
 
 export type DraggableContainer = HTMLElement | HTMLElement[] | NodeList
 
-export enum DraggableEventName {
+declare enum DraggableEventName {
   Initialized = 'draggable:initialized',
   Destroy = 'draggable:destroy'
 }
 
-export enum DragEventName {
+declare enum DragEventName {
   Start = 'drag:start',
   Move = 'drag:move',
   Over = 'drag:over',
@@ -22,35 +22,44 @@ export enum DragEventName {
   Pressure = 'drag:pressure'
 }
 
-export enum DropEventName {
+declare enum DropEventName {
   Over = 'droppable:over',
   Out = 'droppable:out'
 }
 
-export enum SortEventName {
+declare enum SortEventName {
   Start = 'sortable:start',
   Sort = 'sortable:sort',
   Sorted = 'sortable:sorted',
   Stop = 'sortable:stop'
 }
 
-export enum SwapEventName {
+declare enum SwapEventName {
   Start = 'swappable:start',
   Swap = 'swappable:swap',
   Swapped = 'swappable:swapped',
   Stop = 'swappable:stop'
 }
 
-export enum MirrorEventName {
+declare enum MirrorEventName {
   Created = 'mirror:created',
   Attached = 'mirror:attached',
   Move = 'mirror:move',
   Destroy = 'mirror:destroy'
 }
 
-export type Plugin = typeof Plugins.Plugin
+export class BasePlugin {
+  draggable: Draggable
 
-// sensor
+  constructor(draggable: Draggable)
+
+  attach(): void
+
+  detach(): void
+}
+
+export type AbstractPlugin = typeof BasePlugin
+
 export type Sensor = typeof Sensors.Sensor
 
 // draggable options
@@ -60,7 +69,7 @@ interface DraggableOptions {
   placedTimeout?: number,
   handle?: string,
   delay?: number,
-  plugins?: Plugin[],
+  plugins?: AbstractPlugin[],
   sensors?: Sensor[],
   appendTo?: string | HTMLElement | Function,
   classes?: {
@@ -90,17 +99,20 @@ export class Draggable {
   options: DraggableOptions
   callbacks: Function[]
   dragging: boolean
-  plugins: Plugin[]
+  plugins: AbstractPlugin[]
   sensors: Sensor[]
+  classes: {
+    [key: string]: string,
+  }
   mirror?: HTMLElement
 
   constructor(containers: DraggableContainer, options: DraggableOptions)
 
   destroy(): void
 
-  addPlugin(...plugins: Plugin[]): Draggable
+  addPlugin(...plugins: AbstractPlugin[]): Draggable
 
-  removePlugin(...plugins: Plugin[]): Draggable
+  removePlugin(...plugins: AbstractPlugin[]): Draggable
 
   addSensor(...sensors: Sensor[]): Draggable
 
@@ -119,6 +131,8 @@ export class Draggable {
   getClassNameFor(name: string): string | null
 
   isDragging(): boolean
+
+  getDraggableElementsForContainer(container: HTMLElement): HTMLElement[]
 }
 
 export interface DragEvent extends AbstractEvent<DragEvent> {
@@ -258,17 +272,7 @@ export interface SwappableStopEvent extends SwappableEvent { }
 
 // TODO for funcional plugins classes declaration
 export namespace Plugins {
-  export class Plugin {
-    draggable: Draggable
-
-    constructor(draggable: Draggable)
-
-    attach(): void
-
-    detach(): void
-  }
-
-  export class Mirror extends Plugin { }
+  export class Mirror extends BasePlugin { }
 
   export interface MirrorPluginOptions {
     xAxis: boolean,
@@ -295,18 +299,25 @@ export namespace Plugins {
 
   export interface MirrorDestroyEvent extends MirrorEvent { }
 
-  export class Collidable extends Plugin{ }
+  export class AutoScroll extends BasePlugin { }
+
+  export interface AutoScrollPluginOptions {
+    speed: number,
+    sensitivity: number,
+  }
+
+  export class Collidable extends BasePlugin { }
 
   export type CollidableOptions = string | HTMLElement[] | NodeList | HTMLElement
 
-  export class SwapAnimation extends Plugin { }
+  export class SwapAnimation extends BasePlugin { }
 
   export interface SwapAnimationOptions {
     duration: number,
     easingFunction: string
   }
 
-  export class Snappable extends Plugin { }
+  export class Snappable extends BasePlugin { }
 }
 
 // TODO for funcional sensor classes declaration

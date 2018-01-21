@@ -1,7 +1,9 @@
 ## Sortable
 
 Sortable is built on top of Draggable and allows you to reorder elements. It maintains the order internally and fires
-three events on top of the draggable events: `sortable:start`, `sortable:sorted` and `sortable:stop`.
+three events on top of the draggable events: `sortable:start`, `sortable:sort`, `sortable:sorted` and `sortable:stop`.
+
+Make sure to nest draggable elements as immediate children elements to their corresponding containers, this is a requirement for `Sortable`.
 
 ### Import
 
@@ -27,19 +29,27 @@ Check out [Draggables API](../Draggable#api) for the base API
 
 ### Options
 
-Check out Draggables options for the base options
+Check out [Draggables options](../Draggable#options) for the base options
 
 ### Events
 
-| Name                  | Description                                                | Cancelable  | Cancelable action    |
-| --------------------- | ---------------------------------------------------------- | ----------- | -------------------- |
-| `sortable:start`      | Gets fired when drag action begins                         | true        | Prevents drag start  |
-| `sortable:sorted`     | Gets fired when the source gets sorted in the DOM          | false       | -                    |
-| `sortable:stop`       | Gets fired when dragging over other draggable              | false       | -                    |
+Check out [Draggables events](../Draggable#events) for base events
+
+| Name                                 | Description                                                | Cancelable  | Cancelable action    |
+| ------------------------------------ | ---------------------------------------------------------- | ----------- | -------------------- |
+| [`sortable:start`][sortablestart]    | Gets fired when drag action begins                         | true        | Prevents drag start  |
+| [`sortable:sort`][sortablesort]      | Gets fired before sorting                                  | true        | Prevents sorting     |
+| [`sortable:sorted`][sortablesorted]  | Gets fired when the source gets sorted in the DOM          | false       | -                    |
+| [`sortable:stop`][sortablestop]      | Gets fired when dragging over other draggable              | false       | -                    |
+
+[sortablestart]: SortableEvent#sortablestart
+[sortablesort]: SortableEvent#sortablesort
+[sortablesorted]: SortableEvent#sortablesorted
+[sortablestop]: SortableEvent#sortablestop
 
 ### Classes
 
-Check out Draggables class identifiers
+Check out [Draggables class identifiers](../Draggable#classes)
 
 ### Example
 
@@ -53,6 +63,17 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 });
 
 sortable.on('sortable:start', () => console.log('sortable:start'));
+sortable.on('sortable:sort', () => console.log('sortable:sort'));
 sortable.on('sortable:sorted', () => console.log('sortable:sorted'));
 sortable.on('sortable:stop', () => console.log('sortable:stop'));
 ```
+
+### Plans
+
+- Add `copy` option, which will allow draggable elements to be copied when dropped in a different container
+- Add `removeOnSpill` option, which will allow draggable elements to be removed from the DOM when dropped outside a container
+
+### Caveats
+
+- Needs draggable elements to be immediate children of draggable containers.
+- Currently just appends draggable elements in different containers

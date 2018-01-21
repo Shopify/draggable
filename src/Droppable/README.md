@@ -42,8 +42,8 @@ Check out [Draggables events](../Draggable#events) for base events
 | [`droppable:over`][droppableover]  | Gets fired when dragging over droppable element            | true        | Prevents drop        |
 | [`droppable:out`][droppableout]    | Gets fired when dragging out of a droppable element        | true        | Prevents release     |
 
-[droppableover]: DroppableEvent#droppableover
-[droppableout]: DroppableEvent#droppableout
+[droppableover]: DroppableEvent#droppableoverevent
+[droppableout]: DroppableEvent#droppableoutevent
 
 ### Classes
 

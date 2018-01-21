@@ -29,10 +29,13 @@ _No options_
 
 ### Events
 
-| Name                  | Description                                                | Cancelable  | Cancelable action     |
-| --------------------- | ---------------------------------------------------------- | ----------- | --------------------- |
-| `snap:in`             | Gets fired when just before snapping in                    | true        | Prevents snapping     |
-| `snap:out`            | Gets fired when snapping out                               | true        | Prevents snapping out |
+| Name                    | Description                                                | Cancelable  | Cancelable action     |
+| ----------------------- | ---------------------------------------------------------- | ----------- | --------------------- |
+| [`snap:in`][snapin]     | Gets fired when just before snapping in                    | true        | Prevents snapping     |
+| [`snap:out`][snapout]   | Gets fired when snapping out                               | true        | Prevents snapping out |
+
+[snapin]: SnappableEvent#snapinevent
+[snapout]: SnappableEvent#snapoutevent
 
 ### Example
 

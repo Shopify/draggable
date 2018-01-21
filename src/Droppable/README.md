@@ -27,18 +27,27 @@ Check out [Draggables API](../Draggable#api) for the base API
 
 ### Options
 
+Check out [Draggables options](../Draggable#options) for the base options
+
 **`droppable {String|HTMLElement[]|NodeList|Function}`**  
 A css selector string, an array of elements, a NodeList or a function returning elements for droppable
 elements within the `containers` specified.
 
 ### Events
 
-| Name                  | Description                                                | Cancelable  | Cancelable action    |
-| --------------------- | ---------------------------------------------------------- | ----------- | -------------------- |
-| `droppable:over`      | Gets fired when dragging over droppable element            | true        | Prevents drop        |
-| `droppable:out`       | Gets fired when dragging out of a droppable element        | true        | Prevents release     |
+Check out [Draggables events](../Draggable#events) for base events
+
+| Name                               | Description                                                | Cancelable  | Cancelable action    |
+| ---------------------------------- | ---------------------------------------------------------- | ----------- | -------------------- |
+| [`droppable:over`][droppableover]  | Gets fired when dragging over droppable element            | true        | Prevents drop        |
+| [`droppable:out`][droppableout]    | Gets fired when dragging out of a droppable element        | true        | Prevents release     |
+
+[droppableover]: DroppableEvent#droppableover
+[droppableout]: DroppableEvent#droppableout
 
 ### Classes
+
+Check out [Draggables class identifiers](../Draggable#classes)
 
 | Name                 | Description                                                          | Default                            |
 | -------------------- | -------------------------------------------------------------------- | ---------------------------------- |

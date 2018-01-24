@@ -48,7 +48,7 @@ declare enum MirrorEventName {
   Destroy = 'mirror:destroy'
 }
 
-export class BasePlugin {
+declare class AbstractPlugin {
   draggable: Draggable
 
   constructor(draggable: Draggable)
@@ -58,9 +58,7 @@ export class BasePlugin {
   detach(): void
 }
 
-export type AbstractPlugin = typeof BasePlugin
-
-export type Sensor = typeof Sensors.Sensor
+export { AbstractPlugin as BasePlugin }
 
 // draggable options
 interface DraggableOptions {
@@ -69,15 +67,15 @@ interface DraggableOptions {
   placedTimeout?: number,
   handle?: string,
   delay?: number,
-  plugins?: AbstractPlugin[],
-  sensors?: Sensor[],
+  plugins?: Array<typeof AbstractPlugin>,
+  sensors?: Array<typeof Sensors.Sensor>,
   appendTo?: string | HTMLElement | Function,
   classes?: {
     [key: string]: string
   }
 }
 
-export class AbstractEvent<DataT> {
+declare class AbstractEvent<DataT> {
   static type: string
   static cancelable: boolean
 
@@ -94,13 +92,15 @@ export class AbstractEvent<DataT> {
   canceled(): boolean
 }
 
+export { AbstractEvent as BaseEvent }
+
 export class Draggable {
   containers: DraggableContainer
   options: DraggableOptions
   callbacks: Function[]
   dragging: boolean
   plugins: AbstractPlugin[]
-  sensors: Sensor[]
+  sensors: Sensors.Sensor[]
   classes: {
     [key: string]: string,
   }
@@ -110,13 +110,13 @@ export class Draggable {
 
   destroy(): void
 
-  addPlugin(...plugins: AbstractPlugin[]): Draggable
+  addPlugin(...plugins: Array<typeof AbstractPlugin>): Draggable
 
-  removePlugin(...plugins: AbstractPlugin[]): Draggable
+  removePlugin(...plugins: Array<typeof AbstractPlugin>): Draggable
 
-  addSensor(...sensors: Sensor[]): Draggable
+  addSensor(...sensors: Array<typeof Sensors.Sensor>): Draggable
 
-  removeSensor(...sensors: Sensor[]): Draggable
+  removeSensor(...sensors: Array<typeof Sensors.Sensor>): Draggable
 
   addContainer(...containers: HTMLElement[]): Draggable
 
@@ -272,7 +272,7 @@ export interface SwappableStopEvent extends SwappableEvent { }
 
 // TODO for funcional plugins classes declaration
 export namespace Plugins {
-  export class Mirror extends BasePlugin { }
+  export class Mirror extends AbstractPlugin { }
 
   export interface MirrorPluginOptions {
     xAxis: boolean,
@@ -299,25 +299,25 @@ export namespace Plugins {
 
   export interface MirrorDestroyEvent extends MirrorEvent { }
 
-  export class AutoScroll extends BasePlugin { }
+  export class AutoScroll extends AbstractPlugin { }
 
   export interface AutoScrollPluginOptions {
     speed: number,
     sensitivity: number,
   }
 
-  export class Collidable extends BasePlugin { }
+  export class Collidable extends AbstractPlugin { }
 
   export type CollidableOptions = string | HTMLElement[] | NodeList | HTMLElement
 
-  export class SwapAnimation extends BasePlugin { }
+  export class SwapAnimation extends AbstractPlugin { }
 
   export interface SwapAnimationOptions {
     duration: number,
     easingFunction: string
   }
 
-  export class Snappable extends BasePlugin { }
+  export class Snappable extends AbstractPlugin { }
 }
 
 // TODO for funcional sensor classes declaration

@@ -3,7 +3,7 @@
 /// Heading
 ////
 
-@import './props';
+@import 'props';
 
 .Heading {
   @include Heading;
@@ -12,3 +12,5 @@
 .Subheading {
   @include Subheading;
 }
+
+@import 'variants';

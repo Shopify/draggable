@@ -30,7 +30,7 @@ This folder contains the top-level page templates. The project uses Nunjucks for
 There is only one layout template, `views/templates/document.html`, which is extended by all of the `.html` files in the root of `/views`. These root views do the following:
 
 1. Import global components such as `Sidebar` and `PageHeader`
-2. Define the `ViewAttrs` for the view _(Page title, description, etc)_.
+2. Define the `ViewAttr` for the view _(Page title, description, etc)_.
 3. Import and render the content component for that view.
 
 ### `src/styles`

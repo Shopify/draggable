@@ -1,8 +1,8 @@
-{% macro render(ViewAttrs, SubNav) %}
+{% macro render(ViewAttr, SubNav) %}
   {% for Section, Links in SubNav %}
     {% set listClasses = ['NavList'] %}
     {% set listClasses = (
-      listClasses.push('NavList--isCurrent') if ViewAttrs.parent == Section, listClasses
+      listClasses.push('NavList--isCurrent') if ViewAttr.parent == Section, listClasses
     ) %}
 
     <ul class="{{ listClasses | join(' ') | trim }}">
@@ -14,7 +14,7 @@
         {% set linkHref = Link | lower | replace(' ', '-') %}
         {% set linkClasses = ['NavLink'] %}
         {% set linkClasses = (
-          linkClasses.push('NavLink--isCurrent') if ViewAttrs.child == Link, linkClasses
+          linkClasses.push('NavLink--isCurrent') if ViewAttr.child == Link, linkClasses
         ) %}
         {% set linkClasses = linkClasses | join(' ') | trim %}
 

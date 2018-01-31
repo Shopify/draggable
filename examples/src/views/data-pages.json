@@ -8,7 +8,7 @@
     },
     {
       "Droppable": [
-        "One and only",
+        "Unique dropzone",
         "~Capacity"
       ]
     },
@@ -16,7 +16,8 @@
       "Sortable": [
         "Simple list",
         "Transformed",
-        "Multiple containers"
+        "Multiple containers",
+        "~Nested"
       ]
     },
     {

@@ -1,16 +1,15 @@
 ////
 /// Content
-/// OneAndOnly
+/// UniqueDropzone
 ////
 
-@import 'utilities/shared/functions';
-@import 'components/Patterns/props';
+@import 'utils/shared/functions';
 
 $grid-area-names: a, b, c, d, e, f, g, h;
 $grid-rows: 6;
 $grid-columns: 4;
 
-.OneAndOnly {
+.UniqueDropzone {
   .BlockLayout {
     .BlockWrapper {
       .Block:nth-child(1n+3):not(.draggable-source--is-dragging) {

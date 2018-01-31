@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
 import Sortable from 'lib/sortable';
 /* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
-import matchMirrorSize from '../../shared/match-mirror-size';
+import matchMirrorSize from '../../../scripts/utils/match-mirror-size';
 
 const Classes = {
   draggable: 'StackedListItem--isDraggable',

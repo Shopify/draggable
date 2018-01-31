@@ -1,4 +1,4 @@
-import flipSign from '../../scripts/helpers/flip-sign';
+import flipSign from '../../scripts/utils/flip-sign';
 
 const scaleFactor = 0.725;
 const translateFactors = {

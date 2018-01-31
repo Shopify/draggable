@@ -3,10 +3,8 @@
 /// Brand
 ////
 
-@import './keyframes';
-
-$logo-width: 4.6rem;
-$wordmark-width: 17.6rem;
+@import 'keyframes';
+@import 'props';
 
 .Brand {
   cursor: get-cursor(rock);
@@ -21,7 +19,7 @@ $wordmark-width: 17.6rem;
   }
 
   @media screen and (min-width: get-breakpoint(desktop)) {
-    margin-left: -#{get-spacing(tightest)};
+    margin-left: -(get-spacing(tightest));
   }
 }
 
@@ -61,9 +59,9 @@ $wordmark-width: 17.6rem;
 }
 
 // --- Interaction
-.Brand:hover {
+.Brand {
   &:hover {
-    @include logo-hover;
+    @include logo-animation;
   }
 
   &:active {

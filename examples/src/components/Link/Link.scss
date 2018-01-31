@@ -3,8 +3,10 @@
 /// Link
 ////
 
-@import './props';
+@import 'props';
 
 .Link {
   @include Link;
 }
+
+@import 'variants';

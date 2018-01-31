@@ -3,6 +3,9 @@
 /// Simple list
 ////
 
+@import 'utils/shared/layout';
+@import 'components/StackedList/props';
+
 .SimpleList {
   @include centered-width(columns(5));
 

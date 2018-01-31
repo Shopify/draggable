@@ -1,9 +1,9 @@
 ////
-/// Utilities global
+/// Global Utilities
 /// Typography
 ////
 
-@import 'utilities/shared/typography';
+@import 'utils/shared/typography';
 
 .text-truncate {
   @include text-truncate;

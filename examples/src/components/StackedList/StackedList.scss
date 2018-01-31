@@ -3,12 +3,12 @@
 /// StackedList
 ////
 
-@import 'utilities/shared/layout';
-@import 'utilities/shared/typography';
-@import './props';
+@import 'utils/shared/layout';
+@import 'utils/shared/typography';
 @import 'components/Handle/props';
 @import 'components/Heading/props';
 @import 'components/Patterns/props';
+@import 'props';
 
 .StackedListWrapper {
   @include stripes-bg;
@@ -138,3 +138,5 @@
       opacity get-duration(fast) get-easing();
   }
 }
+
+@import 'variants';

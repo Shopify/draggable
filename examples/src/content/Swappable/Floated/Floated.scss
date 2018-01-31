@@ -3,8 +3,8 @@
 /// Floated
 ////
 
-@import 'utilities/shared/functions';
-@import 'content/shared/mixins';
+@import 'utils/shared/functions';
+@import 'utils/shared/layout';
 
 $floated-block-name: unquote('Block');
 

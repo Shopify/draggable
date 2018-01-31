@@ -38,8 +38,8 @@ $pill-switch-data: (
 ///
 /// Mixins
 @mixin pill-switch-track-layout($breakpoint: 'base') {
-  margin-top: -#{pill-switch(radius, $breakpoint)};
-  margin-left: -#{pill-switch(track-width, $breakpoint) / 2};
+  margin-top: -(pill-switch(radius, $breakpoint));
+  margin-left: -(pill-switch(track-width, $breakpoint) / 2);
   width: pill-switch(track-width, $breakpoint);
   height: pill-switch(control-size, $breakpoint);
   border-radius: pill-switch(radius, $breakpoint);

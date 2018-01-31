@@ -1,12 +1,12 @@
-{% import '../Navigation/Navigation.html' as Navigation %}
+{% import 'components/Navigation/Navigation.html' as Navigation %}
 
-{% macro render(ViewAttrs, DataPages) %}
+{% macro render(ViewAttr, DataPages) %}
   <aside id="Sidebar" class="Sidebar" aria-hidden="true">
     <header class="SidebarHeader">
-      {% include '../Brand/Brand.html' %}
+      {% include 'components/Brand/Brand.html' %}
     </header>
 
-    {{ Navigation.render(ViewAttrs, DataPages) }}
+    {{ Navigation.render(ViewAttr, DataPages) }}
 
     <footer class="SidebarFooter">
       <p class="LegalText"><a href="https://shopify.github.io/draggable/" class="Link Link--typeDark" title="Visit Draggable JS">draggable.js</a> was developed by <a href="https://github.com/tsov" class="Link Link--noWrap" title="Github: tsov">Max Hoffmann</a> and <a href="https://github.com/beefchimi" class="Link Link--noWrap" title="Github: beefchimi">Curtis Dulmage</a>.</p>

@@ -3,9 +3,9 @@
 /// Plate
 ////
 
-@import 'utilities/shared/layout';
-@import './props';
-@import './keyframes';
+@import 'utils/shared/layout';
+@import 'keyframes';
+@import 'props';
 
 .PlateWrapper {
   @include centered-width($plate-max-size);
@@ -59,3 +59,5 @@
     margin-bottom: 0;
   }
 }
+
+@import 'variants';

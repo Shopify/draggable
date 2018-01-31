@@ -3,8 +3,8 @@
 /// SwapAnimation
 ////
 
-@import 'utilities/shared/functions';
-@import 'content/shared/mixins';
+@import 'utils/shared/functions';
+@import 'utils/shared/layout';
 
 $swap-anim-block-name: unquote('Block');
 

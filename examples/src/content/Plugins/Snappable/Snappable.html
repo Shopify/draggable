@@ -1,10 +1,10 @@
-{% import '../../../components/Block/Block.html' as Block %}
+{% import 'components/Block/Block.html' as Block %}
 
 {% macro render(id) %}
   <section id="{{ id }}" class="{{ id }}">
     <article class="BlockLayout BlockLayout--typeGrid">
       <div class="BlockWrapper">
-        {{ Block.render('snap',   {index: 1, draggable: true, classes: ['draggable-source']}) }}
+        {{ Block.render('snap', {index: 1, draggable: true, classes: ['draggable-source']}) }}
       </div>
       <div class="BlockWrapper">
         {{ Block.render('two', {index: 2}) }}
@@ -20,7 +20,7 @@
         {{ Block.render('five', {index: 5}) }}
       </div>
       <div class="BlockWrapper">
-        {{ Block.render('',   {index: 6, type: 'Stripes', classes: ['draggable-source']}) }}
+        {{ Block.render('', {index: 6, type: 'Stripes', classes: ['draggable-source']}) }}
       </div>
       <div class="BlockWrapper">
         {{ Block.render('crack', {index: 7, draggable: true, classes: ['draggable-source']}) }}
@@ -30,7 +30,7 @@
       </div>
 
       <div class="BlockWrapper">
-        {{ Block.render('',   {index: 9, type: 'Stripes', classes: ['draggable-source']}) }}
+        {{ Block.render('', {index: 9, type: 'Stripes', classes: ['draggable-source']}) }}
       </div>
       <div class="BlockWrapper">
         {{ Block.render('ten', {index: 10}) }}
@@ -39,7 +39,7 @@
         {{ Block.render('', {index: 11, type: 'Stripes', classes: ['draggable-source']}) }}
       </div>
       <div class="BlockWrapper">
-        {{ Block.render('pop',  {index: 12, draggable: true, classes: ['draggable-source']}) }}
+        {{ Block.render('pop', {index: 12, draggable: true, classes: ['draggable-source']}) }}
       </div>
 
       <div class="BlockWrapper">

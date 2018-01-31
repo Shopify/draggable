@@ -3,9 +3,9 @@
 /// Patterns
 ////
 
-@import 'utilities/shared/layout';
-@import './props';
-@import './keyframes';
+@import 'utils/shared/layout';
+@import 'keyframes';
+@import 'props';
 
 :root {
   --pattern-bg-color: white;

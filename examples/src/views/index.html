@@ -1,4 +1,4 @@
-{% extends 'views/templates/document.html' %}
+{% extends 'templates/document.html' %}
 
 {% import 'components/Document/Head.html' as Head %}
 {% import 'components/Sidebar/Sidebar.html' as Sidebar %}
@@ -6,23 +6,23 @@
 
 {% import 'content/Home/Home.html' as Home %}
 
-{% set ViewAttrs = {
+{% set ViewAttr = {
   id: 'Home',
   parent: 'Examples',
   subheading: 'Draggable is a modern drag and drop JavaScript library. Lightweight, modular and accessible.'
 } %}
 
-{% block PageId %}{{ ViewAttrs.id }}{% endblock %}
+{% block PageId %}{{ ViewAttr.id }}{% endblock %}
 
 {% block head %}
-  {{ Head.render(ViewAttrs) }}
+  {{ Head.render(ViewAttr) }}
 {% endblock %}
 
 {% block sidebar %}
-  {{ Sidebar.render(ViewAttrs, DataPages) }}
+  {{ Sidebar.render(ViewAttr, DataPages) }}
 {% endblock %}
 
 {% block main %}
-  {{ PageHeader.render(ViewAttrs.parent, ViewAttrs.subheading) }}
-  {{ Home.render(ViewAttrs.id) }}
+  {{ PageHeader.render(ViewAttr.parent, ViewAttr.subheading) }}
+  {{ Home.render(ViewAttr.id) }}
 {% endblock %}

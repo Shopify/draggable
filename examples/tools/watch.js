@@ -3,7 +3,10 @@ import {reloadServer, startServer} from './server';
 import {scripts} from './tasks/scripts';
 import {styles} from './tasks/styles';
 import {extAllViews, views} from './tasks/views';
-import {reportWatchStats} from './helpers';
+
+function reportWatchStats(path) {
+  console.log(`File ${path} was changed`);
+}
 
 export function watch() {
   startServer();

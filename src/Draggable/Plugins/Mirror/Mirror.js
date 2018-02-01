@@ -182,9 +182,9 @@ function resetMirror({mirror, source, options, ...args}) {
     let offsetWidth;
 
     if (options.constrainDimensions) {
-      // Compute padding for source
-      offsetHeight = source.clientHeight;
-      offsetWidth = source.clientWidth;
+      const computedSourceStyles = getComputedStyle(source);
+      offsetHeight = computedSourceStyles.getPropertyValue('height');
+      offsetWidth = computedSourceStyles.getPropertyValue('width');
     }
 
     mirror.style.position = 'fixed';
@@ -194,9 +194,8 @@ function resetMirror({mirror, source, options, ...args}) {
     mirror.style.margin = 0;
 
     if (options.constrainDimensions) {
-      // remove padding from dimensions
-      mirror.style.height = `${offsetHeight}px`;
-      mirror.style.width = `${offsetWidth}px`;
+      mirror.style.height = offsetHeight;
+      mirror.style.width = offsetWidth;
     }
 
     resolve({mirror, source, options, ...args});

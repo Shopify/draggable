@@ -19,6 +19,12 @@ If enabled, the mirror will move on the y axis. Default: `true`
 **`constrainDimensions {Boolean}`**  
 If enabled, the source elements height and width will be applied to the mirror. Default: `false`
 
+**`cursorOffsetX {Number|null}`**  
+Defining this sets the offset from cursor to mirror manually on the x axis. Default: `null`
+
+**`cursorOffsetY {Number|null}`**  
+Defining this sets the offset from cursor to mirror manually on the y axis. Default: `null`
+
 ### Examples
 
 #### y Axis only
@@ -29,6 +35,9 @@ import {Draggable} from '@shopify/draggable';
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
   mirror: {
+    constrainDimensions: true,
+    cursorOffsetX: 10,
+    cursorOffsetY: 10,
     xAxis: false,
   },
 });
@@ -42,6 +51,9 @@ import {Sortable} from '@shopify/draggable';
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
   mirror: {
+    constrainDimensions: true,
+    cursorOffsetX: 10,
+    cursorOffsetY: 10,
     yAxis: false,
   },
 });

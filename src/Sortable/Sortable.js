@@ -13,6 +13,38 @@ const onDragOver = Symbol('onDragOver');
 const onDragStop = Symbol('onDragStop');
 
 /**
+ * Returns announcement message when a Draggable element has been sorted with another Draggable element
+ * or moved into a new container
+ * @param {SortableSortedEvent} sortableEvent
+ * @return {String}
+ */
+function onSortableSortedDefaultAnnouncement({dragEvent}) {
+  const sourceText = dragEvent.source.textContent.trim() || dragEvent.source.id || 'sortable element';
+
+  if (dragEvent.over) {
+    const overText = dragEvent.over.textContent.trim() || dragEvent.over.id || 'sortable element';
+    const isFollowing = dragEvent.source.compareDocumentPosition(dragEvent.over) & Node.DOCUMENT_POSITION_FOLLOWING;
+
+    if (isFollowing) {
+      return `Placed ${sourceText} after ${overText}`;
+    } else {
+      return `Placed ${sourceText} before ${overText}`;
+    }
+  } else {
+    // need to figure out how to compute container name
+    return `Placed ${sourceText} into a different container`;
+  }
+}
+
+/**
+ * @const {Object} defaultAnnouncements
+ * @const {Function} defaultAnnouncements['sortable:sorted']
+ */
+const defaultAnnouncements = {
+  'sortable:sorted': onSortableSortedDefaultAnnouncement,
+};
+
+/**
  * Sortable is built on top of Draggable and allows sorting of draggable elements. Sortable will keep
  * track of the original index and emits the new index as you drag over draggable elements.
  * @class Sortable
@@ -28,7 +60,13 @@ export default class Sortable extends Draggable {
    * @param {Object} options - Options for Sortable
    */
   constructor(containers = [], options = {}) {
-    super(containers, options);
+    super(containers, {
+      ...options,
+      announcements: {
+        ...defaultAnnouncements,
+        ...(options.announcements || {}),
+      },
+    });
 
     /**
      * start index of source on drag start

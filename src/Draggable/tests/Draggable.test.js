@@ -23,6 +23,7 @@ import {
   Accessibility,
   Mirror,
   AutoScroll,
+  Announcement,
 } from './../Plugins';
 
 import {
@@ -111,7 +112,7 @@ describe('Draggable', () => {
       const newInstance = new Draggable();
 
       expect(newInstance.plugins.length)
-        .toBe(3);
+        .toBe(4);
 
       expect(newInstance.plugins[0])
         .toBeInstanceOf(Mirror);
@@ -121,6 +122,9 @@ describe('Draggable', () => {
 
       expect(newInstance.plugins[2])
         .toBeInstanceOf(AutoScroll);
+
+      expect(newInstance.plugins[3])
+        .toBeInstanceOf(Announcement);
     });
 
     test('should attach custom plugins', () => {
@@ -131,9 +135,9 @@ describe('Draggable', () => {
       });
 
       expect(newInstance.plugins.length)
-        .toBe(4);
+        .toBe(5);
 
-      const customPlugin = newInstance.plugins[3];
+      const customPlugin = newInstance.plugins[4];
 
       expect(customPlugin.draggable).toBe(newInstance);
 
@@ -207,12 +211,6 @@ describe('Draggable', () => {
 
       newInstance.destroy();
 
-      expect(expectedPlugins[3].detachWasCalled)
-        .toBe(true);
-
-      expect(expectedPlugins[3].numTimesDetachCalled)
-        .toBe(1);
-
       expect(expectedPlugins[4].detachWasCalled)
         .toBe(true);
 
@@ -223,6 +221,12 @@ describe('Draggable', () => {
         .toBe(true);
 
       expect(expectedPlugins[5].numTimesDetachCalled)
+        .toBe(1);
+
+      expect(expectedPlugins[6].detachWasCalled)
+        .toBe(true);
+
+      expect(expectedPlugins[6].numTimesDetachCalled)
         .toBe(1);
     });
 

@@ -14,12 +14,46 @@ const release = Symbol('release');
 const closestDroppable = Symbol('closestDroppable');
 const getDroppables = Symbol('getDroppables');
 
-const classes = {
+/**
+ * Returns an announcement message when the Draggable element is dropped into a Droppable element
+ * @param {DroppableOverEvent} droppableEvent
+ * @return {String}
+ */
+function onDroppableOverDefaultAnnouncement({dragEvent, droppable}) {
+  const sourceText = dragEvent.source.textContent.trim() || dragEvent.source.id || 'draggable element';
+  const overText = droppable.textContent.trim() || droppable.id || 'droppable element';
+
+  return `Dropped ${sourceText} into ${overText}`;
+}
+
+/**
+ * Returns an announcement message when the Draggable element is released from a Droppable element
+ * @param {DroppableOutEvent} droppableEvent
+ * @return {String}
+ */
+function onDroppableOutDefaultAnnouncement({dragEvent, droppable}) {
+  const sourceText = dragEvent.source.textContent.trim() || dragEvent.source.id || 'draggable element';
+  const overText = droppable.textContent.trim() || droppable.id || 'droppable element';
+
+  return `Released ${sourceText} from ${overText}`;
+}
+
+/**
+ * @const {Object} defaultAnnouncements
+ * @const {Function} defaultAnnouncements['droppable:over']
+ * @const {Function} defaultAnnouncements['droppable:out']
+ */
+const defaultAnnouncements = {
+  'droppable:over': onDroppableOverDefaultAnnouncement,
+  'droppable:out': onDroppableOutDefaultAnnouncement,
+};
+
+const defaultClasses = {
   'droppable:active': 'draggable-droppable--active',
   'droppable:occupied': 'draggable-droppable--occupied',
 };
 
-const defaults = {
+const defaultOptions = {
   droppable: '.draggable-droppable',
 };
 
@@ -39,9 +73,18 @@ export default class Droppable extends Draggable {
    * @param {Object} options - Options for Droppable
    */
   constructor(containers = [], options = {}) {
-    super(containers, options);
-
-    this.options = {...defaults, ...this.options};
+    super(containers, {
+      ...defaultOptions,
+      ...options,
+      classes: {
+        ...defaultClasses,
+        ...(options.classes || {}),
+      },
+      announcements: {
+        ...defaultAnnouncements,
+        ...(options.announcements || {}),
+      },
+    });
 
     /**
      * All droppable elements on drag start
@@ -84,15 +127,6 @@ export default class Droppable extends Draggable {
       .off('drag:start', this[onDragStart])
       .off('drag:move', this[onDragMove])
       .off('drag:stop', this[onDragStop]);
-  }
-
-  /**
-   * Returns class name for class identifier
-   * @param {String} name - Name of class identifier
-   * @return {String|null}
-   */
-  getClassNameFor(name) {
-    return super.getClassNameFor(name) || classes[name];
   }
 
   /**

@@ -9,12 +9,16 @@ export const onMirrorMove = Symbol('onMirrorMove');
  * @property {Boolean} defaultOptions.constrainDimensions
  * @property {Boolean} defaultOptions.xAxis
  * @property {Boolean} defaultOptions.yAxis
+ * @property {null} defaultOptions.cursorOffsetX
+ * @property {null} defaultOptions.cursorOffsetY
  * @type {Object}
  */
 export const defaultOptions = {
   constrainDimensions: false,
   xAxis: true,
   yAxis: true,
+  cursorOffsetX: null,
+  cursorOffsetY: null,
 };
 
 /**
@@ -39,6 +43,8 @@ export default class Mirror extends AbstractPlugin {
      * @property {Boolean} options.constrainDimensions
      * @property {Boolean} options.xAxis
      * @property {Boolean} options.yAxis
+     * @property {Number|null} options.cursorOffsetX
+     * @property {Number|null} options.cursorOffsetY
      * @type {Object}
      */
     this.options = {
@@ -156,14 +162,14 @@ function computeMirrorDimensions({source, ...args}) {
  * @return {Promise}
  * @private
  */
-function calculateMirrorOffset({sensorEvent, sourceRect, ...args}) {
+function calculateMirrorOffset({sensorEvent, sourceRect, options, ...args}) {
   return withPromise((resolve) => {
-    const mirrorOffset = {
-      top: sensorEvent.clientY - sourceRect.top,
-      left: sensorEvent.clientX - sourceRect.left,
-    };
+    const top = options.cursorOffsetY === null ? (sensorEvent.clientY - sourceRect.top) : options.cursorOffsetY;
+    const left = options.cursorOffsetX === null ? (sensorEvent.clientX - sourceRect.left) : options.cursorOffsetX;
 
-    resolve({sensorEvent, sourceRect, mirrorOffset, ...args});
+    const mirrorOffset = {top, left};
+
+    resolve({sensorEvent, sourceRect, mirrorOffset, options, ...args});
   });
 }
 

@@ -12,6 +12,26 @@ const onDragOver = Symbol('onDragOver');
 const onDragStop = Symbol('onDragStop');
 
 /**
+ * Returns an announcement message when the Draggable element is swapped with another draggable element
+ * @param {SwappableSwappedEvent} swappableEvent
+ * @return {String}
+ */
+function onSwappableSwappedDefaultAnnouncement({dragEvent, swappedElement}) {
+  const sourceText = dragEvent.source.textContent.trim() || dragEvent.source.id || 'swappable element';
+  const overText = swappedElement.textContent.trim() || swappedElement.id || 'swappable element';
+
+  return `Swapped ${sourceText} with ${overText}`;
+}
+
+/**
+ * @const {Object} defaultAnnouncements
+ * @const {Function} defaultAnnouncements['swappabled:swapped']
+ */
+const defaultAnnouncements = {
+  'swappabled:swapped': onSwappableSwappedDefaultAnnouncement,
+};
+
+/**
  * Swappable is built on top of Draggable and allows swapping of draggable elements.
  * Order is irrelevant to Swappable.
  * @class Swappable
@@ -27,7 +47,13 @@ export default class Swappable extends Draggable {
    * @param {Object} options - Options for Swappable
    */
   constructor(containers = [], options = {}) {
-    super(containers, options);
+    super(containers, {
+      ...options,
+      announcements: {
+        ...defaultAnnouncements,
+        ...(options.announcements || {}),
+      },
+    });
 
     /**
      * Last draggable element that was dragged over

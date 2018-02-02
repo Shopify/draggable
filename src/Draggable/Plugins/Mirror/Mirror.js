@@ -262,8 +262,8 @@ function positionMirror({withFrame = false, initial = false} = {}) {
       };
 
       if (mirrorOffset) {
-        const x = sensorEvent.clientX - mirrorOffset.left;
-        const y = sensorEvent.clientY - mirrorOffset.top;
+        const x = sensorEvent.clientX - mirrorOffset.left - window.scrollX;
+        const y = sensorEvent.clientY - mirrorOffset.top - window.scrollY;
 
         if ((options.xAxis && options.yAxis) || initial) {
           mirror.style.transform = `translate3d(${x}px, ${y}px, 0)`;

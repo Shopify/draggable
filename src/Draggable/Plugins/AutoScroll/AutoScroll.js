@@ -163,8 +163,8 @@ export default class AutoScroll extends AbstractPlugin {
     const sensorEvent = dragEvent.sensorEvent;
 
     this.currentMousePosition = {
-      clientX: sensorEvent.clientX,
-      clientY: sensorEvent.clientY,
+      clientX: sensorEvent.clientX - window.scrollX,
+      clientY: sensorEvent.clientY - window.scrollY,
     };
 
     this.scrollAnimationFrame = requestAnimationFrame(this[scroll]);

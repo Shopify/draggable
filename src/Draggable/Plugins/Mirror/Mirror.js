@@ -9,12 +9,16 @@ export const onMirrorMove = Symbol('onMirrorMove');
  * @property {Boolean} defaultOptions.constrainDimensions
  * @property {Boolean} defaultOptions.xAxis
  * @property {Boolean} defaultOptions.yAxis
+ * @property {null} defaultOptions.cursorOffsetX
+ * @property {null} defaultOptions.cursorOffsetY
  * @type {Object}
  */
 export const defaultOptions = {
   constrainDimensions: false,
   xAxis: true,
   yAxis: true,
+  cursorOffsetX: null,
+  cursorOffsetY: null,
 };
 
 /**
@@ -39,6 +43,8 @@ export default class Mirror extends AbstractPlugin {
      * @property {Boolean} options.constrainDimensions
      * @property {Boolean} options.xAxis
      * @property {Boolean} options.yAxis
+     * @property {Number|null} options.cursorOffsetX
+     * @property {Number|null} options.cursorOffsetY
      * @type {Object}
      */
     this.options = {
@@ -156,14 +162,14 @@ function computeMirrorDimensions({source, ...args}) {
  * @return {Promise}
  * @private
  */
-function calculateMirrorOffset({sensorEvent, sourceRect, ...args}) {
+function calculateMirrorOffset({sensorEvent, sourceRect, options, ...args}) {
   return withPromise((resolve) => {
-    const mirrorOffset = {
-      top: sensorEvent.clientY - sourceRect.top,
-      left: sensorEvent.clientX - sourceRect.left,
-    };
+    const top = options.cursorOffsetY === null ? (sensorEvent.clientY - sourceRect.top) : options.cursorOffsetY;
+    const left = options.cursorOffsetX === null ? (sensorEvent.clientX - sourceRect.left) : options.cursorOffsetX;
 
-    resolve({sensorEvent, sourceRect, mirrorOffset, ...args});
+    const mirrorOffset = {top, left};
+
+    resolve({sensorEvent, sourceRect, mirrorOffset, options, ...args});
   });
 }
 
@@ -182,9 +188,9 @@ function resetMirror({mirror, source, options, ...args}) {
     let offsetWidth;
 
     if (options.constrainDimensions) {
-      // Compute padding for source
-      offsetHeight = source.clientHeight;
-      offsetWidth = source.clientWidth;
+      const computedSourceStyles = getComputedStyle(source);
+      offsetHeight = computedSourceStyles.getPropertyValue('height');
+      offsetWidth = computedSourceStyles.getPropertyValue('width');
     }
 
     mirror.style.position = 'fixed';
@@ -194,9 +200,8 @@ function resetMirror({mirror, source, options, ...args}) {
     mirror.style.margin = 0;
 
     if (options.constrainDimensions) {
-      // remove padding from dimensions
-      mirror.style.height = `${offsetHeight}px`;
-      mirror.style.width = `${offsetWidth}px`;
+      mirror.style.height = offsetHeight;
+      mirror.style.width = offsetWidth;
     }
 
     resolve({mirror, source, options, ...args});

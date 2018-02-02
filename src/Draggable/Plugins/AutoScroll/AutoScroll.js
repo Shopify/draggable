@@ -11,11 +11,13 @@ export const scroll = Symbol('scroll');
  * @property {Object} defaultOptions
  * @property {Number} defaultOptions.speed
  * @property {Number} defaultOptions.sensitivity
+ * @property {HTMLElement[]} defaultOptions.scrollableElements
  * @type {Object}
  */
 export const defaultOptions = {
   speed: 10,
   sensitivity: 30,
+  scrollableElements: [],
 };
 
 /**
@@ -39,6 +41,7 @@ export default class AutoScroll extends AbstractPlugin {
      * @property {Object} options
      * @property {Number} options.speed
      * @property {Number} options.sensitivity
+     * @property {HTMLElement[]} options.scrollableElements
      * @type {Object}
      */
     this.options = {
@@ -111,13 +114,35 @@ export default class AutoScroll extends AbstractPlugin {
   }
 
   /**
+   * Returns closest scrollable elements by element
+   * @param {HTMLElement} target
+   * @return {HTMLElement}
+   */
+  getScrollableElement(target) {
+    if (this.hasDefinedScrollableElements()) {
+      return closest(target, this.options.scrollableElements) || document.documentElement;
+    } else {
+      return closestScrollableElement(target);
+    }
+  }
+
+  /**
+   * Returns true if at least one scrollable element have been defined via options
+   * @param {HTMLElement} target
+   * @return {Boolean}
+   */
+  hasDefinedScrollableElements() {
+    return Boolean(this.options.scrollableElements.length !== 0);
+  }
+
+  /**
    * Drag start handler. Finds closest scrollable parent in separate frame
    * @param {DragStartEvent} dragEvent
    * @private
    */
   [onDragStart](dragEvent) {
     this.findScrollableElementFrame = requestAnimationFrame(() => {
-      this.scrollableElement = closestScrollableElement(dragEvent.source);
+      this.scrollableElement = this.getScrollableElement(dragEvent.source);
     });
   }
 
@@ -128,7 +153,7 @@ export default class AutoScroll extends AbstractPlugin {
    */
   [onDragMove](dragEvent) {
     this.findScrollableElementFrame = requestAnimationFrame(() => {
-      this.scrollableElement = closestScrollableElement(dragEvent.sensorEvent.target);
+      this.scrollableElement = this.getScrollableElement(dragEvent.sensorEvent.target);
     });
 
     if (!this.scrollableElement) {

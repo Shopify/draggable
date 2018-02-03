@@ -1,0 +1,30 @@
+////
+/// Components
+/// Brand props
+////
+
+$logo-width: 4.6rem;
+$wordmark-width: 17.6rem;
+$logo-bounce-offset: 0.1rem;
+
+@mixin logo-animation {
+  .Wave--colorMask {
+    animation: logo-rainbow-mask get-duration(slow) get-easing() infinite;
+  }
+
+  .Wave--colorPurple {
+    animation: logo-rainbow-purple get-duration(slow) get-easing() infinite;
+  }
+
+  .Wave--colorRed {
+    animation: logo-rainbow-red get-duration(slow) get-easing() infinite;
+  }
+
+  .Wave--colorOrange {
+    animation: logo-rainbow-orange get-duration(slow) get-easing() infinite;
+  }
+
+  .Hand {
+    animation: logo-outline-bounce get-duration(slow) linear infinite;
+  }
+}

@@ -1,6 +1,4 @@
-// Debounce
-// -----------------------------------------------------------------------------
-export function debounce(callback, wait) {
+export default function debounce(callback, wait) {
   let timeout = null;
 
   return function(...args) {

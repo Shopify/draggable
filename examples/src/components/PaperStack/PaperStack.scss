@@ -3,8 +3,8 @@
 /// PaperStack
 ////
 
-@import 'utilities/shared/layout';
-@import './props';
+@import 'utils/shared/layout';
+@import 'props';
 
 .PaperStack {
   position: relative;
@@ -73,9 +73,9 @@
   .PaperStackContent::after {
     content: '';
     position: absolute;
-    right: -#{paper-stack-shadow(offset)};
+    right: -(paper-stack-shadow(offset));
     bottom: paper-stack-shadow(bottom);
-    left: -#{paper-stack-shadow(offset)};
+    left: -(paper-stack-shadow(offset));
     display: block;
     height: paper-stack-shadow(height);
     background-color: get-color(coal, dark);
@@ -110,3 +110,5 @@
     @include paper-stack-item-offset(desktop);
   }
 }
+
+@import 'variants';

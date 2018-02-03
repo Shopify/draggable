@@ -1,9 +1,9 @@
 ////
-/// Utilities global
+/// Global Utilities
 /// Layout
 ////
 
-@import 'utilities/shared/layout';
+@import 'utils/shared/layout';
 
 .flex-item-fix {
   @include flex-item-fix;
@@ -15,4 +15,8 @@
 
 .clearfix {
   @include clearfix;
+}
+
+.hidden {
+  display: none !important; /* stylelint-disable-line declaration-no-important */
 }

@@ -3,9 +3,9 @@
 /// PillSwitch
 ////
 
-@import 'utilities/shared/layout';
-@import './props';
+@import 'utils/shared/layout';
 @import 'components/Patterns/props';
+@import 'props';
 
 .PillSwitch {
   position: relative;
@@ -100,3 +100,5 @@
     @include visible(false);
   }
 }
+
+@import 'variants';

@@ -3,8 +3,8 @@
 /// Block
 ////
 
-@import 'utilities/shared/functions';
-@import 'utilities/shared/layout';
+@import 'utils/shared/functions';
+@import 'utils/shared/layout';
 
 .BlockWrapper {
   .Block {
@@ -37,3 +37,5 @@
     margin-top: -0.1em;
   }
 }
+
+@import 'variants';

@@ -3,8 +3,8 @@
 /// Flexbox
 ////
 
-@import 'utilities/shared/functions';
-@import 'content/shared/mixins';
+@import 'utils/shared/functions';
+@import 'utils/shared/layout';
 
 $flexbox-block-name: unquote('Block');
 

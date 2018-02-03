@@ -1,8 +1,22 @@
 ////
 /// Themes
-/// Merge Examples theme into Threads
+/// Examples
 ////
 
+@import 'border';
+@import 'breakpoint';
+@import 'color';
+@import 'cursor';
+@import 'layout-length';
+@import 'duration';
+@import 'easing';
+@import 'font-stack';
+@import 'type-scale';
+@import 'spacing';
+@import 'z-index';
+
+///
+/// Merge Draggable properties into Threads
 @include threads-update-property('border', $examples-border-data);
 @include threads-update-property('breakpoint', $examples-breakpoint-data);
 @include threads-update-property('color', $examples-color-data);

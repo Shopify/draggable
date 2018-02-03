@@ -1,4 +1,4 @@
-{% extends 'views/templates/document.html' %}
+{% extends 'templates/document.html' %}
 
 {% import 'components/Document/Head.html' as Head %}
 {% import 'components/Sidebar/Sidebar.html' as Sidebar %}
@@ -6,24 +6,24 @@
 
 {% import 'content/Swappable/Flexbox/Flexbox.html' as Flexbox %}
 
-{% set ViewAttrs = {
+{% set ViewAttr = {
   id: 'Flexbox',
   parent: 'Swappable',
   child: 'Flexbox',
-  subheading: 'Maintaining layout while swapping direct children can be challenging. This example solves the problem using CSS nth-child and adjacent child rules.'
+  subheading: 'Maintaining layout while swapping direct children can be challenging. This example solves the problem using nth-child and adjacent sibling selectors.'
 } %}
 
-{% block PageId %}{{ ViewAttrs.id }}{% endblock %}
+{% block PageId %}{{ ViewAttr.id }}{% endblock %}
 
 {% block head %}
-  {{ Head.render(ViewAttrs) }}
+  {{ Head.render(ViewAttr) }}
 {% endblock %}
 
 {% block sidebar %}
-  {{ Sidebar.render(ViewAttrs, DataPages) }}
+  {{ Sidebar.render(ViewAttr, DataPages) }}
 {% endblock %}
 
 {% block main %}
-  {{ PageHeader.render(ViewAttrs.parent, ViewAttrs.subheading) }}
-  {{ Flexbox.render(ViewAttrs.id) }}
+  {{ PageHeader.render(ViewAttr.parent, ViewAttr.subheading) }}
+  {{ Flexbox.render(ViewAttr.id) }}
 {% endblock %}

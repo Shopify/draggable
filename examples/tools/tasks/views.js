@@ -11,7 +11,10 @@ const extViews = '*.+(html|njk)';
 export const extAllViews = '*.+(html|njk|json|md)';
 
 export function views() {
-  const nunjucksEnv = new nunjucks.Environment(new nunjucks.FileSystemLoader('src'));
+  const nunjucksEnv = new nunjucks.Environment([
+    new nunjucks.FileSystemLoader('src/views'),
+    new nunjucks.FileSystemLoader('src'),
+  ]);
   const dataPages = JSON.parse(fs.readFileSync('src/views/data-pages.json'));
 
   return gulp

@@ -1,19 +1,17 @@
-{% import './SocialShare.html' as SocialShare %}
-{% import './Analytics.html' as Analytics %}
+{% import 'components/Document/SocialShare.html' as SocialShare %}
 
-{% macro render(ViewAttrs) %}
+{% macro render(ViewAttr) %}
   {% set url = 'https://shopify.github.io/draggable' %}
-  {% set trackingId = 'UA-107063633-1' %}
   {% set siteName = 'Draggable JS Examples' %}
   {% set titleSep = ' | ' %}
 
-  {% set parentFragment = ViewAttrs.parent + titleSep if ViewAttrs.parent %}
-  {% set childFragment = ViewAttrs.child + titleSep if ViewAttrs.child %}
-  {% set title = [parentFragment, childFragment, siteName] %}
+  {% set parentFragment = ViewAttr.parent + titleSep if ViewAttr.parent %}
+  {% set childFragment = ViewAttr.child + titleSep if ViewAttr.child %}
+  {% set titleText = [parentFragment, childFragment, siteName] %}
 
   {% set HeadAttr = {
     siteName: siteName,
-    title: ViewAttrs.subheading,
+    title: ViewAttr.subheading,
     description: 'Draggable is a lightweight, responsive, modern drag and drop JavaScript library – the ideal choice for adding slick native-feeling drag and drop behaviour to your web apps.',
     siteUrl: url,
     socialImg: url + '/assets/img/social/draggable-social.png',
@@ -25,23 +23,20 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>{{ title | join('') | trim }}</title>
+    <title>{{ titleText | join('') | trim }}</title>
 
     <meta name="description" content="{{ HeadAttr.description }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no">
 
     {{ SocialShare.render(HeadAttr) }}
+    {% include 'components/Document/Favicon.html' %}
 
-    {% include './Favicon.html' %}
-
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="{{ url }}/manifest.json">
     <link rel="stylesheet" href="assets/css/examples-app.css">
 
     <script src="assets/js/examples-runtime.js" defer></script>
     <script src="assets/js/examples-vendor.js" defer></script>
     <script src="assets/js/examples-app.js" defer></script>
-
-    {{ Analytics.render(trackingId) }}
   </head>
 {% endmacro %}

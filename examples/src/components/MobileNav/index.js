@@ -1,4 +1,4 @@
-import {debounce, debounceDuration} from '../../scripts/helpers/debounce';
+import debounce, {debounceDuration} from '../../scripts/utils/debounce';
 
 // equal to `get-breakpoint()` base value
 const MAX_WIDTH = 960;
@@ -7,18 +7,18 @@ const Attrs = {
   controls: 'aria-controls',
   expanded: 'aria-expanded',
   hidden: 'aria-hidden',
-  scroll: 'data-scroll-lock',
 };
 
 export default class MobileNav {
   constructor(activator) {
     this.activator = activator;
+    this.target = document.getElementById(activator.getAttribute(Attrs.controls));
+  }
 
-    const controlsTarget = activator.getAttribute(Attrs.controls);
-    this.target = document.getElementById(controlsTarget);
-
+  init() {
     if (!this.target) {
-      throw Error('The activator must have a valid `aria-controls` value. Target not found.');
+      console.error('The activator must have a valid `aria-controls` value. Target not found.');
+      return;
     }
 
     this._setState();
@@ -33,13 +33,13 @@ export default class MobileNav {
   }
 
   expand(widthExceeded = false) {
-    const scrollLock = !widthExceeded;
+    const lockScrolling = !widthExceeded;
     const willExpand = widthExceeded ? 'undefined' : 'false';
 
     this.expanded = true;
     this.activator.setAttribute(Attrs.expanded, 'true');
     this.target.setAttribute(Attrs.hidden, willExpand);
-    document.documentElement.setAttribute(Attrs.scroll, scrollLock);
+    document.documentElement.dataset.scrollLock = lockScrolling;
   }
 
   collapse() {
@@ -50,7 +50,7 @@ export default class MobileNav {
     this.expanded = false;
     this.activator.setAttribute(Attrs.expanded, 'false');
     this.target.setAttribute(Attrs.hidden, 'true');
-    document.documentElement.setAttribute(Attrs.scroll, 'false');
+    document.documentElement.dataset.scrollLock = false;
   }
 
   toggle() {

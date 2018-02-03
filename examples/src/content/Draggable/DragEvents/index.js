@@ -69,7 +69,7 @@ export default function DragEvents() {
     // as that would be very expensive.
     // Instead, we look at the mouse position, which we can ballpark as being
     // close to the center of the draggable element.
-    // We need to look at both the X and Y offset and determin which is the higher number,
+    // We need to look at both the X and Y offset and determine which is the higher number.
     // That way we can drag outside of the container and still have the
     // draggable element move appropriately.
     const offsetX = calcOffset(evt.sensorEvent.clientX - initialMousePosition.x);

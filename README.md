@@ -2,16 +2,11 @@
   <img src="https://circleci.com/gh/Shopify/draggable.svg?style=shield&circle-token=bd97f87d63e330e3b4b186ef11d8223889ef925f" title="CircleCI status" alt="CircleCI status">
 </a>
 
-<hr/>
-
 <a href="https://shopify.github.io/draggable" title="Visit Draggable website">
-  <img src="https://user-images.githubusercontent.com/643944/30787041-84ccc1aa-a14e-11e7-982d-972978185636.png" alt="">
+  <img src="https://user-images.githubusercontent.com/643944/35602291-99e2c56e-0605-11e8-847f-95f1f6be1610.jpg" alt="">
 </a>
 
-<hr/>
-
-
-> **Warning:** Draggable is currently in beta
+> **Ready for production!** While Draggable may still be in beta, all existing features are stable and safe for consumption. Draggable will exit beta once all remaining features have been implemented.
 
 Get complete control over drag and drop behaviour with Draggable! Draggable abstracts
 native browser events into a comprehensive API to create a custom drag and drop experience.

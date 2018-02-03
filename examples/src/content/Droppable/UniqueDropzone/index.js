@@ -2,8 +2,8 @@
 import Droppable from 'lib/droppable';
 /* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 
-export default function OneAndOnly() {
-  const containers = document.querySelectorAll('#OneAndOnly .BlockLayout');
+export default function UniqueDropzone() {
+  const containers = document.querySelectorAll('#UniqueDropzone .BlockLayout');
 
   if (containers.length === 0) {
     return false;

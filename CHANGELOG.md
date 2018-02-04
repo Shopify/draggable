@@ -11,7 +11,7 @@
 ### Added
 
 - Default `Draggable` plugins get exposed statically on `Draggable.Plugins`
-- Default `AutoScroll` plugin for Draggable, which auto scrolls containers/viewport while dragging
+- Default `Scrollable` plugin for Draggable, which auto scrolls containers/viewport while dragging
 - `yarn watch` task for auto-building the library
 - `source:original` class option for Draggable
 - `Draggable#getDraggableElementsForContainer` method, which returns all draggable elements for a given container

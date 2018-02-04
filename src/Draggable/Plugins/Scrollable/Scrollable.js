@@ -161,10 +161,16 @@ export default class Scrollable extends AbstractPlugin {
     }
 
     const sensorEvent = dragEvent.sensorEvent;
+    const scrollOffset = {x: 0, y: 0};
+
+    if ('ontouchstart' in window) {
+      scrollOffset.y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      scrollOffset.x = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+    }
 
     this.currentMousePosition = {
-      clientX: sensorEvent.clientX - window.scrollX,
-      clientY: sensorEvent.clientY - window.scrollY,
+      clientX: sensorEvent.clientX - scrollOffset.x,
+      clientY: sensorEvent.clientY - scrollOffset.y,
     };
 
     this.scrollAnimationFrame = requestAnimationFrame(this[scroll]);
@@ -198,9 +204,28 @@ export default class Scrollable extends AbstractPlugin {
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
     const rect = this.scrollableElement.getBoundingClientRect();
+    const {right, left} = rect;
+    let top;
+    let bottom;
 
-    let offsetY = (Math.abs(rect.bottom - this.currentMousePosition.clientY) <= this.options.sensitivity) - (Math.abs(rect.top - this.currentMousePosition.clientY) <= this.options.sensitivity);
-    let offsetX = (Math.abs(rect.right - this.currentMousePosition.clientX) <= this.options.sensitivity) - (Math.abs(rect.left - this.currentMousePosition.clientX) <= this.options.sensitivity);
+    if (rect.top < 0) {
+      top = 0;
+    } else {
+      top = rect.top;
+    }
+
+    if (windowHeight < rect.bottom) {
+      if (this.scrollableElement !== document.documentElement) {
+        this.scrollableElement = this.getScrollableElement(this.scrollableElement.parentNode);
+      }
+
+      bottom = windowHeight;
+    } else {
+      bottom = rect.bottom;
+    }
+
+    let offsetY = (Math.abs(bottom - this.currentMousePosition.clientY) <= this.options.sensitivity) - (Math.abs(top - this.currentMousePosition.clientY) <= this.options.sensitivity);
+    let offsetX = (Math.abs(right - this.currentMousePosition.clientX) <= this.options.sensitivity) - (Math.abs(left - this.currentMousePosition.clientX) <= this.options.sensitivity);
 
     if (!offsetX && !offsetY) {
       offsetX = (windowWidth - this.currentMousePosition.clientX <= this.options.sensitivity) - (this.currentMousePosition.clientX <= this.options.sensitivity);

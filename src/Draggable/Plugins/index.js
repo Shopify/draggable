@@ -9,9 +9,9 @@ export {
 } from './Announcement';
 
 export {
-  default as AutoScroll,
-  defaultOptions as defaultAutoScrollOptions,
-} from './AutoScroll';
+  default as Scrollable,
+  defaultOptions as defaultScrollableOptions,
+} from './Scrollable';
 
 export {
   default as Accessibility,

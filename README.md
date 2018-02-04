@@ -117,6 +117,11 @@ For more information, please checkout the [contributing document](https://github
 
 We are currently working on `v1.0.0-beta.5`. Check out the [project board](https://github.com/Shopify/draggable/projects/3) to see tasks and follow progress on the release. Any Pull Requests should be pointed against the feature branch `v1.0.0-beta.5`.
 
+## Related resources
+
+- [Ember CLI Shim](https://github.com/timrourke/ember-cli-shopify-draggable-shim) on Github by [@timrourke](https://github.com/timrourke)
+- [Ember CLI Shim](https://www.npmjs.com/package/ember-cli-shopify-draggable-shim) on NPM by [@timrourke](https://github.com/timrourke)
+
 ## Copyright
 
 Copyright (c) 2018 Shopify. See LICENSE.md for further details.

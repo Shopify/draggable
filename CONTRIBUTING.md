@@ -8,7 +8,8 @@ appreciated and encouraged.
 1. [Code of Conduct](code-of-conduct)
 2. [How to contribute](how-to-contribute)
     1. [Creating issues](creating-issues)
-    3. [Opening pull requests](opening-pull-requests)
+    2. [Opening pull requests](opening-pull-requests)
+    3. [JS Docblocks](js-docblocks)
 4. [How to run locally](how-to-run-locally)
 3. [Additional information](additional-information)
 
@@ -35,6 +36,48 @@ This will also require a force push to the branch, e.g. `git push -u origin +som
 
 Additionally we require commits to be atomic and squashed where needed. This will keep the git history clean on master. To squash commits use the `git rebase -i @~2`
 command to do an interactive rebase. This will allow you to merge multiple commits into one. To read up more on this please visit: [Git Tools Rewriting History](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History)
+
+### JS Docblocks
+
+Please follow the libraries convention and use docblocks to document the code
+
+Here are some sample docblocks for different types (methods, properties, constants, classes, constructors):
+
+```js
+/**
+ * Some method description
+ * @param {ParameterType} parameterName
+ * @return {ReturnType}
+ * @private
+ * @static
+ * @readonly
+ */
+
+/**
+ * Some instance property description
+ * @property {PropertyType} propertyName
+ * @private
+ * @static
+ * @readonly
+ */
+
+/**
+ * Some constant description
+ * @const {ConstType} constName
+ */
+
+/**
+ * Some class description
+ * @class ClassName
+ * @module ClassName
+ * @extends BaseClassName
+ */
+
+/**
+ * Constructor description
+ * @constructs ClassName
+ */
+```
 
 ## How to run locally
 

@@ -7,7 +7,7 @@ export const onDragStop = Symbol('onDragStop');
 export const scroll = Symbol('scroll');
 
 /**
- * AutoScroll default options
+ * Scrollable default options
  * @property {Object} defaultOptions
  * @property {Number} defaultOptions.speed
  * @property {Number} defaultOptions.sensitivity
@@ -21,23 +21,23 @@ export const defaultOptions = {
 };
 
 /**
- * AutoScroll plugin which scrolls the closest scrollable parent
- * @class AutoScroll
- * @module AutoScroll
+ * Scrollable plugin which scrolls the closest scrollable parent
+ * @class Scrollable
+ * @module Scrollable
  * @extends AbstractPlugin
  */
-export default class AutoScroll extends AbstractPlugin {
+export default class Scrollable extends AbstractPlugin {
 
   /**
-   * AutoScroll constructor.
-   * @constructs AutoScroll
+   * Scrollable constructor.
+   * @constructs Scrollable
    * @param {Draggable} draggable - Draggable instance
    */
   constructor(draggable) {
     super(draggable);
 
     /**
-     * AutoScroll options
+     * Scrollable options
      * @property {Object} options
      * @property {Number} options.speed
      * @property {Number} options.sensitivity
@@ -110,7 +110,7 @@ export default class AutoScroll extends AbstractPlugin {
    * @return {Object}
    */
   getOptions() {
-    return this.draggable.options.autoScroll || {};
+    return this.draggable.options.scrollable || {};
   }
 
   /**

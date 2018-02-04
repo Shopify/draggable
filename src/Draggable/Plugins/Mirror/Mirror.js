@@ -1,7 +1,10 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
 
+export const onDragStart = Symbol('onDragStart');
+export const onDragStop = Symbol('onDragStop');
 export const onMirrorCreated = Symbol('onMirrorCreated');
 export const onMirrorMove = Symbol('onMirrorMove');
+export const onScroll = Symbol('onScroll');
 
 /**
  * Mirror default options
@@ -52,8 +55,30 @@ export default class Mirror extends AbstractPlugin {
       ...this.getOptions(),
     };
 
+    /**
+     * Scroll offset for touch devices because the mirror is positioned fixed
+     * @property {Object} scrollOffset
+     * @property {Number} scrollOffset.x
+     * @property {Number} scrollOffset.y
+     */
+    this.scrollOffset = {x: 0, y: 0};
+
+    /**
+     * Initial scroll offset for touch devices because the mirror is positioned fixed
+     * @property {Object} scrollOffset
+     * @property {Number} scrollOffset.x
+     * @property {Number} scrollOffset.y
+     */
+    this.initialScrollOffset = {
+      x: window.scrollX,
+      y: window.scrollY,
+    };
+
+    this[onDragStart] = this[onDragStart].bind(this);
+    this[onDragStop] = this[onDragStop].bind(this);
     this[onMirrorCreated] = this[onMirrorCreated].bind(this);
     this[onMirrorMove] = this[onMirrorMove].bind(this);
+    this[onScroll] = this[onScroll].bind(this);
   }
 
   /**
@@ -61,6 +86,8 @@ export default class Mirror extends AbstractPlugin {
    */
   attach() {
     this.draggable
+      .on('drag:start', this[onDragStart])
+      .on('drag:stop', this[onDragStop])
       .on('mirror:created', this[onMirrorCreated])
       .on('mirror:move', this[onMirrorMove]);
   }
@@ -70,6 +97,8 @@ export default class Mirror extends AbstractPlugin {
    */
   detach() {
     this.draggable
+      .off('drag:start', this[onDragStart])
+      .off('drag:stop', this[onDragStop])
       .off('mirror:created', this[onMirrorCreated])
       .off('mirror:move', this[onMirrorMove]);
   }
@@ -80,6 +109,33 @@ export default class Mirror extends AbstractPlugin {
    */
   getOptions() {
     return this.draggable.options.mirror || {};
+  }
+
+  [onDragStart]() {
+    if ('ontouchstart' in window) {
+      document.addEventListener('scroll', this[onScroll], true);
+    }
+
+    this.initialScrollOffset = {
+      x: window.scrollX,
+      y: window.scrollY,
+    };
+  }
+
+  [onDragStop]() {
+    if ('ontouchstart' in window) {
+      document.removeEventListener('scroll', this[onScroll], true);
+    }
+
+    this.initialScrollOffset = {x: 0, y: 0};
+    this.scrollOffset = {x: 0, y: 0};
+  }
+
+  [onScroll]() {
+    this.scrollOffset = {
+      x: window.scrollX - this.initialScrollOffset.x,
+      y: window.scrollY - this.initialScrollOffset.y,
+    };
   }
 
   /**
@@ -103,6 +159,7 @@ export default class Mirror extends AbstractPlugin {
       source,
       sensorEvent,
       mirrorClass,
+      scrollOffset: this.scrollOffset,
       options: this.options,
     };
 
@@ -131,6 +188,7 @@ export default class Mirror extends AbstractPlugin {
       options: this.options,
       initialX: this.initialX,
       initialY: this.initialY,
+      scrollOffset: this.scrollOffset,
     };
 
     return Promise.resolve(initialState)
@@ -251,7 +309,7 @@ function removeMirrorID({mirror, ...args}) {
  * @private
  */
 function positionMirror({withFrame = false, initial = false} = {}) {
-  return ({mirror, sensorEvent, mirrorOffset, initialY, initialX, options, ...args}) => {
+  return ({mirror, sensorEvent, mirrorOffset, initialY, initialX, scrollOffset, options, ...args}) => {
     return withPromise((resolve) => {
       const result = {
         mirror,
@@ -262,8 +320,8 @@ function positionMirror({withFrame = false, initial = false} = {}) {
       };
 
       if (mirrorOffset) {
-        const x = sensorEvent.clientX - mirrorOffset.left - window.scrollX;
-        const y = sensorEvent.clientY - mirrorOffset.top - window.scrollY;
+        const x = sensorEvent.clientX - mirrorOffset.left - scrollOffset.x;
+        const y = sensorEvent.clientY - mirrorOffset.top - scrollOffset.y;
 
         if ((options.xAxis && options.yAxis) || initial) {
           mirror.style.transform = `translate3d(${x}px, ${y}px, 0)`;

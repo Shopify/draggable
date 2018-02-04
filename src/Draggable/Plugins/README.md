@@ -4,5 +4,5 @@ These plugins are included by draggable by default
 
 - [Accessibility](Accessibility)
 - [Mirror](Mirror)
-- [AutoScroll](AutoScroll)
+- [Scrollable](Scrollable)
 - [Announcement](Announcement)

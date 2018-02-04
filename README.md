@@ -75,7 +75,7 @@ You can find the documentation for each module within their respective directori
   - [Plugins](src/Draggable/Plugins)
     - [Accessibility](src/Draggable/Plugins/Accessibility)
     - [Mirror](src/Draggable/Plugins/Mirror)
-    - [AutoScroll](src/Draggable/Plugins/AutoScroll)
+    - [Scrollable](src/Draggable/Plugins/Scrollable)
   - [Sensors](src/Draggable/Sensors)
     - [DragSensor](src/Draggable/Sensors/DragSensor)
     - [ForceTouchSensor](src/Draggable/Sensors/ForceTouchSensor)

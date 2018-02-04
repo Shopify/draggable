@@ -74,6 +74,7 @@ You can find the documentation for each module within their respective directori
   - [MirrorEvent](src/Draggable/MirrorEvent)
   - [Plugins](src/Draggable/Plugins)
     - [Accessibility](src/Draggable/Plugins/Accessibility)
+    - [Announcement](src/Draggable/Plugins/Announcement)
     - [Mirror](src/Draggable/Plugins/Mirror)
     - [Scrollable](src/Draggable/Plugins/Scrollable)
   - [Sensors](src/Draggable/Sensors)

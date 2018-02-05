@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../../">
+  <title data-ice="title">src/Draggable/Plugins/AutoScroll/AutoScroll.js | @shopify/draggable</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="The JavaScript Drag &amp; Drop library your grandparents warned you about."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@shopify/draggable"><meta property="twitter:description" content="The JavaScript Drag &amp; Drop library your grandparents warned you about."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/Shopify/draggable"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable">Draggable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Draggable.js~Draggable.html">Draggable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-dragevent">Draggable/DragEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragEvent.html">DragEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragMoveEvent.html">DragMoveEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOutContainerEvent.html">DragOutContainerEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOutEvent.html">DragOutEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOverContainerEvent.html">DragOverContainerEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOverEvent.html">DragOverEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragPressureEvent.html">DragPressureEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragStartEvent.html">DragStartEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragStopEvent.html">DragStopEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-draggableevent">Draggable/DraggableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableDestroyEvent.html">DraggableDestroyEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableEvent.html">DraggableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableInitializedEvent.html">DraggableInitializedEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-mirrorevent">Draggable/MirrorEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorAttachedEvent.html">MirrorAttachedEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorCreateEvent.html">MirrorCreateEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorCreatedEvent.html">MirrorCreatedEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorDestroyEvent.html">MirrorDestroyEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorEvent.html">MirrorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorMoveEvent.html">MirrorMoveEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-accessibility">Draggable/Plugins/Accessibility</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/Accessibility/Accessibility.js~Accessibility.html">Accessibility</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-autoscroll">Draggable/Plugins/AutoScroll</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html">AutoScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragMove">onDragMove</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragStart">onDragStart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragStop">onDragStop</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-scroll">scroll</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-mirror">Draggable/Plugins/Mirror</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html">Mirror</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-dragsensor">Draggable/Sensors/DragSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/DragSensor/DragSensor.js~DragSensor.html">DragSensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-forcetouchsensor">Draggable/Sensors/ForceTouchSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/ForceTouchSensor/ForceTouchSensor.js~ForceTouchSensor.html">ForceTouchSensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-mousesensor">Draggable/Sensors/MouseSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/MouseSensor/MouseSensor.js~MouseSensor.html">MouseSensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-sensor">Draggable/Sensors/Sensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/Sensor/Sensor.js~Sensor.html">Sensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-sensorevent">Draggable/Sensors/SensorEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragMoveSensorEvent.html">DragMoveSensorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragPressureSensorEvent.html">DragPressureSensorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragStartSensorEvent.html">DragStartSensorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragStopSensorEvent.html">DragStopSensorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~SensorEvent.html">SensorEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-touchsensor">Draggable/Sensors/TouchSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/TouchSensor/TouchSensor.js~TouchSensor.html">TouchSensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#droppable">Droppable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Droppable/Droppable.js~Droppable.html">Droppable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#droppable-droppableevent">Droppable/DroppableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Droppable/DroppableEvent/DroppableEvent.js~DroppableEvent.html">DroppableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Droppable/DroppableEvent/DroppableEvent.js~DroppableOutEvent.html">DroppableOutEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Droppable/DroppableEvent/DroppableEvent.js~DroppableOverEvent.html">DroppableOverEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-collidable">Plugins/Collidable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Collidable/Collidable.js~Collidable.html">Collidable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-collidable-collidableevent">Plugins/Collidable/CollidableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Collidable/CollidableEvent/CollidableEvent.js~CollidableEvent.html">CollidableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Collidable/CollidableEvent/CollidableEvent.js~CollidableInEvent.html">CollidableInEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Collidable/CollidableEvent/CollidableEvent.js~CollidableOutEvent.html">CollidableOutEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-snappable">Plugins/Snappable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Snappable/Snappable.js~Snappable.html">Snappable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-snappable-snappableevent">Plugins/Snappable/SnappableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapEvent.html">SnapEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapInEvent.html">SnapInEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapOutEvent.html">SnapOutEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-swapanimation">Plugins/SwapAnimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html">SwapAnimation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#sortable">Sortable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/Sortable.js~Sortable.html">Sortable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#sortable-sortableevent">Sortable/SortableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableEvent.html">SortableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableSortEvent.html">SortableSortEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableSortedEvent.html">SortableSortedEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableStartEvent.html">SortableStartEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableStopEvent.html">SortableStopEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#swappable">Swappable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/Swappable.js~Swappable.html">Swappable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#swappable-swappableevent">Swappable/SwappableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableEvent.html">SwappableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableStartEvent.html">SwappableStartEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableStopEvent.html">SwappableStopEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableSwapEvent.html">SwappableSwapEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableSwappedEvent.html">SwappableSwappedEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-abstractevent">shared/AbstractEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/shared/AbstractEvent/AbstractEvent.js~AbstractEvent.html">AbstractEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-abstractplugin">shared/AbstractPlugin</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/shared/AbstractPlugin/AbstractPlugin.js~AbstractPlugin.html">AbstractPlugin</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-utils-closest">shared/utils/closest</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-closest">closest</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/Draggable/Plugins/AutoScroll/AutoScroll.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import AbstractPlugin from &apos;shared/AbstractPlugin&apos;;
+import {closest} from &apos;shared/utils&apos;;
+
+export const onDragStart = Symbol(&apos;onDragStart&apos;);
+export const onDragMove = Symbol(&apos;onDragMove&apos;);
+export const onDragStop = Symbol(&apos;onDragStop&apos;);
+export const scroll = Symbol(&apos;scroll&apos;);
+
+/**
+ * AutoScroll default options
+ * @property {Object} defaultOptions
+ * @property {Number} defaultOptions.speed
+ * @property {Number} defaultOptions.sensitivity
+ * @type {Object}
+ */
+export const defaultOptions = {
+  speed: 10,
+  sensitivity: 30,
+};
+
+/**
+ * AutoScroll plugin which scrolls the closest scrollable parent
+ * @class AutoScroll
+ * @module AutoScroll
+ */
+export default class AutoScroll extends AbstractPlugin {
+
+  /**
+   * AutoScroll constructor.
+   * @constructs AutoScroll
+   * @param {Draggable} draggable - Draggable instance
+   */
+  constructor(draggable) {
+    super(draggable);
+
+    /**
+     * AutoScroll options
+     * @property {Object} options
+     * @property {Number} options.speed
+     * @property {Number} options.sensitivity
+     * @type {Object}
+     */
+    this.options = {
+      ...defaultOptions,
+      ...this.getOptions(),
+    };
+
+    /**
+     * Keeps current mouse position
+     * @property {Object} currentMousePosition
+     * @property {Number} currentMousePosition.clientX
+     * @property {Number} currentMousePosition.clientY
+     * @type {Object|null}
+     */
+    this.currentMousePosition = null;
+
+    /**
+     * Scroll animation frame
+     * @property scrollAnimationFrame
+     * @type {Number|null}
+     */
+    this.scrollAnimationFrame = null;
+
+    /**
+     * Closest scrollable element
+     * @property scrollableElement
+     * @type {HTMLElement|null}
+     */
+    this.scrollableElement = null;
+
+    /**
+     * Animation frame looking for the closest scrollable element
+     * @property findScrollableElementFrame
+     * @type {Number|null}
+     */
+    this.findScrollableElementFrame = null;
+
+    this[onDragStart] = this[onDragStart].bind(this);
+    this[onDragMove] = this[onDragMove].bind(this);
+    this[onDragStop] = this[onDragStop].bind(this);
+    this[scroll] = this[scroll].bind(this);
+  }
+
+  /**
+   * Attaches plugins event listeners
+   */
+  attach() {
+    this.draggable
+      .on(&apos;drag:start&apos;, this[onDragStart])
+      .on(&apos;drag:move&apos;, this[onDragMove])
+      .on(&apos;drag:stop&apos;, this[onDragStop]);
+  }
+
+  /**
+   * Detaches plugins event listeners
+   */
+  detach() {
+    this.draggable
+      .off(&apos;drag:start&apos;, this[onDragStart])
+      .off(&apos;drag:move&apos;, this[onDragMove])
+      .off(&apos;drag:stop&apos;, this[onDragStop]);
+  }
+
+  /**
+   * Returns options passed through draggable
+   * @return {Object}
+   */
+  getOptions() {
+    return this.draggable.options.autoScroll || {};
+  }
+
+  /**
+   * Drag start handler. Finds closest scrollable parent in separate frame
+   * @private
+   */
+  [onDragStart](dragEvent) {
+    this.findScrollableElementFrame = requestAnimationFrame(() =&gt; {
+      this.scrollableElement = closestScrollableElement(dragEvent.source);
+    });
+  }
+
+  /**
+   * Drag move handler. Remembers mouse position and initiates scrolling
+   * @private
+   */
+  [onDragMove](dragEvent) {
+    this.findScrollableElementFrame = requestAnimationFrame(() =&gt; {
+      this.scrollableElement = closestScrollableElement(dragEvent.sensorEvent.target);
+    });
+
+    if (!this.scrollableElement) {
+      return;
+    }
+
+    const sensorEvent = dragEvent.sensorEvent;
+
+    this.currentMousePosition = {
+      clientX: sensorEvent.clientX,
+      clientY: sensorEvent.clientY,
+    };
+
+    this.scrollAnimationFrame = requestAnimationFrame(this[scroll]);
+  }
+
+  /**
+   * Drag stop handler. Cancels scroll animations and resets state
+   * @private
+   */
+  [onDragStop]() {
+    cancelAnimationFrame(this.scrollAnimationFrame);
+    cancelAnimationFrame(this.findScrollableElementFrame);
+
+    this.scrollableElement = null;
+    this.scrollAnimationFrame = null;
+    this.findScrollableElementFrame = null;
+    this.currentMousePosition = null;
+  }
+
+  /**
+   * Scroll function that does the heavylifting
+   * @private
+   */
+  [scroll]() {
+    if (!this.scrollableElement) {
+      return;
+    }
+
+    cancelAnimationFrame(this.scrollAnimationFrame);
+
+    const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
+    const rect = this.scrollableElement.getBoundingClientRect();
+
+    let offsetY = (Math.abs(rect.bottom - this.currentMousePosition.clientY) &lt;= this.options.sensitivity) - (Math.abs(rect.top - this.currentMousePosition.clientY) &lt;= this.options.sensitivity);
+    let offsetX = (Math.abs(rect.right - this.currentMousePosition.clientX) &lt;= this.options.sensitivity) - (Math.abs(rect.left - this.currentMousePosition.clientX) &lt;= this.options.sensitivity);
+
+    if (!offsetX &amp;&amp; !offsetY) {
+      offsetX = (windowWidth - this.currentMousePosition.clientX &lt;= this.options.sensitivity) - (this.currentMousePosition.clientX &lt;= this.options.sensitivity);
+      offsetY = (windowHeight - this.currentMousePosition.clientY &lt;= this.options.sensitivity) - (this.currentMousePosition.clientY &lt;= this.options.sensitivity);
+    }
+
+    this.scrollableElement.scrollTop += offsetY * this.options.speed;
+    this.scrollableElement.scrollLeft += offsetX * this.options.speed;
+
+    this.scrollAnimationFrame = requestAnimationFrame(this[scroll]);
+  }
+}
+
+/**
+ * Checks if element has overflow
+ * @param {HTMLElement} element
+ * @return {Boolean}
+ * @private
+ */
+function hasOverflow(element) {
+  const overflowRegex = /(auto|scroll)/;
+  const computedStyles = getComputedStyle(element, null);
+
+  const overflow = computedStyles.getPropertyValue(&apos;overflow&apos;) +
+                   computedStyles.getPropertyValue(&apos;overflow-y&apos;) +
+                   computedStyles.getPropertyValue(&apos;overflow-x&apos;);
+
+  return overflowRegex.test(overflow);
+}
+
+/**
+ * Finds closest scrollable element
+ * @param {HTMLElement} element
+ * @return {HTMLElement}
+ * @private
+ */
+function closestScrollableElement(element) {
+  const scrollableElement = closest(element, (currentElement) =&gt; hasOverflow(currentElement));
+
+  return scrollableElement || document.scrollingElement || document.documentElement || null;
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

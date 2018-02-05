@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">SwapAnimation | @shopify/draggable</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="The JavaScript Drag &amp; Drop library your grandparents warned you about."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@shopify/draggable"><meta property="twitter:description" content="The JavaScript Drag &amp; Drop library your grandparents warned you about."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/Shopify/draggable"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable">Draggable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Draggable.js~Draggable.html">Draggable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-dragevent">Draggable/DragEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragEvent.html">DragEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragMoveEvent.html">DragMoveEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOutContainerEvent.html">DragOutContainerEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOutEvent.html">DragOutEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOverContainerEvent.html">DragOverContainerEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOverEvent.html">DragOverEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragPressureEvent.html">DragPressureEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragStartEvent.html">DragStartEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragStopEvent.html">DragStopEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-draggableevent">Draggable/DraggableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableDestroyEvent.html">DraggableDestroyEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableEvent.html">DraggableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableInitializedEvent.html">DraggableInitializedEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-mirrorevent">Draggable/MirrorEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorAttachedEvent.html">MirrorAttachedEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorCreateEvent.html">MirrorCreateEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorCreatedEvent.html">MirrorCreatedEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorDestroyEvent.html">MirrorDestroyEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorEvent.html">MirrorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorMoveEvent.html">MirrorMoveEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-accessibility">Draggable/Plugins/Accessibility</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/Accessibility/Accessibility.js~Accessibility.html">Accessibility</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-autoscroll">Draggable/Plugins/AutoScroll</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html">AutoScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragMove">onDragMove</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragStart">onDragStart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragStop">onDragStop</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-scroll">scroll</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-mirror">Draggable/Plugins/Mirror</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html">Mirror</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-dragsensor">Draggable/Sensors/DragSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/DragSensor/DragSensor.js~DragSensor.html">DragSensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-forcetouchsensor">Draggable/Sensors/ForceTouchSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/ForceTouchSensor/ForceTouchSensor.js~ForceTouchSensor.html">ForceTouchSensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-mousesensor">Draggable/Sensors/MouseSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/MouseSensor/MouseSensor.js~MouseSensor.html">MouseSensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-sensor">Draggable/Sensors/Sensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/Sensor/Sensor.js~Sensor.html">Sensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-sensorevent">Draggable/Sensors/SensorEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragMoveSensorEvent.html">DragMoveSensorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragPressureSensorEvent.html">DragPressureSensorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragStartSensorEvent.html">DragStartSensorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragStopSensorEvent.html">DragStopSensorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~SensorEvent.html">SensorEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-touchsensor">Draggable/Sensors/TouchSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/TouchSensor/TouchSensor.js~TouchSensor.html">TouchSensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#droppable">Droppable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Droppable/Droppable.js~Droppable.html">Droppable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#droppable-droppableevent">Droppable/DroppableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Droppable/DroppableEvent/DroppableEvent.js~DroppableEvent.html">DroppableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Droppable/DroppableEvent/DroppableEvent.js~DroppableOutEvent.html">DroppableOutEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Droppable/DroppableEvent/DroppableEvent.js~DroppableOverEvent.html">DroppableOverEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-collidable">Plugins/Collidable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Collidable/Collidable.js~Collidable.html">Collidable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-collidable-collidableevent">Plugins/Collidable/CollidableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Collidable/CollidableEvent/CollidableEvent.js~CollidableEvent.html">CollidableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Collidable/CollidableEvent/CollidableEvent.js~CollidableInEvent.html">CollidableInEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Collidable/CollidableEvent/CollidableEvent.js~CollidableOutEvent.html">CollidableOutEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-snappable">Plugins/Snappable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Snappable/Snappable.js~Snappable.html">Snappable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-snappable-snappableevent">Plugins/Snappable/SnappableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapEvent.html">SnapEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapInEvent.html">SnapInEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapOutEvent.html">SnapOutEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-swapanimation">Plugins/SwapAnimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html">SwapAnimation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#sortable">Sortable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/Sortable.js~Sortable.html">Sortable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#sortable-sortableevent">Sortable/SortableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableEvent.html">SortableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableSortEvent.html">SortableSortEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableSortedEvent.html">SortableSortedEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableStartEvent.html">SortableStartEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableStopEvent.html">SortableStopEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#swappable">Swappable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/Swappable.js~Swappable.html">Swappable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#swappable-swappableevent">Swappable/SwappableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableEvent.html">SwappableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableStartEvent.html">SwappableStartEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableStopEvent.html">SwappableStopEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableSwapEvent.html">SwappableSwapEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableSwappedEvent.html">SwappableSwappedEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-abstractevent">shared/AbstractEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/shared/AbstractEvent/AbstractEvent.js~AbstractEvent.html">AbstractEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-abstractplugin">shared/AbstractPlugin</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/shared/AbstractPlugin/AbstractPlugin.js~AbstractPlugin.html">AbstractPlugin</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-utils-closest">shared/utils/closest</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-closest">closest</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div class="header-notice">
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import SwapAnimation from &apos;<span><a href="file/src/Plugins/SwapAnimation/SwapAnimation.js.html#lineNumber8">@shopify/draggable/src/Plugins/SwapAnimation/SwapAnimation.js</a></span>&apos;</code></pre></div>
+  <span data-ice="access">public</span>
+  <span data-ice="kind">class</span>
+  
+  
+  
+  <span data-ice="source">| <span><a href="file/src/Plugins/SwapAnimation/SwapAnimation.js.html#lineNumber8">source</a></span></span>
+</div>
+
+<div class="self-detail detail">
+  <h1 data-ice="name">SwapAnimation</h1>
+
+  
+
+  
+  
+  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span>shared/AbstractPlugin~AbstractPlugin</span> &#x2192; SwapAnimation</div></div>
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+</div>
+
+
+
+<div data-ice="constructorSummary"><h2>Constructor Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Public Constructor</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">()</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<div data-ice="memberSummary"><h2>Member Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Public Members</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html#instance-member-lastAnimationFrame">lastAnimationFrame</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html#instance-member-options">options</a></span></span><span class="code" data-ice="signature">: {...defaultOptions: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>, ...undefined: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>}</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+<div data-ice="methodSummary"><h2>Method Summary</h2><table class="summary" data-ice="summary">
+  <thead><tr><td data-ice="title" colspan="3">Public Methods</td></tr></thead>
+  <tbody>
+  
+  <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html#instance-method-attach">attach</a></span></span><span class="code" data-ice="signature">()</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html#instance-method-detach">detach</a></span></span><span class="code" data-ice="signature">()</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html#instance-method-getOptions">getOptions</a></span></span><span class="code" data-ice="signature">(): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html#instance-method-onSortableSorted">onSortableSorted</a></span></span><span class="code" data-ice="signature">(objectPattern: {&quot;oldIndex&quot;: <span>*</span>, &quot;newIndex&quot;: <span>*</span>, &quot;dragEvent&quot;: <span>*</span>})</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+<div data-ice="constructorDetails"><h2 data-ice="title">Public Constructors</h2>
+
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-constructor-constructor">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">()</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Plugins/SwapAnimation/SwapAnimation.js.html#lineNumber9">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+</div>
+<div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
+
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-lastAnimationFrame">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">lastAnimationFrame</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Plugins/SwapAnimation/SwapAnimation.js.html#lineNumber34">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-member-options">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">options</span><span class="code" data-ice="signature">: {...defaultOptions: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>, ...undefined: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>}</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Plugins/SwapAnimation/SwapAnimation.js.html#lineNumber12">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+</div>
+<div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
+
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-attach">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">attach</span><span class="code" data-ice="signature">()</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Plugins/SwapAnimation/SwapAnimation.js.html#lineNumber20">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-detach">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">detach</span><span class="code" data-ice="signature">()</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Plugins/SwapAnimation/SwapAnimation.js.html#lineNumber24">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-getOptions">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">getOptions</span><span class="code" data-ice="signature">(): <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Plugins/SwapAnimation/SwapAnimation.js.html#lineNumber43">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="instance-method-onSortableSorted">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">onSortableSorted</span><span class="code" data-ice="signature">(objectPattern: {&quot;oldIndex&quot;: <span>*</span>, &quot;newIndex&quot;: <span>*</span>, &quot;dragEvent&quot;: <span>*</span>})</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/Plugins/SwapAnimation/SwapAnimation.js.html#lineNumber28">source</a></span></span>
+    </span>
+  </h3>
+
+  
+  
+  
+  
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">objectPattern</td>
+      <td data-ice="type" class="code">{&quot;oldIndex&quot;: <span>*</span>, &quot;newIndex&quot;: <span>*</span>, &quot;dragEvent&quot;: <span>*</span>}</td>
+      <td data-ice="appendix"><ul><li>default: {&quot;oldIndex&quot;:null,&quot;newIndex&quot;:null,&quot;dragEvent&quot;:null}</li></ul></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

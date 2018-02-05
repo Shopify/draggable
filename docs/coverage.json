@@ -1,0 +1,362 @@
+{
+  "coverage": "56.1%",
+  "expectCount": 442,
+  "actualCount": 248,
+  "files": {
+    "src/Draggable/DragEvent/DragEvent.js": {
+      "expectCount": 34,
+      "actualCount": 23,
+      "undocumentLines": [
+        10,
+        92,
+        93,
+        103,
+        113,
+        114,
+        144,
+        174,
+        194,
+        214,
+        234
+      ]
+    },
+    "src/Draggable/Draggable.js": {
+      "expectCount": 45,
+      "actualCount": 24,
+      "undocumentLines": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        40,
+        92,
+        99,
+        100,
+        339,
+        340,
+        355,
+        368,
+        484,
+        500,
+        599,
+        600,
+        602,
+        667,
+        671,
+        675
+      ]
+    },
+    "src/Draggable/DraggableEvent/DraggableEvent.js": {
+      "expectCount": 7,
+      "actualCount": 4,
+      "undocumentLines": [
+        10,
+        30,
+        40
+      ]
+    },
+    "src/Draggable/MirrorEvent/MirrorEvent.js": {
+      "expectCount": 23,
+      "actualCount": 16,
+      "undocumentLines": [
+        81,
+        91,
+        111,
+        131,
+        132,
+        152,
+        153
+      ]
+    },
+    "src/Draggable/Plugins/Accessibility/Accessibility.js": {
+      "expectCount": 11,
+      "actualCount": 6,
+      "undocumentLines": [
+        3,
+        4,
+        5,
+        83,
+        87
+      ]
+    },
+    "src/Draggable/Plugins/AutoScroll/AutoScroll.js": {
+      "expectCount": 21,
+      "actualCount": 17,
+      "undocumentLines": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    "src/Draggable/Plugins/Mirror/Mirror.js": {
+      "expectCount": 19,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        9,
+        10,
+        13,
+        22,
+        28,
+        34,
+        38,
+        42,
+        43,
+        44,
+        67,
+        82,
+        89,
+        100,
+        127,
+        134,
+        142,
+        176
+      ]
+    },
+    "src/Draggable/Sensors/DragSensor/DragSensor.js": {
+      "expectCount": 23,
+      "actualCount": 14,
+      "undocumentLines": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        90,
+        109
+      ]
+    },
+    "src/Draggable/Sensors/ForceTouchSensor/ForceTouchSensor.js": {
+      "expectCount": 21,
+      "actualCount": 12,
+      "undocumentLines": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        113,
+        114
+      ]
+    },
+    "src/Draggable/Sensors/MouseSensor/MouseSensor.js": {
+      "expectCount": 18,
+      "actualCount": 11,
+      "undocumentLines": [
+        10,
+        11,
+        12,
+        13,
+        111,
+        112,
+        194
+      ]
+    },
+    "src/Draggable/Sensors/Sensor/Sensor.js": {
+      "expectCount": 10,
+      "actualCount": 9,
+      "undocumentLines": [
+        71
+      ]
+    },
+    "src/Draggable/Sensors/SensorEvent/SensorEvent.js": {
+      "expectCount": 15,
+      "actualCount": 11,
+      "undocumentLines": [
+        80,
+        90,
+        100,
+        110
+      ]
+    },
+    "src/Draggable/Sensors/TouchSensor/TouchSensor.js": {
+      "expectCount": 20,
+      "actualCount": 12,
+      "undocumentLines": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        102,
+        136,
+        226
+      ]
+    },
+    "src/Droppable/Droppable.js": {
+      "expectCount": 24,
+      "actualCount": 14,
+      "undocumentLines": [
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        22,
+        44
+      ]
+    },
+    "src/Droppable/DroppableEvent/DroppableEvent.js": {
+      "expectCount": 11,
+      "actualCount": 6,
+      "undocumentLines": [
+        10,
+        30,
+        31,
+        51,
+        52
+      ]
+    },
+    "src/Plugins/Collidable/Collidable.js": {
+      "expectCount": 11,
+      "actualCount": 0,
+      "undocumentLines": [
+        9,
+        10,
+        18,
+        23,
+        28,
+        31,
+        60,
+        63,
+        75,
+        78,
+        85
+      ]
+    },
+    "src/Plugins/Collidable/CollidableEvent/CollidableEvent.js": {
+      "expectCount": 9,
+      "actualCount": 6,
+      "undocumentLines": [
+        10,
+        30,
+        50
+      ]
+    },
+    "src/Plugins/Snappable/Snappable.js": {
+      "expectCount": 9,
+      "actualCount": 0,
+      "undocumentLines": [
+        8,
+        9,
+        18,
+        28,
+        38,
+        43,
+        46,
+        50,
+        86
+      ]
+    },
+    "src/Plugins/Snappable/SnappableEvent/SnappableEvent.js": {
+      "expectCount": 9,
+      "actualCount": 4,
+      "undocumentLines": [
+        10,
+        30,
+        31,
+        41,
+        42
+      ]
+    },
+    "src/Plugins/SwapAnimation/SwapAnimation.js": {
+      "expectCount": 11,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        8,
+        9,
+        12,
+        20,
+        24,
+        28,
+        34,
+        43,
+        48,
+        67
+      ]
+    },
+    "src/Sortable/Sortable.js": {
+      "expectCount": 19,
+      "actualCount": 10,
+      "undocumentLines": [
+        10,
+        11,
+        12,
+        13,
+        219,
+        223,
+        239,
+        247,
+        260
+      ]
+    },
+    "src/Sortable/SortableEvent/SortableEvent.js": {
+      "expectCount": 26,
+      "actualCount": 19,
+      "undocumentLines": [
+        10,
+        30,
+        31,
+        61,
+        62,
+        102,
+        152
+      ]
+    },
+    "src/Swappable/Swappable.js": {
+      "expectCount": 12,
+      "actualCount": 7,
+      "undocumentLines": [
+        10,
+        11,
+        12,
+        136,
+        142
+      ]
+    },
+    "src/Swappable/SwappableEvent/SwappableEvent.js": {
+      "expectCount": 16,
+      "actualCount": 9,
+      "undocumentLines": [
+        10,
+        30,
+        31,
+        41,
+        42,
+        72,
+        92
+      ]
+    },
+    "src/shared/AbstractEvent/AbstractEvent.js": {
+      "expectCount": 11,
+      "actualCount": 8,
+      "undocumentLines": [
+        1,
+        37,
+        38
+      ]
+    },
+    "src/shared/AbstractPlugin/AbstractPlugin.js": {
+      "expectCount": 5,
+      "actualCount": 5,
+      "undocumentLines": []
+    },
+    "src/shared/utils/closest/closest.js": {
+      "expectCount": 2,
+      "actualCount": 1,
+      "undocumentLines": [
+        1
+      ]
+    }
+  }
+}

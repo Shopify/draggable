@@ -1,0 +1,158 @@
+[
+  {
+    "name": "DragSensor#[onMouseUp]",
+    "filePath": "src/Draggable/Sensors/DragSensor/DragSensor.js",
+    "lines": [
+      {
+        "lineNumber": 219,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 220,
+        "line": "   * Mouse up handler"
+      },
+      {
+        "lineNumber": 221,
+        "line": "   * @private"
+      },
+      {
+        "lineNumber": 222,
+        "line": "   * @param {Event} event - Mouse up event"
+      },
+      {
+        "lineNumber": 223,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 224,
+        "line": "  [onMouseUp]() {"
+      }
+    ],
+    "codeParams": [],
+    "docParams": [
+      "event"
+    ]
+  },
+  {
+    "name": "DragSensor#[reset]",
+    "filePath": "src/Draggable/Sensors/DragSensor/DragSensor.js",
+    "lines": [
+      {
+        "lineNumber": 228,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 229,
+        "line": "   * Mouse up handler"
+      },
+      {
+        "lineNumber": 230,
+        "line": "   * @private"
+      },
+      {
+        "lineNumber": 231,
+        "line": "   * @param {Event} event - Mouse up event"
+      },
+      {
+        "lineNumber": 232,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 233,
+        "line": "  [reset]() {"
+      }
+    ],
+    "codeParams": [],
+    "docParams": [
+      "event"
+    ]
+  },
+  {
+    "name": "Droppable#[onDragStop]",
+    "filePath": "src/Droppable/Droppable.js",
+    "lines": [
+      {
+        "lineNumber": 147,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 148,
+        "line": "   * Drag stop handler"
+      },
+      {
+        "lineNumber": 149,
+        "line": "   * @private"
+      },
+      {
+        "lineNumber": 150,
+        "line": "   * @param {DragStopEvent} event - Drag stop event"
+      },
+      {
+        "lineNumber": 151,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 152,
+        "line": "  [onDragStop]() {"
+      }
+    ],
+    "codeParams": [],
+    "docParams": [
+      "event"
+    ]
+  },
+  {
+    "name": "closest",
+    "filePath": "src/shared/utils/closest/closest.js",
+    "lines": [
+      {
+        "lineNumber": 5,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 6,
+        "line": " * Get the closest parent element of a given element that matches the given"
+      },
+      {
+        "lineNumber": 7,
+        "line": " * selector string or matching function"
+      },
+      {
+        "lineNumber": 8,
+        "line": " *"
+      },
+      {
+        "lineNumber": 9,
+        "line": " * @param {Element} element The child element to find a parent of"
+      },
+      {
+        "lineNumber": 10,
+        "line": " * @param {String|Function} selector The string or function to use to match"
+      },
+      {
+        "lineNumber": 11,
+        "line": " *     the parent element"
+      },
+      {
+        "lineNumber": 12,
+        "line": " * @return {Element|null}"
+      },
+      {
+        "lineNumber": 13,
+        "line": " */"
+      },
+      {
+        "lineNumber": 14,
+        "line": "export default function closest(element, value) {"
+      }
+    ],
+    "codeParams": [
+      "element",
+      "value"
+    ],
+    "docParams": [
+      "element",
+      "selector"
+    ]
+  }
+]

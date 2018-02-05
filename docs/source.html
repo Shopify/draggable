@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="">
+  <title data-ice="title">Source | @shopify/draggable</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="The JavaScript Drag &amp; Drop library your grandparents warned you about."><meta property="twitter:card" content="summary"><meta property="twitter:title" content="@shopify/draggable"><meta property="twitter:description" content="The JavaScript Drag &amp; Drop library your grandparents warned you about."></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/Shopify/draggable"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable">Draggable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Draggable.js~Draggable.html">Draggable</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-dragevent">Draggable/DragEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragEvent.html">DragEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragMoveEvent.html">DragMoveEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOutContainerEvent.html">DragOutContainerEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOutEvent.html">DragOutEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOverContainerEvent.html">DragOverContainerEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOverEvent.html">DragOverEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragPressureEvent.html">DragPressureEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragStartEvent.html">DragStartEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragStopEvent.html">DragStopEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-draggableevent">Draggable/DraggableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableDestroyEvent.html">DraggableDestroyEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableEvent.html">DraggableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableInitializedEvent.html">DraggableInitializedEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-mirrorevent">Draggable/MirrorEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorAttachedEvent.html">MirrorAttachedEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorCreateEvent.html">MirrorCreateEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorCreatedEvent.html">MirrorCreatedEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorDestroyEvent.html">MirrorDestroyEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorEvent.html">MirrorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorMoveEvent.html">MirrorMoveEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-accessibility">Draggable/Plugins/Accessibility</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/Accessibility/Accessibility.js~Accessibility.html">Accessibility</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-autoscroll">Draggable/Plugins/AutoScroll</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html">AutoScroll</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragMove">onDragMove</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragStart">onDragStart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragStop">onDragStop</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-scroll">scroll</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-mirror">Draggable/Plugins/Mirror</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html">Mirror</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-dragsensor">Draggable/Sensors/DragSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/DragSensor/DragSensor.js~DragSensor.html">DragSensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-forcetouchsensor">Draggable/Sensors/ForceTouchSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/ForceTouchSensor/ForceTouchSensor.js~ForceTouchSensor.html">ForceTouchSensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-mousesensor">Draggable/Sensors/MouseSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/MouseSensor/MouseSensor.js~MouseSensor.html">MouseSensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-sensor">Draggable/Sensors/Sensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/Sensor/Sensor.js~Sensor.html">Sensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-sensorevent">Draggable/Sensors/SensorEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragMoveSensorEvent.html">DragMoveSensorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragPressureSensorEvent.html">DragPressureSensorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragStartSensorEvent.html">DragStartSensorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragStopSensorEvent.html">DragStopSensorEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~SensorEvent.html">SensorEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-touchsensor">Draggable/Sensors/TouchSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/TouchSensor/TouchSensor.js~TouchSensor.html">TouchSensor</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#droppable">Droppable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Droppable/Droppable.js~Droppable.html">Droppable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#droppable-droppableevent">Droppable/DroppableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Droppable/DroppableEvent/DroppableEvent.js~DroppableEvent.html">DroppableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Droppable/DroppableEvent/DroppableEvent.js~DroppableOutEvent.html">DroppableOutEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Droppable/DroppableEvent/DroppableEvent.js~DroppableOverEvent.html">DroppableOverEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-collidable">Plugins/Collidable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Collidable/Collidable.js~Collidable.html">Collidable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-collidable-collidableevent">Plugins/Collidable/CollidableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Collidable/CollidableEvent/CollidableEvent.js~CollidableEvent.html">CollidableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Collidable/CollidableEvent/CollidableEvent.js~CollidableInEvent.html">CollidableInEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Collidable/CollidableEvent/CollidableEvent.js~CollidableOutEvent.html">CollidableOutEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-snappable">Plugins/Snappable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Snappable/Snappable.js~Snappable.html">Snappable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-snappable-snappableevent">Plugins/Snappable/SnappableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapEvent.html">SnapEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapInEvent.html">SnapInEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapOutEvent.html">SnapOutEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#plugins-swapanimation">Plugins/SwapAnimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html">SwapAnimation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#sortable">Sortable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/Sortable.js~Sortable.html">Sortable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#sortable-sortableevent">Sortable/SortableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableEvent.html">SortableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableSortEvent.html">SortableSortEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableSortedEvent.html">SortableSortedEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableStartEvent.html">SortableStartEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableStopEvent.html">SortableStopEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#swappable">Swappable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/Swappable.js~Swappable.html">Swappable</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#swappable-swappableevent">Swappable/SwappableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableEvent.html">SwappableEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableStartEvent.html">SwappableStartEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableStopEvent.html">SwappableStopEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableSwapEvent.html">SwappableSwapEvent</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableSwappedEvent.html">SwappableSwappedEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-abstractevent">shared/AbstractEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/shared/AbstractEvent/AbstractEvent.js~AbstractEvent.html">AbstractEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-abstractplugin">shared/AbstractPlugin</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/shared/AbstractPlugin/AbstractPlugin.js~AbstractPlugin.html">AbstractPlugin</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#shared-utils-closest">shared/utils/closest</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-closest">closest</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">248/442</span></h1>
+
+<table class="files-summary" data-ice="files" data-use-coverage="true">
+  <thead>
+    <tr>
+      <td>File</td>
+      <td>Identifier</td>
+      <td class="coverage">Document</td>
+      <td style="display: none;">Size</td>
+      <td style="display: none;">Lines</td>
+      <td style="display: none;">Updated</td>
+    </tr>
+  </thead>
+  <tbody>
+    
+  <tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/DragEvent/DragEvent.js.html#errorLines=10,103,113,114,144,174,194,214,234,92,93">src/Draggable/DragEvent/DragEvent.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragEvent.html">DragEvent</a></span>
+<span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragMoveEvent.html">DragMoveEvent</a></span>
+<span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOutContainerEvent.html">DragOutContainerEvent</a></span>
+<span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOutEvent.html">DragOutEvent</a></span>
+<span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOverContainerEvent.html">DragOverContainerEvent</a></span>
+<span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragOverEvent.html">DragOverEvent</a></span>
+<span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragPressureEvent.html">DragPressureEvent</a></span>
+<span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragStartEvent.html">DragStartEvent</a></span>
+<span><a href="class/src/Draggable/DragEvent/DragEvent.js~DragStopEvent.html">DragStopEvent</a></span></td>
+      <td class="coverage"><span data-ice="coverage">67 %</span><span data-ice="coverageCount" class="coverage-count">23/34</span></td>
+      <td style="display: none;" data-ice="size">4235 byte</td>
+      <td style="display: none;" data-ice="lines">235</td>
+      <td style="display: none;" data-ice="updated">2017-11-05 01:10:46 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/DragEvent/index.js.html">src/Draggable/DragEvent/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">188 byte</td>
+      <td style="display: none;" data-ice="lines">10</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Draggable.js.html#errorLines=100,339,34,340,35,355,36,368,37,38,40,484,500,599,600,602,667,671,675,92,99">src/Draggable/Draggable.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Draggable/Draggable.js~Draggable.html">Draggable</a></span>
+<span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></td>
+      <td class="coverage"><span data-ice="coverage">53 %</span><span data-ice="coverageCount" class="coverage-count">24/45</span></td>
+      <td style="display: none;" data-ice="size">20434 byte</td>
+      <td style="display: none;" data-ice="lines">681</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/DraggableEvent/DraggableEvent.js.html#errorLines=10,30,40">src/Draggable/DraggableEvent/DraggableEvent.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableDestroyEvent.html">DraggableDestroyEvent</a></span>
+<span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableEvent.html">DraggableEvent</a></span>
+<span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableInitializedEvent.html">DraggableInitializedEvent</a></span></td>
+      <td class="coverage"><span data-ice="coverage">57 %</span><span data-ice="coverageCount" class="coverage-count">4/7</span></td>
+      <td style="display: none;" data-ice="size">883 byte</td>
+      <td style="display: none;" data-ice="lines">41</td>
+      <td style="display: none;" data-ice="updated">2017-11-05 01:10:46 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/DraggableEvent/index.js.html">src/Draggable/DraggableEvent/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">90 byte</td>
+      <td style="display: none;" data-ice="lines">4</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/MirrorEvent/MirrorEvent.js.html#errorLines=111,131,132,152,153,81,91">src/Draggable/MirrorEvent/MirrorEvent.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorAttachedEvent.html">MirrorAttachedEvent</a></span>
+<span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorCreateEvent.html">MirrorCreateEvent</a></span>
+<span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorCreatedEvent.html">MirrorCreatedEvent</a></span>
+<span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorDestroyEvent.html">MirrorDestroyEvent</a></span>
+<span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorEvent.html">MirrorEvent</a></span>
+<span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorMoveEvent.html">MirrorMoveEvent</a></span></td>
+      <td class="coverage"><span data-ice="coverage">69 %</span><span data-ice="coverageCount" class="coverage-count">16/23</span></td>
+      <td style="display: none;" data-ice="size">2970 byte</td>
+      <td style="display: none;" data-ice="lines">164</td>
+      <td style="display: none;" data-ice="updated">2018-01-02 22:24:05 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/MirrorEvent/index.js.html">src/Draggable/MirrorEvent/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">140 byte</td>
+      <td style="display: none;" data-ice="lines">7</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Plugins/Accessibility/Accessibility.js.html#errorLines=3,4,5,83,87">src/Draggable/Plugins/Accessibility/Accessibility.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Draggable/Plugins/Accessibility/Accessibility.js~Accessibility.html">Accessibility</a></span></td>
+      <td class="coverage"><span data-ice="coverage">54 %</span><span data-ice="coverageCount" class="coverage-count">6/11</span></td>
+      <td style="display: none;" data-ice="size">2152 byte</td>
+      <td style="display: none;" data-ice="lines">89</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Plugins/Accessibility/index.js.html">src/Draggable/Plugins/Accessibility/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">76 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2017-10-03 23:29:32 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#errorLines=4,5,6,7">src/Draggable/Plugins/AutoScroll/AutoScroll.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html">AutoScroll</a></span>
+<span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span>
+<span><a href="variable/index.html#static-variable-onDragMove">onDragMove</a></span>
+<span><a href="variable/index.html#static-variable-onDragStart">onDragStart</a></span>
+<span><a href="variable/index.html#static-variable-onDragStop">onDragStop</a></span>
+<span><a href="variable/index.html#static-variable-scroll">scroll</a></span></td>
+      <td class="coverage"><span data-ice="coverage">80 %</span><span data-ice="coverageCount" class="coverage-count">17/21</span></td>
+      <td style="display: none;" data-ice="size">6116 byte</td>
+      <td style="display: none;" data-ice="lines">216</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Plugins/AutoScroll/index.js.html">src/Draggable/Plugins/AutoScroll/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">143 byte</td>
+      <td style="display: none;" data-ice="lines">6</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Plugins/Mirror/Mirror.js.html#errorLines=10,100,127,13,134,142,176,22,28,3,34,38,42,43,44,67,82,89,9">src/Draggable/Plugins/Mirror/Mirror.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html">Mirror</a></span>
+<span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/19</span></td>
+      <td style="display: none;" data-ice="size">4764 byte</td>
+      <td style="display: none;" data-ice="lines">186</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Plugins/Mirror/index.js.html">src/Draggable/Plugins/Mirror/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">127 byte</td>
+      <td style="display: none;" data-ice="lines">6</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Plugins/index.js.html">src/Draggable/Plugins/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">273 byte</td>
+      <td style="display: none;" data-ice="lines">11</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Sensors/DragSensor/DragSensor.js.html#errorLines=109,11,12,13,14,15,16,17,90">src/Draggable/Sensors/DragSensor/DragSensor.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Draggable/Sensors/DragSensor/DragSensor.js~DragSensor.html">DragSensor</a></span></td>
+      <td class="coverage"><span data-ice="coverage">60 %</span><span data-ice="coverageCount" class="coverage-count">14/23</span></td>
+      <td style="display: none;" data-ice="size">6608 byte</td>
+      <td style="display: none;" data-ice="lines">253</td>
+      <td style="display: none;" data-ice="updated">2017-11-05 01:10:46 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Sensors/DragSensor/index.js.html">src/Draggable/Sensors/DragSensor/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">67 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2017-10-03 23:29:32 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Sensors/ForceTouchSensor/ForceTouchSensor.js.html#errorLines=10,11,113,114,12,13,14,15,16">src/Draggable/Sensors/ForceTouchSensor/ForceTouchSensor.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Draggable/Sensors/ForceTouchSensor/ForceTouchSensor.js~ForceTouchSensor.html">ForceTouchSensor</a></span></td>
+      <td class="coverage"><span data-ice="coverage">57 %</span><span data-ice="coverageCount" class="coverage-count">12/21</span></td>
+      <td style="display: none;" data-ice="size">6189 byte</td>
+      <td style="display: none;" data-ice="lines">231</td>
+      <td style="display: none;" data-ice="updated">2017-11-05 01:10:46 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Sensors/ForceTouchSensor/index.js.html">src/Draggable/Sensors/ForceTouchSensor/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">85 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2017-10-03 23:29:32 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Sensors/MouseSensor/MouseSensor.js.html#errorLines=10,11,111,112,12,13,194">src/Draggable/Sensors/MouseSensor/MouseSensor.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Draggable/Sensors/MouseSensor/MouseSensor.js~MouseSensor.html">MouseSensor</a></span></td>
+      <td class="coverage"><span data-ice="coverage">61 %</span><span data-ice="coverageCount" class="coverage-count">11/18</span></td>
+      <td style="display: none;" data-ice="size">4917 byte</td>
+      <td style="display: none;" data-ice="lines">196</td>
+      <td style="display: none;" data-ice="updated">2017-11-05 01:10:46 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Sensors/MouseSensor/index.js.html">src/Draggable/Sensors/MouseSensor/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">70 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2017-10-03 23:29:32 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Sensors/Sensor/Sensor.js.html#errorLines=71">src/Draggable/Sensors/Sensor/Sensor.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Draggable/Sensors/Sensor/Sensor.js~Sensor.html">Sensor</a></span></td>
+      <td class="coverage"><span data-ice="coverage">90 %</span><span data-ice="coverageCount" class="coverage-count">9/10</span></td>
+      <td style="display: none;" data-ice="size">1565 byte</td>
+      <td style="display: none;" data-ice="lines">74</td>
+      <td style="display: none;" data-ice="updated">2017-11-05 01:10:46 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Sensors/Sensor/index.js.html">src/Draggable/Sensors/Sensor/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">55 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2017-10-03 23:29:32 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Sensors/SensorEvent/SensorEvent.js.html#errorLines=100,110,80,90">src/Draggable/Sensors/SensorEvent/SensorEvent.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragMoveSensorEvent.html">DragMoveSensorEvent</a></span>
+<span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragPressureSensorEvent.html">DragPressureSensorEvent</a></span>
+<span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragStartSensorEvent.html">DragStartSensorEvent</a></span>
+<span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~DragStopSensorEvent.html">DragStopSensorEvent</a></span>
+<span><a href="class/src/Draggable/Sensors/SensorEvent/SensorEvent.js~SensorEvent.html">SensorEvent</a></span></td>
+      <td class="coverage"><span data-ice="coverage">73 %</span><span data-ice="coverageCount" class="coverage-count">11/15</span></td>
+      <td style="display: none;" data-ice="size">2169 byte</td>
+      <td style="display: none;" data-ice="lines">111</td>
+      <td style="display: none;" data-ice="updated">2017-11-05 01:10:46 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Sensors/SensorEvent/index.js.html">src/Draggable/Sensors/SensorEvent/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">145 byte</td>
+      <td style="display: none;" data-ice="lines">7</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Sensors/TouchSensor/TouchSensor.js.html#errorLines=10,102,11,12,13,136,14,226">src/Draggable/Sensors/TouchSensor/TouchSensor.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Draggable/Sensors/TouchSensor/TouchSensor.js~TouchSensor.html">TouchSensor</a></span></td>
+      <td class="coverage"><span data-ice="coverage">60 %</span><span data-ice="coverageCount" class="coverage-count">12/20</span></td>
+      <td style="display: none;" data-ice="size">5971 byte</td>
+      <td style="display: none;" data-ice="lines">229</td>
+      <td style="display: none;" data-ice="updated">2017-11-05 01:10:46 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Sensors/TouchSensor/index.js.html">src/Draggable/Sensors/TouchSensor/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">70 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2017-10-03 23:29:32 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/Sensors/index.js.html">src/Draggable/Sensors/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">290 byte</td>
+      <td style="display: none;" data-ice="lines">13</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Draggable/index.js.html">src/Draggable/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">145 byte</td>
+      <td style="display: none;" data-ice="lines">5</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Droppable/Droppable.js.html#errorLines=10,11,12,13,14,15,17,22,44,9">src/Droppable/Droppable.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Droppable/Droppable.js~Droppable.html">Droppable</a></span></td>
+      <td class="coverage"><span data-ice="coverage">58 %</span><span data-ice="coverageCount" class="coverage-count">14/24</span></td>
+      <td style="display: none;" data-ice="size">6473 byte</td>
+      <td style="display: none;" data-ice="lines">252</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Droppable/DroppableEvent/DroppableEvent.js.html#errorLines=10,30,31,51,52">src/Droppable/DroppableEvent/DroppableEvent.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Droppable/DroppableEvent/DroppableEvent.js~DroppableEvent.html">DroppableEvent</a></span>
+<span><a href="class/src/Droppable/DroppableEvent/DroppableEvent.js~DroppableOutEvent.html">DroppableOutEvent</a></span>
+<span><a href="class/src/Droppable/DroppableEvent/DroppableEvent.js~DroppableOverEvent.html">DroppableOverEvent</a></span></td>
+      <td class="coverage"><span data-ice="coverage">54 %</span><span data-ice="coverageCount" class="coverage-count">6/11</span></td>
+      <td style="display: none;" data-ice="size">1262 byte</td>
+      <td style="display: none;" data-ice="lines">63</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:06:16 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Droppable/DroppableEvent/index.js.html">src/Droppable/DroppableEvent/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">79 byte</td>
+      <td style="display: none;" data-ice="lines">4</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Droppable/index.js.html">src/Droppable/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">64 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Plugins/Collidable/Collidable.js.html#errorLines=10,18,23,28,31,60,63,75,78,85,9">src/Plugins/Collidable/Collidable.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Plugins/Collidable/Collidable.js~Collidable.html">Collidable</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/11</span></td>
+      <td style="display: none;" data-ice="size">3009 byte</td>
+      <td style="display: none;" data-ice="lines">100</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Plugins/Collidable/CollidableEvent/CollidableEvent.js.html#errorLines=10,30,50">src/Plugins/Collidable/CollidableEvent/CollidableEvent.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Plugins/Collidable/CollidableEvent/CollidableEvent.js~CollidableEvent.html">CollidableEvent</a></span>
+<span><a href="class/src/Plugins/Collidable/CollidableEvent/CollidableEvent.js~CollidableInEvent.html">CollidableInEvent</a></span>
+<span><a href="class/src/Plugins/Collidable/CollidableEvent/CollidableEvent.js~CollidableOutEvent.html">CollidableOutEvent</a></span></td>
+      <td class="coverage"><span data-ice="coverage">66 %</span><span data-ice="coverageCount" class="coverage-count">6/9</span></td>
+      <td style="display: none;" data-ice="size">1259 byte</td>
+      <td style="display: none;" data-ice="lines">61</td>
+      <td style="display: none;" data-ice="updated">2017-11-05 01:10:46 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Plugins/Collidable/CollidableEvent/index.js.html">src/Plugins/Collidable/CollidableEvent/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">80 byte</td>
+      <td style="display: none;" data-ice="lines">4</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Plugins/Collidable/index.js.html">src/Plugins/Collidable/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">67 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Plugins/Snappable/Snappable.js.html#errorLines=18,28,38,43,46,50,8,86,9">src/Plugins/Snappable/Snappable.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Plugins/Snappable/Snappable.js~Snappable.html">Snappable</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/9</span></td>
+      <td style="display: none;" data-ice="size">2569 byte</td>
+      <td style="display: none;" data-ice="lines">110</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js.html#errorLines=10,30,31,41,42">src/Plugins/Snappable/SnappableEvent/SnappableEvent.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapEvent.html">SnapEvent</a></span>
+<span><a href="class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapInEvent.html">SnapInEvent</a></span>
+<span><a href="class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapOutEvent.html">SnapOutEvent</a></span></td>
+      <td class="coverage"><span data-ice="coverage">44 %</span><span data-ice="coverageCount" class="coverage-count">4/9</span></td>
+      <td style="display: none;" data-ice="size">792 byte</td>
+      <td style="display: none;" data-ice="lines">43</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:06:16 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Plugins/Snappable/SnappableEvent/index.js.html">src/Plugins/Snappable/SnappableEvent/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">67 byte</td>
+      <td style="display: none;" data-ice="lines">4</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Plugins/Snappable/index.js.html">src/Plugins/Snappable/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">64 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Plugins/SwapAnimation/SwapAnimation.js.html#errorLines=12,20,24,28,3,34,43,48,67,8,9">src/Plugins/SwapAnimation/SwapAnimation.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html">SwapAnimation</a></span>
+<span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></td>
+      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/11</span></td>
+      <td style="display: none;" data-ice="size">1844 byte</td>
+      <td style="display: none;" data-ice="lines">71</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Plugins/SwapAnimation/index.js.html">src/Plugins/SwapAnimation/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">155 byte</td>
+      <td style="display: none;" data-ice="lines">6</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Plugins/index.js.html">src/Plugins/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">178 byte</td>
+      <td style="display: none;" data-ice="lines">9</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Sortable/Sortable.js.html#errorLines=10,11,12,13,219,223,239,247,260">src/Sortable/Sortable.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Sortable/Sortable.js~Sortable.html">Sortable</a></span></td>
+      <td class="coverage"><span data-ice="coverage">52 %</span><span data-ice="coverageCount" class="coverage-count">10/19</span></td>
+      <td style="display: none;" data-ice="size">6826 byte</td>
+      <td style="display: none;" data-ice="lines">271</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Sortable/SortableEvent/SortableEvent.js.html#errorLines=10,102,152,30,31,61,62">src/Sortable/SortableEvent/SortableEvent.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableEvent.html">SortableEvent</a></span>
+<span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableSortEvent.html">SortableSortEvent</a></span>
+<span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableSortedEvent.html">SortableSortedEvent</a></span>
+<span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableStartEvent.html">SortableStartEvent</a></span>
+<span><a href="class/src/Sortable/SortableEvent/SortableEvent.js~SortableStopEvent.html">SortableStopEvent</a></span></td>
+      <td class="coverage"><span data-ice="coverage">73 %</span><span data-ice="coverageCount" class="coverage-count">19/26</span></td>
+      <td style="display: none;" data-ice="size">3611 byte</td>
+      <td style="display: none;" data-ice="lines">193</td>
+      <td style="display: none;" data-ice="updated">2017-11-05 01:10:46 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Sortable/SortableEvent/index.js.html">src/Sortable/SortableEvent/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">122 byte</td>
+      <td style="display: none;" data-ice="lines">6</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Sortable/index.js.html">src/Sortable/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">61 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Swappable/Swappable.js.html#errorLines=10,11,12,136,142">src/Swappable/Swappable.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Swappable/Swappable.js~Swappable.html">Swappable</a></span></td>
+      <td class="coverage"><span data-ice="coverage">58 %</span><span data-ice="coverageCount" class="coverage-count">7/12</span></td>
+      <td style="display: none;" data-ice="size">3562 byte</td>
+      <td style="display: none;" data-ice="lines">151</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Swappable/SwappableEvent/SwappableEvent.js.html#errorLines=10,30,31,41,42,72,92">src/Swappable/SwappableEvent/SwappableEvent.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableEvent.html">SwappableEvent</a></span>
+<span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableStartEvent.html">SwappableStartEvent</a></span>
+<span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableStopEvent.html">SwappableStopEvent</a></span>
+<span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableSwapEvent.html">SwappableSwapEvent</a></span>
+<span><a href="class/src/Swappable/SwappableEvent/SwappableEvent.js~SwappableSwappedEvent.html">SwappableSwappedEvent</a></span></td>
+      <td class="coverage"><span data-ice="coverage">56 %</span><span data-ice="coverageCount" class="coverage-count">9/16</span></td>
+      <td style="display: none;" data-ice="size">1897 byte</td>
+      <td style="display: none;" data-ice="lines">93</td>
+      <td style="display: none;" data-ice="updated">2017-11-05 01:10:46 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Swappable/SwappableEvent/index.js.html">src/Swappable/SwappableEvent/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">128 byte</td>
+      <td style="display: none;" data-ice="lines">6</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/Swappable/index.js.html">src/Swappable/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">64 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/index.js.html">src/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">485 byte</td>
+      <td style="display: none;" data-ice="lines">22</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/index.legacy.js.html">src/index.legacy.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">616 byte</td>
+      <td style="display: none;" data-ice="lines">27</td>
+      <td style="display: none;" data-ice="updated">2018-02-02 02:20:33 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/shared/AbstractEvent/AbstractEvent.js.html#errorLines=1,37,38">src/shared/AbstractEvent/AbstractEvent.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/shared/AbstractEvent/AbstractEvent.js~AbstractEvent.html">AbstractEvent</a></span></td>
+      <td class="coverage"><span data-ice="coverage">72 %</span><span data-ice="coverageCount" class="coverage-count">8/11</span></td>
+      <td style="display: none;" data-ice="size">1294 byte</td>
+      <td style="display: none;" data-ice="lines">75</td>
+      <td style="display: none;" data-ice="updated">2018-01-02 22:24:05 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/shared/AbstractEvent/index.js.html">src/shared/AbstractEvent/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">76 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2017-10-03 23:29:32 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/shared/AbstractPlugin/AbstractPlugin.js.html">src/shared/AbstractPlugin/AbstractPlugin.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="class/src/shared/AbstractPlugin/AbstractPlugin.js~AbstractPlugin.html">AbstractPlugin</a></span></td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">5/5</span></td>
+      <td style="display: none;" data-ice="size">688 byte</td>
+      <td style="display: none;" data-ice="lines">39</td>
+      <td style="display: none;" data-ice="updated">2018-01-02 22:24:05 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/shared/AbstractPlugin/index.js.html">src/shared/AbstractPlugin/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">79 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2018-01-02 22:24:05 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/shared/utils/closest/closest.js.html#errorLines=1">src/shared/utils/closest/closest.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-closest">closest</a></span></td>
+      <td class="coverage"><span data-ice="coverage">50 %</span><span data-ice="coverageCount" class="coverage-count">1/2</span></td>
+      <td style="display: none;" data-ice="size">1780 byte</td>
+      <td style="display: none;" data-ice="lines">57</td>
+      <td style="display: none;" data-ice="updated">2017-11-07 01:01:39 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/shared/utils/closest/index.js.html">src/shared/utils/closest/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">58 byte</td>
+      <td style="display: none;" data-ice="lines">3</td>
+      <td style="display: none;" data-ice="updated">2017-10-03 23:29:32 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/shared/utils/index.js.html">src/shared/utils/index.js</a></span></td>
+      <td data-ice="identifier" class="identifiers">-</td>
+      <td class="coverage"><span data-ice="coverage">-</span></td>
+      <td style="display: none;" data-ice="size">57 byte</td>
+      <td style="display: none;" data-ice="lines">5</td>
+      <td style="display: none;" data-ice="updated">2018-01-02 22:24:05 (UTC)</td>
+    </tr>
+</tbody>
+</table>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

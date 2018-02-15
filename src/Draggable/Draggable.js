@@ -438,6 +438,9 @@ export default class Draggable {
         this.mirror.parentNode.removeChild(this.mirror);
       }
 
+      this.source.parentNode.removeChild(this.source);
+      this.originalSource.style.display = null;
+
       this.source.classList.remove(this.getClassNameFor('source:dragging'));
       this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
       document.body.classList.remove(this.getClassNameFor('body:dragging'));

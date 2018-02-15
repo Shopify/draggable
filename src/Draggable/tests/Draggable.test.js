@@ -418,16 +418,21 @@ describe('Draggable', () => {
       .toBeInstanceOf(DragStartEvent);
   });
 
-  test('sets dragging to false when `drag:start` event is canceled', () => {
+  test('cleans up when `drag:start` event is canceled', () => {
     const newInstance = new Draggable(containers, {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
+    let source;
+    let originalSource;
     const callback = jest.fn((event) => {
+      source = event.source;
+      originalSource = event.originalSource;
       event.cancel();
     });
+
     newInstance.on('drag:start', callback);
 
     triggerEvent(draggableElement, 'mousedown', {button: 0});
@@ -438,6 +443,8 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'dragstart', {button: 0});
 
     expect(newInstance.dragging).toBeFalsy();
+    expect(source.parentNode).toBeNull();
+    expect(originalSource.style.display).toEqual('');
   });
 
   test('triggers `drag:move` drag event on mousedown', () => {

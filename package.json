@@ -39,7 +39,8 @@
     "test-ci": "jest --config config.json --coverage"
   },
   "files": [
-    "lib/**/*.js"
+    "lib/**/*.js",
+    "examples/"
   ],
   "devDependencies": {
     "babel-core": "^6.26.0",

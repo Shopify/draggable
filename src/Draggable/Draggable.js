@@ -520,7 +520,7 @@ export default class Draggable {
         originalSource: this.originalSource,
         sourceContainer: container,
         sensorEvent,
-        overContainer: this.overContainer,
+        overContainer: this.currentOverContainer,
       });
 
       this.currentOverContainer.classList.remove(this.getClassNameFor('container:over'));

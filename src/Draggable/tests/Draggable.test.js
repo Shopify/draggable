@@ -759,4 +759,40 @@ describe('Draggable', () => {
 
     expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBeFalsy();
   });
+
+  test('`drag:out:container` event specifies leaving container', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
+
+    newInstance.on('drag:over:container', (dragEvent) => {
+      expect(dragEvent.overContainer).toEqual(containers[0]);
+    });
+
+    newInstance.on('drag:out:container', (dragEvent) => {
+      expect(dragEvent.overContainer).toEqual(containers[0]);
+    });
+
+    const draggableElement = sandbox.querySelector('li');
+    document.elementFromPoint = () => draggableElement;
+
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    expect(newInstance.isDragging()).toBe(true);
+
+    document.elementFromPoint = () => draggableElement.nextElementSibling;
+    triggerEvent(draggableElement.nextElementSibling, 'mousemove', {button: 0});
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+
+    document.elementFromPoint = () => document.body;
+    triggerEvent(document.body, 'mousemove', {button: 0});
+
+    // Wait for delay
+    jest.runTimersToTime(100);
+  });
 });

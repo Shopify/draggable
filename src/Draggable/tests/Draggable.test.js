@@ -253,15 +253,15 @@ describe('Draggable', () => {
       const newInstance = new Draggable();
       function stubHandler() { /* do nothing */ }
 
-      expect('my:event' in newInstance.callbacks)
+      expect('my:event' in newInstance.emitter.callbacks)
         .toBe(false);
 
       newInstance.on('my:event', stubHandler);
 
-      expect('my:event' in newInstance.callbacks)
+      expect('my:event' in newInstance.emitter.callbacks)
         .toBe(true);
 
-      expect(newInstance.callbacks['my:event'])
+      expect(newInstance.emitter.callbacks['my:event'])
         .toMatchObject([stubHandler]);
     });
 
@@ -269,7 +269,7 @@ describe('Draggable', () => {
       const newInstance = new Draggable();
       function stubHandler() { /* do nothing */ }
 
-      expect('my:event' in newInstance.callbacks)
+      expect('my:event' in newInstance.emitter.callbacks)
         .toBe(false);
 
       const returnValue = newInstance.on('my:event', stubHandler);
@@ -280,33 +280,21 @@ describe('Draggable', () => {
   });
 
   describe('#off', () => {
-    test('should return null if event was not bound', () => {
-      const newInstance = new Draggable();
-      function stubHandler() { /* do nothing */ }
-
-      expect('my:event' in newInstance.callbacks)
-        .toBe(false);
-
-      const returnValue = newInstance.off('my:event', stubHandler);
-
-      expect(returnValue).toBe(null);
-    });
-
     test('should remove event handler from the list of callbacks', () => {
       const newInstance = new Draggable();
       function stubHandler() { /* do nothing */ }
 
       newInstance.on('my:event', stubHandler);
 
-      expect('my:event' in newInstance.callbacks)
+      expect('my:event' in newInstance.emitter.callbacks)
         .toBe(true);
 
       newInstance.off('my:event', stubHandler);
 
-      expect('my:event' in newInstance.callbacks)
+      expect('my:event' in newInstance.emitter.callbacks)
         .toBe(true);
 
-      expect(newInstance.callbacks['my:event'])
+      expect(newInstance.emitter.callbacks['my:event'])
         .toMatchObject([]);
     });
 
@@ -316,7 +304,7 @@ describe('Draggable', () => {
 
       newInstance.on('my:event', stubHandler);
 
-      expect('my:event' in newInstance.callbacks)
+      expect('my:event' in newInstance.emitter.callbacks)
         .toBe(true);
 
       const returnValue = newInstance.off('my:event', stubHandler);

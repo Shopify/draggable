@@ -2,6 +2,8 @@ import {closest} from 'shared/utils';
 
 import {Accessibility, Mirror, Scrollable, Announcement} from './Plugins';
 
+import Emitter from './Emitter';
+
 import {
   MouseSensor,
   TouchSensor,
@@ -121,7 +123,12 @@ export default class Draggable {
       },
     };
 
-    this.callbacks = {};
+    /**
+     * Draggables event emitter
+     * @property emitter
+     * @type {Emitter}
+     */
+    this.emitter = new Emitter();
 
     /**
      * Current drag state
@@ -263,16 +270,12 @@ export default class Draggable {
   /**
    * Adds listener for draggable events
    * @param {String} type - Event name
-   * @param {Function} callback - Event callback
+   * @param {...Function} callbacks - Event callbacks
    * @return {Draggable}
    * @example draggable.on('drag:start', (dragEvent) => dragEvent.cancel());
    */
-  on(type, callback) {
-    if (!this.callbacks[type]) {
-      this.callbacks[type] = [];
-    }
-
-    this.callbacks[type].push(callback);
+  on(type, ...callbacks) {
+    this.emitter.on(type, ...callbacks);
     return this;
   }
 
@@ -284,13 +287,7 @@ export default class Draggable {
    * @example draggable.off('drag:start', handlerFunction);
    */
   off(type, callback) {
-    if (!this.callbacks[type]) { return null; }
-    const copy = this.callbacks[type].slice(0);
-    for (let i = 0; i < copy.length; i++) {
-      if (callback === copy[i]) {
-        this.callbacks[type].splice(i, 1);
-      }
-    }
+    this.emitter.off(type, callback);
     return this;
   }
 
@@ -301,12 +298,7 @@ export default class Draggable {
    * @example draggable.trigger(event);
    */
   trigger(event) {
-    if (!this.callbacks[event.type]) { return null; }
-    const callbacks = [...this.callbacks[event.type]];
-    for (let i = callbacks.length - 1; i >= 0; i--) {
-      const callback = callbacks[i];
-      callback(event);
-    }
+    this.emitter.trigger(event);
     return this;
   }
 

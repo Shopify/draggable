@@ -1,12 +1,13 @@
-<a href="https://circleci.com/gh/Shopify/draggable">
-  <img src="https://circleci.com/gh/Shopify/draggable.svg?style=shield&circle-token=bd97f87d63e330e3b4b186ef11d8223889ef925f" title="CircleCI status" alt="CircleCI status">
-</a>
+[![CircleCI](https://circleci.com/gh/Shopify/draggable/tree/master.svg?style=shield)](https://circleci.com/gh/Shopify/draggable/tree/master)
+[![npm version](https://badge.fury.io/js/%40shopify%2Fdraggable.svg)](https://badge.fury.io/js/%40shopify%2Fdraggable)
+[![codecov](https://codecov.io/gh/Shopify/draggable/branch/v1.0.0-beta.5/graph/badge.svg)](https://codecov.io/gh/Shopify/draggable)
+[![Greenkeeper badge](https://badges.greenkeeper.io/Shopify/draggable.svg)](https://greenkeeper.io/)
 
 <a href="https://shopify.github.io/draggable" title="Visit Draggable website">
   <img src="https://user-images.githubusercontent.com/643944/35602291-99e2c56e-0605-11e8-847f-95f1f6be1610.jpg" alt="">
 </a>
 
-> **Ready for production!** While Draggable may still be in beta, all existing features are stable and safe for consumption. Draggable will exit beta once all remaining features have been implemented.
+> **Currently in beta!** While Draggable is very close to a full release, the API is still subject to change. We keep an updated CHANGELOG with every release, so when upgrading from a previous version, please check and see what has changed.
 
 Get complete control over drag and drop behaviour with Draggable! Draggable abstracts
 native browser events into a comprehensive API to create a custom drag and drop experience.
@@ -63,6 +64,12 @@ or via CDN
 <!-- Plugins only -->
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.4/lib/plugins.js"></script>
 ```
+
+## Browser Compatibility
+
+![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) |
+--- | --- | --- | --- | --- | --- |
+Latest ✔ | Latest ✔ | 11+ ✔ | Latest ✔ | Latest ✔ | Latest ✔ |
 
 ## Documentation
 

@@ -10,5 +10,7 @@
     "!src/index.js",
     "!src/index.legacy.js"
   ],
+  "coverageDirectory": "./coverage/",
+  "collectCoverage": true,
   "moduleDirectories": ["node_modules", "src", "scripts/test"]
 }

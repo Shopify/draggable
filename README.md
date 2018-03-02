@@ -108,7 +108,10 @@ To run the examples locally run
 
 ```
 $ yarn install
+$ cd examples
+$ yarn install
 $ yarn build
+$ cd ..
 $ yarn start
 ```
 

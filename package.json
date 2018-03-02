@@ -32,15 +32,13 @@
     "build": "webpack",
     "watch": "webpack --watch",
     "prepublish": "npm run build",
-    "postinstall": "cd examples && yarn",
     "lint": "eslint ./src --max-warnings 0",
     "esdoc": "esdoc -c esdoc.json",
     "test": "jest --config config.json",
     "test-ci": "jest --config config.json --coverage && codecov"
   },
   "files": [
-    "lib/**/*.js",
-    "examples/"
+    "lib/**/*.js"
   ],
   "devDependencies": {
     "babel-core": "^6.26.0",

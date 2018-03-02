@@ -1,9 +1,9 @@
-const requestAnimationFrameTimeout = 15;
+import './matchers';
 
-window.requestAnimationFrame = (callback) => {
-  return setTimeout(callback, requestAnimationFrameTimeout);
-};
+beforeEach(() => {
+  jest.useFakeTimers();
+});
 
-window.cancelAnimationFrame = (id) => {
-  return clearTimeout(id);
-};
+afterEach(() => {
+  jest.runAllTimers();
+});

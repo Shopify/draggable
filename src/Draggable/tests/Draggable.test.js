@@ -1,7 +1,7 @@
 import {
   createSandbox,
   triggerEvent,
-  PluginStub,
+  TestPlugin,
 } from 'helper';
 
 import Draggable, {
@@ -45,7 +45,6 @@ describe('Draggable', () => {
   const expectedClientY = 82;
 
   beforeEach(() => {
-    jest.useFakeTimers();
     sandbox = createSandbox(sampleMarkup);
     containers = sandbox.querySelectorAll('ul');
   });
@@ -129,9 +128,7 @@ describe('Draggable', () => {
 
     test('should attach custom plugins', () => {
       const newInstance = new Draggable([], {
-        plugins: [
-          PluginStub,
-        ],
+        plugins: [TestPlugin],
       });
 
       expect(newInstance.plugins.length)
@@ -141,11 +138,12 @@ describe('Draggable', () => {
 
       expect(customPlugin.draggable).toBe(newInstance);
 
-      expect(customPlugin.attachWasCalled)
-        .toBe(true);
+      expect(customPlugin.attachFunction)
+        .toHaveBeenCalled();
 
-      expect(customPlugin.detachWasCalled)
-        .toBe(false);
+      expect(customPlugin.detachFunction)
+        .not
+        .toHaveBeenCalled();
     });
 
     test('should attach sensors', () => {
@@ -203,7 +201,7 @@ describe('Draggable', () => {
     });
 
     test('should call Plugin#detach once on each of provided plugins', () => {
-      const plugins = [PluginStub, PluginStub, PluginStub];
+      const plugins = [TestPlugin, TestPlugin, TestPlugin];
       const newInstance = new Draggable([], {
         plugins,
       });
@@ -211,23 +209,23 @@ describe('Draggable', () => {
 
       newInstance.destroy();
 
-      expect(expectedPlugins[4].detachWasCalled)
-        .toBe(true);
+      expect(expectedPlugins[4].detachFunction)
+        .toHaveBeenCalled();
 
-      expect(expectedPlugins[4].numTimesDetachCalled)
-        .toBe(1);
+      expect(expectedPlugins[4].detachFunction)
+        .toHaveBeenCalledTimes(1);
 
-      expect(expectedPlugins[5].detachWasCalled)
-        .toBe(true);
+      expect(expectedPlugins[5].detachFunction)
+        .toHaveBeenCalled();
 
-      expect(expectedPlugins[5].numTimesDetachCalled)
-        .toBe(1);
+      expect(expectedPlugins[5].detachFunction)
+        .toHaveBeenCalledTimes(1);
 
-      expect(expectedPlugins[6].detachWasCalled)
-        .toBe(true);
+      expect(expectedPlugins[6].detachFunction)
+        .toHaveBeenCalled();
 
-      expect(expectedPlugins[6].numTimesDetachCalled)
-        .toBe(1);
+      expect(expectedPlugins[6].detachFunction)
+        .toHaveBeenCalledTimes(1);
     });
 
     test('should remove all sensor event listeners', () => {
@@ -378,6 +376,8 @@ describe('Draggable', () => {
 
     expect(call)
       .toBeInstanceOf(DragStartEvent);
+
+    triggerEvent(draggableElement, 'mouseup');
   });
 
   test('should trigger `drag:start` drag event on dragstart', () => {
@@ -404,6 +404,8 @@ describe('Draggable', () => {
 
     expect(call)
       .toBeInstanceOf(DragStartEvent);
+
+    triggerEvent(draggableElement, 'mouseup');
   });
 
   test('cleans up when `drag:start` event is canceled', () => {
@@ -469,6 +471,8 @@ describe('Draggable', () => {
 
     expect(sensorEvent.clientY)
       .toBe(expectedClientY);
+
+    triggerEvent(draggableElement, 'mouseup');
   });
 
   test('triggers `drag:stop` drag event on mouseup', () => {
@@ -511,6 +515,8 @@ describe('Draggable', () => {
 
     expect(newInstance.source.classList)
       .toContain('draggable-source--is-dragging');
+
+    triggerEvent(draggableElement, 'mouseup');
   });
 
   test('removes `source:dragging` classname from draggable element on mouseup', () => {
@@ -577,6 +583,8 @@ describe('Draggable', () => {
 
     expect(document.body.classList)
       .toContain('draggable--is-dragging');
+
+    triggerEvent(draggableElement, 'mouseup');
   });
 
   test('removes `body:dragging` classname from body on mouseup', () => {
@@ -682,6 +690,8 @@ describe('Draggable', () => {
 
     expect(containers[0].classList)
       .toContain('draggable-container--is-dragging');
+
+    triggerEvent(draggableElement, 'mouseup', {button: 0});
   });
 
   test('removes `container:dragging` classname from draggable container element on mouseup', () => {
@@ -782,5 +792,7 @@ describe('Draggable', () => {
 
     // Wait for delay
     jest.runTimersToTime(100);
+
+    triggerEvent(document.body, 'mouseup', {button: 0});
   });
 });

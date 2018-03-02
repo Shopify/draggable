@@ -1,10 +1,47 @@
 # Changelog
 
-## v1.0.0-beta.5 - ?
+## v1.0.0-beta.6 - ?
 
 ### Added
 
 ### Changed
+
+## v1.0.0-beta.5 - 2018-03-02
+
+### Added
+
+- Increased Documentation coverage
+- Increased Test coverage, including better testing environment
+- Increased JSDoc coverage
+- Added docblock section to `CONTRIBUTING.md`
+- Added greenkeeper as integration for package dependency management
+- Added codecov as integration for tracking test coverage
+- Added github template issue
+- Added github template PR
+- Added yarn scripts for examples
+- Added SensorEvent to exports
+- Added yarn scripts for esdoc
+- Added `Announcement` plugin for screen reader support
+- Added cursor offset option for `Mirror` plugin
+- Added `scrollableElements` option to `Scrollable` plugin
+- Added `snappableElement` to `SnapEvent`
+- Added examples to published package
+- Added `Emitter` class for event emitting for draggable
+
+### Changed
+- Changed esdoc config
+- Changed node version `8.9.1` to `8.9.4`
+- Updated package dependencies
+- Updated roadmap section in README
+- Changed export statements
+- Fixes draggable state after canceling `drag:start`
+- Fixes `constrainDimensions` option for `Mirror` plugin
+- Fixes mirror position with touch devices and `Scrollable`
+- `AutoScroll` plugin has been renamed to `Scrollable`
+- Fixes scrolling edge cases with `Scrollable`
+- Fixes scrolling offset for touch devices in `Scrollable`
+- Fixes npm install issue
+- Fixes `overContainer` property for `DragOutContainerEvent`
 
 ## v1.0.0-beta.4 - 2018-01-15
 

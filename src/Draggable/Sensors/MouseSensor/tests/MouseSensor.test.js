@@ -1,10 +1,11 @@
 import {
   createSandbox,
   triggerEvent,
-  listenToSensorEvents,
-  restoreSensorEvents,
-  getSensorEventsByType,
-  getLastSensorEventByType,
+  waitForDragDelay,
+  DRAG_DELAY,
+  clickMouse,
+  moveMouse,
+  releaseMouse,
 } from 'helper';
 
 import MouseSensor from './..';
@@ -19,114 +20,172 @@ const sampleMarkup = `
 describe('MouseSensor', () => {
   let sandbox;
   let mouseSensor;
+  let draggableElement;
 
   beforeEach(() => {
-    jest.useFakeTimers();
-    listenToSensorEvents();
     sandbox = createSandbox(sampleMarkup);
     const containers = sandbox.querySelectorAll('ul');
-    mouseSensor = new MouseSensor(containers, {delay: 0});
+    draggableElement = sandbox.querySelector('li');
+    mouseSensor = new MouseSensor(containers, {delay: DRAG_DELAY});
     mouseSensor.attach();
   });
 
   afterEach(() => {
-    restoreSensorEvents();
+    mouseSensor.detach();
     sandbox.parentNode.removeChild(sandbox);
   });
 
   test('triggers `drag:start` sensor event on mousedown', () => {
-    const draggable = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggable;
-    triggerEvent(draggable, 'mousedown', {button: 0});
+    function dragFlow() {
+      clickMouse(draggableElement);
+      waitForDragDelay();
+      releaseMouse(document.body);
+    }
 
-    // Wait for delay
-    jest.runTimersToTime(1);
-
-    const sensorEvent = getLastSensorEventByType('drag:start');
-    expect(sensorEvent.type).toBe('drag:start');
+    expect(dragFlow)
+      .toHaveTriggeredSensorEvent('drag:start');
   });
 
   test('cancels `drag:start` event when canceling sensor event', () => {
-    const draggable = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggable;
-    triggerEvent(draggable, 'mousedown', {button: 0});
-
     sandbox.addEventListener('drag:start', (event) => {
       event.detail.cancel();
     });
 
-    // Wait for delay
-    jest.runTimersToTime(1);
+    function dragFlow() {
+      clickMouse(draggableElement);
+      waitForDragDelay();
+      releaseMouse(draggableElement);
+    }
 
-    const sensorEvent = getLastSensorEventByType('drag:start');
-    expect(mouseSensor.dragging).toBe(false);
-    expect(sensorEvent.canceled()).toBe(true);
+    expect(dragFlow)
+      .toHaveCanceledSensorEvent('drag:start');
   });
 
   test('does not trigger `drag:start` event releasing mouse before timeout', () => {
-    const draggable = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggable;
-    triggerEvent(draggable, 'mousedown', {button: 0});
-    triggerEvent(document.body, 'mouseup');
+    function dragFlow() {
+      clickMouse(draggableElement);
+      waitForDragDelay();
+      releaseMouse(document.body);
+    }
 
-    // Wait for delay
-    jest.runTimersToTime(1);
+    function hastyDragFlow() {
+      clickMouse(draggableElement);
+      releaseMouse(document.body);
+    }
 
-    expect(mouseSensor.dragging).toBe(false);
-    expect(getLastSensorEventByType('drag:start')).toBeUndefined();
-    expect(getLastSensorEventByType('drag:move')).toBeUndefined();
-    expect(getLastSensorEventByType('drag:stop')).toBeUndefined();
+    expect(hastyDragFlow)
+      .not
+      .toHaveTriggeredSensorEvent('drag:start');
+
+    expect(hastyDragFlow)
+      .not
+      .toHaveTriggeredSensorEvent('drag:stop');
+
+    expect(dragFlow)
+      .toHaveTriggeredSensorEvent('drag:start');
+
+    expect(dragFlow)
+      .toHaveTriggeredSensorEvent('drag:stop');
   });
 
   test('triggers `drag:move` event while moving the mouse', () => {
-    const draggable = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggable;
-    triggerEvent(draggable, 'mousedown', {button: 0});
+    function dragFlow() {
+      clickMouse(draggableElement);
+      waitForDragDelay();
+      moveMouse(document.body);
+      releaseMouse(document.body);
+    }
 
-    // Wait for delay
-    jest.runTimersToTime(1);
-
-    triggerEvent(document.body, 'mousemove');
-    expect(getSensorEventsByType('drag:move').length).toBe(1);
-
-    triggerEvent(document.body, 'mousemove');
-    expect(getSensorEventsByType('drag:move').length).toBe(2);
+    expect(dragFlow)
+      .toHaveTriggeredSensorEvent('drag:move');
   });
 
   test('triggers `drag:stop` event when releasing mouse', () => {
-    const draggable = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggable;
-    triggerEvent(draggable, 'mousedown', {button: 0});
+    function dragFlow() {
+      clickMouse(draggableElement);
+      waitForDragDelay();
+      moveMouse(document.body);
+      releaseMouse(document.body);
+    }
 
-    // Wait for delay
-    jest.runTimersToTime(1);
-
-    triggerEvent(document.body, 'mousemove');
-    expect(getSensorEventsByType('drag:move').length).toBe(1);
-
-    triggerEvent(document.body, 'mouseup');
-    expect(getLastSensorEventByType('drag:stop')).toBeDefined();
+    expect(dragFlow)
+      .toHaveTriggeredSensorEvent('drag:stop');
   });
 
-  test('does not trigger `drag:start` event when right clicking', () => {
-    const draggable = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggable;
-    triggerEvent(draggable, 'mousedown', {button: 2});
+  test('does not trigger `drag:start` event when right clicking or holding ctrl or meta key', () => {
+    function dragFlowWithRightClick() {
+      clickMouse(draggableElement, {button: 2});
+      waitForDragDelay();
+      releaseMouse(document.body);
+    }
 
-    // Wait for delay
-    jest.runTimersToTime(1);
+    function dragFlowWithCtrlKey() {
+      clickMouse(draggableElement, {ctrlKey: true});
+      waitForDragDelay();
+      releaseMouse(document.body);
+    }
 
-    expect(getLastSensorEventByType('drag:start')).toBeUndefined();
+    function dragFlowWithMetaKey() {
+      clickMouse(draggableElement, {metaKey: true});
+      waitForDragDelay();
+      releaseMouse(document.body);
+    }
+
+    [
+      dragFlowWithRightClick,
+      dragFlowWithCtrlKey,
+      dragFlowWithMetaKey,
+    ].forEach((dragFlow) => {
+      expect(dragFlow)
+        .not
+        .toHaveTriggeredSensorEvent('drag:start');
+    });
   });
 
-  xtest('does not trigger `drag:start` event when clicking on none draggable element', () => {
-    const draggable = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggable;
-    triggerEvent(document.body, 'mousedown', {button: 0});
+  test('does not trigger `drag:start` event when clicking on none draggable element', () => {
+    function dragFlow() {
+      clickMouse(document.body);
+      waitForDragDelay();
+    }
 
-    // Wait for delay
-    jest.runTimersToTime(1);
+    expect(dragFlow)
+      .not
+      .toHaveTriggeredSensorEvent('drag:start');
+  });
 
-    expect(getLastSensorEventByType('drag:start')).toBeUndefined();
+  test('prevents context menu while dragging', () => {
+    let contextMenuEvent = triggerEvent(draggableElement, 'contextmenu');
+
+    expect(contextMenuEvent)
+      .not
+      .toHaveDefaultPrevented();
+
+    clickMouse(draggableElement);
+    waitForDragDelay();
+    contextMenuEvent = triggerEvent(draggableElement, 'contextmenu');
+
+    expect(contextMenuEvent)
+      .toHaveDefaultPrevented();
+
+    releaseMouse(draggableElement);
+  });
+
+  test('prevents native drag when initiating drag flow', () => {
+    let dragEvent = triggerEvent(draggableElement, 'dragstart');
+
+    expect(dragEvent)
+      .not
+      .toHaveDefaultPrevented();
+
+    clickMouse(draggableElement);
+    waitForDragDelay();
+    dragEvent = triggerEvent(draggableElement, 'dragstart');
+
+    expect(dragEvent)
+      .toHaveDefaultPrevented();
+
+    releaseMouse(document.body);
   });
 });
+
+

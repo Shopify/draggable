@@ -9,12 +9,12 @@
   "repository": "https://github.com/Shopify/draggable",
   "contributors": [
     {
-      "name" : "Max Hoffmann",
-      "email" : "max.hoffmann@shopify.com"
+      "name": "Max Hoffmann",
+      "email": "max.hoffmann@shopify.com"
     },
     {
-      "name" : "Curtis Dulmage",
-      "email" : "curtis.dulmage@shopify.com"
+      "name": "Curtis Dulmage",
+      "email": "curtis.dulmage@shopify.com"
     }
   ],
   "bugs": {
@@ -36,7 +36,7 @@
     "lint": "eslint ./src --max-warnings 0",
     "esdoc": "esdoc -c esdoc.json",
     "test": "jest --config config.json",
-    "test-ci": "jest --config config.json --coverage"
+    "test-ci": "jest --config config.json --coverage && codecov"
   },
   "files": [
     "lib/**/*.js",
@@ -44,14 +44,15 @@
   ],
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-preset-shopify": "^16.2.0",
     "babel-jest": "^22.1.0",
     "babel-loader": "^7.1.2",
+    "babel-preset-shopify": "^16.2.0",
+    "codecov": "^3.0.0",
     "concurrently": "^3.5.1",
     "core-js": "^2.5.3",
+    "esdoc": "^1.0.4",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
-    "esdoc": "^1.0.4",
     "eslint": "^4.16.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-shopify": "^19.0.0",

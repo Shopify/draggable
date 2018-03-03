@@ -89,8 +89,7 @@ Sensors dictate how drag operations get triggered, by listening to native browse
 By default draggable includes the `MouseSensor` & `TouchSensor`. Default: `[]`
 
 **`appendTo {String|HTMLElement|Function}`**  
-Draggable allows you to specify where the mirror should be appended to.  For clarification, this is not where the destination will be placed, only the temporary mirror object (the object under your cursor as you drag). You can specify a css
-selector, a HTMLElement or a function that returns a HTMLElement
+Draggable allows you to specify where the mirror should be appended to.  For clarification, this is not where the source will be placed, only the temporary mirror element, which is the element that follows your cursor as you drag. You can specify a css selector, a HTMLElement or a function that returns a HTMLElement
 
 **`classes {Object}`**  
 Draggable adds classes to elements to indicate state. These classes can be used to add styling

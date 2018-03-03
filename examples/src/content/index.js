@@ -17,9 +17,12 @@ import PluginsCollidable from './Plugins/Collidable';
 import PluginsSnappable from './Plugins/Snappable';
 import PluginsSwapAnimation from './Plugins/SwapAnimation';
 
+//  __Import new example__ Don't delete this comment
+
 const Content = {
   Home,
   DragEvents,
+  // __Initialize new example__ Don't delete this comment
   UniqueDropzone,
   SimpleList,
   Transformed,
@@ -29,7 +32,7 @@ const Content = {
   GridLayout,
   PluginsCollidable,
   PluginsSnappable,
-  PluginsSwapAnimation,
+  PluginsSwapAnimation
 };
 
 export default Content;

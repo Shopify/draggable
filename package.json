@@ -20,12 +20,7 @@
   "bugs": {
     "url": "https://github.com/Shopify/draggable/issues"
   },
-  "keywords": [
-    "shopify",
-    "draggable",
-    "drag-and-drop",
-    "es6"
-  ],
+  "keywords": ["shopify", "draggable", "drag-and-drop", "es6"],
   "main": "./lib/draggable.bundle.js",
   "scripts": {
     "start": "concurrently \"webpack --watch\" \"cd examples && yarn && yarn start\"",
@@ -37,15 +32,18 @@
     "test": "jest --config config.json",
     "test-ci": "jest --config config.json --coverage && codecov"
   },
-  "files": [
-    "lib/**/*.js"
-  ],
+  "files": ["lib/**/*.js"],
+  "bin": {
+    "draggable": "./cli/index.js"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-jest": "^22.4.1",
     "babel-loader": "^7.1.4",
     "babel-preset-shopify": "^16.3.0",
+    "chalk": "^2.3.2",
     "codecov": "^3.0.0",
+    "commander": "^2.14.1",
     "concurrently": "^3.5.1",
     "core-js": "^2.5.3",
     "esdoc": "^1.0.4",
@@ -54,19 +52,19 @@
     "eslint": "^4.19.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-shopify": "^20.0.0",
+    "figlet": "^1.2.0",
+    "inquirer": "^5.1.0",
     "jest": "^22.4.2",
+    "then-read-json": "^1.0.3",
     "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
+    "webpack-cli": "^2.0.12",
+    "write": "^1.0.3"
   },
   "eslintConfig": {
     "extends": "plugin:shopify/esnext",
     "env": {}
   },
   "babel": {
-    "presets": [
-      [
-        "shopify/web"
-      ]
-    ]
+    "presets": [["shopify/web"]]
   }
 }

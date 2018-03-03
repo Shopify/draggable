@@ -16,11 +16,11 @@ import Collidable from '@shopify/draggable/lib/plugins/collidable';
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.4/lib/plugins.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.5/lib/plugins.js"></script>
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.4/lib/plugins/collidable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.5/lib/plugins/collidable.js"></script>
 ```
 
 ### Options
@@ -30,10 +30,13 @@ A css selector string, an array of elements, a NodeList, a HTMLElement or a func
 
 ### Events
 
-| Name                  | Description                                                | Cancelable  | Cancelable action    |
-| --------------------- | ---------------------------------------------------------- | ----------- | -------------------- |
-| `collidable:in`       | Gets fired when dragging near a collidable element         | false       | -                    |
-| `collidable:out`      | Gets fired when dragging away from a collidable element    | false       | -                    |
+| Name                               | Description                                                | Cancelable  | Cancelable action    |
+| ---------------------------------- | ---------------------------------------------------------- | ----------- | -------------------- |
+| [`collidable:in`][collidablein]    | Gets fired when dragging near a collidable element         | false       | -                    |
+| [`collidable:out`][collidableout]  | Gets fired when dragging away from a collidable element    | false       | -                    |
+
+[collidablein]: CollidableEvent#collidableinevent
+[collidableout]: CollidableEvent#collidableoutevent
 
 ### Example
 
@@ -49,3 +52,11 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 sortable.on('collidable:in', () => console.log('collidable:in'));
 sortable.on('collidable:out', () => console.log('collidable:out'));
 ```
+
+### Plans
+
+- Improving collision detection for mirror
+
+### Caveats
+
+- Currently only bases collision based on mouse cursor and not mirror element

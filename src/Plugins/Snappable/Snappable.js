@@ -5,37 +5,72 @@ import {
   SnapOutEvent,
 } from './SnappableEvent';
 
+const onDragStart = Symbol('onDragStart');
+const onDragStop = Symbol('onDragStop');
+const onDragOver = Symbol('onDragOver');
+const onDragOut = Symbol('onDragOut');
+
+/**
+ * Snappable plugin which snaps draggable elements into place
+ * @class Snappable
+ * @module Snappable
+ * @extends AbstractPlugin
+ */
 export default class Snappable extends AbstractPlugin {
+
+  /**
+   * Snappable constructor.
+   * @constructs Snappable
+   * @param {Draggable} draggable - Draggable instance
+   */
   constructor(draggable) {
     super(draggable);
 
-    this._onDragStart = this._onDragStart.bind(this);
-    this._onDragStop = this._onDragStop.bind(this);
-    this._onDragOver = this._onDragOver.bind(this);
-    this._onDragOut = this._onDragOut.bind(this);
+    /**
+     * Keeps track of the first source element
+     * @property {HTMLElement|null} firstSource
+     * @type {HTMLElement|null}
+     */
+    this.firstSource = null;
+
+    this[onDragStart] = this[onDragStart].bind(this);
+    this[onDragStop] = this[onDragStop].bind(this);
+    this[onDragOver] = this[onDragOver].bind(this);
+    this[onDragOut] = this[onDragOut].bind(this);
   }
 
+  /**
+   * Attaches plugins event listeners
+   */
   attach() {
     this.draggable
-      .on('drag:start', this._onDragStart)
-      .on('drag:stop', this._onDragStop)
-      .on('drag:over', this._onDragOver)
-      .on('drag:out', this._onDragOut)
-      .on('droppable:over', this._onDragOver)
-      .on('droppable:out', this._onDragOut);
+      .on('drag:start', this[onDragStart])
+      .on('drag:stop', this[onDragStop])
+      .on('drag:over', this[onDragOver])
+      .on('drag:out', this[onDragOut])
+      .on('droppable:over', this[onDragOver])
+      .on('droppable:out', this[onDragOut]);
   }
 
+  /**
+   * Detaches plugins event listeners
+   */
   detach() {
     this.draggable
-      .off('drag:start', this._onDragStart)
-      .off('drag:stop', this._onDragStop)
-      .off('drag:over', this._onDragOver)
-      .off('drag:out', this._onDragOut)
-      .off('droppable:over', this._onDragOver)
-      .off('droppable:out', this._onDragOut);
+      .off('drag:start', this[onDragStart])
+      .off('drag:stop', this[onDragStop])
+      .off('drag:over', this[onDragOver])
+      .off('drag:out', this[onDragOut])
+      .off('droppable:over', this[onDragOver])
+      .off('droppable:out', this[onDragOut]);
   }
 
-  _onDragStart(event) {
+  /**
+   * Drag start handler
+   * @private
+   * @param {DragStartEvent} event - Drag start event
+   */
+  [onDragStart](event) {
     if (event.canceled()) {
       return;
     }
@@ -43,11 +78,21 @@ export default class Snappable extends AbstractPlugin {
     this.firstSource = event.source;
   }
 
-  _onDragStop() {
+  /**
+   * Drag stop handler
+   * @private
+   * @param {DragStopEvent} event - Drag stop event
+   */
+  [onDragStop]() {
     this.firstSource = null;
   }
 
-  _onDragOver(event) {
+  /**
+   * Drag over handler
+   * @private
+   * @param {DragOverEvent|DroppableOverEvent} event - Drag over event
+   */
+  [onDragOver](event) {
     if (event.canceled()) {
       return;
     }
@@ -62,6 +107,7 @@ export default class Snappable extends AbstractPlugin {
 
     const snapInEvent = new SnapInEvent({
       dragEvent: event,
+      snappable: event.over || event.droppable,
     });
 
     this.draggable.trigger(snapInEvent);
@@ -83,7 +129,12 @@ export default class Snappable extends AbstractPlugin {
     }, this.draggable.options.placedTimeout);
   }
 
-  _onDragOut(event) {
+  /**
+   * Drag out handler
+   * @private
+   * @param {DragOutEvent|DroppableOutEvent} event - Drag out event
+   */
+  [onDragOut](event) {
     if (event.canceled()) {
       return;
     }
@@ -93,6 +144,7 @@ export default class Snappable extends AbstractPlugin {
 
     const snapOutEvent = new SnapOutEvent({
       dragEvent: event,
+      snappable: event.over || event.droppable,
     });
 
     this.draggable.trigger(snapOutEvent);

@@ -18,6 +18,16 @@ export class SnapEvent extends AbstractEvent {
   get dragEvent() {
     return this.data.dragEvent;
   }
+
+  /**
+   * Snappable element
+   * @property snappable
+   * @type {HTMLElement}
+   * @readonly
+   */
+  get snappable() {
+    return this.data.snappable;
+  }
 }
 
 /**

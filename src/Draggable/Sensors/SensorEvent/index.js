@@ -1,7 +1,1 @@
-export {
-  SensorEvent,
-  DragStartSensorEvent,
-  DragMoveSensorEvent,
-  DragStopSensorEvent,
-  DragPressureSensorEvent,
-} from './SensorEvent';
+export * from './SensorEvent';

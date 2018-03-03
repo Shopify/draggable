@@ -1,4 +1,1 @@
-export {
-  CollidableInEvent,
-  CollidableOutEvent,
-} from './CollidableEvent';
+export * from './CollidableEvent';

@@ -1,6 +1,8 @@
 import {closest} from 'shared/utils';
 
-import {Accessibility, Mirror, AutoScroll} from './Plugins';
+import {Accessibility, Mirror, Scrollable, Announcement} from './Plugins';
+
+import Emitter from './Emitter';
 
 import {
   MouseSensor,
@@ -37,6 +39,28 @@ const onDragStop = Symbol('onDragStop');
 const onDragPressure = Symbol('onDragPressure');
 const getAppendableContainer = Symbol('getAppendableContainer');
 
+/**
+ * @const {Object} defaultAnnouncements
+ * @const {Function} defaultAnnouncements['drag:start']
+ * @const {Function} defaultAnnouncements['drag:stop']
+ */
+const defaultAnnouncements = {
+  'drag:start': (event) => `Picked up ${event.source.textContent.trim() || event.source.id || 'draggable element'}`,
+  'drag:stop': (event) => `Released ${event.source.textContent.trim() || event.source.id || 'draggable element'}`,
+};
+
+const defaultClasses = {
+  'container:dragging': 'draggable-container--is-dragging',
+  'source:dragging': 'draggable-source--is-dragging',
+  'source:placed': 'draggable-source--placed',
+  'container:placed': 'draggable-container--placed',
+  'body:dragging': 'draggable--is-dragging',
+  'draggable:over': 'draggable--over',
+  'container:over': 'draggable-container--over',
+  'source:original': 'draggable--original',
+  mirror: 'draggable-mirror',
+};
+
 export const defaultOptions = {
   draggable: '.draggable-source',
   handle: null,
@@ -44,17 +68,6 @@ export const defaultOptions = {
   placedTimeout: 800,
   plugins: [],
   sensors: [],
-  classes: {
-    'container:dragging': 'draggable-container--is-dragging',
-    'source:dragging': 'draggable-source--is-dragging',
-    'source:placed': 'draggable-source--placed',
-    'container:placed': 'draggable-container--placed',
-    'body:dragging': 'draggable--is-dragging',
-    'draggable:over': 'draggable--over',
-    'container:over': 'draggable-container--over',
-    'source:original': 'draggable--original',
-    mirror: 'draggable-mirror',
-  },
 };
 
 /**
@@ -70,10 +83,11 @@ export default class Draggable {
    * @property {Object} Plugins
    * @property {Mirror} Plugins.Mirror
    * @property {Accessibility} Plugins.Accessibility
-   * @property {AutoScroll} Plugins.AutoScroll
+   * @property {Scrollable} Plugins.Scrollable
+   * @property {Announcement} Plugins.Announcement
    * @type {Object}
    */
-  static Plugins = {Mirror, Accessibility, AutoScroll};
+  static Plugins = {Mirror, Accessibility, Scrollable, Announcement};
 
   /**
    * Draggable constructor.
@@ -96,8 +110,25 @@ export default class Draggable {
       throw new Error('Draggable containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`');
     }
 
-    this.options = {...defaultOptions, ...options};
-    this.callbacks = {};
+    this.options = {
+      ...defaultOptions,
+      ...options,
+      classes: {
+        ...defaultClasses,
+        ...(options.classes || {}),
+      },
+      announcements: {
+        ...defaultAnnouncements,
+        ...(options.announcements || {}),
+      },
+    };
+
+    /**
+     * Draggables event emitter
+     * @property emitter
+     * @type {Emitter}
+     */
+    this.emitter = new Emitter();
 
     /**
      * Current drag state
@@ -130,7 +161,7 @@ export default class Draggable {
     document.addEventListener('drag:stop', this[onDragStop], true);
     document.addEventListener('drag:pressure', this[onDragPressure], true);
 
-    this.addPlugin(...[Mirror, Accessibility, AutoScroll, ...this.options.plugins]);
+    this.addPlugin(...[Mirror, Accessibility, Scrollable, Announcement, ...this.options.plugins]);
     this.addSensor(...[MouseSensor, TouchSensor, ...this.options.sensors]);
 
     const draggableInitializedEvent = new DraggableInitializedEvent({
@@ -239,16 +270,12 @@ export default class Draggable {
   /**
    * Adds listener for draggable events
    * @param {String} type - Event name
-   * @param {Function} callback - Event callback
+   * @param {...Function} callbacks - Event callbacks
    * @return {Draggable}
    * @example draggable.on('drag:start', (dragEvent) => dragEvent.cancel());
    */
-  on(type, callback) {
-    if (!this.callbacks[type]) {
-      this.callbacks[type] = [];
-    }
-
-    this.callbacks[type].push(callback);
+  on(type, ...callbacks) {
+    this.emitter.on(type, ...callbacks);
     return this;
   }
 
@@ -260,13 +287,7 @@ export default class Draggable {
    * @example draggable.off('drag:start', handlerFunction);
    */
   off(type, callback) {
-    if (!this.callbacks[type]) { return null; }
-    const copy = this.callbacks[type].slice(0);
-    for (let i = 0; i < copy.length; i++) {
-      if (callback === copy[i]) {
-        this.callbacks[type].splice(i, 1);
-      }
-    }
+    this.emitter.off(type, callback);
     return this;
   }
 
@@ -277,12 +298,7 @@ export default class Draggable {
    * @example draggable.trigger(event);
    */
   trigger(event) {
-    if (!this.callbacks[event.type]) { return null; }
-    const callbacks = [...this.callbacks[event.type]];
-    for (let i = callbacks.length - 1; i >= 0; i--) {
-      const callback = callbacks[i];
-      callback(event);
-    }
+    this.emitter.trigger(event);
     return this;
   }
 
@@ -292,7 +308,7 @@ export default class Draggable {
    * @return {String|null}
    */
   getClassNameFor(name) {
-    return this.options.classes[name] || defaultOptions.classes[name];
+    return this.options.classes[name];
   }
 
   /**
@@ -414,6 +430,9 @@ export default class Draggable {
         this.mirror.parentNode.removeChild(this.mirror);
       }
 
+      this.source.parentNode.removeChild(this.source);
+      this.originalSource.style.display = null;
+
       this.source.classList.remove(this.getClassNameFor('source:dragging'));
       this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
       document.body.classList.remove(this.getClassNameFor('body:dragging'));
@@ -493,7 +512,7 @@ export default class Draggable {
         originalSource: this.originalSource,
         sourceContainer: container,
         sensorEvent,
-        overContainer: this.overContainer,
+        overContainer: this.currentOverContainer,
       });
 
       this.currentOverContainer.classList.remove(this.getClassNameFor('container:over'));

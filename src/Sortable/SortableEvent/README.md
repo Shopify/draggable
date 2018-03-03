@@ -36,7 +36,7 @@ Read-only property for the start container of the current draggable source.
 
 ## SortableSortEvent
 
-`SortableSortedEvent` gets triggered by `Sortable` before sorting with another draggable.
+`SortableSortEvent` gets triggered by `Sortable` before sorting with another draggable.
 
 | | |
 | --------------------- | ---------------------------------------------------------- |

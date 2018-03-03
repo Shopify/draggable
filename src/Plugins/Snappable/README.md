@@ -16,11 +16,11 @@ import Snappable from '@shopify/draggable/lib/plugins/snappable';
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.4/lib/plugins.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.5/lib/plugins.js"></script>
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.4/lib/plugins/snappable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.5/lib/plugins/snappable.js"></script>
 ```
 
 ### Options
@@ -29,10 +29,13 @@ _No options_
 
 ### Events
 
-| Name                  | Description                                                | Cancelable  | Cancelable action     |
-| --------------------- | ---------------------------------------------------------- | ----------- | --------------------- |
-| `snap:in`             | Gets fired when just before snapping in                    | true        | Prevents snapping     |
-| `snap:out`            | Gets fired when snapping out                               | true        | Prevents snapping out |
+| Name                    | Description                                                | Cancelable  | Cancelable action     |
+| ----------------------- | ---------------------------------------------------------- | ----------- | --------------------- |
+| [`snap:in`][snapin]     | Gets fired when just before snapping in                    | true        | Prevents snapping     |
+| [`snap:out`][snapout]   | Gets fired when snapping out                               | true        | Prevents snapping out |
+
+[snapin]: SnappableEvent#snapinevent
+[snapout]: SnappableEvent#snapoutevent
 
 ### Example
 

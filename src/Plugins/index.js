@@ -1,9 +1,12 @@
-import Collidable from './Collidable';
-import Snappable from './Snappable';
-import SwapAnimation from './SwapAnimation';
+export {
+  default as Collidable,
+} from './Collidable';
 
 export {
-  Collidable,
-  Snappable,
-  SwapAnimation,
-};
+  default as Snappable,
+} from './Snappable';
+
+export {
+  default as SwapAnimation,
+  defaultOptions as defaultSwapAnimationOptions,
+} from './SwapAnimation';

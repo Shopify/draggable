@@ -1,11 +1,18 @@
-import Mirror, {defaultMirrorOptions} from './Mirror';
-import AutoScroll, {defaultAutoScrollOptions} from './AutoScroll';
-import Accessibility from './Accessibility';
+export {
+  default as Mirror,
+  defaultOptions as defaultMirrorOptions,
+} from './Mirror';
 
 export {
-  Mirror,
-  defaultMirrorOptions,
-  AutoScroll,
-  defaultAutoScrollOptions,
-  Accessibility,
-};
+  default as Announcement,
+  defaultOptions as defaultAnnouncementOptions,
+} from './Announcement';
+
+export {
+  default as Scrollable,
+  defaultOptions as defaultScrollableOptions,
+} from './Scrollable';
+
+export {
+  default as Accessibility,
+} from './Accessibility';

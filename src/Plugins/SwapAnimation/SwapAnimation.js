@@ -1,31 +1,85 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
 
+const onSortableSorted = Symbol('onSortableSorted');
+
+/**
+ * SwapAnimation default options
+ * @property {Object} defaultOptions
+ * @property {Number} defaultOptions.duration
+ * @property {String} defaultOptions.easingFunction
+ * @type {Object}
+ */
 export const defaultOptions = {
   duration: 150,
   easingFunction: 'ease-in-out',
 };
 
+/**
+ * SwapAnimation plugin adds swap animations for sortable
+ * @class SwapAnimation
+ * @module SwapAnimation
+ * @extends AbstractPlugin
+ */
 export default class SwapAnimation extends AbstractPlugin {
+
+  /**
+   * SwapAnimation constructor.
+   * @constructs SwapAnimation
+   * @param {Draggable} draggable - Draggable instance
+   */
   constructor(draggable) {
     super(draggable);
 
+    /**
+     * SwapAnimation options
+     * @property {Object} options
+     * @property {Number} defaultOptions.duration
+     * @property {String} defaultOptions.easingFunction
+     * @type {Object}
+     */
     this.options = {
       ...defaultOptions,
       ...this.getOptions(),
     };
 
-    this.onSortableSorted = this.onSortableSorted.bind(this);
+    /**
+     * Last animation frame
+     * @property {Number} lastAnimationFrame
+     * @type {Number}
+     */
+    this.lastAnimationFrame = null;
+
+    this[onSortableSorted] = this[onSortableSorted].bind(this);
   }
 
+  /**
+   * Attaches plugins event listeners
+   */
   attach() {
-    this.draggable.on('sortable:sorted', this.onSortableSorted);
+    this.draggable.on('sortable:sorted', this[onSortableSorted]);
   }
 
+  /**
+   * Detaches plugins event listeners
+   */
   detach() {
-    this.draggable.off('sortable:sorted', this.onSortableSorted);
+    this.draggable.off('sortable:sorted', this[onSortableSorted]);
   }
 
-  onSortableSorted({oldIndex, newIndex, dragEvent}) {
+  /**
+   * Returns options passed through draggable
+   * @return {Object}
+   */
+  getOptions() {
+    return this.draggable.options.swapAnimation || {};
+  }
+
+  /**
+   * Sortable sorted handler
+   * @param {SortableSortedEvent} sortableEvent
+   * @private
+   */
+  [onSortableSorted]({oldIndex, newIndex, dragEvent}) {
     const {source, over} = dragEvent;
 
     cancelAnimationFrame(this.lastAnimationFrame);
@@ -39,12 +93,17 @@ export default class SwapAnimation extends AbstractPlugin {
       }
     });
   }
-
-  getOptions() {
-    return this.draggable.options.swapAnimation || {};
-  }
 }
 
+/**
+ * Animates two elements
+ * @param {HTMLElement} top
+ * @param {HTMLElement} bottom
+ * @param {Object} options
+ * @param {Number} options.duration
+ * @param {String} options.easingFunction
+ * @private
+ */
 function animate(top, bottom, {duration, easingFunction}) {
   const height = top.offsetHeight;
 
@@ -64,6 +123,11 @@ function animate(top, bottom, {duration, easingFunction}) {
   });
 }
 
+/**
+ * Resets animation style properties after animation has completed
+ * @param {Event} event
+ * @private
+ */
 function resetElementOnTransitionEnd(event) {
   event.target.style.transition = '';
   event.target.style.pointerEvents = '';

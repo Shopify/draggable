@@ -9,6 +9,7 @@ html {
   font-family: sans-serif;
   font-size: 62.5%;
   font-display: swap;
+  line-height: 1;
   text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -19,6 +20,14 @@ html {
   *::before {
     box-sizing: inherit;
   }
+}
+
+@viewport {
+  width: device-width;
+}
+
+:root {
+  tab-size: 2;
 }
 
 html,
@@ -33,11 +42,6 @@ textarea {
 
 body {
   margin: 0;
-  line-height: 1;
-}
-
-@viewport {
-  width: device-width;
 }
 
 ///
@@ -76,7 +80,7 @@ ul {
 }
 
 strong {
-  font-weight: bold;
+  font-weight: bolder;
 }
 
 small {
@@ -85,9 +89,9 @@ small {
 
 sub,
 sup {
+  position: relative;
   font-size: 75%;
   line-height: 0;
-  position: relative;
   vertical-align: baseline;
 }
 
@@ -101,6 +105,14 @@ sub {
 
 blockquote {
   margin: 0;
+}
+
+abbr[title] {
+  text-decoration: underline dotted;
+}
+
+summary {
+  display: list-item;
 }
 
 ///
@@ -163,8 +175,11 @@ pre {
 }
 
 code,
+kbd,
+samp,
 pre {
   font-family: monospace;
+  font-size: 1em;
 }
 
 ///
@@ -176,7 +191,8 @@ select,
 textarea {
   margin: 0;
   padding: 0;
-  font: inherit;
+  font-family: inherit;
+  line-height: 1;
   color: inherit;
 }
 
@@ -203,10 +219,19 @@ button[disabled] {
   cursor: default;
 }
 
-input::-moz-focus-inner,
-button::-moz-focus-inner {
+button::-moz-focus-inner,
+[type='button']::-moz-focus-inner,
+[type='reset']::-moz-focus-inner,
+[type='submit']::-moz-focus-inner {
   padding: 0;
-  border: 0;
+  border-style: none;
+}
+
+button:-moz-focusring,
+[type='button']:-moz-focusring,
+[type='reset']:-moz-focusring,
+[type='submit']:-moz-focusring {
+  outline: 0.1rem dotted ButtonText;
 }
 
 input {
@@ -228,12 +253,17 @@ input[type='number']::-webkit-outer-spin-button {
 
 input[type='search'] {
   -webkit-appearance: textfield; // stylelint-disable-line property-no-vendor-prefix
-  // box-sizing: content-box;
+  outline-offset: -0.2rem;
 }
 
 input[type='search']::-webkit-search-decoration,
 input[type='search']::-webkit-search-cancel-button {
   -webkit-appearance: none; // stylelint-disable-line property-no-vendor-prefix
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; // stylelint-disable-line property-no-vendor-prefix
+  font: inherit;
 }
 
 fieldset {
@@ -247,12 +277,16 @@ legend {
   padding: 0;
 }
 
+progress {
+  vertical-align: baseline;
+}
+
 textarea {
   overflow: auto;
 }
 
 optgroup {
-  font-weight: bold;
+  font-weight: bolder;
 }
 
 select {

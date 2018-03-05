@@ -1,20 +1,13 @@
-import webpack from 'webpack';
 import * as bundleAnalyzer from 'webpack-bundle-analyzer';
 
-export default function initPlugins() {
+export default function initPlugins(isProd = false) {
   const plugins = [];
 
+  if (isProd) {
+    console.log('Running in `production`');
+  }
+
   plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'examples-vendor',
-      minChunks: (module) => /node_modules/.test(module.resource),
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'examples-runtime',
-    }),
     new bundleAnalyzer.BundleAnalyzerPlugin({
       analyzerMode: 'static',
       openAnalyzer: false,

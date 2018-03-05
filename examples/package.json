@@ -21,12 +21,13 @@
     "tools": "--require babel-register --gulpfile tools"
   },
   "scripts": {
+    "clean": "rm -rf dist bundle-report.html",
     "views": "gulp views $npm_package_config_tools",
     "scripts": "gulp scripts $npm_package_config_tools",
     "styles": "gulp styles $npm_package_config_tools",
     "start": "gulp start $npm_package_config_tools",
     "build": "yarn run clean && gulp build $npm_package_config_tools",
-    "clean": "rm -rf dist bundle-report.html",
+    "build:prod": "NODE_ENV=production yarn run build",
     "lint:scss": "stylelint './src/**/*.scss'",
     "prettier:scss": "prettier-stylelint './src/**/*.scss' --write -q",
     "lint:js": "eslint './src/**/*.js' './tools/**/*.js' --max-warnings 0",
@@ -60,7 +61,7 @@
     "prettier-stylelint": "^0.4.2",
     "stylelint": "^9.1.1",
     "stylelint-config-shopify": "^5.0.0",
-    "webpack": "^3.10.0",
+    "webpack": "^4.1.0",
     "webpack-bundle-analyzer": "^2.11.1"
   }
 }

@@ -10,8 +10,7 @@ For instance, our solution to resolving touch events required duplicating the `s
 
 1. Clone the `draggable` repo: `git clone git@github.com:Shopify/draggable.git`.
 2. Run `yarn && yarn start` in the root `draggable` directory.
-    - (optional) `cd examples && yarn && yarn start` if you only care about seeing the Examples. Make sure you have run `yarn` in the `draggable` directory to generate the `lib` files.
-3. You can now access the local site at `http://localhost:3000`.
+3. You can now access the local site at `http://localhost:3000` _(local address may vary - see console for correct url)_.
 
 ## Code style
 
@@ -35,7 +34,7 @@ There is only one layout template, `views/templates/document.html`, which is ext
 
 ### `src/styles`
 
-This is where “global” styles, along with the `examples-app.scss` manifest are located. There shouldn’t be much reason to alter any of these files other than adding new imports to `examples-app.scss`.
+This is where “global” styles, along with the `examples-app.scss` manifest, are located. There shouldn’t be much reason to alter any of these files other than adding new imports to `examples-app.scss`.
 
 This project uses [Threads](https://github.com/beefchimi/threads) to manage style properties. You can see all of the Threads theme values in `styles/themes/examples`.
 
@@ -71,17 +70,7 @@ This folder simply contains any files that need to be copied to the root `dist/`
 
 All of the build scripts are found in this folder. You shouldn’t need to go in here unless you want to change how the code is compiled.
 
-You may find it useful to change how Webpack generates the JavaScript bundles. For example:
-
-**Disable babel’s ES5 transpilation**
-1. Open `webpack.config.js`.
-2. Remove `vendorScripts`, `'examples-vendor': vendorScripts`, and `loader: 'babel-loader'`
-    - (optional) Disable source maps by removing `devtool: 'source-map'`
-3. Open `webpack.plugins.js`.
-4. Remove any `CommonsChunkPlugin` entries.
-    - (optional) Disable minification by removing the Uglify entry.
-5. Open `src/components/Document/Head.html`.
-6. Remove both the `examples-runtime` and `examples-vendor` scripts.
+All JavaScript is generated with source maps, so you should be able to dig through errors and `console.log` statements without issue.
 
 ## Running a server / watching files
 

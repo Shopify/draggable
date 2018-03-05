@@ -6,19 +6,25 @@
 $examples-font-stack-data: (
   base: #{
     -apple-system,
-    'BlinkMacSystemFont',
+    BlinkMacSystemFont,
     'San Francisco',
-    'Roboto',
+    Roboto,
     'Segoe UI',
+    Helvetica,
     'Helvetica Neue',
-    sans-serif
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
   },
   monospace: #{
-    'Courier',
-    'Menlo',
-    'Monaco',
-    'Consolas',
+    SFMono-Regular,
+    'Liberation Mono',
+    Courier,
+    Menlo,
+    Monaco,
+    Consolas,
     'Lucida Console',
-    monospace
+    monospace,
   },
 );

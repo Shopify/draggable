@@ -1,6 +1,6 @@
 {
   "name": "draggable-examples",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Examples for draggable.js",
   "author": "Max Hoffmann and Curtis Dulmage",
   "homepage": "https://shopify.github.io/draggable",
@@ -21,33 +21,35 @@
     "tools": "--require babel-register --gulpfile tools"
   },
   "scripts": {
+    "clean": "rm -rf dist bundle-report.html",
     "views": "gulp views $npm_package_config_tools",
     "scripts": "gulp scripts $npm_package_config_tools",
     "styles": "gulp styles $npm_package_config_tools",
     "start": "gulp start $npm_package_config_tools",
     "build": "yarn run clean && gulp build $npm_package_config_tools",
-    "clean": "rm -rf dist bundle-report.html",
+    "build:prod": "NODE_ENV=production yarn run build",
     "lint:scss": "stylelint './src/**/*.scss'",
     "prettier:scss": "prettier-stylelint './src/**/*.scss' --write -q",
     "lint:js": "eslint './src/**/*.js' './tools/**/*.js' --max-warnings 0",
-    "prettier:js": "yarn run lint:js --fix"
+    "prettier:js": "yarn run lint:js --fix",
+    "prepublish": "yarn run build"
   },
   "dependencies": {
     "core-js": "^2.5.3",
     "threads": "git+ssh://git@github.com/beefchimi/threads.git#v1.0.0-beta8"
   },
   "devDependencies": {
-    "autoprefixer": "^7.2.5",
+    "autoprefixer": "^8.1.0",
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
+    "babel-loader": "^7.1.3",
     "babel-preset-shopify": "^16.2.0",
     "browser-sync": "^2.23.6",
     "cssnano": "^3.10.0",
     "cssnano-preset-advanced": "^4.0.0-rc.2",
-    "eslint": "^4.17.0",
+    "eslint": "^4.18.2",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-shopify": "^19.0.0",
-    "gulp": "gulpjs/gulp.git#4.0",
+    "gulp": "gulpjs/gulp#v4.0.0-alpha.3",
     "gulp-cli": "^2.0.1",
     "gulp-data": "^1.3.1",
     "gulp-htmlmin": "^4.0.0",
@@ -55,12 +57,13 @@
     "gulp-postcss": "^7.0.1",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.4",
-    "nunjucks": "^3.0.1",
-    "prettier": "^1.10.2",
+    "install": "^0.10.4",
+    "nunjucks": "^3.1.2",
+    "prettier": "^1.11.1",
     "prettier-stylelint": "^0.4.2",
-    "stylelint": "^8.4.0",
-    "stylelint-config-shopify": "^4.0.0",
-    "webpack": "^3.10.0",
-    "webpack-bundle-analyzer": "^2.10.0"
+    "stylelint": "^9.1.1",
+    "stylelint-config-shopify": "^5.0.0",
+    "webpack": "^4.1.0",
+    "webpack-bundle-analyzer": "^2.11.1"
   }
 }

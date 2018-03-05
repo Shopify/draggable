@@ -3860,9 +3860,9 @@ gulp-util@^3.0:
     through2 "^2.0.0"
     vinyl "^0.5.0"
 
-gulp@gulpjs/gulp.git#4.0:
+gulp@gulpjs/gulp#v4.0.0-alpha.3:
   version "4.0.0-alpha.3"
-  resolved "https://codeload.github.com/gulpjs/gulp/tar.gz/71c094a51c7972d26f557899ddecab0210ef3776"
+  resolved "https://codeload.github.com/gulpjs/gulp/tar.gz/057df5963034eb6426d99650abba15e4d912b0b7"
   dependencies:
     glob-watcher "^4.0.0"
     gulp-cli "^2.0.0"
@@ -4245,6 +4245,10 @@ inquirer@^3.0.6:
     string-width "^2.1.0"
     strip-ansi "^4.0.0"
     through "^2.3.6"
+
+install@^0.10.4:
+  version "0.10.4"
+  resolved "https://registry.yarnpkg.com/install/-/install-0.10.4.tgz#9cb09115768b93a582d1450a6ba3f275975b49aa"
 
 interpret@^1.1.0:
   version "1.1.0"

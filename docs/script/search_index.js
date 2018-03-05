@@ -18,9 +18,9 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
-    "@shopify/draggable/src/draggable/plugins/autoscroll/autoscroll.js~autoscroll",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html",
-    "<span>AutoScroll</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/AutoScroll/AutoScroll.js</span>",
+    "@shopify/draggable/src/draggable/plugins/announcement/announcement.js~announcement",
+    "class/src/Draggable/Plugins/Announcement/Announcement.js~Announcement.html",
+    "<span>Announcement</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/Announcement/Announcement.js</span>",
     "class"
   ],
   [
@@ -180,6 +180,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "@shopify/draggable/src/draggable/emitter/emitter.js~emitter",
+    "class/src/Draggable/Emitter/Emitter.js~Emitter.html",
+    "<span>Emitter</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Emitter/Emitter.js</span>",
+    "class"
+  ],
+  [
     "@shopify/draggable/src/draggable/sensors/forcetouchsensor/forcetouchsensor.js~forcetouchsensor",
     "class/src/Draggable/Sensors/ForceTouchSensor/ForceTouchSensor.js~ForceTouchSensor.html",
     "<span>ForceTouchSensor</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Sensors/ForceTouchSensor/ForceTouchSensor.js</span>",
@@ -231,6 +237,12 @@ window.esdocSearchIndex = [
     "@shopify/draggable/src/draggable/sensors/mousesensor/mousesensor.js~mousesensor",
     "class/src/Draggable/Sensors/MouseSensor/MouseSensor.js~MouseSensor.html",
     "<span>MouseSensor</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Sensors/MouseSensor/MouseSensor.js</span>",
+    "class"
+  ],
+  [
+    "@shopify/draggable/src/draggable/plugins/scrollable/scrollable.js~scrollable",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html",
+    "<span>Scrollable</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/Scrollable/Scrollable.js</span>",
     "class"
   ],
   [
@@ -366,9 +378,9 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "@shopify/draggable/src/draggable/plugins/autoscroll/autoscroll.js~defaultoptions",
+    "@shopify/draggable/src/draggable/plugins/announcement/announcement.js~defaultoptions",
     "variable/index.html#static-variable-defaultOptions",
-    "<span>defaultOptions</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/AutoScroll/AutoScroll.js</span>",
+    "<span>defaultOptions</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/Announcement/Announcement.js</span>",
     "variable"
   ],
   [
@@ -378,33 +390,69 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "@shopify/draggable/src/draggable/plugins/scrollable/scrollable.js~defaultoptions",
+    "variable/index.html#static-variable-defaultOptions",
+    "<span>defaultOptions</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/Scrollable/Scrollable.js</span>",
+    "variable"
+  ],
+  [
     "@shopify/draggable/src/plugins/swapanimation/swapanimation.js~defaultoptions",
     "variable/index.html#static-variable-defaultOptions",
     "<span>defaultOptions</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Plugins/SwapAnimation/SwapAnimation.js</span>",
     "variable"
   ],
   [
-    "@shopify/draggable/src/draggable/plugins/autoscroll/autoscroll.js~ondragmove",
+    "@shopify/draggable/src/draggable/plugins/scrollable/scrollable.js~ondragmove",
     "variable/index.html#static-variable-onDragMove",
-    "<span>onDragMove</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/AutoScroll/AutoScroll.js</span>",
+    "<span>onDragMove</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/Scrollable/Scrollable.js</span>",
     "variable"
   ],
   [
-    "@shopify/draggable/src/draggable/plugins/autoscroll/autoscroll.js~ondragstart",
+    "@shopify/draggable/src/draggable/plugins/mirror/mirror.js~ondragstart",
     "variable/index.html#static-variable-onDragStart",
-    "<span>onDragStart</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/AutoScroll/AutoScroll.js</span>",
+    "<span>onDragStart</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/Mirror/Mirror.js</span>",
     "variable"
   ],
   [
-    "@shopify/draggable/src/draggable/plugins/autoscroll/autoscroll.js~ondragstop",
+    "@shopify/draggable/src/draggable/plugins/scrollable/scrollable.js~ondragstart",
+    "variable/index.html#static-variable-onDragStart",
+    "<span>onDragStart</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/Scrollable/Scrollable.js</span>",
+    "variable"
+  ],
+  [
+    "@shopify/draggable/src/draggable/plugins/mirror/mirror.js~ondragstop",
     "variable/index.html#static-variable-onDragStop",
-    "<span>onDragStop</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/AutoScroll/AutoScroll.js</span>",
+    "<span>onDragStop</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/Mirror/Mirror.js</span>",
     "variable"
   ],
   [
-    "@shopify/draggable/src/draggable/plugins/autoscroll/autoscroll.js~scroll",
+    "@shopify/draggable/src/draggable/plugins/scrollable/scrollable.js~ondragstop",
+    "variable/index.html#static-variable-onDragStop",
+    "<span>onDragStop</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/Scrollable/Scrollable.js</span>",
+    "variable"
+  ],
+  [
+    "@shopify/draggable/src/draggable/plugins/mirror/mirror.js~onmirrorcreated",
+    "variable/index.html#static-variable-onMirrorCreated",
+    "<span>onMirrorCreated</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/Mirror/Mirror.js</span>",
+    "variable"
+  ],
+  [
+    "@shopify/draggable/src/draggable/plugins/mirror/mirror.js~onmirrormove",
+    "variable/index.html#static-variable-onMirrorMove",
+    "<span>onMirrorMove</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/Mirror/Mirror.js</span>",
+    "variable"
+  ],
+  [
+    "@shopify/draggable/src/draggable/plugins/mirror/mirror.js~onscroll",
+    "variable/index.html#static-variable-onScroll",
+    "<span>onScroll</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/Mirror/Mirror.js</span>",
+    "variable"
+  ],
+  [
+    "@shopify/draggable/src/draggable/plugins/scrollable/scrollable.js~scroll",
     "variable/index.html#static-variable-scroll",
-    "<span>scroll</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/AutoScroll/AutoScroll.js</span>",
+    "<span>scroll</span> <span class=\"search-result-import-path\">@shopify/draggable/src/Draggable/Plugins/Scrollable/Scrollable.js</span>",
     "variable"
   ],
   [
@@ -906,12 +954,6 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/draggable/draggable.js~draggable#callbacks",
-    "class/src/Draggable/Draggable.js~Draggable.html#instance-member-callbacks",
-    "src/Draggable/Draggable.js~Draggable#callbacks",
-    "member"
-  ],
-  [
     "src/draggable/draggable.js~draggable#constructor",
     "class/src/Draggable/Draggable.js~Draggable.html#instance-constructor-constructor",
     "src/Draggable/Draggable.js~Draggable#constructor",
@@ -945,6 +987,12 @@ window.esdocSearchIndex = [
     "src/draggable/draggable.js~draggable#dragging",
     "class/src/Draggable/Draggable.js~Draggable.html#instance-member-dragging",
     "src/Draggable/Draggable.js~Draggable#dragging",
+    "member"
+  ],
+  [
+    "src/draggable/draggable.js~draggable#emitter",
+    "class/src/Draggable/Draggable.js~Draggable.html#instance-member-emitter",
+    "src/Draggable/Draggable.js~Draggable#emitter",
     "member"
   ],
   [
@@ -1104,6 +1152,48 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/draggable/emitter/emitter.js",
+    "file/src/Draggable/Emitter/Emitter.js.html",
+    "src/Draggable/Emitter/Emitter.js",
+    "file"
+  ],
+  [
+    "src/draggable/emitter/emitter.js~emitter#callbacks",
+    "class/src/Draggable/Emitter/Emitter.js~Emitter.html#instance-member-callbacks",
+    "src/Draggable/Emitter/Emitter.js~Emitter#callbacks",
+    "member"
+  ],
+  [
+    "src/draggable/emitter/emitter.js~emitter#constructor",
+    "class/src/Draggable/Emitter/Emitter.js~Emitter.html#instance-constructor-constructor",
+    "src/Draggable/Emitter/Emitter.js~Emitter#constructor",
+    "method"
+  ],
+  [
+    "src/draggable/emitter/emitter.js~emitter#off",
+    "class/src/Draggable/Emitter/Emitter.js~Emitter.html#instance-method-off",
+    "src/Draggable/Emitter/Emitter.js~Emitter#off",
+    "method"
+  ],
+  [
+    "src/draggable/emitter/emitter.js~emitter#on",
+    "class/src/Draggable/Emitter/Emitter.js~Emitter.html#instance-method-on",
+    "src/Draggable/Emitter/Emitter.js~Emitter#on",
+    "method"
+  ],
+  [
+    "src/draggable/emitter/emitter.js~emitter#trigger",
+    "class/src/Draggable/Emitter/Emitter.js~Emitter.html#instance-method-trigger",
+    "src/Draggable/Emitter/Emitter.js~Emitter#trigger",
+    "method"
+  ],
+  [
+    "src/draggable/emitter/index.js",
+    "file/src/Draggable/Emitter/index.js.html",
+    "src/Draggable/Emitter/index.js",
+    "file"
+  ],
+  [
     "src/draggable/mirrorevent/mirrorevent.js",
     "file/src/Draggable/MirrorEvent/MirrorEvent.js.html",
     "src/Draggable/MirrorEvent/MirrorEvent.js",
@@ -1260,93 +1350,75 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/draggable/plugins/autoscroll/autoscroll.js",
-    "file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js",
+    "src/draggable/plugins/announcement/announcement.js",
+    "file/src/Draggable/Plugins/Announcement/Announcement.js.html",
+    "src/Draggable/Plugins/Announcement/Announcement.js",
     "file"
   ],
   [
-    "src/draggable/plugins/autoscroll/autoscroll.js~autoscroll#[ondragmove]",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-[onDragMove]",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll#[onDragMove]",
+    "src/draggable/plugins/announcement/announcement.js~announcement#[announceevent]",
+    "class/src/Draggable/Plugins/Announcement/Announcement.js~Announcement.html#instance-method-[announceEvent]",
+    "src/Draggable/Plugins/Announcement/Announcement.js~Announcement#[announceEvent]",
     "method"
   ],
   [
-    "src/draggable/plugins/autoscroll/autoscroll.js~autoscroll#[ondragstart]",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-[onDragStart]",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll#[onDragStart]",
+    "src/draggable/plugins/announcement/announcement.js~announcement#[announcemessage]",
+    "class/src/Draggable/Plugins/Announcement/Announcement.js~Announcement.html#instance-method-[announceMessage]",
+    "src/Draggable/Plugins/Announcement/Announcement.js~Announcement#[announceMessage]",
     "method"
   ],
   [
-    "src/draggable/plugins/autoscroll/autoscroll.js~autoscroll#[ondragstop]",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-[onDragStop]",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll#[onDragStop]",
+    "src/draggable/plugins/announcement/announcement.js~announcement#[ondestroy]",
+    "class/src/Draggable/Plugins/Announcement/Announcement.js~Announcement.html#instance-method-[onDestroy]",
+    "src/Draggable/Plugins/Announcement/Announcement.js~Announcement#[onDestroy]",
     "method"
   ],
   [
-    "src/draggable/plugins/autoscroll/autoscroll.js~autoscroll#[scroll]",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-[scroll]",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll#[scroll]",
+    "src/draggable/plugins/announcement/announcement.js~announcement#[oninitialize]",
+    "class/src/Draggable/Plugins/Announcement/Announcement.js~Announcement.html#instance-method-[onInitialize]",
+    "src/Draggable/Plugins/Announcement/Announcement.js~Announcement#[onInitialize]",
     "method"
   ],
   [
-    "src/draggable/plugins/autoscroll/autoscroll.js~autoscroll#attach",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-attach",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll#attach",
+    "src/draggable/plugins/announcement/announcement.js~announcement#attach",
+    "class/src/Draggable/Plugins/Announcement/Announcement.js~Announcement.html#instance-method-attach",
+    "src/Draggable/Plugins/Announcement/Announcement.js~Announcement#attach",
     "method"
   ],
   [
-    "src/draggable/plugins/autoscroll/autoscroll.js~autoscroll#constructor",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-constructor-constructor",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll#constructor",
+    "src/draggable/plugins/announcement/announcement.js~announcement#constructor",
+    "class/src/Draggable/Plugins/Announcement/Announcement.js~Announcement.html#instance-constructor-constructor",
+    "src/Draggable/Plugins/Announcement/Announcement.js~Announcement#constructor",
     "method"
   ],
   [
-    "src/draggable/plugins/autoscroll/autoscroll.js~autoscroll#currentmouseposition",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-member-currentMousePosition",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll#currentMousePosition",
+    "src/draggable/plugins/announcement/announcement.js~announcement#detach",
+    "class/src/Draggable/Plugins/Announcement/Announcement.js~Announcement.html#instance-method-detach",
+    "src/Draggable/Plugins/Announcement/Announcement.js~Announcement#detach",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/announcement/announcement.js~announcement#getoptions",
+    "class/src/Draggable/Plugins/Announcement/Announcement.js~Announcement.html#instance-method-getOptions",
+    "src/Draggable/Plugins/Announcement/Announcement.js~Announcement#getOptions",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/announcement/announcement.js~announcement#options",
+    "class/src/Draggable/Plugins/Announcement/Announcement.js~Announcement.html#instance-member-options",
+    "src/Draggable/Plugins/Announcement/Announcement.js~Announcement#options",
     "member"
   ],
   [
-    "src/draggable/plugins/autoscroll/autoscroll.js~autoscroll#detach",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-detach",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll#detach",
-    "method"
-  ],
-  [
-    "src/draggable/plugins/autoscroll/autoscroll.js~autoscroll#findscrollableelementframe",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-member-findScrollableElementFrame",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll#findScrollableElementFrame",
+    "src/draggable/plugins/announcement/announcement.js~announcement#originaltriggermethod",
+    "class/src/Draggable/Plugins/Announcement/Announcement.js~Announcement.html#instance-member-originalTriggerMethod",
+    "src/Draggable/Plugins/Announcement/Announcement.js~Announcement#originalTriggerMethod",
     "member"
   ],
   [
-    "src/draggable/plugins/autoscroll/autoscroll.js~autoscroll#getoptions",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-getOptions",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll#getOptions",
-    "method"
-  ],
-  [
-    "src/draggable/plugins/autoscroll/autoscroll.js~autoscroll#options",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-member-options",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll#options",
-    "member"
-  ],
-  [
-    "src/draggable/plugins/autoscroll/autoscroll.js~autoscroll#scrollanimationframe",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-member-scrollAnimationFrame",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll#scrollAnimationFrame",
-    "member"
-  ],
-  [
-    "src/draggable/plugins/autoscroll/autoscroll.js~autoscroll#scrollableelement",
-    "class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-member-scrollableElement",
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll#scrollableElement",
-    "member"
-  ],
-  [
-    "src/draggable/plugins/autoscroll/index.js",
-    "file/src/Draggable/Plugins/AutoScroll/index.js.html",
-    "src/Draggable/Plugins/AutoScroll/index.js",
+    "src/draggable/plugins/announcement/index.js",
+    "file/src/Draggable/Plugins/Announcement/index.js.html",
+    "src/Draggable/Plugins/Announcement/index.js",
     "file"
   ],
   [
@@ -1354,6 +1426,36 @@ window.esdocSearchIndex = [
     "file/src/Draggable/Plugins/Mirror/Mirror.js.html",
     "src/Draggable/Plugins/Mirror/Mirror.js",
     "file"
+  ],
+  [
+    "src/draggable/plugins/mirror/mirror.js~mirror#[ondragstart]",
+    "class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html#instance-method-[onDragStart]",
+    "src/Draggable/Plugins/Mirror/Mirror.js~Mirror#[onDragStart]",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/mirror/mirror.js~mirror#[ondragstop]",
+    "class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html#instance-method-[onDragStop]",
+    "src/Draggable/Plugins/Mirror/Mirror.js~Mirror#[onDragStop]",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/mirror/mirror.js~mirror#[onmirrorcreated]",
+    "class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html#instance-method-[onMirrorCreated]",
+    "src/Draggable/Plugins/Mirror/Mirror.js~Mirror#[onMirrorCreated]",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/mirror/mirror.js~mirror#[onmirrormove]",
+    "class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html#instance-method-[onMirrorMove]",
+    "src/Draggable/Plugins/Mirror/Mirror.js~Mirror#[onMirrorMove]",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/mirror/mirror.js~mirror#[onscroll]",
+    "class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html#instance-method-[onScroll]",
+    "src/Draggable/Plugins/Mirror/Mirror.js~Mirror#[onScroll]",
+    "method"
   ],
   [
     "src/draggable/plugins/mirror/mirror.js~mirror#attach",
@@ -1380,6 +1482,12 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
+    "src/draggable/plugins/mirror/mirror.js~mirror#initialscrolloffset",
+    "class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html#instance-member-initialScrollOffset",
+    "src/Draggable/Plugins/Mirror/Mirror.js~Mirror#initialScrollOffset",
+    "member"
+  ],
+  [
     "src/draggable/plugins/mirror/mirror.js~mirror#initialx",
     "class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html#instance-member-initialX",
     "src/Draggable/Plugins/Mirror/Mirror.js~Mirror#initialX",
@@ -1398,27 +1506,123 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/draggable/plugins/mirror/mirror.js~mirror#onmirrorcreated",
-    "class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html#instance-method-onMirrorCreated",
-    "src/Draggable/Plugins/Mirror/Mirror.js~Mirror#onMirrorCreated",
-    "method"
-  ],
-  [
-    "src/draggable/plugins/mirror/mirror.js~mirror#onmirrormove",
-    "class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html#instance-method-onMirrorMove",
-    "src/Draggable/Plugins/Mirror/Mirror.js~Mirror#onMirrorMove",
-    "method"
-  ],
-  [
     "src/draggable/plugins/mirror/mirror.js~mirror#options",
     "class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html#instance-member-options",
     "src/Draggable/Plugins/Mirror/Mirror.js~Mirror#options",
     "member"
   ],
   [
+    "src/draggable/plugins/mirror/mirror.js~mirror#scrolloffset",
+    "class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html#instance-member-scrollOffset",
+    "src/Draggable/Plugins/Mirror/Mirror.js~Mirror#scrollOffset",
+    "member"
+  ],
+  [
     "src/draggable/plugins/mirror/index.js",
     "file/src/Draggable/Plugins/Mirror/index.js.html",
     "src/Draggable/Plugins/Mirror/index.js",
+    "file"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js",
+    "file/src/Draggable/Plugins/Scrollable/Scrollable.js.html",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js",
+    "file"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#[ondragmove]",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-method-[onDragMove]",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#[onDragMove]",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#[ondragstart]",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-method-[onDragStart]",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#[onDragStart]",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#[ondragstop]",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-method-[onDragStop]",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#[onDragStop]",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#[scroll]",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-method-[scroll]",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#[scroll]",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#attach",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-method-attach",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#attach",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#constructor",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-constructor-constructor",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#constructor",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#currentmouseposition",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-member-currentMousePosition",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#currentMousePosition",
+    "member"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#detach",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-method-detach",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#detach",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#findscrollableelementframe",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-member-findScrollableElementFrame",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#findScrollableElementFrame",
+    "member"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#getoptions",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-method-getOptions",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#getOptions",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#getscrollableelement",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-method-getScrollableElement",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#getScrollableElement",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#hasdefinedscrollableelements",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-method-hasDefinedScrollableElements",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#hasDefinedScrollableElements",
+    "method"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#options",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-member-options",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#options",
+    "member"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#scrollanimationframe",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-member-scrollAnimationFrame",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#scrollAnimationFrame",
+    "member"
+  ],
+  [
+    "src/draggable/plugins/scrollable/scrollable.js~scrollable#scrollableelement",
+    "class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html#instance-member-scrollableElement",
+    "src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable#scrollableElement",
+    "member"
+  ],
+  [
+    "src/draggable/plugins/scrollable/index.js",
+    "file/src/Draggable/Plugins/Scrollable/index.js.html",
+    "src/Draggable/Plugins/Scrollable/index.js",
     "file"
   ],
   [
@@ -2010,12 +2214,6 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "src/droppable/droppable.js~droppable#getclassnamefor",
-    "class/src/Droppable/Droppable.js~Droppable.html#instance-method-getClassNameFor",
-    "src/Droppable/Droppable.js~Droppable#getClassNameFor",
-    "method"
-  ],
-  [
     "src/droppable/droppable.js~droppable#initialdroppable",
     "class/src/Droppable/Droppable.js~Droppable.html#instance-member-initialDroppable",
     "src/Droppable/Droppable.js~Droppable#initialDroppable",
@@ -2025,12 +2223,6 @@ window.esdocSearchIndex = [
     "src/droppable/droppable.js~droppable#lastdroppable",
     "class/src/Droppable/Droppable.js~Droppable.html#instance-member-lastDroppable",
     "src/Droppable/Droppable.js~Droppable#lastDroppable",
-    "member"
-  ],
-  [
-    "src/droppable/droppable.js~droppable#options",
-    "class/src/Droppable/Droppable.js~Droppable.html#instance-member-options",
-    "src/Droppable/Droppable.js~Droppable#options",
     "member"
   ],
   [
@@ -2106,27 +2298,21 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/plugins/collidable/collidable.js~collidable#_getcollidables",
-    "class/src/Plugins/Collidable/Collidable.js~Collidable.html#instance-method-_getCollidables",
-    "src/Plugins/Collidable/Collidable.js~Collidable#_getCollidables",
+    "src/plugins/collidable/collidable.js~collidable#[ondragmove]",
+    "class/src/Plugins/Collidable/Collidable.js~Collidable.html#instance-method-[onDragMove]",
+    "src/Plugins/Collidable/Collidable.js~Collidable#[onDragMove]",
     "method"
   ],
   [
-    "src/plugins/collidable/collidable.js~collidable#_ondragmove",
-    "class/src/Plugins/Collidable/Collidable.js~Collidable.html#instance-method-_onDragMove",
-    "src/Plugins/Collidable/Collidable.js~Collidable#_onDragMove",
+    "src/plugins/collidable/collidable.js~collidable#[ondragstop]",
+    "class/src/Plugins/Collidable/Collidable.js~Collidable.html#instance-method-[onDragStop]",
+    "src/Plugins/Collidable/Collidable.js~Collidable#[onDragStop]",
     "method"
   ],
   [
-    "src/plugins/collidable/collidable.js~collidable#_ondragstop",
-    "class/src/Plugins/Collidable/Collidable.js~Collidable.html#instance-method-_onDragStop",
-    "src/Plugins/Collidable/Collidable.js~Collidable#_onDragStop",
-    "method"
-  ],
-  [
-    "src/plugins/collidable/collidable.js~collidable#_onrequestanimationframe",
-    "class/src/Plugins/Collidable/Collidable.js~Collidable.html#instance-method-_onRequestAnimationFrame",
-    "src/Plugins/Collidable/Collidable.js~Collidable#_onRequestAnimationFrame",
+    "src/plugins/collidable/collidable.js~collidable#[onrequestanimationframe]",
+    "class/src/Plugins/Collidable/Collidable.js~Collidable.html#instance-method-[onRequestAnimationFrame]",
+    "src/Plugins/Collidable/Collidable.js~Collidable#[onRequestAnimationFrame]",
     "method"
   ],
   [
@@ -2157,6 +2343,12 @@ window.esdocSearchIndex = [
     "src/plugins/collidable/collidable.js~collidable#detach",
     "class/src/Plugins/Collidable/Collidable.js~Collidable.html#instance-method-detach",
     "src/Plugins/Collidable/Collidable.js~Collidable#detach",
+    "method"
+  ],
+  [
+    "src/plugins/collidable/collidable.js~collidable#getcollidables",
+    "class/src/Plugins/Collidable/Collidable.js~Collidable.html#instance-method-getCollidables",
+    "src/Plugins/Collidable/Collidable.js~Collidable#getCollidables",
     "method"
   ],
   [
@@ -2226,27 +2418,27 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/plugins/snappable/snappable.js~snappable#_ondragout",
-    "class/src/Plugins/Snappable/Snappable.js~Snappable.html#instance-method-_onDragOut",
-    "src/Plugins/Snappable/Snappable.js~Snappable#_onDragOut",
+    "src/plugins/snappable/snappable.js~snappable#[ondragout]",
+    "class/src/Plugins/Snappable/Snappable.js~Snappable.html#instance-method-[onDragOut]",
+    "src/Plugins/Snappable/Snappable.js~Snappable#[onDragOut]",
     "method"
   ],
   [
-    "src/plugins/snappable/snappable.js~snappable#_ondragover",
-    "class/src/Plugins/Snappable/Snappable.js~Snappable.html#instance-method-_onDragOver",
-    "src/Plugins/Snappable/Snappable.js~Snappable#_onDragOver",
+    "src/plugins/snappable/snappable.js~snappable#[ondragover]",
+    "class/src/Plugins/Snappable/Snappable.js~Snappable.html#instance-method-[onDragOver]",
+    "src/Plugins/Snappable/Snappable.js~Snappable#[onDragOver]",
     "method"
   ],
   [
-    "src/plugins/snappable/snappable.js~snappable#_ondragstart",
-    "class/src/Plugins/Snappable/Snappable.js~Snappable.html#instance-method-_onDragStart",
-    "src/Plugins/Snappable/Snappable.js~Snappable#_onDragStart",
+    "src/plugins/snappable/snappable.js~snappable#[ondragstart]",
+    "class/src/Plugins/Snappable/Snappable.js~Snappable.html#instance-method-[onDragStart]",
+    "src/Plugins/Snappable/Snappable.js~Snappable#[onDragStart]",
     "method"
   ],
   [
-    "src/plugins/snappable/snappable.js~snappable#_ondragstop",
-    "class/src/Plugins/Snappable/Snappable.js~Snappable.html#instance-method-_onDragStop",
-    "src/Plugins/Snappable/Snappable.js~Snappable#_onDragStop",
+    "src/plugins/snappable/snappable.js~snappable#[ondragstop]",
+    "class/src/Plugins/Snappable/Snappable.js~Snappable.html#instance-method-[onDragStop]",
+    "src/Plugins/Snappable/Snappable.js~Snappable#[onDragStop]",
     "method"
   ],
   [
@@ -2283,6 +2475,12 @@ window.esdocSearchIndex = [
     "src/plugins/snappable/snappableevent/snappableevent.js~snapevent#dragevent",
     "class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapEvent.html#instance-get-dragEvent",
     "src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapEvent#dragEvent",
+    "member"
+  ],
+  [
+    "src/plugins/snappable/snappableevent/snappableevent.js~snapevent#snappable",
+    "class/src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapEvent.html#instance-get-snappable",
+    "src/Plugins/Snappable/SnappableEvent/SnappableEvent.js~SnapEvent#snappable",
     "member"
   ],
   [
@@ -2334,6 +2532,12 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/plugins/swapanimation/swapanimation.js~swapanimation#[onsortablesorted]",
+    "class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html#instance-method-[onSortableSorted]",
+    "src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation#[onSortableSorted]",
+    "method"
+  ],
+  [
     "src/plugins/swapanimation/swapanimation.js~swapanimation#attach",
     "class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html#instance-method-attach",
     "src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation#attach",
@@ -2362,12 +2566,6 @@ window.esdocSearchIndex = [
     "class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html#instance-member-lastAnimationFrame",
     "src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation#lastAnimationFrame",
     "member"
-  ],
-  [
-    "src/plugins/swapanimation/swapanimation.js~swapanimation#onsortablesorted",
-    "class/src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation.html#instance-method-onSortableSorted",
-    "src/Plugins/SwapAnimation/SwapAnimation.js~SwapAnimation#onSortableSorted",
-    "method"
   ],
   [
     "src/plugins/swapanimation/swapanimation.js~swapanimation#options",

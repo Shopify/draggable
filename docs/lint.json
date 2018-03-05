@@ -1,5 +1,39 @@
 [
   {
+    "name": "Scrollable#hasDefinedScrollableElements",
+    "filePath": "src/Draggable/Plugins/Scrollable/Scrollable.js",
+    "lines": [
+      {
+        "lineNumber": 128,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 129,
+        "line": "   * Returns true if at least one scrollable element have been defined via options"
+      },
+      {
+        "lineNumber": 130,
+        "line": "   * @param {HTMLElement} target"
+      },
+      {
+        "lineNumber": 131,
+        "line": "   * @return {Boolean}"
+      },
+      {
+        "lineNumber": 132,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 133,
+        "line": "  hasDefinedScrollableElements() {"
+      }
+    ],
+    "codeParams": [],
+    "docParams": [
+      "target"
+    ]
+  },
+  {
     "name": "DragSensor#[onMouseUp]",
     "filePath": "src/Draggable/Sensors/DragSensor/DragSensor.js",
     "lines": [
@@ -72,27 +106,61 @@
     "filePath": "src/Droppable/Droppable.js",
     "lines": [
       {
-        "lineNumber": 147,
+        "lineNumber": 181,
         "line": "  /**"
       },
       {
-        "lineNumber": 148,
+        "lineNumber": 182,
         "line": "   * Drag stop handler"
       },
       {
-        "lineNumber": 149,
+        "lineNumber": 183,
         "line": "   * @private"
       },
       {
-        "lineNumber": 150,
+        "lineNumber": 184,
         "line": "   * @param {DragStopEvent} event - Drag stop event"
       },
       {
-        "lineNumber": 151,
+        "lineNumber": 185,
         "line": "   */"
       },
       {
-        "lineNumber": 152,
+        "lineNumber": 186,
+        "line": "  [onDragStop]() {"
+      }
+    ],
+    "codeParams": [],
+    "docParams": [
+      "event"
+    ]
+  },
+  {
+    "name": "Snappable#[onDragStop]",
+    "filePath": "src/Plugins/Snappable/Snappable.js",
+    "lines": [
+      {
+        "lineNumber": 80,
+        "line": "  /**"
+      },
+      {
+        "lineNumber": 81,
+        "line": "   * Drag stop handler"
+      },
+      {
+        "lineNumber": 82,
+        "line": "   * @private"
+      },
+      {
+        "lineNumber": 83,
+        "line": "   * @param {DragStopEvent} event - Drag stop event"
+      },
+      {
+        "lineNumber": 84,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 85,
         "line": "  [onDragStop]() {"
       }
     ],

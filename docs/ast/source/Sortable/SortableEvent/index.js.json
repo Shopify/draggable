@@ -1,258 +1,59 @@
 {
   "type": "File",
   "start": 0,
-  "end": 122,
+  "end": 33,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 7,
+      "line": 2,
       "column": 0
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 122,
+    "end": 33,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 7,
+        "line": 2,
         "column": 0
       }
     },
     "sourceType": "module",
     "body": [
       {
-        "type": "ExportNamedDeclaration",
+        "type": "ExportAllDeclaration",
         "start": 0,
-        "end": 121,
+        "end": 32,
         "loc": {
           "start": {
             "line": 1,
             "column": 0
           },
           "end": {
-            "line": 6,
-            "column": 25
+            "line": 1,
+            "column": 32
           }
         },
-        "declaration": null,
-        "specifiers": [
-          {
-            "type": "ExportSpecifier",
-            "start": 11,
-            "end": 29,
-            "loc": {
-              "start": {
-                "line": 2,
-                "column": 2
-              },
-              "end": {
-                "line": 2,
-                "column": 20
-              }
-            },
-            "local": {
-              "type": "Identifier",
-              "start": 11,
-              "end": 29,
-              "loc": {
-                "start": {
-                  "line": 2,
-                  "column": 2
-                },
-                "end": {
-                  "line": 2,
-                  "column": 20
-                },
-                "identifierName": "SortableStartEvent"
-              },
-              "name": "SortableStartEvent"
-            },
-            "exported": {
-              "type": "Identifier",
-              "start": 11,
-              "end": 29,
-              "loc": {
-                "start": {
-                  "line": 2,
-                  "column": 2
-                },
-                "end": {
-                  "line": 2,
-                  "column": 20
-                },
-                "identifierName": "SortableStartEvent"
-              },
-              "name": "SortableStartEvent"
-            }
-          },
-          {
-            "type": "ExportSpecifier",
-            "start": 33,
-            "end": 50,
-            "loc": {
-              "start": {
-                "line": 3,
-                "column": 2
-              },
-              "end": {
-                "line": 3,
-                "column": 19
-              }
-            },
-            "local": {
-              "type": "Identifier",
-              "start": 33,
-              "end": 50,
-              "loc": {
-                "start": {
-                  "line": 3,
-                  "column": 2
-                },
-                "end": {
-                  "line": 3,
-                  "column": 19
-                },
-                "identifierName": "SortableSortEvent"
-              },
-              "name": "SortableSortEvent"
-            },
-            "exported": {
-              "type": "Identifier",
-              "start": 33,
-              "end": 50,
-              "loc": {
-                "start": {
-                  "line": 3,
-                  "column": 2
-                },
-                "end": {
-                  "line": 3,
-                  "column": 19
-                },
-                "identifierName": "SortableSortEvent"
-              },
-              "name": "SortableSortEvent"
-            }
-          },
-          {
-            "type": "ExportSpecifier",
-            "start": 54,
-            "end": 73,
-            "loc": {
-              "start": {
-                "line": 4,
-                "column": 2
-              },
-              "end": {
-                "line": 4,
-                "column": 21
-              }
-            },
-            "local": {
-              "type": "Identifier",
-              "start": 54,
-              "end": 73,
-              "loc": {
-                "start": {
-                  "line": 4,
-                  "column": 2
-                },
-                "end": {
-                  "line": 4,
-                  "column": 21
-                },
-                "identifierName": "SortableSortedEvent"
-              },
-              "name": "SortableSortedEvent"
-            },
-            "exported": {
-              "type": "Identifier",
-              "start": 54,
-              "end": 73,
-              "loc": {
-                "start": {
-                  "line": 4,
-                  "column": 2
-                },
-                "end": {
-                  "line": 4,
-                  "column": 21
-                },
-                "identifierName": "SortableSortedEvent"
-              },
-              "name": "SortableSortedEvent"
-            }
-          },
-          {
-            "type": "ExportSpecifier",
-            "start": 77,
-            "end": 94,
-            "loc": {
-              "start": {
-                "line": 5,
-                "column": 2
-              },
-              "end": {
-                "line": 5,
-                "column": 19
-              }
-            },
-            "local": {
-              "type": "Identifier",
-              "start": 77,
-              "end": 94,
-              "loc": {
-                "start": {
-                  "line": 5,
-                  "column": 2
-                },
-                "end": {
-                  "line": 5,
-                  "column": 19
-                },
-                "identifierName": "SortableStopEvent"
-              },
-              "name": "SortableStopEvent"
-            },
-            "exported": {
-              "type": "Identifier",
-              "start": 77,
-              "end": 94,
-              "loc": {
-                "start": {
-                  "line": 5,
-                  "column": 2
-                },
-                "end": {
-                  "line": 5,
-                  "column": 19
-                },
-                "identifierName": "SortableStopEvent"
-              },
-              "name": "SortableStopEvent"
-            }
-          }
-        ],
         "source": {
           "type": "StringLiteral",
-          "start": 103,
-          "end": 120,
+          "start": 14,
+          "end": 31,
           "loc": {
             "start": {
-              "line": 6,
-              "column": 7
+              "line": 1,
+              "column": 14
             },
             "end": {
-              "line": 6,
-              "column": 24
+              "line": 1,
+              "column": 31
             }
           },
           "extra": {
@@ -297,16 +98,18 @@
     },
     {
       "type": {
-        "label": "{",
+        "label": "*",
         "beforeExpr": true,
-        "startsExpr": true,
+        "startsExpr": false,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
         "prefix": false,
         "postfix": false,
-        "binop": null
+        "binop": 10,
+        "updateContext": null
       },
+      "value": "*",
       "start": 7,
       "end": 8,
       "loc": {
@@ -332,250 +135,17 @@
         "postfix": false,
         "binop": null
       },
-      "value": "SortableStartEvent",
-      "start": 11,
-      "end": 29,
-      "loc": {
-        "start": {
-          "line": 2,
-          "column": 2
-        },
-        "end": {
-          "line": 2,
-          "column": 20
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ",",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 29,
-      "end": 30,
-      "loc": {
-        "start": {
-          "line": 2,
-          "column": 20
-        },
-        "end": {
-          "line": 2,
-          "column": 21
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "SortableSortEvent",
-      "start": 33,
-      "end": 50,
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 2
-        },
-        "end": {
-          "line": 3,
-          "column": 19
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ",",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 50,
-      "end": 51,
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 19
-        },
-        "end": {
-          "line": 3,
-          "column": 20
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "SortableSortedEvent",
-      "start": 54,
-      "end": 73,
-      "loc": {
-        "start": {
-          "line": 4,
-          "column": 2
-        },
-        "end": {
-          "line": 4,
-          "column": 21
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ",",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 73,
-      "end": 74,
-      "loc": {
-        "start": {
-          "line": 4,
-          "column": 21
-        },
-        "end": {
-          "line": 4,
-          "column": 22
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "SortableStopEvent",
-      "start": 77,
-      "end": 94,
-      "loc": {
-        "start": {
-          "line": 5,
-          "column": 2
-        },
-        "end": {
-          "line": 5,
-          "column": 19
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ",",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 94,
-      "end": 95,
-      "loc": {
-        "start": {
-          "line": 5,
-          "column": 19
-        },
-        "end": {
-          "line": 5,
-          "column": 20
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "}",
-        "beforeExpr": false,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "start": 96,
-      "end": 97,
-      "loc": {
-        "start": {
-          "line": 6,
-          "column": 0
-        },
-        "end": {
-          "line": 6,
-          "column": 1
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
       "value": "from",
-      "start": 98,
-      "end": 102,
+      "start": 9,
+      "end": 13,
       "loc": {
         "start": {
-          "line": 6,
-          "column": 2
+          "line": 1,
+          "column": 9
         },
         "end": {
-          "line": 6,
-          "column": 6
+          "line": 1,
+          "column": 13
         }
       }
     },
@@ -593,16 +163,16 @@
         "updateContext": null
       },
       "value": "./SortableEvent",
-      "start": 103,
-      "end": 120,
+      "start": 14,
+      "end": 31,
       "loc": {
         "start": {
-          "line": 6,
-          "column": 7
+          "line": 1,
+          "column": 14
         },
         "end": {
-          "line": 6,
-          "column": 24
+          "line": 1,
+          "column": 31
         }
       }
     },
@@ -619,16 +189,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 120,
-      "end": 121,
+      "start": 31,
+      "end": 32,
       "loc": {
         "start": {
-          "line": 6,
-          "column": 24
+          "line": 1,
+          "column": 31
         },
         "end": {
-          "line": 6,
-          "column": 25
+          "line": 1,
+          "column": 32
         }
       }
     },
@@ -645,15 +215,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 122,
-      "end": 122,
+      "start": 33,
+      "end": 33,
       "loc": {
         "start": {
-          "line": 7,
+          "line": 2,
           "column": 0
         },
         "end": {
-          "line": 7,
+          "line": 2,
           "column": 0
         }
       }

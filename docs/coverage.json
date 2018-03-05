@@ -1,7 +1,7 @@
 {
-  "coverage": "56.1%",
-  "expectCount": 442,
-  "actualCount": 248,
+  "coverage": "65.53%",
+  "expectCount": 499,
+  "actualCount": 327,
   "files": {
     "src/Draggable/DragEvent/DragEvent.js": {
       "expectCount": 34,
@@ -21,30 +21,30 @@
       ]
     },
     "src/Draggable/Draggable.js": {
-      "expectCount": 45,
-      "actualCount": 24,
+      "expectCount": 47,
+      "actualCount": 26,
       "undocumentLines": [
-        34,
-        35,
         36,
         37,
         38,
+        39,
         40,
-        92,
-        99,
-        100,
-        339,
-        340,
+        52,
+        64,
+        106,
+        113,
         355,
-        368,
-        484,
-        500,
-        599,
-        600,
-        602,
-        667,
-        671,
-        675
+        356,
+        371,
+        384,
+        503,
+        519,
+        618,
+        619,
+        621,
+        686,
+        690,
+        694
       ]
     },
     "src/Draggable/DraggableEvent/DraggableEvent.js": {
@@ -54,6 +54,14 @@
         10,
         30,
         40
+      ]
+    },
+    "src/Draggable/Emitter/Emitter.js": {
+      "expectCount": 6,
+      "actualCount": 4,
+      "undocumentLines": [
+        7,
+        8
       ]
     },
     "src/Draggable/MirrorEvent/MirrorEvent.js": {
@@ -76,43 +84,49 @@
         3,
         4,
         5,
-        83,
-        87
+        84,
+        88
       ]
     },
-    "src/Draggable/Plugins/AutoScroll/AutoScroll.js": {
-      "expectCount": 21,
-      "actualCount": 17,
+    "src/Draggable/Plugins/Announcement/Announcement.js": {
+      "expectCount": 23,
+      "actualCount": 15,
+      "undocumentLines": [
+        3,
+        4,
+        5,
+        6,
+        8,
+        9,
+        10,
+        11
+      ]
+    },
+    "src/Draggable/Plugins/Mirror/Mirror.js": {
+      "expectCount": 29,
+      "actualCount": 18,
+      "undocumentLines": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        114,
+        125,
+        134,
+        151,
+        152,
+        153
+      ]
+    },
+    "src/Draggable/Plugins/Scrollable/Scrollable.js": {
+      "expectCount": 23,
+      "actualCount": 19,
       "undocumentLines": [
         4,
         5,
         6,
         7
-      ]
-    },
-    "src/Draggable/Plugins/Mirror/Mirror.js": {
-      "expectCount": 19,
-      "actualCount": 0,
-      "undocumentLines": [
-        3,
-        9,
-        10,
-        13,
-        22,
-        28,
-        34,
-        38,
-        42,
-        43,
-        44,
-        67,
-        82,
-        89,
-        100,
-        127,
-        134,
-        142,
-        176
       ]
     },
     "src/Draggable/Sensors/DragSensor/DragSensor.js": {
@@ -190,8 +204,8 @@
       ]
     },
     "src/Droppable/Droppable.js": {
-      "expectCount": 24,
-      "actualCount": 14,
+      "expectCount": 25,
+      "actualCount": 16,
       "undocumentLines": [
         9,
         10,
@@ -200,9 +214,8 @@
         13,
         14,
         15,
-        17,
-        22,
-        44
+        51,
+        56
       ]
     },
     "src/Droppable/DroppableEvent/DroppableEvent.js": {
@@ -217,20 +230,12 @@
       ]
     },
     "src/Plugins/Collidable/Collidable.js": {
-      "expectCount": 11,
-      "actualCount": 0,
+      "expectCount": 14,
+      "actualCount": 11,
       "undocumentLines": [
         9,
         10,
-        18,
-        23,
-        28,
-        31,
-        60,
-        63,
-        75,
-        78,
-        85
+        11
       ]
     },
     "src/Plugins/Collidable/CollidableEvent/CollidableEvent.js": {
@@ -243,61 +248,46 @@
       ]
     },
     "src/Plugins/Snappable/Snappable.js": {
-      "expectCount": 9,
-      "actualCount": 0,
+      "expectCount": 13,
+      "actualCount": 9,
       "undocumentLines": [
         8,
         9,
-        18,
-        28,
-        38,
-        43,
-        46,
-        50,
-        86
+        10,
+        11
       ]
     },
     "src/Plugins/Snappable/SnappableEvent/SnappableEvent.js": {
-      "expectCount": 9,
-      "actualCount": 4,
+      "expectCount": 10,
+      "actualCount": 5,
       "undocumentLines": [
         10,
-        30,
-        31,
+        40,
         41,
-        42
+        51,
+        52
       ]
     },
     "src/Plugins/SwapAnimation/SwapAnimation.js": {
-      "expectCount": 11,
-      "actualCount": 0,
+      "expectCount": 12,
+      "actualCount": 11,
       "undocumentLines": [
-        3,
-        8,
-        9,
-        12,
-        20,
-        24,
-        28,
-        34,
-        43,
-        48,
-        67
+        3
       ]
     },
     "src/Sortable/Sortable.js": {
-      "expectCount": 19,
-      "actualCount": 10,
+      "expectCount": 21,
+      "actualCount": 12,
       "undocumentLines": [
         10,
         11,
         12,
         13,
-        219,
-        223,
-        239,
-        247,
-        260
+        257,
+        261,
+        277,
+        285,
+        298
       ]
     },
     "src/Sortable/SortableEvent/SortableEvent.js": {
@@ -314,14 +304,14 @@
       ]
     },
     "src/Swappable/Swappable.js": {
-      "expectCount": 12,
-      "actualCount": 7,
+      "expectCount": 14,
+      "actualCount": 9,
       "undocumentLines": [
         10,
         11,
         12,
-        136,
-        142
+        162,
+        168
       ]
     },
     "src/Swappable/SwappableEvent/SwappableEvent.js": {

@@ -1,160 +1,59 @@
 {
   "type": "File",
   "start": 0,
-  "end": 80,
+  "end": 35,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 5,
+      "line": 2,
       "column": 0
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 80,
+    "end": 35,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 5,
+        "line": 2,
         "column": 0
       }
     },
     "sourceType": "module",
     "body": [
       {
-        "type": "ExportNamedDeclaration",
+        "type": "ExportAllDeclaration",
         "start": 0,
-        "end": 79,
+        "end": 34,
         "loc": {
           "start": {
             "line": 1,
             "column": 0
           },
           "end": {
-            "line": 4,
-            "column": 27
+            "line": 1,
+            "column": 34
           }
         },
-        "declaration": null,
-        "specifiers": [
-          {
-            "type": "ExportSpecifier",
-            "start": 11,
-            "end": 28,
-            "loc": {
-              "start": {
-                "line": 2,
-                "column": 2
-              },
-              "end": {
-                "line": 2,
-                "column": 19
-              }
-            },
-            "local": {
-              "type": "Identifier",
-              "start": 11,
-              "end": 28,
-              "loc": {
-                "start": {
-                  "line": 2,
-                  "column": 2
-                },
-                "end": {
-                  "line": 2,
-                  "column": 19
-                },
-                "identifierName": "CollidableInEvent"
-              },
-              "name": "CollidableInEvent"
-            },
-            "exported": {
-              "type": "Identifier",
-              "start": 11,
-              "end": 28,
-              "loc": {
-                "start": {
-                  "line": 2,
-                  "column": 2
-                },
-                "end": {
-                  "line": 2,
-                  "column": 19
-                },
-                "identifierName": "CollidableInEvent"
-              },
-              "name": "CollidableInEvent"
-            }
-          },
-          {
-            "type": "ExportSpecifier",
-            "start": 32,
-            "end": 50,
-            "loc": {
-              "start": {
-                "line": 3,
-                "column": 2
-              },
-              "end": {
-                "line": 3,
-                "column": 20
-              }
-            },
-            "local": {
-              "type": "Identifier",
-              "start": 32,
-              "end": 50,
-              "loc": {
-                "start": {
-                  "line": 3,
-                  "column": 2
-                },
-                "end": {
-                  "line": 3,
-                  "column": 20
-                },
-                "identifierName": "CollidableOutEvent"
-              },
-              "name": "CollidableOutEvent"
-            },
-            "exported": {
-              "type": "Identifier",
-              "start": 32,
-              "end": 50,
-              "loc": {
-                "start": {
-                  "line": 3,
-                  "column": 2
-                },
-                "end": {
-                  "line": 3,
-                  "column": 20
-                },
-                "identifierName": "CollidableOutEvent"
-              },
-              "name": "CollidableOutEvent"
-            }
-          }
-        ],
         "source": {
           "type": "StringLiteral",
-          "start": 59,
-          "end": 78,
+          "start": 14,
+          "end": 33,
           "loc": {
             "start": {
-              "line": 4,
-              "column": 7
+              "line": 1,
+              "column": 14
             },
             "end": {
-              "line": 4,
-              "column": 26
+              "line": 1,
+              "column": 33
             }
           },
           "extra": {
@@ -199,16 +98,18 @@
     },
     {
       "type": {
-        "label": "{",
+        "label": "*",
         "beforeExpr": true,
-        "startsExpr": true,
+        "startsExpr": false,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
         "prefix": false,
         "postfix": false,
-        "binop": null
+        "binop": 10,
+        "updateContext": null
       },
+      "value": "*",
       "start": 7,
       "end": 8,
       "loc": {
@@ -234,146 +135,17 @@
         "postfix": false,
         "binop": null
       },
-      "value": "CollidableInEvent",
-      "start": 11,
-      "end": 28,
-      "loc": {
-        "start": {
-          "line": 2,
-          "column": 2
-        },
-        "end": {
-          "line": 2,
-          "column": 19
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ",",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 28,
-      "end": 29,
-      "loc": {
-        "start": {
-          "line": 2,
-          "column": 19
-        },
-        "end": {
-          "line": 2,
-          "column": 20
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "CollidableOutEvent",
-      "start": 32,
-      "end": 50,
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 2
-        },
-        "end": {
-          "line": 3,
-          "column": 20
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ",",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 50,
-      "end": 51,
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 20
-        },
-        "end": {
-          "line": 3,
-          "column": 21
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "}",
-        "beforeExpr": false,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "start": 52,
-      "end": 53,
-      "loc": {
-        "start": {
-          "line": 4,
-          "column": 0
-        },
-        "end": {
-          "line": 4,
-          "column": 1
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
       "value": "from",
-      "start": 54,
-      "end": 58,
+      "start": 9,
+      "end": 13,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 2
+          "line": 1,
+          "column": 9
         },
         "end": {
-          "line": 4,
-          "column": 6
+          "line": 1,
+          "column": 13
         }
       }
     },
@@ -391,16 +163,16 @@
         "updateContext": null
       },
       "value": "./CollidableEvent",
-      "start": 59,
-      "end": 78,
+      "start": 14,
+      "end": 33,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 7
+          "line": 1,
+          "column": 14
         },
         "end": {
-          "line": 4,
-          "column": 26
+          "line": 1,
+          "column": 33
         }
       }
     },
@@ -417,16 +189,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 78,
-      "end": 79,
+      "start": 33,
+      "end": 34,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 26
+          "line": 1,
+          "column": 33
         },
         "end": {
-          "line": 4,
-          "column": 27
+          "line": 1,
+          "column": 34
         }
       }
     },
@@ -443,15 +215,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 80,
-      "end": 80,
+      "start": 35,
+      "end": 35,
       "loc": {
         "start": {
-          "line": 5,
+          "line": 2,
           "column": 0
         },
         "end": {
-          "line": 5,
+          "line": 2,
           "column": 0
         }
       }

@@ -1,160 +1,59 @@
 {
   "type": "File",
   "start": 0,
-  "end": 90,
+  "end": 34,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 5,
+      "line": 2,
       "column": 0
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 90,
+    "end": 34,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 5,
+        "line": 2,
         "column": 0
       }
     },
     "sourceType": "module",
     "body": [
       {
-        "type": "ExportNamedDeclaration",
+        "type": "ExportAllDeclaration",
         "start": 0,
-        "end": 89,
+        "end": 33,
         "loc": {
           "start": {
             "line": 1,
             "column": 0
           },
           "end": {
-            "line": 4,
-            "column": 26
+            "line": 1,
+            "column": 33
           }
         },
-        "declaration": null,
-        "specifiers": [
-          {
-            "type": "ExportSpecifier",
-            "start": 11,
-            "end": 36,
-            "loc": {
-              "start": {
-                "line": 2,
-                "column": 2
-              },
-              "end": {
-                "line": 2,
-                "column": 27
-              }
-            },
-            "local": {
-              "type": "Identifier",
-              "start": 11,
-              "end": 36,
-              "loc": {
-                "start": {
-                  "line": 2,
-                  "column": 2
-                },
-                "end": {
-                  "line": 2,
-                  "column": 27
-                },
-                "identifierName": "DraggableInitializedEvent"
-              },
-              "name": "DraggableInitializedEvent"
-            },
-            "exported": {
-              "type": "Identifier",
-              "start": 11,
-              "end": 36,
-              "loc": {
-                "start": {
-                  "line": 2,
-                  "column": 2
-                },
-                "end": {
-                  "line": 2,
-                  "column": 27
-                },
-                "identifierName": "DraggableInitializedEvent"
-              },
-              "name": "DraggableInitializedEvent"
-            }
-          },
-          {
-            "type": "ExportSpecifier",
-            "start": 40,
-            "end": 61,
-            "loc": {
-              "start": {
-                "line": 3,
-                "column": 2
-              },
-              "end": {
-                "line": 3,
-                "column": 23
-              }
-            },
-            "local": {
-              "type": "Identifier",
-              "start": 40,
-              "end": 61,
-              "loc": {
-                "start": {
-                  "line": 3,
-                  "column": 2
-                },
-                "end": {
-                  "line": 3,
-                  "column": 23
-                },
-                "identifierName": "DraggableDestroyEvent"
-              },
-              "name": "DraggableDestroyEvent"
-            },
-            "exported": {
-              "type": "Identifier",
-              "start": 40,
-              "end": 61,
-              "loc": {
-                "start": {
-                  "line": 3,
-                  "column": 2
-                },
-                "end": {
-                  "line": 3,
-                  "column": 23
-                },
-                "identifierName": "DraggableDestroyEvent"
-              },
-              "name": "DraggableDestroyEvent"
-            }
-          }
-        ],
         "source": {
           "type": "StringLiteral",
-          "start": 70,
-          "end": 88,
+          "start": 14,
+          "end": 32,
           "loc": {
             "start": {
-              "line": 4,
-              "column": 7
+              "line": 1,
+              "column": 14
             },
             "end": {
-              "line": 4,
-              "column": 25
+              "line": 1,
+              "column": 32
             }
           },
           "extra": {
@@ -199,16 +98,18 @@
     },
     {
       "type": {
-        "label": "{",
+        "label": "*",
         "beforeExpr": true,
-        "startsExpr": true,
+        "startsExpr": false,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
         "prefix": false,
         "postfix": false,
-        "binop": null
+        "binop": 10,
+        "updateContext": null
       },
+      "value": "*",
       "start": 7,
       "end": 8,
       "loc": {
@@ -234,146 +135,17 @@
         "postfix": false,
         "binop": null
       },
-      "value": "DraggableInitializedEvent",
-      "start": 11,
-      "end": 36,
-      "loc": {
-        "start": {
-          "line": 2,
-          "column": 2
-        },
-        "end": {
-          "line": 2,
-          "column": 27
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ",",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 36,
-      "end": 37,
-      "loc": {
-        "start": {
-          "line": 2,
-          "column": 27
-        },
-        "end": {
-          "line": 2,
-          "column": 28
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "DraggableDestroyEvent",
-      "start": 40,
-      "end": 61,
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 2
-        },
-        "end": {
-          "line": 3,
-          "column": 23
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ",",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 61,
-      "end": 62,
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 23
-        },
-        "end": {
-          "line": 3,
-          "column": 24
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "}",
-        "beforeExpr": false,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "start": 63,
-      "end": 64,
-      "loc": {
-        "start": {
-          "line": 4,
-          "column": 0
-        },
-        "end": {
-          "line": 4,
-          "column": 1
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
       "value": "from",
-      "start": 65,
-      "end": 69,
+      "start": 9,
+      "end": 13,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 2
+          "line": 1,
+          "column": 9
         },
         "end": {
-          "line": 4,
-          "column": 6
+          "line": 1,
+          "column": 13
         }
       }
     },
@@ -391,16 +163,16 @@
         "updateContext": null
       },
       "value": "./DraggableEvent",
-      "start": 70,
-      "end": 88,
+      "start": 14,
+      "end": 32,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 7
+          "line": 1,
+          "column": 14
         },
         "end": {
-          "line": 4,
-          "column": 25
+          "line": 1,
+          "column": 32
         }
       }
     },
@@ -417,16 +189,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 88,
-      "end": 89,
+      "start": 32,
+      "end": 33,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 25
+          "line": 1,
+          "column": 32
         },
         "end": {
-          "line": 4,
-          "column": 26
+          "line": 1,
+          "column": 33
         }
       }
     },
@@ -443,15 +215,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 90,
-      "end": 90,
+      "start": 34,
+      "end": 34,
       "loc": {
         "start": {
-          "line": 5,
+          "line": 2,
           "column": 0
         },
         "end": {
-          "line": 5,
+          "line": 2,
           "column": 0
         }
       }

@@ -1,37 +1,37 @@
 {
   "type": "File",
   "start": 0,
-  "end": 290,
+  "end": 300,
   "loc": {
     "start": {
       "line": 1,
       "column": 0
     },
     "end": {
-      "line": 14,
+      "line": 8,
       "column": 0
     }
   },
   "program": {
     "type": "Program",
     "start": 0,
-    "end": 290,
+    "end": 300,
     "loc": {
       "start": {
         "line": 1,
         "column": 0
       },
       "end": {
-        "line": 14,
+        "line": 8,
         "column": 0
       }
     },
     "sourceType": "module",
     "body": [
       {
-        "type": "ImportDeclaration",
+        "type": "ExportNamedDeclaration",
         "start": 0,
-        "end": 30,
+        "end": 43,
         "loc": {
           "start": {
             "line": 1,
@@ -39,36 +39,54 @@
           },
           "end": {
             "line": 1,
-            "column": 30
+            "column": 43
           }
         },
+        "declaration": null,
         "specifiers": [
           {
-            "type": "ImportDefaultSpecifier",
-            "start": 7,
-            "end": 13,
+            "type": "ExportSpecifier",
+            "start": 8,
+            "end": 25,
             "loc": {
               "start": {
                 "line": 1,
-                "column": 7
+                "column": 8
               },
               "end": {
                 "line": 1,
-                "column": 13
+                "column": 25
               }
             },
             "local": {
               "type": "Identifier",
-              "start": 7,
-              "end": 13,
+              "start": 8,
+              "end": 15,
               "loc": {
                 "start": {
                   "line": 1,
-                  "column": 7
+                  "column": 8
                 },
                 "end": {
                   "line": 1,
-                  "column": 13
+                  "column": 15
+                },
+                "identifierName": "default"
+              },
+              "name": "default"
+            },
+            "exported": {
+              "type": "Identifier",
+              "start": 19,
+              "end": 25,
+              "loc": {
+                "start": {
+                  "line": 1,
+                  "column": 19
+                },
+                "end": {
+                  "line": 1,
+                  "column": 25
                 },
                 "identifierName": "Sensor"
               },
@@ -78,16 +96,16 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 19,
-          "end": 29,
+          "start": 32,
+          "end": 42,
           "loc": {
             "start": {
               "line": 1,
-              "column": 19
+              "column": 32
             },
             "end": {
               "line": 1,
-              "column": 29
+              "column": 42
             }
           },
           "extra": {
@@ -98,9 +116,9 @@
         }
       },
       {
-        "type": "ImportDeclaration",
-        "start": 31,
-        "end": 71,
+        "type": "ExportNamedDeclaration",
+        "start": 44,
+        "end": 97,
         "loc": {
           "start": {
             "line": 2,
@@ -108,36 +126,54 @@
           },
           "end": {
             "line": 2,
-            "column": 40
+            "column": 53
           }
         },
+        "declaration": null,
         "specifiers": [
           {
-            "type": "ImportDefaultSpecifier",
-            "start": 38,
-            "end": 49,
+            "type": "ExportSpecifier",
+            "start": 52,
+            "end": 74,
             "loc": {
               "start": {
                 "line": 2,
-                "column": 7
+                "column": 8
               },
               "end": {
                 "line": 2,
-                "column": 18
+                "column": 30
               }
             },
             "local": {
               "type": "Identifier",
-              "start": 38,
-              "end": 49,
+              "start": 52,
+              "end": 59,
               "loc": {
                 "start": {
                   "line": 2,
-                  "column": 7
+                  "column": 8
                 },
                 "end": {
                   "line": 2,
-                  "column": 18
+                  "column": 15
+                },
+                "identifierName": "default"
+              },
+              "name": "default"
+            },
+            "exported": {
+              "type": "Identifier",
+              "start": 63,
+              "end": 74,
+              "loc": {
+                "start": {
+                  "line": 2,
+                  "column": 19
+                },
+                "end": {
+                  "line": 2,
+                  "column": 30
                 },
                 "identifierName": "MouseSensor"
               },
@@ -147,16 +183,16 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 55,
-          "end": 70,
+          "start": 81,
+          "end": 96,
           "loc": {
             "start": {
               "line": 2,
-              "column": 24
+              "column": 37
             },
             "end": {
               "line": 2,
-              "column": 39
+              "column": 52
             }
           },
           "extra": {
@@ -167,9 +203,9 @@
         }
       },
       {
-        "type": "ImportDeclaration",
-        "start": 72,
-        "end": 112,
+        "type": "ExportNamedDeclaration",
+        "start": 98,
+        "end": 151,
         "loc": {
           "start": {
             "line": 3,
@@ -177,36 +213,54 @@
           },
           "end": {
             "line": 3,
-            "column": 40
+            "column": 53
           }
         },
+        "declaration": null,
         "specifiers": [
           {
-            "type": "ImportDefaultSpecifier",
-            "start": 79,
-            "end": 90,
+            "type": "ExportSpecifier",
+            "start": 106,
+            "end": 128,
             "loc": {
               "start": {
                 "line": 3,
-                "column": 7
+                "column": 8
               },
               "end": {
                 "line": 3,
-                "column": 18
+                "column": 30
               }
             },
             "local": {
               "type": "Identifier",
-              "start": 79,
-              "end": 90,
+              "start": 106,
+              "end": 113,
               "loc": {
                 "start": {
                   "line": 3,
-                  "column": 7
+                  "column": 8
                 },
                 "end": {
                   "line": 3,
-                  "column": 18
+                  "column": 15
+                },
+                "identifierName": "default"
+              },
+              "name": "default"
+            },
+            "exported": {
+              "type": "Identifier",
+              "start": 117,
+              "end": 128,
+              "loc": {
+                "start": {
+                  "line": 3,
+                  "column": 19
+                },
+                "end": {
+                  "line": 3,
+                  "column": 30
                 },
                 "identifierName": "TouchSensor"
               },
@@ -216,16 +270,16 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 96,
-          "end": 111,
+          "start": 135,
+          "end": 150,
           "loc": {
             "start": {
               "line": 3,
-              "column": 24
+              "column": 37
             },
             "end": {
               "line": 3,
-              "column": 39
+              "column": 52
             }
           },
           "extra": {
@@ -236,9 +290,9 @@
         }
       },
       {
-        "type": "ImportDeclaration",
-        "start": 113,
-        "end": 151,
+        "type": "ExportNamedDeclaration",
+        "start": 152,
+        "end": 203,
         "loc": {
           "start": {
             "line": 4,
@@ -246,36 +300,54 @@
           },
           "end": {
             "line": 4,
-            "column": 38
+            "column": 51
           }
         },
+        "declaration": null,
         "specifiers": [
           {
-            "type": "ImportDefaultSpecifier",
-            "start": 120,
-            "end": 130,
+            "type": "ExportSpecifier",
+            "start": 160,
+            "end": 181,
             "loc": {
               "start": {
                 "line": 4,
-                "column": 7
+                "column": 8
               },
               "end": {
                 "line": 4,
-                "column": 17
+                "column": 29
               }
             },
             "local": {
               "type": "Identifier",
-              "start": 120,
-              "end": 130,
+              "start": 160,
+              "end": 167,
               "loc": {
                 "start": {
                   "line": 4,
-                  "column": 7
+                  "column": 8
                 },
                 "end": {
                   "line": 4,
-                  "column": 17
+                  "column": 15
+                },
+                "identifierName": "default"
+              },
+              "name": "default"
+            },
+            "exported": {
+              "type": "Identifier",
+              "start": 171,
+              "end": 181,
+              "loc": {
+                "start": {
+                  "line": 4,
+                  "column": 19
+                },
+                "end": {
+                  "line": 4,
+                  "column": 29
                 },
                 "identifierName": "DragSensor"
               },
@@ -285,16 +357,16 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 136,
-          "end": 150,
+          "start": 188,
+          "end": 202,
           "loc": {
             "start": {
               "line": 4,
-              "column": 23
+              "column": 36
             },
             "end": {
               "line": 4,
-              "column": 37
+              "column": 50
             }
           },
           "extra": {
@@ -305,9 +377,9 @@
         }
       },
       {
-        "type": "ImportDeclaration",
-        "start": 152,
-        "end": 202,
+        "type": "ExportNamedDeclaration",
+        "start": 204,
+        "end": 267,
         "loc": {
           "start": {
             "line": 5,
@@ -315,36 +387,54 @@
           },
           "end": {
             "line": 5,
-            "column": 50
+            "column": 63
           }
         },
+        "declaration": null,
         "specifiers": [
           {
-            "type": "ImportDefaultSpecifier",
-            "start": 159,
-            "end": 175,
+            "type": "ExportSpecifier",
+            "start": 212,
+            "end": 239,
             "loc": {
               "start": {
                 "line": 5,
-                "column": 7
+                "column": 8
               },
               "end": {
                 "line": 5,
-                "column": 23
+                "column": 35
               }
             },
             "local": {
               "type": "Identifier",
-              "start": 159,
-              "end": 175,
+              "start": 212,
+              "end": 219,
               "loc": {
                 "start": {
                   "line": 5,
-                  "column": 7
+                  "column": 8
                 },
                 "end": {
                   "line": 5,
-                  "column": 23
+                  "column": 15
+                },
+                "identifierName": "default"
+              },
+              "name": "default"
+            },
+            "exported": {
+              "type": "Identifier",
+              "start": 223,
+              "end": 239,
+              "loc": {
+                "start": {
+                  "line": 5,
+                  "column": 19
+                },
+                "end": {
+                  "line": 5,
+                  "column": 35
                 },
                 "identifierName": "ForceTouchSensor"
               },
@@ -354,16 +444,16 @@
         ],
         "source": {
           "type": "StringLiteral",
-          "start": 181,
-          "end": 201,
+          "start": 246,
+          "end": 266,
           "loc": {
             "start": {
               "line": 5,
-              "column": 29
+              "column": 42
             },
             "end": {
               "line": 5,
-              "column": 49
+              "column": 62
             }
           },
           "extra": {
@@ -374,268 +464,39 @@
         }
       },
       {
-        "type": "ExportNamedDeclaration",
-        "start": 204,
-        "end": 289,
+        "type": "ExportAllDeclaration",
+        "start": 269,
+        "end": 299,
         "loc": {
           "start": {
             "line": 7,
             "column": 0
           },
           "end": {
-            "line": 13,
-            "column": 2
+            "line": 7,
+            "column": 30
           }
         },
-        "declaration": null,
-        "specifiers": [
-          {
-            "type": "ExportSpecifier",
-            "start": 215,
-            "end": 221,
-            "loc": {
-              "start": {
-                "line": 8,
-                "column": 2
-              },
-              "end": {
-                "line": 8,
-                "column": 8
-              }
+        "source": {
+          "type": "StringLiteral",
+          "start": 283,
+          "end": 298,
+          "loc": {
+            "start": {
+              "line": 7,
+              "column": 14
             },
-            "local": {
-              "type": "Identifier",
-              "start": 215,
-              "end": 221,
-              "loc": {
-                "start": {
-                  "line": 8,
-                  "column": 2
-                },
-                "end": {
-                  "line": 8,
-                  "column": 8
-                },
-                "identifierName": "Sensor"
-              },
-              "name": "Sensor"
-            },
-            "exported": {
-              "type": "Identifier",
-              "start": 215,
-              "end": 221,
-              "loc": {
-                "start": {
-                  "line": 8,
-                  "column": 2
-                },
-                "end": {
-                  "line": 8,
-                  "column": 8
-                },
-                "identifierName": "Sensor"
-              },
-              "name": "Sensor"
+            "end": {
+              "line": 7,
+              "column": 29
             }
           },
-          {
-            "type": "ExportSpecifier",
-            "start": 225,
-            "end": 236,
-            "loc": {
-              "start": {
-                "line": 9,
-                "column": 2
-              },
-              "end": {
-                "line": 9,
-                "column": 13
-              }
-            },
-            "local": {
-              "type": "Identifier",
-              "start": 225,
-              "end": 236,
-              "loc": {
-                "start": {
-                  "line": 9,
-                  "column": 2
-                },
-                "end": {
-                  "line": 9,
-                  "column": 13
-                },
-                "identifierName": "MouseSensor"
-              },
-              "name": "MouseSensor"
-            },
-            "exported": {
-              "type": "Identifier",
-              "start": 225,
-              "end": 236,
-              "loc": {
-                "start": {
-                  "line": 9,
-                  "column": 2
-                },
-                "end": {
-                  "line": 9,
-                  "column": 13
-                },
-                "identifierName": "MouseSensor"
-              },
-              "name": "MouseSensor"
-            }
+          "extra": {
+            "rawValue": "./SensorEvent",
+            "raw": "'./SensorEvent'"
           },
-          {
-            "type": "ExportSpecifier",
-            "start": 240,
-            "end": 251,
-            "loc": {
-              "start": {
-                "line": 10,
-                "column": 2
-              },
-              "end": {
-                "line": 10,
-                "column": 13
-              }
-            },
-            "local": {
-              "type": "Identifier",
-              "start": 240,
-              "end": 251,
-              "loc": {
-                "start": {
-                  "line": 10,
-                  "column": 2
-                },
-                "end": {
-                  "line": 10,
-                  "column": 13
-                },
-                "identifierName": "TouchSensor"
-              },
-              "name": "TouchSensor"
-            },
-            "exported": {
-              "type": "Identifier",
-              "start": 240,
-              "end": 251,
-              "loc": {
-                "start": {
-                  "line": 10,
-                  "column": 2
-                },
-                "end": {
-                  "line": 10,
-                  "column": 13
-                },
-                "identifierName": "TouchSensor"
-              },
-              "name": "TouchSensor"
-            }
-          },
-          {
-            "type": "ExportSpecifier",
-            "start": 255,
-            "end": 265,
-            "loc": {
-              "start": {
-                "line": 11,
-                "column": 2
-              },
-              "end": {
-                "line": 11,
-                "column": 12
-              }
-            },
-            "local": {
-              "type": "Identifier",
-              "start": 255,
-              "end": 265,
-              "loc": {
-                "start": {
-                  "line": 11,
-                  "column": 2
-                },
-                "end": {
-                  "line": 11,
-                  "column": 12
-                },
-                "identifierName": "DragSensor"
-              },
-              "name": "DragSensor"
-            },
-            "exported": {
-              "type": "Identifier",
-              "start": 255,
-              "end": 265,
-              "loc": {
-                "start": {
-                  "line": 11,
-                  "column": 2
-                },
-                "end": {
-                  "line": 11,
-                  "column": 12
-                },
-                "identifierName": "DragSensor"
-              },
-              "name": "DragSensor"
-            }
-          },
-          {
-            "type": "ExportSpecifier",
-            "start": 269,
-            "end": 285,
-            "loc": {
-              "start": {
-                "line": 12,
-                "column": 2
-              },
-              "end": {
-                "line": 12,
-                "column": 18
-              }
-            },
-            "local": {
-              "type": "Identifier",
-              "start": 269,
-              "end": 285,
-              "loc": {
-                "start": {
-                  "line": 12,
-                  "column": 2
-                },
-                "end": {
-                  "line": 12,
-                  "column": 18
-                },
-                "identifierName": "ForceTouchSensor"
-              },
-              "name": "ForceTouchSensor"
-            },
-            "exported": {
-              "type": "Identifier",
-              "start": 269,
-              "end": 285,
-              "loc": {
-                "start": {
-                  "line": 12,
-                  "column": 2
-                },
-                "end": {
-                  "line": 12,
-                  "column": 18
-                },
-                "identifierName": "ForceTouchSensor"
-              },
-              "name": "ForceTouchSensor"
-            }
-          }
-        ],
-        "source": null
+          "value": "./SensorEvent"
+        }
       }
     ],
     "directives": []
@@ -644,10 +505,10 @@
   "tokens": [
     {
       "type": {
-        "label": "import",
-        "keyword": "import",
+        "label": "export",
+        "keyword": "export",
         "beforeExpr": false,
-        "startsExpr": true,
+        "startsExpr": false,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
@@ -656,7 +517,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "import",
+      "value": "export",
       "start": 0,
       "end": 6,
       "loc": {
@@ -667,6 +528,85 @@
         "end": {
           "line": 1,
           "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 7,
+      "end": 8,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 7
+        },
+        "end": {
+          "line": 1,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "default",
+        "keyword": "default",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "default",
+      "start": 8,
+      "end": 15,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 8
+        },
+        "end": {
+          "line": 1,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "as",
+      "start": 16,
+      "end": 18,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 16
+        },
+        "end": {
+          "line": 1,
+          "column": 18
         }
       }
     },
@@ -683,16 +623,41 @@
         "binop": null
       },
       "value": "Sensor",
-      "start": 7,
-      "end": 13,
+      "start": 19,
+      "end": 25,
       "loc": {
         "start": {
           "line": 1,
-          "column": 7
+          "column": 19
         },
         "end": {
           "line": 1,
-          "column": 13
+          "column": 25
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 25,
+      "end": 26,
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 25
+        },
+        "end": {
+          "line": 1,
+          "column": 26
         }
       }
     },
@@ -709,16 +674,16 @@
         "binop": null
       },
       "value": "from",
-      "start": 14,
-      "end": 18,
+      "start": 27,
+      "end": 31,
       "loc": {
         "start": {
           "line": 1,
-          "column": 14
+          "column": 27
         },
         "end": {
           "line": 1,
-          "column": 18
+          "column": 31
         }
       }
     },
@@ -736,16 +701,16 @@
         "updateContext": null
       },
       "value": "./Sensor",
-      "start": 19,
-      "end": 29,
+      "start": 32,
+      "end": 42,
       "loc": {
         "start": {
           "line": 1,
-          "column": 19
+          "column": 32
         },
         "end": {
           "line": 1,
-          "column": 29
+          "column": 42
         }
       }
     },
@@ -762,25 +727,25 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 29,
-      "end": 30,
+      "start": 42,
+      "end": 43,
       "loc": {
         "start": {
           "line": 1,
-          "column": 29
+          "column": 42
         },
         "end": {
           "line": 1,
-          "column": 30
+          "column": 43
         }
       }
     },
     {
       "type": {
-        "label": "import",
-        "keyword": "import",
+        "label": "export",
+        "keyword": "export",
         "beforeExpr": false,
-        "startsExpr": true,
+        "startsExpr": false,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
@@ -789,9 +754,9 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "import",
-      "start": 31,
-      "end": 37,
+      "value": "export",
+      "start": 44,
+      "end": 50,
       "loc": {
         "start": {
           "line": 2,
@@ -800,6 +765,59 @@
         "end": {
           "line": 2,
           "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 51,
+      "end": 52,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 7
+        },
+        "end": {
+          "line": 2,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "default",
+        "keyword": "default",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "default",
+      "start": 52,
+      "end": 59,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 8
+        },
+        "end": {
+          "line": 2,
+          "column": 15
         }
       }
     },
@@ -815,13 +833,13 @@
         "postfix": false,
         "binop": null
       },
-      "value": "MouseSensor",
-      "start": 38,
-      "end": 49,
+      "value": "as",
+      "start": 60,
+      "end": 62,
       "loc": {
         "start": {
           "line": 2,
-          "column": 7
+          "column": 16
         },
         "end": {
           "line": 2,
@@ -841,9 +859,9 @@
         "postfix": false,
         "binop": null
       },
-      "value": "from",
-      "start": 50,
-      "end": 54,
+      "value": "MouseSensor",
+      "start": 63,
+      "end": 74,
       "loc": {
         "start": {
           "line": 2,
@@ -851,7 +869,58 @@
         },
         "end": {
           "line": 2,
-          "column": 23
+          "column": 30
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 74,
+      "end": 75,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 30
+        },
+        "end": {
+          "line": 2,
+          "column": 31
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "from",
+      "start": 76,
+      "end": 80,
+      "loc": {
+        "start": {
+          "line": 2,
+          "column": 32
+        },
+        "end": {
+          "line": 2,
+          "column": 36
         }
       }
     },
@@ -869,16 +938,16 @@
         "updateContext": null
       },
       "value": "./MouseSensor",
-      "start": 55,
-      "end": 70,
+      "start": 81,
+      "end": 96,
       "loc": {
         "start": {
           "line": 2,
-          "column": 24
+          "column": 37
         },
         "end": {
           "line": 2,
-          "column": 39
+          "column": 52
         }
       }
     },
@@ -895,25 +964,25 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 70,
-      "end": 71,
+      "start": 96,
+      "end": 97,
       "loc": {
         "start": {
           "line": 2,
-          "column": 39
+          "column": 52
         },
         "end": {
           "line": 2,
-          "column": 40
+          "column": 53
         }
       }
     },
     {
       "type": {
-        "label": "import",
-        "keyword": "import",
+        "label": "export",
+        "keyword": "export",
         "beforeExpr": false,
-        "startsExpr": true,
+        "startsExpr": false,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
@@ -922,9 +991,9 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "import",
-      "start": 72,
-      "end": 78,
+      "value": "export",
+      "start": 98,
+      "end": 104,
       "loc": {
         "start": {
           "line": 3,
@@ -933,6 +1002,59 @@
         "end": {
           "line": 3,
           "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 105,
+      "end": 106,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 7
+        },
+        "end": {
+          "line": 3,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "default",
+        "keyword": "default",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "default",
+      "start": 106,
+      "end": 113,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 8
+        },
+        "end": {
+          "line": 3,
+          "column": 15
         }
       }
     },
@@ -948,13 +1070,13 @@
         "postfix": false,
         "binop": null
       },
-      "value": "TouchSensor",
-      "start": 79,
-      "end": 90,
+      "value": "as",
+      "start": 114,
+      "end": 116,
       "loc": {
         "start": {
           "line": 3,
-          "column": 7
+          "column": 16
         },
         "end": {
           "line": 3,
@@ -974,9 +1096,9 @@
         "postfix": false,
         "binop": null
       },
-      "value": "from",
-      "start": 91,
-      "end": 95,
+      "value": "TouchSensor",
+      "start": 117,
+      "end": 128,
       "loc": {
         "start": {
           "line": 3,
@@ -984,7 +1106,58 @@
         },
         "end": {
           "line": 3,
-          "column": 23
+          "column": 30
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 128,
+      "end": 129,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 30
+        },
+        "end": {
+          "line": 3,
+          "column": 31
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "from",
+      "start": 130,
+      "end": 134,
+      "loc": {
+        "start": {
+          "line": 3,
+          "column": 32
+        },
+        "end": {
+          "line": 3,
+          "column": 36
         }
       }
     },
@@ -1002,149 +1175,16 @@
         "updateContext": null
       },
       "value": "./TouchSensor",
-      "start": 96,
-      "end": 111,
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 24
-        },
-        "end": {
-          "line": 3,
-          "column": 39
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ";",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 111,
-      "end": 112,
-      "loc": {
-        "start": {
-          "line": 3,
-          "column": 39
-        },
-        "end": {
-          "line": 3,
-          "column": 40
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "import",
-        "keyword": "import",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "value": "import",
-      "start": 113,
-      "end": 119,
-      "loc": {
-        "start": {
-          "line": 4,
-          "column": 0
-        },
-        "end": {
-          "line": 4,
-          "column": 6
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "DragSensor",
-      "start": 120,
-      "end": 130,
-      "loc": {
-        "start": {
-          "line": 4,
-          "column": 7
-        },
-        "end": {
-          "line": 4,
-          "column": 17
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "from",
-      "start": 131,
-      "end": 135,
-      "loc": {
-        "start": {
-          "line": 4,
-          "column": 18
-        },
-        "end": {
-          "line": 4,
-          "column": 22
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "string",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "value": "./DragSensor",
-      "start": 136,
+      "start": 135,
       "end": 150,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 23
+          "line": 3,
+          "column": 37
         },
         "end": {
-          "line": 4,
-          "column": 37
+          "line": 3,
+          "column": 52
         }
       }
     },
@@ -1165,21 +1205,21 @@
       "end": 151,
       "loc": {
         "start": {
-          "line": 4,
-          "column": 37
+          "line": 3,
+          "column": 52
         },
         "end": {
-          "line": 4,
-          "column": 38
+          "line": 3,
+          "column": 53
         }
       }
     },
     {
       "type": {
-        "label": "import",
-        "keyword": "import",
+        "label": "export",
+        "keyword": "export",
         "beforeExpr": false,
-        "startsExpr": true,
+        "startsExpr": false,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
@@ -1188,17 +1228,70 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "import",
+      "value": "export",
       "start": 152,
       "end": 158,
       "loc": {
         "start": {
-          "line": 5,
+          "line": 4,
           "column": 0
         },
         "end": {
-          "line": 5,
+          "line": 4,
           "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "{",
+        "beforeExpr": true,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 159,
+      "end": 160,
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 7
+        },
+        "end": {
+          "line": 4,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "default",
+        "keyword": "default",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "default",
+      "start": 160,
+      "end": 167,
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 8
+        },
+        "end": {
+          "line": 4,
+          "column": 15
         }
       }
     },
@@ -1214,17 +1307,68 @@
         "postfix": false,
         "binop": null
       },
-      "value": "ForceTouchSensor",
-      "start": 159,
-      "end": 175,
+      "value": "as",
+      "start": 168,
+      "end": 170,
       "loc": {
         "start": {
-          "line": 5,
-          "column": 7
+          "line": 4,
+          "column": 16
         },
         "end": {
-          "line": 5,
-          "column": 23
+          "line": 4,
+          "column": 18
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "DragSensor",
+      "start": 171,
+      "end": 181,
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 19
+        },
+        "end": {
+          "line": 4,
+          "column": 29
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 181,
+      "end": 182,
+      "loc": {
+        "start": {
+          "line": 4,
+          "column": 29
+        },
+        "end": {
+          "line": 4,
+          "column": 30
         }
       }
     },
@@ -1241,16 +1385,16 @@
         "binop": null
       },
       "value": "from",
-      "start": 176,
-      "end": 180,
+      "start": 183,
+      "end": 187,
       "loc": {
         "start": {
-          "line": 5,
-          "column": 24
+          "line": 4,
+          "column": 31
         },
         "end": {
-          "line": 5,
-          "column": 28
+          "line": 4,
+          "column": 35
         }
       }
     },
@@ -1267,17 +1411,17 @@
         "binop": null,
         "updateContext": null
       },
-      "value": "./ForceTouchSensor",
-      "start": 181,
-      "end": 201,
+      "value": "./DragSensor",
+      "start": 188,
+      "end": 202,
       "loc": {
         "start": {
-          "line": 5,
-          "column": 29
+          "line": 4,
+          "column": 36
         },
         "end": {
-          "line": 5,
-          "column": 49
+          "line": 4,
+          "column": 50
         }
       }
     },
@@ -1294,16 +1438,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 201,
-      "end": 202,
+      "start": 202,
+      "end": 203,
       "loc": {
         "start": {
-          "line": 5,
-          "column": 49
+          "line": 4,
+          "column": 50
         },
         "end": {
-          "line": 5,
-          "column": 50
+          "line": 4,
+          "column": 51
         }
       }
     },
@@ -1326,11 +1470,11 @@
       "end": 210,
       "loc": {
         "start": {
-          "line": 7,
+          "line": 5,
           "column": 0
         },
         "end": {
-          "line": 7,
+          "line": 5,
           "column": 6
         }
       }
@@ -1349,6 +1493,245 @@
       },
       "start": 211,
       "end": 212,
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 7
+        },
+        "end": {
+          "line": 5,
+          "column": 8
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "default",
+        "keyword": "default",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "default",
+      "start": 212,
+      "end": 219,
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 8
+        },
+        "end": {
+          "line": 5,
+          "column": 15
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "as",
+      "start": 220,
+      "end": 222,
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 16
+        },
+        "end": {
+          "line": 5,
+          "column": 18
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "ForceTouchSensor",
+      "start": 223,
+      "end": 239,
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 19
+        },
+        "end": {
+          "line": 5,
+          "column": 35
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "}",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "start": 239,
+      "end": 240,
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 35
+        },
+        "end": {
+          "line": 5,
+          "column": 36
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "name",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null
+      },
+      "value": "from",
+      "start": 241,
+      "end": 245,
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 37
+        },
+        "end": {
+          "line": 5,
+          "column": 41
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "./ForceTouchSensor",
+      "start": 246,
+      "end": 266,
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 42
+        },
+        "end": {
+          "line": 5,
+          "column": 62
+        }
+      }
+    },
+    {
+      "type": {
+        "label": ";",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "start": 266,
+      "end": 267,
+      "loc": {
+        "start": {
+          "line": 5,
+          "column": 62
+        },
+        "end": {
+          "line": 5,
+          "column": 63
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "export",
+        "keyword": "export",
+        "beforeExpr": false,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": null,
+        "updateContext": null
+      },
+      "value": "export",
+      "start": 269,
+      "end": 275,
+      "loc": {
+        "start": {
+          "line": 7,
+          "column": 0
+        },
+        "end": {
+          "line": 7,
+          "column": 6
+        }
+      }
+    },
+    {
+      "type": {
+        "label": "*",
+        "beforeExpr": true,
+        "startsExpr": false,
+        "rightAssociative": false,
+        "isLoop": false,
+        "isAssign": false,
+        "prefix": false,
+        "postfix": false,
+        "binop": 10,
+        "updateContext": null
+      },
+      "value": "*",
+      "start": 276,
+      "end": 277,
       "loc": {
         "start": {
           "line": 7,
@@ -1372,77 +1755,25 @@
         "postfix": false,
         "binop": null
       },
-      "value": "Sensor",
-      "start": 215,
-      "end": 221,
+      "value": "from",
+      "start": 278,
+      "end": 282,
       "loc": {
         "start": {
-          "line": 8,
-          "column": 2
-        },
-        "end": {
-          "line": 8,
-          "column": 8
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ",",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 221,
-      "end": 222,
-      "loc": {
-        "start": {
-          "line": 8,
-          "column": 8
-        },
-        "end": {
-          "line": 8,
+          "line": 7,
           "column": 9
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "MouseSensor",
-      "start": 225,
-      "end": 236,
-      "loc": {
-        "start": {
-          "line": 9,
-          "column": 2
         },
         "end": {
-          "line": 9,
+          "line": 7,
           "column": 13
         }
       }
     },
     {
       "type": {
-        "label": ",",
-        "beforeExpr": true,
-        "startsExpr": false,
+        "label": "string",
+        "beforeExpr": false,
+        "startsExpr": true,
         "rightAssociative": false,
         "isLoop": false,
         "isAssign": false,
@@ -1451,197 +1782,17 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 236,
-      "end": 237,
+      "value": "./SensorEvent",
+      "start": 283,
+      "end": 298,
       "loc": {
         "start": {
-          "line": 9,
-          "column": 13
-        },
-        "end": {
-          "line": 9,
+          "line": 7,
           "column": 14
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "TouchSensor",
-      "start": 240,
-      "end": 251,
-      "loc": {
-        "start": {
-          "line": 10,
-          "column": 2
         },
         "end": {
-          "line": 10,
-          "column": 13
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ",",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 251,
-      "end": 252,
-      "loc": {
-        "start": {
-          "line": 10,
-          "column": 13
-        },
-        "end": {
-          "line": 10,
-          "column": 14
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "DragSensor",
-      "start": 255,
-      "end": 265,
-      "loc": {
-        "start": {
-          "line": 11,
-          "column": 2
-        },
-        "end": {
-          "line": 11,
-          "column": 12
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ",",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 265,
-      "end": 266,
-      "loc": {
-        "start": {
-          "line": 11,
-          "column": 12
-        },
-        "end": {
-          "line": 11,
-          "column": 13
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "name",
-        "beforeExpr": false,
-        "startsExpr": true,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "value": "ForceTouchSensor",
-      "start": 269,
-      "end": 285,
-      "loc": {
-        "start": {
-          "line": 12,
-          "column": 2
-        },
-        "end": {
-          "line": 12,
-          "column": 18
-        }
-      }
-    },
-    {
-      "type": {
-        "label": ",",
-        "beforeExpr": true,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null,
-        "updateContext": null
-      },
-      "start": 285,
-      "end": 286,
-      "loc": {
-        "start": {
-          "line": 12,
-          "column": 18
-        },
-        "end": {
-          "line": 12,
-          "column": 19
-        }
-      }
-    },
-    {
-      "type": {
-        "label": "}",
-        "beforeExpr": false,
-        "startsExpr": false,
-        "rightAssociative": false,
-        "isLoop": false,
-        "isAssign": false,
-        "prefix": false,
-        "postfix": false,
-        "binop": null
-      },
-      "start": 287,
-      "end": 288,
-      "loc": {
-        "start": {
-          "line": 13,
-          "column": 0
-        },
-        "end": {
-          "line": 13,
-          "column": 1
+          "line": 7,
+          "column": 29
         }
       }
     },
@@ -1658,16 +1809,16 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 288,
-      "end": 289,
+      "start": 298,
+      "end": 299,
       "loc": {
         "start": {
-          "line": 13,
-          "column": 1
+          "line": 7,
+          "column": 29
         },
         "end": {
-          "line": 13,
-          "column": 2
+          "line": 7,
+          "column": 30
         }
       }
     },
@@ -1684,15 +1835,15 @@
         "binop": null,
         "updateContext": null
       },
-      "start": 290,
-      "end": 290,
+      "start": 300,
+      "end": 300,
       "loc": {
         "start": {
-          "line": 14,
+          "line": 8,
           "column": 0
         },
         "end": {
-          "line": 14,
+          "line": 8,
           "column": 0
         }
       }

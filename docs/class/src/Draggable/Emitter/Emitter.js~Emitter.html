@@ -2,8 +2,8 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="../../../../../">
-  <title data-ice="title">AutoScroll | @shopify/draggable</title>
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">Emitter | @shopify/draggable</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -43,6 +43,7 @@
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-draggableevent">Draggable/DraggableEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableDestroyEvent.html">DraggableDestroyEvent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableEvent.html">DraggableEvent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/DraggableEvent/DraggableEvent.js~DraggableInitializedEvent.html">DraggableInitializedEvent</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-emitter">Draggable/Emitter</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Emitter/Emitter.js~Emitter.html">Emitter</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-mirrorevent">Draggable/MirrorEvent</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorAttachedEvent.html">MirrorAttachedEvent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorCreateEvent.html">MirrorCreateEvent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorCreatedEvent.html">MirrorCreatedEvent</a></span></span></li>
@@ -50,14 +51,21 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorEvent.html">MirrorEvent</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/MirrorEvent/MirrorEvent.js~MirrorMoveEvent.html">MirrorMoveEvent</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-accessibility">Draggable/Plugins/Accessibility</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/Accessibility/Accessibility.js~Accessibility.html">Accessibility</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-autoscroll">Draggable/Plugins/AutoScroll</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html">AutoScroll</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-announcement">Draggable/Plugins/Announcement</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/Announcement/Announcement.js~Announcement.html">Announcement</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-mirror">Draggable/Plugins/Mirror</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html">Mirror</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragStart">onDragStart</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragStop">onDragStop</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onMirrorCreated">onMirrorCreated</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onMirrorMove">onMirrorMove</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onScroll">onScroll</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-scrollable">Draggable/Plugins/Scrollable</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/Scrollable/Scrollable.js~Scrollable.html">Scrollable</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragMove">onDragMove</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragStart">onDragStart</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-onDragStop">onDragStop</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-scroll">scroll</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-plugins-mirror">Draggable/Plugins/Mirror</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Plugins/Mirror/Mirror.js~Mirror.html">Mirror</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-defaultOptions">defaultOptions</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-dragsensor">Draggable/Sensors/DragSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/DragSensor/DragSensor.js~DragSensor.html">DragSensor</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-forcetouchsensor">Draggable/Sensors/ForceTouchSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/ForceTouchSensor/ForceTouchSensor.js~ForceTouchSensor.html">ForceTouchSensor</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#draggable-sensors-mousesensor">Draggable/Sensors/MouseSensor</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/Draggable/Sensors/MouseSensor/MouseSensor.js~MouseSensor.html">MouseSensor</a></span></span></li>
@@ -102,23 +110,23 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import AutoScroll from &apos;<span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber26">@shopify/draggable/src/Draggable/Plugins/AutoScroll/AutoScroll.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Emitter from &apos;<span><a href="file/src/Draggable/Emitter/Emitter.js.html#lineNumber6">@shopify/draggable/src/Draggable/Emitter/Emitter.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
   
   
-  <span data-ice="source">| <span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber26">source</a></span></span>
+  <span data-ice="source">| <span><a href="file/src/Draggable/Emitter/Emitter.js.html#lineNumber6">source</a></span></span>
 </div>
 
 <div class="self-detail detail">
-  <h1 data-ice="name">AutoScroll</h1>
+  <h1 data-ice="name">Emitter</h1>
 
   
 
   
   
-  <div class="flat-list" data-ice="extendsChain"><h4>Extends:</h4><div><span>shared/AbstractPlugin~AbstractPlugin</span> &#x2192; AutoScroll</div></div>
+  
   
   
   
@@ -128,7 +136,7 @@
 
   
   
-  <div class="description" data-ice="description"><p>AutoScroll plugin which scrolls the closest scrollable parent</p>
+  <div class="description" data-ice="description"><p>The Emitter is a simple emitter class that provides you with <code>on()</code>, <code>off()</code> and <code>trigger()</code> methods</p>
 </div>
   
 
@@ -161,14 +169,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">(draggable: <span><a href="class/src/Draggable/Draggable.js~Draggable.html">Draggable</a></span>)</span>
+          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Emitter/Emitter.js~Emitter.html#instance-constructor-constructor">constructor</a></span></span><span class="code" data-ice="signature">()</span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>AutoScroll constructor.</p>
-</div>
+        
       </div>
     </td>
     <td>
@@ -197,130 +204,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-member-currentMousePosition">currentMousePosition</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Emitter/Emitter.js~Emitter.html#instance-member-callbacks">callbacks</a></span></span><span class="code" data-ice="signature">: {}</span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Keeps current mouse position</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-member-findScrollableElementFrame">findScrollableElementFrame</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span></span>
-        </p>
-      </div>
-      <div>
         
-        
-        <div data-ice="description"><p>Animation frame looking for the closest scrollable element</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-member-options">options</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>AutoScroll options</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-member-scrollAnimationFrame">scrollAnimationFrame</a></span></span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>Scroll animation frame</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-member-scrollableElement">scrollableElement</a></span></span><span class="code" data-ice="signature">: <span>HTMLElement</span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>Closest scrollable element</p>
-</div>
       </div>
     </td>
     <td>
@@ -349,13 +239,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-attach">attach</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Emitter/Emitter.js~Emitter.html#instance-method-off">off</a></span></span><span class="code" data-ice="signature">(type: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, callback: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Attaches plugins event listeners</p>
+        <div data-ice="description"><p>Unregisters callbacks by event name</p>
 </div>
       </div>
     </td>
@@ -378,13 +268,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-detach">detach</a></span></span><span class="code" data-ice="signature">()</span>
+          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Emitter/Emitter.js~Emitter.html#instance-method-on">on</a></span></span><span class="code" data-ice="signature">(type: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, callbacks: ...<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Detaches plugins event listeners</p>
+        <div data-ice="description"><p>Registers callbacks by event name</p>
 </div>
       </div>
     </td>
@@ -407,135 +297,13 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-getOptions">getOptions</a></span></span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
+          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Emitter/Emitter.js~Emitter.html#instance-method-trigger">trigger</a></span></span><span class="code" data-ice="signature">(event: <span><a href="class/src/shared/AbstractEvent/AbstractEvent.js~AbstractEvent.html">AbstractEvent</a></span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Returns options passed through draggable</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-</tbody>
-</table>
-<table class="summary" data-ice="summary">
-  <thead><tr><td data-ice="title" colspan="3">Private Methods</td></tr></thead>
-  <tbody>
-  
-  <tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">private</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-[onDragMove]">[onDragMove]</a></span></span><span class="code" data-ice="signature">(dragEvent: <span>*</span>)</span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>Drag move handler.</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">private</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-[onDragStart]">[onDragStart]</a></span></span><span class="code" data-ice="signature">(dragEvent: <span>*</span>)</span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>Drag start handler.</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">private</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-[onDragStop]">[onDragStop]</a></span></span><span class="code" data-ice="signature">()</span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>Drag stop handler.</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">private</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/src/Draggable/Plugins/AutoScroll/AutoScroll.js~AutoScroll.html#instance-method-[scroll]">[scroll]</a></span></span><span class="code" data-ice="signature">()</span>
-        </p>
-      </div>
-      <div>
-        
-        
-        <div data-ice="description"><p>Scroll function that does the heavylifting</p>
+        <div data-ice="description"><p>Triggers event callbacks by event object</p>
 </div>
       </div>
     </td>
@@ -562,40 +330,22 @@
     
     
     
-    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">(draggable: <span><a href="class/src/Draggable/Draggable.js~Draggable.html">Draggable</a></span>)</span>
+    <span class="code" data-ice="name">constructor</span><span class="code" data-ice="signature">()</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber33">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Draggable/Emitter/Emitter.js.html#lineNumber7">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>AutoScroll constructor.</p>
-</div>
+  
 
   
 
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">draggable</td>
-      <td data-ice="type" class="code"><span><a href="class/src/Draggable/Draggable.js~Draggable.html">Draggable</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"><p>Draggable instance</p>
-</td>
-    </tr>
-</tbody>
-  </table>
-</div>
+  <div data-ice="properties">
 </div>
 
   
@@ -619,310 +369,29 @@
 <div data-ice="memberDetails"><h2 data-ice="title">Public Members</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-currentMousePosition">
+  <h3 data-ice="anchor" id="instance-member-callbacks">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">currentMousePosition</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span></span>
+    <span class="code" data-ice="name">callbacks</span><span class="code" data-ice="signature">: {}</span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber55">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Draggable/Emitter/Emitter.js.html#lineNumber8">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Keeps current mouse position</p>
-</div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Properties:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">currentMousePosition</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-<tr data-ice="property" data-depth="1">
-      <td data-ice="name" class="code" data-depth="1">currentMousePosition.clientX</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-<tr data-ice="property" data-depth="1">
-      <td data-ice="name" class="code" data-depth="1">currentMousePosition.clientY</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
   
 
   
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-findScrollableElementFrame">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">findScrollableElementFrame</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber76">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Animation frame looking for the closest scrollable element</p>
-</div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Properties:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">findScrollableElementFrame</td>
-      <td data-ice="type" class="code"><span>*</span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-options">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">options</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber43">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>AutoScroll options</p>
-</div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Properties:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">options</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-<tr data-ice="property" data-depth="1">
-      <td data-ice="name" class="code" data-depth="1">options.speed</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-<tr data-ice="property" data-depth="1">
-      <td data-ice="name" class="code" data-depth="1">options.sensitivity</td>
-      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-scrollAnimationFrame">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">scrollAnimationFrame</span><span class="code" data-ice="signature">: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">Number</a></span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber62">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Scroll animation frame</p>
-</div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Properties:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">scrollAnimationFrame</td>
-      <td data-ice="type" class="code"><span>*</span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-scrollableElement">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">scrollableElement</span><span class="code" data-ice="signature">: <span>HTMLElement</span> | <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null">null</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber69">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Closest scrollable element</p>
-</div>
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Properties:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">scrollableElement</td>
-      <td data-ice="type" class="code"><span>*</span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-</tbody>
-  </table>
-</div>
+  <div data-ice="properties">
 </div>
 
   
@@ -946,118 +415,52 @@
 <div data-ice="methodDetails"><h2 data-ice="title">Public Methods</h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-attach">
+  <h3 data-ice="anchor" id="instance-method-off">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">attach</span><span class="code" data-ice="signature">()</span>
+    <span class="code" data-ice="name">off</span><span class="code" data-ice="signature">(type: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, callback: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber87">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Draggable/Emitter/Emitter.js.html#lineNumber31">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Attaches plugins event listeners</p>
+  <div data-ice="description"><p>Unregisters callbacks by event name</p>
 </div>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">type</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">callback</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
 </div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-detach">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">detach</span><span class="code" data-ice="signature">()</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber97">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Detaches plugins event listeners</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-getOptions">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">getOptions</span><span class="code" data-ice="signature">(): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber108">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Returns options passed through draggable</p>
-</div>
-
-  
-
-  <div data-ice="properties">
 </div>
 
   <div class="return-params" data-ice="returnParams">
@@ -1065,7 +468,7 @@
     <table>
       <tbody>
         <tr>
-          <td class="return-type code" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
           
         </tr>
       </tbody>
@@ -1089,28 +492,26 @@
   
   
 </div>
-<h2 data-ice="title">Private Methods</h2>
-
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-[onDragMove]">
-    <span class="access" data-ice="access">private</span>
+  <h3 data-ice="anchor" id="instance-method-on">
+    <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">[onDragMove]</span><span class="code" data-ice="signature">(dragEvent: <span>*</span>)</span>
+    <span class="code" data-ice="name">on</span><span class="code" data-ice="signature">(type: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, callbacks: ...<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber126">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Draggable/Emitter/Emitter.js.html#lineNumber16">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Drag move handler. Remembers mouse position and initiates scrolling</p>
+  <div data-ice="description"><p>Registers callbacks by event name</p>
 </div>
 
   
@@ -1124,8 +525,14 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">dragEvent</td>
-      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="name" class="code" data-depth="0">type</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">callbacks</td>
+      <td data-ice="type" class="code">...<span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function">Function</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"></td>
     </tr>
@@ -1134,7 +541,19 @@
 </div>
 </div>
 
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
 
   
 
@@ -1152,25 +571,25 @@
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-[onDragStart]">
-    <span class="access" data-ice="access">private</span>
+  <h3 data-ice="anchor" id="instance-method-trigger">
+    <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">[onDragStart]</span><span class="code" data-ice="signature">(dragEvent: <span>*</span>)</span>
+    <span class="code" data-ice="name">trigger</span><span class="code" data-ice="signature">(event: <span><a href="class/src/shared/AbstractEvent/AbstractEvent.js~AbstractEvent.html">AbstractEvent</a></span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber116">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/Draggable/Emitter/Emitter.js.html#lineNumber51">source</a></span></span>
     </span>
   </h3>
 
   
   
   
-  <div data-ice="description"><p>Drag start handler. Finds closest scrollable parent in separate frame</p>
+  <div data-ice="description"><p>Triggers event callbacks by event object</p>
 </div>
 
   
@@ -1184,8 +603,8 @@
     <tbody>
     
     <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">dragEvent</td>
-      <td data-ice="type" class="code"><span>*</span></td>
+      <td data-ice="name" class="code" data-depth="0">event</td>
+      <td data-ice="type" class="code"><span><a href="class/src/shared/AbstractEvent/AbstractEvent.js~AbstractEvent.html">AbstractEvent</a></span></td>
       <td data-ice="appendix"></td>
       <td data-ice="description"></td>
     </tr>
@@ -1194,95 +613,19 @@
 </div>
 </div>
 
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span>*</span></td>
+          
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
 </div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-[onDragStop]">
-    <span class="access" data-ice="access">private</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">[onDragStop]</span><span class="code" data-ice="signature">()</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber149">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Drag stop handler. Cancels scroll animations and resets state</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-method-[scroll]">
-    <span class="access" data-ice="access">private</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">[scroll]</span><span class="code" data-ice="signature">()</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/Draggable/Plugins/AutoScroll/AutoScroll.js.html#lineNumber163">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  <div data-ice="description"><p>Scroll function that does the heavylifting</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
+  </div>
 
   
 

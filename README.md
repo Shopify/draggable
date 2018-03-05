@@ -104,15 +104,10 @@ You can find the documentation for each module within their respective directori
 
 ## Running examples
 
-To run the examples locally run
+To run the `examples` project locally, simply run the following from the `draggable` root:
 
 ```
-$ yarn install
-$ cd examples
-$ yarn install
-$ yarn build
-$ cd ..
-$ yarn start
+yarn && yarn start
 ```
 
 This will start a server that hosts the contents of `examples/`. It also watches for file

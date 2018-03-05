@@ -31,7 +31,8 @@
     "lint:scss": "stylelint './src/**/*.scss'",
     "prettier:scss": "prettier-stylelint './src/**/*.scss' --write -q",
     "lint:js": "eslint './src/**/*.js' './tools/**/*.js' --max-warnings 0",
-    "prettier:js": "yarn run lint:js --fix"
+    "prettier:js": "yarn run lint:js --fix",
+    "prepublish": "yarn run build"
   },
   "dependencies": {
     "core-js": "^2.5.3",

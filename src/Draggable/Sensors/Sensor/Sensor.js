@@ -16,7 +16,7 @@ export default class Sensor {
      * @property containers
      * @type {HTMLElement[]}
      */
-    this.containers = containers;
+    this.containers = [...containers];
 
     /**
      * Current options
@@ -54,6 +54,24 @@ export default class Sensor {
    */
   detach() {
     return this;
+  }
+
+  /**
+   * Adds container to this sensor instance
+   * @param {...HTMLElement} containers - Containers you want to add to this sensor
+   * @example draggable.addContainer(document.body)
+   */
+  addContainer(...containers) {
+    this.containers = [...this.containers, ...containers];
+  }
+
+  /**
+   * Removes container from this sensor instance
+   * @param {...HTMLElement} containers - Containers you want to remove from this sensor
+   * @example draggable.removeContainer(document.body)
+   */
+  removeContainer(...containers) {
+    this.containers = this.containers.filter((container) => !containers.includes(container));
   }
 
   /**

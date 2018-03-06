@@ -245,10 +245,11 @@ export default class Draggable {
    * Adds container to this draggable instance
    * @param {...HTMLElement} containers - Containers you want to add to draggable
    * @return {Draggable}
-   * @example draggable.addPlugin(CustomA11yPlugin, CustomMirrorPlugin)
+   * @example draggable.addContainer(document.body)
    */
   addContainer(...containers) {
     this.containers = [...this.containers, ...containers];
+    this.sensors.forEach((sensor) => sensor.addContainer(...containers));
     return this;
   }
 
@@ -256,10 +257,11 @@ export default class Draggable {
    * Removes container from this draggable instance
    * @param {...HTMLElement} containers - Containers you want to remove from draggable
    * @return {Draggable}
-   * @example draggable.removePlugin(MirrorPlugin, CustomMirrorPlugin)
+   * @example draggable.removeContainer(document.body)
    */
   removeContainer(...containers) {
     this.containers = this.containers.filter((container) => !containers.includes(container));
+    this.sensors.forEach((sensor) => sensor.removeContainer(...containers));
     return this;
   }
 

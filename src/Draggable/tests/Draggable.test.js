@@ -2,6 +2,10 @@ import {
   createSandbox,
   triggerEvent,
   TestPlugin,
+  clickMouse,
+  moveMouse,
+  releaseMouse,
+  waitForDragDelay,
 } from 'helper';
 
 import Draggable, {
@@ -32,7 +36,11 @@ import {
 } from '../Sensors';
 
 const sampleMarkup = `
-  <ul>
+  <ul class="Container">
+    <li>First item</li>
+    <li>Second item</li>
+  </ul>
+  <ul class="DynamicContainer">
     <li>First item</li>
     <li>Second item</li>
   </ul>
@@ -46,7 +54,7 @@ describe('Draggable', () => {
 
   beforeEach(() => {
     sandbox = createSandbox(sampleMarkup);
-    containers = sandbox.querySelectorAll('ul');
+    containers = sandbox.querySelectorAll('.Container');
   });
 
   afterEach(() => {
@@ -351,6 +359,86 @@ describe('Draggable', () => {
       expect(containerChildren.length).toEqual(2);
 
       triggerEvent(draggableElement, 'mouseup', {button: 0});
+    });
+  });
+
+  describe('#addContainer', () => {
+    test('adds single container dynamically', () => {
+      const dragOverContainerHandler = jest.fn();
+      const newInstance = new Draggable(containers, {
+        draggable: 'li',
+      });
+
+      newInstance.on('drag:over:container', dragOverContainerHandler);
+
+      const draggableElement = document.querySelector('li');
+      const dynamicContainer = document.querySelector('.DynamicContainer');
+
+      clickMouse(draggableElement);
+      waitForDragDelay(100);
+      moveMouse(dynamicContainer);
+
+      expect(dragOverContainerHandler)
+        .not
+        .toHaveBeenCalled();
+
+      releaseMouse(newInstance.source);
+
+      newInstance.addContainer(dynamicContainer);
+
+      expect(newInstance.containers)
+        .toEqual([...containers, dynamicContainer]);
+
+      clickMouse(draggableElement);
+      waitForDragDelay(100);
+      moveMouse(dynamicContainer);
+
+      expect(dragOverContainerHandler)
+        .toHaveBeenCalled();
+
+      releaseMouse(newInstance.source);
+    });
+  });
+
+  describe('#removeContainer', () => {
+    test('removes single container dynamically', () => {
+      let dragOverContainerHandler = jest.fn();
+      const allContainers = document.querySelectorAll('.Container, .DynamicContainer');
+      const newInstance = new Draggable(allContainers, {
+        draggable: 'li',
+      });
+
+      newInstance.on('drag:over:container', dragOverContainerHandler);
+
+      const draggableElement = document.querySelector('li');
+      const dynamicContainer = document.querySelector('.DynamicContainer');
+
+      clickMouse(draggableElement);
+      waitForDragDelay(100);
+      moveMouse(dynamicContainer);
+
+      expect(dragOverContainerHandler)
+        .toHaveBeenCalled();
+
+      releaseMouse(newInstance.source);
+
+      newInstance.removeContainer(dynamicContainer);
+
+      expect(newInstance.containers)
+        .toEqual([...containers]);
+
+      dragOverContainerHandler = jest.fn();
+      newInstance.on('drag:over:container', dragOverContainerHandler);
+
+      clickMouse(draggableElement);
+      waitForDragDelay(100);
+      moveMouse(dynamicContainer);
+
+      expect(dragOverContainerHandler)
+        .not
+        .toHaveBeenCalled();
+
+      releaseMouse(newInstance.source);
     });
   });
 

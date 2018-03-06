@@ -6,6 +6,8 @@
 
 ### Changed
 
+- Fixed `addContainer`/`removeContainer` api
+
 ## v1.0.0-beta.5 - 2018-03-02
 
 ### Added

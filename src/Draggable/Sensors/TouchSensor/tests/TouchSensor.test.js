@@ -8,7 +8,7 @@ import {
   touchRelease,
 } from 'helper';
 
-import TouchSensor from './..';
+import TouchSensor from '..';
 
 const sampleMarkup = `
   <ul>

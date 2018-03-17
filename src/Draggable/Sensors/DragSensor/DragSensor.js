@@ -1,12 +1,12 @@
 import {closest} from 'shared/utils';
 
-import Sensor from './../Sensor';
+import Sensor from '../Sensor';
 
 import {
   DragStartSensorEvent,
   DragMoveSensorEvent,
   DragStopSensorEvent,
-} from './../SensorEvent';
+} from '../SensorEvent';
 
 const onMouseDown = Symbol('onMouseDown');
 const onMouseUp = Symbol('onMouseUp');

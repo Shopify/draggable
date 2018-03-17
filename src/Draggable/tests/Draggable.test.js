@@ -6,30 +6,30 @@ import {
 
 import Draggable, {
   defaultOptions,
-} from './../Draggable';
+} from '../Draggable';
 
 import {
   DragStartEvent,
   DragMoveEvent,
   DragStopEvent,
-} from './../DragEvent';
+} from '../DragEvent';
 
 import {
   DraggableInitializedEvent,
   DraggableDestroyEvent,
-} from './../DraggableEvent';
+} from '../DraggableEvent';
 
 import {
   Accessibility,
   Mirror,
   Scrollable,
   Announcement,
-} from './../Plugins';
+} from '../Plugins';
 
 import {
   MouseSensor,
   TouchSensor,
-} from './../Sensors';
+} from '../Sensors';
 
 const sampleMarkup = `
   <ul>
@@ -452,7 +452,7 @@ describe('Draggable', () => {
     const callback = jest.fn();
     newInstance.on('drag:move', callback);
 
-    triggerEvent(document, 'mousemove', {
+    triggerEvent(document.body, 'mousemove', {
       clientX: expectedClientX,
       clientY: expectedClientY,
     });
@@ -602,7 +602,7 @@ describe('Draggable', () => {
     expect(document.body.classList)
       .toContain('draggable--is-dragging');
 
-    triggerEvent(document, 'mouseup', {button: 0});
+    triggerEvent(document.body, 'mouseup', {button: 0});
 
     expect(document.body.classList)
       .not
@@ -663,7 +663,7 @@ describe('Draggable', () => {
     // Wait for delay
     jest.runTimersToTime(100);
 
-    triggerEvent(document, 'mouseup', {button: 0});
+    triggerEvent(document.body, 'mouseup', {button: 0});
 
     expect(containers[0].classList)
       .toContain('draggable-container--placed');
@@ -709,7 +709,7 @@ describe('Draggable', () => {
     expect(containers[0].classList)
       .toContain('draggable-container--is-dragging');
 
-    triggerEvent(document, 'mouseup', {button: 0});
+    triggerEvent(document.body, 'mouseup', {button: 0});
 
     expect(containers[0].classList)
       .not
@@ -753,7 +753,7 @@ describe('Draggable', () => {
 
     expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBeTruthy();
 
-    triggerEvent(document, 'mouseup', {button: 0});
+    triggerEvent(document.body, 'mouseup', {button: 0});
 
     expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBeFalsy();
   });

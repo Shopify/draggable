@@ -7,7 +7,7 @@ import {
   DRAG_DELAY,
 } from 'helper';
 
-import Sortable from './..';
+import Sortable from '..';
 
 const sampleMarkup = `
   <ul>

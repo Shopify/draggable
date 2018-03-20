@@ -8,7 +8,7 @@ import {
   releaseMouse,
 } from 'helper';
 
-import MouseSensor from './..';
+import MouseSensor from '..';
 
 const sampleMarkup = `
   <ul>

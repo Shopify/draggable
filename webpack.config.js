@@ -4,6 +4,7 @@ const target = '/lib/';
 
 function createConfig({name, filename = name, source, path = ''}) {
   return {
+    mode: 'production',
     entry: `./src/${source}`,
     output: {
       path: __dirname + target + path,
@@ -12,6 +13,9 @@ function createConfig({name, filename = name, source, path = ''}) {
       libraryTarget: 'umd',
       umdNamedDefine: true,
     },
+    optimization: {
+      minimize: false,
+    },
     resolve: {
       modules: [
         'node_modules',
@@ -19,7 +23,7 @@ function createConfig({name, filename = name, source, path = ''}) {
       ],
     },
     module: {
-      loaders: [
+      rules: [
         {
           test: /(\.jsx|\.js)$/,
           loader: 'babel-loader',

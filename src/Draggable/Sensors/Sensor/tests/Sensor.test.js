@@ -1,4 +1,4 @@
-import Sensor from './../Sensor';
+import Sensor from '../Sensor';
 
 describe('Sensor', () => {
   describe('#constructor', () => {

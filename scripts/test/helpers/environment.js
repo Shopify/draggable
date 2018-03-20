@@ -12,3 +12,11 @@ export function withElementFromPoint(elementFromPoint, callback) {
   callback();
   document.elementFromPoint = originalElementFromPoint;
 }
+
+export const REQUEST_ANIMATION_FRAME_TIMEOUT = 15;
+
+export function waitForRequestAnimationFrame(
+  requestAnimationFrameTimeout = REQUEST_ANIMATION_FRAME_TIMEOUT,
+) {
+  jest.runTimersToTime(requestAnimationFrameTimeout + 1);
+}

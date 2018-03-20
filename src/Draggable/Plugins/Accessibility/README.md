@@ -1,3 +1,0 @@
-## Accessibility
-
-__WIP__

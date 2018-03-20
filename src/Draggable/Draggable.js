@@ -1,6 +1,6 @@
 import {closest} from 'shared/utils';
 
-import {Accessibility, Mirror, Scrollable, Announcement} from './Plugins';
+import {Focusable, Mirror, Scrollable, Announcement} from './Plugins';
 
 import Emitter from './Emitter';
 
@@ -81,13 +81,13 @@ export default class Draggable {
    * Default plugins draggable uses
    * @static
    * @property {Object} Plugins
-   * @property {Mirror} Plugins.Mirror
-   * @property {Accessibility} Plugins.Accessibility
-   * @property {Scrollable} Plugins.Scrollable
    * @property {Announcement} Plugins.Announcement
+   * @property {Focusable} Plugins.Focusable
+   * @property {Mirror} Plugins.Mirror
+   * @property {Scrollable} Plugins.Scrollable
    * @type {Object}
    */
-  static Plugins = {Mirror, Accessibility, Scrollable, Announcement};
+  static Plugins = {Announcement, Focusable, Mirror, Scrollable};
 
   /**
    * Draggable constructor.
@@ -161,8 +161,11 @@ export default class Draggable {
     document.addEventListener('drag:stop', this[onDragStop], true);
     document.addEventListener('drag:pressure', this[onDragPressure], true);
 
-    this.addPlugin(...[Mirror, Accessibility, Scrollable, Announcement, ...this.options.plugins]);
-    this.addSensor(...[MouseSensor, TouchSensor, ...this.options.sensors]);
+    const defaultPlugins = Object.values(Draggable.Plugins).map((Plugin) => Plugin);
+    const defaultSensors = [MouseSensor, TouchSensor];
+
+    this.addPlugin(...[...defaultPlugins, ...this.options.plugins]);
+    this.addSensor(...[...defaultSensors, ...this.options.sensors]);
 
     const draggableInitializedEvent = new DraggableInitializedEvent({
       draggable: this,
@@ -319,6 +322,16 @@ export default class Draggable {
    */
   isDragging() {
     return Boolean(this.dragging);
+  }
+
+  /**
+   * Returns all draggable elements
+   * @return {HTMLElement[]}
+   */
+  getDraggableElements() {
+    return this.containers.reduce((current, container) => {
+      return [...current, ...this.getDraggableElementsForContainer(container)];
+    }, []);
   }
 
   /**

@@ -24,7 +24,7 @@ import {
 } from '../DraggableEvent';
 
 import {
-  Accessibility,
+  Focusable,
   Mirror,
   Scrollable,
   Announcement,
@@ -65,7 +65,7 @@ describe('Draggable', () => {
     test('should be available statically', () => {
       expect(Draggable.Plugins).toBeDefined();
       expect(Draggable.Plugins.Mirror).toEqual(Mirror);
-      expect(Draggable.Plugins.Accessibility).toEqual(Accessibility);
+      expect(Draggable.Plugins.Focusable).toEqual(Focusable);
       expect(Draggable.Plugins.Scrollable).toEqual(Scrollable);
     });
   });
@@ -122,16 +122,16 @@ describe('Draggable', () => {
         .toBe(4);
 
       expect(newInstance.plugins[0])
-        .toBeInstanceOf(Mirror);
+        .toBeInstanceOf(Announcement);
 
       expect(newInstance.plugins[1])
-        .toBeInstanceOf(Accessibility);
+        .toBeInstanceOf(Focusable);
 
       expect(newInstance.plugins[2])
-        .toBeInstanceOf(Scrollable);
+        .toBeInstanceOf(Mirror);
 
       expect(newInstance.plugins[3])
-        .toBeInstanceOf(Announcement);
+        .toBeInstanceOf(Scrollable);
     });
 
     test('should attach custom plugins', () => {
@@ -439,6 +439,37 @@ describe('Draggable', () => {
         .toHaveBeenCalled();
 
       releaseMouse(newInstance.source);
+    });
+  });
+
+  describe('#getDraggableElements', () => {
+    test('returns draggable elements', () => {
+      const draggable = new Draggable(containers, {
+        draggable: 'li',
+      });
+
+      expect(draggable.getDraggableElements())
+        .toEqual([...document.querySelectorAll('.Container li')]);
+    });
+
+    test('returns draggable elements after adding a container', () => {
+      const dynamicContainer = document.querySelector('.DynamicContainer');
+      const draggable = new Draggable(containers, {
+        draggable: 'li',
+      });
+
+      expect(draggable.getDraggableElements())
+        .toEqual([...document.querySelectorAll('.Container li')]);
+
+      draggable.addContainer(dynamicContainer);
+
+      expect(draggable.getDraggableElements())
+        .toEqual([...document.querySelectorAll('li')]);
+
+      draggable.removeContainer(dynamicContainer);
+
+      expect(draggable.getDraggableElements())
+        .toEqual([...document.querySelectorAll('.Container li')]);
     });
   });
 

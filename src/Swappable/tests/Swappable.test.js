@@ -7,7 +7,7 @@ import {
   DRAG_DELAY,
 } from 'helper';
 
-import Swappable from './..';
+import Swappable from '..';
 
 const sampleMarkup = `
   <ul>

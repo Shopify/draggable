@@ -8,7 +8,7 @@ import {
   DragPressureEvent,
   DragStartEvent,
   DragStopEvent,
-} from './../DragEvent';
+} from '../DragEvent';
 
 describe('DragEvent', () => {
   describe('#constructor', () => {

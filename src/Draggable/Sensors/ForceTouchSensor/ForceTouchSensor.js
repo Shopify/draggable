@@ -1,11 +1,11 @@
-import Sensor from './../Sensor';
+import Sensor from '../Sensor';
 
 import {
   DragStartSensorEvent,
   DragMoveSensorEvent,
   DragStopSensorEvent,
   DragPressureSensorEvent,
-} from './../SensorEvent';
+} from '../SensorEvent';
 
 const onMouseForceWillBegin = Symbol('onMouseForceWillBegin');
 const onMouseForceDown = Symbol('onMouseForceDown');

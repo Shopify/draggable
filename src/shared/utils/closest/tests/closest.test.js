@@ -2,7 +2,7 @@ import {
   createSandbox,
 } from 'helper';
 
-import closest from './../closest';
+import closest from '../closest';
 
 const sampleMarkup = `
   <div class="tree">

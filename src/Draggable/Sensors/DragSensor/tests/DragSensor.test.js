@@ -9,7 +9,7 @@ import {
   waitForDragDelay,
 } from 'helper';
 
-import DragSensor from './..';
+import DragSensor from '..';
 
 const sampleMarkup = `
   <ul>

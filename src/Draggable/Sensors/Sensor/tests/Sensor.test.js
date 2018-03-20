@@ -38,32 +38,28 @@ describe('Sensor', () => {
   });
 
   describe('#addContainer', () => {
-    test('adds container to sensor', () => {
+    it('adds container to sensor', () => {
       const containers = [document.documentElement, document.body];
       const sensor = new Sensor();
 
-      expect(sensor.containers)
-        .toEqual([]);
+      expect(sensor.containers).toEqual([]);
 
       sensor.addContainer(...containers);
 
-      expect(sensor.containers)
-        .toEqual(containers);
+      expect(sensor.containers).toEqual(containers);
     });
   });
 
   describe('#removeContainer', () => {
-    test('removes container to sensor', () => {
+    it('removes container to sensor', () => {
       const containers = [document.documentElement, document.body];
       const sensor = new Sensor(containers);
 
-      expect(sensor.containers)
-        .toEqual(containers);
+      expect(sensor.containers).toEqual(containers);
 
       sensor.removeContainer(...containers);
 
-      expect(sensor.containers)
-        .toEqual([]);
+      expect(sensor.containers).toEqual([]);
     });
   });
 

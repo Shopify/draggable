@@ -1,9 +1,8 @@
 import {createSandbox, triggerEvent, TestPlugin, clickMouse, moveMouse, releaseMouse, waitForDragDelay} from 'helper';
-
 import Draggable, {defaultOptions} from '../Draggable';
 import {DragStartEvent, DragMoveEvent, DragStopEvent} from '../DragEvent';
 import {DraggableInitializedEvent, DraggableDestroyEvent} from '../DraggableEvent';
-import {Accessibility, Mirror, Scrollable, Announcement} from '../Plugins';
+import {Focusable, Mirror, Scrollable, Announcement} from '../Plugins';
 import {MouseSensor, TouchSensor} from '../Sensors';
 
 const sampleMarkup = `
@@ -36,7 +35,7 @@ describe('Draggable', () => {
     it('should be available statically', () => {
       expect(Draggable.Plugins).toBeDefined();
       expect(Draggable.Plugins.Mirror).toEqual(Mirror);
-      expect(Draggable.Plugins.Accessibility).toEqual(Accessibility);
+      expect(Draggable.Plugins.Focusable).toEqual(Focusable);
       expect(Draggable.Plugins.Scrollable).toEqual(Scrollable);
     });
   });
@@ -88,13 +87,13 @@ describe('Draggable', () => {
 
       expect(newInstance.plugins).toHaveLength(4);
 
-      expect(newInstance.plugins[0]).toBeInstanceOf(Mirror);
+      expect(newInstance.plugins[0]).toBeInstanceOf(Announcement);
 
-      expect(newInstance.plugins[1]).toBeInstanceOf(Accessibility);
+      expect(newInstance.plugins[1]).toBeInstanceOf(Focusable);
 
-      expect(newInstance.plugins[2]).toBeInstanceOf(Scrollable);
+      expect(newInstance.plugins[2]).toBeInstanceOf(Mirror);
 
-      expect(newInstance.plugins[3]).toBeInstanceOf(Announcement);
+      expect(newInstance.plugins[3]).toBeInstanceOf(Scrollable);
     });
 
     it('should attach custom plugins', () => {
@@ -370,6 +369,33 @@ describe('Draggable', () => {
       expect(dragOverContainerHandler).not.toHaveBeenCalled();
 
       releaseMouse(newInstance.source);
+    });
+  });
+
+  describe('#getDraggableElements', () => {
+    it('returns draggable elements', () => {
+      const draggable = new Draggable(containers, {
+        draggable: 'li',
+      });
+
+      expect(draggable.getDraggableElements()).toEqual([...document.querySelectorAll('.Container li')]);
+    });
+
+    it('returns draggable elements after adding a container', () => {
+      const dynamicContainer = document.querySelector('.DynamicContainer');
+      const draggable = new Draggable(containers, {
+        draggable: 'li',
+      });
+
+      expect(draggable.getDraggableElements()).toEqual([...document.querySelectorAll('.Container li')]);
+
+      draggable.addContainer(dynamicContainer);
+
+      expect(draggable.getDraggableElements()).toEqual([...document.querySelectorAll('li')]);
+
+      draggable.removeContainer(dynamicContainer);
+
+      expect(draggable.getDraggableElements()).toEqual([...document.querySelectorAll('.Container li')]);
     });
   });
 

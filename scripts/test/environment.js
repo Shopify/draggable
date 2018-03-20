@@ -1,7 +1,7 @@
-const requestAnimationFrameTimeout = 15;
+import {REQUEST_ANIMATION_FRAME_TIMEOUT} from './helpers/environment';
 
 window.requestAnimationFrame = (callback) => {
-  return setTimeout(callback, requestAnimationFrameTimeout);
+  return setTimeout(callback, REQUEST_ANIMATION_FRAME_TIMEOUT);
 };
 
 window.cancelAnimationFrame = (id) => {

@@ -31,7 +31,6 @@ export const defaultOptions = {
  * @extends AbstractPlugin
  */
 export default class Mirror extends AbstractPlugin {
-
   /**
    * Mirror constructor.
    * @constructs Mirror
@@ -163,15 +162,17 @@ export default class Mirror extends AbstractPlugin {
       options: this.options,
     };
 
-    return Promise.resolve(initialState)
-      // Fix reflow here
-      .then(computeMirrorDimensions)
-      .then(calculateMirrorOffset)
-      .then(resetMirror)
-      .then(addMirrorClasses)
-      .then(positionMirror({initial: true}))
-      .then(removeMirrorID)
-      .then(setState);
+    return (
+      Promise.resolve(initialState)
+        // Fix reflow here
+        .then(computeMirrorDimensions)
+        .then(calculateMirrorOffset)
+        .then(resetMirror)
+        .then(addMirrorClasses)
+        .then(positionMirror({initial: true}))
+        .then(removeMirrorID)
+        .then(setState)
+    );
   }
 
   /**
@@ -191,8 +192,7 @@ export default class Mirror extends AbstractPlugin {
       scrollOffset: this.scrollOffset,
     };
 
-    return Promise.resolve(initialState)
-      .then(positionMirror({raf: true}));
+    return Promise.resolve(initialState).then(positionMirror({raf: true}));
   }
 }
 
@@ -222,8 +222,8 @@ function computeMirrorDimensions({source, ...args}) {
  */
 function calculateMirrorOffset({sensorEvent, sourceRect, options, ...args}) {
   return withPromise((resolve) => {
-    const top = options.cursorOffsetY === null ? (sensorEvent.clientY - sourceRect.top) : options.cursorOffsetY;
-    const left = options.cursorOffsetX === null ? (sensorEvent.clientX - sourceRect.left) : options.cursorOffsetX;
+    const top = options.cursorOffsetY === null ? sensorEvent.clientY - sourceRect.top : options.cursorOffsetY;
+    const left = options.cursorOffsetX === null ? sensorEvent.clientX - sourceRect.left : options.cursorOffsetX;
 
     const mirrorOffset = {top, left};
 
@@ -310,35 +310,38 @@ function removeMirrorID({mirror, ...args}) {
  */
 function positionMirror({withFrame = false, initial = false} = {}) {
   return ({mirror, sensorEvent, mirrorOffset, initialY, initialX, scrollOffset, options, ...args}) => {
-    return withPromise((resolve) => {
-      const result = {
-        mirror,
-        sensorEvent,
-        mirrorOffset,
-        options,
-        ...args,
-      };
+    return withPromise(
+      (resolve) => {
+        const result = {
+          mirror,
+          sensorEvent,
+          mirrorOffset,
+          options,
+          ...args,
+        };
 
-      if (mirrorOffset) {
-        const x = sensorEvent.clientX - mirrorOffset.left - scrollOffset.x;
-        const y = sensorEvent.clientY - mirrorOffset.top - scrollOffset.y;
+        if (mirrorOffset) {
+          const x = sensorEvent.clientX - mirrorOffset.left - scrollOffset.x;
+          const y = sensorEvent.clientY - mirrorOffset.top - scrollOffset.y;
 
-        if ((options.xAxis && options.yAxis) || initial) {
-          mirror.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-        } else if (options.xAxis && !options.yAxis) {
-          mirror.style.transform = `translate3d(${x}px, ${initialY}px, 0)`;
-        } else if (options.yAxis && !options.xAxis) {
-          mirror.style.transform = `translate3d(${initialX}px, ${y}px, 0)`;
+          if ((options.xAxis && options.yAxis) || initial) {
+            mirror.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+          } else if (options.xAxis && !options.yAxis) {
+            mirror.style.transform = `translate3d(${x}px, ${initialY}px, 0)`;
+          } else if (options.yAxis && !options.xAxis) {
+            mirror.style.transform = `translate3d(${initialX}px, ${y}px, 0)`;
+          }
+
+          if (initial) {
+            result.initialX = x;
+            result.initialY = y;
+          }
         }
 
-        if (initial) {
-          result.initialX = x;
-          result.initialY = y;
-        }
-      }
-
-      resolve(result);
-    }, {frame: withFrame});
+        resolve(result);
+      },
+      {frame: withFrame},
+    );
   };
 }
 

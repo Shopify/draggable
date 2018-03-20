@@ -2,6 +2,7 @@ export function createSandbox(content) {
   const sandbox = document.createElement('div');
   sandbox.innerHTML = content;
   document.body.appendChild(sandbox);
+
   return sandbox;
 }
 

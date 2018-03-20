@@ -27,7 +27,6 @@ export const defaultOptions = {
  * @extends AbstractPlugin
  */
 export default class Scrollable extends AbstractPlugin {
-
   /**
    * Scrollable constructor.
    * @constructs Scrollable
@@ -224,12 +223,20 @@ export default class Scrollable extends AbstractPlugin {
       bottom = rect.bottom;
     }
 
-    let offsetY = (Math.abs(bottom - this.currentMousePosition.clientY) <= this.options.sensitivity) - (Math.abs(top - this.currentMousePosition.clientY) <= this.options.sensitivity);
-    let offsetX = (Math.abs(right - this.currentMousePosition.clientX) <= this.options.sensitivity) - (Math.abs(left - this.currentMousePosition.clientX) <= this.options.sensitivity);
+    let offsetY =
+      (Math.abs(bottom - this.currentMousePosition.clientY) <= this.options.sensitivity) -
+      (Math.abs(top - this.currentMousePosition.clientY) <= this.options.sensitivity);
+    let offsetX =
+      (Math.abs(right - this.currentMousePosition.clientX) <= this.options.sensitivity) -
+      (Math.abs(left - this.currentMousePosition.clientX) <= this.options.sensitivity);
 
     if (!offsetX && !offsetY) {
-      offsetX = (windowWidth - this.currentMousePosition.clientX <= this.options.sensitivity) - (this.currentMousePosition.clientX <= this.options.sensitivity);
-      offsetY = (windowHeight - this.currentMousePosition.clientY <= this.options.sensitivity) - (this.currentMousePosition.clientY <= this.options.sensitivity);
+      offsetX =
+        (windowWidth - this.currentMousePosition.clientX <= this.options.sensitivity) -
+        (this.currentMousePosition.clientX <= this.options.sensitivity);
+      offsetY =
+        (windowHeight - this.currentMousePosition.clientY <= this.options.sensitivity) -
+        (this.currentMousePosition.clientY <= this.options.sensitivity);
     }
 
     this.scrollableElement.scrollTop += offsetY * this.options.speed;
@@ -249,9 +256,10 @@ function hasOverflow(element) {
   const overflowRegex = /(auto|scroll)/;
   const computedStyles = getComputedStyle(element, null);
 
-  const overflow = computedStyles.getPropertyValue('overflow') +
-                   computedStyles.getPropertyValue('overflow-y') +
-                   computedStyles.getPropertyValue('overflow-x');
+  const overflow =
+    computedStyles.getPropertyValue('overflow') +
+    computedStyles.getPropertyValue('overflow-y') +
+    computedStyles.getPropertyValue('overflow-x');
 
   return overflowRegex.test(overflow);
 }

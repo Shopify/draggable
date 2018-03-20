@@ -58,6 +58,7 @@ export default class Emitter {
 
     for (let i = callbacks.length - 1; i >= 0; i--) {
       const callback = callbacks[i];
+
       try {
         callback(event);
       } catch (error) {

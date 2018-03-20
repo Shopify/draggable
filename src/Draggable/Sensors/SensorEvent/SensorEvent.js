@@ -7,7 +7,6 @@ import AbstractEvent from 'shared/AbstractEvent';
  * @extends AbstractEvent
  */
 export class SensorEvent extends AbstractEvent {
-
   /**
    * Original browser event that triggered a sensor
    * @property originalEvent

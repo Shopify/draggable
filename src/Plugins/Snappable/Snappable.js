@@ -1,9 +1,5 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
-
-import {
-  SnapInEvent,
-  SnapOutEvent,
-} from './SnappableEvent';
+import {SnapInEvent, SnapOutEvent} from './SnappableEvent';
 
 const onDragStart = Symbol('onDragStart');
 const onDragStop = Symbol('onDragStop');
@@ -17,7 +13,6 @@ const onDragOut = Symbol('onDragOut');
  * @extends AbstractPlugin
  */
 export default class Snappable extends AbstractPlugin {
-
   /**
    * Snappable constructor.
    * @constructs Snappable

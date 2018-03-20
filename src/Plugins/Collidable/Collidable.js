@@ -1,10 +1,6 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
 import {closest} from 'shared/utils';
-
-import {
-  CollidableInEvent,
-  CollidableOutEvent,
-} from './CollidableEvent';
+import {CollidableInEvent, CollidableOutEvent} from './CollidableEvent';
 
 const onDragMove = Symbol('onDragMove');
 const onDragStop = Symbol('onDragStop');
@@ -17,7 +13,6 @@ const onRequestAnimationFrame = Symbol('onRequestAnimationFrame');
  * @extends AbstractPlugin
  */
 export default class Collidable extends AbstractPlugin {
-
   /**
    * Collidable constructor.
    * @constructs Collidable
@@ -56,18 +51,14 @@ export default class Collidable extends AbstractPlugin {
    * Attaches plugins event listeners
    */
   attach() {
-    this.draggable
-      .on('drag:move', this[onDragMove])
-      .on('drag:stop', this[onDragStop]);
+    this.draggable.on('drag:move', this[onDragMove]).on('drag:stop', this[onDragStop]);
   }
 
   /**
    * Detaches plugins event listeners
    */
   detach() {
-    this.draggable
-      .off('drag:move', this[onDragMove])
-      .off('drag:stop', this[onDragStop]);
+    this.draggable.off('drag:move', this[onDragMove]).off('drag:stop', this[onDragStop]);
   }
 
   /**
@@ -114,7 +105,9 @@ export default class Collidable extends AbstractPlugin {
       collidingElement: this.lastCollidingElement,
     });
 
-    const enteringCollidable = Boolean(this.currentlyCollidingElement && this.lastCollidingElement !== this.currentlyCollidingElement);
+    const enteringCollidable = Boolean(
+      this.currentlyCollidingElement && this.lastCollidingElement !== this.currentlyCollidingElement,
+    );
     const leavingCollidable = Boolean(!this.currentlyCollidingElement && this.lastCollidingElement);
 
     if (enteringCollidable) {

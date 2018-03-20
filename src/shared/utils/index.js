@@ -1,5 +1,3 @@
 import closest from './closest';
 
-export {
-  closest,
-};
+export {closest};

@@ -27,7 +27,6 @@ export const defaultOptions = {
  * @extends AbstractPlugin
  */
 export default class Announcement extends AbstractPlugin {
-
   /**
    * Announcement constructor.
    * @constructs Announcement
@@ -61,16 +60,14 @@ export default class Announcement extends AbstractPlugin {
    * Attaches listeners to draggable
    */
   attach() {
-    this.draggable
-      .on('draggable:initialize', this[onInitialize]);
+    this.draggable.on('draggable:initialize', this[onInitialize]);
   }
 
   /**
    * Detaches listeners from draggable
    */
   detach() {
-    this.draggable
-      .off('draggable:destroy', this[onDestroy]);
+    this.draggable.off('draggable:destroy', this[onDestroy]);
   }
 
   /**
@@ -88,11 +85,11 @@ export default class Announcement extends AbstractPlugin {
   [announceEvent](event) {
     const message = this.options[event.type];
 
-    if (message && (typeof message === 'string')) {
+    if (message && typeof message === 'string') {
       this[announceMessage](message);
     }
 
-    if (message && (typeof message === 'function')) {
+    if (message && typeof message === 'function') {
       this[announceMessage](message(event));
     }
   }
@@ -144,8 +141,10 @@ const liveRegion = createRegion();
  */
 function announce(message, {expire}) {
   const element = document.createElement('div');
+
   element.innerHTML = message;
   liveRegion.appendChild(element);
+
   return setTimeout(() => {
     liveRegion.removeChild(element);
   }, expire);

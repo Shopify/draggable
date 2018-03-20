@@ -1,11 +1,5 @@
 import Draggable from '../Draggable';
-
-import {
-  SortableStartEvent,
-  SortableSortEvent,
-  SortableSortedEvent,
-  SortableStopEvent,
-} from './SortableEvent';
+import {SortableStartEvent, SortableSortEvent, SortableSortedEvent, SortableStopEvent} from './SortableEvent';
 
 const onDragStart = Symbol('onDragStart');
 const onDragOverContainer = Symbol('onDragOverContainer');
@@ -52,7 +46,6 @@ const defaultAnnouncements = {
  * @extends Draggable
  */
 export default class Sortable extends Draggable {
-
   /**
    * Sortable constructor.
    * @constructs Sortable
@@ -88,8 +81,7 @@ export default class Sortable extends Draggable {
     this[onDragOver] = this[onDragOver].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
 
-    this
-      .on('drag:start', this[onDragStart])
+    this.on('drag:start', this[onDragStart])
       .on('drag:over:container', this[onDragOverContainer])
       .on('drag:over', this[onDragOver])
       .on('drag:stop', this[onDragStop]);
@@ -101,8 +93,7 @@ export default class Sortable extends Draggable {
   destroy() {
     super.destroy();
 
-    this
-      .off('drag:start', this[onDragStart])
+    this.off('drag:start', this[onDragStart])
       .off('drag:over:container', this[onDragOverContainer])
       .off('drag:over', this[onDragOver])
       .off('drag:stop', this[onDragStop]);
@@ -260,7 +251,7 @@ function index(element) {
 
 function move({source, over, overContainer, children}) {
   const emptyOverContainer = !children.length;
-  const differentContainer = (source.parentNode !== overContainer);
+  const differentContainer = source.parentNode !== overContainer;
   const sameContainer = over && !differentContainer;
 
   if (emptyOverContainer) {

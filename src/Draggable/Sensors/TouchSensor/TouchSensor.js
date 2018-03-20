@@ -1,11 +1,6 @@
 import {closest} from 'shared/utils';
 import Sensor from '../Sensor';
-
-import {
-  DragStartSensorEvent,
-  DragMoveSensorEvent,
-  DragStopSensorEvent,
-} from '../SensorEvent';
+import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
 
 const onTouchStart = Symbol('onTouchStart');
 const onTouchHold = Symbol('onTouchHold');
@@ -16,9 +11,11 @@ const onScroll = Symbol('onScroll');
 /**
  * Adds default document.ontouchmove. Workaround for preventing scrolling on touchmove
  */
-document.ontouchmove = document.ontouchmove || function() {
-  return true;
-};
+document.ontouchmove =
+  document.ontouchmove ||
+  function() {
+    return true;
+  };
 
 /**
  * This sensor picks up native browser touch events and dictates drag operations
@@ -27,7 +24,6 @@ document.ontouchmove = document.ontouchmove || function() {
  * @extends Sensor
  */
 export default class TouchSensor extends Sensor {
-
   /**
    * TouchSensor constructor.
    * @constructs TouchSensor
@@ -118,7 +114,9 @@ export default class TouchSensor extends Sensor {
    */
   [onTouchHold](event, container) {
     return () => {
-      if (this.touchMoved) { return; }
+      if (this.touchMoved) {
+        return;
+      }
 
       const touch = event.touches[0] || event.changedTouches[0];
       const target = event.target;

@@ -1,11 +1,5 @@
 import Draggable from '../Draggable';
-
-import {
-  SwappableStartEvent,
-  SwappableSwapEvent,
-  SwappableSwappedEvent,
-  SwappableStopEvent,
-} from './SwappableEvent';
+import {SwappableStartEvent, SwappableSwapEvent, SwappableSwappedEvent, SwappableStopEvent} from './SwappableEvent';
 
 const onDragStart = Symbol('onDragStart');
 const onDragOver = Symbol('onDragOver');
@@ -39,7 +33,6 @@ const defaultAnnouncements = {
  * @extends Draggable
  */
 export default class Swappable extends Draggable {
-
   /**
    * Swappable constructor.
    * @constructs Swappable
@@ -66,8 +59,7 @@ export default class Swappable extends Draggable {
     this[onDragOver] = this[onDragOver].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
 
-    this
-      .on('drag:start', this[onDragStart])
+    this.on('drag:start', this[onDragStart])
       .on('drag:over', this[onDragOver])
       .on('drag:stop', this[onDragStop]);
   }
@@ -78,8 +70,7 @@ export default class Swappable extends Draggable {
   destroy() {
     super.destroy();
 
-    this
-      .off('drag:start', this._onDragStart)
+    this.off('drag:start', this._onDragStart)
       .off('drag:over', this._onDragOver)
       .off('drag:stop', this._onDragStop);
   }

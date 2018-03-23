@@ -5,6 +5,8 @@ const onDragStart = Symbol('onDragStart');
 const onDragOverContainer = Symbol('onDragOverContainer');
 const onDragOver = Symbol('onDragOver');
 const onDragStop = Symbol('onDragStop');
+const onDragNext = Symbol('onDragNext');
+const onDragPrevious = Symbol('onDragPrevious');
 
 /**
  * Returns announcement message when a Draggable element has been sorted with another Draggable element
@@ -80,10 +82,14 @@ export default class Sortable extends Draggable {
     this[onDragOverContainer] = this[onDragOverContainer].bind(this);
     this[onDragOver] = this[onDragOver].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
+    this[onDragNext] = this[onDragNext].bind(this);
+    this[onDragPrevious] = this[onDragPrevious].bind(this);
 
     this.on('drag:start', this[onDragStart])
       .on('drag:over:container', this[onDragOverContainer])
       .on('drag:over', this[onDragOver])
+      .on('drag:next', this[onDragNext])
+      .on('drag:previous', this[onDragPrevious])
       .on('drag:stop', this[onDragStop]);
   }
 
@@ -96,6 +102,8 @@ export default class Sortable extends Draggable {
     this.off('drag:start', this[onDragStart])
       .off('drag:over:container', this[onDragOverContainer])
       .off('drag:over', this[onDragOver])
+      .off('drag:next', this[onDragNext])
+      .off('drag:previous', this[onDragPrevious])
       .off('drag:stop', this[onDragStop]);
   }
 
@@ -106,6 +114,28 @@ export default class Sortable extends Draggable {
    */
   index(element) {
     return this.getDraggableElementsForContainer(element.parentNode).indexOf(element);
+  }
+
+  nextDraggable() {
+    const currentIndex = this.draggableElements.indexOf(this.source);
+    if (currentIndex === -1) {
+      return null;
+    } else if (currentIndex === this.draggableElements.length - 1) {
+      return this.draggableElements[0];
+    } else {
+      return this.draggableElements[currentIndex + 1];
+    }
+  }
+
+  previousDraggable() {
+    const currentIndex = this.draggableElements.indexOf(this.source);
+    if (currentIndex === -1) {
+      return null;
+    } else if (currentIndex === 0) {
+      return this.draggableElements[this.draggableElements.length - 1];
+    } else {
+      return this.draggableElements[currentIndex - 1];
+    }
   }
 
   /**
@@ -242,6 +272,18 @@ export default class Sortable extends Draggable {
 
     this.startIndex = null;
     this.startContainer = null;
+  }
+
+  [onDragNext]() {
+    move(this.source, this.nextDraggable(), this.nextDraggable().parentNode);
+    this.source.focus();
+    this.draggableElements = this.getDraggableElements();
+  }
+
+  [onDragPrevious]() {
+    move(this.source, this.previousDraggable(), this.previousDraggable().parentNode);
+    this.source.focus();
+    this.draggableElements = this.getDraggableElements();
   }
 }
 

@@ -34,11 +34,11 @@ describe('MouseSensor', () => {
       releaseMouse(document.body);
     }
 
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:start');
+    expect(dragFlow).toHaveTriggeredSensorEvent('drag:pointer:start');
   });
 
   it('cancels `drag:start` event when canceling sensor event', () => {
-    sandbox.addEventListener('drag:start', (event) => {
+    sandbox.addEventListener('drag:pointer:start', (event) => {
       event.detail.cancel();
     });
 
@@ -48,7 +48,7 @@ describe('MouseSensor', () => {
       releaseMouse(draggableElement);
     }
 
-    expect(dragFlow).toHaveCanceledSensorEvent('drag:start');
+    expect(dragFlow).toHaveCanceledSensorEvent('drag:pointer:start');
   });
 
   it('does not trigger `drag:start` event releasing mouse before timeout', () => {
@@ -63,13 +63,13 @@ describe('MouseSensor', () => {
       releaseMouse(document.body);
     }
 
-    expect(hastyDragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+    expect(hastyDragFlow).not.toHaveTriggeredSensorEvent('drag:pointer:start');
 
-    expect(hastyDragFlow).not.toHaveTriggeredSensorEvent('drag:stop');
+    expect(hastyDragFlow).not.toHaveTriggeredSensorEvent('drag:pointer:stop');
 
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:start');
+    expect(dragFlow).toHaveTriggeredSensorEvent('drag:pointer:start');
 
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
+    expect(dragFlow).toHaveTriggeredSensorEvent('drag:pointer:stop');
   });
 
   it('triggers `drag:move` event while moving the mouse', () => {
@@ -80,7 +80,7 @@ describe('MouseSensor', () => {
       releaseMouse(document.body);
     }
 
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:move');
+    expect(dragFlow).toHaveTriggeredSensorEvent('drag:pointer:move');
   });
 
   it('triggers `drag:stop` event when releasing mouse', () => {
@@ -91,7 +91,7 @@ describe('MouseSensor', () => {
       releaseMouse(document.body);
     }
 
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
+    expect(dragFlow).toHaveTriggeredSensorEvent('drag:pointer:stop');
   });
 
   it('does not trigger `drag:start` event when right clicking or holding ctrl or meta key', () => {
@@ -114,7 +114,7 @@ describe('MouseSensor', () => {
     }
 
     [dragFlowWithRightClick, dragFlowWithCtrlKey, dragFlowWithMetaKey].forEach((dragFlow) => {
-      expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+      expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:pointer:start');
     });
   });
 
@@ -124,7 +124,7 @@ describe('MouseSensor', () => {
       waitForDragDelay();
     }
 
-    expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+    expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:pointer:start');
   });
 
   it('prevents context menu while dragging', () => {

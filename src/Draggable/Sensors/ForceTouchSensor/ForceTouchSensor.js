@@ -1,5 +1,11 @@
 import Sensor from '../Sensor';
-import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent, DragPressureSensorEvent} from '../SensorEvent';
+
+import {
+  DragPointerStartSensorEvent,
+  DragPointerMoveSensorEvent,
+  DragPointerStopSensorEvent,
+  DragPointerPressureSensorEvent,
+} from '../SensorEvent';
 
 const onMouseForceWillBegin = Symbol('onMouseForceWillBegin');
 const onMouseForceDown = Symbol('onMouseForceDown');
@@ -93,7 +99,7 @@ export default class ForceTouchSensor extends Sensor {
     const target = document.elementFromPoint(event.clientX, event.clientY);
     const container = event.currentTarget;
 
-    const dragStartEvent = new DragStartSensorEvent({
+    const dragStartEvent = new DragPointerStartSensorEvent({
       clientX: event.clientX,
       clientY: event.clientY,
       target,
@@ -118,7 +124,7 @@ export default class ForceTouchSensor extends Sensor {
       return;
     }
 
-    const dragStopEvent = new DragStopSensorEvent({
+    const dragStopEvent = new DragPointerStopSensorEvent({
       clientX: event.clientX,
       clientY: event.clientY,
       target: null,
@@ -162,7 +168,7 @@ export default class ForceTouchSensor extends Sensor {
 
     const target = document.elementFromPoint(event.clientX, event.clientY);
 
-    const dragMoveEvent = new DragMoveSensorEvent({
+    const dragMoveEvent = new DragPointerMoveSensorEvent({
       clientX: event.clientX,
       clientY: event.clientY,
       target,
@@ -186,7 +192,7 @@ export default class ForceTouchSensor extends Sensor {
     const target = event.target;
     const container = event.currentTarget;
 
-    const dragPressureEvent = new DragPressureSensorEvent({
+    const dragPressureEvent = new DragPointerPressureSensorEvent({
       pressure: event.webkitForce,
       clientX: event.clientX,
       clientY: event.clientY,
@@ -210,7 +216,7 @@ export default class ForceTouchSensor extends Sensor {
 
     const target = event.target;
 
-    const dragPressureEvent = new DragPressureSensorEvent({
+    const dragPressureEvent = new DragPointerPressureSensorEvent({
       pressure: event.webkitForce,
       clientX: event.clientX,
       clientY: event.clientY,

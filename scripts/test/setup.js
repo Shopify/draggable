@@ -5,5 +5,6 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  jest.runAllTimers();
+  // damn!
+  // jest.runAllTimers();
 });

@@ -152,7 +152,7 @@ export default class Collidable extends AbstractPlugin {
   [onRequestAnimationFrame](target) {
     return () => {
       const collidables = this.getCollidables();
-      this.currentlyCollidingElement = closest(target, (element) => collidables.includes(element));
+      this.currentlyCollidingElement = closest(target, collidables);
     };
   }
 }

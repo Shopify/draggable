@@ -790,7 +790,7 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    clickMouse(draggableElement);
 
     // Wait for delay
     jest.runTimersToTime(100);
@@ -798,17 +798,17 @@ describe('Draggable', () => {
     expect(newInstance.isDragging()).toBe(true);
 
     document.elementFromPoint = () => draggableElement.nextElementSibling;
-    triggerEvent(draggableElement.nextElementSibling, 'mousemove', {button: 0});
+    moveMouse(draggableElement.nextElementSibling);
 
     // Wait for delay
     jest.runTimersToTime(100);
 
     document.elementFromPoint = () => document.body;
-    triggerEvent(document.body, 'mousemove', {button: 0});
+    moveMouse(document.body);
 
     // Wait for delay
     jest.runTimersToTime(100);
 
-    triggerEvent(document.body, 'mouseup', {button: 0});
+    releaseMouse(document.body, 'mouseup', {button: 0});
   });
 });

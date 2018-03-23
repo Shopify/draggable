@@ -10,7 +10,9 @@
           "--config",
           "config.json",
           "-i",
-          "--watchAll"
+          "--watchAll",
+          "-t",
+          "triggers collidable:out event"
       ],
       "internalConsoleOptions": "openOnSessionStart",
       "outFiles": [

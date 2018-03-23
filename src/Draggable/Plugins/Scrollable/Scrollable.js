@@ -167,6 +167,9 @@ export default class Scrollable extends AbstractPlugin {
       scrollOffset.x = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
     }
 
+    // if (sensorEvent.clientX == null || sensorEvent.clientY == null) {
+    //   debugger
+    // }
     this.currentMousePosition = {
       clientX: sensorEvent.clientX - scrollOffset.x,
       clientY: sensorEvent.clientY - scrollOffset.y,

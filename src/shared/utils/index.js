@@ -1,3 +1,2 @@
-import closest from './closest';
-
-export {closest};
+export {default as closest} from './closest';
+export {default as requestNextAnimationFrame} from './requestNextAnimationFrame';

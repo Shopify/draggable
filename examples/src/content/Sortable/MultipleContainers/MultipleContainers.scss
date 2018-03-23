@@ -46,9 +46,10 @@ $grid-columns: 8;
     }
   }
 
+  // apply transition for the ResizeMirror plugin
   .draggable-mirror {
     // prevent wacky horizontal height issue
-    max-height: stacked-list-item(base, desktop);
+    // max-height: stacked-list-item(base, desktop);
     transition: width get-duration(fast) get-easing(), height get-duration(fast) get-easing();
   }
 

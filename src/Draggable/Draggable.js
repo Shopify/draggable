@@ -450,7 +450,17 @@ export default class Draggable {
       this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
       document.body.classList.remove(this.getClassNameFor('body:dragging'));
     } else {
-      requestAnimationFrame(() => this[onDragMove](event));
+      requestAnimationFrame(() => {
+        // Temporary hack until we can correctly re-write the originalSource -> source
+        this[onDragMove]({
+          ...event,
+          target: this.source,
+          detail: {
+            ...event.detail,
+            target: this.source,
+          },
+        });
+      });
     }
   }
 

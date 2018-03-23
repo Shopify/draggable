@@ -1,7 +1,8 @@
-const matchFunction = Element.prototype.matches ||
-                      Element.prototype.webkitMatchesSelector ||
-                      Element.prototype.mozMatchesSelector ||
-                      Element.prototype.msMatchesSelector;
+const matchFunction =
+  Element.prototype.matches ||
+  Element.prototype.webkitMatchesSelector ||
+  Element.prototype.mozMatchesSelector ||
+  Element.prototype.msMatchesSelector;
 
 /**
  * Get the closest parent element of a given element that matches the given
@@ -47,9 +48,11 @@ export default function closest(element, value) {
 
   do {
     current = current.correspondingUseElement || current.correspondingElement || current;
+
     if (conditionFn(current)) {
       return current;
     }
+
     current = current.parentNode;
   } while (current && current !== document.body && current !== document);
 

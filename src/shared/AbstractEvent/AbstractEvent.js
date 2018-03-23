@@ -9,7 +9,6 @@ const canceled = Symbol('canceled');
  * @module AbstractEvent
  */
 export default class AbstractEvent {
-
   /**
    * Event type
    * @static

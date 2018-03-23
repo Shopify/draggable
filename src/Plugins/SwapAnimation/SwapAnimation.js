@@ -21,7 +21,6 @@ export const defaultOptions = {
  * @extends AbstractPlugin
  */
 export default class SwapAnimation extends AbstractPlugin {
-
   /**
    * SwapAnimation constructor.
    * @constructs SwapAnimation

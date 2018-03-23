@@ -11,7 +11,6 @@ const TABINDEX = 'tabindex';
  * @extends AbstractPlugin
  */
 export default class Accessibility extends AbstractPlugin {
-
   /**
    * Accessibility constructor.
    * @constructs Accessibility

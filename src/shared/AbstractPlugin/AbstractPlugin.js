@@ -5,14 +5,12 @@
  * @module AbstractPlugin
  */
 export default class AbstractPlugin {
-
   /**
    * AbstractPlugin constructor.
    * @constructs AbstractPlugin
    * @param {Draggable} draggable - Draggable instance
    */
   constructor(draggable) {
-
     /**
      * Draggable instance
      * @property draggable

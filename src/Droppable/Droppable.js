@@ -1,10 +1,6 @@
 import {closest} from 'shared/utils';
 import Draggable from '../Draggable';
-
-import {
-  DroppableOverEvent,
-  DroppableOutEvent,
-} from './DroppableEvent';
+import {DroppableOverEvent, DroppableOutEvent} from './DroppableEvent';
 
 const onDragStart = Symbol('onDragStart');
 const onDragMove = Symbol('onDragMove');
@@ -65,7 +61,6 @@ const defaultOptions = {
  * @extends Draggable
  */
 export default class Droppable extends Draggable {
-
   /**
    * Droppable constructor.
    * @constructs Droppable
@@ -111,8 +106,7 @@ export default class Droppable extends Draggable {
     this[onDragMove] = this[onDragMove].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
 
-    this
-      .on('drag:start', this[onDragStart])
+    this.on('drag:start', this[onDragStart])
       .on('drag:move', this[onDragMove])
       .on('drag:stop', this[onDragStop]);
   }
@@ -123,8 +117,7 @@ export default class Droppable extends Draggable {
   destroy() {
     super.destroy();
 
-    this
-      .off('drag:start', this[onDragStart])
+    this.off('drag:start', this[onDragStart])
       .off('drag:move', this[onDragMove])
       .off('drag:stop', this[onDragStop]);
   }

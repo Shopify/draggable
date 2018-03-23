@@ -1,12 +1,6 @@
 import {closest} from 'shared/utils';
-
 import Sensor from '../Sensor';
-
-import {
-  DragStartSensorEvent,
-  DragMoveSensorEvent,
-  DragStopSensorEvent,
-} from '../SensorEvent';
+import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
 
 const onMouseDown = Symbol('onMouseDown');
 const onMouseUp = Symbol('onMouseUp');
@@ -23,7 +17,6 @@ const reset = Symbol('reset');
  * @extends Sensor
  */
 export default class DragSensor extends Sensor {
-
   /**
    * DragSensor constructor.
    * @constructs DragSensor
@@ -177,7 +170,8 @@ export default class DragSensor extends Sensor {
    * @private
    * @param {Event} event - Drop event
    */
-  [onDrop](event) { // eslint-disable-line class-methods-use-this
+  [onDrop](event) {
+    // eslint-disable-line class-methods-use-this
     event.preventDefault();
   }
 
@@ -188,7 +182,7 @@ export default class DragSensor extends Sensor {
    */
   [onMouseDown](event) {
     // Firefox bug for inputs within draggables https://bugzilla.mozilla.org/show_bug.cgi?id=739071
-    if ((event.target && (event.target.form || event.target.contenteditable))) {
+    if (event.target && (event.target.form || event.target.contenteditable)) {
       return;
     }
 

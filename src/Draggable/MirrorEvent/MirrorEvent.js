@@ -7,7 +7,6 @@ import AbstractEvent from 'shared/AbstractEvent';
  * @extends AbstractEvent
  */
 export class MirrorEvent extends AbstractEvent {
-
   /**
    * Draggables source element
    * @property source

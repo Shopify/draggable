@@ -4,7 +4,6 @@
  * @module Sensor
  */
 export default class Sensor {
-
   /**
    * Sensor constructor.
    * @constructs Sensor
@@ -12,7 +11,6 @@ export default class Sensor {
    * @param {Object} options - Options
    */
   constructor(containers = [], options = {}) {
-
     /**
      * Current containers
      * @property containers
@@ -69,6 +67,7 @@ export default class Sensor {
     event.initEvent(sensorEvent.type, true, true);
     element.dispatchEvent(event);
     this.lastEvent = sensorEvent;
+
     return sensorEvent;
   }
 }

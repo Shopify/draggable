@@ -11,7 +11,7 @@ describe('Emitter', () => {
   });
 
   describe('#on', () => {
-    test('registers a callback by event type', () => {
+    it('registers a callback by event type', () => {
       const callback = jest.fn();
 
       emitter.on('event', callback);
@@ -19,7 +19,7 @@ describe('Emitter', () => {
       expect(emitter.callbacks.event).toContain(callback);
     });
 
-    test('registers multiple callbacks by event type', () => {
+    it('registers multiple callbacks by event type', () => {
       const callbacks = [jest.fn(), jest.fn()];
 
       emitter.on('event', ...callbacks);
@@ -30,7 +30,7 @@ describe('Emitter', () => {
   });
 
   describe('#off', () => {
-    test('removes a callback by event type', () => {
+    it('removes a callback by event type', () => {
       const callback = jest.fn();
 
       emitter.on('event', callback);
@@ -44,7 +44,7 @@ describe('Emitter', () => {
   });
 
   describe('#trigger', () => {
-    test('triggers callbacks on event with test event', () => {
+    it('triggers callbacks on event with test event', () => {
       const testEvent = new TestEvent({});
       const callback = jest.fn();
 
@@ -55,11 +55,13 @@ describe('Emitter', () => {
       expect(callback).toHaveBeenCalledWith(testEvent);
     });
 
-    test('catches errors from listeners and re-throws at the end of the trigger phase', () => {
+    it('catches errors from listeners and re-throws at the end of the trigger phase', () => {
       const testEvent = new TestEvent({});
       const callbacks = [
         jest.fn(),
-        () => { throw new Error('Error'); },
+        () => {
+          throw new Error('Error');
+        },
         jest.fn(),
       ];
 

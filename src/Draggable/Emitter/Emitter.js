@@ -69,7 +69,7 @@ export default class Emitter {
     if (caughtErrors.length) {
       /* eslint-disable no-console */
       console.error(`Draggable caught errors while triggering '${event.type}'`, caughtErrors);
-      /* dislint-disable no-console */
+      /* eslint-disable no-console */
     }
 
     return this;

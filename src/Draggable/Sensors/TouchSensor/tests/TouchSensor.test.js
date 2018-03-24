@@ -94,7 +94,7 @@ describe('TouchSensor', () => {
     expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
   });
 
-  it('prevents `drag:start` when holding finger on none draggable element', () => {
+  it('prevents `drag:start` when trying to drag a none draggable element', () => {
     function dragFlow() {
       touchStart(document.body);
       waitForDragDelay();

@@ -20,30 +20,28 @@
   "bugs": {
     "url": "https://github.com/Shopify/draggable/issues"
   },
-  "keywords": [
-    "shopify",
-    "draggable",
-    "drag-and-drop",
-    "es6"
-  ],
+  "keywords": ["shopify", "draggable", "drag-and-drop", "es6"],
   "main": "./lib/draggable.bundle.js",
   "scripts": {
-    "start": "concurrently \"webpack --watch\" \"cd examples && yarn && yarn start\"",
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "prepublish": "npm run build",
+    "start": "concurrently \"yarn watch\" \"cd examples && yarn && yarn start\"",
+    "build": "yarn build:development",
+    "watch": "node scripts/watch.js",
+    "prepublish": "yarn build",
     "lint": "eslint ./src --max-warnings 0",
     "esdoc": "esdoc -c esdoc.json",
     "test": "jest --config config.json",
-    "test-ci": "jest --config config.json --coverage && codecov"
+    "test-ci": "jest --config config.json --coverage && codecov",
+    "build:development": "node scripts/build.js",
+    "build:production": "node scripts/build.js --production"
   },
-  "files": [
-    "lib/**/*.js"
-  ],
+  "files": ["lib/**/*.js"],
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-jest": "^22.4.1",
     "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-shopify": "^16.3.0",
     "codecov": "^3.0.0",
     "concurrently": "^3.5.1",
@@ -56,6 +54,7 @@
     "eslint-plugin-shopify": "^20.0.0",
     "jest": "^22.4.2",
     "webpack": "^4.1.1",
+    "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.12"
   },
   "eslintConfig": {
@@ -63,10 +62,6 @@
     "env": {}
   },
   "babel": {
-    "presets": [
-      [
-        "shopify/web"
-      ]
-    ]
+    "plugins": ["transform-class-properties", "transform-object-rest-spread", "transform-es2015-modules-commonjs"]
   }
 }

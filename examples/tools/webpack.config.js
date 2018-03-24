@@ -44,7 +44,7 @@ export const webpackConfig = {
   // this makes our `import` paths cleaner and consistent
   resolve: {
     modules: [
-      path.resolve(__dirname, '../../../draggable'), // eslint-disable-line no-undef
+      path.resolve(__dirname, '../packages'), // eslint-disable-line no-undef
       path.resolve(__dirname, '../node_modules'), // eslint-disable-line no-undef
     ],
   },

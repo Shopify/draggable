@@ -11,7 +11,7 @@ function reportWatchStats(path) {
 export function watch() {
   startServer();
 
-  gulp.watch(['../lib/*.js', 'src/**/*.js'], gulp.series(scripts, reloadServer));
+  gulp.watch(['packages/**/*.js', 'src/**/*.js'], gulp.series(scripts, reloadServer));
 
   // only need to watch `styles` task, as it will `stream` changes to the server
   const watchStyles = gulp.watch('src/**/*.scss', styles);

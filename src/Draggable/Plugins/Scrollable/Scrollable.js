@@ -213,27 +213,31 @@ export default class Scrollable extends AbstractPlugin {
     const clientY = this.currentMousePosition.clientY;
 
     if (scrollableElement !== document.body && scrollableElement !== document.documentElement && !cutOff) {
-      if (rect.top + scrollableElement.offsetHeight - clientY < sensitivity) {
+      const {offsetHeight, offsetWidth} = scrollableElement;
+
+      if (rect.top + offsetHeight - clientY < sensitivity) {
         scrollableElement.scrollTop += speed;
       } else if (clientY - rect.top < sensitivity) {
         scrollableElement.scrollTop -= speed;
       }
 
-      if (rect.left + scrollableElement.offsetWidth - clientX < sensitivity) {
+      if (rect.left + offsetWidth - clientX < sensitivity) {
         scrollableElement.scrollLeft += speed;
       } else if (clientX - rect.left < sensitivity) {
         scrollableElement.scrollLeft -= speed;
       }
     } else {
+      const {innerHeight, innerWidth} = window;
+
       if (clientY < sensitivity) {
         documentScrollingElement.scrollTop -= speed;
-      } else if (window.innerHeight - clientY < sensitivity) {
+      } else if (innerHeight - clientY < sensitivity) {
         documentScrollingElement.scrollTop += speed;
       }
 
       if (clientX < sensitivity) {
         documentScrollingElement.scrollLeft -= speed;
-      } else if (window.innerWidth - clientX < sensitivity) {
+      } else if (innerWidth - clientX < sensitivity) {
         documentScrollingElement.scrollLeft += speed;
       }
     }

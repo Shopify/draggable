@@ -6,7 +6,9 @@ export function triggerEvent(element, type, data = {}) {
 
   for (const key in data) {
     if (data.hasOwnProperty(key)) {
-      event[key] = data[key];
+      Object.defineProperty(event, key, {
+        value: data[key],
+      });
     }
   }
 

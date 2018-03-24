@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
-import Swappable from 'lib/swappable';
-import Snappable from 'lib/plugins/snappable';
+import {Swappable, Snappable} from '@shopify/draggable';
 /* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 
 export default function PluginsSnappable() {

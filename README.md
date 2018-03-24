@@ -19,10 +19,11 @@ The additional modules are built on top of `Draggable` and therefore provide a s
 interface, for more information read the documentation below.
 
 **Features**
-- Works with native drag, mouse, touch and force touch events
-- Can extend dragging behaviour by hooking into draggables event life cycle
-- Can extend drag detection by adding sensors to draggable
-- The library is targeted ES6 first
+
+* Works with native drag, mouse, touch and force touch events
+* Can extend dragging behaviour by hooking into draggables event life cycle
+* Can extend drag detection by adding sensors to draggable
+* The library is targeted ES6 first
 
 ## Table of Contents
 
@@ -67,40 +68,55 @@ or via CDN
 
 ## Browser Compatibility
 
-![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) |
---- | --- | --- | --- | --- | --- |
-Latest ✔ | Latest ✔ | 11+ ✔ | Latest ✔ | Latest ✔ | Latest ✔ |
+| ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Latest ✔                                                                                 | Latest ✔                                                                                    | 11+ ✔                                                                                                                        | Latest ✔                                                                              | Latest ✔                                                                                 | Latest ✔                                                                           |
+
+## Bundle sizes
+
+| Package name               | ES6 bundle sizes | ES5 bundle sizes |
+| -------------------------- | ---------------- | ---------------- |
+| draggable.bundle.js        | ~11kb            | ~19.2kb          |
+| draggable.bundle.legacy.js | ~19.2kb          | ~25.63kb         |
+| draggable.js               | ~8.06kb          | ~15.36kb         |
+| sortable.js                | ~8.93kb          | ~16.51kb         |
+| swappable.js               | ~8.56kb          | ~16.14kb         |
+| droppable.js               | ~8.8kb           | ~16.55kb         |
+| plugins.js                 | ~2.37kb          | ~8.76kb          |
+| plugins/collidable.js      | ~1.45kb          | ~7.81kb          |
+| plugins/snappable.js       | ~1.19kb          | ~6.94kb          |
+| plugins/swap-animation.js  | ~1kb             | ~6.65kb          |
 
 ## Documentation
 
 You can find the documentation for each module within their respective directories.
 
-- [Draggable](src/Draggable)
-  - [DragEvent](src/Draggable/DragEvent)
-  - [DraggableEvent](src/Draggable/DraggableEvent)
-  - [MirrorEvent](src/Draggable/MirrorEvent)
-  - [Plugins](src/Draggable/Plugins)
-    - [Announcement](src/Draggable/Plugins/Announcement)
-    - [Focusable](src/Draggable/Plugins/Focusable)
-    - [Mirror](src/Draggable/Plugins/Mirror)
-    - [Scrollable](src/Draggable/Plugins/Scrollable)
-  - [Sensors](src/Draggable/Sensors)
-    - [DragSensor](src/Draggable/Sensors/DragSensor)
-    - [ForceTouchSensor](src/Draggable/Sensors/ForceTouchSensor)
-    - [MouseSensor](src/Draggable/Sensors/MouseSensor)
-    - [Sensor](src/Draggable/Sensors/Sensor)
-    - [SensorEvent](src/Draggable/Sensors/SensorEvent)
-    - [TouchSensor](src/Draggable/Sensors/TouchSensor)
-- [Droppable](src/Droppable)
-  - [DroppableEvent](src/Droppable/DroppableEvent)
-- [Plugins](src/Plugins)
-  - [Collidable](src/Plugins/Collidable)
-  - [Snappable](src/Plugins/Snappable)
-  - [SwapAnimation](src/Plugins/SwapAnimation)
-- [Sortable](src/Sortable)
-  - [SortableEvent](src/Sortable/SortableEvent)
-- [Swappable](src/Swappable)
-  - [SwappableEvent](src/Swappable/SwappableEvent)
+* [Draggable](src/Draggable)
+  * [DragEvent](src/Draggable/DragEvent)
+  * [DraggableEvent](src/Draggable/DraggableEvent)
+  * [MirrorEvent](src/Draggable/MirrorEvent)
+  * [Plugins](src/Draggable/Plugins)
+    * [Announcement](src/Draggable/Plugins/Announcement)
+    * [Focusable](src/Draggable/Plugins/Focusable)
+    * [Mirror](src/Draggable/Plugins/Mirror)
+    * [Scrollable](src/Draggable/Plugins/Scrollable)
+  * [Sensors](src/Draggable/Sensors)
+    * [DragSensor](src/Draggable/Sensors/DragSensor)
+    * [ForceTouchSensor](src/Draggable/Sensors/ForceTouchSensor)
+    * [MouseSensor](src/Draggable/Sensors/MouseSensor)
+    * [Sensor](src/Draggable/Sensors/Sensor)
+    * [SensorEvent](src/Draggable/Sensors/SensorEvent)
+    * [TouchSensor](src/Draggable/Sensors/TouchSensor)
+* [Droppable](src/Droppable)
+  * [DroppableEvent](src/Droppable/DroppableEvent)
+* [Plugins](src/Plugins)
+  * [Collidable](src/Plugins/Collidable)
+  * [Snappable](src/Plugins/Snappable)
+  * [SwapAnimation](src/Plugins/SwapAnimation)
+* [Sortable](src/Sortable)
+  * [SortableEvent](src/Sortable/SortableEvent)
+* [Swappable](src/Swappable)
+  * [SwappableEvent](src/Swappable/SwappableEvent)
 
 ## Running examples
 
@@ -125,8 +141,8 @@ We are currently working on `v1.0.0-beta.5`. Check out the [project board](https
 
 ## Related resources
 
-- [Ember CLI Shim](https://github.com/timrourke/ember-cli-shopify-draggable-shim) on Github by [@timrourke](https://github.com/timrourke)
-- [Ember CLI Shim](https://www.npmjs.com/package/ember-cli-shopify-draggable-shim) on NPM by [@timrourke](https://github.com/timrourke)
+* [Ember CLI Shim](https://github.com/timrourke/ember-cli-shopify-draggable-shim) on Github by [@timrourke](https://github.com/timrourke)
+* [Ember CLI Shim](https://www.npmjs.com/package/ember-cli-shopify-draggable-shim) on NPM by [@timrourke](https://github.com/timrourke)
 
 ## Copyright
 

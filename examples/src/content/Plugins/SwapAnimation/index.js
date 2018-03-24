@@ -1,6 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
-import Sortable from 'lib/sortable';
-import SwapAnimation from 'lib/plugins/swap-animation';
+import {Sortable, SwapAnimation} from '@shopify/draggable';
 /* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 
 export default function PluginsSwapAnimation() {

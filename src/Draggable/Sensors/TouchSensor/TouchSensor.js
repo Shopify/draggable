@@ -114,7 +114,7 @@ export default class TouchSensor extends Sensor {
    */
   [onTouchHold](event, container) {
     return () => {
-      if (this.touchMoved) {
+      if (this.touchMoved || !event.cancelable) {
         return;
       }
 

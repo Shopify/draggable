@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
-import Swappable from 'lib/swappable';
+import {Swappable} from '@shopify/draggable';
 /* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 
 export default function GridLayout() {

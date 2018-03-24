@@ -3,6 +3,8 @@
 /// PageHeader
 ////
 
+@import 'utils/shared/layout';
+
 .PageHeader {
   @include centered-width(get-layout-length(page-header));
   margin-bottom: get-spacing(loose);

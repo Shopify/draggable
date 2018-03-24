@@ -55,7 +55,7 @@
 
     @media screen and (min-width: get-breakpoint(desktop)) {
       @include stacked-list-scroll-height(
-        stacked-list-item(medium, desktop), 3
+        stacked-list-item(medium, desktop), 3, base
       );
     }
   }
@@ -67,7 +67,7 @@
 
     @media screen and (min-width: get-breakpoint(desktop)) {
       @include stacked-list-scroll-height(
-        stacked-list-item(large, desktop), 3
+        stacked-list-item(large, desktop), 3, base
       );
     }
   }
@@ -79,7 +79,7 @@
 
   @media screen and (min-width: get-breakpoint(desktop)) {
     @include stacked-list-scroll-height(
-      stacked-list-item(base, desktop), 7
+      stacked-list-item(base, desktop), 7, base
     );
   }
 
@@ -92,7 +92,7 @@
 
     @media screen and (min-width: get-breakpoint(desktop)) {
       @include stacked-list-scroll-height(
-        stacked-list-item(medium, desktop), 3
+        stacked-list-item(medium, desktop), 3, base
       );
     }
   }
@@ -104,7 +104,7 @@
 
     @media screen and (min-width: get-breakpoint(desktop)) {
       @include stacked-list-scroll-height(
-        stacked-list-item(large, desktop), 3
+        stacked-list-item(large, desktop), 3, base
       );
     }
   }
@@ -148,8 +148,12 @@
     display: flex;
     flex: 1 1 auto;
     margin-top: 0;
-    margin-left: -(get-border());
+    margin-left: -(get-border(thin));
     overflow-x: scroll;
+
+    @media screen and (min-width: get-breakpoint(tablet)) {
+      margin-left: -(get-border());
+    }
   }
 
   .StackedListItem {
@@ -158,7 +162,11 @@
 
     &:nth-child(1n+2) {
       margin-top: 0;
-      margin-left: -(get-border());
+      margin-left: -(get-border(thin));
+
+      @media screen and (min-width: get-breakpoint(tablet)) {
+        margin-left: -(get-border());
+      }
     }
 
     @media screen and (min-width: get-breakpoint(tablet)) {
@@ -177,12 +185,19 @@
     text-align: center;
 
     &::before {
-      top: -(get-border());
+      top: -(get-border(thin));
       right: auto;
-      bottom: -(get-border());
-      left: -(get-border());
-      width: get-border();
+      bottom: -(get-border(thin));
+      left: -(get-border(thin));
+      width: get-border(thin);
       height: auto;
+
+      @media screen and (min-width: get-breakpoint(tablet)) {
+        top: -(get-border());
+        bottom: -(get-border());
+        left: -(get-border());
+        width: get-border();
+      }
     }
   }
 

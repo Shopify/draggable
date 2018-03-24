@@ -9,9 +9,9 @@ $collidable-container-height: 60rem;
 $collidable-container-height-tablet: 64rem;
 $collidable-container-height-desktop: 80rem;
 
-$collidable-block-height: columns() * 1.5;
-$collidable-block-height-tablet: columns(2);
-$collidable-block-height-desktop: columns(3);
+$collidable-block-height: rows(3, true);
+$collidable-block-height-tablet: rows(4);
+$collidable-block-height-desktop: rows(5);
 
 $collidable: (
   container-height: (

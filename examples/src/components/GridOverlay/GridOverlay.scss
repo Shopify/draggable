@@ -1,0 +1,77 @@
+////
+/// Components
+/// Grid Overlay
+////
+
+@import 'utils/shared/functions';
+@import 'utils/shared/layout';
+@import 'components/Main/props';
+
+$grid-overlay-baseline: 0.1rem;
+
+.GridOverlay {
+  --columns: 4;
+  --repeating-width: calc(100% / var(--columns));
+  --gutter-size: get-layout-length(gutter, mobile);
+  --column-width: calc((100% / var(--columns)) - var(--gutter-size));
+  --baseline-stop: calc(var(--gutter-size) - #{$grid-overlay-baseline});
+  --row-height: calc(#{rows(1, true)} + var(--gutter-size));
+  --bg-width: calc(100% + var(--gutter-size));
+  --bg-baseline: repeating-linear-gradient(
+    to bottom,
+    get-color(purple),
+    get-color(purple) $grid-overlay-baseline,
+    transparent $grid-overlay-baseline,
+    transparent var(--baseline-stop),
+    get-color(purple) var(--baseline-stop),
+    get-color(purple) var(--gutter-size),
+    transparent var(--gutter-size),
+    transparent var(--row-height)
+  );
+  --bg-columns: repeating-linear-gradient(
+    to right,
+    get-color(purple, light),
+    get-color(purple, light) var(--column-width),
+    transparent var(--column-width),
+    transparent var(--repeating-width)
+  );
+
+  @media screen and (min-width: get-breakpoint(tablet)) {
+    --columns: 6;
+    --gutter-size: get-layout-length(gutter);
+    --row-height: calc(#{rows()} + var(--gutter-size));
+  }
+
+  @media screen and (min-width: get-breakpoint(desktop)) {
+    --columns: 8;
+  }
+
+  // positioned parent will be `body`
+  @include centered-width(get-layout-length(main-interior));
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: get-spacing(tight);
+  right: get-spacing(tight);
+  min-height: 100vh;
+  background-image: var(--bg-baseline), var(--bg-columns);
+  background-size: var(--bg-width) 100%;
+  background-position: 0 calc(-1 * var(--gutter-size));
+  mix-blend-mode: multiply;
+  opacity: 0.8;
+  pointer-events: none;
+
+  @media screen and (min-width: get-breakpoint()) {
+    left: $main-padding-left-tablet;
+  }
+
+  @media screen and (min-width: get-breakpoint(desktop)) {
+    right: get-spacing(fattest);
+    left: $main-padding-left-desktop;
+  }
+}
+
+.GridOverlay--isHidden {
+  display: none;
+}

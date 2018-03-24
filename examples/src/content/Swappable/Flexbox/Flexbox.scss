@@ -19,26 +19,26 @@ $flexbox-block-name: unquote('Block');
 
   @include draggable-source-layout($flexbox-block-name, 1, 2, 4, 5, 7) {
     .BlockContent {
-      height: columns();
+      height: rows(2);
     }
   }
 
   @include draggable-source-layout($flexbox-block-name, 3, 6) {
     .BlockContent {
-      height: columns() * 1.5;
+      height: rows(3);
     }
   }
 
   @media screen and (min-width: get-breakpoint(tablet)) {
     @include draggable-source-layout($flexbox-block-name, 1, 2, 4, 5, 7) {
       .BlockContent {
-        height: columns() * 1.5;
+        height: rows(3);
       }
     }
 
     @include draggable-source-layout($flexbox-block-name, 3, 6) {
       .BlockContent {
-        height: columns(2);
+        height: rows(4);
       }
     }
   }
@@ -62,13 +62,13 @@ $flexbox-block-name: unquote('Block');
 
     @include draggable-source-layout($flexbox-block-name, 1, 2, 3, 4, 6, 7) {
       .BlockContent {
-        height: columns(2);
+        height: rows(4);
       }
     }
 
     @include draggable-source-layout($flexbox-block-name, 4, 5) {
       .BlockContent {
-        height: columns(3);
+        height: rows(5);
       }
     }
   }
@@ -76,13 +76,13 @@ $flexbox-block-name: unquote('Block');
   @media screen and (min-width: get-breakpoint('1080p', wide)) {
     @include draggable-source-layout($flexbox-block-name, 1, 2, 3, 4, 6, 7) {
       .BlockContent {
-        height: columns() * 2.5;
+        height: rows(5);
       }
     }
 
     @include draggable-source-layout($flexbox-block-name, 4, 5) {
       .BlockContent {
-        height: columns() * 3.5;
+        height: rows(6);
       }
     }
   }

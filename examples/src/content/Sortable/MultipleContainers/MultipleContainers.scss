@@ -3,30 +3,26 @@
 /// MultipleContainers
 ////
 
+@import 'utils/shared/layout';
 @import 'components/StackedList/props';
 
 $grid-columns: 8;
 
 .MultipleContainers {
-  @include centered-width(columns(5));
   display: grid;
   grid-gap: get-layout-length(gutter);
   grid-template-columns: 100%;
   grid-template-areas: 'a' 'b' 'c';
-
-  @media screen and (min-width: get-breakpoint('720p')) {
-    max-width: columns(7);
-  }
-
-  @media screen and (min-width: get-breakpoint()) {
-    max-width: none;
-  }
 
   @media screen and (min-width: get-breakpoint(desktop)) {
     grid-template-columns: repeat($grid-columns, 1fr);
     grid-template-areas:
       'a a a a a a a a'
       'b b b b b c c c';
+  }
+
+  @media screen and (min-width: get-breakpoint('1080p', wide)) {
+    @include centered-width(columns(6));
   }
 
   .Container {
@@ -40,6 +36,13 @@ $grid-columns: 8;
 
     &:nth-child(3) {
       grid-area: c;
+    }
+  }
+
+  // resolve slim padding-bottom when single column
+  .StackedListHeader {
+    @media screen and (min-width: get-breakpoint(tablet)) and (max-width: get-breakpoint(desktop) - 1px) {
+      height: auto;
     }
   }
 

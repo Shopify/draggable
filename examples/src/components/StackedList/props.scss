@@ -4,11 +4,9 @@
 ////
 
 $stacked-list-header: (
-  padding-top: (
-    base: get-spacing(tighter) + (get-border() / 2),
-  ),
-  padding-bottom: (
-    base: get-spacing(tighter) + get-border(),
+  padding: (
+    base: get-spacing(tighter) + get-border(thin),
+    tablet: get-spacing(tighter) + get-border(),
   ),
 );
 
@@ -16,6 +14,8 @@ $stacked-list-header: (
   @return threads-value-get($stacked-list-header, $group, $variant);
 }
 
+// using static values instead of `rows()`
+// will consider switching later when I have more time
 $stacked-list-item: (
   base: (
     base: 7.2rem,
@@ -37,8 +37,8 @@ $stacked-list-item: (
 
 ///
 /// Mixins
-@mixin stacked-list-scroll-height($size: stacked-list-item(), $rows: 6) {
-  height: ($size * $rows) - (get-border() * ($rows - 1));
+@mixin stacked-list-scroll-height($size: stacked-list-item(), $rows: 6, $border-width: thin) {
+  height: ($size * $rows) - (get-border($border-width) * ($rows - 1));
 }
 
 @mixin scroll-indicator($vertical: true) {
@@ -54,11 +54,19 @@ $stacked-list-item: (
     right: 0;
     bottom: 0;
     left: 0;
-    height: get-border();
+    height: get-border(thin);
   } @else {
     top: 0;
     right: 0;
     bottom: 0;
-    width: get-border();
+    width: get-border(thin);
+  }
+
+  @media screen and (min-width: get-breakpoint(tablet)) {
+    @if $vertical {
+      height: get-border();
+    } @else {
+      width: get-border();
+    }
   }
 }

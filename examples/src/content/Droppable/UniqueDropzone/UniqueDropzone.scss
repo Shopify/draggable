@@ -98,13 +98,29 @@ $grid-columns: 4;
     }
   }
 
-  .BlockContent {
-    @media screen and (min-width: get-breakpoint(tablet)) {
-      min-height: columns() * 1.5;
-    }
+  .BlockLayout--typeFlex {
+    .BlockContent {
+      @media screen and (min-width: get-breakpoint(tablet)) {
+        min-height: rows(3);
+      }
 
-    @media screen and (min-width: get-breakpoint(desktop)) {
-      min-height: columns(2);
+      @media screen and (min-width: get-breakpoint(desktop)) {
+        min-height: rows(4);
+      }
+    }
+  }
+
+  // not quite lining up with the rows correctly...
+  // will likely need to tweak `grid` values
+  .BlockLayout--typeGrid {
+    .BlockContent {
+      @media screen and (min-width: get-breakpoint(tablet)) {
+        min-height: rows(3, false, true);
+      }
+
+      @media screen and (min-width: get-breakpoint(desktop)) {
+        min-height: rows(4, false, true);
+      }
     }
   }
 }

@@ -16,7 +16,7 @@ describe('Emitter', () => {
 
       emitter.on('event', callback);
 
-      expect(emitter.callbacks.event).toContain(callback);
+      expect(emitter.callbacks.event.capture).toContain(callback);
     });
 
     it('registers multiple callbacks by event type', () => {
@@ -24,8 +24,8 @@ describe('Emitter', () => {
 
       emitter.on('event', ...callbacks);
 
-      expect(emitter.callbacks.event[0]).toEqual(callbacks[0]);
-      expect(emitter.callbacks.event[1]).toEqual(callbacks[1]);
+      expect(emitter.callbacks.event.capture[0]).toEqual(callbacks[0]);
+      expect(emitter.callbacks.event.capture[1]).toEqual(callbacks[1]);
     });
   });
 
@@ -35,7 +35,7 @@ describe('Emitter', () => {
 
       emitter.on('event', callback);
 
-      expect(emitter.callbacks.event).toContain(callback);
+      expect(emitter.callbacks.event.capture).toContain(callback);
 
       emitter.off('event', callback);
 

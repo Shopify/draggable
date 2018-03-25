@@ -9,16 +9,27 @@ export default class Emitter {
   }
 
   /**
-   * Registers callbacks by event name
+   * Registers callback by event name
    * @param {String} type
-   * @param {...Function} callbacks
+   * @param {Function} callback
    */
   on(type, ...callbacks) {
-    if (!this.callbacks[type]) {
-      this.callbacks[type] = [];
+    let options = {capture: true};
+
+    if (typeof callbacks[callbacks.length - 1] === 'object') {
+      options = callbacks.pop();
     }
 
-    this.callbacks[type].push(...callbacks);
+    if (!this.callbacks[type]) {
+      this.callbacks[type] = {
+        capture: [],
+        bubble: [],
+      };
+    }
+
+    const phase = options.capture ? 'capture' : 'bubble';
+
+    this.callbacks[type][phase].push(...callbacks);
 
     return this;
   }
@@ -28,18 +39,16 @@ export default class Emitter {
    * @param {String} type
    * @param {Function} callback
    */
-  off(type, callback) {
+  off(type, callback, {capture = true} = {}) {
     if (!this.callbacks[type]) {
       return null;
     }
 
-    const copy = this.callbacks[type].slice(0);
+    const phase = capture ? 'capture' : 'bubble';
 
-    for (let i = 0; i < copy.length; i++) {
-      if (callback === copy[i]) {
-        this.callbacks[type].splice(i, 1);
-      }
-    }
+    this.callbacks[type][phase] = [
+      ...this.callbacks[type][phase].filter((currentCallback) => callback !== currentCallback),
+    ];
 
     return this;
   }
@@ -53,12 +62,15 @@ export default class Emitter {
       return null;
     }
 
-    const callbacks = [...this.callbacks[event.type]];
     const caughtErrors = [];
 
-    for (let i = callbacks.length - 1; i >= 0; i--) {
-      const callback = callbacks[i];
+    const captureCallbacks = this.callbacks[event.type].capture;
+    const bubbleCallbacks = this.callbacks[event.type].bubble;
 
+    captureCallbacks.reverse().forEach(invoke);
+    bubbleCallbacks.reverse().forEach(invoke);
+
+    function invoke(callback) {
       try {
         callback(event);
       } catch (error) {

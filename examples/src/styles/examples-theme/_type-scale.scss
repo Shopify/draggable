@@ -9,6 +9,11 @@ $examples-type-scale-data: (
     leading: 1.2,
     tracking: -0.01em,
   ),
+  button: (
+    base: 1.2rem,
+    tablet: 1.6rem,
+    weight: 900,
+  ),
   nav: (
     base: 3.2rem,
     '960': 2.4rem,

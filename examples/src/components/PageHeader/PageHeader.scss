@@ -18,4 +18,12 @@
   @media screen and (min-width: get-breakpoint(desktop)) {
     margin-bottom: get-spacing(fattest);
   }
+
+  .Link {
+    margin-top: get-spacing(tight);
+
+    @media screen and (min-width: get-breakpoint(desktop)) {
+      margin-top: get-spacing();
+    }
+  }
 }

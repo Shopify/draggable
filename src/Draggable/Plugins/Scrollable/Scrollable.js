@@ -15,8 +15,8 @@ export const scroll = Symbol('scroll');
  * @type {Object}
  */
 export const defaultOptions = {
-  speed: 10,
-  sensitivity: 30,
+  speed: 6,
+  sensitivity: 50,
   scrollableElements: [],
 };
 
@@ -200,54 +200,50 @@ export default class Scrollable extends AbstractPlugin {
 
     cancelAnimationFrame(this.scrollAnimationFrame);
 
-    const windowHeight = window.innerHeight;
-    const windowWidth = window.innerWidth;
+    const {speed, sensitivity} = this.options;
+
     const rect = this.scrollableElement.getBoundingClientRect();
-    const {right, left} = rect;
-    let top;
-    let bottom;
+    const bottomCutOff = rect.bottom > window.innerHeight;
+    const topCutOff = rect.top < 0;
+    const cutOff = topCutOff || bottomCutOff;
 
-    if (rect.top < 0) {
-      top = 0;
-    } else {
-      top = rect.top;
-    }
+    const documentScrollingElement = getDocumentScrollingElement();
+    const scrollableElement = this.scrollableElement;
+    const clientX = this.currentMousePosition.clientX;
+    const clientY = this.currentMousePosition.clientY;
 
-    if (windowHeight < rect.bottom) {
-      if (this.scrollableElement !== document.documentElement) {
-        this.scrollableElement = this.getScrollableElement(this.scrollableElement.parentNode);
+    if (scrollableElement !== document.body && scrollableElement !== document.documentElement && !cutOff) {
+      if (rect.top + scrollableElement.offsetHeight - clientY < sensitivity) {
+        scrollableElement.scrollTop += speed;
+      } else if (clientY - rect.top < sensitivity) {
+        scrollableElement.scrollTop -= speed;
       }
 
-      bottom = windowHeight;
+      if (rect.left + scrollableElement.offsetWidth - clientX < sensitivity) {
+        scrollableElement.scrollLeft += speed;
+      } else if (clientX - rect.left < sensitivity) {
+        scrollableElement.scrollLeft -= speed;
+      }
     } else {
-      bottom = rect.bottom;
+      if (clientY < sensitivity) {
+        documentScrollingElement.scrollTop -= speed;
+      } else if (window.innerHeight - clientY < sensitivity) {
+        documentScrollingElement.scrollTop += speed;
+      }
+
+      if (clientX < sensitivity) {
+        documentScrollingElement.scrollLeft -= speed;
+      } else if (window.innerWidth - clientX < sensitivity) {
+        documentScrollingElement.scrollLeft += speed;
+      }
     }
-
-    let offsetY =
-      (Math.abs(bottom - this.currentMousePosition.clientY) <= this.options.sensitivity) -
-      (Math.abs(top - this.currentMousePosition.clientY) <= this.options.sensitivity);
-    let offsetX =
-      (Math.abs(right - this.currentMousePosition.clientX) <= this.options.sensitivity) -
-      (Math.abs(left - this.currentMousePosition.clientX) <= this.options.sensitivity);
-
-    if (!offsetX && !offsetY) {
-      offsetX =
-        (windowWidth - this.currentMousePosition.clientX <= this.options.sensitivity) -
-        (this.currentMousePosition.clientX <= this.options.sensitivity);
-      offsetY =
-        (windowHeight - this.currentMousePosition.clientY <= this.options.sensitivity) -
-        (this.currentMousePosition.clientY <= this.options.sensitivity);
-    }
-
-    this.scrollableElement.scrollTop += offsetY * this.options.speed;
-    this.scrollableElement.scrollLeft += offsetX * this.options.speed;
 
     this.scrollAnimationFrame = requestAnimationFrame(this[scroll]);
   }
 }
 
 /**
- * Checks if element has overflow
+ * Returns true if the passed element has overflow
  * @param {HTMLElement} element
  * @return {Boolean}
  * @private
@@ -265,13 +261,49 @@ function hasOverflow(element) {
 }
 
 /**
+ * Returns true if the passed element is statically positioned
+ * @param {HTMLElement} element
+ * @return {Boolean}
+ * @private
+ */
+function isStaticallyPositioned(element) {
+  const position = getComputedStyle(element).getPropertyValue('position');
+  return position === 'static';
+}
+
+/**
  * Finds closest scrollable element
  * @param {HTMLElement} element
  * @return {HTMLElement}
  * @private
  */
 function closestScrollableElement(element) {
-  const scrollableElement = closest(element, (currentElement) => hasOverflow(currentElement));
+  if (!element) {
+    return getDocumentScrollingElement();
+  }
 
-  return scrollableElement || document.scrollingElement || document.documentElement || null;
+  const position = getComputedStyle(element).getPropertyValue('position');
+  const excludeStaticParents = position === 'absolute';
+
+  const scrollableElement = closest(element, (parent) => {
+    if (excludeStaticParents && isStaticallyPositioned(parent)) {
+      return false;
+    }
+    return hasOverflow(parent);
+  });
+
+  if (position === 'fixed' || !scrollableElement) {
+    return getDocumentScrollingElement();
+  } else {
+    return scrollableElement;
+  }
+}
+
+/**
+ * Returns element that scrolls document
+ * @return {HTMLElement}
+ * @private
+ */
+function getDocumentScrollingElement() {
+  return document.scrollingElement || document.documentElement;
 }

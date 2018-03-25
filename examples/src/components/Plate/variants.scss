@@ -154,11 +154,6 @@
       }
     }
   }
-
-  // would be nice if there was a better way to suppress the creation of the mirror
-  &.draggable-mirror {
-    display: none;
-  }
 }
 
 .draggable-container--placed {

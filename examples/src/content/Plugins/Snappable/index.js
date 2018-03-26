@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
-import {Swappable, Snappable} from '@shopify/draggable';
+import {Swappable, Plugins} from '@shopify/draggable';
 /* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 
 export default function PluginsSnappable() {
@@ -15,7 +15,7 @@ export default function PluginsSnappable() {
     mirror: {
       constrainDimensions: true,
     },
-    plugins: [Snappable],
+    plugins: [Plugins.Snappable],
   });
 
   // --- Draggable events --- //

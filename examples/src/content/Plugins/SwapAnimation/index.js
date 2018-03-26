@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
-import {Sortable, SwapAnimation} from '@shopify/draggable';
+import {Sortable, Plugins} from '@shopify/draggable';
 /* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 
 export default function PluginsSwapAnimation() {
@@ -14,7 +14,7 @@ export default function PluginsSwapAnimation() {
     mirror: {
       constrainDimensions: true,
     },
-    plugins: [SwapAnimation],
+    plugins: [Plugins.SwapAnimation],
     swapAnimation: {
       duration: 200,
       easingFunction: 'ease-in-out',

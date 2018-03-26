@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
-import {Droppable, Collidable} from '@shopify/draggable';
+import {Droppable, Plugins} from '@shopify/draggable';
 /* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 
 export default function PluginsCollidable() {
@@ -20,7 +20,7 @@ export default function PluginsCollidable() {
     mirror: {
       constrainDimensions: true,
     },
-    plugins: [Collidable],
+    plugins: [Plugins.Collidable],
   });
 
   // --- Draggable events --- //

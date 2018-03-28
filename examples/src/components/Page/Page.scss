@@ -8,22 +8,40 @@
 html {
   @include scroll-lock;
   font-family: get-font-stack();
-  background-color: white;
 
   ::selection {
     color: white;
     background-color: get-color(coal, dark);
   }
-
-  // better overscroll in Chrome
-  @media screen and (min-width: get-breakpoint()) {
-    background-color: get-color(coal, dark);
-  }
 }
 
 body {
-  position: relative;
   cursor: get-cursor();
+  position: relative;
+  background-color: white;
+
+  // Better page overscroll... specifically adds color above and below the Sidebar
+  @media screen and (min-width: get-breakpoint()) {
+    &::before,
+    &::after {
+      content: '';
+      position: sticky;
+      left: 0;
+      display: block;
+      width: get-layout-length(sidebar) - get-spacing(fattest);
+      height: 0;
+    }
+
+    &::before {
+      top: 0;
+      box-shadow: 0 #{-(get-spacing(fattest))} 0 get-spacing(fattest) get-color(coal, dark);
+    }
+
+    &::after {
+      bottom: 0;
+      box-shadow: 0 get-spacing(fattest) 0 get-spacing(fattest) get-color(coal, dark);
+    }
+  }
 }
 
 ///

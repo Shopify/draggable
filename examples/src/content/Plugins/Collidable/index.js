@@ -14,7 +14,7 @@ export default function PluginsCollidable() {
 
   const droppable = new Droppable(containers, {
     draggable: '.Block--isDraggable',
-    droppable: '.BlockWrapper--isDroppable',
+    dropzone: '.BlockWrapper--isDropzone',
     collidables: '.CollidableObstacle',
     appendTo: containerSelector,
     mirror: {

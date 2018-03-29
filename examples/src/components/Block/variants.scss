@@ -149,7 +149,7 @@
 .BlockWrapper {
   position: relative;
 
-  &.draggable-droppable--occupied {
+  &.draggable-dropzone--occupied {
     .Block--typeHollow,
     .Block--typeStripes {
       @include position-cover;

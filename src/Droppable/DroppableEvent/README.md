@@ -2,48 +2,82 @@
 
 The base droppable event for all Droppable events that `Droppable` emits.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Interface**         | `DroppableEvent`                                           |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `droppable`                                                |
+|                   |                  |
+| ----------------- | ---------------- |
+| **Interface**     | `DroppableEvent` |
+| **Cancelable**    | false            |
+| **Cancel action** | -                |
+| **type**          | `droppable`      |
 
 ### API
 
 **`droppableEvent.dragEvent: DragEvent`**  
 Read-only property for the original drag event that triggered the droppable event.
 
-## DroppableOverEvent
+## DroppableStartEvent
 
-`DroppableOverEvent` gets triggered by `Droppable` before dropping the draggable element into a droppable element.
+`DroppableStartEvent` gets triggered by `Droppable` before dropping the draggable element into a dropzone element.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `DroppableEvent`                                           |
-| **Interface**         | `DroppableOverEvent`                                       |
-| **Cancelable**        | true                                                       |
-| **Cancel action**     | Prevents drop                                              |
-| **type**              | `droppable:over`                                           |
-
-### API
-
-**`droppableEvent.droppable: HTMLElement`**  
-Read-only property for the droppable element you are over.
-
-## DroppableOutEvent
-
-`DroppableOutEvent` gets triggered by `Droppable` before moving the draggable element to its original position.
-
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `DroppableEvent`                                           |
-| **Interface**         | `DroppableOutEvent`                                        |
-| **Cancelable**        | true                                                       |
-| **Cancel action**     | Prevents release                                           |
-| **type**              | `droppable:out`                                           |
+|                   |                       |
+| ----------------- | --------------------- |
+| **Specification** | `DroppableEvent`      |
+| **Interface**     | `DroppableStartEvent` |
+| **Cancelable**    | true                  |
+| **Cancel action** | Prevents drag         |
+| **type**          | `droppable:start`     |
 
 ### API
 
-**`droppableEvent.droppable: HTMLElement`**  
-Read-only property for the droppable element you were over.
+**`droppableEvent.dropzone: HTMLElement`**  
+Read-only property for the initial dropzone element of the currently dragging draggable element
+
+## DroppableDroppedEvent
+
+`DroppableDroppedEvent` gets triggered by `Droppable` before dropping the draggable element into a dropzone element.
+
+|                   |                         |
+| ----------------- | ----------------------- |
+| **Specification** | `DroppableEvent`        |
+| **Interface**     | `DroppableDroppedEvent` |
+| **Cancelable**    | true                    |
+| **Cancel action** | Prevents drop           |
+| **type**          | `droppable:dropped`     |
+
+### API
+
+**`droppableEvent.dropzone: HTMLElement`**  
+Read-only property for the dropzone element you dropped the draggable element into
+
+## DroppableReturnedEvent
+
+`DroppableReturnedEvent` gets triggered by `Droppable` before moving the draggable element to its original dropzone.
+
+|                   |                                      |
+| ----------------- | ------------------------------------ |
+| **Specification** | `DroppableEvent`                     |
+| **Interface**     | `DroppableReturnedEvent`             |
+| **Cancelable**    | true                                 |
+| **Cancel action** | Prevents return of draggable element |
+| **type**          | `droppable:returned`                 |
+
+### API
+
+**`droppableEvent.dropzone: HTMLElement`**  
+Read-only property for the dropzone element you dragged away from
+
+## DroppableStopEvent
+
+`DroppableStopEvent` gets triggered by `Droppable` before dropping the draggable element into a dropzone element.
+
+|                   |                      |
+| ----------------- | -------------------- |
+| **Specification** | `DroppableEvent`     |
+| **Interface**     | `DroppableStopEvent` |
+| **Cancelable**    | false                |
+| **Cancel action** | -                    |
+| **type**          | `droppable:start`    |
+
+### API
+
+**`droppableEvent.dropzone: HTMLElement`**  
+Read-only property for the final dropzone element of the draggable element

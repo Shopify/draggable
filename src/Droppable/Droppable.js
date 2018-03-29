@@ -1,61 +1,62 @@
 import {closest} from 'shared/utils';
 import Draggable from '../Draggable';
-import {DroppableOverEvent, DroppableOutEvent} from './DroppableEvent';
+
+import {DroppableStartEvent, DroppableDroppedEvent, DroppableReturnedEvent, DroppableStopEvent} from './DroppableEvent';
 
 const onDragStart = Symbol('onDragStart');
 const onDragMove = Symbol('onDragMove');
 const onDragStop = Symbol('onDragStop');
-const drop = Symbol('drop');
-const release = Symbol('release');
-const closestDroppable = Symbol('closestDroppable');
-const getDroppables = Symbol('getDroppables');
+const dropInDropzone = Symbol('dropInDropZone');
+const returnToOriginalDropzone = Symbol('returnToOriginalDropzone');
+const closestDropzone = Symbol('closestDropzone');
+const getDropzones = Symbol('getDropzones');
 
 /**
- * Returns an announcement message when the Draggable element is dropped into a Droppable element
- * @param {DroppableOverEvent} droppableEvent
+ * Returns an announcement message when the Draggable element is dropped into a dropzone element
+ * @param {DroppableDroppedEvent} droppableEvent
  * @return {String}
  */
-function onDroppableOverDefaultAnnouncement({dragEvent, droppable}) {
+function onDroppableDroppedDefaultAnnouncement({dragEvent, dropzone}) {
   const sourceText = dragEvent.source.textContent.trim() || dragEvent.source.id || 'draggable element';
-  const overText = droppable.textContent.trim() || droppable.id || 'droppable element';
+  const dropzoneText = dropzone.textContent.trim() || dropzone.id || 'droppable element';
 
-  return `Dropped ${sourceText} into ${overText}`;
+  return `Dropped ${sourceText} into ${dropzoneText}`;
 }
 
 /**
- * Returns an announcement message when the Draggable element is released from a Droppable element
- * @param {DroppableOutEvent} droppableEvent
+ * Returns an announcement message when the Draggable element has returned to its original dropzone element
+ * @param {DroppableReturnedEvent} droppableEvent
  * @return {String}
  */
-function onDroppableOutDefaultAnnouncement({dragEvent, droppable}) {
+function onDroppableReturnedDefaultAnnouncement({dragEvent, dropzone}) {
   const sourceText = dragEvent.source.textContent.trim() || dragEvent.source.id || 'draggable element';
-  const overText = droppable.textContent.trim() || droppable.id || 'droppable element';
+  const dropzoneText = dropzone.textContent.trim() || dropzone.id || 'droppable element';
 
-  return `Released ${sourceText} from ${overText}`;
+  return `Returned ${sourceText} from ${dropzoneText}`;
 }
 
 /**
  * @const {Object} defaultAnnouncements
- * @const {Function} defaultAnnouncements['droppable:over']
- * @const {Function} defaultAnnouncements['droppable:out']
+ * @const {Function} defaultAnnouncements['droppable:dropped']
+ * @const {Function} defaultAnnouncements['droppable:returned']
  */
 const defaultAnnouncements = {
-  'droppable:over': onDroppableOverDefaultAnnouncement,
-  'droppable:out': onDroppableOutDefaultAnnouncement,
+  'droppable:dropped': onDroppableDroppedDefaultAnnouncement,
+  'droppable:returned': onDroppableReturnedDefaultAnnouncement,
 };
 
 const defaultClasses = {
-  'droppable:active': 'draggable-droppable--active',
-  'droppable:occupied': 'draggable-droppable--occupied',
+  'droppable:active': 'draggable-dropzone--active',
+  'droppable:occupied': 'draggable-dropzone--occupied',
 };
 
 const defaultOptions = {
-  droppable: '.draggable-droppable',
+  dropzone: '.draggable-droppable',
 };
 
 /**
  * Droppable is built on top of Draggable and allows dropping draggable elements
- * into droppable element
+ * into dropzone element
  * @class Droppable
  * @module Droppable
  * @extends Draggable
@@ -82,25 +83,25 @@ export default class Droppable extends Draggable {
     });
 
     /**
-     * All droppable elements on drag start
-     * @property droppables
+     * All dropzone elements on drag start
+     * @property dropzones
      * @type {HTMLElement[]}
      */
-    this.droppables = null;
+    this.dropzones = null;
 
     /**
-     * Last droppable element that the source was dropped into
-     * @property lastDroppable
+     * Last dropzone element that the source was dropped into
+     * @property lastDropzone
      * @type {HTMLElement}
      */
-    this.lastDroppable = null;
+    this.lastDropzone = null;
 
     /**
-     * Initial droppable element that the source was drag from
-     * @property initialDroppable
+     * Initial dropzone element that the source was drag from
+     * @property initialDropzone
      * @type {HTMLElement}
      */
-    this.initialDroppable = null;
+    this.initialDropzone = null;
 
     this[onDragStart] = this[onDragStart].bind(this);
     this[onDragMove] = this[onDragMove].bind(this);
@@ -132,22 +133,34 @@ export default class Droppable extends Draggable {
       return;
     }
 
-    this.droppables = [...this[getDroppables]()];
-    const droppable = closest(event.sensorEvent.target, this.options.droppable);
+    this.dropzones = [...this[getDropzones]()];
+    const dropzone = closest(event.sensorEvent.target, this.options.dropzone);
 
-    if (!droppable) {
+    if (!dropzone) {
       event.cancel();
       return;
     }
 
-    this.initialDroppable = droppable;
+    const droppableStartEvent = new DroppableStartEvent({
+      dragEvent: event,
+      dropzone,
+    });
 
-    for (const droppableElement of this.droppables) {
-      if (droppableElement.classList.contains(this.getClassNameFor('droppable:occupied'))) {
+    this.trigger(droppableStartEvent);
+
+    if (droppableStartEvent.canceled()) {
+      event.cancel();
+      return;
+    }
+
+    this.initialDropzone = dropzone;
+
+    for (const dropzoneElement of this.dropzones) {
+      if (dropzoneElement.classList.contains(this.getClassNameFor('droppable:occupied'))) {
         continue;
       }
 
-      droppableElement.classList.add(this.getClassNameFor('droppable:active'));
+      dropzoneElement.classList.add(this.getClassNameFor('droppable:active'));
     }
   }
 
@@ -161,14 +174,14 @@ export default class Droppable extends Draggable {
       return;
     }
 
-    const droppable = this[closestDroppable](event.sensorEvent.target);
-    const overEmptyDroppable = droppable && !droppable.classList.contains(this.getClassNameFor('droppable:occupied'));
+    const dropzone = this[closestDropzone](event.sensorEvent.target);
+    const overEmptyDropzone = dropzone && !dropzone.classList.contains(this.getClassNameFor('droppable:occupied'));
 
-    if (overEmptyDroppable && this[drop](event, droppable)) {
-      this.lastDroppable = droppable;
-    } else if ((!droppable || droppable === this.initialDroppable) && this.lastDroppable) {
-      this[release](event);
-      this.lastDroppable = null;
+    if (overEmptyDropzone && this[dropInDropzone](event, dropzone)) {
+      this.lastDropzone = dropzone;
+    } else if ((!dropzone || dropzone === this.initialDropzone) && this.lastDropzone) {
+      this[returnToOriginalDropzone](event);
+      this.lastDropzone = null;
     }
   }
 
@@ -177,101 +190,108 @@ export default class Droppable extends Draggable {
    * @private
    * @param {DragStopEvent} event - Drag stop event
    */
-  [onDragStop]() {
+  [onDragStop](event) {
+    const droppableStopEvent = new DroppableStopEvent({
+      dragEvent: event,
+      dropzone: this.lastDropzone || this.initialDropzone,
+    });
+
+    this.trigger(droppableStopEvent);
+
     const occupiedClass = this.getClassNameFor('droppable:occupied');
 
-    for (const droppable of this.droppables) {
-      droppable.classList.remove(this.getClassNameFor('droppable:active'));
+    for (const dropzone of this.dropzones) {
+      dropzone.classList.remove(this.getClassNameFor('droppable:active'));
     }
 
-    if (this.lastDroppable && this.lastDroppable !== this.initialDroppable) {
-      this.initialDroppable.classList.remove(occupiedClass);
+    if (this.lastDropzone && this.lastDropzone !== this.initialDropzone) {
+      this.initialDropzone.classList.remove(occupiedClass);
     }
 
-    this.droppables = null;
-    this.lastDroppable = null;
-    this.initialDroppable = null;
+    this.dropzones = null;
+    this.lastDropzone = null;
+    this.initialDropzone = null;
   }
 
   /**
-   * Drop method drops a draggable element into a droppable element
+   * Drops a draggable element into a dropzone element
    * @private
    * @param {DragMoveEvent} event - Drag move event
-   * @param {HTMLElement} droppable - Droppable element to drop draggable into
+   * @param {HTMLElement} dropzone - Dropzone element to drop draggable into
    */
-  [drop](event, droppable) {
-    const droppableOverEvent = new DroppableOverEvent({
+  [dropInDropzone](event, dropzone) {
+    const droppableDroppedEvent = new DroppableDroppedEvent({
       dragEvent: event,
-      droppable,
+      dropzone,
     });
 
-    this.trigger(droppableOverEvent);
+    this.trigger(droppableDroppedEvent);
 
-    if (droppableOverEvent.canceled()) {
+    if (droppableDroppedEvent.canceled()) {
       return false;
     }
 
     const occupiedClass = this.getClassNameFor('droppable:occupied');
 
-    if (this.lastDroppable) {
-      this.lastDroppable.classList.remove(occupiedClass);
+    if (this.lastDropzone) {
+      this.lastDropzone.classList.remove(occupiedClass);
     }
 
-    droppable.appendChild(event.source);
-    droppable.classList.add(occupiedClass);
+    dropzone.appendChild(event.source);
+    dropzone.classList.add(occupiedClass);
 
     return true;
   }
 
   /**
-   * Release method moves the previously dropped element back into its original position
+   * Moves the previously dropped element back into its original dropzone
    * @private
    * @param {DragMoveEvent} event - Drag move event
    */
-  [release](event) {
-    const droppableOutEvent = new DroppableOutEvent({
+  [returnToOriginalDropzone](event) {
+    const droppableReturnedEvent = new DroppableReturnedEvent({
       dragEvent: event,
-      droppable: this.lastDroppable,
+      dropzone: this.lastDropzone,
     });
 
-    this.trigger(droppableOutEvent);
+    this.trigger(droppableReturnedEvent);
 
-    if (droppableOutEvent.canceled()) {
+    if (droppableReturnedEvent.canceled()) {
       return;
     }
 
-    this.initialDroppable.appendChild(event.source);
-    this.lastDroppable.classList.remove(this.getClassNameFor('droppable:occupied'));
+    this.initialDropzone.appendChild(event.source);
+    this.lastDropzone.classList.remove(this.getClassNameFor('droppable:occupied'));
   }
 
   /**
-   * Returns closest droppable element for even target
+   * Returns closest dropzone element for even target
    * @private
    * @param {HTMLElement} target - Event target
    * @return {HTMLElement|null}
    */
-  [closestDroppable](target) {
-    if (!this.droppables) {
+  [closestDropzone](target) {
+    if (!this.dropzones) {
       return null;
     }
 
-    return closest(target, (element) => this.droppables.includes(element));
+    return closest(target, this.dropzones);
   }
 
   /**
-   * Returns all current droppable elements for this draggable instance
+   * Returns all current dropzone elements for this draggable instance
    * @private
    * @return {NodeList|HTMLElement[]|Array}
    */
-  [getDroppables]() {
-    const droppables = this.options.droppable;
+  [getDropzones]() {
+    const dropzone = this.options.dropzone;
 
-    if (typeof droppables === 'string') {
-      return document.querySelectorAll(droppables);
-    } else if (droppables instanceof NodeList || droppables instanceof Array) {
-      return droppables;
-    } else if (typeof droppables === 'function') {
-      return droppables();
+    if (typeof dropzone === 'string') {
+      return document.querySelectorAll(dropzone);
+    } else if (dropzone instanceof NodeList || dropzone instanceof Array) {
+      return dropzone;
+    } else if (typeof dropzone === 'function') {
+      return dropzone();
     } else {
       return [];
     }

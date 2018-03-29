@@ -57,7 +57,7 @@ $grid-columns: 4;
       border-width: get-border();
     }
 
-    .BlockWrapper--isDroppable {
+    .BlockWrapper--isDropzone {
       &::before {
         content: '';
         position: absolute;
@@ -80,7 +80,7 @@ $grid-columns: 4;
       }
 
       // not focusable, but, whatever... this was hard to solve
-      &.draggable-droppable--occupied:hover {
+      &.draggable-dropzone--occupied:hover {
         &::before {
           opacity: 1;
         }

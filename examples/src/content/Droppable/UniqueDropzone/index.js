@@ -11,7 +11,7 @@ export default function UniqueDropzone() {
 
   const droppable = new Droppable(containers, {
     draggable: '.Block--isDraggable',
-    droppable: '.BlockWrapper--isDroppable',
+    dropzone: '.BlockWrapper--isDropzone',
     mirror: {
       constrainDimensions: true,
     },
@@ -21,11 +21,11 @@ export default function UniqueDropzone() {
 
   // --- Draggable events --- //
   droppable.on('drag:start', (evt) => {
-    droppableOrigin = evt.originalSource.parentNode.dataset.droppable;
+    droppableOrigin = evt.originalSource.parentNode.dataset.dropzone;
   });
 
-  droppable.on('droppable:over', (evt) => {
-    if (droppableOrigin !== evt.droppable.dataset.droppable) {
+  droppable.on('droppable:dropped', (evt) => {
+    if (droppableOrigin !== evt.dropzone.dataset.dropzone) {
       evt.cancel();
     }
   });

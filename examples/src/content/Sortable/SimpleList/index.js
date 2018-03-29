@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import {Sortable} from '@shopify/draggable';
+import {Sortable, Plugins} from '@shopify/draggable';
 
 export default function SimpleList() {
   const containerSelector = '#SimpleList .StackedList';
@@ -15,6 +15,7 @@ export default function SimpleList() {
     mirror: {
       constrainDimensions: true,
     },
+    plugins: [Plugins.Releasable],
   });
 
   return sortable;

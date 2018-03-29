@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import {Sortable} from '@shopify/draggable';
+import {Sortable, Plugins} from '@shopify/draggable';
 import matchMirrorSize from '../../../scripts/utils/match-mirror-size';
 
 const Classes = {
@@ -19,6 +19,7 @@ export default function MultipleContainers() {
     mirror: {
       constrainDimensions: true,
     },
+    plugins: [Plugins.Releasable],
   });
 
   const containerTwoCapacity = 3;

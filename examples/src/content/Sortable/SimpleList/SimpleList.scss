@@ -10,21 +10,5 @@
 $simple-list-width: 42rem;
 
 .SimpleList {
-  @include centered-width($simple-list-width);
-
-  .StackedListWrapper {
-    .StackedListHeader {
-      @media screen and (min-width: get-breakpoint(desktop)) {
-        display: flex;
-        align-items: center;
-        height: stacked-list-item(medium);
-      }
-    }
-
-    .StackedListContent {
-      @media screen and (min-width: get-breakpoint(desktop)) {
-        height: stacked-list-item(medium);
-      }
-    }
-  }
+  @include centered-width(columns(5));
 }

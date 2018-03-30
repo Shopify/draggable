@@ -45,32 +45,6 @@
       opacity: 0.1;
     }
   }
-
-  // Size variants
-
-  .StackedListWrapper--sizeMedium & {
-    @include stacked-list-scroll-height(
-      stacked-list-item(medium), 3
-    );
-
-    @media screen and (min-width: get-breakpoint(desktop)) {
-      @include stacked-list-scroll-height(
-        stacked-list-item(medium, desktop), 3, base
-      );
-    }
-  }
-
-  .StackedListWrapper--sizeLarge & {
-    @include stacked-list-scroll-height(
-      stacked-list-item(large), 3
-    );
-
-    @media screen and (min-width: get-breakpoint(desktop)) {
-      @include stacked-list-scroll-height(
-        stacked-list-item(large, desktop), 3, base
-      );
-    }
-  }
 }
 
 .StackedList--hasScroll {
@@ -78,34 +52,24 @@
   overflow-y: scroll;
 
   @media screen and (min-width: get-breakpoint(desktop)) {
-    @include stacked-list-scroll-height(
-      stacked-list-item(base, desktop), 7, base
-    );
+    @include stacked-list-scroll-height(stacked-list-item(base, desktop), 7, base);
   }
 
   // Size variants
 
   .StackedListWrapper--sizeMedium & {
-    @include stacked-list-scroll-height(
-      stacked-list-item(medium), 3
-    );
+    @include stacked-list-scroll-height(stacked-list-item(medium), 3);
 
     @media screen and (min-width: get-breakpoint(desktop)) {
-      @include stacked-list-scroll-height(
-        stacked-list-item(medium, desktop), 3, base
-      );
+      @include stacked-list-scroll-height(stacked-list-item(medium, desktop), 3, base);
     }
   }
 
   .StackedListWrapper--sizeLarge & {
-    @include stacked-list-scroll-height(
-      stacked-list-item(large), 3
-    );
+    @include stacked-list-scroll-height(stacked-list-item(large), 3);
 
     @media screen and (min-width: get-breakpoint(desktop)) {
-      @include stacked-list-scroll-height(
-        stacked-list-item(large, desktop), 3, base
-      );
+      @include stacked-list-scroll-height(stacked-list-item(large, desktop), 3, base);
     }
   }
 }
@@ -160,7 +124,7 @@
     flex: 1 0 stacked-list-item(large);
     max-width: stacked-list-item(large) * 2;
 
-    &:nth-child(1n+2) {
+    &:nth-child(1n + 2) {
       margin-top: 0;
       margin-left: -(get-border(thin));
 

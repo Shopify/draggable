@@ -399,6 +399,116 @@ describe('Draggable', () => {
     });
   });
 
+  describe('#setOptions', () => {
+    it('sets new options', () => {
+      const draggable = new Draggable(containers, {
+        draggable: 'li',
+      });
+
+      expect(draggable.getOptions()).toMatchObject({
+        draggable: 'li',
+        delay: 100,
+      });
+
+      draggable.setOptions({draggable: '.new-selector'});
+
+      expect(draggable.getOptions()).toMatchObject({
+        draggable: '.new-selector',
+        delay: 100,
+      });
+    });
+
+    it('throws error while dragging', () => {
+      const draggableElement = document.querySelector('li');
+      const draggable = new Draggable(containers, {
+        draggable: 'li',
+      });
+
+      clickMouse(draggableElement);
+      waitForDragDelay(100);
+
+      expect(() => {
+        draggable.setOptions({draggable: '.new-selector'});
+      }).toThrowError();
+
+      releaseMouse(draggable.source);
+    });
+
+    it('sets nested options', () => {
+      const draggable = new Draggable(containers, {
+        classes: {
+          mirror: '.Mirror',
+        },
+      });
+
+      expect(draggable.getOptions()).toMatchObject({
+        classes: {
+          mirror: '.Mirror',
+          'source:dragging': 'draggable-source--is-dragging',
+        },
+      });
+
+      draggable.setOptions({
+        classes: {
+          mirror: '.NewMirror',
+        },
+      });
+
+      expect(draggable.getOptions()).toMatchObject({
+        classes: {
+          mirror: '.NewMirror',
+          'source:dragging': 'draggable-source--is-dragging',
+        },
+      });
+    });
+
+    it('sets options for sensors', () => {
+      const draggable = new Draggable(containers);
+      const mouseSensor = draggable.sensors.find((sensor) => sensor.constructor === MouseSensor);
+
+      expect(mouseSensor.getOptions()).toMatchObject({
+        delay: 100,
+      });
+
+      draggable.setOptions({delay: 1000});
+
+      expect(mouseSensor.getOptions()).toMatchObject({
+        delay: 1000,
+      });
+    });
+
+    it('sets options for plugins', () => {
+      const draggable = new Draggable(containers);
+      const scrollablePlugin = draggable.plugins.find((plugin) => plugin.constructor === Scrollable);
+
+      expect(scrollablePlugin.options).toMatchObject({
+        speed: 6,
+      });
+
+      draggable.setOptions({
+        scrollable: {
+          speed: 10,
+        },
+      });
+
+      expect(scrollablePlugin.options).toMatchObject({
+        speed: 10,
+      });
+    });
+  });
+
+  describe('#getOptions', () => {
+    it('returns a copy of the options', () => {
+      const draggable = new Draggable(containers);
+
+      expect(draggable.getOptions()).not.toBe(draggable.options);
+
+      expect(draggable.getOptions()).toMatchObject({
+        draggable: '.draggable-source',
+      });
+    });
+  });
+
   it('triggers `drag:start` drag event on mousedown', () => {
     const newInstance = new Draggable(containers, {
       draggable: 'li',

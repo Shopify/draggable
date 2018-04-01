@@ -59,7 +59,7 @@ export default class Sensor {
   /**
    * Adds container to this sensor instance
    * @param {...HTMLElement} containers - Containers you want to add to this sensor
-   * @example draggable.addContainer(document.body)
+   * @example sensor.addContainer(document.body)
    */
   addContainer(...containers) {
     this.containers = [...this.containers, ...containers];
@@ -68,10 +68,31 @@ export default class Sensor {
   /**
    * Removes container from this sensor instance
    * @param {...HTMLElement} containers - Containers you want to remove from this sensor
-   * @example draggable.removeContainer(document.body)
+   * @example sensor.removeContainer(document.body)
    */
   removeContainer(...containers) {
     this.containers = this.containers.filter((container) => !containers.includes(container));
+  }
+
+  /**
+   * Sets new options for this sensor instance
+   * @param {Object} options - New options to be applied
+   * @example sensor.setOptions({delay: 1000})
+   */
+  setOptions(options) {
+    this.options = {
+      ...this.getOptions,
+      ...options,
+    };
+  }
+
+  /**
+   * Returns a copy of the options for this sensor instance
+   * @return {Object}
+   * @example sensor.getOptions()
+   */
+  getOptions() {
+    return {...this.options};
   }
 
   /**

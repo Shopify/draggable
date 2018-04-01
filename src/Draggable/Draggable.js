@@ -97,7 +97,7 @@ export default class Draggable {
     } else if (containers instanceof HTMLElement) {
       this.containers = [containers];
     } else {
-      throw new Error('Draggable containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`');
+      throw new Error('[Draggable] Containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`');
     }
 
     this.options = {
@@ -268,6 +268,46 @@ export default class Draggable {
     this.containers = this.containers.filter((container) => !containers.includes(container));
     this.sensors.forEach((sensor) => sensor.removeContainer(...containers));
     return this;
+  }
+
+  /**
+   * Sets new options for this draggable instance
+   * @param {Object} options - New options to be applied
+   * @example draggable.setOptions({draggable: '.NewSelector'})
+   */
+  setOptions(options) {
+    if (this.isDragging()) {
+      throw new Error("[Draggable] Can't apply new options while dragging");
+    }
+
+    if (!this.options) {
+      this.options = {};
+    }
+
+    this.options = {
+      ...this.options,
+      ...options,
+      classes: {
+        ...this.options.classes,
+        ...(options.classes || {}),
+      },
+      announcements: {
+        ...this.options.announcements,
+        ...(options.announcements || {}),
+      },
+    };
+
+    this.sensors.forEach((sensor) => sensor.setOptions(this.options));
+    this.plugins.forEach((plugin) => plugin.setOptions(this.options));
+  }
+
+  /**
+   * Returns a copy of the options for this draggable instance
+   * @return {Object}
+   * @example draggable.getOptions()
+   */
+  getOptions() {
+    return {...this.options};
   }
 
   /**

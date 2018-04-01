@@ -57,6 +57,12 @@ Adds containers to this draggable instance.
 **`draggable.removeContainer(containers: ...HTMLElement): Draggable`**  
 Removes containers from this draggable instance.
 
+**`draggable.setOptions(options: Object): undefined`**  
+Sets new options for this draggable instance. Throws errors when called while dragging.
+
+**`draggable.getOptions(): Object`**  
+Returns a copy of the options for this draggable instance.
+
 **`draggable.getClassNameFor(name: String): String`**  
 Returns class name for class identifier, check the classes table below for identifiers.
 

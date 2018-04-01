@@ -5,10 +5,10 @@ custom sensor.
 
 Currently triggers these sensor events:
 
-- `drag:start`
-- `drag:move`
-- `drag:stop`
-- `drag:pressure`
+* `drag:start`
+* `drag:move`
+* `drag:stop`
+* `drag:pressure`
 
 ### API
 
@@ -21,6 +21,12 @@ Attaches sensors to the DOM
 
 **`sensor.detach(): void`**  
 Detaches sensors to the DOM
+
+**`sensor.setOptions(options: Object): undefined`**  
+Sets new options for this sensor instance.
+
+**`sensor.getOptions(): Object`**  
+Returns a copy of the options for this sensor instance.
 
 **`sensor.trigger(element: HTMLElement, sensorEvent: SensorEvent): void`**  
 Triggers sensor event on container element

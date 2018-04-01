@@ -24,7 +24,7 @@ export default class AbstractPlugin {
    * @abstract
    */
   attach() {
-    throw new Error('Not Implemented');
+    throw new Error('[Draggable] Not Implemented');
   }
 
   /**
@@ -32,6 +32,17 @@ export default class AbstractPlugin {
    * @abstract
    */
   detach() {
-    throw new Error('Not Implemented');
+    throw new Error('[Draggable] Not Implemented');
+  }
+
+  setOptions(options) {
+    this.options = {
+      ...this.getOptions(),
+      ...options,
+    };
+  }
+
+  getOptions() {
+    return this.options;
   }
 }

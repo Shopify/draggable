@@ -6,6 +6,7 @@ import DragEvents from './Draggable/DragEvents';
 import UniqueDropzone from './Droppable/UniqueDropzone';
 // Sortable
 import SimpleList from './Sortable/SimpleList';
+import Iframe from './Sortable/Iframe';
 import Transformed from './Sortable/Transformed';
 import MultipleContainers from './Sortable/MultipleContainers';
 // Swappable
@@ -22,6 +23,7 @@ const Content = {
   DragEvents,
   UniqueDropzone,
   SimpleList,
+  Iframe,
   Transformed,
   MultipleContainers,
   Flexbox,

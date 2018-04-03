@@ -85,8 +85,9 @@ export default class Draggable {
    * @constructs Draggable
    * @param {HTMLElement[]|NodeList|HTMLElement} containers - Draggable containers
    * @param {Object} options - Options for draggable
+   * @param {DocumentOrShadowRoot[]} hosts - Hosts
    */
-  constructor(containers = [document.body], options = {}) {
+  constructor(containers = [], options = {}, hosts = [document]) {
     /**
      * Draggable containers
      * @property containers
@@ -141,15 +142,24 @@ export default class Draggable {
      */
     this.sensors = [];
 
+    /**
+     * Active hosts
+     * @property hosts
+     * @type {DocumentOrShadowRoot[]}
+     */
+    this.hosts = hosts;
+
     this[onDragStart] = this[onDragStart].bind(this);
     this[onDragMove] = this[onDragMove].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
     this[onDragPressure] = this[onDragPressure].bind(this);
 
-    document.addEventListener('drag:start', this[onDragStart], true);
-    document.addEventListener('drag:move', this[onDragMove], true);
-    document.addEventListener('drag:stop', this[onDragStop], true);
-    document.addEventListener('drag:pressure', this[onDragPressure], true);
+    this.hosts.forEach((host) => {
+      host.addEventListener('drag:start', this[onDragStart], true);
+      host.addEventListener('drag:move', this[onDragMove], true);
+      host.addEventListener('drag:stop', this[onDragStop], true);
+      host.addEventListener('drag:pressure', this[onDragPressure], true);
+    });
 
     const defaultPlugins = Object.values(Draggable.Plugins).map((Plugin) => Plugin);
     const defaultSensors = [MouseSensor, TouchSensor];
@@ -169,10 +179,12 @@ export default class Draggable {
    * deactivates sensors and plugins
    */
   destroy() {
-    document.removeEventListener('drag:start', this[onDragStart], true);
-    document.removeEventListener('drag:move', this[onDragMove], true);
-    document.removeEventListener('drag:stop', this[onDragStop], true);
-    document.removeEventListener('drag:pressure', this[onDragPressure], true);
+    this.hosts.forEach((host) => {
+      host.removeEventListener('drag:start', this[onDragStart], true);
+      host.removeEventListener('drag:move', this[onDragMove], true);
+      host.removeEventListener('drag:stop', this[onDragStop], true);
+      host.removeEventListener('drag:pressure', this[onDragPressure], true);
+    });
 
     const draggableDestroyEvent = new DraggableDestroyEvent({
       draggable: this,
@@ -222,7 +234,7 @@ export default class Draggable {
    * @example draggable.addSensor(ForceTouchSensor, CustomSensor)
    */
   addSensor(...sensors) {
-    const activeSensors = sensors.map((Sensor) => new Sensor(this.containers, this.options));
+    const activeSensors = sensors.map((Sensor) => new Sensor(this.containers, this.options, this.hosts));
 
     activeSensors.forEach((sensor) => sensor.attach());
     this.sensors = [...this.sensors, ...activeSensors];
@@ -423,8 +435,11 @@ export default class Draggable {
     this.originalSource.style.display = 'none';
     this.source.classList.add(this.getClassNameFor('source:dragging'));
     this.sourceContainer.classList.add(this.getClassNameFor('container:dragging'));
-    document.body.classList.add(this.getClassNameFor('body:dragging'));
-    applyUserSelect(document.body, 'none');
+
+    this.hosts.forEach((host) => {
+      host.documentElement.classList.add(this.getClassNameFor('body:dragging'));
+      applyUserSelect(host.documentElement, 'none');
+    });
 
     const dragEvent = new DragStartEvent({
       source: this.source,
@@ -448,7 +463,11 @@ export default class Draggable {
 
       this.source.classList.remove(this.getClassNameFor('source:dragging'));
       this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
-      document.body.classList.remove(this.getClassNameFor('body:dragging'));
+
+      this.hosts.forEach((host) => {
+        host.documentElement.classList.remove(this.getClassNameFor('body:dragging'));
+        applyUserSelect(host.documentElement, '');
+      });
     } else {
       requestAnimationFrame(() => this[onDragMove](event));
     }
@@ -602,8 +621,11 @@ export default class Draggable {
     this.originalSource.classList.add(this.getClassNameFor('source:placed'));
     this.sourceContainer.classList.add(this.getClassNameFor('container:placed'));
     this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
-    document.body.classList.remove(this.getClassNameFor('body:dragging'));
-    applyUserSelect(document.body, '');
+
+    this.hosts.forEach((host) => {
+      host.documentElement.classList.remove(this.getClassNameFor('body:dragging'));
+      applyUserSelect(host.documentElement, '');
+    });
 
     if (this.currentOver) {
       this.currentOver.classList.remove(this.getClassNameFor('draggable:over'));

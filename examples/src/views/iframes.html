@@ -1,0 +1,29 @@
+{% extends 'templates/document.html' %}
+
+{% import 'components/Document/Head.html' as Head %}
+{% import 'components/Sidebar/Sidebar.html' as Sidebar %}
+{% import 'components/PageHeader/PageHeader.html' as PageHeader %}
+
+{% import 'content/Sortable/Iframe/Iframe.html' as Iframe %}
+
+{% set ViewAttr = {
+  id: 'iFrames',
+  parent: 'Sortable',
+  child: 'iFrames',
+  subheading: 'Sort elements between iframes like you have never before.'
+} %}
+
+{% block PageId %}{{ ViewAttr.id }}{% endblock %}
+
+{% block head %}
+  {{ Head.render(ViewAttr) }}
+{% endblock %}
+
+{% block sidebar %}
+  {{ Sidebar.render(ViewAttr, DataPages) }}
+{% endblock %}
+
+{% block main %}
+  {{ PageHeader.render(ViewAttr.parent, ViewAttr.subheading) }}
+  {{ Iframe.render(ViewAttr.id) }}
+{% endblock %}

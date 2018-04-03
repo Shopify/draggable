@@ -11,13 +11,17 @@ const Attrs = {
 
 export default class MobileNav {
   constructor(activator) {
+    if (!activator) {
+      return;
+    }
+
     this.activator = activator;
     this.target = document.getElementById(activator.getAttribute(Attrs.controls));
   }
 
   init() {
     if (!this.target) {
-      console.error('The activator must have a valid `aria-controls` value. Target not found.');
+      // console.error('The activator must have a valid `aria-controls` value. Target not found.');
       return;
     }
 

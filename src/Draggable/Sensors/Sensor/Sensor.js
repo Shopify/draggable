@@ -9,8 +9,9 @@ export default class Sensor {
    * @constructs Sensor
    * @param {HTMLElement[]|NodeList|HTMLElement} containers - Containers
    * @param {Object} options - Options
+   * @param {DocumentOrShadowRoot} hosts - Hosts
    */
-  constructor(containers = [], options = {}) {
+  constructor(containers = [], options = {}, hosts = []) {
     /**
      * Current containers
      * @property containers
@@ -24,6 +25,13 @@ export default class Sensor {
      * @type {Object}
      */
     this.options = {...options};
+
+    /**
+     * Current hosts
+     * @property hosts
+     * @type {DocumentOrShadowRoot[]}
+     */
+    this.hosts = [...hosts];
 
     /**
      * Current drag state
@@ -72,6 +80,18 @@ export default class Sensor {
    */
   removeContainer(...containers) {
     this.containers = this.containers.filter((container) => !containers.includes(container));
+  }
+
+  addHostsEventListener(type, callback, options) {
+    this.hosts.forEach((host) => {
+      host.addEventListener(type, callback, options);
+    });
+  }
+
+  removeHostsEventListener(type, callback, options) {
+    this.hosts.forEach((host) => {
+      host.removeEventListener(type, callback, options);
+    });
   }
 
   /**

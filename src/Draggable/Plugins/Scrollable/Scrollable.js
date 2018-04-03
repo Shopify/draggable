@@ -200,6 +200,8 @@ export default class Scrollable extends AbstractPlugin {
 
     cancelAnimationFrame(this.scrollAnimationFrame);
 
+    const {defaultView: view} = this.scrollableElement.ownerDocument;
+
     const {speed, sensitivity} = this.options;
 
     const rect = this.scrollableElement.getBoundingClientRect();
@@ -207,7 +209,7 @@ export default class Scrollable extends AbstractPlugin {
     const topCutOff = rect.top < 0;
     const cutOff = topCutOff || bottomCutOff;
 
-    const documentScrollingElement = getDocumentScrollingElement();
+    const documentScrollingElement = getDocumentScrollingElement(view.document);
     const scrollableElement = this.scrollableElement;
     const clientX = this.currentMousePosition.clientX;
     const clientY = this.currentMousePosition.clientY;
@@ -227,7 +229,7 @@ export default class Scrollable extends AbstractPlugin {
         scrollableElement.scrollLeft -= speed;
       }
     } else {
-      const {innerHeight, innerWidth} = window;
+      const {innerHeight, innerWidth} = view;
 
       if (clientY < sensitivity) {
         documentScrollingElement.scrollTop -= speed;
@@ -253,8 +255,12 @@ export default class Scrollable extends AbstractPlugin {
  * @private
  */
 function hasOverflow(element) {
+  if (!element.ownerDocument) {
+    return false;
+  }
+  const view = element.ownerDocument.defaultView;
   const overflowRegex = /(auto|scroll)/;
-  const computedStyles = getComputedStyle(element, null);
+  const computedStyles = view.getComputedStyle(element, null);
 
   const overflow =
     computedStyles.getPropertyValue('overflow') +
@@ -271,7 +277,8 @@ function hasOverflow(element) {
  * @private
  */
 function isStaticallyPositioned(element) {
-  const position = getComputedStyle(element).getPropertyValue('position');
+  const {defaultView: view} = element.ownerDocument;
+  const position = view.getComputedStyle(element).getPropertyValue('position');
   return position === 'static';
 }
 
@@ -283,10 +290,11 @@ function isStaticallyPositioned(element) {
  */
 function closestScrollableElement(element) {
   if (!element) {
-    return getDocumentScrollingElement();
+    return null;
   }
 
-  const position = getComputedStyle(element).getPropertyValue('position');
+  const {defaultView: view} = element.ownerDocument;
+  const position = view.getComputedStyle(element).getPropertyValue('position');
   const excludeStaticParents = position === 'absolute';
 
   const scrollableElement = closest(element, (parent) => {
@@ -297,7 +305,7 @@ function closestScrollableElement(element) {
   });
 
   if (position === 'fixed' || !scrollableElement) {
-    return getDocumentScrollingElement();
+    return getDocumentScrollingElement(view.document);
   } else {
     return scrollableElement;
   }
@@ -308,6 +316,6 @@ function closestScrollableElement(element) {
  * @return {HTMLElement}
  * @private
  */
-function getDocumentScrollingElement() {
-  return document.scrollingElement || document.documentElement;
+function getDocumentScrollingElement(host) {
+  return host.scrollingElement || host.documentElement;
 }

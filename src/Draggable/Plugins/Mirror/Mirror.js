@@ -321,8 +321,18 @@ function positionMirror({withFrame = false, initial = false} = {}) {
         };
 
         if (mirrorOffset) {
-          const x = sensorEvent.clientX - mirrorOffset.left - scrollOffset.x;
-          const y = sensorEvent.clientY - mirrorOffset.top - scrollOffset.y;
+          const {document: currentHost} = sensorEvent.originalEvent.view;
+          let x = sensorEvent.clientX - mirrorOffset.left - scrollOffset.x;
+          let y = sensorEvent.clientY - mirrorOffset.top - scrollOffset.y;
+
+          if (document !== currentHost) {
+            const iframeElements = [...document.querySelectorAll('iframe')];
+            const iframeElement = iframeElements.find((iframe) => iframe.contentDocument === currentHost);
+            const {top, left} = iframeElement.getBoundingClientRect();
+
+            x += left;
+            y += top;
+          }
 
           if ((options.xAxis && options.yAxis) || initial) {
             mirror.style.transform = `translate3d(${x}px, ${y}px, 0)`;

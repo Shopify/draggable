@@ -74,14 +74,14 @@ export default class TouchSensor extends Sensor {
    * Attaches sensors event listeners to the DOM
    */
   attach() {
-    document.addEventListener('touchstart', this[onTouchStart]);
+    this.addHostsEventListener('touchstart', this[onTouchStart]);
   }
 
   /**
    * Detaches sensors event listeners to the DOM
    */
   detach() {
-    document.removeEventListener('touchstart', this[onTouchStart]);
+    this.removeHostsEventListener('touchstart', this[onTouchStart]);
   }
 
   /**
@@ -96,9 +96,9 @@ export default class TouchSensor extends Sensor {
       return;
     }
 
-    document.addEventListener('touchmove', this[onTouchMove]);
-    document.addEventListener('touchend', this[onTouchEnd]);
-    document.addEventListener('touchcancel', this[onTouchEnd]);
+    this.addHostsEventListener('touchmove', this[onTouchMove]);
+    this.addHostsEventListener('touchend', this[onTouchEnd]);
+    this.addHostsEventListener('touchcancel', this[onTouchEnd]);
     container.addEventListener('contextmenu', onContextMenu);
 
     this.currentContainer = container;

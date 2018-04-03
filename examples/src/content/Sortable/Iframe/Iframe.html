@@ -1,0 +1,23 @@
+{% import 'components/StackedList/StackedListItem.html' as StackedListItem %}
+
+{% macro render(id) %}
+  <section id="{{ id }}" class="{{ id }}">
+    <article class="StackedListWrapper">
+      <header class="StackedListHeader">
+        <h3 class="Heading Heading--size3 Heading--colorWhite">Outside iFrame</h3>
+      </header>
+
+      <ul class="StackedList">
+        {{ StackedListItem.render('item one',   {index: 1, draggable: true}) }}
+        {{ StackedListItem.render('item two',   {index: 2, draggable: true}) }}
+        {{ StackedListItem.render('item three', {index: 3, draggable: true}) }}
+        {{ StackedListItem.render('item four',  {index: 4, draggable: true}) }}
+        {{ StackedListItem.render('item five',  {index: 5}) }}
+        {{ StackedListItem.render('item six',   {index: 6, draggable: true}) }}
+      </ul>
+    </article>
+    <article class="iFrameContainer">
+      <iframe src="inside-iframe.html" class="iFrame"></iframe>
+    </article>
+  </section>
+{% endmacro %}

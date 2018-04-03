@@ -9,7 +9,7 @@
     "**/node_modules": true,
     "lib": true
   },
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "prettier.eslintIntegration": true,
   "javascript.validate.enable": false,
   "eslint.validate": ["javascript"]

@@ -52,14 +52,18 @@ export default class Sortable extends Draggable {
    * @param {HTMLElement[]|NodeList|HTMLElement} containers - Sortable containers
    * @param {Object} options - Options for Sortable
    */
-  constructor(containers = [], options = {}) {
-    super(containers, {
-      ...options,
-      announcements: {
-        ...defaultAnnouncements,
-        ...(options.announcements || {}),
+  constructor(containers = [], options = {}, hosts) {
+    super(
+      containers,
+      {
+        ...options,
+        announcements: {
+          ...defaultAnnouncements,
+          ...(options.announcements || {}),
+        },
       },
-    });
+      hosts,
+    );
 
     /**
      * start index of source on drag start

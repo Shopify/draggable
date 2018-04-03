@@ -20,10 +20,11 @@ import Draggable from '@shopify/draggable/lib/draggable';
 
 ### API
 
-**`new Draggable(containers: HTMLElement[]|NodeList|HTMLElement, options: Object): Draggable`**  
+**`new Draggable(containers: HTMLElement[]|NodeList|HTMLElement, options: Object, hosts: DocumentOrShadowRoot[]): Draggable`**  
 To create a draggable instance you need to specify the container(s) that hold draggable items, e.g.
-`document.body` would work too. The second argument is an options object, which is described
-below.
+`document.body` would work too. The second argument is an [options object](#options), which is described
+below. The third argument let's you specify the documents or shadow roots draggable should attach itself
+to, by default this is the `document` in the current context.
 
 **`draggable.destroy(): void`**  
 Detaches all sensors and listeners, and cleans up after itself.

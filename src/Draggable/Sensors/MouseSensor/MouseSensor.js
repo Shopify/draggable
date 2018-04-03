@@ -19,9 +19,10 @@ export default class MouseSensor extends Sensor {
    * @constructs MouseSensor
    * @param {HTMLElement[]|NodeList|HTMLElement} containers - Containers
    * @param {Object} options - Options
+   * @param {DocumentOrShadowRoot} hosts - Hosts
    */
-  constructor(containers = [], options = {}) {
-    super(containers, options);
+  constructor(containers = [], options = {}, hosts = []) {
+    super(containers, options, hosts);
 
     /**
      * Indicates if mouse button is still down
@@ -54,14 +55,14 @@ export default class MouseSensor extends Sensor {
    * Attaches sensors event listeners to the DOM
    */
   attach() {
-    document.addEventListener('mousedown', this[onMouseDown], true);
+    this.addHostsEventListener('mousedown', this[onMouseDown], true);
   }
 
   /**
    * Detaches sensors event listeners to the DOM
    */
   detach() {
-    document.removeEventListener('mousedown', this[onMouseDown], true);
+    this.removeHostsEventListener('mousedown', this[onMouseDown], true);
   }
 
   /**
@@ -74,9 +75,17 @@ export default class MouseSensor extends Sensor {
       return;
     }
 
-    document.addEventListener('mouseup', this[onMouseUp]);
+    const {document: currentHost} = event.view;
 
-    const target = document.elementFromPoint(event.clientX, event.clientY);
+    this.startedInsideIframe = Boolean(document !== currentHost);
+
+    this.initialHost = currentHost;
+    this.iframeElements = [...document.querySelectorAll('iframe')];
+
+    this.addHostsEventListener('mouseup', this[onMouseUp]);
+    currentHost.addEventListener('dragstart', preventNativeDragStart);
+
+    const target = currentHost.elementFromPoint(event.clientX, event.clientY);
     const container = closest(target, this.containers);
 
     if (!container) {
@@ -107,8 +116,8 @@ export default class MouseSensor extends Sensor {
       this.dragging = !dragStartEvent.canceled();
 
       if (this.dragging) {
-        document.addEventListener('contextmenu', this[onContextMenuWhileDragging]);
-        document.addEventListener('mousemove', this[onMouseMove]);
+        this.addHostsEventListener('contextmenu', this[onContextMenuWhileDragging]);
+        this.addHostsEventListener('mousemove', this[onMouseMove]);
       }
     }, this.options.delay);
   }
@@ -123,7 +132,23 @@ export default class MouseSensor extends Sensor {
       return;
     }
 
-    const target = document.elementFromPoint(event.clientX, event.clientY);
+    const {document: currentHost} = event.view;
+
+    let {clientX, clientY} = event;
+
+    let target;
+
+    if (this.startedInsideIframe && (clientX < 0 || clientY < 0)) {
+      const iframeElements = [...document.querySelectorAll('iframe')];
+      const iframeElement = iframeElements.find((iframe) => iframe.contentDocument === currentHost);
+      const {top, left} = iframeElement.getBoundingClientRect();
+
+      clientX += left;
+      clientY += top;
+      target = document.elementFromPoint(clientX, clientY);
+    } else {
+      target = currentHost.elementFromPoint(clientX, clientY);
+    }
 
     const dragMoveEvent = new DragMoveSensorEvent({
       clientX: event.clientX,
@@ -149,14 +174,16 @@ export default class MouseSensor extends Sensor {
       return;
     }
 
-    document.removeEventListener('mouseup', this[onMouseUp]);
-    document.removeEventListener('dragstart', preventNativeDragStart);
+    this.removeHostsEventListener('mouseup', this[onMouseUp]);
+    this.removeHostsEventListener('dragstart', preventNativeDragStart);
 
     if (!this.dragging) {
       return;
     }
 
-    const target = document.elementFromPoint(event.clientX, event.clientY);
+    const {document: currentHost} = event.view;
+
+    const target = currentHost.elementFromPoint(event.clientX, event.clientY);
 
     const dragStopEvent = new DragStopSensorEvent({
       clientX: event.clientX,
@@ -168,8 +195,8 @@ export default class MouseSensor extends Sensor {
 
     this.trigger(this.currentContainer, dragStopEvent);
 
-    document.removeEventListener('contextmenu', this[onContextMenuWhileDragging]);
-    document.removeEventListener('mousemove', this[onMouseMove]);
+    this.removeHostsEventListener('contextmenu', this[onContextMenuWhileDragging]);
+    this.removeHostsEventListener('mousemove', this[onMouseMove]);
 
     this.currentContainer = null;
     this.dragging = false;

@@ -103,25 +103,6 @@ describe('TouchSensor', () => {
     expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
   });
 
-  it('prevents `drag:start` when browser starts scrolling instead', () => {
-    function dragFlow() {
-      touchStart(draggableElement);
-      triggerEvent(document.body, 'scroll');
-      waitForDragDelay();
-    }
-
-    expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
-  });
-
-  it('prevents `drag:start` when touchstart event is not cancelable', () => {
-    function dragFlow() {
-      touchStart(draggableElement, {cancelable: false});
-      waitForDragDelay();
-    }
-
-    expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
-  });
-
   it('prevents `drag:start` when touch moved before drag delay', () => {
     function dragFlow() {
       touchStart(draggableElement);
@@ -153,15 +134,11 @@ describe('TouchSensor', () => {
 
     expect(touchMoveEvent.defaultPrevented).toBe(false);
 
-    expect(touchMoveEvent.stoppedPropagation).toBeUndefined();
-
     touchStart(draggableElement);
     waitForDragDelay();
     touchMoveEvent = touchMove(draggableElement);
 
     expect(touchMoveEvent.defaultPrevented).toBe(true);
-
-    expect(touchMoveEvent.stoppedPropagation).toBe(true);
 
     touchRelease(draggableElement);
   });

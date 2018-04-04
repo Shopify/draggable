@@ -6,7 +6,7 @@ so any draggable element that gets dragged over will be swapped with the source 
 ### Import
 
 ```js
-import {Swappable} from '@shopify/draggable';
+import { Swappable } from '@shopify/draggable';
 ```
 
 ```js
@@ -14,11 +14,11 @@ import Swappable from '@shopify/draggable/lib/swappable';
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.5/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/draggable.bundle.js"></script>
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.5/lib/swappable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/swappable.js"></script>
 ```
 
 ### API
@@ -33,12 +33,12 @@ Check out [Draggables options](../Draggable#options) for the base options
 
 Check out [Draggables events](../Draggable#events) for base events
 
-| Name                                     | Description                                                | Cancelable  | Cancelable action    |
-| ---------------------------------------- | ---------------------------------------------------------- | ----------- | -------------------- |
-| [`swappable:start`][swappablestart]      | Gets fired when starting to drag                           | true        | Prevents drag        |
-| [`swappable:swap`][swappableswap]        | Gets fired before the source gets swapped                  | true        | Prevents swap        |
-| [`swappable:swapped`][swappableswapped]  | Gets fired before the source gets swapped                  | false       | -                    |
-| [`swappable:stop`][swappablestop]        | Gets fired when dragging out of a droppable element        | false       | -                    |
+| Name                                    | Description                                         | Cancelable | Cancelable action |
+| --------------------------------------- | --------------------------------------------------- | ---------- | ----------------- |
+| [`swappable:start`][swappablestart]     | Gets fired when starting to drag                    | true       | Prevents drag     |
+| [`swappable:swap`][swappableswap]       | Gets fired before the source gets swapped           | true       | Prevents swap     |
+| [`swappable:swapped`][swappableswapped] | Gets fired before the source gets swapped           | false      | -                 |
+| [`swappable:stop`][swappablestop]       | Gets fired when dragging out of a droppable element | false      | -                 |
 
 [swappablestart]: SwappableEvent#swappablestartevent
 [swappableswap]: SwappableEvent#swappableswapevent
@@ -54,13 +54,13 @@ Check out [Draggables class identifiers](../Draggable#classes)
 This sample code will make list items draggable and allows you to swap them with other draggable elements:
 
 ```js
-import {Swappable} from '@shopify/draggable';
+import { Swappable } from '@shopify/draggable';
 
 const swappable = new Swappable(document.querySelectorAll('ul'), {
-  draggable: 'li',
+  draggable: 'li'
 });
 
-swappable.on('swappable:start', () => console.log('swappable:start'))
+swappable.on('swappable:start', () => console.log('swappable:start'));
 swappable.on('swappable:swapped', () => console.log('swappable:swapped'));
 swappable.on('swappable:stop', () => console.log('swappable:stop'));
 ```

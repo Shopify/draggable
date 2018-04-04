@@ -8,7 +8,7 @@ This plugin is not included by default, so make sure to import it before using.
 ### Import
 
 ```js
-import {Plugins} from '@shopify/draggable';
+import { Plugins } from '@shopify/draggable';
 ```
 
 ```js
@@ -16,11 +16,11 @@ import Snappable from '@shopify/draggable/lib/plugins/snappable';
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.5/lib/plugins.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/plugins.js"></script>
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.5/lib/plugins/snappable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/plugins/snappable.js"></script>
 ```
 
 ### Options
@@ -29,10 +29,10 @@ _No options_
 
 ### Events
 
-| Name                    | Description                                                | Cancelable  | Cancelable action     |
-| ----------------------- | ---------------------------------------------------------- | ----------- | --------------------- |
-| [`snap:in`][snapin]     | Gets fired when just before snapping in                    | true        | Prevents snapping     |
-| [`snap:out`][snapout]   | Gets fired when snapping out                               | true        | Prevents snapping out |
+| Name                  | Description                             | Cancelable | Cancelable action     |
+| --------------------- | --------------------------------------- | ---------- | --------------------- |
+| [`snap:in`][snapin]   | Gets fired when just before snapping in | true       | Prevents snapping     |
+| [`snap:out`][snapout] | Gets fired when snapping out            | true       | Prevents snapping out |
 
 [snapin]: SnappableEvent#snapinevent
 [snapout]: SnappableEvent#snapoutevent
@@ -40,7 +40,7 @@ _No options_
 ### Example
 
 ```js
-import {Sortable, Plugins} from '@shopify/draggable';
+import { Sortable, Plugins } from '@shopify/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',

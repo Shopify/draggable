@@ -3,7 +3,7 @@
 ### Import
 
 ```js
-import {Draggable} from '@shopify/draggable';
+import { Draggable } from '@shopify/draggable';
 ```
 
 ```js
@@ -11,11 +11,11 @@ import Draggable from '@shopify/draggable/lib/draggable';
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.5/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/draggable.bundle.js"></script>
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.5/lib/draggable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/draggable.js"></script>
 ```
 
 ### API
@@ -97,27 +97,26 @@ on elements in certain states.
 
 ### Events
 
-| Name                                         | Description                                                | Cancelable  | Cancelable action        |
-| -------------------------------------------- | ---------------------------------------------------------- | ----------- | ------------------------ |
-| [`draggable:initialize`][draggableinit]      | Gets fired when draggable gets initialized                 | false       | -                        |
-| [`draggable:destroy`][draggabledest]         | Gets fired when draggable gets destroyed                   | false       | -                        |
-| [`drag:start`][dragstart]                    | Gets fired when drag action begins                         | true        | Prevents drag start      |
-| [`drag:move`][dragmove]                      | Gets fired when moving a draggable around                  | false       | -                        |
-| [`drag:over`][dragover]                      | Gets fired when dragging over other draggable              | false       | -                        |
-| [`drag:over:container`][dragovercontainer]   | Gets fired when dragging over other draggable container    | false       | -                        |
-| [`drag:out`][dragout]                        | Gets fired when dragging out of other draggable            | false       | -                        |
-| [`drag:out:container`][dragoutcontainer]     | Gets fired when dragging out of other draggable container  | false       | -                        |
-| [`drag:stop`][dragstop]                      | Gets fired when draggable has been released                | false       | -                        |
-| [`drag:pressure`][dragpressure]              | Gets fired when using force touch on draggable element     | false       | -                        |
-| [`mirror:create`][mirrorcreate]              | Gets fired before draggable mirror gets created            | true        | Prevents mirror creation |
-| [`mirror:created`][mirrorcreated]            | Gets fired when draggable mirror gets created              | false       | -                        |
-| [`mirror:attached`][mirrorattached]          | Gets fired when draggable mirror gets attached to DOM      | false       | -                        |
-| [`mirror:move`][mirrormove]                  | Gets fired when draggable mirror moves                     | true        | Stop mirror movement     |
-| [`mirror:destroy`][mirrordestroy]            | Gets fired when draggable mirror gets removed              | true        | Stop mirror removal      |
+| Name                                       | Description                                               | Cancelable | Cancelable action        |
+| ------------------------------------------ | --------------------------------------------------------- | ---------- | ------------------------ |
+| [`draggable:initialize`][draggableinit]    | Gets fired when draggable gets initialized                | false      | -                        |
+| [`draggable:destroy`][draggabledest]       | Gets fired when draggable gets destroyed                  | false      | -                        |
+| [`drag:start`][dragstart]                  | Gets fired when drag action begins                        | true       | Prevents drag start      |
+| [`drag:move`][dragmove]                    | Gets fired when moving a draggable around                 | false      | -                        |
+| [`drag:over`][dragover]                    | Gets fired when dragging over other draggable             | false      | -                        |
+| [`drag:over:container`][dragovercontainer] | Gets fired when dragging over other draggable container   | false      | -                        |
+| [`drag:out`][dragout]                      | Gets fired when dragging out of other draggable           | false      | -                        |
+| [`drag:out:container`][dragoutcontainer]   | Gets fired when dragging out of other draggable container | false      | -                        |
+| [`drag:stop`][dragstop]                    | Gets fired when draggable has been released               | false      | -                        |
+| [`drag:pressure`][dragpressure]            | Gets fired when using force touch on draggable element    | false      | -                        |
+| [`mirror:create`][mirrorcreate]            | Gets fired before draggable mirror gets created           | true       | Prevents mirror creation |
+| [`mirror:created`][mirrorcreated]          | Gets fired when draggable mirror gets created             | false      | -                        |
+| [`mirror:attached`][mirrorattached]        | Gets fired when draggable mirror gets attached to DOM     | false      | -                        |
+| [`mirror:move`][mirrormove]                | Gets fired when draggable mirror moves                    | true       | Stop mirror movement     |
+| [`mirror:destroy`][mirrordestroy]          | Gets fired when draggable mirror gets removed             | true       | Stop mirror removal      |
 
 [draggableinit]: DraggableEvent#draggableinitializedevent
 [draggabledest]: DraggableEvent#draggabledestroydevent
-
 [dragstart]: DragEvent#dragstartevent
 [dragmove]: DragEvent#dragmoveevent
 [dragover]: DragEvent#dragoverevent
@@ -126,7 +125,6 @@ on elements in certain states.
 [dragoutcontainer]: DragEvent#dragoutcontainerevent
 [dragstop]: DragEvent#dragstopevent
 [dragpressure]: DragEvent#dragpressureevent
-
 [mirrorcreate]: MirrorEvent#mirrorcreateevent
 [mirrorcreated]: MirrorEvent#mirrorcreatedevent
 [mirrorattached]: MirrorEvent#mirrorattachedevent
@@ -135,30 +133,30 @@ on elements in certain states.
 
 ### Classes
 
-| Name                 | Description                                                          | Default                            |
-| -------------------- | -------------------------------------------------------------------- | ---------------------------------- |
-| `body:dragging`      | Class added on the document body while dragging                      | `draggable--is-dragging`           |
-| `container:dragging` | Class added on the container where the draggable was picked up from  | `draggable-container--is-dragging` |
-| `source:dragging`    | Class added on the draggable element that has been picked up         | `draggable-source--is-dragging`    |
-| `source:placed`      | Class added on the draggable element on `drag:stop`                  | `draggable-source--placed`         |
-| `container:placed`   | Class added on the draggable container element on `drag:stop`        | `draggable-container--placed`      |
-| `draggable:over`     | Class added on draggable element you are dragging over               | `draggable--over`                  |
-| `container:over`     | Class added on draggable container element you are dragging over     | `draggable-container--over`        |
-| `source:original`    | Class added on the original source element, which is hidden on drag  | `draggable--original`              |
-| `mirror`             | Class added on the mirror element                                    | `draggable-mirror`                 |
+| Name                 | Description                                                         | Default                            |
+| -------------------- | ------------------------------------------------------------------- | ---------------------------------- |
+| `body:dragging`      | Class added on the document body while dragging                     | `draggable--is-dragging`           |
+| `container:dragging` | Class added on the container where the draggable was picked up from | `draggable-container--is-dragging` |
+| `source:dragging`    | Class added on the draggable element that has been picked up        | `draggable-source--is-dragging`    |
+| `source:placed`      | Class added on the draggable element on `drag:stop`                 | `draggable-source--placed`         |
+| `container:placed`   | Class added on the draggable container element on `drag:stop`       | `draggable-container--placed`      |
+| `draggable:over`     | Class added on draggable element you are dragging over              | `draggable--over`                  |
+| `container:over`     | Class added on draggable container element you are dragging over    | `draggable-container--over`        |
+| `source:original`    | Class added on the original source element, which is hidden on drag | `draggable--original`              |
+| `mirror`             | Class added on the mirror element                                   | `draggable-mirror`                 |
 
 ### Example
 
 This sample code will make list items draggable:
 
 ```js
-import {Draggable} from '@shopify/draggable';
+import { Draggable } from '@shopify/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
-  draggable: 'li',
+  draggable: 'li'
 });
 
 draggable.on('drag:start', () => console.log('drag:start'));
-draggable.on('drag:move',  () => console.log('drag:move'));
-draggable.on('drag:stop',  () => console.log('drag:stop'));
+draggable.on('drag:move', () => console.log('drag:move'));
+draggable.on('drag:stop', () => console.log('drag:stop'));
 ```

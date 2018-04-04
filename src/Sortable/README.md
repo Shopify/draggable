@@ -8,7 +8,7 @@ Make sure to nest draggable elements as immediate children elements to their cor
 ### Import
 
 ```js
-import {Sortable} from '@shopify/sortable';
+import { Sortable } from '@shopify/sortable';
 ```
 
 ```js
@@ -16,11 +16,11 @@ import Sortable from '@shopify/draggable/lib/sortable';
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.5/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/draggable.bundle.js"></script>
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.5/lib/sortable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.6/lib/sortable.js"></script>
 ```
 
 ### API
@@ -35,12 +35,12 @@ Check out [Draggables options](../Draggable#options) for the base options
 
 Check out [Draggables events](../Draggable#events) for base events
 
-| Name                                 | Description                                                | Cancelable  | Cancelable action    |
-| ------------------------------------ | ---------------------------------------------------------- | ----------- | -------------------- |
-| [`sortable:start`][sortablestart]    | Gets fired when drag action begins                         | true        | Prevents drag start  |
-| [`sortable:sort`][sortablesort]      | Gets fired before sorting                                  | true        | Prevents sorting     |
-| [`sortable:sorted`][sortablesorted]  | Gets fired when the source gets sorted in the DOM          | false       | -                    |
-| [`sortable:stop`][sortablestop]      | Gets fired when dragging over other draggable              | false       | -                    |
+| Name                                | Description                                       | Cancelable | Cancelable action   |
+| ----------------------------------- | ------------------------------------------------- | ---------- | ------------------- |
+| [`sortable:start`][sortablestart]   | Gets fired when drag action begins                | true       | Prevents drag start |
+| [`sortable:sort`][sortablesort]     | Gets fired before sorting                         | true       | Prevents sorting    |
+| [`sortable:sorted`][sortablesorted] | Gets fired when the source gets sorted in the DOM | false      | -                   |
+| [`sortable:stop`][sortablestop]     | Gets fired when dragging over other draggable     | false      | -                   |
 
 [sortablestart]: SortableEvent#sortablestartevent
 [sortablesort]: SortableEvent#sortablesortevent
@@ -56,10 +56,10 @@ Check out [Draggables class identifiers](../Draggable#classes)
 This sample code will make list items sortable:
 
 ```js
-import {Sortable} from '@shopify/draggable';
+import { Sortable } from '@shopify/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
-  draggable: 'li',
+  draggable: 'li'
 });
 
 sortable.on('sortable:start', () => console.log('sortable:start'));
@@ -70,10 +70,10 @@ sortable.on('sortable:stop', () => console.log('sortable:stop'));
 
 ### Plans
 
-- Add `copy` option, which will allow draggable elements to be copied when dropped in a different container
-- Add `removeOnSpill` option, which will allow draggable elements to be removed from the DOM when dropped outside a container
+* Add `copy` option, which will allow draggable elements to be copied when dropped in a different container
+* Add `removeOnSpill` option, which will allow draggable elements to be removed from the DOM when dropped outside a container
 
 ### Caveats
 
-- Needs draggable elements to be immediate children of draggable containers.
-- Currently just appends draggable elements in different containers
+* Needs draggable elements to be immediate children of draggable containers.
+* Currently just appends draggable elements in different containers

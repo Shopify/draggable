@@ -1,6 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
+// eslint-disable-next-line import/no-unresolved
 import {Draggable} from '@shopify/draggable';
-/* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 
 function translateMirror(mirror, mirrorCoords, containerRect) {
   if (mirrorCoords.top < containerRect.top || mirrorCoords.left < containerRect.left) {

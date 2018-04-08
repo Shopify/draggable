@@ -28,15 +28,16 @@
     <meta name="description" content="{{ HeadAttr.description }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#212529">
 
     {{ SocialShare.render(HeadAttr) }}
     {% include 'components/Document/Favicon.html' %}
 
     <link rel="manifest" href="{{ url }}/manifest.json">
-    <link rel="stylesheet" href="assets/css/examples-app.css">
+    <link rel="stylesheet" href="assets/css/examples-app.css?beta=6">
 
-    <script src="assets/js/examples-runtime.js" defer></script>
-    <script src="assets/js/examples-vendor.js" defer></script>
-    <script src="assets/js/examples-app.js" defer></script>
+    <script src="assets/js/examples-runtime.js?beta=6" defer></script>
+    <script src="assets/js/examples-vendor.js?beta=6" defer></script>
+    <script src="assets/js/examples-app.js?beta=6" defer></script>
   </head>
 {% endmacro %}

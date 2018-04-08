@@ -29,7 +29,7 @@ Check out [Draggables API](../Draggable#api) for the base API
 
 Check out [Draggables options](../Draggable#options) for the base options
 
-**`dropzone {String|HTMLElement[]|NodeList|Function}`**  
+**`dropzone {String|HTMLElement[]|NodeList|Function}`**
 A css selector string, an array of elements, a NodeList or a function returning elements for dropzone
 elements within the `containers`.
 
@@ -49,10 +49,10 @@ Check out [Draggables events](../Draggable#events) for base events
 
 Check out [Draggables class identifiers](../Draggable#classes)
 
-| Name                 | Description                                                    | Default                         |
-| -------------------- | -------------------------------------------------------------- | ------------------------------- |
-| `droppable:active`   | Class added on droppables when drag starts                     | `draggable-droppable--active`   |
-| `droppable:occupied` | Class added on droppable element, when it contains a draggable | `draggable-droppable--occupied` |
+| Name                 | Description                                                                              | Default                         |
+| -------------------- | ---------------------------------------------------------------------------------------- | ------------------------------- |
+| `droppable:active`   | Class added to the droppable container _(dropzone)_ when drag starts                     | `draggable-droppable--active`   |
+| `droppable:occupied` | Class added to the droppable container _(dropzone)_ when it contains a draggable element | `draggable-droppable--occupied` |
 
 ### Example
 

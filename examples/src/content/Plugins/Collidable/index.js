@@ -1,6 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
+// eslint-disable-next-line import/no-unresolved
 import {Droppable, Plugins} from '@shopify/draggable';
-/* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 
 export default function PluginsCollidable() {
   const containerSelector = '#Collidable .BlockLayout';

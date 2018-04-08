@@ -1,6 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
+// eslint-disable-next-line import/no-unresolved
 import {Droppable} from '@shopify/draggable';
-/* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 
 export default function UniqueDropzone() {
   const containers = document.querySelectorAll('#UniqueDropzone .BlockLayout');

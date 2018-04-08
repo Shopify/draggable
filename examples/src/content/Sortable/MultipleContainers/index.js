@@ -1,6 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved */
+// eslint-disable-next-line import/no-unresolved
 import {Sortable} from '@shopify/draggable';
-/* eslint-enable import/no-extraneous-dependencies, import/no-unresolved */
 import matchMirrorSize from '../../../scripts/utils/match-mirror-size';
 
 const Classes = {

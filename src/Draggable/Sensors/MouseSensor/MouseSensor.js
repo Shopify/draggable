@@ -75,7 +75,6 @@ export default class MouseSensor extends Sensor {
     }
 
     document.addEventListener('mouseup', this[onMouseUp]);
-    document.addEventListener('dragstart', preventNativeDragStart);
 
     const target = document.elementFromPoint(event.clientX, event.clientY);
     const container = closest(target, this.containers);
@@ -83,6 +82,8 @@ export default class MouseSensor extends Sensor {
     if (!container) {
       return;
     }
+
+    document.addEventListener('dragstart', preventNativeDragStart);
 
     this.mouseDown = true;
 

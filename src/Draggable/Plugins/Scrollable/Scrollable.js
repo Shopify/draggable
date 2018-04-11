@@ -194,7 +194,7 @@ export default class Scrollable extends AbstractPlugin {
    * @private
    */
   [scroll]() {
-    if (!this.scrollableElement) {
+    if (!this.scrollableElement || !this.currentMousePosition) {
       return;
     }
 

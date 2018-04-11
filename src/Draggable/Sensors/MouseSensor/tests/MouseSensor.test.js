@@ -154,4 +154,14 @@ describe('MouseSensor', () => {
 
     releaseMouse(document.body);
   });
+
+  it('does not prevent `dragstart` event when attempting to drag outside of draggable container', () => {
+    clickMouse(document.body);
+    waitForDragDelay();
+    const nativeDragEvent = triggerEvent(draggableElement, 'dragstart');
+
+    expect(nativeDragEvent).not.toHaveDefaultPrevented();
+
+    releaseMouse(document.body);
+  });
 });

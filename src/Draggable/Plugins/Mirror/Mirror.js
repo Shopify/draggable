@@ -325,14 +325,14 @@ function positionMirror({withFrame = false, initial = false} = {}) {
           let x = sensorEvent.clientX - mirrorOffset.left - scrollOffset.x;
           let y = sensorEvent.clientY - mirrorOffset.top - scrollOffset.y;
 
-          if (document !== currentHost) {
-            const iframeElements = [...document.querySelectorAll('iframe')];
-            const iframeElement = iframeElements.find((iframe) => iframe.contentDocument === currentHost);
-            const {top, left} = iframeElement.getBoundingClientRect();
+          // if (document !== currentHost) {
+          //   const iframeElements = [...document.querySelectorAll('iframe')];
+          //   const iframeElement = iframeElements.find((iframe) => iframe.contentDocument === currentHost);
+          //   const {top, left} = iframeElement.getBoundingClientRect();
 
-            x += left;
-            y += top;
-          }
+          //   x += left;
+          //   y += top;
+          // }
 
           if ((options.xAxis && options.yAxis) || initial) {
             mirror.style.transform = `translate3d(${x}px, ${y}px, 0)`;

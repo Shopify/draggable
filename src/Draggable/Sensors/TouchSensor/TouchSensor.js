@@ -39,9 +39,10 @@ export default class TouchSensor extends Sensor {
    * @constructs TouchSensor
    * @param {HTMLElement[]|NodeList|HTMLElement} containers - Containers
    * @param {Object} options - Options
+   * @param {DocumentOrShadowRoot} hosts - Hosts
    */
-  constructor(containers = [], options = {}) {
-    super(containers, options);
+  constructor(containers = [], options = {}, hosts = []) {
+    super(containers, options, hosts);
 
     /**
      * Closest scrollable container so accidental scroll can cancel long touch
@@ -96,6 +97,12 @@ export default class TouchSensor extends Sensor {
       return;
     }
 
+    const {document: currentHost} = event.view;
+
+    this.startedInsideIframe = Boolean(document !== currentHost);
+    this.initialHost = currentHost;
+    this.iframeElements = [...document.querySelectorAll('iframe')];
+
     this.addHostsEventListener('touchmove', this[onTouchMove]);
     this.addHostsEventListener('touchend', this[onTouchEnd]);
     this.addHostsEventListener('touchcancel', this[onTouchEnd]);
@@ -148,7 +155,41 @@ export default class TouchSensor extends Sensor {
     }
 
     const touch = event.touches[0] || event.changedTouches[0];
-    const target = document.elementFromPoint(touch.pageX - window.scrollX, touch.pageY - window.scrollY);
+    const {document: currentHost} = event.view;
+
+    let {pageX: clientX, pageY: clientY} = touch;
+    clientX -= window.scrollX;
+    clientY -= window.scrollY;
+    let target = currentHost.elementFromPoint(clientX, clientY);
+
+    if (this.startedInsideIframe && (clientX < 0 || clientY < 0)) {
+      const iframeElements = [...document.querySelectorAll('iframe')];
+      const iframeElement = iframeElements.find((iframe) => iframe.contentDocument === currentHost);
+      const {top, left} = iframeElement.getBoundingClientRect();
+
+      clientX += left;
+      clientY += top;
+      target = document.elementFromPoint(clientX, clientY);
+    } else if (!this.startedInsideIframe && target && target.tagName === 'IFRAME') {
+      const iframeHost = target.contentDocument;
+      const iframeElements = [...document.querySelectorAll('iframe')];
+      const iframeElement = iframeElements.find((iframe) => iframe.contentDocument === iframeHost);
+      const {top, left} = iframeElement.getBoundingClientRect();
+
+      clientX -= left;
+      clientY -= top;
+
+      target = iframeHost.elementFromPoint(clientX, clientY);
+    } else {
+      target = currentHost.elementFromPoint(clientX, clientY);
+    }
+
+    // console.log(clientX, clientY)
+
+    // console.log(target)
+
+    // const touch = event.touches[0] || event.changedTouches[0];
+    // const target = document.elementFromPoint(touch.pageX - window.scrollX, touch.pageY - window.scrollY);
 
     const dragMoveEvent = new DragMoveSensorEvent({
       clientX: touch.pageX,

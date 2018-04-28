@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import {Swappable} from '@shopify/draggable';
+import {Swappable, Plugins} from '@shopify/draggable';
 
 export default function Flexbox() {
   const containers = document.querySelectorAll('#Flexbox .BlockLayout');
@@ -13,6 +13,7 @@ export default function Flexbox() {
     mirror: {
       constrainDimensions: true,
     },
+    plugins: [Plugins.ResizeMirror],
   });
 
   return swappable;

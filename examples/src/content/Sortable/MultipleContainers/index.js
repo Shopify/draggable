@@ -15,7 +15,9 @@ export default function MultipleContainers() {
 
   const sortable = new Sortable(containers, {
     draggable: `.${Classes.draggable}`,
-    mirror: {constrainDimensions: true},
+    mirror: {
+      constrainDimensions: true,
+    },
     plugins: [Plugins.ResizeMirror],
   });
 

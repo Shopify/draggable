@@ -1,10 +1,15 @@
 ## ResizeMirror
 
 The ResizeMirror plugin resizes the mirror element to the dimensions of the draggable element that the mirror is hovering over.
+
 It will also appends the mirror element to whatever draggable container element the mirror is hovering over.
 You can add transitions to the mirror element to animate the resizing.
 
 This plugin is not included in the default Draggable bundle, so you'll need to import it separately.
+
+![grid-mirror-resize](https://user-images.githubusercontent.com/643944/39401902-197a93d4-4b1f-11e8-8e2a-9c3070a6fb95.gif)
+
+> **Example of `ResizeMirror` in action.** Custom transitions are applied via CSS _(not provided by the plugin)_ – [Grid Layout Example](https://shopify.github.io/draggable/examples/grid-layout.html)
 
 ### Import
 
@@ -26,7 +31,7 @@ import ResizeMirror from '@shopify/draggable/lib/plugins/resize-mirror';
 
 ### API
 
-**`new ResizeMirror(draggable: Draggable): ResizeMirror`**  
+**`new ResizeMirror(draggable: Draggable): ResizeMirror`**
 Creates an instance of the ResizeMirror plugin.
 
 ### Options

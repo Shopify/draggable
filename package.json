@@ -38,7 +38,7 @@
   "files": ["lib/**/*.js"],
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-jest": "^22.4.1",
+    "babel-jest": "^22.4.3",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-classes": "^6.24.1",
@@ -47,17 +47,17 @@
     "babel-preset-shopify": "^16.3.0",
     "codecov": "^3.0.0",
     "concurrently": "^3.5.1",
-    "core-js": "^2.5.3",
+    "core-js": "^2.5.5",
     "esdoc": "^1.0.4",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
-    "eslint": "^4.19.0",
+    "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
-    "eslint-plugin-shopify": "^20.0.0",
-    "jest": "^22.4.2",
-    "webpack": "^4.1.1",
+    "eslint-plugin-shopify": "^21.0.1",
+    "jest": "^22.4.3",
+    "webpack": "^4.6.0",
     "webpack-bundle-analyzer": "^2.11.1",
-    "webpack-cli": "^2.0.12"
+    "webpack-cli": "^2.0.15"
   },
   "eslintConfig": {
     "extends": "plugin:shopify/esnext",

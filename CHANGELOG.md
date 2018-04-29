@@ -1,10 +1,21 @@
 # Changelog
 
-## v1.0.0-beta.7 - ?
+## v1.0.0-beta.8 - ?
 
 ### Added
 
 ### Changed
+
+## v1.0.0-beta.7 - 2018-04-28
+
+### Added
+
+* ResizeMirror plugin
+
+### Changed
+
+* Fixed native drag events with draggable
+* Mouse position bug in scrollable
 
 ## v1.0.0-beta.6 - 2018-04-04
 

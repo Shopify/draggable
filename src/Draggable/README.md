@@ -88,10 +88,6 @@ plugins controls the mirror movement. Default: `[]`
 Sensors dictate how drag operations get triggered, by listening to native browser events.
 By default draggable includes the `MouseSensor` & `TouchSensor`. Default: `[]`
 
-**`classes {Object}`**  
-Draggable adds classes to elements to indicate state. These classes can be used to add styling
-on elements in certain states.
-
 ### Events
 
 | Name                                       | Description                                               | Cancelable | Cancelable action   |

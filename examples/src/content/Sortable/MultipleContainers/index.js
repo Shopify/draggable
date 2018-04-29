@@ -1,6 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import {Sortable} from '@shopify/draggable';
-import matchMirrorSize from '../../../scripts/utils/match-mirror-size';
+import {Sortable, Plugins} from '@shopify/draggable';
 
 const Classes = {
   draggable: 'StackedListItem--isDraggable',
@@ -19,6 +18,7 @@ export default function MultipleContainers() {
     mirror: {
       constrainDimensions: true,
     },
+    plugins: [Plugins.ResizeMirror],
   });
 
   const containerTwoCapacity = 3;
@@ -52,7 +52,6 @@ export default function MultipleContainers() {
       return;
     }
 
-    matchMirrorSize(evt.dragEvent, Classes.draggable);
     lastOverContainer = evt.dragEvent.overContainer;
   });
 

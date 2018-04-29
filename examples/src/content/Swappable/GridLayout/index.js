@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import {Swappable} from '@shopify/draggable';
+import {Swappable, Plugins} from '@shopify/draggable';
 
 export default function GridLayout() {
   const containerSelector = '#GridLayout .BlockLayout';
@@ -15,6 +15,7 @@ export default function GridLayout() {
     mirror: {
       constrainDimensions: true,
     },
+    plugins: [Plugins.ResizeMirror],
   });
 
   return swappable;

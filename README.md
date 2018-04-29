@@ -111,6 +111,7 @@ You can find the documentation for each module within their respective directori
   * [DroppableEvent](src/Droppable/DroppableEvent)
 * [Plugins](src/Plugins)
   * [Collidable](src/Plugins/Collidable)
+  * [ResizeMirror](src/Plugins/ResizeMirror)
   * [Snappable](src/Plugins/Snappable)
   * [SwapAnimation](src/Plugins/SwapAnimation)
 * [Sortable](src/Sortable)

@@ -249,8 +249,10 @@
 
   &.draggable-mirror {
     z-index: get-z-index(overlay);
+    transition: width get-duration() get-easing(bungie), height get-duration() get-easing(bungie);
 
     .StackedListContent {
+      height: 100%;
       color: white;
       background-color: get-color(brand, blue);
       border-color: get-color(brand, blue);

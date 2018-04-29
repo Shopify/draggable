@@ -106,9 +106,7 @@
     color: get-color(coal, dark);
     background-color: white;
     border-color: currentColor;
-    transition:
-      color get-duration(fast) get-easing(),
-      background-color get-duration(fast) get-easing(),
+    transition: color get-duration(fast) get-easing(), background-color get-duration(fast) get-easing(),
       transform get-duration() get-easing(bungie);
   }
 
@@ -134,8 +132,10 @@
 
   &.draggable-mirror {
     z-index: get-z-index(overlay);
+    transition: width get-duration() get-easing(bungie), height get-duration() get-easing(bungie);
 
     .BlockContent {
+      height: 100%;
       color: white;
       background-color: get-color(brand, blue);
       border-color: get-color(brand, blue);

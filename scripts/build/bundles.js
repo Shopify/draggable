@@ -49,6 +49,13 @@ const bundles = [
   },
 
   {
+    name: 'ResizeMirror',
+    filename: 'resize-mirror',
+    source: 'Plugins/ResizeMirror/index',
+    path: 'plugins/',
+  },
+
+  {
     name: 'Snappable',
     filename: 'snappable',
     source: 'Plugins/Snappable/index',

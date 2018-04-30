@@ -65,5 +65,9 @@
   },
   "babel": {
     "plugins": ["transform-class-properties", "transform-object-rest-spread", "transform-es2015-modules-commonjs"]
+  },
+  "publishConfig": {
+    "access": "public",
+    "@shopify:registry": "https://registry.npmjs.org"
   }
 }

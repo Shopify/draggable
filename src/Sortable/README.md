@@ -8,7 +8,7 @@ Make sure to nest draggable elements as immediate children elements to their cor
 ### Import
 
 ```js
-import { Sortable } from '@shopify/sortable';
+import { Sortable } from '@shopify/draggable';
 ```
 
 ```js

@@ -395,6 +395,7 @@ export default class Draggable {
     if (!isDragEvent(originalEvent) && !mirrorCreateEvent.canceled()) {
       const appendableContainer = this[getAppendableContainer]({source: this.originalSource});
       this.mirror = this.source.cloneNode(true);
+      this.mirror.style.display = 'none';
 
       const mirrorCreatedEvent = new MirrorCreatedEvent({
         source: this.source,

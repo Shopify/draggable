@@ -251,7 +251,7 @@ function resetMirror({mirror, source, options, ...args}) {
       offsetWidth = computedSourceStyles.getPropertyValue('width');
     }
 
-    mirror.style.display = 'block'
+    mirror.style.display = 'block';
     mirror.style.position = 'fixed';
     mirror.style.pointerEvents = 'none';
     mirror.style.top = 0;

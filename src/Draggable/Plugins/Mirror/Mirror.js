@@ -286,6 +286,8 @@ export default class Mirror extends AbstractPlugin {
       return {mirrorOffset, initialX, initialY, ...args};
     };
 
+    mirror.style.display = 'none';
+
     const initialState = {
       mirror,
       source,
@@ -424,6 +426,7 @@ function resetMirror({mirror, source, options, ...args}) {
       offsetWidth = computedSourceStyles.getPropertyValue('width');
     }
 
+    mirror.style.display = null;
     mirror.style.position = 'fixed';
     mirror.style.pointerEvents = 'none';
     mirror.style.top = 0;

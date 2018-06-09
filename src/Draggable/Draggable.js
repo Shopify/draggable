@@ -451,14 +451,12 @@ export default class Draggable {
       document.body.classList.remove(this.getClassNameFor('body:dragging'));
     } else {
       requestAnimationFrame(() => {
-        // Temporary hack until we can correctly re-write the originalSource -> source
+        const oldSensorEvent = getSensorEvent(event);
+        const newSensorEvent = oldSensorEvent.clone({target: this.source});
+
         this[onDragMove]({
           ...event,
-          target: this.source,
-          detail: {
-            ...event.detail,
-            target: this.source,
-          },
+          detail: newSensorEvent,
         });
       });
     }

@@ -71,4 +71,17 @@ export default class AbstractEvent {
   canceled() {
     return Boolean(this[canceled]);
   }
+
+  /**
+   * Returns new event instance with existing event data.
+   * This method allows for overriding of event data.
+   * @param {Object} data
+   * @return {AbstractEvent}
+   */
+  clone(data) {
+    return new this.constructor({
+      ...this.data,
+      ...data,
+    });
+  }
 }

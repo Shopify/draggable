@@ -1,4 +1,13 @@
-import {createSandbox, triggerEvent, TestPlugin, clickMouse, moveMouse, releaseMouse, waitForDragDelay} from 'helper';
+import {
+  createSandbox,
+  triggerEvent,
+  TestPlugin,
+  clickMouse,
+  moveMouse,
+  releaseMouse,
+  waitForDragDelay,
+  waitForRequestAnimationFrame,
+} from 'helper';
 import Draggable, {defaultOptions} from '../Draggable';
 import {DragStartEvent, DragMoveEvent, DragStopEvent} from '../DragEvent';
 import {DraggableInitializedEvent, DraggableDestroyEvent} from '../DraggableEvent';
@@ -397,6 +406,43 @@ describe('Draggable', () => {
 
       expect(draggable.getDraggableElements()).toEqual([...document.querySelectorAll('.Container li')]);
     });
+  });
+
+  it('triggers `drag:move` as part of the `drag:start` event', () => {
+    const dragStartHandler = jest.fn();
+    const dragMoveHandler = jest.fn();
+
+    let dragStartTarget;
+    let dragMoveTarget;
+
+    const draggable = new Draggable(containers, {
+      draggable: 'li',
+    });
+
+    draggable.on('drag:start', (dragStartEvent) => {
+      dragStartTarget = dragStartEvent.sensorEvent.target;
+      dragStartHandler(dragStartEvent);
+    });
+
+    draggable.on('drag:move', (dragMoveEvent) => {
+      dragMoveTarget = dragMoveEvent.sensorEvent.target;
+      dragMoveHandler(dragMoveEvent);
+    });
+
+    const draggableElement = document.querySelector('li');
+
+    clickMouse(draggableElement);
+    waitForDragDelay(100);
+    waitForRequestAnimationFrame();
+
+    expect(dragStartHandler).toHaveBeenCalledTimes(1);
+    expect(dragMoveHandler).toHaveBeenCalledTimes(1);
+
+    expect(draggableElement).not.toEqual(draggable.source);
+    expect(dragStartTarget).toBe(draggableElement);
+    expect(dragMoveTarget).toBe(draggable.source);
+
+    releaseMouse(draggable.source);
   });
 
   it('triggers `drag:start` drag event on mousedown', () => {

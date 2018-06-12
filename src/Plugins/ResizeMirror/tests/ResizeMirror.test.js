@@ -5,6 +5,7 @@ import {
   moveMouse,
   releaseMouse,
   waitForDragDelay,
+  waitForPromisesToResolve,
   DRAG_DELAY,
 } from 'helper';
 import {Draggable} from '../../..';
@@ -63,11 +64,12 @@ describe('ResizeMirror', () => {
     sandbox.parentNode.removeChild(sandbox);
   });
 
-  it('resizes mirror based on over element', () => {
+  it('resizes mirror based on over element', async () => {
     clickMouse(smallerDraggable);
     waitForDragDelay();
+    await waitForPromisesToResolve();
 
-    const mirror = getMirror(containers[0]);
+    const mirror = document.querySelector('.draggable-mirror');
 
     expect(mirror.style).toMatchObject({
       width: `${smallerDraggableDimensions.width}px`,
@@ -95,11 +97,12 @@ describe('ResizeMirror', () => {
     releaseMouse(largerDraggable);
   });
 
-  it('appends mirror in over container', () => {
+  it('appends mirror in over container', async () => {
     clickMouse(smallerDraggable);
     waitForDragDelay();
+    await waitForPromisesToResolve();
 
-    const mirror = getMirror(containers[0]);
+    const mirror = document.querySelector('.draggable-mirror');
 
     moveMouse(largerDraggable);
     waitForRequestAnimationFrame();
@@ -108,15 +111,25 @@ describe('ResizeMirror', () => {
 
     releaseMouse(largerDraggable);
   });
-});
 
-function getMirror(containerWithMirror) {
-  // figure out how we can resolve mirror promises to set the mirror class
-  // so we don't have to assume the mirror gets appended at the end of the
-  // container
-  const children = containerWithMirror.children;
-  return children[children.length - 1];
-}
+  it('appends mirror only for different parent containers', async () => {
+    clickMouse(smallerDraggable);
+    waitForDragDelay();
+    await waitForPromisesToResolve();
+
+    const mirror = document.querySelector('.draggable-mirror');
+
+    const mockedAppendChild = withMockedAppendChild(() => {
+      moveMouse(smallerDraggable);
+      waitForRequestAnimationFrame();
+    });
+
+    expect(mirror.parentNode).toBe(draggable.sourceContainer);
+    expect(mockedAppendChild).not.toHaveBeenCalled();
+
+    releaseMouse(largerDraggable);
+  });
+});
 
 function mockDimensions(element, {width = 0, height = 0}) {
   Object.assign(element.style, {
@@ -139,4 +152,16 @@ function mockDimensions(element, {width = 0, height = 0}) {
 function waitForNextRequestAnimationFrame() {
   waitForRequestAnimationFrame();
   waitForRequestAnimationFrame();
+}
+
+function withMockedAppendChild(callback) {
+  const mock = jest.fn();
+  const appendChild = Node.prototype.appendChild;
+  Node.prototype.appendChild = function(...args) {
+    mock(...args);
+    return appendChild.call(this, ...args);
+  };
+  callback();
+  Node.prototype.appendChild = appendChild;
+  return mock;
 }

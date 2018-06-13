@@ -4,13 +4,13 @@
 
 The base event for all Drag events that `Draggable` emits.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `DragEvent`                                                |
-| **Interface**         | `DragEvent`                                                |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `drag`                                                     |
+|                   |             |
+| ----------------- | ----------- |
+| **Specification** | `DragEvent` |
+| **Interface**     | `DragEvent` |
+| **Cancelable**    | false       |
+| **Cancel action** | -           |
+| **type**          | `drag`      |
 
 ### API
 
@@ -22,10 +22,6 @@ element, which can be moved around in the DOM.
 Read-only property for the original source element that was picked up. This element never
 moves in the DOM and gets hidden on `drag:start`.
 
-**`dragEvent.mirror: String`**  
-Read-only property for the mirror element, which is also a copy of the `originalSource` element.
-The mirror follows your mouse/touch movements.
-
 **`dragEvent.sourceContainer: String`**  
 Read-only property for the source elements container. This would be one of the containers that
 was passed into Draggable.
@@ -34,47 +30,44 @@ was passed into Draggable.
 Read-only property for the original sensor event that triggered this event.
 
 **`dragEvent.originalEvent: SensorEvent`**  
-Read-only property for the original event  that triggered the sensor event.
-
-**`dragEvent.hasMirror(): Boolean`**  
-Checks if a mirror has been created. The mirror does not get created for `DragSensor` or `KeyboardSensor` events
+Read-only property for the original event that triggered the sensor event.
 
 ## DragStartEvent
 
 `DragStartEvent` gets triggered by `Draggable` when drag interaction has started.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `DragEvent`                                                |
-| **Interface**         | `DragStartEvent`                                           |
-| **Cancelable**        | true                                                       |
-| **Cancel action**     | Prevents drag start                                        |
-| **type**              | `drag:start`                                               |
+|                   |                     |
+| ----------------- | ------------------- |
+| **Specification** | `DragEvent`         |
+| **Interface**     | `DragStartEvent`    |
+| **Cancelable**    | true                |
+| **Cancel action** | Prevents drag start |
+| **type**          | `drag:start`        |
 
 ## DragMoveEvent
 
 `DragMoveEvent` gets triggered while moving the mouse after the `DragStartEvent` has triggered.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `DragEvent`                                                |
-| **Interface**         | `DragMoveEvent`                                            |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `drag:move`                                                |
+|                   |                 |
+| ----------------- | --------------- |
+| **Specification** | `DragEvent`     |
+| **Interface**     | `DragMoveEvent` |
+| **Cancelable**    | false           |
+| **Cancel action** | -               |
+| **type**          | `drag:move`     |
 
 ## DragOverEvent
 
 `DragOverEvent` gets triggered when hovering over another draggable element during a drag
 interaction.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `DragEvent`                                                |
-| **Interface**         | `DragOverEvent`                                            |
-| **Cancelable**        | true                                                       |
-| **Cancel action**     | Cancels default actions in `Sortable` and `Swappable`      |
-| **type**              | `drag:over`                                                |
+|                   |                                                       |
+| ----------------- | ----------------------------------------------------- |
+| **Specification** | `DragEvent`                                           |
+| **Interface**     | `DragOverEvent`                                       |
+| **Cancelable**    | true                                                  |
+| **Cancel action** | Cancels default actions in `Sortable` and `Swappable` |
+| **type**          | `drag:over`                                           |
 
 ### API
 
@@ -89,13 +82,13 @@ Read-only property for the draggable container element that you are hovering ove
 `DragOutEvent` gets triggered after a `DragOverEvent` and indicates that you are leaving
 a draggable element.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `DragEvent`                                                |
-| **Interface**         | `DragOutEvent`                                             |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `drag:out`                                                 |
+|                   |                |
+| ----------------- | -------------- |
+| **Specification** | `DragEvent`    |
+| **Interface**     | `DragOutEvent` |
+| **Cancelable**    | false          |
+| **Cancel action** | -              |
+| **type**          | `drag:out`     |
 
 ### API
 
@@ -109,13 +102,13 @@ Read-only property for the draggable container element that you are hovering ove
 
 `DragOverContainerEvent` gets triggered when hovering over a container, other than the `sourceContainer` in `DragStartEvent`.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `DragEvent`                                                |
-| **Interface**         | `DragOverContainerEvent`                                   |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `drag:over:container`                                      |
+|                   |                          |
+| ----------------- | ------------------------ |
+| **Specification** | `DragEvent`              |
+| **Interface**     | `DragOverContainerEvent` |
+| **Cancelable**    | false                    |
+| **Cancel action** | -                        |
+| **type**          | `drag:over:container`    |
 
 ### API
 
@@ -127,13 +120,13 @@ Read-only property for the draggable container element that you are hovering ove
 `DragOutContainerEvent` gets triggered after a `DragOverContainerEvent` and indicates that
 you are leaving a draggable container element.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `DragEvent`                                                |
-| **Interface**         | `DragOutContainerEvent`                                    |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `drag:out:container`                                       |
+|                   |                         |
+| ----------------- | ----------------------- |
+| **Specification** | `DragEvent`             |
+| **Interface**     | `DragOutContainerEvent` |
+| **Cancelable**    | false                   |
+| **Cancel action** | -                       |
+| **type**          | `drag:out:container`    |
 
 ### API
 
@@ -146,13 +139,13 @@ Read-only property for the draggable container element that you are leaving.
 only fires when the `ForceTouchSensor` is included as a Sensor and a Force Touch trackpad
 is used with Safari.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `DragEvent`                                                |
-| **Interface**         | `DragPressureEvent`                                        |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `drag:pressure`                                            |
+|                   |                     |
+| ----------------- | ------------------- |
+| **Specification** | `DragEvent`         |
+| **Interface**     | `DragPressureEvent` |
+| **Cancelable**    | false               |
+| **Cancel action** | -                   |
+| **type**          | `drag:pressure`     |
 
 ### API
 
@@ -163,10 +156,10 @@ Read-only property for pressure applied on a draggable element. Value ranges fro
 
 `DragStopEvent` gets triggered after `DragStartEvent`, once drag interactions have completed.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `DragEvent`                                                |
-| **Interface**         | `DragStopEvent`                                            |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `drag:stop`                                                |
+|                   |                 |
+| ----------------- | --------------- |
+| **Specification** | `DragEvent`     |
+| **Interface**     | `DragStopEvent` |
+| **Cancelable**    | false           |
+| **Cancel action** | -               |
+| **type**          | `drag:stop`     |

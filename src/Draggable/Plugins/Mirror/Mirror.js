@@ -1,10 +1,20 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
 
+import {
+  MirrorCreateEvent,
+  MirrorCreatedEvent,
+  MirrorAttachedEvent,
+  MirrorMoveEvent,
+  MirrorDestroyEvent,
+} from './MirrorEvent';
+
 export const onDragStart = Symbol('onDragStart');
+export const onDragMove = Symbol('onDragMove');
 export const onDragStop = Symbol('onDragStop');
 export const onMirrorCreated = Symbol('onMirrorCreated');
 export const onMirrorMove = Symbol('onMirrorMove');
 export const onScroll = Symbol('onScroll');
+export const getAppendableContainer = Symbol('getAppendableContainer');
 
 /**
  * Mirror default options
@@ -47,6 +57,7 @@ export default class Mirror extends AbstractPlugin {
      * @property {Boolean} options.yAxis
      * @property {Number|null} options.cursorOffsetX
      * @property {Number|null} options.cursorOffsetY
+     * @property {String|HTMLElement|Function} options.appendTo
      * @type {Object}
      */
     this.options = {
@@ -74,6 +85,7 @@ export default class Mirror extends AbstractPlugin {
     };
 
     this[onDragStart] = this[onDragStart].bind(this);
+    this[onDragMove] = this[onDragMove].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
     this[onMirrorCreated] = this[onMirrorCreated].bind(this);
     this[onMirrorMove] = this[onMirrorMove].bind(this);
@@ -86,6 +98,7 @@ export default class Mirror extends AbstractPlugin {
   attach() {
     this.draggable
       .on('drag:start', this[onDragStart])
+      .on('drag:move', this[onDragMove])
       .on('drag:stop', this[onDragStop])
       .on('mirror:created', this[onMirrorCreated])
       .on('mirror:move', this[onMirrorMove]);
@@ -97,6 +110,7 @@ export default class Mirror extends AbstractPlugin {
   detach() {
     this.draggable
       .off('drag:start', this[onDragStart])
+      .off('drag:move', this[onDragMove])
       .off('drag:stop', this[onDragStop])
       .off('mirror:created', this[onMirrorCreated])
       .off('mirror:move', this[onMirrorMove]);
@@ -110,7 +124,11 @@ export default class Mirror extends AbstractPlugin {
     return this.draggable.options.mirror || {};
   }
 
-  [onDragStart]() {
+  [onDragStart](dragEvent) {
+    if (dragEvent.canceled()) {
+      return;
+    }
+
     if ('ontouchstart' in window) {
       document.addEventListener('scroll', this[onScroll], true);
     }
@@ -119,15 +137,95 @@ export default class Mirror extends AbstractPlugin {
       x: window.scrollX,
       y: window.scrollY,
     };
+
+    const {source, originalSource, sourceContainer, sensorEvent} = dragEvent;
+
+    const mirrorCreateEvent = new MirrorCreateEvent({
+      source,
+      originalSource,
+      sourceContainer,
+      sensorEvent,
+      dragEvent,
+    });
+
+    this.draggable.trigger(mirrorCreateEvent);
+
+    if (isNativeDragEvent(sensorEvent) || mirrorCreateEvent.canceled()) {
+      return;
+    }
+
+    const appendableContainer = this[getAppendableContainer](source) || sourceContainer;
+    this.mirror = source.cloneNode(true);
+
+    const mirrorCreatedEvent = new MirrorCreatedEvent({
+      source,
+      originalSource,
+      sourceContainer,
+      sensorEvent,
+      dragEvent,
+      mirror: this.mirror,
+    });
+
+    const mirrorAttachedEvent = new MirrorAttachedEvent({
+      source,
+      originalSource,
+      sourceContainer,
+      sensorEvent,
+      dragEvent,
+      mirror: this.mirror,
+    });
+
+    this.draggable.trigger(mirrorCreatedEvent);
+    appendableContainer.appendChild(this.mirror);
+    this.draggable.trigger(mirrorAttachedEvent);
   }
 
-  [onDragStop]() {
+  [onDragMove](dragEvent) {
+    if (!this.mirror || dragEvent.canceled()) {
+      return;
+    }
+
+    const {source, originalSource, sourceContainer, sensorEvent} = dragEvent;
+
+    const mirrorMoveEvent = new MirrorMoveEvent({
+      source,
+      originalSource,
+      sourceContainer,
+      sensorEvent,
+      dragEvent,
+      mirror: this.mirror,
+    });
+
+    this.draggable.trigger(mirrorMoveEvent);
+  }
+
+  [onDragStop](dragEvent) {
     if ('ontouchstart' in window) {
       document.removeEventListener('scroll', this[onScroll], true);
     }
 
     this.initialScrollOffset = {x: 0, y: 0};
     this.scrollOffset = {x: 0, y: 0};
+
+    if (!this.mirror) {
+      return;
+    }
+
+    const {source, sourceContainer, sensorEvent} = dragEvent;
+
+    const mirrorDestroyEvent = new MirrorDestroyEvent({
+      source,
+      mirror: this.mirror,
+      sourceContainer,
+      sensorEvent,
+      dragEvent,
+    });
+
+    this.draggable.trigger(mirrorDestroyEvent);
+
+    if (!mirrorDestroyEvent.canceled()) {
+      this.mirror.parentNode.removeChild(this.mirror);
+    }
   }
 
   [onScroll]() {
@@ -178,13 +276,17 @@ export default class Mirror extends AbstractPlugin {
   /**
    * Mirror move handler
    * @param {MirrorMoveEvent} mirrorEvent
-   * @return {Promise}
+   * @return {Promise|null}
    * @private
    */
-  [onMirrorMove]({mirror, sensorEvent}) {
+  [onMirrorMove](mirrorEvent) {
+    if (mirrorEvent.canceled()) {
+      return null;
+    }
+
     const initialState = {
-      mirror,
-      sensorEvent,
+      mirror: mirrorEvent.mirror,
+      sensorEvent: mirrorEvent.sensorEvent,
       mirrorOffset: this.mirrorOffset,
       options: this.options,
       initialX: this.initialX,
@@ -193,6 +295,27 @@ export default class Mirror extends AbstractPlugin {
     };
 
     return Promise.resolve(initialState).then(positionMirror({raf: true}));
+  }
+
+  /**
+   * Returns appendable container for mirror based on the appendTo option
+   * @private
+   * @param {Object} options
+   * @param {HTMLElement} options.source - Current source
+   * @return {HTMLElement}
+   */
+  [getAppendableContainer](source) {
+    const appendTo = this.options.appendTo;
+
+    if (typeof appendTo === 'string') {
+      return document.querySelector(appendTo);
+    } else if (appendTo instanceof HTMLElement) {
+      return appendTo;
+    } else if (typeof appendTo === 'function') {
+      return appendTo(source);
+    } else {
+      return source.parentNode;
+    }
   }
 }
 
@@ -363,4 +486,12 @@ function withPromise(callback, {raf = false} = {}) {
       callback(resolve, reject);
     }
   });
+}
+
+/**
+ * Returns true if the sensor event was triggered by a native browser drag event
+ * @param {SensorEvent} sensorEvent
+ */
+function isNativeDragEvent(sensorEvent) {
+  return /^drag/.test(sensorEvent.originalEvent.type);
 }

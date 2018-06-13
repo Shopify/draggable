@@ -1,20 +1,20 @@
-import {DRAG_DELAY, defaultTouchEventOptions} from './constants';
+import {DRAG_DELAY, defaultTouchEventOptions, defaultMouseEventOptions} from './constants';
 import {triggerEvent} from './event';
 
 export function waitForDragDelay(dragDelay = DRAG_DELAY) {
   jest.runTimersToTime(dragDelay + 1);
 }
 
-export function clickMouse(element, {button = 0, ...options} = {}) {
-  return triggerEvent(element, 'mousedown', {button, ...options});
+export function clickMouse(element, options = {}) {
+  return triggerEvent(element, 'mousedown', {...defaultMouseEventOptions, ...options});
 }
 
-export function moveMouse(element) {
-  return triggerEvent(element, 'mousemove');
+export function moveMouse(element, options = {}) {
+  return triggerEvent(element, 'mousemove', {...defaultMouseEventOptions, ...options});
 }
 
-export function releaseMouse(element) {
-  return triggerEvent(element, 'mouseup');
+export function releaseMouse(element, options = {}) {
+  return triggerEvent(element, 'mouseup', {...defaultMouseEventOptions, ...options});
 }
 
 export function touchStart(element, options) {

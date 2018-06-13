@@ -628,8 +628,6 @@ describe('Draggable', () => {
     document.elementFromPoint = () => draggableElement;
 
     newInstance.on('drag:start', (event) => {
-      expect(newInstance.source.classList).toContain('draggable-source--is-dragging');
-
       event.cancel();
     });
 
@@ -641,6 +639,8 @@ describe('Draggable', () => {
     const source = newInstance.source;
 
     expect(source.classList).not.toContain('draggable-source--is-dragging');
+
+    triggerEvent(draggableElement, 'mouseup', {button: 0});
   });
 
   it('adds `body:dragging` classname to body on mousedown', () => {
@@ -689,8 +689,6 @@ describe('Draggable', () => {
     document.elementFromPoint = () => draggableElement;
 
     newInstance.on('drag:start', (event) => {
-      expect(document.body.classList).toContain('draggable--is-dragging');
-
       event.cancel();
     });
 
@@ -700,6 +698,8 @@ describe('Draggable', () => {
     jest.runTimersToTime(100);
 
     expect(document.body.classList).not.toContain('draggable--is-dragging');
+
+    triggerEvent(draggableElement, 'mouseup', {button: 0});
   });
 
   it('adds `container:placed` classname to draggable container element on mouseup', () => {
@@ -788,8 +788,6 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
 
     newInstance.on('drag:start', (event) => {
-      expect(containers[0].classList).toContain('draggable-container--is-dragging');
-
       event.cancel();
     });
 
@@ -799,6 +797,8 @@ describe('Draggable', () => {
     jest.runTimersToTime(100);
 
     expect(containers[0].classList).not.toContain('draggable-container--is-dragging');
+
+    triggerEvent(draggableElement, 'mouseup', {button: 0});
   });
 
   it('adds and removes `source:original` on start and stop', () => {

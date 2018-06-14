@@ -46,7 +46,7 @@ export default function DragEvents() {
 
   draggable.on('mirror:created', (evt) => {
     containerRect = evt.sourceContainer.getBoundingClientRect();
-    dragRect = evt.originalSource.getBoundingClientRect();
+    dragRect = evt.source.getBoundingClientRect();
 
     const containerRectQuarter = containerRect.width / 4;
     dragThreshold = isToggled ? containerRectQuarter * -1 : containerRectQuarter;
@@ -60,7 +60,7 @@ export default function DragEvents() {
     };
   });
 
-  draggable.on('drag:move', (evt) => {
+  draggable.on('mirror:move', (evt) => {
     // Required to help restrict the draggable element to the container
     evt.cancel();
 

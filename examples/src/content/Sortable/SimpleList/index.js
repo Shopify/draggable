@@ -11,8 +11,8 @@ export default function SimpleList() {
 
   const sortable = new Sortable(containers, {
     draggable: '.StackedListItem--isDraggable',
-    appendTo: containerSelector,
     mirror: {
+      appendTo: containerSelector,
       constrainDimensions: true,
     },
   });

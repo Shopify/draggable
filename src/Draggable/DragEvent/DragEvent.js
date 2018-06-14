@@ -72,14 +72,6 @@ export class DragEvent extends AbstractEvent {
 
     return null;
   }
-
-  /**
-   * Checks if mirror has been created
-   * @return {Boolean}
-   */
-  hasMirror() {
-    return Boolean(this.mirror);
-  }
 }
 
 /**

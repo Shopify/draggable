@@ -11,8 +11,8 @@ export default function Transformed() {
 
   const sortable = new Sortable(containers, {
     draggable: '.PaperStackItem--isDraggable',
-    appendTo: containerSelector,
     mirror: {
+      appendTo: containerSelector,
       constrainDimensions: true,
     },
   });

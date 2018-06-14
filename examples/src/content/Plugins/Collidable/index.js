@@ -15,8 +15,8 @@ export default function PluginsCollidable() {
     draggable: '.Block--isDraggable',
     dropzone: '.BlockWrapper--isDropzone',
     collidables: '.CollidableObstacle',
-    appendTo: containerSelector,
     mirror: {
+      appendTo: containerSelector,
       constrainDimensions: true,
     },
     plugins: [Plugins.Collidable],

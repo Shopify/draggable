@@ -50,7 +50,7 @@
     "esdoc": "^1.1.0",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
-    "eslint": "^4.19.1",
+    "eslint": "^5.0.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-shopify": "^22.1.0",
     "jest": "^23.1.0",

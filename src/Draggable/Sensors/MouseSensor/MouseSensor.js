@@ -76,7 +76,8 @@ export default class MouseSensor extends Sensor {
 
     document.addEventListener('mouseup', this[onMouseUp]);
 
-    const target = document.elementFromPoint(event.clientX, event.clientY);
+    const target = (this.options.mapTarget?this.options.mapTarget:(htmlElement)=>htmlElement)(document.elementFromPoint(event.clientX, event.clientY));
+    
     const container = closest(target, this.containers);
 
     if (!container) {

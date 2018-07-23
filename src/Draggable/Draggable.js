@@ -381,18 +381,24 @@ export default class Draggable {
 
     this.dragging = true;
 
-    this.source = this.originalSource.cloneNode(true);
+    if ( !this.options.sourceAndOriginalIdentical )
+      this.source = this.originalSource.cloneNode(true);
+    else
+      this.source = this.originalSource;
 
-    const mirrorCreateEvent = new MirrorCreateEvent({
-      source: this.source,
-      originalSource: this.originalSource,
-      sourceContainer: container,
-      sensorEvent,
-    });
+    if ( !this.options.noMirror )
+    {
+      const mirrorCreateEvent = new MirrorCreateEvent({
+        source: this.source,
+        originalSource: this.originalSource,
+        sourceContainer: container,
+        sensorEvent,
+      });
+  
+      this.trigger(mirrorCreateEvent);
+    }
 
-    this.trigger(mirrorCreateEvent);
-
-    if (!isDragEvent(originalEvent) && !mirrorCreateEvent.canceled()) {
+    if (!this.options.noMirror && !isDragEvent(originalEvent) && !mirrorCreateEvent.canceled()) {
       const appendableContainer = this[getAppendableContainer]({source: this.originalSource});
       this.mirror = this.source.cloneNode(true);
 
@@ -418,9 +424,11 @@ export default class Draggable {
     }
 
     this.originalSource.classList.add(this.getClassNameFor('source:original'));
-    this.originalSource.parentNode.insertBefore(this.source, this.originalSource);
+    if ( !this.options.sourceAndOriginalIdentical )
+      this.originalSource.parentNode.insertBefore(this.source, this.originalSource);
 
-    this.originalSource.style.display = 'none';
+    if ( !this.options.sourceAndOriginalIdentical )
+      this.originalSource.style.display = 'none';
     this.source.classList.add(this.getClassNameFor('source:dragging'));
     this.sourceContainer.classList.add(this.getClassNameFor('container:dragging'));
     document.body.classList.add(this.getClassNameFor('body:dragging'));
@@ -443,7 +451,8 @@ export default class Draggable {
         this.mirror.parentNode.removeChild(this.mirror);
       }
 
-      this.source.parentNode.removeChild(this.source);
+      if ( !this.options.sourceAndOriginalIdentical )
+        this.source.parentNode.removeChild(this.source);
       this.originalSource.style.display = null;
 
       this.source.classList.remove(this.getClassNameFor('source:dragging'));
@@ -603,8 +612,11 @@ export default class Draggable {
 
     this.trigger(dragStopEvent);
 
-    this.source.parentNode.insertBefore(this.originalSource, this.source);
-    this.source.parentNode.removeChild(this.source);
+    if ( !this.options.sourceAndOriginalIdentical )
+    {
+      this.source.parentNode.insertBefore(this.originalSource, this.source);
+      this.source.parentNode.removeChild(this.source);
+    }
     this.originalSource.style.display = '';
 
     this.source.classList.remove(this.getClassNameFor('source:dragging'));

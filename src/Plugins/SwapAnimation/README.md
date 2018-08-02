@@ -37,6 +37,9 @@ The duration option allows you to specify the animation during for a single swap
 **`easingFunction {String}`**  
 The easing option allows you to specify an animation easing function. Default: `'ease-in-out'`
 
+**`horizontal {Boolean}`**
+The horizontal option allows you to set the elements to animate horizontally. Default: `false`
+
 ### Examples
 
 ```js
@@ -46,7 +49,8 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
   swapAnimation: {
     duration: 200,
-    easingFunction: 'ease-in-out'
+    easingFunction: 'ease-in-out',
+    horizontal: true
   },
   plugins: [Plugins.SwapAnimation]
 });
@@ -55,13 +59,11 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 ### Plans
 
 * Add support for staggering animations
-* Add support bi-directional swap animations
 * Find cross-container animation solution
 * Add support for `Swappable` and `Droppable`
 
 ### Caveats
 
-* Only works with vertical lists
 * Only works within same container
 * Animations don't stagger
 * Only works with `Sortable`

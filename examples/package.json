@@ -17,16 +17,13 @@
   "bugs": {
     "url": "https://github.com/Shopify/draggable/issues"
   },
-  "config": {
-    "tools": "--require babel-register --gulpfile tools"
-  },
   "scripts": {
     "clean": "rimraf dist bundle-report.html",
-    "views": "gulp views $npm_package_config_tools",
-    "scripts": "gulp scripts $npm_package_config_tools",
-    "styles": "gulp styles $npm_package_config_tools",
-    "start": "gulp start $npm_package_config_tools",
-    "build": "yarn run clean && gulp build $npm_package_config_tools",
+    "views": "gulp views --require babel-register --gulpfile tools",
+    "scripts": "gulp scripts --require babel-register --gulpfile tools",
+    "styles": "gulp styles --require babel-register --gulpfile tools",
+    "start": "gulp start --require babel-register --gulpfile tools",
+    "build": "yarn run clean && gulp build --require babel-register --gulpfile tools",
     "build:prod": "NODE_ENV=production yarn run build",
     "lint:scss": "stylelint './src/**/*.scss'",
     "prettier:scss": "prettier-stylelint './src/**/*.scss' --write -q",

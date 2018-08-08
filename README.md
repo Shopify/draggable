@@ -100,6 +100,7 @@ You can find the documentation for each module within their respective directori
     * [Focusable](src/Draggable/Plugins/Focusable)
     * [Mirror](src/Draggable/Plugins/Mirror)
     * [Scrollable](src/Draggable/Plugins/Scrollable)
+    * [Styleable](src/Draggable/Plugins/Styleable)
   * [Sensors](src/Draggable/Sensors)
     * [DragSensor](src/Draggable/Sensors/DragSensor)
     * [ForceTouchSensor](src/Draggable/Sensors/ForceTouchSensor)

@@ -2,7 +2,8 @@
 
 These plugins are included by draggable by default
 
-- [Announcement](Announcement)
-- [Focusable](Focusable)
-- [Mirror](Mirror)
-- [Scrollable](Scrollable)
+* [Announcement](Announcement)
+* [Focusable](Focusable)
+* [Mirror](Mirror)
+* [Scrollable](Scrollable)
+* [Styleable](Styleable)

@@ -78,7 +78,7 @@ export class SortableSortEvent extends SortableEvent {
    * @readonly
    */
   get over() {
-    return this.data.oldIndex;
+    return this.data.over;
   }
 
   /**
@@ -88,7 +88,7 @@ export class SortableSortEvent extends SortableEvent {
    * @readonly
    */
   get overContainer() {
-    return this.data.newIndex;
+    return this.data.dragEvent.overContainer;
   }
 }
 

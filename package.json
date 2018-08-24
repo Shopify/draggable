@@ -45,7 +45,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-shopify": "^16.5.0",
     "codecov": "^3.0.2",
-    "concurrently": "^3.5.1",
+    "concurrently": "^4.0.0",
     "core-js": "^2.5.7",
     "esdoc": "^1.1.0",
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",

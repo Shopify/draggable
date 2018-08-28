@@ -38,7 +38,7 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-jest": "^23.0.1",
-    "babel-loader": "^7.1.4",
+    "babel-loader": "^8.0.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-es2015-classes": "^6.24.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",

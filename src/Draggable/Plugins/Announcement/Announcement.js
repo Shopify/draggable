@@ -142,7 +142,7 @@ const liveRegion = createRegion();
 function announce(message, {expire}) {
   const element = document.createElement('div');
 
-  element.innerHTML = message;
+  element.textContent = message;
   liveRegion.appendChild(element);
 
   return setTimeout(() => {

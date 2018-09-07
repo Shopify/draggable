@@ -1,11 +1,7 @@
 module.exports = {
-  extends: [
-    'plugin:shopify/esnext',
-    'plugin:shopify/jest',
-    'plugin:shopify/prettier',
-  ],
+  extends: ['plugin:shopify/esnext', 'plugin:shopify/jest', 'plugin:shopify/prettier'],
   env: {
-    browser: true,
+    browser: true
   },
   rules: {
     'import/no-unresolved': 'off',
@@ -13,5 +9,7 @@ module.exports = {
     'class-methods-use-this': 'off',
     'line-comment-position': 0,
     'lines-around-comment': 'off',
-  },
+    'shopify/jest/no-vague-titles': 'off',
+    'shopify/strict-component-boundaries': 'off'
+  }
 };

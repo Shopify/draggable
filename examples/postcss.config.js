@@ -2,11 +2,16 @@
 module.exports = () => ({
   plugins: {
     autoprefixer: {},
-    cssnano: {
-      preset: 'advanced',
-      autoprefixer: false,
-      'postcss-reduce-idents': false,
+    // can eventually be removed
+    'postcss-gap-properties': {
+      preserve: false
     },
-  },
+    cssnano: {
+      // causing problem with `grid-template-areas`
+      // preset: 'advanced',
+      autoprefixer: false
+      // 'postcss-reduce-idents': false
+    }
+  }
 });
 /* eslint-enable no-undef */

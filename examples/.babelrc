@@ -1,9 +1,12 @@
 {
   "presets": [
-    ["shopify/web", {
-      "shopify/web": {
-        "modules": false
+    [
+      "shopify/web",
+      {
+        "shopify/web": {
+          "modules": false
+        }
       }
-    }]
+    ]
   ]
 }

@@ -59,10 +59,10 @@
 
 .BlockLayout--typeGrid {
   display: grid;
-  grid-gap: get-border(thin);
+  gap: get-border(thin);
 
   @media screen and (min-width: get-breakpoint(tablet)) {
-    grid-gap: get-border();
+    gap: get-border();
   }
 }
 

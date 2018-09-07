@@ -20,18 +20,18 @@ interface, for more information read the documentation below.
 
 **Features**
 
-* Works with native drag, mouse, touch and force touch events
-* Can extend dragging behaviour by hooking into draggables event life cycle
-* Can extend drag detection by adding sensors to draggable
-* The library is targeted ES6 first
+- Works with native drag, mouse, touch and force touch events
+- Can extend dragging behaviour by hooking into draggables event life cycle
+- Can extend drag detection by adding sensors to draggable
+- The library is targeted ES6 first
 
 ## Table of Contents
 
-* [Install](#install)
-* [Documentation](#documentation)
-* [Contributing](#contributing)
-* [Roadmap](#roadmap)
-* [Copyright](#copyright)
+- [Install](#install)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+- [Roadmap](#roadmap)
+- [Copyright](#copyright)
 
 ## Install
 
@@ -51,19 +51,19 @@ or via CDN
 
 ```html
 <!-- Entire bundle -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
 <!-- legacy bundle for older browsers (IE11) -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/draggable.bundle.legacy.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.legacy.js"></script>
 <!-- Draggable only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/draggable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.js"></script>
 <!-- Sortable only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/sortable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/sortable.js"></script>
 <!-- Droppable only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/droppable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/droppable.js"></script>
 <!-- Swappable only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/swappable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/swappable.js"></script>
 <!-- Plugins only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/plugins.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/plugins.js"></script>
 ```
 
 ## Browser Compatibility
@@ -91,33 +91,33 @@ or via CDN
 
 You can find the documentation for each module within their respective directories.
 
-* [Draggable](src/Draggable)
-  * [DragEvent](src/Draggable/DragEvent)
-  * [DraggableEvent](src/Draggable/DraggableEvent)
-  * [MirrorEvent](src/Draggable/MirrorEvent)
-  * [Plugins](src/Draggable/Plugins)
-    * [Announcement](src/Draggable/Plugins/Announcement)
-    * [Focusable](src/Draggable/Plugins/Focusable)
-    * [Mirror](src/Draggable/Plugins/Mirror)
-    * [Scrollable](src/Draggable/Plugins/Scrollable)
-  * [Sensors](src/Draggable/Sensors)
-    * [DragSensor](src/Draggable/Sensors/DragSensor)
-    * [ForceTouchSensor](src/Draggable/Sensors/ForceTouchSensor)
-    * [MouseSensor](src/Draggable/Sensors/MouseSensor)
-    * [Sensor](src/Draggable/Sensors/Sensor)
-    * [SensorEvent](src/Draggable/Sensors/SensorEvent)
-    * [TouchSensor](src/Draggable/Sensors/TouchSensor)
-* [Droppable](src/Droppable)
-  * [DroppableEvent](src/Droppable/DroppableEvent)
-* [Plugins](src/Plugins)
-  * [Collidable](src/Plugins/Collidable)
-  * [ResizeMirror](src/Plugins/ResizeMirror)
-  * [Snappable](src/Plugins/Snappable)
-  * [SwapAnimation](src/Plugins/SwapAnimation)
-* [Sortable](src/Sortable)
-  * [SortableEvent](src/Sortable/SortableEvent)
-* [Swappable](src/Swappable)
-  * [SwappableEvent](src/Swappable/SwappableEvent)
+- [Draggable](src/Draggable)
+  - [DragEvent](src/Draggable/DragEvent)
+  - [DraggableEvent](src/Draggable/DraggableEvent)
+  - [MirrorEvent](src/Draggable/MirrorEvent)
+  - [Plugins](src/Draggable/Plugins)
+    - [Announcement](src/Draggable/Plugins/Announcement)
+    - [Focusable](src/Draggable/Plugins/Focusable)
+    - [Mirror](src/Draggable/Plugins/Mirror)
+    - [Scrollable](src/Draggable/Plugins/Scrollable)
+  - [Sensors](src/Draggable/Sensors)
+    - [DragSensor](src/Draggable/Sensors/DragSensor)
+    - [ForceTouchSensor](src/Draggable/Sensors/ForceTouchSensor)
+    - [MouseSensor](src/Draggable/Sensors/MouseSensor)
+    - [Sensor](src/Draggable/Sensors/Sensor)
+    - [SensorEvent](src/Draggable/Sensors/SensorEvent)
+    - [TouchSensor](src/Draggable/Sensors/TouchSensor)
+- [Droppable](src/Droppable)
+  - [DroppableEvent](src/Droppable/DroppableEvent)
+- [Plugins](src/Plugins)
+  - [Collidable](src/Plugins/Collidable)
+  - [ResizeMirror](src/Plugins/ResizeMirror)
+  - [Snappable](src/Plugins/Snappable)
+  - [SwapAnimation](src/Plugins/SwapAnimation)
+- [Sortable](src/Sortable)
+  - [SortableEvent](src/Sortable/SortableEvent)
+- [Swappable](src/Swappable)
+  - [SwappableEvent](src/Swappable/SwappableEvent)
 
 ## Running examples
 
@@ -142,8 +142,8 @@ We are currently working on `v1.0.0-beta.8`. Check out the [project board](https
 
 ## Related resources
 
-* [Ember CLI Shim](https://github.com/timrourke/ember-cli-shopify-draggable-shim) on Github by [@timrourke](https://github.com/timrourke)
-* [Ember CLI Shim](https://www.npmjs.com/package/ember-cli-shopify-draggable-shim) on NPM by [@timrourke](https://github.com/timrourke)
+- [Ember CLI Shim](https://github.com/timrourke/ember-cli-shopify-draggable-shim) on Github by [@timrourke](https://github.com/timrourke)
+- [Ember CLI Shim](https://www.npmjs.com/package/ember-cli-shopify-draggable-shim) on NPM by [@timrourke](https://github.com/timrourke)
 
 ## Copyright
 

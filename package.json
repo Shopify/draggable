@@ -1,13 +1,14 @@
 {
   "name": "@shopify/draggable",
-  "version": "1.0.0-beta.7",
+  "version": "1.0.0-beta.8",
   "private": false,
   "license": "MIT",
   "description": "The JavaScript Drag & Drop library your grandparents warned you about.",
   "author": "Shopify <dev@shopify.com>",
   "homepage": "https://github.com/Shopify/draggable#readme",
   "repository": "https://github.com/Shopify/draggable",
-  "contributors": [{
+  "contributors": [
+    {
       "name": "Max Hoffmann",
       "email": "max.hoffmann@shopify.com"
     },
@@ -19,7 +20,12 @@
   "bugs": {
     "url": "https://github.com/Shopify/draggable/issues"
   },
-  "keywords": ["shopify", "draggable", "drag-and-drop", "es6"],
+  "keywords": [
+    "shopify",
+    "draggable",
+    "drag-and-drop",
+    "es6"
+  ],
   "main": "./lib/draggable.bundle.js",
   "scripts": {
     "start": "concurrently \"yarn watch\" \"cd examples && yarn && yarn start\"",
@@ -34,7 +40,9 @@
     "build:development": "node scripts/build.js",
     "build:production": "node scripts/build.js --production"
   },
-  "files": ["lib/**/*.js"],
+  "files": [
+    "lib/**/*.js"
+  ],
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-jest": "^23.0.1",
@@ -63,7 +71,11 @@
     "env": {}
   },
   "babel": {
-    "plugins": ["transform-class-properties", "transform-object-rest-spread", "transform-es2015-modules-commonjs"]
+    "plugins": [
+      "transform-class-properties",
+      "transform-object-rest-spread",
+      "transform-es2015-modules-commonjs"
+    ]
   },
   "publishConfig": {
     "access": "public",

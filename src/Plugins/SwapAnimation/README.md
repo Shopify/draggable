@@ -17,11 +17,11 @@ import SwapAnimation from '@shopify/draggable/lib/plugins/swap-animation';
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/plugins.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/plugins.js"></script>
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/plugins/swap-animation.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/plugins/swap-animation.js"></script>
 ```
 
 ### API
@@ -58,12 +58,12 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 
 ### Plans
 
-* Add support for staggering animations
-* Find cross-container animation solution
-* Add support for `Swappable` and `Droppable`
+- Add support for staggering animations
+- Find cross-container animation solution
+- Add support for `Swappable` and `Droppable`
 
 ### Caveats
 
-* Only works within same container
-* Animations don't stagger
-* Only works with `Sortable`
+- Only works within same container
+- Animations don't stagger
+- Only works with `Sortable`

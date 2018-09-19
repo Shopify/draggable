@@ -33,15 +33,14 @@ type DraggableClassNames =
   | 'droppable:active' // Class added to the droppable container _(dropzone)_ when drag starts
   | 'droppable:occupied'; // Class added to the droppable container _(dropzone)_ when it contains a draggable element
 
-  type AnnouncementsNames = 
-  |'drag:start'// Picked up draggable element
-  |'drag:stop' // Released draggable element
-  |'sortable:stopped' // Draggable elements swapped',
-  |'droppable:dropped'// Gets fired when dropping draggable element into a dropzone,
-  |'droppable:returned'// Gets fired when draggable elements returns to original dropzone
-  |  'sortable:sorted'// Gets fired when the source gets sorted in the DOM
-  |  'swappabled:swapped'// onSwappableSwappedDefaultAnnouncement,
-
+type AnnouncementsNames =
+  | 'drag:start' // Picked up draggable element
+  | 'drag:stop' // Released draggable element
+  | 'sortable:stopped' // Draggable elements swapped',
+  | 'droppable:dropped' // Gets fired when dropping draggable element into a dropzone,
+  | 'droppable:returned' // Gets fired when draggable elements returns to original dropzone
+  | 'sortable:sorted' // Gets fired when the source gets sorted in the DOM
+  | 'swappabled:swapped'; // onSwappableSwappedDefaultAnnouncement
 
 // draggable options
 interface DraggableOptions {
@@ -52,12 +51,8 @@ interface DraggableOptions {
   plugins?: AbstractPlugin[];
   sensors?: Sensor[];
   appendTo?: string | HTMLElement | Function; // Only used for Mirror!
-  classes?: {
-    [key in DraggableClassNames]: string;
-  };
-  announcements: {
-    [key: string]: any;
-  };
+  classes?: { [key in DraggableClassNames]: string };
+  announcements?: { [key in AnnouncementsNames]: any };
 }
 declare class AbstractEvent<DataT> {
   constructor(data: DataT);
@@ -226,6 +221,8 @@ export interface MirrorPluginOptions {
 }
 
 export interface MirrorEvent extends AbstractEvent<MirrorEvent> {
+  static type: string;
+  static cancelable: boolean;
   readonly source: HTMLElement;
   readonly originalSource: HTMLElement;
   readonly sourceContainer: HTMLElement;

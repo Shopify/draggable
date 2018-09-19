@@ -221,8 +221,8 @@ export interface MirrorPluginOptions {
 }
 
 export interface MirrorEvent extends AbstractEvent<MirrorEvent> {
-  static type: string;
-  static cancelable: boolean;
+  readonly type: string;
+  readonly cancelable: boolean;
   readonly source: HTMLElement;
   readonly originalSource: HTMLElement;
   readonly sourceContainer: HTMLElement;

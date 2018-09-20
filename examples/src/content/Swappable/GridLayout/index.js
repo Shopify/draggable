@@ -11,8 +11,8 @@ export default function GridLayout() {
 
   const swappable = new Swappable(containers, {
     draggable: '.Block--isDraggable',
-    appendTo: containerSelector,
     mirror: {
+      appendTo: containerSelector,
       constrainDimensions: true,
     },
     plugins: [Plugins.ResizeMirror],

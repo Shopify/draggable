@@ -16,11 +16,11 @@ import Sortable from '@shopify/draggable/lib/sortable';
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/sortable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/sortable.js"></script>
 ```
 
 ### API
@@ -70,10 +70,10 @@ sortable.on('sortable:stop', () => console.log('sortable:stop'));
 
 ### Plans
 
-* Add `copy` option, which will allow draggable elements to be copied when dropped in a different container
-* Add `removeOnSpill` option, which will allow draggable elements to be removed from the DOM when dropped outside a container
+- Add `copy` option, which will allow draggable elements to be copied when dropped in a different container
+- Add `removeOnSpill` option, which will allow draggable elements to be removed from the DOM when dropped outside a container
 
 ### Caveats
 
-* Needs draggable elements to be immediate children of draggable containers.
-* Currently just appends draggable elements in different containers
+- Needs draggable elements to be immediate children of draggable containers.
+- Currently just appends draggable elements in different containers

@@ -74,22 +74,6 @@ describe('DragEvent', () => {
       expect(event.originalEvent).toBeNull();
     });
   });
-
-  describe('#hasMirror', () => {
-    it('should return true when event has mirror', () => {
-      const event = new DragEvent({
-        mirror: true,
-      });
-
-      expect(event.hasMirror()).toBe(true);
-    });
-
-    it('should return false when event does not have mirror', () => {
-      const event = new DragEvent({});
-
-      expect(event.hasMirror()).toBe(false);
-    });
-  });
 });
 
 describe('DragStartEvent', () => {

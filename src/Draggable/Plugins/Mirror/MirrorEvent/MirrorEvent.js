@@ -48,6 +48,16 @@ export class MirrorEvent extends AbstractEvent {
   }
 
   /**
+   * Drag event
+   * @property dragEvent
+   * @type {DragEvent}
+   * @readonly
+   */
+  get dragEvent() {
+    return this.data.dragEvent;
+  }
+
+  /**
    * Original event that triggered sensor event
    * @property originalEvent
    * @type {Event}
@@ -59,14 +69,6 @@ export class MirrorEvent extends AbstractEvent {
     }
 
     return null;
-  }
-
-  /**
-   * Checks if mirror has been created
-   * @return {Boolean}
-   */
-  hasMirror() {
-    return Boolean(this.mirror);
   }
 }
 

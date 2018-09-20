@@ -22,11 +22,11 @@ import ResizeMirror from '@shopify/draggable/lib/plugins/resize-mirror';
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/plugins.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/plugins.js"></script>
 ```
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.7/lib/plugins/resize-mirror.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/plugins/resize-mirror.js"></script>
 ```
 
 ### API
@@ -51,4 +51,4 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 
 ### Caveats
 
-* The mirror is not re-positioned under the cursor once resized, i.e. if the mirror shrinks/expands the mirror may no longer be directly beneath the cursor
+- The mirror is not re-positioned under the cursor once resized, i.e. if the mirror shrinks/expands the mirror may no longer be directly beneath the cursor

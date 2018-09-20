@@ -7,11 +7,13 @@ const onSortableSorted = Symbol('onSortableSorted');
  * @property {Object} defaultOptions
  * @property {Number} defaultOptions.duration
  * @property {String} defaultOptions.easingFunction
+ * @property {Boolean} defaultOptions.horizontal
  * @type {Object}
  */
 export const defaultOptions = {
   duration: 150,
   easingFunction: 'ease-in-out',
+  horizontal: false,
 };
 
 /**
@@ -96,25 +98,31 @@ export default class SwapAnimation extends AbstractPlugin {
 
 /**
  * Animates two elements
- * @param {HTMLElement} top
- * @param {HTMLElement} bottom
+ * @param {HTMLElement} from
+ * @param {HTMLElement} to
  * @param {Object} options
  * @param {Number} options.duration
  * @param {String} options.easingFunction
+ * @param {String} options.horizontal
  * @private
  */
-function animate(top, bottom, {duration, easingFunction}) {
-  const height = top.offsetHeight;
-
-  for (const element of [top, bottom]) {
+function animate(from, to, {duration, easingFunction, horizontal}) {
+  for (const element of [from, to]) {
     element.style.pointerEvents = 'none';
   }
 
-  top.style.transform = `translate3d(0, ${height}px, 0)`;
-  bottom.style.transform = `translate3d(0, -${height}px, 0)`;
+  if (horizontal) {
+    const width = from.offsetWidth;
+    from.style.transform = `translate3d(${width}px, 0, 0)`;
+    to.style.transform = `translate3d(-${width}px, 0, 0)`;
+  } else {
+    const height = from.offsetHeight;
+    from.style.transform = `translate3d(0, ${height}px, 0)`;
+    to.style.transform = `translate3d(0, -${height}px, 0)`;
+  }
 
   requestAnimationFrame(() => {
-    for (const element of [top, bottom]) {
+    for (const element of [from, to]) {
       element.addEventListener('transitionend', resetElementOnTransitionEnd);
       element.style.transition = `transform ${duration}ms ${easingFunction}`;
       element.style.transform = '';

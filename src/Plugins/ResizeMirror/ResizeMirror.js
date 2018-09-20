@@ -1,6 +1,8 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
 import {requestNextAnimationFrame} from 'shared/utils';
 
+const onMirrorCreated = Symbol('onMirrorCreated');
+const onMirrorDestroy = Symbol('onMirrorDestroy');
 const onDragOver = Symbol('onDragOver');
 const resize = Symbol('resize');
 
@@ -36,6 +38,28 @@ export default class ResizeMirror extends AbstractPlugin {
       ...this.getOptions(),
     };
 
+    /**
+     * ResizeMirror remembers the last width when resizing the mirror
+     * to avoid additional writes to the DOM
+     * @property {number} lastWidth
+     */
+    this.lastWidth = 0;
+
+    /**
+     * ResizeMirror remembers the last height when resizing the mirror
+     * to avoid additional writes to the DOM
+     * @property {number} lastHeight
+     */
+    this.lastHeight = 0;
+
+    /**
+     * Keeps track of the mirror element
+     * @property {HTMLElement} mirror
+     */
+    this.mirror = null;
+
+    this[onMirrorCreated] = this[onMirrorCreated].bind(this);
+    this[onMirrorDestroy] = this[onMirrorDestroy].bind(this);
     this[onDragOver] = this[onDragOver].bind(this);
   }
 
@@ -43,16 +67,21 @@ export default class ResizeMirror extends AbstractPlugin {
    * Attaches plugins event listeners
    */
   attach() {
-    this.draggable.on('drag:over', this[onDragOver]);
-    this.draggable.on('drag:over:container', this[onDragOver]);
+    this.draggable
+      .on('mirror:created', this[onMirrorCreated])
+      .on('drag:over', this[onDragOver])
+      .on('drag:over:container', this[onDragOver]);
   }
 
   /**
    * Detaches plugins event listeners
    */
   detach() {
-    this.draggable.off('drag:over', this[onDragOver]);
-    this.draggable.off('drag:over:container', this[onDragOver]);
+    this.draggable
+      .off('mirror:created', this[onMirrorCreated])
+      .off('mirror:destroy', this[onMirrorDestroy])
+      .off('drag:over', this[onDragOver])
+      .off('drag:over:container', this[onDragOver]);
   }
 
   /**
@@ -61,6 +90,24 @@ export default class ResizeMirror extends AbstractPlugin {
    */
   getOptions() {
     return this.draggable.options.resizeMirror || {};
+  }
+
+  /**
+   * Mirror created handler
+   * @param {MirrorCreatedEvent} mirrorEvent
+   * @private
+   */
+  [onMirrorCreated]({mirror}) {
+    this.mirror = mirror;
+  }
+
+  /**
+   * Mirror destroy handler
+   * @param {MirrorDestroyEvent} mirrorEvent
+   * @private
+   */
+  [onMirrorDestroy]() {
+    this.mirror = null;
   }
 
   /**
@@ -77,11 +124,13 @@ export default class ResizeMirror extends AbstractPlugin {
    * @param {DragOverEvent | DragOverContainer} dragEvent
    * @private
    */
-  [resize](dragEvent) {
+  [resize]({overContainer, over}) {
     requestAnimationFrame(() => {
-      dragEvent.overContainer.appendChild(dragEvent.mirror);
+      if (this.mirror.parentNode !== overContainer) {
+        overContainer.appendChild(this.mirror);
+      }
 
-      const overElement = dragEvent.over || this.draggable.getDraggableElementsForContainer(dragEvent.overContainer)[0];
+      const overElement = over || this.draggable.getDraggableElementsForContainer(overContainer)[0];
 
       if (!overElement) {
         return;
@@ -89,8 +138,16 @@ export default class ResizeMirror extends AbstractPlugin {
 
       requestNextAnimationFrame(() => {
         const overRect = overElement.getBoundingClientRect();
-        dragEvent.mirror.style.width = `${overRect.width}px`;
-        dragEvent.mirror.style.height = `${overRect.height}px`;
+
+        if (this.lastHeight === overRect.height && this.lastWidth === overRect.width) {
+          return;
+        }
+
+        this.mirror.style.width = `${overRect.width}px`;
+        this.mirror.style.height = `${overRect.height}px`;
+
+        this.lastWidth = overRect.width;
+        this.lastHeight = overRect.height;
       });
     });
   }

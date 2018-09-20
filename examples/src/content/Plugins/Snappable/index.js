@@ -10,8 +10,8 @@ export default function PluginsSnappable() {
   }
 
   const swappable = new Swappable(containers, {
-    appendTo: containerSelector,
     mirror: {
+      appendTo: containerSelector,
       constrainDimensions: true,
     },
     plugins: [Plugins.Snappable],

@@ -6,6 +6,13 @@ function toHaveBeenCalledWithEvent(jestFunction, expectedEventConstructor) {
   let pass;
   let message;
 
+  // eslint-disable-next-line babel/no-invalid-this
+  pass = this.isNot && mockCalls.length === 0;
+  if (pass) {
+    message = () => `Expected ${expectedEventConstructor.type} event ${expectation(!pass)} triggered`;
+    return {pass: !pass, message};
+  }
+
   pass = !mockCalls.length;
   if (pass) {
     message = () => `Expected ${expectedEventConstructor.type} event ${expectation(pass)} triggered`;
@@ -47,8 +54,8 @@ function toHaveBeenCalledWithEventProperties(jestFunction, expectedProperties) {
   return {
     pass,
     message: () => {
-      const listOfExpectedProperties = expectedPropertyEntries.map(([key, value]) => `${key}=${value}`);
-      const listOfReceivedProperties = receivedPropertyEntries.map(([key, value]) => `${key}=${value}`);
+      const listOfExpectedProperties = expectedPropertyEntries.map(([key, value]) => `${key}=${JSON.stringify(value)}`);
+      const listOfReceivedProperties = receivedPropertyEntries.map(([key, value]) => `${key}=${JSON.stringify(value)}`);
 
       return `Expected ${event.type} event ${expectation(
         pass,

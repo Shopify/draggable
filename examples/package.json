@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "core-js": "^2.5.7",
-    "threads": "git+ssh://git@github.com/beefchimi/threads.git#v1.0.0-beta8"
+    "threads": "https://github.com/beefchimi/threads.git#v1.0.0-beta8"
   },
   "devDependencies": {
     "autoprefixer": "^8.6.2",

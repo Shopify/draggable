@@ -41,8 +41,10 @@
     "build:production": "node scripts/build.js --production"
   },
   "files": [
-    "lib/**/*.js"
+    "lib/**/*.js",
+    "index.d.ts"
   ],
+  "typings": "index.d.ts",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-jest": "^23.0.1",

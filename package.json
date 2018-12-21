@@ -27,6 +27,7 @@
     "es6"
   ],
   "main": "./lib/draggable.bundle.js",
+  "types": "./index.d.ts",
   "scripts": {
     "start": "concurrently \"yarn watch\" \"cd examples && yarn && yarn start\"",
     "build": "yarn build:production",
@@ -41,7 +42,8 @@
     "build:production": "node scripts/build.js --production"
   },
   "files": [
-    "lib/**/*.js"
+    "lib/**/*.js",
+    "index.d.ts"
   ],
   "devDependencies": {
     "babel-core": "^6.26.3",

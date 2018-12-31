@@ -98,7 +98,7 @@ declare module '@shopify/draggable' {
 
     export type DraggableContainer = HTMLElement | HTMLElement[] | NodeList;
 
-    interface DraggableOptions {
+    export interface DraggableOptions {
         draggable?: string;
         handle?: string | NodeList | HTMLElement[] | HTMLElement | ((currentElement: HTMLElement) => HTMLElement);
         delay?: number;

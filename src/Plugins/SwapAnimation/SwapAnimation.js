@@ -86,11 +86,7 @@ export default class SwapAnimation extends AbstractPlugin {
 
     // Can be done in a separate frame
     this.lastAnimationFrame = requestAnimationFrame(() => {
-      if (oldIndex >= newIndex) {
-        animate(source, over, this.options);
-      } else {
-        animate(over, source, this.options);
-      }
+      animate(source, over, this.options);
     });
   }
 }

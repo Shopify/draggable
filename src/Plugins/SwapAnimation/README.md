@@ -49,8 +49,7 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
   swapAnimation: {
     duration: 200,
-    easingFunction: 'ease-in-out',
-    horizontal: true
+    easingFunction: 'ease-in-out'
   },
   plugins: [Plugins.SwapAnimation]
 });

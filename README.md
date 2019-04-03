@@ -7,7 +7,20 @@
   <img src="https://user-images.githubusercontent.com/643944/35602291-99e2c56e-0605-11e8-847f-95f1f6be1610.jpg" alt="">
 </a>
 
-> **Currently in beta!** While Draggable is very close to a full release, the API is still subject to change. We keep an updated CHANGELOG with every release, so when upgrading from a previous version, please check and see what has changed.
+# Development
+
+**Draggable is no longer maintained by its original authors.** Maintence of this repo has been passed on to new collaborators and is no longer worked on by anyone at Shopify.
+
+**We are still looking for more maintainers!** If anyone is interested in answering / triaging issues, reviewing / rejecting / approving PRs, and authoring code for bug fixes / new features — please send an email to `curtis.dulmage (at) shopify (dot) com`. You may be asked a few questions before obtaining collaboration permission, but if everything checks out, we will happily add you as a collaborator.
+
+**Current maintainers are:**
+
+- [@fdietze](https://github.com/fdietze)
+- [@josh18](https://github.com/josh18)
+
+Please ping the above handles when putting up PRs.
+
+---
 
 Get complete control over drag and drop behaviour with Draggable! Draggable abstracts
 native browser events into a comprehensive API to create a custom drag and drop experience.

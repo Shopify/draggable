@@ -270,6 +270,56 @@ describe('Mirror', () => {
     releaseMouse(draggable.source);
   });
 
+  it('moves mirror only when past `thresholdX` or `thresholdY`', async () => {
+    draggable = new Draggable(container, {
+      ...draggableOptions,
+      mirror: {
+        thresholdX: 10,
+        thresholdY: 50,
+      },
+    });
+
+    clickMouse(draggableElement);
+    waitForDragDelay();
+    waitForRequestAnimationFrame();
+
+    await waitForPromisesToResolve();
+
+    const mirrorElement = document.querySelector('.draggable-mirror');
+
+    moveMouse(document.body, {
+      clientX: 5,
+      clientY: 10,
+    });
+
+    await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+
+    expect(mirrorElement.style.transform).toBe('translate3d(0px, 0px, 0)');
+
+    moveMouse(document.body, {
+      clientX: 10,
+      clientY: 40,
+    });
+
+    await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+
+    expect(mirrorElement.style.transform).toBe('translate3d(10px, 0px, 0)');
+
+    moveMouse(document.body, {
+      clientX: 100,
+      clientY: 100,
+    });
+
+    await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+
+    expect(mirrorElement.style.transform).toBe('translate3d(100px, 100px, 0)');
+
+    releaseMouse(draggable.source);
+  });
+
   it('prevents mirror movement when `mirror:move` gets canceled', async () => {
     draggable = new Draggable(container, draggableOptions);
 

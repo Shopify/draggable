@@ -96,6 +96,13 @@ The mirror follows your mouse/touch movements.
 Read-only property for the mirror element, which is also a copy of the `originalSource` element.
 The mirror follows your mouse/touch movements.
 
+**`mirrorEvent.passedThreshX: Booolean`**  
+Read-only property for whether or not the mirror's threshold has been exceeded in the x axis.
+
+**`mirrorEvent.passedThreshY: Booolean`**  
+Read-only property for whether or not the mirror's threshold has been exceeded in the y axis.
+
+
 ## MirrorDestroyEvent
 
 `MirrorDestroyEvent` gets triggered before the mirror gets removed from the DOM.

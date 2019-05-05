@@ -145,7 +145,7 @@ export default class Mirror extends AbstractPlugin {
     // Last sensor position of mirror move
     this.lastMirrorMovedClient = {
       x: sensorEvent.clientX,
-      y: sensorEvent.clientY
+      y: sensorEvent.clientY,
     };
 
     const mirrorCreateEvent = new MirrorCreateEvent({
@@ -195,7 +195,8 @@ export default class Mirror extends AbstractPlugin {
 
     const {source, originalSource, sourceContainer, sensorEvent} = dragEvent;
 
-    let passedThreshX = true, passedThreshY = true;
+    let passedThreshX = true;
+    let passedThreshY = true;
 
     if (this.options.thresholdX || this.options.thresholdY) {
       const {x: lastX, y: lastY} = this.lastMirrorMovedClient;
@@ -320,11 +321,11 @@ export default class Mirror extends AbstractPlugin {
       return null;
     }
 
-    const setState = ({ lastMovedX, lastMovedY, ...args }) => {
+    const setState = ({lastMovedX, lastMovedY, ...args}) => {
       this.lastMovedX = lastMovedX;
       this.lastMovedY = lastMovedY;
 
-      return { lastMovedX, lastMovedY, ...args };
+      return {lastMovedX, lastMovedY, ...args};
     };
 
     const initialState = {
@@ -341,7 +342,9 @@ export default class Mirror extends AbstractPlugin {
       lastMovedY: this.lastMovedY,
     };
 
-    return Promise.resolve(initialState).then(positionMirror({raf: true})).then(setState);
+    return Promise.resolve(initialState)
+      .then(positionMirror({raf: true}))
+      .then(setState);
   }
 
   /**
@@ -479,7 +482,20 @@ function removeMirrorID({mirror, ...args}) {
  * @private
  */
 function positionMirror({withFrame = false, initial = false} = {}) {
-  return ({mirror, sensorEvent, mirrorOffset, initialY, initialX, scrollOffset, options, passedThreshX, passedThreshY, lastMovedX, lastMovedY, ...args}) => {
+  return ({
+    mirror,
+    sensorEvent,
+    mirrorOffset,
+    initialY,
+    initialX,
+    scrollOffset,
+    options,
+    passedThreshX,
+    passedThreshY,
+    lastMovedX,
+    lastMovedY,
+    ...args
+  }) => {
     return withPromise(
       (resolve) => {
         const result = {

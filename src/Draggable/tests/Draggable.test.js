@@ -12,7 +12,7 @@ import Draggable, {defaultOptions} from '../Draggable';
 import {DragStartEvent, DragMoveEvent, DragStopEvent} from '../DragEvent';
 import {DraggableInitializedEvent, DraggableDestroyEvent} from '../DraggableEvent';
 import {Focusable, Mirror, Scrollable, Announcement} from '../Plugins';
-import {MouseSensor, TouchSensor} from '../Sensors';
+import {MouseSensor, TouchSensor, KeyboardSensor} from '../Sensors';
 
 const sampleMarkup = `
   <ul class="Container">
@@ -64,7 +64,7 @@ describe('Draggable', () => {
 
       for (const key in defaultOptions) {
         if (defaultOptions.hasOwnProperty(key)) {
-          expect(newInstance.options[key]).toBe(defaultOptions[key]);
+          expect(newInstance.options[key]).toEqual(defaultOptions[key]);
         }
       }
     });
@@ -126,11 +126,10 @@ describe('Draggable', () => {
         native: false,
       });
 
-      expect(newInstance.sensors).toHaveLength(2);
-
+      expect(newInstance.sensors).toHaveLength(3);
       expect(newInstance.sensors[0]).toBeInstanceOf(MouseSensor);
-
       expect(newInstance.sensors[1]).toBeInstanceOf(TouchSensor);
+      expect(newInstance.sensors[2]).toBeInstanceOf(KeyboardSensor);
     });
 
     it('should trigger DraggableInitializedEvent on init', () => {
@@ -197,10 +196,10 @@ describe('Draggable', () => {
 
       const mockCalls = document.removeEventListener.mock.calls;
 
-      expect(mockCalls[0][0]).toEqual('drag:start');
-      expect(mockCalls[1][0]).toEqual('drag:move');
-      expect(mockCalls[2][0]).toEqual('drag:stop');
-      expect(mockCalls[3][0]).toEqual('drag:pressure');
+      expect(mockCalls[0][0]).toEqual('drag:pointer:start');
+      expect(mockCalls[1][0]).toEqual('drag:pointer:move');
+      expect(mockCalls[2][0]).toEqual('drag:pointer:stop');
+      expect(mockCalls[3][0]).toEqual('drag:pointer:pressure');
 
       document.removeEventListener.mockRestore();
     });

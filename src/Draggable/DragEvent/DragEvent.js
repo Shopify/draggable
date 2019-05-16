@@ -86,6 +86,26 @@ export class DragStartEvent extends DragEvent {
 }
 
 /**
+ * Drag start event
+ * @class DragNextEvent
+ * @module DragNextEvent
+ * @extends DragEvent
+ */
+export class DragNextEvent extends DragEvent {
+  static type = 'drag:next';
+}
+
+/**
+ * Drag start event
+ * @class DragPreviousEvent
+ * @module DragPreviousEvent
+ * @extends DragEvent
+ */
+export class DragPreviousEvent extends DragEvent {
+  static type = 'drag:previous';
+}
+
+/**
  * Drag move event
  * @class DragMoveEvent
  * @module DragMoveEvent

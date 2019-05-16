@@ -1,6 +1,7 @@
 import {closest} from 'shared/utils';
 import Sensor from '../Sensor';
-import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
+
+import {DragPointerStartSensorEvent, DragPointerMoveSensorEvent, DragPointerStopSensorEvent} from '../SensorEvent';
 
 const onContextMenuWhileDragging = Symbol('onContextMenuWhileDragging');
 const onMouseDown = Symbol('onMouseDown');
@@ -93,7 +94,7 @@ export default class MouseSensor extends Sensor {
         return;
       }
 
-      const dragStartEvent = new DragStartSensorEvent({
+      const dragStartEvent = new DragPointerStartSensorEvent({
         clientX: event.clientX,
         clientY: event.clientY,
         target,
@@ -125,7 +126,7 @@ export default class MouseSensor extends Sensor {
 
     const target = document.elementFromPoint(event.clientX, event.clientY);
 
-    const dragMoveEvent = new DragMoveSensorEvent({
+    const dragMoveEvent = new DragPointerMoveSensorEvent({
       clientX: event.clientX,
       clientY: event.clientY,
       target,
@@ -158,7 +159,7 @@ export default class MouseSensor extends Sensor {
 
     const target = document.elementFromPoint(event.clientX, event.clientY);
 
-    const dragStopEvent = new DragStopSensorEvent({
+    const dragStopEvent = new DragPointerStopSensorEvent({
       clientX: event.clientX,
       clientY: event.clientY,
       target,

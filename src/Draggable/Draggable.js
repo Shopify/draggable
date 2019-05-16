@@ -3,11 +3,13 @@ import {closest} from 'shared/utils';
 import {Announcement, Focusable, Mirror, Scrollable} from './Plugins';
 
 import Emitter from './Emitter';
-import {MouseSensor, TouchSensor} from './Sensors';
+import {MouseSensor, TouchSensor, KeyboardSensor} from './Sensors';
 import {DraggableInitializedEvent, DraggableDestroyEvent} from './DraggableEvent';
 
 import {
   DragStartEvent,
+  DragNextEvent,
+  DragPreviousEvent,
   DragMoveEvent,
   DragOutContainerEvent,
   DragOutEvent,
@@ -21,6 +23,10 @@ const onDragStart = Symbol('onDragStart');
 const onDragMove = Symbol('onDragMove');
 const onDragStop = Symbol('onDragStop');
 const onDragPressure = Symbol('onDragPressure');
+const onKeyboardDragStart = Symbol('onKeyboardDragStart');
+const onKeyboardDragNext = Symbol('onKeyboardDragNext');
+const onKeyboardDragPrevious = Symbol('onKeyboardDragPrevious');
+const onKeyboardDragStop = Symbol('onKeyboardDragStop');
 
 /**
  * @const {Object} defaultAnnouncements
@@ -51,6 +57,7 @@ export const defaultOptions = {
   placedTimeout: 800,
   plugins: [],
   sensors: [],
+  classes: defaultClasses,
 };
 
 /**
@@ -132,18 +139,35 @@ export default class Draggable {
      */
     this.sensors = [];
 
+    /**
+     * Draggable elements by container
+     * @property draggableElements
+     * @type {HTMLElement[]}
+     */
+    this.draggableElements = [];
+
     this[onDragStart] = this[onDragStart].bind(this);
     this[onDragMove] = this[onDragMove].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
     this[onDragPressure] = this[onDragPressure].bind(this);
 
-    document.addEventListener('drag:start', this[onDragStart], true);
-    document.addEventListener('drag:move', this[onDragMove], true);
-    document.addEventListener('drag:stop', this[onDragStop], true);
-    document.addEventListener('drag:pressure', this[onDragPressure], true);
+    this[onKeyboardDragStart] = this[onKeyboardDragStart].bind(this);
+    this[onKeyboardDragNext] = this[onKeyboardDragNext].bind(this);
+    this[onKeyboardDragPrevious] = this[onKeyboardDragPrevious].bind(this);
+    this[onKeyboardDragStop] = this[onKeyboardDragStop].bind(this);
+
+    document.addEventListener('drag:pointer:start', this[onDragStart], true);
+    document.addEventListener('drag:pointer:move', this[onDragMove], true);
+    document.addEventListener('drag:pointer:stop', this[onDragStop], true);
+    document.addEventListener('drag:pointer:pressure', this[onDragPressure], true);
+
+    document.addEventListener('drag:keyboard:start', this[onKeyboardDragStart], true);
+    document.addEventListener('drag:keyboard:next', this[onKeyboardDragNext], true);
+    document.addEventListener('drag:keyboard:previous', this[onKeyboardDragPrevious], true);
+    document.addEventListener('drag:keyboard:stop', this[onKeyboardDragStop], true);
 
     const defaultPlugins = Object.values(Draggable.Plugins).map((Plugin) => Plugin);
-    const defaultSensors = [MouseSensor, TouchSensor];
+    const defaultSensors = [MouseSensor, TouchSensor, KeyboardSensor];
 
     this.addPlugin(...[...defaultPlugins, ...this.options.plugins]);
     this.addSensor(...[...defaultSensors, ...this.options.sensors]);
@@ -163,10 +187,15 @@ export default class Draggable {
    * deactivates sensors and plugins
    */
   destroy() {
-    document.removeEventListener('drag:start', this[onDragStart], true);
-    document.removeEventListener('drag:move', this[onDragMove], true);
-    document.removeEventListener('drag:stop', this[onDragStop], true);
-    document.removeEventListener('drag:pressure', this[onDragPressure], true);
+    document.removeEventListener('drag:pointer:start', this.dragStart, true);
+    document.removeEventListener('drag:pointer:move', this.dragMove, true);
+    document.removeEventListener('drag:pointer:stop', this.dragStop, true);
+    document.removeEventListener('drag:pointer:pressure', this.dragPressure, true);
+
+    document.removeEventListener('drag:keyboard:start', this[onKeyboardDragStart], true);
+    document.removeEventListener('drag:keyboard:next', this[onKeyboardDragNext], true);
+    document.removeEventListener('drag:keyboard:previous', this[onKeyboardDragPrevious], true);
+    document.removeEventListener('drag:keyboard:stop', this[onKeyboardDragStop], true);
 
     const draggableDestroyEvent = new DraggableDestroyEvent({
       draggable: this,
@@ -372,6 +401,10 @@ export default class Draggable {
       this.lastPlacedSource.classList.remove(this.getClassNameFor('source:placed'));
       this.lastPlacedContainer.classList.remove(this.getClassNameFor('container:placed'));
     }
+
+    requestAnimationFrame(() => {
+      this.draggableElements = this.getDraggableElements();
+    });
 
     this.source = this.originalSource.cloneNode(true);
     this.originalSource.parentNode.insertBefore(this.source, this.originalSource);
@@ -594,6 +627,112 @@ export default class Draggable {
     });
 
     this.trigger(dragPressureEvent);
+  }
+
+  [onKeyboardDragStart](event) {
+    const sensorEvent = getSensorEvent(event);
+
+    this.originalSource = sensorEvent.target;
+    this.sourceContainer = sensorEvent.container;
+    this.source = this.originalSource.cloneNode(true);
+
+    this.originalSource.parentNode.insertBefore(this.source, this.originalSource);
+    this.originalSource.style.display = 'none';
+    this.source.classList.add(this.getClassNameFor('source:dragging'));
+    this.sourceContainer.classList.add(this.getClassNameFor('container:dragging'));
+    document.body.classList.add(this.getClassNameFor('body:dragging'));
+
+    this.draggableElements = this.getDraggableElements();
+
+    const dragEvent = new DragStartEvent({
+      source: this.source,
+      mirror: this.mirror,
+      originalSource: this.originalSource,
+      sourceContainer: this.sourceContainer,
+      sensorEvent,
+    });
+
+    this.trigger(dragEvent);
+    this.dragging = !dragEvent.canceled();
+
+    if (!dragEvent.canceled()) {
+      return;
+    }
+
+    // reset
+    this.source.parentNode.removeChild(this.source);
+    this.source.classList.remove(this.getClassNameFor('source:dragging'));
+    this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
+    document.body.classList.remove(this.getClassNameFor('body:dragging'));
+    this.originalSource.style.display = '';
+    this.source = null;
+    this.originalSource = null;
+    this.sourceContainer = null;
+    this.dragging = false;
+  }
+
+  [onKeyboardDragNext](event) {
+    if (!this.dragging) {
+      return;
+    }
+
+    const sensorEvent = getSensorEvent(event);
+
+    const dragEvent = new DragNextEvent({
+      source: this.source,
+      mirror: this.mirror,
+      originalSource: this.originalSource,
+      sourceContainer: this.sourceContainer,
+      sensorEvent,
+    });
+
+    this.trigger(dragEvent);
+  }
+
+  [onKeyboardDragPrevious](event) {
+    if (!this.dragging) {
+      return;
+    }
+
+    const sensorEvent = getSensorEvent(event);
+
+    const dragEvent = new DragPreviousEvent({
+      source: this.source,
+      mirror: this.mirror,
+      originalSource: this.originalSource,
+      sourceContainer: this.sourceContainer,
+      sensorEvent,
+    });
+
+    this.trigger(dragEvent);
+  }
+
+  [onKeyboardDragStop](event) {
+    if (!this.dragging) {
+      return;
+    }
+
+    const sensorEvent = getSensorEvent(event);
+
+    const dragEvent = new DragStopEvent({
+      source: this.source,
+      mirror: this.mirror,
+      originalSource: this.originalSource,
+      sourceContainer: this.sourceContainer,
+      sensorEvent,
+    });
+
+    this.trigger(dragEvent);
+
+    this.source.parentNode.removeChild(this.source);
+    this.source.classList.remove(this.getClassNameFor('source:dragging'));
+    this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
+    document.body.classList.remove(this.getClassNameFor('body:dragging'));
+    this.originalSource.style.display = '';
+    this.source = null;
+    this.originalSource = null;
+    this.sourceContainer = null;
+    this.dragging = false;
   }
 }
 

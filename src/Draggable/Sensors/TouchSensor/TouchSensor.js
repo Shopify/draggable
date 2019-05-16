@@ -1,6 +1,7 @@
 import {closest} from 'shared/utils';
 import Sensor from '../Sensor';
-import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
+
+import {DragPointerStartSensorEvent, DragPointerMoveSensorEvent, DragPointerStopSensorEvent} from '../SensorEvent';
 
 const onTouchStart = Symbol('onTouchStart');
 const onTouchHold = Symbol('onTouchHold');
@@ -120,7 +121,7 @@ export default class TouchSensor extends Sensor {
       const touch = event.touches[0] || event.changedTouches[0];
       const target = event.target;
 
-      const dragStartEvent = new DragStartSensorEvent({
+      const dragStartEvent = new DragPointerStartSensorEvent({
         clientX: touch.pageX,
         clientY: touch.pageY,
         target,
@@ -150,7 +151,7 @@ export default class TouchSensor extends Sensor {
     const touch = event.touches[0] || event.changedTouches[0];
     const target = document.elementFromPoint(touch.pageX - window.scrollX, touch.pageY - window.scrollY);
 
-    const dragMoveEvent = new DragMoveSensorEvent({
+    const dragMoveEvent = new DragPointerMoveSensorEvent({
       clientX: touch.pageX,
       clientY: touch.pageY,
       target,
@@ -189,7 +190,7 @@ export default class TouchSensor extends Sensor {
 
     event.preventDefault();
 
-    const dragStopEvent = new DragStopSensorEvent({
+    const dragStopEvent = new DragPointerStopSensorEvent({
       clientX: touch.pageX,
       clientY: touch.pageY,
       target,

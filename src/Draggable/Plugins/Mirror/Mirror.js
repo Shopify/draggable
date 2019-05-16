@@ -158,7 +158,7 @@ export default class Mirror extends AbstractPlugin {
 
     this.draggable.trigger(mirrorCreateEvent);
 
-    if (isNativeDragEvent(sensorEvent) || mirrorCreateEvent.canceled()) {
+    if (isNativeDragEvent(sensorEvent) || isNativeKeyboardEvent(sensorEvent) || mirrorCreateEvent.canceled()) {
       return;
     }
 
@@ -566,4 +566,12 @@ function withPromise(callback, {raf = false} = {}) {
  */
 function isNativeDragEvent(sensorEvent) {
   return /^drag/.test(sensorEvent.originalEvent.type);
+}
+
+/**
+ * Returns true if the sensor event was triggered by a native browser keyboard event
+ * @param {SensorEvent} sensorEvent
+ */
+function isNativeKeyboardEvent(sensorEvent) {
+  return /^key/.test(sensorEvent.originalEvent.type);
 }

@@ -38,6 +38,27 @@ export default class Sensor {
      * @type {HTMLElement}
      */
     this.currentContainer = null;
+
+    /**
+     * The distance moved from the first pointer down location, no longer updated after the drag has started
+     * @property distance
+     * @type {Number}
+     */
+    this.distance = 0;
+
+    /**
+     * Indicates whether the delay has ended
+     * @property delayOver
+     * @type {Boolean}
+     */
+    this.delayOver = false;
+
+    /**
+     * The event of the initial sensor down
+     * @property startEvent
+     * @type {Event}
+     */
+    this.startEvent = null;
   }
 
   /**

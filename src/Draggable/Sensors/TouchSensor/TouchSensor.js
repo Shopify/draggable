@@ -113,7 +113,9 @@ export default class TouchSensor extends Sensor {
     this.currentContainer = container;
     this.tapTimeout = setTimeout(() => {
       this.delayOver = true;
-      if (this.touchMoved || this.distance < this.options.distance) return;
+      if (this.touchMoved || this.distance < this.options.distance) {
+        return;
+      }
       this[startDrag]();
     }, this.options.delay);
   }
@@ -147,7 +149,10 @@ export default class TouchSensor extends Sensor {
    * @param {Event} event - Touch move event
    */
   [onDistanceChange](event) {
-    if (this.dragging || !this.options.distance) return;
+    if (this.dragging || !this.options.distance) {
+      return;
+    }
+
     const tap = this.startEvent.touches[0] || this.startEvent.changedTouches[0];
     const touch = event.touches[0] || event.changedTouches[0];
 

@@ -80,7 +80,9 @@ export default class MouseSensor extends Sensor {
     this.currentContainer = container;
     this.mouseDownTimeout = setTimeout(() => {
       this.delayOver = true;
-      if (this.distance < this.options.distance) return;
+      if (this.distance < this.options.distance) {
+        return;
+      }
       this[startDrag]();
     }, this.options.delay);
   }

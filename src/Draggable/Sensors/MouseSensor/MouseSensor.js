@@ -1,4 +1,4 @@
-import {closest} from 'shared/utils';
+import {closest, distance} from 'shared/utils';
 import Sensor from '../Sensor';
 import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
 
@@ -6,6 +6,8 @@ const onContextMenuWhileDragging = Symbol('onContextMenuWhileDragging');
 const onMouseDown = Symbol('onMouseDown');
 const onMouseMove = Symbol('onMouseMove');
 const onMouseUp = Symbol('onMouseUp');
+const startDrag = Symbol('startDrag');
+const onDistanceChange = Symbol('onDistanceChange');
 
 /**
  * This sensor picks up native browser mouse events and dictates drag operations
@@ -24,30 +26,18 @@ export default class MouseSensor extends Sensor {
     super(containers, options);
 
     /**
-     * Indicates if mouse button is still down
-     * @property mouseDown
-     * @type {Boolean}
-     */
-    this.mouseDown = false;
-
-    /**
      * Mouse down timer which will end up triggering the drag start operation
      * @property mouseDownTimeout
      * @type {Number}
      */
     this.mouseDownTimeout = null;
 
-    /**
-     * Indicates if context menu has been opened during drag operation
-     * @property openedContextMenu
-     * @type {Boolean}
-     */
-    this.openedContextMenu = false;
-
     this[onContextMenuWhileDragging] = this[onContextMenuWhileDragging].bind(this);
     this[onMouseDown] = this[onMouseDown].bind(this);
     this[onMouseMove] = this[onMouseMove].bind(this);
     this[onMouseUp] = this[onMouseUp].bind(this);
+    this[startDrag] = this[startDrag].bind(this);
+    this[onDistanceChange] = this[onDistanceChange].bind(this);
   }
 
   /**
@@ -74,10 +64,12 @@ export default class MouseSensor extends Sensor {
       return;
     }
 
-    document.addEventListener('mouseup', this[onMouseUp]);
+    this.startEvent = event;
 
-    const target = document.elementFromPoint(event.clientX, event.clientY);
-    const container = closest(target, this.containers);
+    document.addEventListener('mouseup', this[onMouseUp]);
+    document.addEventListener('mousemove', this[onDistanceChange]);
+
+    const container = closest(event.target, this.containers);
 
     if (!container) {
       return;
@@ -85,32 +77,54 @@ export default class MouseSensor extends Sensor {
 
     document.addEventListener('dragstart', preventNativeDragStart);
 
-    this.mouseDown = true;
-
-    clearTimeout(this.mouseDownTimeout);
+    this.currentContainer = container;
     this.mouseDownTimeout = setTimeout(() => {
-      if (!this.mouseDown) {
+      this.delayOver = true;
+      if (this.distance < this.options.distance) {
         return;
       }
-
-      const dragStartEvent = new DragStartSensorEvent({
-        clientX: event.clientX,
-        clientY: event.clientY,
-        target,
-        container,
-        originalEvent: event,
-      });
-
-      this.trigger(container, dragStartEvent);
-
-      this.currentContainer = container;
-      this.dragging = !dragStartEvent.canceled();
-
-      if (this.dragging) {
-        document.addEventListener('contextmenu', this[onContextMenuWhileDragging]);
-        document.addEventListener('mousemove', this[onMouseMove]);
-      }
+      this[startDrag]();
     }, this.options.delay);
+  }
+
+  /**
+   * Start the drag
+   * @private
+   */
+  [startDrag]() {
+    const startEvent = this.startEvent;
+    const container = this.currentContainer;
+
+    const dragStartEvent = new DragStartSensorEvent({
+      clientX: startEvent.clientX,
+      clientY: startEvent.clientY,
+      target: startEvent.target,
+      container,
+      originalEvent: startEvent,
+    });
+
+    this.trigger(this.currentContainer, dragStartEvent);
+
+    this.dragging = !dragStartEvent.canceled();
+
+    if (this.dragging) {
+      document.addEventListener('contextmenu', this[onContextMenuWhileDragging], true);
+      document.addEventListener('mousemove', this[onMouseMove]);
+    }
+  }
+
+  /**
+   * Detect change in distance
+   * @private
+   * @param {Event} event - Mouse move event
+   */
+  [onDistanceChange](event) {
+    if (this.dragging) return;
+    this.distance = distance(this.startEvent.pageX, this.startEvent.pageY, event.pageX, event.pageY);
+
+    if (this.delayOver && this.distance >= this.options.distance) {
+      this[startDrag]();
+    }
   }
 
   /**
@@ -142,15 +156,15 @@ export default class MouseSensor extends Sensor {
    * @param {Event} event - Mouse up event
    */
   [onMouseUp](event) {
-    this.mouseDown = Boolean(this.openedContextMenu);
+    clearTimeout(this.mouseDownTimeout);
 
-    if (this.openedContextMenu) {
-      this.openedContextMenu = false;
+    if (event.button !== 0) {
       return;
     }
 
     document.removeEventListener('mouseup', this[onMouseUp]);
     document.removeEventListener('dragstart', preventNativeDragStart);
+    document.removeEventListener('mousemove', this[onDistanceChange]);
 
     if (!this.dragging) {
       return;
@@ -168,11 +182,14 @@ export default class MouseSensor extends Sensor {
 
     this.trigger(this.currentContainer, dragStopEvent);
 
-    document.removeEventListener('contextmenu', this[onContextMenuWhileDragging]);
+    document.removeEventListener('contextmenu', this[onContextMenuWhileDragging], true);
     document.removeEventListener('mousemove', this[onMouseMove]);
 
     this.currentContainer = null;
     this.dragging = false;
+    this.distance = 0;
+    this.delayOver = false;
+    this.startEvent = null;
   }
 
   /**
@@ -182,7 +199,6 @@ export default class MouseSensor extends Sensor {
    */
   [onContextMenuWhileDragging](event) {
     event.preventDefault();
-    this.openedContextMenu = true;
   }
 }
 

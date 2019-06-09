@@ -466,7 +466,7 @@ describe('Draggable', () => {
 
     expect(call).toBeInstanceOf(DragStartEvent);
 
-    triggerEvent(draggableElement, 'mouseup');
+    triggerEvent(draggableElement, 'mouseup', {button: 0});
   });
 
   it('should trigger `drag:start` drag event on dragstart', () => {
@@ -492,7 +492,7 @@ describe('Draggable', () => {
 
     expect(call).toBeInstanceOf(DragStartEvent);
 
-    triggerEvent(draggableElement, 'mouseup');
+    triggerEvent(draggableElement, 'mouseup', {button: 0});
   });
 
   it('cleans up when `drag:start` event is canceled', () => {
@@ -555,7 +555,7 @@ describe('Draggable', () => {
 
     expect(sensorEvent.clientY).toBe(expectedClientY);
 
-    triggerEvent(draggableElement, 'mouseup');
+    triggerEvent(draggableElement, 'mouseup', {button: 0});
   });
 
   it('triggers `drag:stop` drag event on mouseup', () => {
@@ -596,7 +596,7 @@ describe('Draggable', () => {
 
     expect(newInstance.source.classList).toContain('draggable-source--is-dragging');
 
-    triggerEvent(draggableElement, 'mouseup');
+    triggerEvent(draggableElement, 'mouseup', {button: 0});
   });
 
   it('removes `source:dragging` classname from draggable element on mouseup', () => {
@@ -658,7 +658,7 @@ describe('Draggable', () => {
 
     expect(document.body.classList).toContain('draggable--is-dragging');
 
-    triggerEvent(draggableElement, 'mouseup');
+    triggerEvent(draggableElement, 'mouseup', {button: 0});
   });
 
   it('removes `body:dragging` classname from body on mouseup', () => {

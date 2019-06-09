@@ -1,11 +1,12 @@
-import {closest} from 'shared/utils';
+import {closest, distance} from 'shared/utils';
 import Sensor from '../Sensor';
 import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
 
 const onTouchStart = Symbol('onTouchStart');
-const onTouchHold = Symbol('onTouchHold');
 const onTouchEnd = Symbol('onTouchEnd');
 const onTouchMove = Symbol('onTouchMove');
+const startDrag = Symbol('startDrag');
+const onDistanceChange = Symbol('onDistanceChange');
 
 /**
  * Prevents scrolling when set to true
@@ -65,9 +66,10 @@ export default class TouchSensor extends Sensor {
     this.touchMoved = false;
 
     this[onTouchStart] = this[onTouchStart].bind(this);
-    this[onTouchHold] = this[onTouchHold].bind(this);
     this[onTouchEnd] = this[onTouchEnd].bind(this);
     this[onTouchMove] = this[onTouchMove].bind(this);
+    this[startDrag] = this[startDrag].bind(this);
+    this[onDistanceChange] = this[onDistanceChange].bind(this);
   }
 
   /**
@@ -96,43 +98,69 @@ export default class TouchSensor extends Sensor {
       return;
     }
 
+    this.startEvent = event;
+
     document.addEventListener('touchmove', this[onTouchMove]);
     document.addEventListener('touchend', this[onTouchEnd]);
     document.addEventListener('touchcancel', this[onTouchEnd]);
+    document.addEventListener('touchmove', this[onDistanceChange]);
     container.addEventListener('contextmenu', onContextMenu);
 
+    if (this.options.distance) {
+      preventScrolling = true;
+    }
+
     this.currentContainer = container;
-    this.tapTimeout = setTimeout(this[onTouchHold](event, container), this.options.delay);
+    this.tapTimeout = setTimeout(() => {
+      this.delayOver = true;
+      if (this.touchMoved || this.distance < this.options.distance) {
+        return;
+      }
+      this[startDrag]();
+    }, this.options.delay);
   }
 
   /**
-   * Touch hold handler
+   * Start the drag
    * @private
-   * @param {Event} event - Touch start event
-   * @param {HTMLElement} container - Container element
    */
-  [onTouchHold](event, container) {
-    return () => {
-      if (this.touchMoved) {
-        return;
-      }
+  [startDrag]() {
+    const startEvent = this.startEvent;
+    const container = this.currentContainer;
+    const touch = startEvent.touches[0] || startEvent.changedTouches[0];
 
-      const touch = event.touches[0] || event.changedTouches[0];
-      const target = event.target;
+    const dragStartEvent = new DragStartSensorEvent({
+      clientX: touch.pageX,
+      clientY: touch.pageY,
+      target: startEvent.target,
+      container,
+      originalEvent: startEvent,
+    });
 
-      const dragStartEvent = new DragStartSensorEvent({
-        clientX: touch.pageX,
-        clientY: touch.pageY,
-        target,
-        container,
-        originalEvent: event,
-      });
+    this.trigger(this.currentContainer, dragStartEvent);
 
-      this.trigger(container, dragStartEvent);
+    this.dragging = !dragStartEvent.canceled();
+    preventScrolling = this.dragging;
+  }
 
-      this.dragging = !dragStartEvent.canceled();
-      preventScrolling = this.dragging;
-    };
+  /**
+   * Detect change in distance
+   * @private
+   * @param {Event} event - Touch move event
+   */
+  [onDistanceChange](event) {
+    if (this.dragging || !this.options.distance) {
+      return;
+    }
+
+    const tap = this.startEvent.touches[0] || this.startEvent.changedTouches[0];
+    const touch = event.touches[0] || event.changedTouches[0];
+
+    this.distance = distance(tap.pageX, tap.pageY, touch.pageX, touch.pageY);
+
+    if (this.delayOver && this.distance >= this.options.distance) {
+      this[startDrag]();
+    }
   }
 
   /**
@@ -173,6 +201,7 @@ export default class TouchSensor extends Sensor {
     document.removeEventListener('touchend', this[onTouchEnd]);
     document.removeEventListener('touchcancel', this[onTouchEnd]);
     document.removeEventListener('touchmove', this[onTouchMove]);
+    document.removeEventListener('touchmove', this[onDistanceChange]);
 
     if (this.currentContainer) {
       this.currentContainer.removeEventListener('contextmenu', onContextMenu);
@@ -201,6 +230,9 @@ export default class TouchSensor extends Sensor {
 
     this.currentContainer = null;
     this.dragging = false;
+    this.distance = 0;
+    this.delayOver = false;
+    this.startEvent = null;
   }
 }
 

@@ -28,7 +28,7 @@ This value will delay touch start
 ### Known issues
 
 The drag sensor uses the native Drag and Drop API and therefor Draggable does not create
-a mirror. This means there is less control over the mirror
+a mirror. This means there is less control over the mirror.
 
 ### Example
 
@@ -42,3 +42,7 @@ const draggable = new Draggable(containers, {
 // Remove default mouse sensor
 draggable.removeSensor(Sensors.MouseSensor);
 ```
+
+### Caveats
+
+- The `distance` option will not work with this sensor.

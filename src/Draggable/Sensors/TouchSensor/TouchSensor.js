@@ -14,19 +14,23 @@ const onDistanceChange = Symbol('onDistanceChange');
  */
 let preventScrolling = false;
 
-// WebKit requires cancelable `touchmove` events to be added as early as possible
-window.addEventListener(
-  'touchmove',
-  (event) => {
-    if (!preventScrolling) {
-      return;
-    }
+const hasWindow = typeof window !== 'undefined';
 
-    // Prevent scrolling
-    event.preventDefault();
-  },
-  {passive: false},
-);
+// WebKit requires cancelable `touchmove` events to be added as early as possible
+if (hasWindow) {
+  window.addEventListener(
+    'touchmove',
+    (event) => {
+      if (!preventScrolling) {
+        return;
+      }
+
+      // Prevent scrolling
+      event.preventDefault();
+    },
+    {passive: false},
+  );
+}
 
 /**
  * This sensor picks up native browser touch events and dictates drag operations

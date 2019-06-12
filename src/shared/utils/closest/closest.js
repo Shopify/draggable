@@ -1,8 +1,11 @@
-const matchFunction =
-  Element.prototype.matches ||
-  Element.prototype.webkitMatchesSelector ||
-  Element.prototype.mozMatchesSelector ||
-  Element.prototype.msMatchesSelector;
+export const hasWindow = typeof window !== 'undefined';
+
+const matchFunction = hasWindow
+  ? Element.prototype.matches ||
+    Element.prototype.webkitMatchesSelector ||
+    Element.prototype.mozMatchesSelector ||
+    Element.prototype.msMatchesSelector
+  : () => false;
 
 /**
  * Get the closest parent element of a given element that matches the given

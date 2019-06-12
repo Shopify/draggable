@@ -1,3 +1,4 @@
+import {hasWindow} from 'shared/envs';
 import {closest, distance} from 'shared/utils';
 import Sensor from '../Sensor';
 import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
@@ -13,8 +14,6 @@ const onDistanceChange = Symbol('onDistanceChange');
  * @var {Boolean} preventScrolling
  */
 let preventScrolling = false;
-
-const hasWindow = typeof window !== 'undefined';
 
 // WebKit requires cancelable `touchmove` events to be added as early as possible
 if (hasWindow) {

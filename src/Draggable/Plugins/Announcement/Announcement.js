@@ -1,3 +1,5 @@
+import {hasWindow} from 'shared/envs';
+
 import AbstractPlugin from 'shared/AbstractPlugin';
 
 const onInitialize = Symbol('onInitialize');
@@ -131,7 +133,7 @@ export default class Announcement extends AbstractPlugin {
 /**
  * @const {HTMLElement} liveRegion
  */
-const liveRegion = createRegion();
+const liveRegion = hasWindow && createRegion();
 
 /**
  * Announces message via live region
@@ -172,7 +174,9 @@ function createRegion() {
   return element;
 }
 
-// Append live region element as early as possible
-document.addEventListener('DOMContentLoaded', () => {
-  document.body.appendChild(liveRegion);
-});
+if (hasWindow) {
+  // Append live region element as early as possible
+  document.addEventListener('DOMContentLoaded', () => {
+    document.body.appendChild(liveRegion);
+  });
+}

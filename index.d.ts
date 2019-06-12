@@ -98,7 +98,7 @@ declare module '@shopify/draggable' {
 
     export type DraggableContainer = HTMLElement | HTMLElement[] | NodeList;
 
-    interface DraggableOptions {
+    export interface DraggableOptions {
         draggable?: string;
         handle?: string | NodeList | HTMLElement[] | HTMLElement | ((currentElement: HTMLElement) => HTMLElement);
         delay?: number;
@@ -120,10 +120,11 @@ declare module '@shopify/draggable' {
             Scrollable: typeof Scrollable
         };
         constructor(containers: DraggableContainer, options?: DraggableOptions);
+        options: DraggableOptions
         destroy(): void;
         on(eventName: EventListType, callback: (event: AbstractEvent) => void): this;
         off(eventName: EventListType, callback: (event: AbstractEvent) => void): this;
-        trigger(event: typeof AbstractEvent): void;
+        trigger(event: AbstractEvent): void;
         addPlugin(...plugins: Array<typeof AbstractPlugin>): this;
         removePlugin(...plugins: Array<typeof AbstractPlugin>): this;
         addSensor(...sensors: Array<typeof Sensor>): this;

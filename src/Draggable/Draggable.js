@@ -48,6 +48,7 @@ export const defaultOptions = {
   draggable: '.draggable-source',
   handle: null,
   delay: 100,
+  distance: 0,
   placedTimeout: 800,
   plugins: [],
   sensors: [],

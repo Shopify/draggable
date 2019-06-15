@@ -141,6 +141,24 @@ export class MirrorMoveEvent extends MirrorEvent {
   get mirror() {
     return this.data.mirror;
   }
+
+  /**
+   * Sensor has exceeded mirror's threshold on x axis
+   * @type {Boolean}
+   * @readonly
+   */
+  get passedThreshX() {
+    return this.data.passedThreshX;
+  }
+
+  /**
+   * Sensor has exceeded mirror's threshold on y axis
+   * @type {Boolean}
+   * @readonly
+   */
+  get passedThreshY() {
+    return this.data.passedThreshY;
+  }
 }
 
 /**

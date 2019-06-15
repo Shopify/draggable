@@ -80,6 +80,10 @@ on the entire element. Default: `null`
 If you want to delay a drag start you can specify delay in milliseconds. This can be useful
 for draggable elements within scrollable containers. Default: `100`
 
+**`distance {Number}`**  
+The distance you want the pointer to have moved before drag starts. This can be useful
+for clickable draggable elements, such as links. Default: `0`
+
 **`plugins {Plugin[]}`**  
 Plugins add behaviour to Draggable by hooking into its life cycle, e.g. one of the default
 plugins controls the mirror movement. Default: `[]`

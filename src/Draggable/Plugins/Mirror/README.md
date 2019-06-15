@@ -32,6 +32,12 @@ this is not where the source will be placed, only the temporary mirror element, 
 that follows your cursor as you drag. You can specify a css selector, a HTMLElement or a function
 that returns a HTMLElement. Default is the source parent element.
 
+**`thresholdX {Number|null}`**
+Defining this sets a threshold that must be exceeded by the mouse for the mirror to move on the x axis. Default: `null`
+
+**`thresholdY {Number|null}`**
+Defining this sets a threshold that must be exceeded by the mouse for the mirror to move on the y axis. Default: `null`
+
 ### Events
 
 | Name                                | Description                                           | Cancelable | Cancelable action        |

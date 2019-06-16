@@ -1,4 +1,4 @@
-import {closest} from 'shared/utils';
+import {closest, querySelectorAll} from 'shared/utils';
 import Draggable from '../Draggable';
 
 import {DroppableStartEvent, DroppableDroppedEvent, DroppableReturnedEvent, DroppableStopEvent} from './DroppableEvent';
@@ -287,7 +287,7 @@ export default class Droppable extends Draggable {
     const dropzone = this.options.dropzone;
 
     if (typeof dropzone === 'string') {
-      return document.querySelectorAll(dropzone);
+      return querySelectorAll(document, dropzone);
     } else if (dropzone instanceof NodeList || dropzone instanceof Array) {
       return dropzone;
     } else if (typeof dropzone === 'function') {

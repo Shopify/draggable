@@ -1,4 +1,4 @@
-import {closest, distance} from 'shared/utils';
+import {closest, distance, getRealTarget} from 'shared/utils';
 import Sensor from '../Sensor';
 import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
 
@@ -69,7 +69,7 @@ export default class MouseSensor extends Sensor {
     document.addEventListener('mouseup', this[onMouseUp]);
     document.addEventListener('mousemove', this[onDistanceChange]);
 
-    const container = closest(event.target, this.containers);
+    const container = closest(getRealTarget(event), this.containers);
 
     if (!container) {
       return;

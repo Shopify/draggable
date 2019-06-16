@@ -1,4 +1,5 @@
 import AbstractEvent from 'shared/AbstractEvent';
+import {getRealTarget} from 'shared/utils';
 
 /**
  * Base sensor event
@@ -7,6 +8,15 @@ import AbstractEvent from 'shared/AbstractEvent';
  * @extends AbstractEvent
  */
 export class SensorEvent extends AbstractEvent {
+  /**
+   * SensorEvent constructor.
+   * @constructs SensorEvent
+   * @param {object} data - Event data
+   */
+  constructor(data) {
+    super(data);
+    this.data.target = getRealTarget(this.data);
+  }
   /**
    * Original browser event that triggered a sensor
    * @property originalEvent

@@ -47,6 +47,9 @@ export default function closest(element, value) {
   let current = element;
 
   do {
+    if (current.host && current !== document && current.host.nodeType) {
+      current = current.host;
+    }
     current = current.correspondingUseElement || current.correspondingElement || current;
 
     if (conditionFn(current)) {

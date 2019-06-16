@@ -1,4 +1,4 @@
-import {closest} from 'shared/utils';
+import {closest, getRealTarget} from 'shared/utils';
 import Sensor from '../Sensor';
 import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
 
@@ -79,8 +79,8 @@ export default class DragSensor extends Sensor {
     event.dataTransfer.setData('text', '');
     event.dataTransfer.effectAllowed = this.options.type;
 
-    const target = document.elementFromPoint(event.clientX, event.clientY);
-    this.currentContainer = closest(event.target, this.containers);
+    const target = this.draggableElement;
+    this.currentContainer = closest(target, this.containers);
 
     if (!this.currentContainer) {
       return;
@@ -188,7 +188,9 @@ export default class DragSensor extends Sensor {
       return;
     }
 
-    const nativeDraggableElement = closest(event.target, (element) => element.draggable);
+    const realTarget = getRealTarget(event);
+
+    const nativeDraggableElement = closest(realTarget, (element) => element.draggable);
 
     if (nativeDraggableElement) {
       nativeDraggableElement.draggable = false;
@@ -201,7 +203,7 @@ export default class DragSensor extends Sensor {
     document.addEventListener('dragend', this[onDragEnd], false);
     document.addEventListener('drop', this[onDrop], false);
 
-    const target = closest(event.target, this.options.draggable);
+    const target = closest(realTarget, this.options.draggable);
 
     if (!target) {
       return;

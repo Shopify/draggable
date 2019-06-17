@@ -1,13 +1,14 @@
 {
   "name": "@bestminr/draggable",
-  "version": "1.0.0-beta.8",
+  "version": "1.0.0-beta.9",
   "private": false,
   "license": "MIT",
   "description": "The JavaScript Drag & Drop library your grandparents warned you about.",
   "author": "Chen Min <chenmin@bestminr.com>",
   "homepage": "https://github.com/hikerpig/draggable#readme",
   "repository": "https://github.com/hikerpig/draggable",
-  "contributors": [{
+  "contributors": [
+    {
       "name": "Max Hoffmann",
       "email": "max.hoffmann@shopify.com"
     },

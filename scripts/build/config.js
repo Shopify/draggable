@@ -5,7 +5,7 @@ const useAnalyser = args.find((value) => value === '--analyser');
 const isProd = args.find((value) => value === '--production');
 
 const rootPath = `${__dirname}/../../`;
-const targetPath = isProd ? `${rootPath}lib/` : `${rootPath}examples/packages/@shopify/draggable`;
+const targetPath = isProd ? `${rootPath}lib/` : `${rootPath}examples/packages/@bestminr/draggable`;
 const resolveModules = ['node_modules', 'src/'];
 
 module.exports = {

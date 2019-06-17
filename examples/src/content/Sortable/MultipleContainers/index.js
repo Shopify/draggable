@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import {Sortable, Plugins} from '@shopify/draggable';
+import {Sortable, Plugins} from '@bestminr/draggable';
 
 const Classes = {
   draggable: 'StackedListItem--isDraggable',

@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import {Droppable} from '@shopify/draggable';
+import {Droppable} from '@bestminr/draggable';
 
 export default function UniqueDropzone() {
   const containers = document.querySelectorAll('#UniqueDropzone .BlockLayout');

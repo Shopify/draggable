@@ -1,24 +1,27 @@
 {
-  "name": "@shopify/draggable",
+  "name": "@bestminr/draggable",
   "version": "1.0.0-beta.8",
   "private": false,
   "license": "MIT",
   "description": "The JavaScript Drag & Drop library your grandparents warned you about.",
-  "author": "Shopify <dev@shopify.com>",
-  "homepage": "https://github.com/Shopify/draggable#readme",
-  "repository": "https://github.com/Shopify/draggable",
-  "contributors": [
-    {
+  "author": "Chen Min <chenmin@bestminr.com>",
+  "homepage": "https://github.com/hikerpig/draggable#readme",
+  "repository": "https://github.com/hikerpig/draggable",
+  "contributors": [{
       "name": "Max Hoffmann",
       "email": "max.hoffmann@shopify.com"
     },
     {
       "name": "Curtis Dulmage",
       "email": "curtis.dulmage@shopify.com"
+    },
+    {
+      "name": "Chen Min",
+      "email": "chenmin@bestminr.com"
     }
   ],
   "bugs": {
-    "url": "https://github.com/Shopify/draggable/issues"
+    "url": "https://github.com/hikerpig/draggable/issues"
   },
   "keywords": [
     "shopify",

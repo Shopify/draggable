@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import {Swappable, Plugins} from '@shopify/draggable';
+import {Swappable, Plugins} from '@bestminr/draggable';
 
 export default function PluginsSnappable() {
   const containerSelector = '#Snappable .BlockLayout';

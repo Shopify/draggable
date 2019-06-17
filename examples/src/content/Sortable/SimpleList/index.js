@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-unresolved
-import {Sortable} from '@shopify/draggable';
+import {Sortable} from '@bestminr/draggable';
 
 export default function SimpleList() {
   const containerSelector = '#SimpleList .StackedList';

@@ -26,6 +26,7 @@
   },
   "keywords": [
     "shopify",
+    "bestminr",
     "draggable",
     "drag-and-drop",
     "es6"
@@ -84,7 +85,6 @@
     ]
   },
   "publishConfig": {
-    "access": "public",
-    "@shopify:registry": "https://registry.npmjs.org"
+    "access": "public"
   }
 }

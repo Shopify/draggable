@@ -102,6 +102,7 @@ declare module '@bestminr/draggable' {
         draggable?: string;
         handle?: string | NodeList | HTMLElement[] | HTMLElement | ((currentElement: HTMLElement) => HTMLElement);
         delay?: number;
+        distance?: number;
         plugins?: Array<typeof AbstractPlugin>;
         sensors?: Sensor[];
         classes?: { [key in DraggableClassNames]: string };

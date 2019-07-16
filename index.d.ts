@@ -106,6 +106,7 @@ declare module '@bestminr/draggable' {
         plugins?: Array<typeof AbstractPlugin>;
         sensors?: Sensor[];
         classes?: { [key in DraggableClassNames]: string };
+        findClosestDraggable?: (target: Element, options: DraggableOptions, draggable: Draggable) => Element | undefined;
         announcements?: AnnouncementOptions;
         collidables?: Collidables;
         mirror?: MirrorOptions;

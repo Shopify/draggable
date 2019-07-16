@@ -52,6 +52,9 @@ export const defaultOptions = {
   placedTimeout: 800,
   plugins: [],
   sensors: [],
+  findClosestDraggable(target, options, draggable) {
+    return closest(target, options.draggable, draggable);
+  },
 };
 
 /**
@@ -439,7 +442,8 @@ export default class Draggable {
       sensorEvent.cancel();
     }
 
-    target = closest(target, this.options.draggable);
+    target = this.options.findClosestDraggable(sensorEvent.target, this.options, this);
+
     const withinCorrectContainer = closest(sensorEvent.target, this.containers);
     const overContainer = sensorEvent.overContainer || withinCorrectContainer;
     const isLeavingContainer = this.currentOverContainer && overContainer !== this.currentOverContainer;

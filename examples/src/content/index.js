@@ -4,6 +4,8 @@ import Home from './Home';
 import DragEvents from './Draggable/DragEvents';
 // Droppable
 import UniqueDropzone from './Droppable/UniqueDropzone';
+// Pannable
+import PanImage from './Pannable/PanImage';
 // Sortable
 import SimpleList from './Sortable/SimpleList';
 import Transformed from './Sortable/Transformed';
@@ -21,6 +23,7 @@ const Content = {
   Home,
   DragEvents,
   UniqueDropzone,
+  PanImage,
   SimpleList,
   Transformed,
   MultipleContainers,

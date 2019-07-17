@@ -13,6 +13,11 @@
       ]
     },
     {
+      "Pannable": [
+        "Pannable Image"
+      ]
+    },
+    {
       "Sortable": [
         "Simple list",
         "Transformed",

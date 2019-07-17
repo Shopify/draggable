@@ -526,7 +526,7 @@ export default class Draggable {
     const dragStopEvent = new DragStopEvent({
       source: this.source,
       originalSource: this.originalSource,
-      sensorEvent: event.sensorEvent,
+      sensorEvent: getSensorEvent(event),
       sourceContainer: this.sourceContainer,
     });
 
@@ -535,6 +535,7 @@ export default class Draggable {
     this.source.parentNode.insertBefore(this.originalSource, this.source);
     this.source.parentNode.removeChild(this.source);
     this.originalSource.style.display = '';
+    // this.originalSource.style.transform = this.source.style.transform;
 
     this.source.classList.remove(this.getClassNameFor('source:dragging'));
     this.originalSource.classList.remove(this.getClassNameFor('source:original'));

@@ -54,6 +54,23 @@ export default class MouseSensor extends Sensor {
     document.removeEventListener('mousedown', this[onMouseDown], true);
   }
 
+  abort() {
+    clearTimeout(this.mouseDownTimeout);
+
+    document.removeEventListener('mouseup', this[onMouseUp]);
+    document.removeEventListener('dragstart', preventNativeDragStart);
+    document.removeEventListener('mousemove', this[onDistanceChange]);
+
+    document.removeEventListener('contextmenu', this[onContextMenuWhileDragging], true);
+    document.removeEventListener('mousemove', this[onMouseMove]);
+
+    this.currentContainer = null;
+    this.dragging = false;
+    this.distance = 0;
+    this.delayOver = false;
+    this.startEvent = null;
+  }
+
   /**
    * Mouse down handler
    * @private

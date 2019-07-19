@@ -4,7 +4,7 @@ import {Announcement, Focusable, Mirror, Scrollable} from './Plugins';
 
 import Emitter from './Emitter';
 import {MouseSensor, TouchSensor} from './Sensors';
-import {DraggableInitializedEvent, DraggableDestroyEvent} from './DraggableEvent';
+import {DraggableInitializedEvent, DraggableDestroyEvent, DraggableAbortEvent} from './DraggableEvent';
 
 import {
   DragStartEvent,
@@ -301,6 +301,50 @@ export default class Draggable {
   trigger(event) {
     this.emitter.trigger(event);
     return this;
+  }
+
+  /**
+   * Abortion while dragging
+   */
+  abort() {
+    if (!this.dragging) {
+      return;
+    }
+
+    const abortEvent = new DraggableAbortEvent({
+      draggable: this,
+    });
+
+    this.trigger(abortEvent);
+
+    this.source.parentNode.removeChild(this.source);
+    this.originalSource.style.display = '';
+
+    this.source.classList.remove(this.getClassNameFor('source:dragging'));
+    this.originalSource.classList.remove(this.getClassNameFor('source:original'));
+    this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
+    document.body.classList.remove(this.getClassNameFor('body:dragging'));
+    applyUserSelect(document.body, '');
+
+    if (this.currentOver) {
+      this.currentOver.classList.remove(this.getClassNameFor('draggable:over'));
+    }
+
+    if (this.currentOverContainer) {
+      this.currentOverContainer.classList.remove(this.getClassNameFor('container:over'));
+    }
+
+    this.sensors.forEach((sensor) => {
+      sensor.abort();
+    });
+
+    this.isDragging = false;
+
+    this.source = null;
+    this.originalSource = null;
+    this.currentOverContainer = null;
+    this.currentOver = null;
+    this.sourceContainer = null;
   }
 
   /**

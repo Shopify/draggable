@@ -11,6 +11,7 @@ import {
 export const onDragStart = Symbol('onDragStart');
 export const onDragMove = Symbol('onDragMove');
 export const onDragStop = Symbol('onDragStop');
+export const onDraggableAbort = Symbol('onDraggableAbort');
 export const onMirrorCreated = Symbol('onMirrorCreated');
 export const onMirrorMove = Symbol('onMirrorMove');
 export const onScroll = Symbol('onScroll');
@@ -86,6 +87,7 @@ export default class Mirror extends AbstractPlugin {
       y: window.scrollY,
     };
 
+    this[onDraggableAbort] = this[onDraggableAbort].bind(this);
     this[onDragStart] = this[onDragStart].bind(this);
     this[onDragMove] = this[onDragMove].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
@@ -99,6 +101,7 @@ export default class Mirror extends AbstractPlugin {
    */
   attach() {
     this.draggable
+      .on('draggable:abort', this[onDraggableAbort])
       .on('drag:start', this[onDragStart])
       .on('drag:move', this[onDragMove])
       .on('drag:stop', this[onDragStop])
@@ -111,6 +114,7 @@ export default class Mirror extends AbstractPlugin {
    */
   detach() {
     this.draggable
+      .off('draggable:abort', this[onDraggableAbort])
       .off('drag:start', this[onDragStart])
       .off('drag:move', this[onDragMove])
       .off('drag:stop', this[onDragStop])
@@ -124,6 +128,10 @@ export default class Mirror extends AbstractPlugin {
    */
   getOptions() {
     return this.draggable.options.mirror || {};
+  }
+
+  [onDraggableAbort]() {
+    this._clearAfterStop({removeMirror: true});
   }
 
   [onDragStart](dragEvent) {
@@ -233,18 +241,9 @@ export default class Mirror extends AbstractPlugin {
   }
 
   [onDragStop](dragEvent) {
-    if ('ontouchstart' in window) {
-      document.removeEventListener('scroll', this[onScroll], true);
-    }
-
-    this.initialScrollOffset = {x: 0, y: 0};
-    this.scrollOffset = {x: 0, y: 0};
-
-    if (!this.mirror) {
-      return;
-    }
-
     const {source, sourceContainer, sensorEvent} = dragEvent;
+
+    this._clearAfterStop();
 
     const mirrorDestroyEvent = new MirrorDestroyEvent({
       source,
@@ -365,6 +364,19 @@ export default class Mirror extends AbstractPlugin {
       return appendTo(source);
     } else {
       return source.parentNode;
+    }
+  }
+
+  _clearAfterStop(opts = {}) {
+    if ('ontouchstart' in window) {
+      document.removeEventListener('scroll', this[onScroll], true);
+    }
+
+    this.initialScrollOffset = {x: 0, y: 0};
+    this.scrollOffset = {x: 0, y: 0};
+
+    if (this.mirror && opts.removeMirror) {
+      this.mirror.parentNode.removeChild(this.mirror);
     }
   }
 }

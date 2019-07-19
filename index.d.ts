@@ -69,6 +69,7 @@ declare module '@bestminr/draggable' {
      */
     export type DraggableEventNames =
         'draggable:initialize' |
+        'draggable:abort' |
         'draggable:destroy' |
         'drag:start' |
         'drag:move' |
@@ -123,6 +124,7 @@ declare module '@bestminr/draggable' {
         };
         constructor(containers: DraggableContainer, options?: DraggableOptions);
         options: DraggableOptions
+        abort(): void;
         destroy(): void;
         on(eventName: EventListType, callback: (event: AbstractEvent) => void): this;
         off(eventName: EventListType, callback: (event: AbstractEvent) => void): this;

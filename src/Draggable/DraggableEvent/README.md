@@ -11,7 +11,7 @@ The base draggable event for all Draggable events that `Draggable` emits.
 
 ### API
 
-**`draggableEvent.draggable: Draggable`**  
+**`draggableEvent.draggable: Draggable`**
 Read-only property for the current draggable instance
 
 ## DraggableInitializedEvent
@@ -25,6 +25,19 @@ Read-only property for the current draggable instance
 | **Cancelable**        | false                                                      |
 | **Cancel action**     | -                                                          |
 | **type**              | `draggable:initialized`                                    |
+
+## DraggableAbortEvent
+
+`DraggableAbortEvent` gets triggered by `Draggable` when `.abort()` is called.
+
+| | |
+| --------------------- | ---------------------------------------------------------- |
+| **Specification**     | `DraggableEvent`                                           |
+| **Interface**         | `DraggableAbortEvent`                                      |
+| **Cancelable**        | false                                                      |
+| **Cancel action**     | -                                                          |
+| **type**              | `draggable:abort`                                          |
+
 
 ## DraggableDestroyEvent
 

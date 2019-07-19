@@ -31,6 +31,15 @@ export class DraggableInitializedEvent extends DraggableEvent {
 }
 
 /**
+ * Draggable abort event
+ * @module DraggableAbortEvent
+ * @extends DraggableEvent
+ */
+export class DraggableAbortEvent extends DraggableEvent {
+  static type = 'draggable:abort';
+}
+
+/**
  * Draggable destory event
  * @class DraggableInitializedEvent
  * @module DraggableDestroyEvent

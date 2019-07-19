@@ -102,6 +102,7 @@ on elements in certain states.
 | ------------------------------------------ | --------------------------------------------------------- | ---------- | ------------------- |
 | [`draggable:initialize`][draggableinit]    | Gets fired when draggable gets initialized                | false      | -                   |
 | [`draggable:destroy`][draggabledest]       | Gets fired when draggable gets destroyed                  | false      | -                   |
+| [`draggable:abort`][draggableabort]        | Gets fired when draggable.abort() called                  | false      | -                   |
 | [`drag:start`][dragstart]                  | Gets fired when drag action begins                        | true       | Prevents drag start |
 | [`drag:move`][dragmove]                    | Gets fired when moving a draggable around                 | false      | -                   |
 | [`drag:over`][dragover]                    | Gets fired when dragging over other draggable             | false      | -                   |
@@ -113,6 +114,7 @@ on elements in certain states.
 
 [draggableinit]: DraggableEvent#draggableinitializedevent
 [draggabledest]: DraggableEvent#draggabledestroydevent
+[draggableabort]: DraggableEvent#draggableabortevent
 [dragstart]: DragEvent#dragstartevent
 [dragmove]: DragEvent#dragmoveevent
 [dragover]: DragEvent#dragoverevent

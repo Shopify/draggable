@@ -78,6 +78,13 @@ export default class Sensor {
   }
 
   /**
+   * Abort interaction and reset to initial
+   */
+  abort() {
+    return this;
+  }
+
+  /**
    * Adds container to this sensor instance
    * @param {...HTMLElement} containers - Containers you want to add to this sensor
    * @example draggable.addContainer(document.body)

@@ -214,6 +214,8 @@ export default class TouchSensor extends Sensor {
 
     clearTimeout(this.tapTimeout);
 
+    this.startEvent = null;
+
     if (!this.dragging) {
       return;
     }
@@ -237,7 +239,6 @@ export default class TouchSensor extends Sensor {
     this.dragging = false;
     this.distance = 0;
     this.delayOver = false;
-    this.startEvent = null;
   }
 }
 

@@ -61,7 +61,7 @@
     "esdoc-ecmascript-proposal-plugin": "^1.0.0",
     "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^4.19.1",
-    "eslint-loader": "^2.0.0",
+    "eslint-loader": "^3.0.0",
     "eslint-plugin-shopify": "^22.1.0",
     "jest": "^23.1.0",
     "webpack": "^4.12.0",

@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.0.0-beta.9 - 2019-08-26
+
+### Added
+
+* Added `distance` option
+* Added `thresholdX` and `thresholdY` mirror options
+
+### Changed
+
+* Fixes preventing of contextmenu in MouseSensor
+* Fixes SortableEvent `over` and `overContainer` giving incorrect properties
+
 ## v1.0.0-beta.8 - 2018-09-07
 
 ### Changed

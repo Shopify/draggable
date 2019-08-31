@@ -195,6 +195,7 @@ export default class TouchSensor extends Sensor {
    * @param {Event} event - Touch end event
    */
   [onTouchEnd](event) {
+    this.delayOver = false;
     this.touchMoved = false;
     preventScrolling = false;
 
@@ -231,7 +232,6 @@ export default class TouchSensor extends Sensor {
     this.currentContainer = null;
     this.dragging = false;
     this.distance = 0;
-    this.delayOver = false;
     this.startEvent = null;
   }
 }

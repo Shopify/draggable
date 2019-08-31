@@ -156,6 +156,7 @@ export default class MouseSensor extends Sensor {
    * @param {Event} event - Mouse up event
    */
   [onMouseUp](event) {
+    this.delayOver = false;
     clearTimeout(this.mouseDownTimeout);
 
     if (event.button !== 0) {
@@ -188,7 +189,6 @@ export default class MouseSensor extends Sensor {
     this.currentContainer = null;
     this.dragging = false;
     this.distance = 0;
-    this.delayOver = false;
     this.startEvent = null;
   }
 

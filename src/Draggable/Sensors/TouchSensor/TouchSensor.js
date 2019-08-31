@@ -1,3 +1,4 @@
+import {hasWindow} from 'shared/envs';
 import {closest, distance} from 'shared/utils';
 import Sensor from '../Sensor';
 import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
@@ -15,18 +16,20 @@ const onDistanceChange = Symbol('onDistanceChange');
 let preventScrolling = false;
 
 // WebKit requires cancelable `touchmove` events to be added as early as possible
-window.addEventListener(
-  'touchmove',
-  (event) => {
-    if (!preventScrolling) {
-      return;
-    }
+if (hasWindow) {
+  window.addEventListener(
+    'touchmove',
+    (event) => {
+      if (!preventScrolling) {
+        return;
+      }
 
-    // Prevent scrolling
-    event.preventDefault();
-  },
-  {passive: false},
-);
+      // Prevent scrolling
+      event.preventDefault();
+    },
+    {passive: false},
+  );
+}
 
 /**
  * This sensor picks up native browser touch events and dictates drag operations

@@ -27,6 +27,7 @@ function createBundleConfig(bundle, {analyser}) {
       library: bundle.name,
       libraryTarget: 'umd',
       umdNamedDefine: true,
+      globalObject: 'this',
     },
     optimization: {
       minimize,

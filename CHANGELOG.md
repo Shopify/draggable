@@ -1,6 +1,14 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.0.0](https://github.com/hikerpig/draggable/compare/v1.0.0-beta.10...v1.0.0) (2019-09-10)
+
+
+### Features
+
+* add `.abort()` method and related events to Draggable/MouseSensor/Mirror ([c8e6ab0](https://github.com/hikerpig/draggable/commit/c8e6ab0))
+* options.findClosestDraggable ([127af38](https://github.com/hikerpig/draggable/commit/127af38))
 
 <a name="1.0.0-beta.10"></a>
 # [1.0.0-beta.10](https://github.com/hikerpig/draggable/compare/v1.0.0-beta.9...v1.0.0-beta.10) (2019-06-17)

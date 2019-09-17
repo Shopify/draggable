@@ -94,28 +94,24 @@ describe('MouseSensor', () => {
     expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
   });
 
-  it('does not trigger `drag:start` event when right clicking or holding ctrl or meta key', () => {
-    function dragFlowWithRightClick() {
+  it('does not trigger `drag:start` event when right clicking', () => {
+    function dragFlow() {
       clickMouse(draggableElement, {button: 2});
       waitForDragDelay();
       releaseMouse(document.body);
     }
 
-    function dragFlowWithCtrlKey() {
-      clickMouse(draggableElement, {ctrlKey: true});
+    expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+  });
+
+  it('does not trigger `drag:start` event when holding "ctrl+click" or "metakey+click" in A Tag', () => {
+    function dragFlow() {
+      clickMouse(draggableElement, {srcElement: {nodeName: 'A'}});
       waitForDragDelay();
       releaseMouse(document.body);
     }
 
-    function dragFlowWithMetaKey() {
-      clickMouse(draggableElement, {metaKey: true});
-      waitForDragDelay();
-      releaseMouse(document.body);
-    }
-
-    [dragFlowWithRightClick, dragFlowWithCtrlKey, dragFlowWithMetaKey].forEach((dragFlow) => {
-      expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
-    });
+    expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
   });
 
   it('does not trigger `drag:start` event when clicking on none draggable element', () => {

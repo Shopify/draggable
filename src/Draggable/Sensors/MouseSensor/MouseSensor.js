@@ -65,9 +65,9 @@ export default class MouseSensor extends Sensor {
     }
 
     // is 'A' node target
-    const isANode = (event.srcElement && event.srcElement.nodeName) === 'A'
+    const isANode = (event.srcElement && event.srcElement.nodeName) === 'A';
     if (isANode && (event.ctrlKey || event.metaKey)) {
-      return
+      return;
     }
 
     this.startEvent = event;

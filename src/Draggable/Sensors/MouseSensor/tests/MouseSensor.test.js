@@ -102,7 +102,7 @@ describe('MouseSensor', () => {
     }
 
     function dragFlowWithATag() {
-      clickMouse(draggableElement, {srcElement: {nodeName: "A"}});
+      clickMouse(draggableElement, {srcElement: {nodeName: 'A'}});
       waitForDragDelay();
       releaseMouse(document.body);
     }

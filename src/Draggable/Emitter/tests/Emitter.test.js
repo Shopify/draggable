@@ -31,15 +31,18 @@ describe('Emitter', () => {
 
   describe('#off', () => {
     it('removes a callback by event type', () => {
-      const callback = jest.fn();
+      const callbacks = [jest.fn(), jest.fn()];
 
-      emitter.on('event', callback);
+      emitter.on('event', callbacks[0]);
+      emitter.on('event2', callbacks[1]);
 
-      expect(emitter.callbacks.event).toContain(callback);
+      expect(emitter.callbacks.event).toContain(callbacks[0]);
+      expect(emitter.callbacks.event2).toContain(callbacks[1]);
 
-      emitter.off('event', callback);
+      emitter.off('event', callbacks[0]);
 
-      expect(emitter.callbacks.event).not.toContain(callback);
+      expect(emitter.callbacks.event).not.toContain(callbacks[0]);
+      expect(emitter.callbacks.event2).toContain(callbacks[1]);
     });
   });
 

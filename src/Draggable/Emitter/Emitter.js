@@ -33,15 +33,7 @@ export default class Emitter {
       return null;
     }
 
-    const copy = this.callbacks[type].slice(0);
-
-    for (let i = 0; i < copy.length; i++) {
-      if (callback === copy[i]) {
-        this.callbacks[type].splice(i, 1);
-      }
-    }
-
-    return this;
+    this.callbacks[type] = this.callbacks[type].filter(cb => cb !== callback);
   }
 
   /**

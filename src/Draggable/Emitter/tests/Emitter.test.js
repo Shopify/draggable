@@ -44,6 +44,18 @@ describe('Emitter', () => {
       expect(emitter.callbacks.event).not.toContain(callbacks[0]);
       expect(emitter.callbacks.event2).toContain(callbacks[1]);
     });
+
+    it('removes multiple callbacks of event type', () => {
+      const callback = jest.fn();
+
+      emitter.on('event', callback, callback);
+
+      expect(emitter.callbacks.event).toContain(callback);
+
+      emitter.off('event', callback);
+
+      expect(emitter.callbacks.event).not.toContain(callback);
+    });
   });
 
   describe('#trigger', () => {

@@ -33,7 +33,9 @@ export default class Emitter {
       return null;
     }
 
-    this.callbacks[type] = this.callbacks[type].filter(cb => cb !== callback);
+    this.callbacks[type] = this.callbacks[type].filter((cb) => cb !== callback);
+
+    return this;
   }
 
   /**

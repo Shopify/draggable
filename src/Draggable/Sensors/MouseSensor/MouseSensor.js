@@ -44,7 +44,9 @@ export default class MouseSensor extends Sensor {
    * Attaches sensors event listeners to the DOM
    */
   attach() {
-    document.addEventListener('mousedown', this[onMouseDown], true);
+    if (!this.options.useManualStart) {
+      document.addEventListener('mousedown', this[onMouseDown], true);
+    }
   }
 
   /**
@@ -69,6 +71,14 @@ export default class MouseSensor extends Sensor {
     this.distance = 0;
     this.delayOver = false;
     this.startEvent = null;
+  }
+
+  /**
+   * Pass a mousedown event to start sensor manually
+   * @param {Event} event - Mouse down event
+   */
+  manualStart(event) {
+    this[onMouseDown](event);
   }
 
   /**

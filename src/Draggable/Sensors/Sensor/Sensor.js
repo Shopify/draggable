@@ -21,7 +21,7 @@ export default class Sensor {
     /**
      * Current options
      * @property options
-     * @type {Object}
+     * @type {import("@bestminr/draggable").SensorOptions}
      */
     this.options = {...options};
 
@@ -82,6 +82,14 @@ export default class Sensor {
    */
   abort() {
     return this;
+  }
+
+  /**
+   * Pass an  event to start sensor manually
+   * @public
+   * @param {Event} event - Start event, should be accord with concreate Sensor class's event type
+   */
+  manualStart(event) {
   }
 
   /**

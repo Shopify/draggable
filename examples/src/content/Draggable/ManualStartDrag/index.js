@@ -5,16 +5,25 @@ export default function ManualStartDrag() {
   const container = document.getElementById('ManualStartDrag');
   if (!container) return false;
 
-  console.log('ManualStartDrag');
-
   const draggable = new Draggable(container, {
     draggable: '.StackedListItem--isDraggable',
+    useManualStart: true,
     getMultiDragItems(target, options, draggable) {
       return container.querySelectorAll('.StackedListItem--isDraggable.selected');
     },
   });
 
-  container.addEventListener('dblclick', () => {
-    draggable.startDrag();
+  container.addEventListener('mousedown', e => {
+    // console.log('mousedown', e);
+    let shouldStart = true;
+    e.path.forEach(ele => {
+      if (ele.classList) {
+        if (ele.classList.contains('js-no-manual-start')) {
+          shouldStart = false;
+          return false;
+        }
+      }
+    });
+    if (shouldStart) draggable.manualStart(e);
   });
 }

@@ -2,7 +2,6 @@
 
 {% macro render(id) %}
   <section id="{{ id }}" class="{{ id }}">
-
     <article class="StackedListWrapper StackedListWrapper--hasScrollIndicator">
       <header class="StackedListHeader">
         <h3 class="Heading Heading--size3 Heading--colorWhite">ManualStartDrag</h3>
@@ -11,9 +10,8 @@
       <ul class="StackedList StackedList--hasScroll">
         {{ StackedListItem.render('item one',    {index: 1, draggable: true, classes: ['selected']}) }}
         {{ StackedListItem.render('item two',    {index: 2, draggable: true, classes: ['selected']}) }}
-        {{ StackedListItem.render('item three',  {index: 3, draggable: true}) }}
-        {{ StackedListItem.render('item four',   {index: 4, draggable: true}) }}
-        {{ StackedListItem.render('item five',   {index: 5}) }}
+        {{ StackedListItem.render('不调用 manualStart, 不会触发拖动', {index: 3, draggable: true, classes: ['js-no-manual-start']}) }}
+        {{ StackedListItem.render('item five, not draggable', {index: 4}) }}
       </ul>
     </article>
 

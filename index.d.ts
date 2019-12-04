@@ -112,6 +112,10 @@ declare module '@bestminr/draggable' {
          * 拖拽的时候如果有多选，返回所有多选的 source elements
          */
         getMultiDragItems?: (target: Element, options: DraggableOptions, draggable: Draggable) => Element[] | void
+        /**
+         * 开启此选项时, sensor 不再监听用于启动的dom事件(mousedown/touchstart), 等外界调用 manualStart 方法
+         */
+        useManualStart?: boolean;
         announcements?: AnnouncementOptions;
         collidables?: Collidables;
         mirror?: MirrorOptions;
@@ -129,6 +133,8 @@ declare module '@bestminr/draggable' {
         constructor(containers: DraggableContainer, options?: DraggableOptions);
         options: DraggableOptions
         abort(): void;
+        /** 手动触发拖拽流程 */
+        manualStart(e: Event): void;
         destroy(): void;
         on(eventName: EventListType, callback: (event: AbstractEvent) => void): this;
         off(eventName: EventListType, callback: (event: AbstractEvent) => void): this;
@@ -258,6 +264,8 @@ declare module '@bestminr/draggable' {
 
     export interface SensorOptions {
         delay?: number;
+        /** @type DraggableOptions['useManualStart'] */
+        useManualStart?: boolean;
     }
 
     export class Sensor {
@@ -267,6 +275,10 @@ declare module '@bestminr/draggable' {
         addContainer(...containers: HTMLElement[]): void;
         removeContainer(...containers: HTMLElement[]): void;
         trigger(element: HTMLElement, sensorEvent: SensorEvent): SensorEvent;
+        /**
+         * Pass an  event to start sensor manually
+         */
+        manualStart(e: Event): void;
     }
 
     export interface Sensors {

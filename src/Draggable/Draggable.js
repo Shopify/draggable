@@ -45,6 +45,9 @@ const defaultClasses = {
   mirror: 'draggable-mirror',
 };
 
+/**
+ * @type {Partial<import("@bestminr/draggable").DraggableOptions>}
+ */
 export const defaultOptions = {
   draggable: '.draggable-source',
   handle: null,
@@ -53,6 +56,7 @@ export const defaultOptions = {
   placedTimeout: 800,
   plugins: [],
   sensors: [],
+  useManualStart: false,
   findClosestDraggable(target, options, draggable) {
     return closest(target, options.draggable, draggable);
   },
@@ -393,6 +397,18 @@ export default class Draggable {
   }
 
   /**
+   * 手动触发拖拽流程
+   * @public
+   * @param {Event} event - DOM Drag event
+   */
+  manualStart(event) {
+    // console.log('manualStart', event);
+    this.sensors.forEach((sensor) => {
+      sensor.manualStart(event);
+    });
+  }
+
+  /**
    * Drag start handler
    * @private
    * @param {Event} event - DOM Drag event
@@ -420,7 +436,8 @@ export default class Draggable {
     }
 
     /**
-     * 拖拽时带着多选
+     * 拖拽时带着的多选的 source elements
+     * @public
      * @type Element[]
      */
     this.multiDragItems = this.options.getMultiDragItems(target, this.options, this);

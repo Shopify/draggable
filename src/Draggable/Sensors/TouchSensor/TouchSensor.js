@@ -79,7 +79,9 @@ export default class TouchSensor extends Sensor {
    * Attaches sensors event listeners to the DOM
    */
   attach() {
-    document.addEventListener('touchstart', this[onTouchStart]);
+    if (!this.options.useManualStart) {
+      document.addEventListener('touchstart', this[onTouchStart]);
+    }
   }
 
   /**
@@ -87,6 +89,14 @@ export default class TouchSensor extends Sensor {
    */
   detach() {
     document.removeEventListener('touchstart', this[onTouchStart]);
+  }
+
+  /**
+   * Pass a touchstart event to start sensor manually
+   * @param {Event} event - touchstart event
+   */
+  manualStart(event) {
+    if (event.type === 'touchstart') this[onTouchStart](event);
   }
 
   /**

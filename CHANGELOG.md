@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0-beta.0](https://github.com/hikerpig/draggable/compare/v1.0.0...v1.1.0-beta.0) (2019-12-04)
+
+
+### Features
+
+* Add option `getMultiDragItems` to enable multi-drag styling ([d1f995b](https://github.com/hikerpig/draggable/commit/d1f995b))
+* add option and method for manual start ([32f2c17](https://github.com/hikerpig/draggable/commit/32f2c17))
+
 ## [1.0.0](https://github.com/hikerpig/draggable/compare/v1.0.0-beta.10...v1.0.0) (2019-09-10)
 
 

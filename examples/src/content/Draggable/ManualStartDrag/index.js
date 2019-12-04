@@ -8,9 +8,10 @@ export default function ManualStartDrag() {
   const draggable = new Draggable(container, {
     draggable: '.StackedListItem--isDraggable',
     useManualStart: true,
-    getMultiDragItems(target, options, draggable) {
-      return container.querySelectorAll('.StackedListItem--isDraggable.selected');
-    },
+    mirror: {
+      appendTo: container,
+      constrainDimensions: true
+    }
   });
 
   container.addEventListener('mousedown', e => {

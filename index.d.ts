@@ -108,6 +108,10 @@ declare module '@bestminr/draggable' {
         sensors?: Sensor[];
         classes?: { [key in DraggableClassNames]: string };
         findClosestDraggable?: (target: Element, options: DraggableOptions, draggable: Draggable) => Element | undefined;
+        /**
+         * 拖拽的时候如果有多选，返回所有多选的 source elements
+         */
+        getMultiDragItems?: (target: Element, options: DraggableOptions, draggable: Draggable) => Element[] | void
         announcements?: AnnouncementOptions;
         collidables?: Collidables;
         mirror?: MirrorOptions;

@@ -41,6 +41,7 @@ const defaultClasses = {
   'draggable:over': 'draggable--over',
   'container:over': 'draggable-container--over',
   'source:original': 'draggable--original',
+  'source:multi-item': 'draggable-multi-source',
   mirror: 'draggable-mirror',
 };
 
@@ -54,6 +55,9 @@ export const defaultOptions = {
   sensors: [],
   findClosestDraggable(target, options, draggable) {
     return closest(target, options.draggable, draggable);
+  },
+  getMultiDragItems(target, options, draggable) {
+    return undefined;
   },
 };
 
@@ -415,6 +419,17 @@ export default class Draggable {
       return;
     }
 
+    /**
+     * 拖拽时带着多选
+     * @type Element[]
+     */
+    this.multiDragItems = this.options.getMultiDragItems(target, this.options, this);
+    if (this.multiDragItems) {
+      this.multiDragItems.forEach((item) => {
+        item.classList.add(this.getClassNameFor('source:multi-item'));
+      });
+    }
+
     if (this.lastPlacedSource && this.lastPlacedContainer) {
       clearTimeout(this.placedTimeoutID);
       this.lastPlacedSource.classList.remove(this.getClassNameFor('source:placed'));
@@ -583,6 +598,11 @@ export default class Draggable {
     this.source.parentNode.insertBefore(this.originalSource, this.source);
     this.source.parentNode.removeChild(this.source);
     this.originalSource.style.display = '';
+    if (this.multiDragItems) {
+      this.multiDragItems.forEach((item) => {
+        item.classList.remove(this.getClassNameFor('source:multi-item'));
+      });
+    }
 
     this.source.classList.remove(this.getClassNameFor('source:dragging'));
     this.originalSource.classList.remove(this.getClassNameFor('source:original'));

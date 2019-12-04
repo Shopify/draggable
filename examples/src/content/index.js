@@ -2,6 +2,7 @@
 import Home from './Home';
 // Draggable
 import DragEvents from './Draggable/DragEvents';
+import ManualStartDrag from './Draggable/ManualStartDrag';
 // Droppable
 import UniqueDropzone from './Droppable/UniqueDropzone';
 // Sortable
@@ -20,6 +21,7 @@ import PluginsSwapAnimation from './Plugins/SwapAnimation';
 const Content = {
   Home,
   DragEvents,
+  ManualStartDrag,
   UniqueDropzone,
   SimpleList,
   Transformed,

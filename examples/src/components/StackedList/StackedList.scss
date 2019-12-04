@@ -106,6 +106,12 @@
     }
   }
 
+  &.selected {
+    .StackedListContent {
+      border-color: #c968e9;
+    }
+  }
+
   .draggable--original:first-child + & {
     margin-top: 0;
   }

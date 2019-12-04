@@ -3,6 +3,7 @@
     {
       "Draggable": [
         "Drag events",
+        "Manual Start Drag",
         "~Restrict axis"
       ]
     },

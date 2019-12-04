@@ -268,4 +268,10 @@
       @include drag-handle-dragging;
     }
   }
+
+  &.draggable-multi-source {
+    .StackedListContent {
+      border-style: dashed;
+    }
+  }
 }

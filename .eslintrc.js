@@ -13,5 +13,6 @@ module.exports = {
     'class-methods-use-this': 'off',
     'line-comment-position': 0,
     'lines-around-comment': 'off',
+    'no-unused-vars': ["error", { "argsIgnorePattern": "^_" }]
   },
 };

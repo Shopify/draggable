@@ -89,8 +89,8 @@ export default class Sensor {
    * @public
    * @param {Event} event - Start event, should be accord with concreate Sensor class's event type
    */
-  manualStart(event) {
-  }
+  // eslint-disable-next-line no-empty-function
+  manualStart(_event) {}
 
   /**
    * Adds container to this sensor instance

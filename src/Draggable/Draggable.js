@@ -60,6 +60,7 @@ export const defaultOptions = {
   findClosestDraggable(target, options, draggable) {
     return closest(target, options.draggable, draggable);
   },
+  // eslint-disable-next-line no-unused-vars
   getMultiDragItems(target, options, draggable) {
     return undefined;
   },

@@ -161,7 +161,6 @@ export default class DragSensor extends Sensor {
     this.trigger(container, dragStopEvent);
 
     this.dragging = false;
-    this.delayOver = false;
     this.startEvent = null;
 
     this[reset]();
@@ -210,7 +209,6 @@ export default class DragSensor extends Sensor {
     this.startEvent = event;
 
     this.mouseDownTimeout = setTimeout(() => {
-      this.delayOver = true;
       target.draggable = true;
       this.draggableElement = target;
     }, this.options.delay);

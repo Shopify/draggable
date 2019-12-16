@@ -294,12 +294,11 @@ describe('Draggable', () => {
         draggable: 'li',
       });
       const draggableElement = sandbox.querySelector('li');
-      document.elementFromPoint = () => draggableElement;
 
       triggerEvent(draggableElement, 'mousedown', {button: 0});
 
       // Wait for delay
-      jest.runTimersToTime(100);
+      waitForDragDelay(100);
 
       const containerChildren = newInstance.getDraggableElementsForContainer(draggableElement.parentNode);
 
@@ -336,7 +335,6 @@ describe('Draggable', () => {
       clickMouse(draggableElement);
       waitForDragDelay(100);
       moveMouse(dynamicContainer);
-
       expect(dragOverContainerHandler).toHaveBeenCalled();
 
       releaseMouse(newInstance.source);
@@ -432,7 +430,7 @@ describe('Draggable', () => {
     const draggableElement = document.querySelector('li');
 
     clickMouse(draggableElement);
-    waitForDragDelay(100);
+    waitForDragDelay();
     waitForRequestAnimationFrame();
 
     expect(dragStartHandler).toHaveBeenCalledTimes(1);
@@ -456,9 +454,8 @@ describe('Draggable', () => {
     newInstance.on('drag:start', callback);
 
     triggerEvent(draggableElement, 'mousedown', {button: 0});
-
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     const call = callback.mock.calls[0][0];
 
@@ -482,7 +479,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     triggerEvent(draggableElement, 'dragstart', {button: 0});
 
@@ -515,7 +512,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     triggerEvent(draggableElement, 'dragstart', {button: 0});
 
@@ -534,7 +531,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     const callback = jest.fn();
     newInstance.on('drag:move', callback);
@@ -568,7 +565,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     const callback = jest.fn();
     newInstance.on('drag:stop', callback);
@@ -592,7 +589,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     expect(newInstance.source.classList).toContain('draggable-source--is-dragging');
 
@@ -609,7 +606,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     const source = newInstance.source;
 
@@ -634,7 +631,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     const source = newInstance.source;
 
@@ -654,7 +651,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     expect(document.body.classList).toContain('draggable--is-dragging');
 
@@ -672,8 +669,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
-
+    waitForDragDelay(100);
     expect(document.body.classList).toContain('draggable--is-dragging');
 
     triggerEvent(document.body, 'mouseup', {button: 0});
@@ -695,7 +691,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     expect(document.body.classList).not.toContain('draggable--is-dragging');
 
@@ -713,7 +709,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     triggerEvent(draggableElement, 'mouseup', {button: 0});
 
@@ -731,7 +727,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     triggerEvent(document.body, 'mouseup', {button: 0});
 
@@ -754,7 +750,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     expect(containers[0].classList).toContain('draggable-container--is-dragging');
 
@@ -772,7 +768,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     expect(containers[0].classList).toContain('draggable-container--is-dragging');
 
@@ -794,7 +790,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     expect(containers[0].classList).not.toContain('draggable-container--is-dragging');
 
@@ -811,7 +807,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBeTruthy();
 
@@ -839,7 +835,7 @@ describe('Draggable', () => {
     triggerEvent(draggableElement, 'mousedown', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     expect(newInstance.isDragging()).toBe(true);
 
@@ -847,13 +843,13 @@ describe('Draggable', () => {
     triggerEvent(draggableElement.nextElementSibling, 'mousemove', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     document.elementFromPoint = () => document.body;
     triggerEvent(document.body, 'mousemove', {button: 0});
 
     // Wait for delay
-    jest.runTimersToTime(100);
+    waitForDragDelay(100);
 
     triggerEvent(document.body, 'mouseup', {button: 0});
   });

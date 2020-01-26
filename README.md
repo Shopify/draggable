@@ -16,7 +16,6 @@
 **Current maintainers are:**
 
 - [@fdietze](https://github.com/fdietze)
-- [@josh18](https://github.com/josh18)
 
 Please ping the above handles when putting up PRs.
 

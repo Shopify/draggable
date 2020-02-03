@@ -32,6 +32,7 @@
       "Plugins": [
         "Collidable",
         "Snappable",
+        "Mirror",
         "~Swap Animation"
       ]
     }

@@ -25,7 +25,7 @@ export const getAppendableContainer = Symbol('getAppendableContainer');
  * @property {Boolean} defaultOptions.yAxis
  * @property {null} defaultOptions.cursorOffsetX
  * @property {null} defaultOptions.cursorOffsetY
- * @type {Object}
+ * @property {Function} defaultOptions.createMirror (source: Element) => Element
  */
 export const defaultOptions = {
   constrainDimensions: false,
@@ -35,6 +35,9 @@ export const defaultOptions = {
   cursorOffsetY: null,
   thresholdX: null,
   thresholdY: null,
+  createMirror(source) {
+    return source.cloneNode(true);
+  },
 };
 
 /**
@@ -171,7 +174,7 @@ export default class Mirror extends AbstractPlugin {
     }
 
     const appendableContainer = this[getAppendableContainer](source) || sourceContainer;
-    this.mirror = source.cloneNode(true);
+    this.mirror = this.options.createMirror(source);
 
     const mirrorCreatedEvent = new MirrorCreatedEvent({
       source,

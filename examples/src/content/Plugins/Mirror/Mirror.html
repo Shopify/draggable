@@ -1,0 +1,14 @@
+{% import 'components/Block/Block.html' as Block %}
+
+{% macro render(id) %}
+  <section id="{{ id }}" class="{{ id }}">
+    <article class="BlockLayout BlockLayout--typeGrid">
+      <div class="BlockWrapper">
+        {{ Block.render('snap', {index: 1, draggable: true, classes: ['draggable-source']}) }}
+      </div>
+      <div class="BlockWrapper">
+        {{ Block.render('Extra content', {index: 2, draggable: true, classes: ['draggable-source']}) }}
+      </div>
+    </article>
+  </section>
+{% endmacro %}

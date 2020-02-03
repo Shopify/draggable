@@ -62,6 +62,30 @@ describe('Mirror', () => {
     releaseMouse(draggable.source);
   });
 
+  it('mirror element creation is customizable through `options.mirror.createMirror`', async () => {
+    draggable = new Draggable(container, {
+      ...draggableOptions,
+      mirror: {
+        createMirror(source) {
+          const mirror = source.cloneNode(true);
+          mirror.textContent += ' Oho';
+          return mirror;
+        },
+      },
+    });
+
+    clickMouse(draggableElement);
+    waitForDragDelay();
+
+    await waitForPromisesToResolve();
+
+    const mirrorElement = document.querySelector('.draggable-mirror');
+
+    expect(mirrorElement.textContent).toContain('Oho');
+
+    releaseMouse(draggable.source);
+  });
+
   it('triggers `mirror:create` event on `drag:start`', () => {
     draggable = new Draggable(container, draggableOptions);
 

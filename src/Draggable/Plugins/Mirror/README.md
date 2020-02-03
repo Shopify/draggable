@@ -6,27 +6,27 @@ This plugin is used by draggable by default, but could potentially be replaced w
 
 ### API
 
-**`new Mirror(draggable: Draggable): Mirror`**  
+**`new Mirror(draggable: Draggable): Mirror`**
 To create a mirror plugin instance.
 
 ### Options
 
-**`xAxis {Boolean}`**  
+**`xAxis {Boolean}`**
 If enabled, the mirror will move on the x axis. Default: `true`
 
-**`yAxis {Boolean}`**  
+**`yAxis {Boolean}`**
 If enabled, the mirror will move on the y axis. Default: `true`
 
-**`constrainDimensions {Boolean}`**  
+**`constrainDimensions {Boolean}`**
 If enabled, the source elements height and width will be applied to the mirror. Default: `false`
 
-**`cursorOffsetX {Number|null}`**  
+**`cursorOffsetX {Number|null}`**
 Defining this sets the offset from cursor to mirror manually on the x axis. Default: `null`
 
-**`cursorOffsetY {Number|null}`**  
+**`cursorOffsetY {Number|null}`**
 Defining this sets the offset from cursor to mirror manually on the y axis. Default: `null`
 
-**`appendTo {String|HTMLElement|Function}`**  
+**`appendTo {String|HTMLElement|Function}`**
 The mirror plugin allows you to specify where the mirror should be appended to. For clarification,
 this is not where the source will be placed, only the temporary mirror element, which is the element
 that follows your cursor as you drag. You can specify a css selector, a HTMLElement or a function
@@ -38,6 +38,10 @@ Defining this sets a threshold that must be exceeded by the mouse for the mirror
 **`thresholdY {Number|null}`**
 Defining this sets a threshold that must be exceeded by the mouse for the mirror to move on the y axis. Default: `null`
 
+**`createMirror {(source: Element) => Element}`**
+Customizing the creation of mirror element.
+
+### Events
 ### Events
 
 | Name                                | Description                                           | Cancelable | Cancelable action        |

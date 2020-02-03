@@ -17,6 +17,7 @@ import GridLayout from './Swappable/GridLayout';
 import PluginsCollidable from './Plugins/Collidable';
 import PluginsSnappable from './Plugins/Snappable';
 import PluginsSwapAnimation from './Plugins/SwapAnimation';
+import PluginsMirror from './Plugins/Mirror';
 
 const Content = {
   Home,
@@ -32,6 +33,7 @@ const Content = {
   PluginsCollidable,
   PluginsSnappable,
   PluginsSwapAnimation,
+  PluginsMirror,
 };
 
 export default Content;

@@ -220,6 +220,7 @@ declare module '@bestminr/draggable' {
         cursorOffsetX?: number;
         cursorOffsetY?: number;
         appendTo?: string | HTMLElement | ((source: HTMLElement) => HTMLElement);
+        createMirror?(source: Element): Element;
     }
 
     class Mirror extends AbstractPlugin {

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/hikerpig/draggable/compare/v1.1.0-beta.0...v1.1.0) (2020-02-04)
+
+
+### Features
+
+* Mirror option `createMirror` ([8e17b6c](https://github.com/hikerpig/draggable/commit/8e17b6c))
+
 ## [1.1.0-beta.0](https://github.com/hikerpig/draggable/compare/v1.0.0...v1.1.0-beta.0) (2019-12-04)
 
 

@@ -100,6 +100,7 @@ declare module '@shopify/draggable' {
 
     interface DraggableOptions {
         draggable?: string;
+        distance?: number;
         handle?: string | NodeList | HTMLElement[] | HTMLElement | ((currentElement: HTMLElement) => HTMLElement);
         delay?: number;
         plugins?: Array<typeof AbstractPlugin>;

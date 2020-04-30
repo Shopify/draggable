@@ -110,7 +110,7 @@ function animate(from, to, {duration, easingFunction, horizontal}) {
   for (const element of [from, to]) {
     if (element && element.style) {
       element.style.pointerEvents = 'none';
-    }  
+    }
   }
 
   if (from && to && from.style && to.style) {
@@ -124,14 +124,14 @@ function animate(from, to, {duration, easingFunction, horizontal}) {
       to.style.transform = `translate3d(0, -${height}px, 0)`;
     }
   }
-  
+
   requestAnimationFrame(() => {
     for (const element of [from, to]) {
       if (element && element.style && element.addEventListener) {
         element.addEventListener('transitionend', resetElementOnTransitionEnd);
         element.style.transition = `transform ${duration}ms ${easingFunction}`;
         element.style.transform = '';
-      }  
+      }
     }
   });
 }

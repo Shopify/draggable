@@ -7,6 +7,7 @@ import {
   waitForDragDelay,
   waitForPromisesToResolve,
   DRAG_DELAY,
+  drag,
 } from 'helper';
 import {Draggable} from '../../..';
 import ResizeMirror from '..';
@@ -128,6 +129,18 @@ describe('ResizeMirror', () => {
     expect(mockedAppendChild).not.toHaveBeenCalled();
 
     releaseMouse(largerDraggable);
+  });
+
+  it('dont appends mirror when mirror was removed', async () => {
+    drag({from: smallerDraggable, to: smallerDraggable});
+    drag({from: smallerDraggable, to: smallerDraggable});
+
+    await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+
+    const mirror = document.querySelector('.draggable-mirror');
+
+    expect(mirror).toBeNull();
   });
 });
 

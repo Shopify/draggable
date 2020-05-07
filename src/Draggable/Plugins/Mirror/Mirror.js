@@ -164,6 +164,7 @@ export default class Mirror extends AbstractPlugin {
 
     const appendableContainer = this[getAppendableContainer](source) || sourceContainer;
     this.mirror = source.cloneNode(true);
+    this.mirror.style.position = 'fixed';
 
     const mirrorCreatedEvent = new MirrorCreatedEvent({
       source,

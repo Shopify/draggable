@@ -68,6 +68,13 @@ const bundles = [
     source: 'Plugins/SwapAnimation/index',
     path: 'plugins/',
   },
+
+  {
+    name: 'SortAnimation',
+    filename: 'sort-animation',
+    source: 'Plugins/SortAnimation/index',
+    path: 'plugins/',
+  },
 ];
 
 module.exports = {bundles};

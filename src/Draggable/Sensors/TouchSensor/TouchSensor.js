@@ -92,6 +92,11 @@ export default class TouchSensor extends Sensor {
    * @param {Event} event - Touch start event
    */
   [onTouchStart](event) {
+    if (this.startEvent) {
+      event.preventDefault();
+      return;
+    }
+
     const container = closest(event.target, this.containers);
 
     if (!container) {
@@ -209,6 +214,8 @@ export default class TouchSensor extends Sensor {
 
     clearTimeout(this.tapTimeout);
 
+    this.startEvent = null;
+
     if (!this.dragging) {
       return;
     }
@@ -232,7 +239,6 @@ export default class TouchSensor extends Sensor {
     this.dragging = false;
     this.distance = 0;
     this.delayOver = false;
-    this.startEvent = null;
   }
 }
 

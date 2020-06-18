@@ -31,7 +31,8 @@
       "Plugins": [
         "Collidable",
         "Snappable",
-        "~Swap Animation"
+        "~Swap Animation",
+        "Sort Animation"
       ]
     }
   ]

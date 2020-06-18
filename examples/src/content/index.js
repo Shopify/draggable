@@ -16,6 +16,7 @@ import GridLayout from './Swappable/GridLayout';
 import PluginsCollidable from './Plugins/Collidable';
 import PluginsSnappable from './Plugins/Snappable';
 import PluginsSwapAnimation from './Plugins/SwapAnimation';
+import PluginsSortAnimation from './Plugins/SortAnimation';
 
 const Content = {
   Home,
@@ -30,6 +31,7 @@ const Content = {
   PluginsCollidable,
   PluginsSnappable,
   PluginsSwapAnimation,
+  PluginsSortAnimation,
 };
 
 export default Content;

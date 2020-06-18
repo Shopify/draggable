@@ -126,6 +126,7 @@ You can find the documentation for each module within their respective directori
   - [ResizeMirror](src/Plugins/ResizeMirror)
   - [Snappable](src/Plugins/Snappable)
   - [SwapAnimation](src/Plugins/SwapAnimation)
+  - [SortAnimation](src/Plugins/SortAnimation)
 - [Sortable](src/Sortable)
   - [SortableEvent](src/Sortable/SortableEvent)
 - [Swappable](src/Swappable)

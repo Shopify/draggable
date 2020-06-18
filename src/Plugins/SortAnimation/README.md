@@ -4,11 +4,11 @@ The sort animation plugin currently only works with `Sortable`. It adds sort ani
 and animates all sorted elements via `translate3d`. It is currently possible to change the duration and
 the easing function of the animation.
 
-It different with (SwapAnimation)[https://github.com/Shopify/draggable/tree/master/src/Plugins/SwapAnimation] plugin because SwapAnimation only support horizontal or vertical layout.
+It different with [SwapAnimation](https://github.com/Shopify/draggable/tree/master/src/Plugins/SwapAnimation) plugin because SwapAnimation only support horizontal or vertical layout.
 
 This plugin is not included by default, so make sure to import it before using.
 
-**NOTE**: Don't use this plugin with (SwapAnimation)[https://github.com/Shopify/draggable/tree/master/src/Plugins/SwapAnimation] plugin to avoid conflict.
+**NOTE**: Don't use this plugin with [SwapAnimation](https://github.com/Shopify/draggable/tree/master/src/Plugins/SwapAnimation) plugin to avoid conflict.
 
 ### Import
 

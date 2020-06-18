@@ -1,5 +1,16 @@
 # Changelog
 
+## v1.0.0-beta.10 - 2020-06-18
+
+### Added
+
+* Added `SortAnimation` plugin
+* Added `distance?: number` to DraggableOptions TS interface
+
+### Changed
+
+* Fix mirror dimensions when `constrainDimensions` is active and not using fixed item width
+
 ## v1.0.0-beta.9 - 2019-08-26
 
 ### Added

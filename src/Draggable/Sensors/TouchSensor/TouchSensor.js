@@ -1,4 +1,4 @@
-import {closest, distance} from 'shared/utils';
+import {closest, distance, getRealTarget} from 'shared/utils';
 import Sensor from '../Sensor';
 import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
 
@@ -92,7 +92,16 @@ export default class TouchSensor extends Sensor {
    * @param {Event} event - Touch start event
    */
   [onTouchStart](event) {
-    const container = closest(event.target, this.containers);
+    const touch = event.touches[0] || event.changedTouches[0];
+
+    const container = closest(
+      getRealTarget({
+        target: event.target,
+        clientX: touch.clientX,
+        clientY: touch.clientY,
+      }),
+      this.containers,
+    );
 
     if (!container) {
       return;
@@ -130,8 +139,8 @@ export default class TouchSensor extends Sensor {
     const touch = startEvent.touches[0] || startEvent.changedTouches[0];
 
     const dragStartEvent = new DragStartSensorEvent({
-      clientX: touch.pageX,
-      clientY: touch.pageY,
+      clientX: touch.clientX,
+      clientY: touch.clientY,
       target: startEvent.target,
       container,
       originalEvent: startEvent,
@@ -176,11 +185,11 @@ export default class TouchSensor extends Sensor {
     }
 
     const touch = event.touches[0] || event.changedTouches[0];
-    const target = document.elementFromPoint(touch.pageX - window.scrollX, touch.pageY - window.scrollY);
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
 
     const dragMoveEvent = new DragMoveSensorEvent({
-      clientX: touch.pageX,
-      clientY: touch.pageY,
+      clientX: touch.clientX,
+      clientY: touch.clientY,
       target,
       container: this.currentContainer,
       originalEvent: event,
@@ -214,13 +223,13 @@ export default class TouchSensor extends Sensor {
     }
 
     const touch = event.touches[0] || event.changedTouches[0];
-    const target = document.elementFromPoint(touch.pageX - window.scrollX, touch.pageY - window.scrollY);
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
 
     event.preventDefault();
 
     const dragStopEvent = new DragStopSensorEvent({
-      clientX: touch.pageX,
-      clientY: touch.pageY,
+      clientX: touch.clientX,
+      clientY: touch.clientY,
       target,
       container: this.currentContainer,
       originalEvent: event,

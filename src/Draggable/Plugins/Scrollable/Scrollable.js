@@ -160,16 +160,10 @@ export default class Scrollable extends AbstractPlugin {
     }
 
     const sensorEvent = dragEvent.sensorEvent;
-    const scrollOffset = {x: 0, y: 0};
-
-    if ('ontouchstart' in window) {
-      scrollOffset.y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      scrollOffset.x = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
-    }
 
     this.currentMousePosition = {
-      clientX: sensorEvent.clientX - scrollOffset.x,
-      clientY: sensorEvent.clientY - scrollOffset.y,
+      clientX: sensorEvent.clientX,
+      clientY: sensorEvent.clientY,
     };
 
     this.scrollAnimationFrame = requestAnimationFrame(this[scroll]);

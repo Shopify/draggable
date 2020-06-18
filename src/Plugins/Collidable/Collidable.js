@@ -1,5 +1,5 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
-import {closest} from 'shared/utils';
+import {closest, querySelectorAll} from 'shared/utils';
 import {CollidableInEvent, CollidableOutEvent} from './CollidableEvent';
 
 const onDragMove = Symbol('onDragMove');
@@ -69,7 +69,7 @@ export default class Collidable extends AbstractPlugin {
     const collidables = this.draggable.options.collidables;
 
     if (typeof collidables === 'string') {
-      return Array.prototype.slice.call(document.querySelectorAll(collidables));
+      return Array.prototype.slice.call(querySelectorAll(document, collidables));
     } else if (collidables instanceof NodeList || collidables instanceof Array) {
       return Array.prototype.slice.call(collidables);
     } else if (collidables instanceof HTMLElement) {

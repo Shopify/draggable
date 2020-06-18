@@ -1,4 +1,4 @@
-import {closest} from 'shared/utils';
+import {closest, querySelectorAll} from 'shared/utils';
 
 import {Announcement, Focusable, Mirror, Scrollable} from './Plugins';
 
@@ -138,10 +138,19 @@ export default class Draggable {
     this[onDragStop] = this[onDragStop].bind(this);
     this[onDragPressure] = this[onDragPressure].bind(this);
 
-    document.addEventListener('drag:start', this[onDragStart], true);
-    document.addEventListener('drag:move', this[onDragMove], true);
-    document.addEventListener('drag:stop', this[onDragStop], true);
-    document.addEventListener('drag:pressure', this[onDragPressure], true);
+    this.documents = [
+      document,
+      ...querySelectorAll(document, (element) => {
+        return element.shadowRoot;
+      }).map((element) => element.shadowRoot),
+    ];
+
+    this.documents.forEach((doc) => {
+      doc.addEventListener('drag:start', this[onDragStart], true);
+      doc.addEventListener('drag:move', this[onDragMove], true);
+      doc.addEventListener('drag:stop', this[onDragStop], true);
+      doc.addEventListener('drag:pressure', this[onDragPressure], true);
+    });
 
     const defaultPlugins = Object.values(Draggable.Plugins).map((Plugin) => Plugin);
     const defaultSensors = [MouseSensor, TouchSensor];
@@ -164,10 +173,12 @@ export default class Draggable {
    * deactivates sensors and plugins
    */
   destroy() {
-    document.removeEventListener('drag:start', this[onDragStart], true);
-    document.removeEventListener('drag:move', this[onDragMove], true);
-    document.removeEventListener('drag:stop', this[onDragStop], true);
-    document.removeEventListener('drag:pressure', this[onDragPressure], true);
+    this.documents.forEach((doc) => {
+      doc.removeEventListener('drag:start', this[onDragStart], true);
+      doc.removeEventListener('drag:move', this[onDragMove], true);
+      doc.removeEventListener('drag:stop', this[onDragStop], true);
+      doc.removeEventListener('drag:pressure', this[onDragPressure], true);
+    });
 
     const draggableDestroyEvent = new DraggableDestroyEvent({
       draggable: this,
@@ -334,7 +345,7 @@ export default class Draggable {
    * @return {HTMLElement[]}
    */
   getDraggableElementsForContainer(container) {
-    const allDraggableElements = container.querySelectorAll(this.options.draggable);
+    const allDraggableElements = querySelectorAll(container, this.options.draggable);
 
     return [...allDraggableElements].filter((childElement) => {
       return childElement !== this.originalSource && childElement !== this.mirror;

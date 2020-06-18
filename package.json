@@ -54,6 +54,7 @@
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-shopify": "^16.5.0",
+    "canvas": "^1.6.13",
     "codecov": "^3.0.2",
     "concurrently": "^3.5.1",
     "core-js": "^2.5.7",

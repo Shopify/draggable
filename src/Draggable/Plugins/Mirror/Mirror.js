@@ -1,4 +1,5 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
+import {cloneNode} from 'shared/utils';
 
 import {
   MirrorCreateEvent,
@@ -163,7 +164,7 @@ export default class Mirror extends AbstractPlugin {
     }
 
     const appendableContainer = this[getAppendableContainer](source) || sourceContainer;
-    this.mirror = source.cloneNode(true);
+    this.mirror = cloneNode(source, true);
 
     const mirrorCreatedEvent = new MirrorCreatedEvent({
       source,

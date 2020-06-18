@@ -1,4 +1,4 @@
-import {closest} from 'shared/utils';
+import {closest, cloneNode} from 'shared/utils';
 
 import {Announcement, Focusable, Mirror, Scrollable} from './Plugins';
 
@@ -374,7 +374,7 @@ export default class Draggable {
       this.lastPlacedContainer.classList.remove(this.getClassNameFor('container:placed'));
     }
 
-    this.source = this.originalSource.cloneNode(true);
+    this.source = cloneNode(this.originalSource, true);
     this.originalSource.parentNode.insertBefore(this.source, this.originalSource);
     this.originalSource.style.display = 'none';
 

@@ -94,26 +94,20 @@ describe('MouseSensor', () => {
     expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
   });
 
-  it('does not trigger `drag:start` event when right clicking or holding ctrl or meta key', () => {
+  it('does not trigger `drag:start` event when right clicking or holding "ctrl+click" or "metakey+click" in A Tag', () => {
     function dragFlowWithRightClick() {
       clickMouse(draggableElement, {button: 2});
       waitForDragDelay();
       releaseMouse(document.body);
     }
 
-    function dragFlowWithCtrlKey() {
-      clickMouse(draggableElement, {ctrlKey: true});
+    function dragFlowWithATag() {
+      clickMouse(draggableElement, {srcElement: {nodeName: 'A'}});
       waitForDragDelay();
       releaseMouse(document.body);
     }
 
-    function dragFlowWithMetaKey() {
-      clickMouse(draggableElement, {metaKey: true});
-      waitForDragDelay();
-      releaseMouse(document.body);
-    }
-
-    [dragFlowWithRightClick, dragFlowWithCtrlKey, dragFlowWithMetaKey].forEach((dragFlow) => {
+    [dragFlowWithRightClick, dragFlowWithATag].forEach((dragFlow) => {
       expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
     });
   });

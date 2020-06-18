@@ -60,7 +60,13 @@ export default class MouseSensor extends Sensor {
    * @param {Event} event - Mouse down event
    */
   [onMouseDown](event) {
-    if (event.button !== 0 || event.ctrlKey || event.metaKey) {
+    if (event.button !== 0) {
+      return;
+    }
+
+    // is 'A' node target
+    const isANode = (event.srcElement && event.srcElement.nodeName) === 'A';
+    if (isANode && (event.ctrlKey || event.metaKey)) {
       return;
     }
 

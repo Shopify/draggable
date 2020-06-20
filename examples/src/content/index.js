@@ -17,6 +17,7 @@ import PluginsCollidable from './Plugins/Collidable';
 import PluginsSnappable from './Plugins/Snappable';
 import PluginsSwapAnimation from './Plugins/SwapAnimation';
 import PluginsSortAnimation from './Plugins/SortAnimation';
+import PluginsSnapMirror from './Plugins/SnapMirror';
 
 const Content = {
   Home,
@@ -32,6 +33,7 @@ const Content = {
   PluginsSnappable,
   PluginsSwapAnimation,
   PluginsSortAnimation,
+  PluginsSnapMirror,
 };
 
 export default Content;

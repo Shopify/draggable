@@ -1,0 +1,19 @@
+////
+/// Content
+/// SnapMirror
+////
+
+@import 'utils/shared/functions';
+@import 'utils/shared/layout';
+
+.SnapMirror {
+  $width: 50px;
+  height: 500px;
+  background: linear-gradient(180deg, #000 0, #000 1px, transparent 0, transparent $width) 0px 0px / 100% $width repeat-y,
+    linear-gradient(90deg, #000 0, #000 1px, transparent 0, transparent $width) 0px 0px / #{$width} 100% repeat-x;
+  .box{
+    width: 100px;
+    height: 100px;
+    background: aqua;
+  }
+}

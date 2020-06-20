@@ -32,7 +32,8 @@
         "Collidable",
         "Snappable",
         "~Swap Animation",
-        "Sort Animation"
+        "Sort Animation",
+        "Snap Mirror"
       ]
     }
   ]

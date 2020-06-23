@@ -7,13 +7,78 @@
 @import 'utils/shared/layout';
 
 .SnapMirror {
-  $width: 50px;
-  height: 500px;
-  background: linear-gradient(180deg, #000 0, #000 1px, transparent 0, transparent $width) 0px 0px / 100% $width repeat-y,
-    linear-gradient(90deg, #000 0, #000 1px, transparent 0, transparent $width) 0px 0px / #{$width} 100% repeat-x;
-  .box{
-    width: 100px;
-    height: 100px;
-    background: aqua;
+  h2 {
+    font-size: 24px;
+    line-height: 1.5em;
+  }
+  .box {
+    $width: 50px;
+    height: 500px;
+    background: linear-gradient(180deg, #000 0, #000 1px, transparent 0, transparent $width) 0px 0px / 100% $width
+        repeat-y,
+      linear-gradient(90deg, #000 0, #000 1px, transparent 0, transparent $width) 0px 0px / #{$width} 100% repeat-x;
+    &__item {
+      width: 100px;
+      height: 100px;
+      background: aqua;
+      cursor: pointer;
+    }
+  }
+  .sky {
+    position: relative;
+    height: 300px;
+    background: #000;
+    &__item {
+      width: 10px;
+      height: 10px;
+      background: gold;
+      cursor: pointer;
+    }
+    .star {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border: 1px solid gray;
+      &::after{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 10px;
+        height: 10px;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        content: "";
+      }
+
+    }
+    .star1 {
+      left: 15%;
+      top: 20%;
+      border: none;
+    }
+    .star2 {
+      left: 25%;
+      top: 60%;
+    }
+    .star3 {
+      left: 35%;
+      top: 60%;
+    }
+    .star4 {
+      left: 45%;
+      top: 20%;
+    }
+    .star5 {
+      left: 55%;
+      top: 20%;
+    }
+    .star6 {
+      left: 65%;
+      top: 15%;
+    }
+    .star7 {
+      left: 75%;
+      top: 10%;
+    }
   }
 }

@@ -1,7 +1,21 @@
 {% import 'components/Block/Block.html' as Block %}
 
 {% macro render(id) %}
-  <section id="{{ id }}" class="{{ id }}">
-    <div class="box"></div>
+<section id="{{ id }}" class="{{ id }}">
+  <h2>Grid</h2>
+  <section class="box">
+    <div class="box__item"></div>
   </section>
+  <h2>Sky</h2>
+  <section class="sky">
+    <div class="sky__item"></div>
+    <div class="star star1"></div>
+    <div class="star star2"></div>
+    <div class="star star3"></div>
+    <div class="star star4"></div>
+    <div class="star star5"></div>
+    <div class="star star6"></div>
+    <div class="star star7"></div>
+  </section>
+</section>
 {% endmacro %}

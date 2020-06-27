@@ -7,6 +7,7 @@ const onMouseDown = Symbol('onMouseDown');
 const onMouseMove = Symbol('onMouseMove');
 const onMouseUp = Symbol('onMouseUp');
 const startDrag = Symbol('startDrag');
+const resetMouseSensor = Symbol('resetMouseSensor');
 const onDistanceChange = Symbol('onDistanceChange');
 
 /**
@@ -37,6 +38,7 @@ export default class MouseSensor extends Sensor {
     this[onMouseMove] = this[onMouseMove].bind(this);
     this[onMouseUp] = this[onMouseUp].bind(this);
     this[startDrag] = this[startDrag].bind(this);
+    this[resetMouseSensor] = this[resetMouseSensor].bind(this);
     this[onDistanceChange] = this[onDistanceChange].bind(this);
   }
 
@@ -167,6 +169,7 @@ export default class MouseSensor extends Sensor {
     document.removeEventListener('mousemove', this[onDistanceChange]);
 
     if (!this.dragging) {
+      this[resetMouseSensor]();
       return;
     }
 
@@ -185,11 +188,7 @@ export default class MouseSensor extends Sensor {
     document.removeEventListener('contextmenu', this[onContextMenuWhileDragging], true);
     document.removeEventListener('mousemove', this[onMouseMove]);
 
-    this.currentContainer = null;
-    this.dragging = false;
-    this.distance = 0;
-    this.delayOver = false;
-    this.startEvent = null;
+    this[resetMouseSensor]();
   }
 
   /**
@@ -199,6 +198,18 @@ export default class MouseSensor extends Sensor {
    */
   [onContextMenuWhileDragging](event) {
     event.preventDefault();
+  }
+
+  /**
+   * Reset all value of sensor
+   * @private
+   */
+  [resetMouseSensor]() {
+    this.currentContainer = null;
+    this.dragging = false;
+    this.distance = 0;
+    this.delayOver = false;
+    this.startEvent = null;
   }
 }
 

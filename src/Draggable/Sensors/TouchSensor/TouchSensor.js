@@ -6,6 +6,7 @@ const onTouchStart = Symbol('onTouchStart');
 const onTouchEnd = Symbol('onTouchEnd');
 const onTouchMove = Symbol('onTouchMove');
 const startDrag = Symbol('startDrag');
+const resetTouchSensor = Symbol('resetTouchSensor');
 const onDistanceChange = Symbol('onDistanceChange');
 
 /**
@@ -69,6 +70,7 @@ export default class TouchSensor extends Sensor {
     this[onTouchEnd] = this[onTouchEnd].bind(this);
     this[onTouchMove] = this[onTouchMove].bind(this);
     this[startDrag] = this[startDrag].bind(this);
+    this[resetTouchSensor] = this[resetTouchSensor].bind(this);
     this[onDistanceChange] = this[onDistanceChange].bind(this);
   }
 
@@ -210,6 +212,7 @@ export default class TouchSensor extends Sensor {
     clearTimeout(this.tapTimeout);
 
     if (!this.dragging) {
+      this[resetTouchSensor]();
       return;
     }
 
@@ -228,6 +231,14 @@ export default class TouchSensor extends Sensor {
 
     this.trigger(this.currentContainer, dragStopEvent);
 
+    this[resetTouchSensor]();
+  }
+
+  /**
+   * Reset all value of sensor
+   * @private
+   */
+  [resetTouchSensor]() {
     this.currentContainer = null;
     this.dragging = false;
     this.distance = 0;

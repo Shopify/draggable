@@ -3,3 +3,4 @@ export {default as ResizeMirror, defaultOptions as defaultResizeMirrorOptions} f
 export {default as Snappable} from './Snappable';
 export {default as SwapAnimation, defaultOptions as defaultSwapAnimationOptions} from './SwapAnimation';
 export {default as SortAnimation, defaultOptions as defaultSortAnimationOptions} from './SortAnimation';
+export {default as SnapMirror, defaultOptions as defaultSnapMirrorOptions} from './SnapMirror';

@@ -32,6 +32,20 @@ export default class MouseSensor extends Sensor {
      */
     this.mouseDownTimeout = null;
 
+    /**
+     * Save pageX coordinates for delay drag
+     * @property {Numbre} pageX
+     * @private
+     */
+    this.pageX = null;
+
+    /**
+     * Save pageY coordinates for delay drag
+     * @property {Numbre} pageY
+     * @private
+     */
+    this.pageY = null;
+
     this[onContextMenuWhileDragging] = this[onContextMenuWhileDragging].bind(this);
     this[onMouseDown] = this[onMouseDown].bind(this);
     this[onMouseMove] = this[onMouseMove].bind(this);

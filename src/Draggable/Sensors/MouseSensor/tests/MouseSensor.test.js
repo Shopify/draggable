@@ -275,6 +275,7 @@ describe('MouseSensor', () => {
       }
       expect(dragFlow).toHaveTriggeredSensorEvent('drag:start', 1);
     });
+
     it('only triggers `drag:start` sensor event once when distance is met after delay', () => {
       function dragFlow() {
         clickMouse(draggableElement);

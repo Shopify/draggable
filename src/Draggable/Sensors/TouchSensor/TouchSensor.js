@@ -65,6 +65,20 @@ export default class TouchSensor extends Sensor {
      */
     this.touchMoved = false;
 
+    /**
+     * Save pageX coordinates for delay drag
+     * @property {Numbre} pageX
+     * @private
+     */
+    this.pageX = null;
+
+    /**
+     * Save pageY coordinates for delay drag
+     * @property {Numbre} pageY
+     * @private
+     */
+    this.pageY = null;
+
     this[onTouchStart] = this[onTouchStart].bind(this);
     this[onTouchEnd] = this[onTouchEnd].bind(this);
     this[onTouchMove] = this[onTouchMove].bind(this);

@@ -14,144 +14,266 @@ describe('TouchSensor', () => {
   let touchSensor;
   let draggableElement;
 
-  beforeEach(() => {
+  function setup(options = {delay: 0, distance: 0}) {
     sandbox = createSandbox(sampleMarkup);
     const containers = sandbox.querySelectorAll('ul');
     draggableElement = sandbox.querySelector('li');
-    touchSensor = new TouchSensor(containers, {delay: DRAG_DELAY});
+    touchSensor = new TouchSensor(containers, options);
     touchSensor.attach();
-  });
+  }
 
-  afterEach(() => {
+  function teardown() {
     touchSensor.detach();
     sandbox.parentNode.removeChild(sandbox);
-  });
+  }
+  describe('common', () => {
+    beforeEach(setup);
+    afterEach(teardown);
+    it('cancels `drag:start` event when canceling sensor event', () => {
+      sandbox.addEventListener('drag:start', (event) => {
+        event.detail.cancel();
+      });
 
-  it('triggers `drag:start` sensor event on touchstart', () => {
-    function dragFlow() {
-      touchStart(draggableElement);
-      waitForDragDelay();
-      touchRelease(draggableElement);
-    }
+      function dragFlow() {
+        touchStart(draggableElement);
+        waitForDragDelay();
+        touchRelease(draggableElement);
+      }
 
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:start');
-  });
-
-  it('cancels `drag:start` event when canceling sensor event', () => {
-    sandbox.addEventListener('drag:start', (event) => {
-      event.detail.cancel();
+      expect(dragFlow).toHaveCanceledSensorEvent('drag:start');
     });
 
-    function dragFlow() {
+    it('prevents `drag:start` when trying to drag a none draggable element', () => {
+      function dragFlow() {
+        touchStart(document.body);
+        waitForDragDelay();
+      }
+
+      expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+    });
+    it('prevents context menu while dragging', () => {
       touchStart(draggableElement);
+      let contextMenuEvent = triggerEvent(draggableElement, 'contextmenu');
       waitForDragDelay();
+
+      expect(contextMenuEvent.defaultPrevented).toBe(true);
+
+      expect(contextMenuEvent.stoppedPropagation).toBe(true);
+
       touchRelease(draggableElement);
-    }
+      contextMenuEvent = triggerEvent(draggableElement, 'contextmenu');
 
-    expect(dragFlow).toHaveCanceledSensorEvent('drag:start');
-  });
+      expect(contextMenuEvent.defaultPrevented).toBe(false);
 
-  it('does not trigger `drag:start` event releasing finger before timeout', () => {
-    function dragFlow() {
+      expect(contextMenuEvent.stoppedPropagation).toBeUndefined();
+    });
+
+    it('prevents scroll on touchmove while dragging', () => {
+      let touchMoveEvent = touchMove(draggableElement);
+
+      expect(touchMoveEvent.defaultPrevented).toBe(false);
+
       touchStart(draggableElement);
       waitForDragDelay();
-      touchRelease(document.body);
-    }
+      touchMoveEvent = touchMove(draggableElement);
 
-    function hastyDragFlow() {
-      touchStart(draggableElement);
-      touchRelease(document.body);
-    }
+      expect(touchMoveEvent.defaultPrevented).toBe(true);
 
-    expect(hastyDragFlow).not.toHaveTriggeredSensorEvent('drag:start');
-
-    expect(hastyDragFlow).not.toHaveTriggeredSensorEvent('drag:stop');
-
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:start');
-
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
-  });
-
-  it('triggers `drag:move` event while moving the finger', () => {
-    function dragFlow() {
-      touchStart(draggableElement);
-      waitForDragDelay();
-      touchMove(draggableElement);
       touchRelease(draggableElement);
-    }
+    });
 
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:move');
-  });
+    it('prevents clicking on touchend after dragging', () => {
+      let touchEndEvent = touchRelease(draggableElement);
 
-  it('triggers `drag:stop` event when releasing the finger', () => {
-    function dragFlow() {
+      expect(touchEndEvent.defaultPrevented).toBe(false);
+
       touchStart(draggableElement);
       waitForDragDelay();
-      touchMove(draggableElement);
-      touchRelease(draggableElement);
-    }
+      touchEndEvent = touchRelease(draggableElement);
 
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
+      expect(touchEndEvent.defaultPrevented).toBe(true);
+    });
+  });
+  describe('using distance', () => {
+    beforeEach(() => {
+      setup({delay: 0, distance: 1});
+    });
+
+    afterEach(teardown);
+    it('does not trigger `drag:start` before distance has been travelled', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        touchRelease(draggableElement);
+      }
+
+      expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+    });
+
+    it('triggers `drag:start` sensor event after distance requirement has been met', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
+      }
+
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:start');
+    });
+
+    it('triggers `drag:move` event while moving the finger after delay', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
+        touchMove(draggableElement);
+        touchRelease(draggableElement);
+      }
+
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:move');
+    });
+
+    it('triggers `drag:stop` event when releasing the finger after dragging has started', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
+        touchRelease(draggableElement);
+      }
+
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
+    });
+
+    it('does not triggers `drag:stop` event when releasing the finger before dragging has started', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        touchRelease(draggableElement);
+      }
+
+      expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:stop');
+    });
   });
 
-  it('prevents `drag:start` when trying to drag a none draggable element', () => {
-    function dragFlow() {
-      touchStart(document.body);
-      waitForDragDelay();
-    }
+  describe('using delay', () => {
+    beforeEach(() => {
+      setup({delay: DRAG_DELAY, distance: 0});
+    });
+    afterEach(teardown);
 
-    expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+    it('does not trigger `drag:start` before delay ends', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        touchRelease(draggableElement);
+      }
+
+      expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+    });
+
+    it('triggers `drag:start` sensor event on touchstart after delay', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        waitForDragDelay();
+      }
+
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:start');
+    });
+
+    it('triggers `drag:move` event while moving the finger after delay', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        waitForDragDelay();
+        touchMove(draggableElement);
+        touchRelease(draggableElement);
+      }
+
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:move');
+    });
+
+    it('triggers `drag:stop` event when releasing the finger after dragging has started', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        waitForDragDelay();
+        touchMove(draggableElement);
+        touchRelease(draggableElement);
+      }
+
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
+    });
+
+    it('does not triggers `drag:stop` event when releasing the finger before dragging has started', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        touchMove(draggableElement);
+        touchRelease(draggableElement);
+      }
+
+      expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:stop');
+    });
   });
 
-  it('prevents `drag:start` when touch moved before drag delay', () => {
-    function dragFlow() {
-      touchStart(draggableElement);
-      touchMove(draggableElement);
-    }
+  describe('delay and distance', () => {
+    beforeEach(() => {
+      setup({delay: DRAG_DELAY, distance: 1});
+    });
+    afterEach(teardown);
 
-    expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
-  });
+    it('does not trigger `drag:start` before delay ends', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
+        touchRelease(draggableElement);
+      }
 
-  it('prevents context menu while dragging', () => {
-    touchStart(draggableElement);
-    let contextMenuEvent = triggerEvent(draggableElement, 'contextmenu');
-    waitForDragDelay();
+      expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+    });
 
-    expect(contextMenuEvent.defaultPrevented).toBe(true);
+    it('does not trigger `drag:start` before distance requirement is met', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        waitForDragDelay();
+        touchRelease(draggableElement);
+      }
 
-    expect(contextMenuEvent.stoppedPropagation).toBe(true);
+      expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+    });
 
-    touchRelease(draggableElement);
-    contextMenuEvent = triggerEvent(draggableElement, 'contextmenu');
+    it('only triggers `drag:start` sensor event once when delay ends after distance is met', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
+        waitForDragDelay();
+        touchRelease(draggableElement);
+      }
 
-    expect(contextMenuEvent.defaultPrevented).toBe(false);
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:start', 1);
+    });
 
-    expect(contextMenuEvent.stoppedPropagation).toBeUndefined();
-  });
+    it('only triggers `drag:start` sensor event once when delay ends at the same time distance is met', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        const next = Date.now() + DRAG_DELAY;
+        const dateMock = jest.spyOn(Date, 'now').mockImplementation(() => {
+          return next;
+        });
+        jest.runTimersToTime(DRAG_DELAY);
+        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
+        touchRelease(draggableElement);
+        dateMock.mockRestore();
+      }
 
-  it('prevents scroll on touchmove while dragging', () => {
-    let touchMoveEvent = touchMove(draggableElement);
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:start', 1);
+    });
 
-    expect(touchMoveEvent.defaultPrevented).toBe(false);
+    it('only triggers `drag:start` sensor event once when distance is met after delay', () => {
+      function dragFlow() {
+        touchStart(draggableElement);
+        // do not use waitForDragDelay as it will reset the mock before touchMove
+        const next = Date.now() + DRAG_DELAY + 1;
+        const dateMock = jest.spyOn(Date, 'now').mockImplementation(() => {
+          return next;
+        });
+        jest.runTimersToTime(DRAG_DELAY + 1);
+        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 1}]});
+        dateMock.mockRestore();
+        touchRelease(draggableElement);
+      }
 
-    touchStart(draggableElement);
-    waitForDragDelay();
-    touchMoveEvent = touchMove(draggableElement);
-
-    expect(touchMoveEvent.defaultPrevented).toBe(true);
-
-    touchRelease(draggableElement);
-  });
-
-  it('prevents clicking on touchend after dragging', () => {
-    let touchEndEvent = touchRelease(draggableElement);
-
-    expect(touchEndEvent.defaultPrevented).toBe(false);
-
-    touchStart(draggableElement);
-    waitForDragDelay();
-    touchEndEvent = touchRelease(draggableElement);
-
-    expect(touchEndEvent.defaultPrevented).toBe(true);
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:start', 1);
+    });
   });
 });

@@ -1,7 +1,8 @@
-function toHaveTriggeredSensorEvent(received, expectedEventName) {
+function toHaveTriggeredSensorEvent(received, expectedEventName, count) {
   let triggered = false;
-
+  let callCount = 0;
   function callback() {
+    count !== undefined && (callCount = callCount + 1);
     triggered = true;
   }
 
@@ -9,14 +10,15 @@ function toHaveTriggeredSensorEvent(received, expectedEventName) {
   received();
   document.removeEventListener(expectedEventName, callback);
 
-  const pass = Boolean(triggered);
+  const pass = Boolean(triggered) && Boolean(count === undefined || callCount === count);
 
   return {
     pass,
     message: () => {
       const expectation = pass ? 'not to have been' : 'to have been';
+      const defaultMessage = `Expected sensor event '${expectedEventName}' ${expectation} to be triggered`;
 
-      return `Expected sensor event '${expectedEventName}' ${expectation} triggered`;
+      return count ? `${defaultMessage} ${count} time(s)` : defaultMessage;
     },
   };
 }

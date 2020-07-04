@@ -64,7 +64,7 @@ describe('Draggable', () => {
 
       for (const key in defaultOptions) {
         if (defaultOptions.hasOwnProperty(key)) {
-          expect(newInstance.options[key]).toBe(defaultOptions[key]);
+          expect(newInstance.options[key]).toEqual(defaultOptions[key]);
         }
       }
     });
@@ -105,6 +105,20 @@ describe('Draggable', () => {
       expect(newInstance.plugins[3]).toBeInstanceOf(Scrollable);
     });
 
+    it('should remove default plugins from the list of exclude plugins', () => {
+      const newInstance = new Draggable([], {
+        exclude: {
+          plugins: [Draggable.Plugins.Focusable],
+        },
+      });
+
+      expect(newInstance.plugins).toHaveLength(3);
+
+      newInstance.plugins.forEach((plugin) => {
+        expect(plugin).not.toBeInstanceOf(Focusable);
+      });
+    });
+
     it('should attach custom plugins', () => {
       const newInstance = new Draggable([], {
         plugins: [TestPlugin],
@@ -131,6 +145,20 @@ describe('Draggable', () => {
       expect(newInstance.sensors[0]).toBeInstanceOf(MouseSensor);
 
       expect(newInstance.sensors[1]).toBeInstanceOf(TouchSensor);
+    });
+
+    it('should remove default sensors from the list of exclude sensors', () => {
+      const newInstance = new Draggable([], {
+        exclude: {
+          sensors: [Draggable.Sensors.TouchSensor],
+        },
+      });
+
+      expect(newInstance.sensors).toHaveLength(1);
+
+      newInstance.sensors.forEach((sensor) => {
+        expect(sensor).not.toBeInstanceOf(TouchSensor);
+      });
     });
 
     it('should trigger DraggableInitializedEvent on init', () => {

@@ -126,6 +126,10 @@ export default class ResizeMirror extends AbstractPlugin {
    */
   [resize]({overContainer, over}) {
     requestAnimationFrame(() => {
+      if (!this.mirror.parentNode) {
+        return;
+      }
+
       if (this.mirror.parentNode !== overContainer) {
         overContainer.appendChild(this.mirror);
       }

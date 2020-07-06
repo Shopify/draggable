@@ -83,7 +83,7 @@ export default class SnapMirror extends AbstractPlugin {
    * @param {MirrorCreatedEvent} mirrorEvent
    * @private
    */
-  [onMirrorCreated]({sourceContainer, source, sensorEvent}) {
+  [onMirrorCreated]({sourceContainer, source, originalEvent}) {
     const rect = source.getBoundingClientRect();
     this.offset = this.getOffset(sourceContainer);
 
@@ -92,8 +92,8 @@ export default class SnapMirror extends AbstractPlugin {
     this.relativePoints = this.getRelativePoints(rect);
 
     this.eventStartPoint = {
-      x: sensorEvent.clientX,
-      y: sensorEvent.clientY,
+      x: originalEvent.pageX,
+      y: originalEvent.pageY,
     };
     this.startPoint = {
       x: rect.x - this.offset.x,
@@ -120,12 +120,11 @@ export default class SnapMirror extends AbstractPlugin {
    */
   [onMirrorMove](evt) {
     evt.cancel();
-    const {clientX, clientY} = evt.sensorEvent;
-
+    const {pageX, pageY} = evt.originalEvent;
     requestAnimationFrame(() => {
       const nearest = this.getNearest({
-        x: clientX - this.eventStartPoint.x,
-        y: clientY - this.eventStartPoint.y,
+        x: pageX - this.eventStartPoint.x,
+        y: pageY - this.eventStartPoint.y,
       });
       const translate = {
         x: this.offset.x + nearest.x,

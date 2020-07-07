@@ -5,6 +5,8 @@ import grid from './grid';
 const onMirrorCreated = Symbol('onMirrorCreated');
 const onMirrorDestroy = Symbol('onMirrorDestroy');
 const onMirrorMove = Symbol('onMirrorMove');
+const onDragOverContainer = Symbol('onDragOverContainer');
+const onDragOutContainer = Symbol('onDragOutContainer');
 
 /**
  * SnapMirror default options
@@ -13,7 +15,6 @@ const onMirrorMove = Symbol('onMirrorMove');
  */
 export const defaultOptions = {
   targets: [],
-  offset: 'container',
   relativePoints: [
     {
       x: 0,
@@ -51,13 +52,20 @@ export default class SnapMirror extends AbstractPlugin {
     this[onMirrorCreated] = this[onMirrorCreated].bind(this);
     this[onMirrorDestroy] = this[onMirrorDestroy].bind(this);
     this[onMirrorMove] = this[onMirrorMove].bind(this);
+    this[onDragOverContainer] = this[onDragOverContainer].bind(this);
+    this[onDragOutContainer] = this[onDragOutContainer].bind(this);
   }
 
   /**
    * Attaches plugins event listeners
    */
   attach() {
-    this.draggable.on('mirror:created', this[onMirrorCreated]).on('mirror:move', this[onMirrorMove]);
+    this.draggable
+      .on('mirror:created', this[onMirrorCreated])
+      .on('mirror:move', this[onMirrorMove])
+      .on('drag:over:container', this[onDragOverContainer])
+      .on('drag:out:container', this[onDragOutContainer])
+      .on('mirror:destroy', this[onMirrorDestroy]);
   }
 
   /**
@@ -66,8 +74,10 @@ export default class SnapMirror extends AbstractPlugin {
   detach() {
     this.draggable
       .off('mirror:created', this[onMirrorCreated])
-      .off('mirror:destroy', this[onMirrorDestroy])
-      .off('mirror:move', this[onMirrorMove]);
+      .off('drag:over:container', this[onDragOverContainer])
+      .off('drag:out:container', this[onDragOutContainer])
+      .off('mirror:move', this[onMirrorMove])
+      .off('mirror:destroy', this[onMirrorDestroy]);
   }
 
   /**
@@ -83,22 +93,19 @@ export default class SnapMirror extends AbstractPlugin {
    * @param {MirrorCreatedEvent} mirrorEvent
    * @private
    */
-  [onMirrorCreated]({sourceContainer, source, originalEvent}) {
-    const rect = source.getBoundingClientRect();
-    this.offset = this.getOffset(sourceContainer);
+  [onMirrorCreated](evt) {
+    const rect = evt.source.getBoundingClientRect();
 
     // can't get dimensions of mirror in mirror created
     // so use source dimensions
-    this.relativePoints = this.getRelativePoints(rect);
+    this.relativePoints = this.getRelativePoints(rect, evt.originalEvent);
 
-    this.eventStartPoint = {
-      x: originalEvent.pageX,
-      y: originalEvent.pageY,
+    this.offset = {
+      x: rect.x - evt.sensorEvent.clientX,
+      y: rect.y - evt.sensorEvent.clientY,
     };
-    this.startPoint = {
-      x: rect.x - this.offset.x,
-      y: rect.y - this.offset.y,
-    };
+
+    this.mirror = evt.mirror;
   }
 
   /**
@@ -109,7 +116,6 @@ export default class SnapMirror extends AbstractPlugin {
   [onMirrorDestroy]() {
     this.offset = null;
     this.relativePoints = null;
-    this.eventStartPoint = null;
     this.startPoint = null;
   }
 
@@ -119,19 +125,38 @@ export default class SnapMirror extends AbstractPlugin {
    * @private
    */
   [onMirrorMove](evt) {
+    if (!this.overContainer) {
+      return;
+    }
     evt.cancel();
-    const {pageX, pageY} = evt.originalEvent;
     requestAnimationFrame(() => {
+      // console.log(evt.originalEvent.pageY, evt.originalEvent.pageX);
+      // console.log(this.overContainer.scrollTop, this.overContainer.scrollLeft);
+      // console.log(this.overContainer.offsetTop, this.overContainer.offsetLeft);
       const nearest = this.getNearest({
-        x: pageX - this.eventStartPoint.x,
-        y: pageY - this.eventStartPoint.y,
+        x: evt.originalEvent.pageX + this.overContainer.scrollLeft - this.overContainer.offsetLeft,
+        y: evt.originalEvent.pageY + this.overContainer.scrollTop - this.overContainer.offsetTop,
       });
-      const translate = {
-        x: this.offset.x + nearest.x,
-        y: this.offset.y + nearest.y,
-      };
-      evt.mirror.style.transform = `translate3d(${translate.x}px, ${translate.y}px, 0)`;
+      // console.log(nearest);
+      this.mirror.style.transform = null;
+      evt.mirror.style.left = `${nearest.x}px`;
+      evt.mirror.style.top = `${nearest.y}px`;
     });
+  }
+
+  [onDragOverContainer](evt) {
+    this.overContainer = evt.overContainer;
+    this.overContainer.append(this.mirror);
+    this.mirror.style.position = 'absolute';
+  }
+
+  [onDragOutContainer](evt) {
+    this.overContainer.position = null;
+    this.overContainer = null;
+    evt.sourceContainer.append(this.mirror);
+    this.mirror.style.position = 'fixed';
+    this.mirror.style.top = '0';
+    this.mirror.style.left = '0';
   }
 
   getNearest(diff) {
@@ -147,13 +172,9 @@ export default class SnapMirror extends AbstractPlugin {
       const range = target.range ? target.range : this.options.range;
 
       this.relativePoints.forEach((relativePoint) => {
-        const point = {
-          x: this.startPoint.x + relativePoint.x,
-          y: this.startPoint.y + relativePoint.y,
-        };
         const tempPoint = {
-          x: point.x + diff.x,
-          y: point.y + diff.y,
+          x: diff.x + this.offset.x + relativePoint.x,
+          y: diff.y + this.offset.y + relativePoint.y,
         };
         const tempDistance = euclideanDistance(tempPoint.x, tempPoint.y, target.x, target.y);
 
@@ -183,22 +204,11 @@ export default class SnapMirror extends AbstractPlugin {
   }
 
   getOffset(container) {
-    if (this.options.offset === 'container') {
-      const rect = container.getBoundingClientRect();
-      return {
-        x: rect.x,
-        y: rect.y,
-      };
-    }
-
-    if (this.options.offset.x && this.options.offset.y) {
-      return {
-        x: this.options.offset.x,
-        y: this.options.offset.y,
-      };
-    }
-
-    return {x: 0, y: 0};
+    const rect = container.getBoundingClientRect();
+    return {
+      x: rect.x,
+      y: rect.y,
+    };
   }
 }
 

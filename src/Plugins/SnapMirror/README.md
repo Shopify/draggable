@@ -26,6 +26,14 @@ import SnapMirror from '@shopify/draggable/lib/plugins/snap-mirror';
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.x/lib/plugins/snap-mirror.js"></script>
 ```
 
+The over container should set relative/absolute/fixed position, bacause while over a container mirror using absolute position based on the container.
+
+```css
+.draggable-container--over {
+  position: relative;
+}
+```
+
 ### Options
 
 **`targets {Array<Object|Function>}`**  
@@ -41,11 +49,14 @@ Target options:
 | `y`     | `number` | The y coordinates of snap target relative to offset.                                                                    |
 | `range` | `number` | The range of a snap target is the distance the pointer must be from the target's coordinates for a snap to be possible. |
 
-**`offset {string|Object}`**  
-A string `container` or an object with `x` and `y` properties.  
+<!--
+no longer need
+**`offset {string|Object}`**
+A string `container` or an object with `x` and `y` properties.
 The `offset` option lets you shift the coordinates of the targets.
 
 If using `container`, offset will set to the upper left corner coordinates of the current source container.
+-->
 
 **`relativePoints {Array<Object>}`**  
 An object with `x` and `y` properties.  
@@ -73,10 +84,13 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
   SnapMirror: {
     targets: [{x: 100, y: 100, range: 50}],
     relativePoints: [{x: 0.5, y: 0.5}],
-    offset: 'container',
   },
   plugins: [Plugins.SnapMirror],
 });
 ```
+
+# Why different form interact.js
+
+Consider of scorll, nest container and nest container with scorll. Limit snap in a contianer will make things simple.
 
 ### Caveats

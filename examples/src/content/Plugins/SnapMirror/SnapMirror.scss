@@ -7,6 +7,9 @@
 @import 'utils/shared/layout';
 
 .SnapMirror {
+  .draggable-container--over {
+    position: relative;
+  }
   h2 {
     font-size: 24px;
     line-height: 1.5em;
@@ -39,7 +42,7 @@
       width: 40px;
       height: 40px;
       border: 1px solid gray;
-      &::after{
+      &::after {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -47,7 +50,7 @@
         height: 10px;
         transform: translate(-50%, -50%);
         background: #fff;
-        content: "";
+        content: '';
       }
     }
     .star1 {

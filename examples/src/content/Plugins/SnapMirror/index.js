@@ -1,25 +1,25 @@
 // eslint-disable-next-line import/no-unresolved
 import {Draggable, Plugins} from '@shopify/draggable';
 
-function initSky() {
-  const container = document.querySelector('.sky');
+function initMLP() {
+  const container = document.querySelector('#SnapMirror .BlockLayout.MLP');
   const containerRect = container.getBoundingClientRect();
 
   const targets = [];
-  [...document.querySelectorAll('.star')].forEach((star) => {
+  [...document.querySelectorAll('.Block--typeHollow')].forEach((star) => {
     const rect = star.getBoundingClientRect();
-    let range = {rect: [15, 25, 25, 15]};
+    let range = Plugins.SnapMirror.inRectRange([15, 25, 25, 15]);
     if (star.classList.contains('star1')) {
-      range = {rect: [Infinity, Infinity, Infinity, Infinity]};
+      range = Plugins.SnapMirror.inRectRange([Infinity, Infinity, Infinity, Infinity]);
     }
     if (star.classList.contains('star2')) {
-      range = {circle: 20};
+      range = 20;
     }
     targets.push({x: rect.x + 20 - containerRect.x, y: rect.y + 20 - containerRect.y, range});
   });
 
   const draggable = new Draggable([container], {
-    draggable: '.sky__item',
+    draggable: '.Block--isDraggable',
     mirror: {
       constrainDimensions: true,
     },
@@ -30,16 +30,14 @@ function initSky() {
     },
   });
 
-  draggable.on('mirror:created', () => {});
-
-  draggable.on('mirror:move', () => {});
+  return draggable;
 }
 
-export default function PluginsSnapMirror() {
-  const container = document.querySelector('.box');
+function initWorkspace() {
+  const container = document.querySelector('#SnapMirror .BlockLayout.Workspace');
 
   const draggable = new Draggable([container], {
-    draggable: '.box__item',
+    draggable: '.Block--isDraggable',
     mirror: {
       constrainDimensions: true,
     },
@@ -54,8 +52,12 @@ export default function PluginsSnapMirror() {
     },
   });
 
-  // demo sky
-  initSky();
-
   return draggable;
+}
+
+export default function PluginsSnapMirror() {
+  const workspaceDraggable = initWorkspace();
+  const MLPDraggable = initMLP();
+
+  return [workspaceDraggable, MLPDraggable];
 }

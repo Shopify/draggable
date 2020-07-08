@@ -1,10 +1,8 @@
 ## SnapMirror
 
-The SnapMirror plugin snap the mirror element to the target points.
+The SnapMirror plugin snap the mirror to the target points.
 
 This plugin is not included in the default Draggable bundle, so you'll need to import it separately.
-
-<!-- add a gif / video ? -->
 
 <!-- Inspired by interact.js -->
 
@@ -39,7 +37,7 @@ The over container should set relative/absolute/fixed position, bacause while ov
 **`targets {Array<Object|Function>}`**  
 An object contain target options or a function returning an object contain target options.
 
-If a snap target is a function, then it is called and given the x and y coordinates of the event as the first two parameters and the current SnapMirror instance as the third parameter.
+If a snap target is a function, then it is called and given the x and y coordinates of the dragging mirror base on contianer as the first two parameters and the current SnapMirror instance as the third parameter.
 
 Target options:
 
@@ -60,7 +58,7 @@ If using `container`, offset will set to the upper left corner coordinates of th
 
 **`relativePoints {Array<Object>}`**  
 An object with `x` and `y` properties.  
-The `relativePoints` option lets you set where the drag element should snap.
+The `relativePoints` option lets you set where the dragging mirror element should snap.
 
 **`range {Object|Function}`**  
 The `range` option lets you set the default range for all targets.
@@ -89,8 +87,8 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 });
 ```
 
-# Why different form interact.js
+### Caveats
+
+### Why different form interact.js
 
 Consider of scorll, nest container and nest container with scorll. Limit snap in a contianer will make things simple.
-
-### Caveats

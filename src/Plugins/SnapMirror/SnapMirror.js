@@ -130,17 +130,19 @@ export default class SnapMirror extends AbstractPlugin {
     }
     evt.cancel();
     requestAnimationFrame(() => {
+      if (!this.overContainer) {
+        return;
+      }
       // console.log(evt.originalEvent.pageY, evt.originalEvent.pageX);
       // console.log(this.overContainer.scrollTop, this.overContainer.scrollLeft);
       // console.log(this.overContainer.offsetTop, this.overContainer.offsetLeft);
       const nearest = this.getNearest({
-        x: evt.originalEvent.pageX + this.overContainer.scrollLeft - this.overContainer.offsetLeft,
-        y: evt.originalEvent.pageY + this.overContainer.scrollTop - this.overContainer.offsetTop,
+        // currentPageX - contianerOffset + contanierScroll + selfOffset
+        x: evt.originalEvent.pageX + this.overContainer.scrollLeft - this.overContainer.offsetLeft + this.offset.x,
+        y: evt.originalEvent.pageY + this.overContainer.scrollTop - this.overContainer.offsetTop + this.offset.y,
       });
       // console.log(nearest);
-      this.mirror.style.transform = null;
-      evt.mirror.style.left = `${nearest.x}px`;
-      evt.mirror.style.top = `${nearest.y}px`;
+      this.mirror.style.transform = `translate3d(${nearest.x}px, ${nearest.y}px, 0)`;
     });
   }
 
@@ -155,30 +157,28 @@ export default class SnapMirror extends AbstractPlugin {
     this.overContainer = null;
     evt.sourceContainer.append(this.mirror);
     this.mirror.style.position = 'fixed';
-    this.mirror.style.top = '0';
-    this.mirror.style.left = '0';
   }
 
-  getNearest(diff) {
-    let result = {x: 0, y: 0};
+  getNearest(coord) {
+    let result = {x: coord.x, y: coord.y};
     let distance = Infinity;
 
     this.options.targets.forEach((rowTarget) => {
       let target = rowTarget;
       if (typeof target === 'function') {
-        target = target(diff.x, diff.y);
+        target = target(coord.x, coord.y, this);
       }
 
       const range = target.range ? target.range : this.options.range;
 
       this.relativePoints.forEach((relativePoint) => {
         const tempPoint = {
-          x: diff.x + this.offset.x + relativePoint.x,
-          y: diff.y + this.offset.y + relativePoint.y,
+          x: coord.x + relativePoint.x,
+          y: coord.y + relativePoint.y,
         };
         const tempDistance = euclideanDistance(tempPoint.x, tempPoint.y, target.x, target.y);
 
-        if (tempDistance > range) {
+        if ((typeof range === 'function' && !range(target, tempPoint)) || tempDistance > range) {
           return;
         }
 
@@ -214,11 +214,13 @@ export default class SnapMirror extends AbstractPlugin {
 
 SnapMirror.grid = grid;
 
-SnapMirror.inRangeRange = function(coord, range) {
-  return (
-    coord.x < this.x + range.rect[1] &&
-    coord.x > this.x - range.rect[3] &&
-    coord.y > this.y - range.rect[0] &&
-    coord.y < this.y + range.rect[2]
-  );
+SnapMirror.inRectRange = function(range) {
+  return function(target, coord) {
+    return (
+      coord.x < target.x + range[1] &&
+      coord.x > target.x - range[3] &&
+      coord.y > target.y - range[0] &&
+      coord.y < target.y + range[2]
+    );
+  };
 };

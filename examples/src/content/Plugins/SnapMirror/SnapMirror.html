@@ -2,20 +2,31 @@
 
 {% macro render(id) %}
 <section id="{{ id }}" class="{{ id }}">
-  <h2>Grid</h2>
-  <section class="box">
-    <div class="box__item"></div>
-  </section>
-  <h2>Sky</h2>
-  <section class="sky">
-    <div class="sky__item"></div>
-    <div class="star star1"></div>
-    <div class="star star2"></div>
-    <div class="star star3"></div>
-    <div class="star star4"></div>
-    <div class="star star5"></div>
-    <div class="star star6"></div>
-    <div class="star star7"></div>
-  </section>
+  <article class="Workspace BlockLayout BlockLayout--typePositioned">
+    <div class="Workspace__grid">
+      {{ Block.render('drag', {index: 1, draggable: true}) }}
+    </div>
+  </article>
+
+  <div style="height: 3rem"></div>
+
+  <article class="MLP BlockLayout BlockLayout--typePositioned">
+    <div class="Block-wrapper">
+      {{ Block.render('1', {index: 1, draggable: true}) }}
+      {{ Block.render('2', {index: 2, draggable: true}) }}
+      {{ Block.render('3', {index: 3, draggable: true}) }}
+      {{ Block.render('4', {index: 4, draggable: true}) }}
+      {{ Block.render('5', {index: 5, draggable: true}) }}
+      {{ Block.render('6', {index: 6, draggable: true}) }}
+    </div>
+    <div class="Hollow-wrapper">
+      {{ Block.render('', {type: 'Hollow'}) }}
+      {{ Block.render('', {type: 'Hollow'}) }}
+      {{ Block.render('', {type: 'Hollow'}) }}
+      {{ Block.render('', {type: 'Hollow'}) }}
+      {{ Block.render('', {type: 'Hollow'}) }}
+      {{ Block.render('', {type: 'Hollow'}) }}
+    </div>
+  </article>
 </section>
 {% endmacro %}

@@ -43,7 +43,7 @@ describe('SnapMirror', () => {
     sandbox.parentNode.removeChild(sandbox);
   });
 
-  it('snap to targets', async () => {
+  it('targets option', async () => {
     draggable = new Draggable(containers, {
       draggable: 'li',
       plugins: [SnapMirror],
@@ -56,48 +56,22 @@ describe('SnapMirror', () => {
         ],
       },
     });
-    clickMouse(item1, {clientX: 15, clientY: 15});
 
+    clickMouse(item1, {pageX: 15, pageY: 15});
     waitForDragDelay();
     waitForRequestAnimationFrame();
     await waitForPromisesToResolve();
-
     const mirror = document.querySelector('.draggable-mirror');
 
-    moveMouse(document.body, {clientX: 50, clientY: 10});
+    moveMouse(item1, {pageX: 50, pageY: 10});
     await waitForPromisesToResolve();
     waitForRequestAnimationFrame();
     expect(mirror.style.transform).toBe('translate3d(100px, 100px, 0)');
 
-    moveMouse(document.body, {clientX: 220, clientY: 180});
+    moveMouse(item1, {pageX: 220, pageY: 180});
     await waitForPromisesToResolve();
     waitForRequestAnimationFrame();
     expect(mirror.style.transform).toBe('translate3d(200px, 200px, 0)');
-
-    releaseMouse(item1);
-  });
-
-  it('offset option', async () => {
-    draggable = new Draggable(containers, {
-      draggable: 'li',
-      plugins: [SnapMirror],
-      SnapMirror: {
-        offset: {x: 30, y: 70},
-        targets: [{x: 100, y: 100}],
-      },
-    });
-    clickMouse(item1, {clientX: 10, clientY: 10});
-
-    waitForDragDelay();
-    waitForRequestAnimationFrame();
-    await waitForPromisesToResolve();
-
-    const mirror = document.querySelector('.draggable-mirror');
-
-    moveMouse(document.body, {clientX: 50, clientY: 50});
-    await waitForPromisesToResolve();
-    waitForRequestAnimationFrame();
-    expect(mirror.style.transform).toBe('translate3d(130px, 170px, 0)');
 
     releaseMouse(item1);
   });
@@ -111,15 +85,14 @@ describe('SnapMirror', () => {
         targets: [{x: 100, y: 100}],
       },
     });
-    clickMouse(item1, {clientX: 10, clientY: 10});
 
+    clickMouse(item1, {pageX: 10, pageY: 10});
     waitForDragDelay();
     waitForRequestAnimationFrame();
     await waitForPromisesToResolve();
-
     const mirror = document.querySelector('.draggable-mirror');
 
-    moveMouse(document.body, {clientX: 50, clientY: 50});
+    moveMouse(item1, {pageX: 50, pageY: 50});
     await waitForPromisesToResolve();
     waitForRequestAnimationFrame();
     expect(mirror.style.transform).toBe('translate3d(91px, 79px, 0)');
@@ -127,7 +100,7 @@ describe('SnapMirror', () => {
     releaseMouse(item1);
   });
 
-  it('SnapMirror.grid', async () => {
+  it('SnapMirror.grid()', async () => {
     draggable = new Draggable(containers, {
       draggable: 'li',
       plugins: [SnapMirror],
@@ -135,33 +108,70 @@ describe('SnapMirror', () => {
         targets: [SnapMirror.grid({x: 50, y: 50})],
       },
     });
-    clickMouse(item1, {clientX: 10, clientY: 10});
 
+    clickMouse(item1, {pageX: 10, pageY: 10});
     waitForDragDelay();
     waitForRequestAnimationFrame();
     await waitForPromisesToResolve();
-
     const mirror = document.querySelector('.draggable-mirror');
 
-    moveMouse(document.body, {clientX: 20, clientY: 10});
+    moveMouse(item1, {pageX: 20, pageY: 10});
     await waitForPromisesToResolve();
     waitForRequestAnimationFrame();
     expect(mirror.style.transform).toBe('translate3d(0px, 0px, 0)');
 
-    moveMouse(document.body, {clientX: 60, clientY: 10});
+    moveMouse(item1, {pageX: 60, pageY: 10});
     await waitForPromisesToResolve();
     waitForRequestAnimationFrame();
     expect(mirror.style.transform).toBe('translate3d(50px, 0px, 0)');
 
-    moveMouse(document.body, {clientX: 40, clientY: 40});
+    moveMouse(item1, {pageX: 40, pageY: 40});
     await waitForPromisesToResolve();
     waitForRequestAnimationFrame();
     expect(mirror.style.transform).toBe('translate3d(50px, 50px, 0)');
 
-    moveMouse(document.body, {clientX: 440, clientY: 550});
+    moveMouse(item1, {pageX: 440, pageY: 550});
     await waitForPromisesToResolve();
     waitForRequestAnimationFrame();
     expect(mirror.style.transform).toBe('translate3d(450px, 550px, 0)');
+
+    releaseMouse(item1);
+  });
+
+  it('SnapMirror.inRectRange()', async () => {
+    draggable = new Draggable(containers, {
+      draggable: 'li',
+      plugins: [SnapMirror],
+      SnapMirror: {
+        targets: [{x: 100, y: 100, range: SnapMirror.inRectRange([10, 20, 30, 40])}],
+      },
+    });
+
+    clickMouse(item1, {pageX: 10, pageY: 10});
+    waitForDragDelay();
+    waitForRequestAnimationFrame();
+    await waitForPromisesToResolve();
+    const mirror = document.querySelector('.draggable-mirror');
+
+    moveMouse(item1, {pageX: 70, pageY: 80});
+    await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+    expect(mirror.style.transform).toBe('translate3d(70px, 80px, 0)');
+
+    moveMouse(item1, {pageX: 70, pageY: 100});
+    await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+    expect(mirror.style.transform).toBe('translate3d(100px, 100px, 0)');
+
+    moveMouse(item1, {pageX: 130, pageY: 120});
+    await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+    expect(mirror.style.transform).toBe('translate3d(130px, 120px, 0)');
+
+    moveMouse(item1, {pageX: 110, pageY: 120});
+    await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+    expect(mirror.style.transform).toBe('translate3d(100px, 100px, 0)');
 
     releaseMouse(item1);
   });

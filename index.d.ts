@@ -111,6 +111,7 @@ declare module '@shopify/draggable' {
         mirror?: MirrorOptions;
         scrollable?: ScrollableOptions;
         swapAnimation?: SwapAnimationOptions;
+        sortAnimation?: SortAnimationOptions;
     }
 
     export class Draggable<EventListType extends string = DraggableEventNames | MirrorEventNames> {
@@ -424,9 +425,23 @@ declare module '@shopify/draggable' {
         protected detach(): void;
     }
 
+    /**
+     * SortAnimation
+     */
+    export interface SortAnimationOptions {
+        duration?: number;
+        easingFunction?: string;
+    }
+
+    class SortAnimation extends AbstractPlugin {
+        protected attach(): void;
+        protected detach(): void;
+    }
+
     export const Plugins: {
         Collidable: typeof Collidable,
         SwapAnimation: typeof SwapAnimation,
+        SortAnimation: typeof SortAnimation,
         ResizeMirror: typeof ResizeMirror,
         Snappable: typeof Snappable,
     };

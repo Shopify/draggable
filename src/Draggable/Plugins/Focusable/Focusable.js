@@ -51,6 +51,9 @@ export default class Focusable extends AbstractPlugin {
    */
   detach() {
     this.draggable.off('draggable:initialize', this[onInitialize]).off('draggable:destroy', this[onDestroy]);
+
+    // Remove modified elements when detach
+    this[onDestroy]();
   }
 
   /**

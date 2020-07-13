@@ -96,6 +96,9 @@ By default draggable includes the `MouseSensor` & `TouchSensor`. Default: `[]`
 Draggable adds classes to elements to indicate state. These classes can be used to add styling
 on elements in certain states.
 
+**`exclude {plugins: Plugin[], sensors: Sensor[]}`**  
+Allow excluding default plugins and default sensors. Use with caution as it may create strange behavior.
+
 ### Events
 
 | Name                                       | Description                                               | Cancelable | Cancelable action   |
@@ -150,4 +153,18 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 draggable.on('drag:start', () => console.log('drag:start'));
 draggable.on('drag:move', () => console.log('drag:move'));
 draggable.on('drag:stop', () => console.log('drag:stop'));
+```
+
+Create draggable which excluded some default plugins and sensor:
+
+```js
+import { Draggable } from '@shopify/draggable';
+
+const draggable = new Draggable(document.querySelectorAll('ul'), {
+  draggable: 'li',
+  exclude: {
+    plugins: [Draggable.Plugins.Focusable],
+    sensors: [Draggable.Sensors.TouchSensor],
+  }
+});
 ```

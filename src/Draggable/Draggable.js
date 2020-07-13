@@ -52,6 +52,10 @@ export const defaultOptions = {
   placedTimeout: 800,
   plugins: [],
   sensors: [],
+  exclude: {
+    plugins: [],
+    sensors: [],
+  },
 };
 
 /**
@@ -71,6 +75,16 @@ export default class Draggable {
    * @type {Object}
    */
   static Plugins = {Announcement, Focusable, Mirror, Scrollable};
+
+  /**
+   * Default sensors draggable uses
+   * @static
+   * @property {Object} Sensors
+   * @property {MouseSensor} Sensors.MouseSensor
+   * @property {TouchSensor} Sensors.TouchSensor
+   * @type {Object}
+   */
+  static Sensors = {MouseSensor, TouchSensor};
 
   /**
    * Draggable constructor.
@@ -102,6 +116,10 @@ export default class Draggable {
       announcements: {
         ...defaultAnnouncements,
         ...(options.announcements || {}),
+      },
+      exclude: {
+        plugins: (options.exclude && options.exclude.plugins) || [],
+        sensors: (options.exclude && options.exclude.sensors) || [],
       },
     };
 
@@ -143,8 +161,12 @@ export default class Draggable {
     document.addEventListener('drag:stop', this[onDragStop], true);
     document.addEventListener('drag:pressure', this[onDragPressure], true);
 
-    const defaultPlugins = Object.values(Draggable.Plugins).map((Plugin) => Plugin);
-    const defaultSensors = [MouseSensor, TouchSensor];
+    const defaultPlugins = Object.values(Draggable.Plugins).filter(
+      (Plugin) => !this.options.exclude.plugins.includes(Plugin),
+    );
+    const defaultSensors = Object.values(Draggable.Sensors).filter(
+      (sensor) => !this.options.exclude.sensors.includes(sensor),
+    );
 
     this.addPlugin(...[...defaultPlugins, ...this.options.plugins]);
     this.addSensor(...[...defaultSensors, ...this.options.sensors]);

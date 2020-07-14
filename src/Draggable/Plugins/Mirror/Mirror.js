@@ -513,11 +513,11 @@ function positionMirror({withFrame = false, initial = false} = {}) {
           const x = passedThreshX
             ? Math.round((sensorEvent.clientX - mirrorOffset.left - scrollOffset.x) / (options.thresholdX || 1)) *
               (options.thresholdX || 1)
-            : lastMovedX;
+            : Math.round(lastMovedX);
           const y = passedThreshY
             ? Math.round((sensorEvent.clientY - mirrorOffset.top - scrollOffset.y) / (options.thresholdY || 1)) *
               (options.thresholdY || 1)
-            : lastMovedY;
+            : Math.round(lastMovedY);
 
           if ((options.xAxis && options.yAxis) || initial) {
             mirror.style.transform = `translate3d(${x}px, ${y}px, 0)`;

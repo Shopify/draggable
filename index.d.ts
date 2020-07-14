@@ -24,6 +24,66 @@ declare module '@shopify/draggable' {
 
     export { AbstractEvent as BaseEvent };
 
+    type GetEventByEventName<eventName> = eventName extends 'draggable:initialize'
+        ? DraggableInitializedEvent
+        : eventName extends 'draggable:destroy'
+        ? DraggableDestroyEvent
+        : eventName extends 'drag:start'
+        ? DragStartEvent
+        : eventName extends 'drag:move'
+        ? DragMoveEvent
+        : eventName extends 'drag:over'
+        ? DragOverEvent
+        : eventName extends 'drag:over:container'
+        ? DragOverContainerEvent
+        : eventName extends 'drag:out'
+        ? DragOutEvent
+        : eventName extends 'drag:out:container'
+        ? DragOutContainerEvent
+        : eventName extends 'drag:stop'
+        ? DragStopEvent
+        : eventName extends 'drag:pressure'
+        ? DragPressureEvent
+        : eventName extends 'mirror:create'
+        ? MirrorCreateEvent
+        : eventName extends 'mirror:created'
+        ? MirrorCreatedEvent
+        : eventName extends 'mirror:attached'
+        ? MirrorAttachedEvent
+        : eventName extends 'mirror:move'
+        ? MirrorMoveEvent
+        : eventName extends 'mirror:destroy'
+        ? MirrorDestroyEvent
+        : eventName extends 'droppable:dropped'
+        ? DroppableDroppedEvent
+        : eventName extends 'droppable:returned'
+        ? DroppableReturnedEvent
+        : eventName extends 'sortable:start'
+        ? SortableStartEvent
+        : eventName extends 'sortable:sort'
+        ? SortableSortEvent
+        : eventName extends 'sortable:sorted'
+        ? SortableSortedEvent
+        : eventName extends 'sortable:stop'
+        ? SortableStopEvent
+        : eventName extends 'swappable:start'
+        ? SwappableStartEvent
+        : eventName extends 'swappable:swap'
+        ? SwappableSwapEvent
+        : eventName extends 'swappable:swapped'
+        ? SwappableSwappedEvent
+        : eventName extends 'swappable:stop'
+        ? SwappableStopEvent
+        : eventName extends 'collidable:in'
+        ? CollidableInEvent
+        : eventName extends 'collidable:out'
+        ? CollidableOutEvent
+        : eventName extends 'snap:in'
+        ? SnapInEvent
+        : eventName extends 'snap:out'
+        ? SnapOutEvent
+        : AbstractEvent;
+
     /**
      * DragEvent
      */
@@ -77,7 +137,8 @@ declare module '@shopify/draggable' {
         'drag:out' |
         'drag:out:container' |
         'drag:stop' |
-        'drag:pressure';
+        'drag:pressure' |
+        MirrorEventNames;
 
     export class DraggableEvent extends AbstractEvent {
         readonly draggable: Draggable;
@@ -113,7 +174,7 @@ declare module '@shopify/draggable' {
         swapAnimation?: SwapAnimationOptions;
     }
 
-    export class Draggable<EventListType extends string = DraggableEventNames | MirrorEventNames> {
+    export class Draggable<EventListType = DraggableEventNames> {
         static Plugins: {
             Announcement: typeof Announcement,
             Focusable: typeof Focusable,
@@ -122,8 +183,8 @@ declare module '@shopify/draggable' {
         };
         constructor(containers: DraggableContainer, options?: DraggableOptions);
         destroy(): void;
-        on(eventName: EventListType, callback: (event: AbstractEvent) => void): this;
-        off(eventName: EventListType, callback: (event: AbstractEvent) => void): this;
+        on<T extends EventListType>(eventName: T, callback: (event: GetEventByEventName<T>) => void): this;
+        off<T extends EventListType>(eventName: T, callback: (event: GetEventByEventName<T>) => void): this;
         trigger(event: typeof AbstractEvent): void;
         addPlugin(...plugins: Array<typeof AbstractPlugin>): this;
         removePlugin(...plugins: Array<typeof AbstractPlugin>): this;
@@ -278,7 +339,8 @@ declare module '@shopify/draggable' {
      */
     export type DroppableEventNames =
         'droppable:dropped' |
-        'droppable:returned';
+        'droppable:returned' |
+        DraggableEventNames;
 
     export class DroppableEvent extends AbstractEvent {
         readonly dragEvent: DragEvent;
@@ -310,7 +372,7 @@ declare module '@shopify/draggable' {
         classes?: { [key in DroppableClassNames]: string };
     }
 
-    export class Droppable extends Draggable<DraggableEventNames | DroppableEventNames | MirrorEventNames> {
+    export class Droppable<T = DroppableEventNames> extends Draggable<T> {
         constructor(containers: DraggableContainer, options: DroppableOptions);
         getClassNameFor(name: DroppableClassNames): string;
     }
@@ -322,7 +384,8 @@ declare module '@shopify/draggable' {
         'sortable:start' |
         'sortable:sort' |
         'sortable:sorted' |
-        'sortable:stop';
+        'sortable:stop' |
+        DraggableEventNames;
 
     export class SortableEvent extends AbstractEvent {
         readonly dragEvent: DragEvent;
@@ -354,7 +417,7 @@ declare module '@shopify/draggable' {
         readonly newContainer: HTMLElement;
     }
 
-    export class Sortable extends Draggable<DraggableEventNames | MirrorEventNames | SortableEventNames> { }
+    export class Sortable<T = SortableEventNames> extends Draggable<T> { }
 
     /**
      * Swappable
@@ -363,7 +426,8 @@ declare module '@shopify/draggable' {
         'swappable:start' |
         'swappable:swap' |
         'swappable:swapped' |
-        'swappable:stop';
+        'swappable:stop' |
+        DraggableEventNames;
 
     export class SwappableEvent extends AbstractEvent {
         readonly dragEvent: DragEvent;
@@ -382,11 +446,22 @@ declare module '@shopify/draggable' {
 
     export class SwappableStopEvent extends SwappableEvent { }
 
-    export class Swappable extends Draggable<DraggableEventNames | MirrorEventNames | SwappableEventNames> { }
+    export class Swappable<T = SwappableEventNames> extends Draggable<T> { }
 
     /**
      * Collidable Plugin
      */
+    export type CollidableEventNames =
+        'collidable:in' |
+        'collidable:out';
+
+    export class CollidableEvent extends AbstractEvent {
+        readonly dragEvent: DragEvent;
+        readonly collidingElement: HTMLElement;
+    }
+    export class CollidableInEvent extends CollidableEvent { }
+    export class CollidableOutEvent extends CollidableEvent { }
+
     export type Collidables = string | NodeList | HTMLElement[] | (() => NodeList | HTMLElement[]);
 
     class Collidable extends AbstractPlugin {
@@ -395,7 +470,7 @@ declare module '@shopify/draggable' {
     }
 
     /**
-     * ResizeMirror
+     * ResizeMirror Plugin
      */
     class ResizeMirror extends AbstractPlugin {
         protected attach(): void;
@@ -403,15 +478,26 @@ declare module '@shopify/draggable' {
     }
 
     /**
-     * Snappable
+     * Snappable Plugin
      */
+    export type SnappableEventNames =
+        'snap:in' |
+        'snap:out';
+
+    export class SnapEvent extends AbstractEvent {
+        readonly dragEvent: DragEvent;
+        readonly snappable: HTMLElement;
+    }
+    export class SnapInEvent extends SnapEvent { }
+    export class SnapOutEvent extends SnapEvent { }
+
     class Snappable extends AbstractPlugin {
         protected attach(): void;
         protected detach(): void;
     }
 
     /**
-     * SwapAnimation
+     * SwapAnimation Plugin
      */
     export interface SwapAnimationOptions {
         duration: number;

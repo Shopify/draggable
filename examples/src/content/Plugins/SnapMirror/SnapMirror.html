@@ -11,14 +11,6 @@
   <div style="height: 3rem"></div>
 
   <article class="MLP BlockLayout BlockLayout--typePositioned">
-    <div class="Block-wrapper">
-      {{ Block.render('1', {index: 1, draggable: true}) }}
-      {{ Block.render('2', {index: 2, draggable: true}) }}
-      {{ Block.render('3', {index: 3, draggable: true}) }}
-      {{ Block.render('4', {index: 4, draggable: true}) }}
-      {{ Block.render('5', {index: 5, draggable: true}) }}
-      {{ Block.render('6', {index: 6, draggable: true}) }}
-    </div>
     <div class="Hollow-wrapper">
       {{ Block.render('', {type: 'Hollow'}) }}
       {{ Block.render('', {type: 'Hollow'}) }}
@@ -27,6 +19,12 @@
       {{ Block.render('', {type: 'Hollow'}) }}
       {{ Block.render('', {type: 'Hollow'}) }}
     </div>
+    {{ Block.render('1', {index: 1, draggable: true}) }}
+    {{ Block.render('2', {index: 2, draggable: true}) }}
+    {{ Block.render('3', {index: 3, draggable: true}) }}
+    {{ Block.render('4', {index: 4, draggable: true}) }}
+    {{ Block.render('5', {index: 5, draggable: true}) }}
+    {{ Block.render('6', {index: 6, draggable: true}) }}
   </article>
 </section>
 {% endmacro %}

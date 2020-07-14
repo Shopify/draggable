@@ -30,6 +30,17 @@ function initMLP() {
     },
   });
 
+  let originalSource;
+
+  draggable.on('mirror:create', (evt) => {
+    originalSource = evt.originalSource;
+  });
+
+  draggable.on('mirror:destroy', (evt) => {
+    originalSource.style.transform = evt.mirror.style.transform;
+    console.log(evt);
+  });
+
   return draggable;
 }
 
@@ -50,6 +61,17 @@ function initWorkspace() {
         }),
       ],
     },
+  });
+
+  let originalSource;
+
+  draggable.on('mirror:create', (evt) => {
+    originalSource = evt.originalSource;
+  });
+
+  draggable.on('mirror:destroy', (evt) => {
+    originalSource.style.transform = evt.mirror.style.transform;
+    console.log(evt);
   });
 
   return draggable;

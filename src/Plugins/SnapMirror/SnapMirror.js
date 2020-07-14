@@ -1,6 +1,6 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
 import {distance as euclideanDistance} from 'shared/utils';
-import grid from './grid';
+import {grid, line} from './targets';
 
 const onMirrorCreated = Symbol('onMirrorCreated');
 const onMirrorDestroy = Symbol('onMirrorDestroy');
@@ -50,6 +50,11 @@ export default class SnapMirror extends AbstractPlugin {
       ...defaultOptions,
       ...this.getOptions(),
     };
+
+    this.offset = null;
+    this.mirror = null;
+    this.overContainer = null;
+    this.relativePoints = null;
 
     this[onMirrorCreated] = this[onMirrorCreated].bind(this);
     this[onMirrorDestroy] = this[onMirrorDestroy].bind(this);
@@ -117,8 +122,9 @@ export default class SnapMirror extends AbstractPlugin {
    */
   [onMirrorDestroy]() {
     this.offset = null;
+    this.mirror = null;
     this.relativePoints = null;
-    this.startPoint = null;
+    this.overContainer = null;
   }
 
   /**
@@ -127,7 +133,7 @@ export default class SnapMirror extends AbstractPlugin {
    * @private
    */
   [onMirrorMove](evt) {
-    if (!this.overContainer) {
+    if (!this.overContainer || evt.canceled()) {
       return;
     }
 
@@ -136,15 +142,14 @@ export default class SnapMirror extends AbstractPlugin {
       if (!this.overContainer) {
         return;
       }
-      // console.log(evt.originalEvent.pageY, evt.originalEvent.pageX);
-      // console.log(this.overContainer.scrollTop, this.overContainer.scrollLeft);
-      // console.log(this.overContainer.offsetTop, this.overContainer.offsetLeft);
-      const nearest = this.getNearest({
+
+      const point = {
         // currentPageX - contianerOffset + contanierScroll + selfOffset
         x: evt.originalEvent.pageX + this.overContainer.scrollLeft - this.overContainer.offsetLeft + this.offset.x,
         y: evt.originalEvent.pageY + this.overContainer.scrollTop - this.overContainer.offsetTop + this.offset.y,
-      });
-      // console.log(nearest);
+      };
+      const nearest = this[getNearestSnapCoordinate](point);
+
       this.mirror.style.transform = `translate3d(${nearest.x}px, ${nearest.y}px, 0)`;
     });
   }
@@ -155,6 +160,9 @@ export default class SnapMirror extends AbstractPlugin {
    * @private
    */
   [onDragOverContainer](evt) {
+    if (evt.canceled()) {
+      return;
+    }
     this.overContainer = evt.overContainer;
     this.overContainer.append(this.mirror);
     this.mirror.style.position = 'absolute';
@@ -167,6 +175,9 @@ export default class SnapMirror extends AbstractPlugin {
    * @private
    */
   [onDragOutContainer](evt) {
+    if (evt.canceled()) {
+      return;
+    }
     this.overContainer = null;
     evt.sourceContainer.append(this.mirror);
     this.mirror.style.position = 'fixed';
@@ -228,6 +239,8 @@ export default class SnapMirror extends AbstractPlugin {
 }
 
 SnapMirror.grid = grid;
+
+SnapMirror.line = line;
 
 SnapMirror.inRectRange = function(range) {
   return function(target, coord) {

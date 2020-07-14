@@ -201,6 +201,7 @@ function mockDimensions(element, [top, right, bottom, left]) {
     node.getBoundingClientRect = function() {
       return element.getBoundingClientRect();
     };
+    node.cloneNode = element.cloneNode;
     return node;
   };
 

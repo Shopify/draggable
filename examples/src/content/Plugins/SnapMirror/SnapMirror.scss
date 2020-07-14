@@ -16,6 +16,7 @@
       .Block {
         width: 150px;
         height: 150px;
+        position: absolute;
       }
       &.draggable-container--over {
         .Workspace__grid {
@@ -45,23 +46,22 @@
       height: 64rem;
       border: 0.6rem solid #212529;
       overflow: auto;
-      .Block-wrapper {
-        display: flex;
-        .Block {
-          width: 50px;
-          height: 50px;
-        }
-        .Block:nth-child(1) {
-        }
-        .Block:nth-child(2) {
-        }
-        .Block:nth-child(3) {
-        }
-        .Block:nth-child(4) {
-        }
-        .Block:nth-child(5) {
-        }
-        .Block:nth-child(6) {
+
+      .Block--isDraggable {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        z-index: 2;
+      }
+
+      $colors: purple palegoldenrod silver pink orange aqua;
+      $i: 0;
+      @each $color in $colors {
+        $i: $i + 1;
+        .Block--isDraggable:nth-child(#{$i}) {
+          .BlockContent {
+            border-color: $color;
+          }
         }
       }
 
@@ -75,23 +75,11 @@
           top: 50%;
           left: 50%;
         }
-        .Block--typeHollow:nth-last-child(1) {
-          transform: rotate(60deg) translateX(200px) rotate(-60deg);
-        }
-        .Block--typeHollow:nth-last-child(2) {
-          transform: rotate(120deg) translateX(200px) rotate(-120deg);
-        }
-        .Block--typeHollow:nth-last-child(3) {
-          transform: rotate(180deg) translateX(200px) rotate(-180deg);
-        }
-        .Block--typeHollow:nth-last-child(4) {
-          transform: rotate(240deg) translateX(200px) rotate(-240deg);
-        }
-        .Block--typeHollow:nth-last-child(5) {
-          transform: rotate(300deg) translateX(200px) rotate(-300deg);
-        }
-        .Block--typeHollow:nth-last-child(6) {
-          transform: rotate(360deg) translateX(200px) rotate(-360deg);
+
+        @for $i from 0 to 6 {
+          .Block--typeHollow:nth-child(#{$i + 1}) {
+            transform: rotate($i * 60deg) translateX(200px) rotate($i * -60deg);
+          }
         }
       }
     }

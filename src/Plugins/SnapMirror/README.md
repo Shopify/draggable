@@ -47,29 +47,24 @@ Target options:
 | `y`     | `number` | The y coordinates of snap target relative to offset.                                                                    |
 | `range` | `number` | The range of a snap target is the distance the pointer must be from the target's coordinates for a snap to be possible. |
 
-<!--
-no longer need
-**`offset {string|Object}`**
-A string `container` or an object with `x` and `y` properties.
-The `offset` option lets you shift the coordinates of the targets.
-
-If using `container`, offset will set to the upper left corner coordinates of the current source container.
--->
-
 **`relativePoints {Array<Object>}`**  
 An object with `x` and `y` properties.  
 The `relativePoints` option lets you set where the dragging mirror element should snap.
 
-**`range {Object|Function}`**  
+**`range {number}`**  
 The `range` option lets you set the default range for all targets.
 
 ### Global Method
 
-**`grid(option: Object)`**  
+**`grid(Object)`**  
 You can use the `SnapMirror.grid()` method to create a target that snaps to a grid.  
 The method takes an object describing a grid and returns a function that snaps to the corners of that grid.
 
-**`inRectRange(range: Array)`**
+**`line(Object)`**
+You can use the `SnapMirror.line()` method to create a target that snaps to a line.  
+The method takes an object describing a line and returns a function that snaps to the line.
+
+**`inRectRange(Array)`**
 You can use the `SnapMirror.rectRange()` method check if a point in ract Range.
 
 ### Examples

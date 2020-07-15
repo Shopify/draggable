@@ -138,6 +138,85 @@ describe('SnapMirror', () => {
     releaseMouse(item1);
   });
 
+  it('SnapMirror.line() with x option', async () => {
+    draggable = new Draggable(containers, {
+      draggable: 'li',
+      plugins: [SnapMirror],
+      SnapMirror: {
+        targets: [SnapMirror.line({x: 50})],
+      },
+    });
+
+    clickMouse(item1, {pageX: 10, pageY: 10});
+    waitForDragDelay();
+    waitForRequestAnimationFrame();
+    await waitForPromisesToResolve();
+    const mirror = document.querySelector('.draggable-mirror');
+
+    moveMouse(item1, {pageX: 20, pageY: 10});
+    await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+    expect(mirror.style.transform).toBe('translate3d(50px, 10px, 0)');
+
+    moveMouse(item1, {pageX: 440, pageY: 550});
+    await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+    expect(mirror.style.transform).toBe('translate3d(50px, 550px, 0)');
+
+    releaseMouse(item1);
+  });
+
+  it('SnapMirror.line() with y option', async () => {
+    draggable = new Draggable(containers, {
+      draggable: 'li',
+      plugins: [SnapMirror],
+      SnapMirror: {
+        targets: [SnapMirror.line({y: 50})],
+      },
+    });
+
+    clickMouse(item1, {pageX: 10, pageY: 10});
+    waitForDragDelay();
+    waitForRequestAnimationFrame();
+    await waitForPromisesToResolve();
+    const mirror = document.querySelector('.draggable-mirror');
+
+    moveMouse(item1, {pageX: 20, pageY: 10});
+    await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+    expect(mirror.style.transform).toBe('translate3d(20px, 50px, 0)');
+
+    moveMouse(item1, {pageX: 440, pageY: 550});
+    await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+    expect(mirror.style.transform).toBe('translate3d(440px, 50px, 0)');
+
+    releaseMouse(item1);
+  });
+
+  it('SnapMirror.line() with x and y options', async () => {
+    draggable = new Draggable(containers, {
+      draggable: 'li',
+      plugins: [SnapMirror],
+      SnapMirror: {
+        targets: [SnapMirror.line({x: 30, y: 50})],
+      },
+    });
+
+    clickMouse(item1, {pageX: 10, pageY: 10});
+    waitForDragDelay();
+    waitForRequestAnimationFrame();
+    await waitForPromisesToResolve();
+    const mirror = document.querySelector('.draggable-mirror');
+
+    moveMouse(item1, {pageX: 20, pageY: 10});
+    await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+    expect(mirror.style.transform).toBe('translate3d(23px, 12px, 0)');
+
+    releaseMouse(item1);
+  });
+
   it('SnapMirror.inRectRange()', async () => {
     draggable = new Draggable(containers, {
       draggable: 'li',

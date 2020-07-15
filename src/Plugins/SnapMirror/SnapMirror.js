@@ -150,7 +150,7 @@ export default class SnapMirror extends AbstractPlugin {
       };
       const nearest = this[getNearestSnapCoordinate](point);
 
-      this.mirror.style.transform = `translate3d(${nearest.x}px, ${nearest.y}px, 0)`;
+      this.mirror.style.transform = `translate3d(${Math.round(nearest.x)}px, ${Math.round(nearest.y)}px, 0)`;
     });
   }
 

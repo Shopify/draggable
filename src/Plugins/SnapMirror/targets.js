@@ -28,10 +28,28 @@ export function line(options) {
       return result;
     }
 
-    // TOD0: P1(0, a) P2(b, 0) P3(c, d) -> P(x, y)
-    result.x = x;
-    result.y = y;
+    const intersection = verticalIntersection(options, {x, y});
+
+    result.x = intersection.x;
+    result.y = intersection.y;
 
     return result;
+  };
+}
+
+/**
+ * Get the coordinates of the foot of perpendicular of the given point on the given line
+ * @param {*} intercepts x-intercept and y-intercept of the line
+ * @param {*} point the given point
+ *
+ * line: y = b - (b / a) * x
+ * perpendicular on the point: (y - d) / (x - c) = a / b
+ */
+function verticalIntersection({x: a, y: b}, {x: c, y: d}) {
+  const x = (a * a * c + a * b * b - a * d * b) / (a * a + b * b);
+  const y = b - (b / a) * x;
+  return {
+    x,
+    y,
   };
 }

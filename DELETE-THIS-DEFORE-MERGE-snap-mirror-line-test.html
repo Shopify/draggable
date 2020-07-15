@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .container {
+      position: relative;
+      width: 600px;
+      height: 600px;
+      background: gray;
+    }
+
+    .item {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      background: aquamarine;
+      z-index: 1;
+    }
+
+    #canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 600px;
+      height: 600px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <canvas id="canvas" width="600" height="600"></canvas>
+    <div class="item"></div>
+  </div>
+</body>
+<script src="./examples/packages/@shopify/draggable/index.js"></script>
+<script>
+  const { Draggable: DraggableClass, Plugins } = window.Draggable
+
+  const draggable = new DraggableClass(document.querySelectorAll(".container"), {
+    draggable: '.item',
+    mirror: {
+      constrainDimensions: true,
+    },
+    plugins: [Plugins.SnapMirror],
+    SnapMirror: {
+      targets: [
+        Plugins.SnapMirror.line({ x: 100, range: 50 }),
+        Plugins.SnapMirror.line({ y: 100, range: 50 }),
+        Plugins.SnapMirror.line({ x: 300, y: 500, range: 50 })],
+    },
+  });
+
+
+  const ctx = document.getElementById("canvas").getContext('2d');
+  console.log(ctx);
+
+  ctx.moveTo(100, 0)
+  ctx.lineTo(100, 500)
+  ctx.lineTo(101, 500)
+  ctx.fill();
+
+  ctx.moveTo(0, 100)
+  ctx.lineTo(500, 100)
+  ctx.lineTo(500, 101)
+  ctx.fill();
+
+  ctx.moveTo(300, 0)
+  ctx.lineTo(0, 500)
+  ctx.lineTo(0, 501)
+  ctx.lineTo(301, 0)
+  ctx.fill();
+</script>
+
+</html>

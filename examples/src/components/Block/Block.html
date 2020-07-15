@@ -15,8 +15,8 @@
   {% set classes = classes | join(' ') | trim %}
 
   {% if options.draggable %}
-    {% set openingTag = '<a href="#" class="' + classes + '" title="Click to drag">' %}
-    {% set closingTag = '</a>' %}
+    {% set openingTag = '<span class="' + classes + '" title="Click to drag">' %}
+    {% set closingTag = '</span>' %}
   {% else %}
     {% set openingTag = '<span class="' + classes + '">' %}
     {% set closingTag = '</span>' %}

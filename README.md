@@ -13,12 +13,6 @@
 
 **We are still looking for more maintainers!** If anyone is interested in answering / triaging issues, reviewing / rejecting / approving PRs, and authoring code for bug fixes / new features — please send an email to `curtis.dulmage (at) shopify (dot) com`. You may be asked a few questions before obtaining collaboration permission, but if everything checks out, we will happily add you as a collaborator.
 
-**Current maintainers are:**
-
-- [@fdietze](https://github.com/fdietze)
-
-Please ping the above handles when putting up PRs.
-
 ---
 
 Get complete control over drag and drop behaviour with Draggable! Draggable abstracts

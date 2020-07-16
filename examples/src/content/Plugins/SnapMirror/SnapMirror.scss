@@ -8,20 +8,21 @@
 
 .SnapMirror {
   .Workspace {
+    $size: 50px;
+    $border-width: 0.3rem;
     &.BlockLayout--typePositioned {
       height: 32rem;
       border: 0.6rem solid #212529;
       overflow: auto;
 
       .Block {
-        width: 150px;
-        height: 150px;
+        width: calc(#{3 * $size} + #{$border-width});
+        height: calc(#{3 * $size} + #{$border-width});
         position: absolute;
       }
+
       &.draggable-container--over {
         .Workspace__grid {
-          $size: 50px;
-          $border-width: 0.3rem;
           background: linear-gradient(180deg, #00f 0, #00f $border-width, transparent 0, transparent $size) 0px 0px /
               100% $size repeat-y,
             linear-gradient(90deg, #00f 0, #00f $border-width, transparent 0, transparent $size) 0px 0px / #{$size} 100%
@@ -31,8 +32,6 @@
     }
 
     &__grid {
-      $size: 50px;
-      $border-width: 0.3rem;
       width: 1500px;
       height: 1000px;
       background: linear-gradient(180deg, #000 0, #000 $border-width, transparent 0, transparent $size) 0px 0px / 100%
@@ -41,46 +40,36 @@
     }
   }
 
-  .MLP {
+  .CircleRange {
     &.BlockLayout--typePositioned {
       height: 64rem;
       border: 0.6rem solid #212529;
       overflow: auto;
 
       .Block--isDraggable {
-        width: 50px;
-        height: 50px;
         position: absolute;
+        width: 20rem;
+        height: 20rem;
         z-index: 2;
       }
 
-      $colors: purple palegoldenrod silver pink orange aqua;
-      $i: 0;
-      @each $color in $colors {
-        $i: $i + 1;
-        .Block--isDraggable:nth-child(#{$i}) {
-          .BlockContent {
-            border-color: $color;
-          }
-        }
+      .Block--typeHollow {
+        position: absolute;
+        top: calc(50% - 10rem);
+        left: calc(50% - 10rem);
+        width: 20rem;
+        height: 20rem;
       }
 
-      .Hollow-wrapper {
-        position: relative;
-        height: 500px;
-        .Block--typeHollow {
-          width: 50px;
-          height: 50px;
-          position: absolute;
-          top: 50%;
-          left: 50%;
-        }
-
-        @for $i from 0 to 6 {
-          .Block--typeHollow:nth-child(#{$i + 1}) {
-            transform: rotate($i * 60deg) translateX(200px) rotate($i * -60deg);
-          }
-        }
+      .circle {
+        position: absolute;
+        top: calc(50% - 25rem);
+        left: calc(50% - 25rem);
+        width: 50rem;
+        height: 50rem;
+        border: 3px solid #000;
+        border-radius: 50%;
+        content: '';
       }
     }
   }

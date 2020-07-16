@@ -61,6 +61,7 @@ describe('SnapMirror', () => {
     waitForDragDelay();
     waitForRequestAnimationFrame();
     await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
     const mirror = document.querySelector('.draggable-mirror');
 
     moveMouse(item1, {pageX: 50, pageY: 10});
@@ -90,6 +91,7 @@ describe('SnapMirror', () => {
     waitForDragDelay();
     waitForRequestAnimationFrame();
     await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
     const mirror = document.querySelector('.draggable-mirror');
 
     moveMouse(item1, {pageX: 50, pageY: 50});
@@ -113,6 +115,7 @@ describe('SnapMirror', () => {
     waitForDragDelay();
     waitForRequestAnimationFrame();
     await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
     const mirror = document.querySelector('.draggable-mirror');
 
     moveMouse(item1, {pageX: 20, pageY: 10});
@@ -151,6 +154,7 @@ describe('SnapMirror', () => {
     waitForDragDelay();
     waitForRequestAnimationFrame();
     await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
     const mirror = document.querySelector('.draggable-mirror');
 
     moveMouse(item1, {pageX: 20, pageY: 10});
@@ -179,6 +183,7 @@ describe('SnapMirror', () => {
     waitForDragDelay();
     waitForRequestAnimationFrame();
     await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
     const mirror = document.querySelector('.draggable-mirror');
 
     moveMouse(item1, {pageX: 20, pageY: 10});
@@ -207,6 +212,7 @@ describe('SnapMirror', () => {
     waitForDragDelay();
     waitForRequestAnimationFrame();
     await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
     const mirror = document.querySelector('.draggable-mirror');
 
     moveMouse(item1, {pageX: 20, pageY: 10});
@@ -230,6 +236,7 @@ describe('SnapMirror', () => {
     waitForDragDelay();
     waitForRequestAnimationFrame();
     await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
     const mirror = document.querySelector('.draggable-mirror');
 
     moveMouse(item1, {pageX: 70, pageY: 80});

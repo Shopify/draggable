@@ -1,23 +1,25 @@
 // eslint-disable-next-line import/no-unresolved
 import {Draggable, Plugins} from '@shopify/draggable';
 
-function initMLP() {
-  const container = document.querySelector('#SnapMirror .BlockLayout.MLP');
+function initCircle() {
+  const container = document.querySelector('#SnapMirror .BlockLayout.CircleRange');
   const containerRect = container.getBoundingClientRect();
+  const circleRect = document.querySelector('.circle').getBoundingClientRect();
 
   const targets = [];
   [...document.querySelectorAll('.Block--typeHollow')].forEach((star) => {
     const rect = star.getBoundingClientRect();
-    let range = Plugins.SnapMirror.inRectRange([15, 25, 25, 15]);
-    if (star.classList.contains('star1')) {
-      range = Plugins.SnapMirror.inRectRange([Infinity, Infinity, Infinity, Infinity]);
-    }
-    if (star.classList.contains('star2')) {
-      range = 20;
-    }
-    targets.push({x: rect.x + 20 - containerRect.x, y: rect.y + 20 - containerRect.y, range});
+    const range = circleRect.width / 2;
+    targets.push({
+      x: rect.x - containerRect.x + rect.width / 2,
+      y: rect.y - containerRect.y + rect.width / 2,
+      range(coord, target, relativePoint, {eventOffset}) {
+        return (coord.x + eventOffset.x - target.x) ** 2 + (coord.y + eventOffset.y - target.y) ** 2 < range ** 2;
+      },
+    });
   });
 
+  console.log(targets);
   const draggable = new Draggable([container], {
     draggable: '.Block--isDraggable',
     mirror: {
@@ -37,8 +39,10 @@ function initMLP() {
   });
 
   draggable.on('mirror:destroy', (evt) => {
+    if (evt.mirror.style.position !== 'absolute') {
+      return;
+    }
     originalSource.style.transform = evt.mirror.style.transform;
-    console.log(evt);
   });
 
   return draggable;
@@ -70,8 +74,10 @@ function initWorkspace() {
   });
 
   draggable.on('mirror:destroy', (evt) => {
+    if (evt.mirror.style.position !== 'absolute') {
+      return;
+    }
     originalSource.style.transform = evt.mirror.style.transform;
-    console.log(evt);
   });
 
   return draggable;
@@ -79,7 +85,7 @@ function initWorkspace() {
 
 export default function PluginsSnapMirror() {
   const workspaceDraggable = initWorkspace();
-  const MLPDraggable = initMLP();
+  const CircleDraggable = initCircle();
 
-  return [workspaceDraggable, MLPDraggable];
+  return [workspaceDraggable, CircleDraggable];
 }

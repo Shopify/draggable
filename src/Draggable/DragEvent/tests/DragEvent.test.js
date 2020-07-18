@@ -8,6 +8,7 @@ import {
   DragPressureEvent,
   DragStartEvent,
   DragStopEvent,
+  DragStoppedEvent,
 } from '../DragEvent';
 
 describe('DragEvent', () => {
@@ -256,6 +257,22 @@ describe('DragStopEvent', () => {
       const event = new DragStopEvent();
 
       expect(event.type).toBe('drag:stop');
+    });
+  });
+});
+
+describe('DragStoppedEvent', () => {
+  describe('#constructor', () => {
+    it('should be instance of DragStoppedEvent', () => {
+      const event = new DragStoppedEvent();
+
+      expect(event).toBeInstanceOf(DragStoppedEvent);
+    });
+
+    it('should initialize with `type` of `drag:stopped`', () => {
+      const event = new DragStoppedEvent();
+
+      expect(event.type).toBe('drag:stopped');
     });
   });
 });

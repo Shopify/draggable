@@ -15,6 +15,7 @@ import {
   DragOverEvent,
   DragStopEvent,
   DragPressureEvent,
+  DragStoppedEvent,
 } from './DragEvent';
 
 const onDragStart = Symbol('onDragStart');
@@ -589,6 +590,15 @@ export default class Draggable {
       this.lastPlacedSource = null;
       this.lastPlacedContainer = null;
     }, this.options.placedTimeout);
+
+    const dragStoppedEvent = new DragStoppedEvent({
+      source: this.source,
+      originalSource: this.originalSource,
+      sensorEvent: event.sensorEvent,
+      sourceContainer: this.sourceContainer,
+    });
+
+    this.trigger(dragStoppedEvent);
 
     this.source = null;
     this.originalSource = null;

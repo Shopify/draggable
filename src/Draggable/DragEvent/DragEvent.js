@@ -225,3 +225,13 @@ export class DragPressureEvent extends DragEvent {
 export class DragStopEvent extends DragEvent {
   static type = 'drag:stop';
 }
+
+/**
+ * Drag stopped event
+ * @class DragStoppedEvent
+ * @module DragStoppedEvent
+ * @extends DragEvent
+ */
+export class DragStoppedEvent extends DragEvent {
+  static type = 'drag:stopped';
+}

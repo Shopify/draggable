@@ -42,6 +42,8 @@ declare module '@shopify/draggable' {
         ? DragOutContainerEvent
         : eventName extends 'drag:stop'
         ? DragStopEvent
+        : eventName extends 'drag:stopped'
+        ? DragStoppedEvent
         : eventName extends 'drag:pressure'
         ? DragPressureEvent
         : eventName extends 'mirror:create'
@@ -123,6 +125,8 @@ declare module '@shopify/draggable' {
     }
 
     export class DragStopEvent extends DragEvent { }
+
+    export class DragStoppedEvent extends DragEvent { }
 
     /**
      * DraggableEvent

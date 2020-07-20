@@ -2,7 +2,9 @@ function toHaveTriggeredSensorEvent(received, expectedEventName, count) {
   let triggered = false;
   let callCount = 0;
   function callback() {
-    count !== undefined && (callCount = callCount + 1);
+    if (count !== undefined) {
+      callCount++;
+    }
     triggered = true;
   }
 

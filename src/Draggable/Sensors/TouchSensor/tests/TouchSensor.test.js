@@ -26,9 +26,12 @@ describe('TouchSensor', () => {
     touchSensor.detach();
     sandbox.parentNode.removeChild(sandbox);
   }
+
   describe('common', () => {
     beforeEach(setup);
+
     afterEach(teardown);
+
     it('cancels `drag:start` event when canceling sensor event', () => {
       sandbox.addEventListener('drag:start', (event) => {
         event.detail.cancel();
@@ -51,6 +54,7 @@ describe('TouchSensor', () => {
 
       expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
     });
+
     it('prevents context menu while dragging', () => {
       touchStart(draggableElement);
       let contextMenuEvent = triggerEvent(draggableElement, 'contextmenu');
@@ -94,12 +98,14 @@ describe('TouchSensor', () => {
       expect(touchEndEvent.defaultPrevented).toBe(true);
     });
   });
+
   describe('using distance', () => {
     beforeEach(() => {
       setup({delay: 0, distance: 1});
     });
 
     afterEach(teardown);
+
     it('does not trigger `drag:start` before distance has been travelled', () => {
       function dragFlow() {
         touchStart(draggableElement);
@@ -153,6 +159,7 @@ describe('TouchSensor', () => {
     beforeEach(() => {
       setup({delay: DRAG_DELAY, distance: 0});
     });
+
     afterEach(teardown);
 
     it('does not trigger `drag:start` before delay ends', () => {
@@ -210,6 +217,7 @@ describe('TouchSensor', () => {
     beforeEach(() => {
       setup({delay: DRAG_DELAY, distance: 1});
     });
+
     afterEach(teardown);
 
     it('does not trigger `drag:start` before delay ends', () => {

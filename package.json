@@ -34,7 +34,7 @@
     "watch": "node scripts/watch.js",
     "prepare": "yarn build:development",
     "prepublishOnly": "yarn build:production",
-    "lint": "eslint ./src --max-warnings 0",
+    "lint": "eslint ./src ./scripts --max-warnings 0",
     "esdoc": "esdoc -c esdoc.json",
     "test": "jest --config config.json",
     "test-ci": "jest --config config.json --coverage && codecov",

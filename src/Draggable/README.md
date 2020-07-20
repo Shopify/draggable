@@ -112,6 +112,7 @@ Allow excluding default plugins and default sensors. Use with caution as it may 
 | [`drag:out`][dragout]                      | Gets fired when dragging out of other draggable           | false      | -                   |
 | [`drag:out:container`][dragoutcontainer]   | Gets fired when dragging out of other draggable container | false      | -                   |
 | [`drag:stop`][dragstop]                    | Gets fired when draggable has been released               | false      | -                   |
+| [`drag:stopped`][dragstopped]              | Gets fired when draggable finished                        | false      | -                   |
 | [`drag:pressure`][dragpressure]            | Gets fired when using force touch on draggable element    | false      | -                   |
 
 [draggableinit]: DraggableEvent#draggableinitializedevent
@@ -123,6 +124,7 @@ Allow excluding default plugins and default sensors. Use with caution as it may 
 [dragout]: DragEvent#dragoutevent
 [dragoutcontainer]: DragEvent#dragoutcontainerevent
 [dragstop]: DragEvent#dragstopevent
+[dragstopped]: DragEvent#dragstoppedevent
 [dragpressure]: DragEvent#dragpressureevent
 
 ### Classes

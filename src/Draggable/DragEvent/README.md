@@ -163,3 +163,16 @@ Read-only property for pressure applied on a draggable element. Value ranges fro
 | **Cancelable**    | false           |
 | **Cancel action** | -               |
 | **type**          | `drag:stop`     |
+
+## DragStoppedEvent
+
+`DragStoppedEvent` gets triggered after `DragStopEvent`. This event fires after `drag:stop` listeners have finished running,
+the source element removed from the document and draggable classes are removed.
+
+|                   |                    |
+| ----------------- | ------------------ |
+| **Specification** | `DragEvent`        |
+| **Interface**     | `DragStoppedEvent` |
+| **Cancelable**    | false              |
+| **Cancel action** | -                  |
+| **type**          | `drag:stopped`     |

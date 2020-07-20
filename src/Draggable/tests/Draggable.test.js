@@ -9,7 +9,7 @@ import {
   waitForRequestAnimationFrame,
 } from 'helper';
 import Draggable, {defaultOptions} from '../Draggable';
-import {DragStartEvent, DragMoveEvent, DragStopEvent} from '../DragEvent';
+import {DragStartEvent, DragMoveEvent, DragStopEvent, DragStoppedEvent} from '../DragEvent';
 import {DraggableInitializedEvent, DraggableDestroyEvent} from '../DraggableEvent';
 import {Focusable, Mirror, Scrollable, Announcement} from '../Plugins';
 import {MouseSensor, TouchSensor} from '../Sensors';
@@ -607,6 +607,30 @@ describe('Draggable', () => {
     expect(call).toBeInstanceOf(DragStopEvent);
   });
 
+  it('triggers `drag:stopped` drag event on mouseup', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
+    const draggableElement = sandbox.querySelector('li');
+    document.elementFromPoint = () => draggableElement;
+
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
+
+    // Wait for delay
+    waitForDragDelay();
+
+    const callback = jest.fn();
+    newInstance.on('drag:stopped', callback);
+
+    triggerEvent(draggableElement, 'mouseup', {button: 0});
+
+    const call = callback.mock.calls[0][0];
+
+    expect(call.type).toBe('drag:stopped');
+
+    expect(call).toBeInstanceOf(DragStoppedEvent);
+  });
+
   it('adds `source:dragging` classname to draggable element on mousedown', () => {
     const newInstance = new Draggable(containers, {
       draggable: 'li',
@@ -880,5 +904,26 @@ describe('Draggable', () => {
     waitForDragDelay(100);
 
     triggerEvent(document.body, 'mouseup', {button: 0});
+  });
+
+  describe('when `drag:stopped`', () => {
+    it('source element was removed from document', () => {
+      const newInstance = new Draggable(containers, {
+        draggable: 'li',
+      });
+      const draggableElement = sandbox.querySelector('li');
+      document.elementFromPoint = () => draggableElement;
+
+      newInstance.on('drag:stopped', (event) => {
+        expect(event.source.parentNode).toBeNull();
+      });
+
+      clickMouse(draggableElement);
+
+      // Wait for delay
+      waitForDragDelay();
+
+      releaseMouse(newInstance.source);
+    });
   });
 });

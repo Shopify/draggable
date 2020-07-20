@@ -494,4 +494,23 @@ describe('Mirror', () => {
 
     releaseMouse(draggable.source);
   });
+
+  describe('when `drag:stopped`', () => {
+    it('mirror element was removed from document', async () => {
+      draggable = new Draggable(container, draggableOptions);
+
+      clickMouse(draggableElement);
+      waitForDragDelay();
+
+      await waitForPromisesToResolve();
+
+      const mirrorElement = document.querySelector('.draggable-mirror');
+
+      draggable.on('drag:stopped', () => {
+        expect(mirrorElement.parentNode).toBeNull();
+      });
+
+      releaseMouse(draggable.source);
+    });
+  });
 });

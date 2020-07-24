@@ -97,6 +97,31 @@ describe('TouchSensor', () => {
 
       expect(touchEndEvent.defaultPrevented).toBe(true);
     });
+
+    it('event attributes should be set correctly', () => {
+      const touchEvent = {
+        pageX: 21,
+        pageY: 22,
+        clientX: 11,
+        clientY: 12,
+      };
+
+      function testAttributes(event) {
+        expect(event.detail.clientX).toBe(touchEvent.clientX);
+        expect(event.detail.clientY).toBe(touchEvent.clientY);
+      }
+
+      sandbox.addEventListener('drag:start', testAttributes);
+
+      sandbox.addEventListener('drag:move', testAttributes);
+
+      sandbox.addEventListener('drag:stop', testAttributes);
+
+      touchStart(draggableElement, {touches: [touchEvent]});
+      waitForDragDelay();
+      touchMove(draggableElement, {touches: [touchEvent]});
+      touchRelease(draggableElement, {touches: [touchEvent]});
+    });
   });
 
   describe('using distance', () => {

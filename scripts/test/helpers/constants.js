@@ -1,6 +1,8 @@
 export const defaultTouchEventOptions = {
   touches: [
     {
+      clientX: 0,
+      clientY: 0,
       pageX: 0,
       pageY: 0,
     },

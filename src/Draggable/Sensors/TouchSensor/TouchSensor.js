@@ -140,11 +140,11 @@ export default class TouchSensor extends Sensor {
   [startDrag]() {
     const startEvent = this.startEvent;
     const container = this.currentContainer;
-    const touch = touchCoords(startEvent);
+    const {clientX, clientY} = touchCoords(startEvent);
 
     const dragStartEvent = new DragStartSensorEvent({
-      clientX: touch.pageX,
-      clientY: touch.pageY,
+      clientX,
+      clientY,
       target: startEvent.target,
       container,
       originalEvent: startEvent,
@@ -190,12 +190,12 @@ export default class TouchSensor extends Sensor {
     if (!this.dragging) {
       return;
     }
-    const {pageX, pageY} = touchCoords(event);
+    const {clientX, clientY, pageX, pageY} = touchCoords(event);
     const target = document.elementFromPoint(pageX - window.scrollX, pageY - window.scrollY);
 
     const dragMoveEvent = new DragMoveSensorEvent({
-      clientX: pageX,
-      clientY: pageY,
+      clientX,
+      clientY,
       target,
       container: this.currentContainer,
       originalEvent: event,
@@ -227,14 +227,14 @@ export default class TouchSensor extends Sensor {
 
     document.removeEventListener('touchmove', this[onTouchMove]);
 
-    const {pageX, pageY} = touchCoords(event);
+    const {clientX, clientY, pageX, pageY} = touchCoords(event);
     const target = document.elementFromPoint(pageX - window.scrollX, pageY - window.scrollY);
 
     event.preventDefault();
 
     const dragStopEvent = new DragStopSensorEvent({
-      clientX: pageX,
-      clientY: pageY,
+      clientX,
+      clientY,
       target,
       container: this.currentContainer,
       originalEvent: event,

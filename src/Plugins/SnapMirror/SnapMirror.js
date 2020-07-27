@@ -50,7 +50,7 @@ export default class SnapMirror extends AbstractPlugin {
       ...this.getOptions(),
     };
 
-    this.eventOffset = null;
+    this.pointInMirrorCoordinate = null;
     this.mirror = null;
     this.overContainer = null;
     this.relativePoints = null;
@@ -106,7 +106,7 @@ export default class SnapMirror extends AbstractPlugin {
     // so use source's dimensions
     const rect = evt.source.getBoundingClientRect();
 
-    this.eventOffset = {
+    this.pointInMirrorCoordinate = {
       x: evt.sensorEvent.clientX - rect.x,
       y: evt.sensorEvent.clientY - rect.y,
     };
@@ -122,7 +122,7 @@ export default class SnapMirror extends AbstractPlugin {
   [onMirrorDestroy]() {
     cancelAnimationFrame(this.lastAnimationFrame);
     this.lastAnimationFrame = null;
-    this.eventOffset = null;
+    this.pointInMirrorCoordinate = null;
     this.mirror = null;
     this.relativePoints = null;
     this.overContainer = null;
@@ -151,7 +151,7 @@ export default class SnapMirror extends AbstractPlugin {
 
     cancelAnimationFrame(this.lastAnimationFrame);
     this.lastAnimationFrame = requestAnimationFrame(() => {
-      positionMirror(evt.originalEvent, this);
+      positionMirror(evt.sensorEvent, this);
       this.lastAnimationFrame = null;
     });
   }
@@ -166,13 +166,16 @@ export default class SnapMirror extends AbstractPlugin {
       return;
     }
     this.overContainer = evt.overContainer;
+    const rect = evt.overContainer.getBoundingClientRect();
+    this.overContainer.pageX = window.scrollX + rect.x;
+    this.overContainer.pageY = window.scrollY + rect.y;
 
     cancelAnimationFrame(this.lastAnimationFrame);
     this.lastAnimationFrame = requestAnimationFrame(() => {
       this.overContainer.append(this.mirror);
       this[calcRelativePoints]();
       this.mirror.style.position = 'absolute';
-      positionMirror(evt.originalEvent, this);
+      positionMirror(evt.sensorEvent, this);
       this.lastAnimationFrame = null;
     });
   }
@@ -192,7 +195,7 @@ export default class SnapMirror extends AbstractPlugin {
     this.lastAnimationFrame = requestAnimationFrame(() => {
       evt.sourceContainer.append(this.mirror);
       this.mirror.style.position = 'fixed';
-      positionMirror(evt.originalEvent, this);
+      positionMirror(evt.sensorEvent, this);
       cancelAnimationFrame(this.lastAnimationFrame);
       this.lastAnimationFrame = null;
     });
@@ -212,27 +215,28 @@ export default class SnapMirror extends AbstractPlugin {
   }
 }
 
-function positionMirror(mouseMoveEvent, snapMirror) {
-  const {mirror, overContainer, eventOffset} = snapMirror;
+function positionMirror(sensorEvent, snapMirror) {
+  const {mirror, overContainer, pointInMirrorCoordinate} = snapMirror;
 
   if (!overContainer) {
     // point relative to client and event offset
     const point = {
-      x: mouseMoveEvent.clientX - eventOffset.x,
-      y: mouseMoveEvent.clientY - eventOffset.y,
+      x: sensorEvent.clientX - pointInMirrorCoordinate.x,
+      y: sensorEvent.clientY - pointInMirrorCoordinate.y,
     };
     mirror.style.transform = `translate3d(${Math.round(point.x)}px, ${Math.round(point.y)}px, 0)`;
     return;
   }
 
   const pointRelativeToPage = {
-    x: mouseMoveEvent.pageX - eventOffset.x,
-    y: mouseMoveEvent.pageY - eventOffset.y,
+    x: sensorEvent.pageX - pointInMirrorCoordinate.x,
+    y: sensorEvent.pageY - pointInMirrorCoordinate.y,
   };
   const pointRelativeToContainer = {
-    x: pointRelativeToPage.x + overContainer.scrollLeft - overContainer.offsetLeft,
-    y: pointRelativeToPage.y + overContainer.scrollTop - overContainer.offsetTop,
+    x: pointRelativeToPage.x + overContainer.scrollLeft - overContainer.pageX,
+    y: pointRelativeToPage.y + overContainer.scrollTop - overContainer.pageY,
   };
+
   const point = getNearestSnapPoint(pointRelativeToContainer, snapMirror);
   mirror.style.transform = `translate3d(${Math.round(point.x)}px, ${Math.round(point.y)}px, 0)`;
 }

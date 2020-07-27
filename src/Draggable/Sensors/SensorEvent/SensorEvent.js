@@ -38,6 +38,26 @@ export class SensorEvent extends AbstractEvent {
   }
 
   /**
+   * Normalized pageX for both touch and mouse events
+   * @property pageX
+   * @type {Number}
+   * @readonly
+   */
+  get pageX() {
+    return this.data.pageX;
+  }
+
+  /**
+   * Normalized pageY for both touch and mouse events
+   * @property pageY
+   * @type {Number}
+   * @readonly
+   */
+  get pageY() {
+    return this.data.pageY;
+  }
+
+  /**
    * Normalized target for both touch and mouse events
    * Returns the element that is behind cursor or touch pointer
    * @property target

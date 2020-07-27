@@ -13,8 +13,12 @@ function initCircle() {
     targets.push({
       x: rect.x - containerRect.x + rect.width / 2,
       y: rect.y - containerRect.y + rect.width / 2,
-      range(coord, target, relativePoint, {eventOffset}) {
-        return (coord.x + eventOffset.x - target.x) ** 2 + (coord.y + eventOffset.y - target.y) ** 2 < range ** 2;
+      range(coord, target, relativePoint, {pointInMirrorCoordinate}) {
+        return (
+          (coord.x + pointInMirrorCoordinate.x - target.x) ** 2 +
+            (coord.y + pointInMirrorCoordinate.y - target.y) ** 2 <
+          range ** 2
+        );
       },
     });
   });

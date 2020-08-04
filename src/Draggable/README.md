@@ -116,11 +116,11 @@ Allow excluding default plugins and default sensors. Use with caution as it may 
 | [`drag:pressure`][dragpressure]            | Gets fired when using force touch on draggable element    | false      | -                   |
 
 [draggableinit]: DraggableEvent#draggableinitializedevent
-[draggabledest]: DraggableEvent#draggabledestroydevent
+[draggabledest]: DraggableEvent#draggabledestroyevent
 [dragstart]: DragEvent#dragstartevent
 [dragmove]: DragEvent#dragmoveevent
 [dragover]: DragEvent#dragoverevent
-[dragovercontainer]: DragEvent#dragovercontainer
+[dragovercontainer]: DragEvent#dragovercontainerevent
 [dragout]: DragEvent#dragoutevent
 [dragoutcontainer]: DragEvent#dragoutcontainerevent
 [dragstop]: DragEvent#dragstopevent

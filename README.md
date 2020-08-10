@@ -126,6 +126,12 @@ You can find the documentation for each module within their respective directori
 - [Swappable](src/Swappable)
   - [SwappableEvent](src/Swappable/SwappableEvent)
 
+## TypeScript
+
+Draggable includes [TypeScript](http://typescriptlang.org) definitions.
+
+[Documentation](doc/typescript.md)
+
 ## Running examples
 
 To run the `examples` project locally, simply run the following from the `draggable` root:

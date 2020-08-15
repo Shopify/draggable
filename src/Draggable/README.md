@@ -1,21 +1,36 @@
 ## Draggable
 
-### Import
+### Usage
 
+- ES6:
 ```js
 import { Draggable } from '@shopify/draggable';
+// Or
+// import Draggable from '@shopify/draggable/lib/draggable';
+
+const draggable = new Draggable(document.querySelectorAll('ul'), {
+  draggable: 'li'
+});
 ```
 
-```js
-import Draggable from '@shopify/draggable/lib/draggable';
-```
-
+- Browser (All Bundle):
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+<script>
+    const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
+      draggable: 'li'
+    });
+</script>
 ```
 
+- Browser (Standalone):
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.js"></script>
+<script>
+    const draggable = new Draggable.default(document.querySelectorAll('ul'), {
+      draggable: 'li'
+    });
+</script>
 ```
 
 ### API

@@ -6,22 +6,58 @@ the easing function of the animation.
 
 This plugin is not included by default, so make sure to import it before using.
 
-### Import
+### Usage
 
+- ES6:
 ```js
-import { Plugins } from '@shopify/draggable';
+import { Sortable, Plugins } from "@shopify/draggable";
+// Or
+// import Sortable from '@shopify/draggable/lib/sortable';
+// import SwapAnimation from '@shopify/draggable/lib/plugins/swap-animation';
+
+
+const sortable = new Sortable(document.querySelectorAll('ul'), {
+  draggable: 'li',
+  swapAnimation: {
+    duration: 200,
+    easingFunction: 'ease-in-out',
+    horizontal: true
+  },
+  plugins: [Plugins.SwapAnimation] // Or [SwapAnimation]
+});
 ```
 
-```js
-import SwapAnimation from '@shopify/draggable/lib/plugins/swap-animation';
-```
-
+- Browser (All plugins bundle):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/plugins.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+<script>
+    const sortable = new Draggable.Sortable(document.querySelectorAll('ul'), {
+      draggable: 'li',
+      swapAnimation: {
+        duration: 200,
+        easingFunction: 'ease-in-out',
+        horizontal: true
+      },
+      plugins: [Draggable.Plugins.SwapAnimation]
+    });
+</script>
 ```
 
+- Browser (Standalone):
 ```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/sortable.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/plugins/swap-animation.js"></script>
+<script>
+    const sortable = new Sortable.default(document.querySelectorAll('ul'), {
+      draggable: 'li',
+      swapAnimation: {
+        duration: 200,
+        easingFunction: 'ease-in-out',
+        horizontal: true
+      },
+      plugins: [SwapAnimation.default]
+    });
+</script>
 ```
 
 ### API

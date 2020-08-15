@@ -3,22 +3,37 @@
 Swappable is built on top of Draggable and allows you to swap elements by dragging over them. No order will be maintained (unlike Sortable),
 so any draggable element that gets dragged over will be swapped with the source element.
 
-### Import
+### Usage
 
+- ES6:
 ```js
 import { Swappable } from '@shopify/draggable';
+// Or
+// import Swappable from '@shopify/draggable/lib/swappable';
+
+const swappable = new Swappable(document.querySelectorAll('ul'), {
+  draggable: 'li'
+});
 ```
 
-```js
-import Swappable from '@shopify/draggable/lib/swappable';
-```
-
+- Browser (All Bundle):
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+<script>
+    const swappable = new Draggable.Swappable(document.querySelectorAll('ul'), {
+      draggable: 'li'
+    });
+</script>
 ```
 
+- Browser (Standalone):
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/swappable.js"></script>
+<script>
+    const swappable = new Swappable.default(document.querySelectorAll('ul'), {
+      draggable: 'li'
+    });
+</script>
 ```
 
 ### API

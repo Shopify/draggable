@@ -48,17 +48,14 @@ Read-only property for the start container of the current draggable source.
 
 ### API
 
-**`sortableEvent.oldIndex: Number`**  
-Read-only property for the old index of the current draggable source.
+**`sortableEvent.currentIndex: Number`**  
+Read-only property for the index of the current draggable source.
 
-**`sortableEvent.newIndex: Number`**  
-Read-only property for the new index of the current draggable source.
+**`sortableEvent.over: HTMLElement`**  
+Read-only property for the draggable source you are hovering over.
 
-**`sortableEvent.oldContainer: HTMLElement`**  
-Read-only property for the old container of the current draggable source.
-
-**`sortableEvent.newContainer: HTMLElement`**  
-Read-only property for the new container of the current draggable source.
+**`sortableEvent.overContainer: HTMLElement`**  
+Read-only property for the container of the draggable source you are hovering over.
 
 ## SortableSortedEvent
 

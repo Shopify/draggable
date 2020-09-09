@@ -211,7 +211,7 @@ export default class DragSensor extends Sensor {
     this.mouseDownTimeout = setTimeout(() => {
       target.draggable = true;
       this.draggableElement = target;
-    }, this.options.delay);
+    }, this.delay.drag);
   }
 
   /**

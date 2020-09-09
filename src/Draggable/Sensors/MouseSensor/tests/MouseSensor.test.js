@@ -251,14 +251,17 @@ describe('MouseSensor', () => {
       expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
     });
 
-    it('only triggers `drag:start` sensor event once when delay ends after distance is met', () => {
+    it('does not trigger `drag:start` sensor event when moved during delay', () => {
       function dragFlow() {
         clickMouse(draggableElement);
         moveMouse(draggableElement, {pageY: 1, pageX: 0});
+        const dateMock = waitForDragDelay({restoreDateMock: false});
+        moveMouse(draggableElement, {pageY: 2, pageX: 0});
         waitForDragDelay();
         releaseMouse(document.body);
+        dateMock.mockRestore();
       }
-      expect(dragFlow).toHaveTriggeredSensorEvent('drag:start', 1);
+      expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start', 1);
     });
 
     it('only triggers `drag:start` sensor event once when distance and delay are met at the same time', () => {

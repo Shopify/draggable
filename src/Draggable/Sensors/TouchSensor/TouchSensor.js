@@ -111,7 +111,8 @@ export default class TouchSensor extends Sensor {
     if (!container) {
       return;
     }
-    const {distance = 0, delay = 0} = this.options;
+    const {distance = 0} = this.options;
+    const {delay} = this;
     const {pageX, pageY} = touchCoords(event);
 
     Object.assign(this, {pageX, pageY});
@@ -130,7 +131,7 @@ export default class TouchSensor extends Sensor {
 
     this.tapTimeout = window.setTimeout(() => {
       this[onDistanceChange]({touches: [{pageX: this.pageX, pageY: this.pageY}]});
-    }, delay);
+    }, delay.touch);
   }
 
   /**
@@ -166,16 +167,21 @@ export default class TouchSensor extends Sensor {
    * @param {Event} event - Touch move event
    */
   [onDistanceChange](event) {
-    const {delay, distance} = this.options;
-    const {startEvent} = this;
+    const {distance} = this.options;
+    const {startEvent, delay} = this;
     const start = touchCoords(startEvent);
     const current = touchCoords(event);
     const timeElapsed = Date.now() - this.onTouchStartAt;
     const distanceTravelled = euclideanDistance(start.pageX, start.pageY, current.pageX, current.pageY);
 
     Object.assign(this, current);
-    if (timeElapsed >= delay && distanceTravelled >= distance) {
-      window.clearTimeout(this.tapTimeout);
+
+    clearTimeout(this.tapTimeout);
+
+    if (timeElapsed < delay.touch) {
+      // moved during delay
+      document.removeEventListener('touchmove', this[onDistanceChange]);
+    } else if (distanceTravelled >= distance) {
       document.removeEventListener('touchmove', this[onDistanceChange]);
       this[startDrag]();
     }

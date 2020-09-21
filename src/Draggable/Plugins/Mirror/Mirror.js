@@ -13,7 +13,6 @@ export const onDragMove = Symbol('onDragMove');
 export const onDragStop = Symbol('onDragStop');
 export const onMirrorCreated = Symbol('onMirrorCreated');
 export const onMirrorMove = Symbol('onMirrorMove');
-export const onScroll = Symbol('onScroll');
 export const getAppendableContainer = Symbol('getAppendableContainer');
 
 /**
@@ -67,31 +66,11 @@ export default class Mirror extends AbstractPlugin {
       ...this.getOptions(),
     };
 
-    /**
-     * Scroll offset for touch devices because the mirror is positioned fixed
-     * @property {Object} scrollOffset
-     * @property {Number} scrollOffset.x
-     * @property {Number} scrollOffset.y
-     */
-    this.scrollOffset = {x: 0, y: 0};
-
-    /**
-     * Initial scroll offset for touch devices because the mirror is positioned fixed
-     * @property {Object} scrollOffset
-     * @property {Number} scrollOffset.x
-     * @property {Number} scrollOffset.y
-     */
-    this.initialScrollOffset = {
-      x: window.scrollX,
-      y: window.scrollY,
-    };
-
     this[onDragStart] = this[onDragStart].bind(this);
     this[onDragMove] = this[onDragMove].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
     this[onMirrorCreated] = this[onMirrorCreated].bind(this);
     this[onMirrorMove] = this[onMirrorMove].bind(this);
-    this[onScroll] = this[onScroll].bind(this);
   }
 
   /**
@@ -130,15 +109,6 @@ export default class Mirror extends AbstractPlugin {
     if (dragEvent.canceled()) {
       return;
     }
-
-    if ('ontouchstart' in window) {
-      document.addEventListener('scroll', this[onScroll], true);
-    }
-
-    this.initialScrollOffset = {
-      x: window.scrollX,
-      y: window.scrollY,
-    };
 
     const {source, originalSource, sourceContainer, sensorEvent} = dragEvent;
 
@@ -233,13 +203,6 @@ export default class Mirror extends AbstractPlugin {
   }
 
   [onDragStop](dragEvent) {
-    if ('ontouchstart' in window) {
-      document.removeEventListener('scroll', this[onScroll], true);
-    }
-
-    this.initialScrollOffset = {x: 0, y: 0};
-    this.scrollOffset = {x: 0, y: 0};
-
     if (!this.mirror) {
       return;
     }
@@ -259,13 +222,6 @@ export default class Mirror extends AbstractPlugin {
     if (!mirrorDestroyEvent.canceled()) {
       this.mirror.parentNode.removeChild(this.mirror);
     }
-  }
-
-  [onScroll]() {
-    this.scrollOffset = {
-      x: window.scrollX - this.initialScrollOffset.x,
-      y: window.scrollY - this.initialScrollOffset.y,
-    };
   }
 
   /**
@@ -293,7 +249,6 @@ export default class Mirror extends AbstractPlugin {
       source,
       sensorEvent,
       mirrorClass,
-      scrollOffset: this.scrollOffset,
       options: this.options,
       passedThreshX: true,
       passedThreshY: true,
@@ -337,7 +292,6 @@ export default class Mirror extends AbstractPlugin {
       options: this.options,
       initialX: this.initialX,
       initialY: this.initialY,
-      scrollOffset: this.scrollOffset,
       passedThreshX: mirrorEvent.passedThreshX,
       passedThreshY: mirrorEvent.passedThreshY,
       lastMovedX: this.lastMovedX,
@@ -491,7 +445,6 @@ function positionMirror({withFrame = false, initial = false} = {}) {
     mirrorOffset,
     initialY,
     initialX,
-    scrollOffset,
     options,
     passedThreshX,
     passedThreshY,
@@ -511,11 +464,11 @@ function positionMirror({withFrame = false, initial = false} = {}) {
 
         if (mirrorOffset) {
           const x = passedThreshX
-            ? Math.round((sensorEvent.clientX - mirrorOffset.left - scrollOffset.x) / (options.thresholdX || 1)) *
+            ? Math.round((sensorEvent.clientX - mirrorOffset.left) / (options.thresholdX || 1)) *
               (options.thresholdX || 1)
             : Math.round(lastMovedX);
           const y = passedThreshY
-            ? Math.round((sensorEvent.clientY - mirrorOffset.top - scrollOffset.y) / (options.thresholdY || 1)) *
+            ? Math.round((sensorEvent.clientY - mirrorOffset.top) / (options.thresholdY || 1)) *
               (options.thresholdY || 1)
             : Math.round(lastMovedY);
 

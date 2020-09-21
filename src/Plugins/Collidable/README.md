@@ -5,22 +5,45 @@ the mirror movement for you. These currently only work with `Sortable`, `Swappab
 
 This plugin is not included by default, so make sure to import it before using.
 
-### Import
+### Usage
 
+- ES6:
 ```js
-import { Plugins } from '@shopify/draggable';
+import { Draggable, Plugins } from "@shopify/draggable";
+// Or
+// import Draggable from '@shopify/draggable/lib/draggable';
+// import Collidable from '@shopify/draggable/lib/plugins/collidable';
+
+const draggable = new Draggable(document.querySelectorAll("ul"), {
+  draggable: "li",
+  collidables: ".other-list",
+  plugins: [Plugins.Collidable], // Or [Collidable]
+});
 ```
 
-```js
-import Collidable from '@shopify/draggable/lib/plugins/collidable';
-```
-
+- Browser (All bundle):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/plugins.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+<script>
+    const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
+      draggable: 'li',
+      collidables: '.other-list',
+      plugins: [Draggable.Plugins.Collidable]
+    });
+</script>
 ```
 
+- Browser (Standalone):
 ```html
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/plugins/collidable.js"></script>
+<script>
+    const draggable = new Draggable.default(document.querySelectorAll('ul'), {
+      draggable: 'li',
+      collidables: '.other-list',
+      plugins: [Collidable.default]
+    });
+</script>
 ```
 
 ### Options

@@ -5,22 +5,37 @@ three events on top of the draggable events: `sortable:start`, `sortable:sort`, 
 
 Make sure to nest draggable elements as immediate children elements to their corresponding containers, this is a requirement for `Sortable`.
 
-### Import
+### Usage
 
+- ES6:
 ```js
 import { Sortable } from '@shopify/draggable';
+// Or
+// import Sortable from '@shopify/draggable/lib/sortable';
+
+const sortable = new Sortable(document.querySelectorAll('ul'), {
+  draggable: 'li'
+});
 ```
 
-```js
-import Sortable from '@shopify/draggable/lib/sortable';
-```
-
+- Browser (All Bundle):
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+<script>
+    const sortable = new Draggable.Sortable(document.querySelectorAll('ul'), {
+      draggable: 'li'
+    });
+</script>
 ```
 
+- Browser (Standalone):
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/sortable.js"></script>
+<script>
+    const sortable = new Sortable.default(document.querySelectorAll('ul'), {
+      draggable: 'li'
+    });
+</script>
 ```
 
 ### API

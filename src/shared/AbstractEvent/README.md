@@ -16,7 +16,7 @@ your own custom events.
 **`new AbstractEvent(data: Object): AbstractEvent`**  
 Creates an `AbstractEvent` instance.
 
-**`abstractEvent.cancel(data: Object): null`**  
+**`abstractEvent.cancel(): void`**  
 Cancels drag start event.
 
 **`abstractEvent.canceled(): Boolean`**  
@@ -25,5 +25,9 @@ Checks if event has been canceled.
 **`abstractEvent.type: String`**  
 Read-only property to find out event type
 
-**`abstractEvent.cancelable: String`**  
+**`abstractEvent.cancelable: Boolean`**  
 Read-only property to check if event is cancelable
+
+**`abstractEvent.clone(data: Object): AbstractEvent`**  
+Creates an `AbstractEvent` instance with existing event data. This method allows
+for overriding of event data.

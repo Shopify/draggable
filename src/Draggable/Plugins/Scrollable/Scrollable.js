@@ -49,13 +49,11 @@ export default class Scrollable extends AbstractPlugin {
     };
 
     /**
-     * Keeps current mouse position
-     * @property {Object} currentMousePosition
-     * @property {Number} currentMousePosition.clientX
-     * @property {Number} currentMousePosition.clientY
+     * Keeps current sensor event
+     * @property {SensorEvent} currentSensorEvent
      * @type {Object|null}
      */
-    this.currentMousePosition = null;
+    this.currentSensorEvent = null;
 
     /**
      * Scroll animation frame
@@ -159,18 +157,7 @@ export default class Scrollable extends AbstractPlugin {
       return;
     }
 
-    const sensorEvent = dragEvent.sensorEvent;
-    const scrollOffset = {x: 0, y: 0};
-
-    if ('ontouchstart' in window) {
-      scrollOffset.y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      scrollOffset.x = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
-    }
-
-    this.currentMousePosition = {
-      clientX: sensorEvent.clientX - scrollOffset.x,
-      clientY: sensorEvent.clientY - scrollOffset.y,
-    };
+    this.currentSensorEvent = dragEvent.sensorEvent;
 
     this.scrollAnimationFrame = requestAnimationFrame(this[scroll]);
   }
@@ -186,7 +173,7 @@ export default class Scrollable extends AbstractPlugin {
     this.scrollableElement = null;
     this.scrollAnimationFrame = null;
     this.findScrollableElementFrame = null;
-    this.currentMousePosition = null;
+    this.currentSensorEvent = null;
   }
 
   /**
@@ -194,7 +181,7 @@ export default class Scrollable extends AbstractPlugin {
    * @private
    */
   [scroll]() {
-    if (!this.scrollableElement || !this.currentMousePosition) {
+    if (!this.scrollableElement || !this.currentSensorEvent) {
       return;
     }
 
@@ -209,8 +196,7 @@ export default class Scrollable extends AbstractPlugin {
 
     const documentScrollingElement = getDocumentScrollingElement();
     const scrollableElement = this.scrollableElement;
-    const clientX = this.currentMousePosition.clientX;
-    const clientY = this.currentMousePosition.clientY;
+    const {clientX, clientY} = this.currentSensorEvent;
 
     if (scrollableElement !== document.body && scrollableElement !== document.documentElement && !cutOff) {
       const {offsetHeight, offsetWidth} = scrollableElement;

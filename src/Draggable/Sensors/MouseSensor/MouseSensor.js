@@ -109,6 +109,8 @@ export default class MouseSensor extends Sensor {
     const container = this.currentContainer;
 
     const dragStartEvent = new DragStartSensorEvent({
+      pageX: startEvent.pageX,
+      pageY: startEvent.pageY,
       clientX: startEvent.clientX,
       clientY: startEvent.clientY,
       target: startEvent.target,
@@ -170,6 +172,8 @@ export default class MouseSensor extends Sensor {
     const target = document.elementFromPoint(event.clientX, event.clientY);
 
     const dragMoveEvent = new DragMoveSensorEvent({
+      pageX: event.pageX,
+      pageY: event.pageY,
       clientX: event.clientX,
       clientY: event.clientY,
       target,
@@ -203,6 +207,8 @@ export default class MouseSensor extends Sensor {
     const target = document.elementFromPoint(event.clientX, event.clientY);
 
     const dragStopEvent = new DragStopSensorEvent({
+      pageX: event.pageX,
+      pageY: event.pageY,
       clientX: event.clientX,
       clientY: event.clientY,
       target,

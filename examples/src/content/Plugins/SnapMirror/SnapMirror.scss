@@ -1,0 +1,76 @@
+////
+/// Content
+/// SnapMirror
+////
+
+@import 'utils/shared/functions';
+@import 'utils/shared/layout';
+
+.SnapMirror {
+  .Workspace {
+    $size: 50px;
+    $border-width: 0.3rem;
+    &.BlockLayout--typePositioned {
+      height: 32rem;
+      border: 0.6rem solid #212529;
+      overflow: auto;
+
+      .Block {
+        width: calc(#{3 * $size} + #{$border-width});
+        height: calc(#{3 * $size} + #{$border-width});
+        position: absolute;
+      }
+
+      &.draggable-container--over {
+        .Workspace__grid {
+          background: linear-gradient(180deg, #00f 0, #00f $border-width, transparent 0, transparent $size) 0px 0px /
+              100% $size repeat-y,
+            linear-gradient(90deg, #00f 0, #00f $border-width, transparent 0, transparent $size) 0px 0px / #{$size} 100%
+              repeat-x;
+        }
+      }
+    }
+
+    &__grid {
+      width: 1500px;
+      height: 1000px;
+      background: linear-gradient(180deg, #000 0, #000 $border-width, transparent 0, transparent $size) 0px 0px / 100%
+          $size repeat-y,
+        linear-gradient(90deg, #000 0, #000 $border-width, transparent 0, transparent $size) 0px 0px / #{$size} 100% repeat-x;
+    }
+  }
+
+  .CircleRange {
+    &.BlockLayout--typePositioned {
+      height: 64rem;
+      border: 0.6rem solid #212529;
+      overflow: auto;
+
+      .Block--isDraggable {
+        position: absolute;
+        width: 20rem;
+        height: 20rem;
+        z-index: 2;
+      }
+
+      .Block--typeHollow {
+        position: absolute;
+        top: calc(50% - 10rem);
+        left: calc(50% - 10rem);
+        width: 20rem;
+        height: 20rem;
+      }
+
+      .circle {
+        position: absolute;
+        top: calc(50% - 25rem);
+        left: calc(50% - 25rem);
+        width: 50rem;
+        height: 50rem;
+        border: 3px solid #000;
+        border-radius: 50%;
+        content: '';
+      }
+    }
+  }
+}

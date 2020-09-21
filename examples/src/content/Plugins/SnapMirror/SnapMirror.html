@@ -1,0 +1,19 @@
+{% import 'components/Block/Block.html' as Block %}
+
+{% macro render(id) %}
+<section id="{{ id }}" class="{{ id }}">
+  <article class="Workspace BlockLayout BlockLayout--typePositioned">
+    <div class="Workspace__grid">
+      {{ Block.render('drag', {index: 1, draggable: true}) }}
+    </div>
+  </article>
+
+  <div style="height: 3rem"></div>
+
+  <article class="CircleRange BlockLayout BlockLayout--typePositioned">
+    {{ Block.render('drag', {index: 1, draggable: true}) }}
+    {{ Block.render('drop', {type: 'Hollow'}) }}
+    <div class="circle"></div>
+  </article>
+</section>
+{% endmacro %}

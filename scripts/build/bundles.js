@@ -75,6 +75,13 @@ const bundles = [
     source: 'Plugins/SortAnimation/index',
     path: 'plugins/',
   },
+
+  {
+    name: 'SnapMirror',
+    filename: 'snap-mirror',
+    source: 'Plugins/SnapMirror/index',
+    path: 'plugins/',
+  },
 ];
 
 module.exports = {bundles};

@@ -105,7 +105,23 @@ export default class Sortable extends Draggable {
    * @return {Number}
    */
   index(element) {
-    return this.getDraggableElementsForContainer(element.parentNode).indexOf(element);
+    return this.getSortableElementsForContainer(element.parentNode).indexOf(element);
+  }
+
+  /**
+   * Returns sortable elements for a given container, excluding the mirror and
+   * original source element if present
+   * @param {HTMLElement} container
+   * @return {HTMLElement[]}
+   */
+  getSortableElementsForContainer(container) {
+    const allSortableElements = container.querySelectorAll(this.options.draggable);
+
+    return [...allSortableElements].filter((childElement) => {
+      return (
+        childElement !== this.originalSource && childElement !== this.mirror && childElement.parentNode === container
+      );
+    });
   }
 
   /**
@@ -156,7 +172,7 @@ export default class Sortable extends Draggable {
       return;
     }
 
-    const children = this.getDraggableElementsForContainer(overContainer);
+    const children = this.getSortableElementsForContainer(overContainer);
     const moves = move({source, over, overContainer, children});
 
     if (!moves) {
@@ -252,7 +268,7 @@ function index(element) {
 function move({source, over, overContainer, children}) {
   const emptyOverContainer = !children.length;
   const differentContainer = source.parentNode !== overContainer;
-  const sameContainer = over && !differentContainer;
+  const sameContainer = over && source.parentNode === over.parentNode;
 
   if (emptyOverContainer) {
     return moveInsideEmptyContainer(source, overContainer);

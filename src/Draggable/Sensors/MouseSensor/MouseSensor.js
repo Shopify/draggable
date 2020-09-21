@@ -83,7 +83,7 @@ export default class MouseSensor extends Sensor {
       return;
     }
 
-    const {delay = 0} = this.options;
+    const {delay} = this;
     const {pageX, pageY} = event;
 
     Object.assign(this, {pageX, pageY});
@@ -97,7 +97,7 @@ export default class MouseSensor extends Sensor {
 
     this.mouseDownTimeout = window.setTimeout(() => {
       this[onDistanceChange]({pageX: this.pageX, pageY: this.pageY});
-    }, delay);
+    }, delay.mouse);
   }
 
   /**
@@ -134,8 +134,8 @@ export default class MouseSensor extends Sensor {
    */
   [onDistanceChange](event) {
     const {pageX, pageY} = event;
-    const {delay, distance} = this.options;
-    const {startEvent} = this;
+    const {distance} = this.options;
+    const {startEvent, delay} = this;
 
     Object.assign(this, {pageX, pageY});
 
@@ -146,8 +146,12 @@ export default class MouseSensor extends Sensor {
     const timeElapsed = Date.now() - this.onMouseDownAt;
     const distanceTravelled = euclideanDistance(startEvent.pageX, startEvent.pageY, pageX, pageY) || 0;
 
-    if (timeElapsed >= delay && distanceTravelled >= distance) {
-      window.clearTimeout(this.mouseDownTimeout);
+    clearTimeout(this.mouseDownTimeout);
+
+    if (timeElapsed < delay.mouse) {
+      // moved during delay
+      document.removeEventListener('mousemove', this[onDistanceChange]);
+    } else if (distanceTravelled >= distance) {
       document.removeEventListener('mousemove', this[onDistanceChange]);
       this[startDrag]();
     }

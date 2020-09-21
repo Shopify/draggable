@@ -1,3 +1,9 @@
+const defaultDealy = {
+  mouse: 0,
+  drag: 0,
+  touch: 100,
+};
+
 /**
  * Base sensor class. Extend from this class to create a new or custom sensor
  * @class Sensor
@@ -45,6 +51,13 @@ export default class Sensor {
      * @type {Event}
      */
     this.startEvent = null;
+
+    /**
+     * The delay of each sensor
+     * @property delay
+     * @type {Object}
+     */
+    this.delay = calcDelay(options.delay);
   }
 
   /**
@@ -95,4 +108,38 @@ export default class Sensor {
 
     return sensorEvent;
   }
+}
+
+/**
+ * Calculate the delay of each sensor through the delay in the options
+ * @param {undefined|Number|Object} optionsDelay - the delay in the options
+ * @return {Object}
+ */
+function calcDelay(optionsDelay) {
+  const delay = {};
+
+  if (optionsDelay === undefined) {
+    return {...defaultDealy};
+  }
+
+  if (typeof optionsDelay === 'number') {
+    for (const key in defaultDealy) {
+      if (defaultDealy.hasOwnProperty(key)) {
+        delay[key] = optionsDelay;
+      }
+    }
+    return delay;
+  }
+
+  for (const key in defaultDealy) {
+    if (defaultDealy.hasOwnProperty(key)) {
+      if (optionsDelay[key] === undefined) {
+        delay[key] = defaultDealy[key];
+      } else {
+        delay[key] = optionsDelay[key];
+      }
+    }
+  }
+
+  return delay;
 }

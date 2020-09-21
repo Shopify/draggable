@@ -352,7 +352,8 @@ describe('Draggable', () => {
       waitForDragDelay();
       moveMouse(dynamicContainer);
 
-      expect(dragOverContainerHandler).not.toHaveBeenCalled();
+      // will be called once after delay
+      expect(dragOverContainerHandler).toHaveBeenCalledTimes(1);
 
       releaseMouse(newInstance.source);
 
@@ -363,7 +364,7 @@ describe('Draggable', () => {
       clickMouse(draggableElement);
       waitForDragDelay();
       moveMouse(dynamicContainer);
-      expect(dragOverContainerHandler).toHaveBeenCalled();
+      expect(dragOverContainerHandler).toHaveBeenCalledTimes(3);
 
       releaseMouse(newInstance.source);
     });
@@ -386,7 +387,7 @@ describe('Draggable', () => {
       waitForDragDelay();
       moveMouse(dynamicContainer);
 
-      expect(dragOverContainerHandler).toHaveBeenCalled();
+      expect(dragOverContainerHandler).toHaveBeenCalledTimes(2);
 
       releaseMouse(newInstance.source);
 
@@ -401,7 +402,7 @@ describe('Draggable', () => {
       waitForDragDelay();
       moveMouse(dynamicContainer);
 
-      expect(dragOverContainerHandler).not.toHaveBeenCalled();
+      expect(dragOverContainerHandler).toHaveBeenCalledTimes(1);
 
       releaseMouse(newInstance.source);
     });

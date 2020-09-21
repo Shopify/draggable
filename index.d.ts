@@ -86,6 +86,12 @@ declare module '@shopify/draggable' {
         ? SnapOutEvent
         : AbstractEvent;
 
+    interface DelayOptions {
+        mouse?: number;
+        drag?: number;
+        touch?: number;
+    }
+
     /**
      * DragEvent
      */
@@ -167,7 +173,7 @@ declare module '@shopify/draggable' {
         draggable?: string;
         distance?: number;
         handle?: string | NodeList | HTMLElement[] | HTMLElement | ((currentElement: HTMLElement) => HTMLElement);
-        delay?: number;
+        delay?: number | DelayOptions;
         plugins?: Array<typeof AbstractPlugin>;
         sensors?: Sensor[];
         classes?: { [key in DraggableClassNames]: string };
@@ -315,7 +321,7 @@ declare module '@shopify/draggable' {
     export class DragPressureSensorEvent extends SensorEvent { }
 
     export interface SensorOptions {
-        delay?: number;
+        delay?: number | DelayOptions;
     }
 
     export class Sensor {

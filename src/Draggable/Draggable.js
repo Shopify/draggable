@@ -48,7 +48,7 @@ const defaultClasses = {
 export const defaultOptions = {
   draggable: '.draggable-source',
   handle: null,
-  delay: 100,
+  delay: {},
   distance: 0,
   placedTimeout: 800,
   plugins: [],

@@ -17,6 +17,38 @@ describe('Sensor', () => {
       expect(sensor.containers).toEqual(expectedContainers);
       expect(sensor.options).toEqual(expectedOptions);
     });
+
+    describe('should initialize with correct delay', () => {
+      it('unset', () => {
+        const sensor = new Sensor(undefined, {});
+
+        expect(sensor.delay).toEqual({
+          mouse: 0,
+          drag: 0,
+          touch: 100,
+        });
+      });
+
+      it('number', () => {
+        const sensor = new Sensor(undefined, {delay: 42});
+
+        expect(sensor.delay).toEqual({
+          mouse: 42,
+          drag: 42,
+          touch: 42,
+        });
+      });
+
+      it('object', () => {
+        const sensor = new Sensor(undefined, {delay: {mouse: 42, drag: 142}});
+
+        expect(sensor.delay).toEqual({
+          mouse: 42,
+          drag: 142,
+          touch: 100,
+        });
+      });
+    });
   });
 
   describe('#attach', () => {

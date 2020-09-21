@@ -1,13 +1,16 @@
 import {DRAG_DELAY, defaultTouchEventOptions, defaultMouseEventOptions} from './constants';
 import {triggerEvent} from './event';
 
-export function waitForDragDelay(dragDelay = DRAG_DELAY) {
+export function waitForDragDelay({dragDelay = DRAG_DELAY, restoreDateMock = true} = {}) {
   const next = Date.now() + dragDelay + 1;
   const dateMock = jest.spyOn(Date, 'now').mockImplementation(() => {
     return next;
   });
   jest.runTimersToTime(dragDelay + 1);
-  dateMock.mockRestore();
+  if (restoreDateMock) {
+    dateMock.mockRestore();
+  }
+  return dateMock;
 }
 
 export function clickMouse(element, options = {}) {

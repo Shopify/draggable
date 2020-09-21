@@ -240,15 +240,17 @@ describe('TouchSensor', () => {
       expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
     });
 
-    it('only triggers `drag:start` sensor event once when delay ends after distance is met', () => {
+    it('does not trigger `drag:start` sensor event when moved during delay', () => {
       function dragFlow() {
         touchStart(draggableElement);
         touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
-        waitForDragDelay();
+        const dateMock = waitForDragDelay({restoreDateMock: false});
+        touchMove(draggableElement, {touches: [{pageX: 2, pageY: 0}]});
         touchRelease(draggableElement);
+        dateMock.mockRestore();
       }
 
-      expect(dragFlow).toHaveTriggeredSensorEvent('drag:start', 1);
+      expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
     });
 
     it('only triggers `drag:start` sensor event once when delay ends at the same time distance is met', () => {
@@ -258,8 +260,8 @@ describe('TouchSensor', () => {
         const dateMock = jest.spyOn(Date, 'now').mockImplementation(() => {
           return next;
         });
-        jest.runTimersToTime(DRAG_DELAY);
         touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
+        jest.runTimersToTime(DRAG_DELAY);
         touchRelease(draggableElement);
         dateMock.mockRestore();
       }

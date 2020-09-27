@@ -75,6 +75,9 @@ Removes containers from this draggable instance.
 **`draggable.getClassNameFor(name: String): String`**  
 Returns class name for class identifier, check the classes table below for identifiers.
 
+**`draggable.getClassNamesFor(name: String): String[]`**  
+Returns array of class name for class identifier, useful when working with atomic css, check the classes table below for identifiers.
+
 **`draggable.isDragging(): Boolean`**  
 Returns true or false, depending on this draggables dragging state.
 
@@ -117,9 +120,11 @@ plugins controls the mirror movement. Default: `[]`
 Sensors dictate how drag operations get triggered, by listening to native browser events.
 By default draggable includes the `MouseSensor` & `TouchSensor`. Default: `[]`
 
-**`classes {Object}`**  
+**`classes {{String: String|String[]}}`**  
 Draggable adds classes to elements to indicate state. These classes can be used to add styling
-on elements in certain states.
+on elements in certain states. Accept String or Array of strings.
+
+**NOTE**: When specifying multiple classes to an indicate state, the first class MUST be unique for that state to avoid duplicate classes for other states. 
 
 **`exclude {plugins: Plugin[], sensors: Sensor[]}`**  
 Allow excluding default plugins and default sensors. Use with caution as it may create strange behavior.
@@ -156,15 +161,15 @@ Allow excluding default plugins and default sensors. Use with caution as it may 
 
 | Name                 | Description                                                         | Default                            |
 | -------------------- | ------------------------------------------------------------------- | ---------------------------------- |
-| `body:dragging`      | Class added on the document body while dragging                     | `draggable--is-dragging`           |
-| `container:dragging` | Class added on the container where the draggable was picked up from | `draggable-container--is-dragging` |
-| `source:dragging`    | Class added on the draggable element that has been picked up        | `draggable-source--is-dragging`    |
-| `source:placed`      | Class added on the draggable element on `drag:stop`                 | `draggable-source--placed`         |
-| `container:placed`   | Class added on the draggable container element on `drag:stop`       | `draggable-container--placed`      |
-| `draggable:over`     | Class added on draggable element you are dragging over              | `draggable--over`                  |
-| `container:over`     | Class added on draggable container element you are dragging over    | `draggable-container--over`        |
-| `source:original`    | Class added on the original source element, which is hidden on drag | `draggable--original`              |
-| `mirror`             | Class added on the mirror element                                   | `draggable-mirror`                 |
+| `body:dragging`      | Classes added on the document body while dragging                     | `draggable--is-dragging`           |
+| `container:dragging` | Classes added on the container where the draggable was picked up from | `draggable-container--is-dragging` |
+| `source:dragging`    | Classes added on the draggable element that has been picked up        | `draggable-source--is-dragging`    |
+| `source:placed`      | Classes added on the draggable element on `drag:stop`                 | `draggable-source--placed`         |
+| `container:placed`   | Classes added on the draggable container element on `drag:stop`       | `draggable-container--placed`      |
+| `draggable:over`     | Classes added on draggable element you are dragging over              | `draggable--over`                  |
+| `container:over`     | Classes added on draggable container element you are dragging over    | `draggable-container--over`        |
+| `source:original`    | Classes added on the original source element, which is hidden on drag | `draggable--original`              |
+| `mirror`             | Classes added on the mirror element                                   | `draggable-mirror`                 |
 
 ### Example
 
@@ -193,5 +198,18 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
     plugins: [Draggable.Plugins.Focusable],
     sensors: [Draggable.Sensors.TouchSensor],
   }
+});
+```
+
+Create draggable with specific classes:
+
+```js
+import { Draggable } from '@shopify/draggable';
+
+const draggable = new Draggable(document.querySelectorAll('ul'), {
+  draggable: 'li',
+  classes: {
+    'draggable:over': ['draggable--over', '.bg-red-200', 'bg-opacity-25'],
+  },
 });
 ```

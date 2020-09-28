@@ -329,7 +329,23 @@ export default class Draggable {
    * @return {String|null}
    */
   getClassNameFor(name) {
-    return this.options.classes[name];
+    return this.getClassNamesFor(name)[0];
+  }
+
+  /**
+   * Returns class names for class identifier
+   * @return {String[]}
+   */
+  getClassNamesFor(name) {
+    const classNames = this.options.classes[name];
+
+    if (classNames instanceof Array) {
+      return classNames;
+    } else if (typeof classNames === 'string' || classNames instanceof String) {
+      return [classNames];
+    } else {
+      return [];
+    }
   }
 
   /**
@@ -393,8 +409,8 @@ export default class Draggable {
 
     if (this.lastPlacedSource && this.lastPlacedContainer) {
       clearTimeout(this.placedTimeoutID);
-      this.lastPlacedSource.classList.remove(this.getClassNameFor('source:placed'));
-      this.lastPlacedContainer.classList.remove(this.getClassNameFor('container:placed'));
+      this.lastPlacedSource.classList.remove(...this.getClassNamesFor('source:placed'));
+      this.lastPlacedContainer.classList.remove(...this.getClassNamesFor('container:placed'));
     }
 
     this.source = this.originalSource.cloneNode(true);
@@ -418,10 +434,10 @@ export default class Draggable {
       return;
     }
 
-    this.originalSource.classList.add(this.getClassNameFor('source:original'));
-    this.source.classList.add(this.getClassNameFor('source:dragging'));
-    this.sourceContainer.classList.add(this.getClassNameFor('container:dragging'));
-    document.body.classList.add(this.getClassNameFor('body:dragging'));
+    this.originalSource.classList.add(...this.getClassNamesFor('source:original'));
+    this.source.classList.add(...this.getClassNamesFor('source:dragging'));
+    this.sourceContainer.classList.add(...this.getClassNamesFor('container:dragging'));
+    document.body.classList.add(...this.getClassNamesFor('body:dragging'));
     applyUserSelect(document.body, 'none');
 
     requestAnimationFrame(() => {
@@ -479,7 +495,7 @@ export default class Draggable {
         over: this.currentOver,
       });
 
-      this.currentOver.classList.remove(this.getClassNameFor('draggable:over'));
+      this.currentOver.classList.remove(...this.getClassNamesFor('draggable:over'));
       this.currentOver = null;
 
       this.trigger(dragOutEvent);
@@ -494,14 +510,14 @@ export default class Draggable {
         overContainer: this.currentOverContainer,
       });
 
-      this.currentOverContainer.classList.remove(this.getClassNameFor('container:over'));
+      this.currentOverContainer.classList.remove(...this.getClassNamesFor('container:over'));
       this.currentOverContainer = null;
 
       this.trigger(dragOutContainerEvent);
     }
 
     if (isOverContainer) {
-      overContainer.classList.add(this.getClassNameFor('container:over'));
+      overContainer.classList.add(...this.getClassNamesFor('container:over'));
 
       const dragOverContainerEvent = new DragOverContainerEvent({
         source: this.source,
@@ -517,7 +533,7 @@ export default class Draggable {
     }
 
     if (isOverDraggable) {
-      target.classList.add(this.getClassNameFor('draggable:over'));
+      target.classList.add(...this.getClassNamesFor('draggable:over'));
 
       const dragOverEvent = new DragOverEvent({
         source: this.source,
@@ -559,20 +575,20 @@ export default class Draggable {
     this.source.parentNode.removeChild(this.source);
     this.originalSource.style.display = '';
 
-    this.source.classList.remove(this.getClassNameFor('source:dragging'));
-    this.originalSource.classList.remove(this.getClassNameFor('source:original'));
-    this.originalSource.classList.add(this.getClassNameFor('source:placed'));
-    this.sourceContainer.classList.add(this.getClassNameFor('container:placed'));
-    this.sourceContainer.classList.remove(this.getClassNameFor('container:dragging'));
-    document.body.classList.remove(this.getClassNameFor('body:dragging'));
+    this.source.classList.remove(...this.getClassNamesFor('source:dragging'));
+    this.originalSource.classList.remove(...this.getClassNamesFor('source:original'));
+    this.originalSource.classList.add(...this.getClassNamesFor('source:placed'));
+    this.sourceContainer.classList.add(...this.getClassNamesFor('container:placed'));
+    this.sourceContainer.classList.remove(...this.getClassNamesFor('container:dragging'));
+    document.body.classList.remove(...this.getClassNamesFor('body:dragging'));
     applyUserSelect(document.body, '');
 
     if (this.currentOver) {
-      this.currentOver.classList.remove(this.getClassNameFor('draggable:over'));
+      this.currentOver.classList.remove(...this.getClassNamesFor('draggable:over'));
     }
 
     if (this.currentOverContainer) {
-      this.currentOverContainer.classList.remove(this.getClassNameFor('container:over'));
+      this.currentOverContainer.classList.remove(...this.getClassNamesFor('container:over'));
     }
 
     this.lastPlacedSource = this.originalSource;
@@ -580,11 +596,11 @@ export default class Draggable {
 
     this.placedTimeoutID = setTimeout(() => {
       if (this.lastPlacedSource) {
-        this.lastPlacedSource.classList.remove(this.getClassNameFor('source:placed'));
+        this.lastPlacedSource.classList.remove(...this.getClassNamesFor('source:placed'));
       }
 
       if (this.lastPlacedContainer) {
-        this.lastPlacedContainer.classList.remove(this.getClassNameFor('container:placed'));
+        this.lastPlacedContainer.classList.remove(...this.getClassNamesFor('container:placed'));
       }
 
       this.lastPlacedSource = null;

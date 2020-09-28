@@ -176,7 +176,7 @@ declare module '@shopify/draggable' {
         delay?: number | DelayOptions;
         plugins?: Array<typeof AbstractPlugin>;
         sensors?: Sensor[];
-        classes?: { [key in DraggableClassNames]: string };
+        classes?: { [key in DraggableClassNames]: string | string[] };
         announcements?: AnnouncementOptions;
         collidables?: Collidables;
         mirror?: MirrorOptions;
@@ -204,6 +204,7 @@ declare module '@shopify/draggable' {
         addContainer(...containers: HTMLElement[]): this;
         removeContainer(...containers: HTMLElement[]): this;
         getClassNameFor(name: DraggableClassNames): string;
+        getClassNamesFor(name: DraggableClassNames): string[];
         isDragging(): boolean;
         getDraggableElementsForContainer(container: HTMLElement): HTMLElement[];
     }

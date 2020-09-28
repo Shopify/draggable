@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.0.0-beta.12 - 2020-09-29
+
+### Added
+
+- Added `drag:stopped` event that will be fired after drag finished
+- Support specifying an array of class name to Draggable `classes` option
+
+### Changed
+
+- Fixes incorrect `oldIndex` value when working with **nested sortable**
+- Fixes wrong same container checking bug when working with **nested sortable** 
+- Fixes bug `drag:start` event was triggered  during the delay time
+- Fixes missing `overContainer` property in **DragOutEvent**
+
 ## v1.0.0-beta.11 - 2020-07-14
 
 ### Added

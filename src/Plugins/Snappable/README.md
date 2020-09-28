@@ -23,7 +23,7 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 
 - Browser (All bundle):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.bundle.js"></script>
 <script>
     const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
       draggable: 'li',
@@ -34,8 +34,8 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 
 - Browser (Standalone):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/plugins/snappable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/plugins/snappable.js"></script>
 <script>
     const draggable = new Draggable.default(document.querySelectorAll('ul'), {
       draggable: 'li',

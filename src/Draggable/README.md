@@ -124,7 +124,7 @@ By default draggable includes the `MouseSensor` & `TouchSensor`. Default: `[]`
 Draggable adds classes to elements to indicate state. These classes can be used to add styling
 on elements in certain states. Accept String or Array of strings.
 
-**NOTE**: When specifying multiple classes to an indicate state, the first class MUST be unique for that state to avoid duplicate classes for other states. 
+**NOTE**: When specifying multiple classes to an indicate state, the first class MUST be unique for that state to avoid duplicate classes for other states. IE doesn't support add or remove multiple classes. If you want to use multiple classes in IE, you need to add a classList polyfill to your project first.
 
 **`exclude {plugins: Plugin[], sensors: Sensor[]}`**  
 Allow excluding default plugins and default sensors. Use with caution as it may create strange behavior.
@@ -209,7 +209,7 @@ import { Draggable } from '@shopify/draggable';
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
   classes: {
-    'draggable:over': ['draggable--over', '.bg-red-200', 'bg-opacity-25'],
+    'draggable:over': ['draggable--over', 'bg-red-200', 'bg-opacity-25'],
   },
 });
 ```

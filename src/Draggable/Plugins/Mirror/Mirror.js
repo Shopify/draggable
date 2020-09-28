@@ -275,7 +275,7 @@ export default class Mirror extends AbstractPlugin {
    * @private
    */
   [onMirrorCreated]({mirror, source, sensorEvent}) {
-    const mirrorClass = this.draggable.getClassNamesFor('mirror');
+    const mirrorClasses = this.draggable.getClassNamesFor('mirror');
 
     const setState = ({mirrorOffset, initialX, initialY, ...args}) => {
       this.mirrorOffset = mirrorOffset;
@@ -292,7 +292,7 @@ export default class Mirror extends AbstractPlugin {
       mirror,
       source,
       sensorEvent,
-      mirrorClass,
+      mirrorClasses,
       scrollOffset: this.scrollOffset,
       options: this.options,
       passedThreshX: true,
@@ -446,18 +446,14 @@ function resetMirror({mirror, source, options, ...args}) {
  * Applys mirror class on mirror element
  * @param {Object} state
  * @param {HTMLElement} state.mirror
- * @param {String|String[]} state.mirrorClass
+ * @param {String[]} state.mirrorClasses
  * @return {Promise}
  * @private
  */
-function addMirrorClasses({mirror, mirrorClass, ...args}) {
+function addMirrorClasses({mirror, mirrorClasses, ...args}) {
   return withPromise((resolve) => {
-    if (mirrorClass instanceof Array) {
-      mirror.classList.add(...mirrorClass);
-    } else {
-      mirror.classList.add(mirrorClass);
-    }
-    resolve({mirror, mirrorClass, ...args});
+    mirror.classList.add(...mirrorClasses);
+    resolve({mirror, mirrorClasses, ...args});
   });
 }
 

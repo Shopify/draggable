@@ -1,12 +1,11 @@
-/* eslint-disable no-undef */
+/* eslint-env node */
 module.exports = () => ({
   plugins: {
     autoprefixer: {},
     cssnano: {
-      preset: 'advanced',
+      // reduceIdents causing problem with `grid-template-areas`
+      preset: ['advanced', {reduceIdents: false}],
       autoprefixer: false,
-      'postcss-reduce-idents': false,
     },
   },
 });
-/* eslint-enable no-undef */

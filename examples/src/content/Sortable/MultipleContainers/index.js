@@ -29,7 +29,8 @@ export default function MultipleContainers() {
 
   // --- Draggable events --- //
   sortable.on('drag:start', (evt) => {
-    currentMediumChildren = sortable.getDraggableElementsForContainer(sortable.containers[1]).length;
+    currentMediumChildren = sortable.getDraggableElementsForContainer(sortable.containers[1])
+      .length;
     capacityReached = currentMediumChildren === containerTwoCapacity;
     lastOverContainer = evt.sourceContainer;
     containerTwoParent.classList.toggle(Classes.capacity, capacityReached);

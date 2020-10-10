@@ -1,5 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import {Draggable} from '@shopify/draggable';
+
+// eslint-disable-next-line shopify/strict-component-boundaries
 import Plate from '../../components/Plate';
 
 export default function Home() {

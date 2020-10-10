@@ -34,7 +34,7 @@ body {
 
     &::before {
       top: 0;
-      box-shadow: 0 #{- (get-spacing(fattest))} 0 get-spacing(fattest) get-color(coal, dark);
+      box-shadow: 0 -#{get-spacing(fattest)} 0 get-spacing(fattest) get-color(coal, dark);
     }
 
     &::after {

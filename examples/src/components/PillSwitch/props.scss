@@ -26,9 +26,7 @@ $pill-switch-data: (
     tablet: $pill-switch-control-size-tablet,
   ),
   track-width: (
-    base: (
-      $pill-switch-control-size * 2,
-    ) + $pill-switch-radius,
+    base: $pill-switch-control-size * 2 + $pill-switch-radius,
     tablet: $pill-switch-control-size-tablet * 2,
   ),
 );

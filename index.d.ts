@@ -56,10 +56,14 @@ declare module '@shopify/draggable' {
         ? MirrorMoveEvent
         : eventName extends 'mirror:destroy'
         ? MirrorDestroyEvent
+        : eventName extends 'droppable:start'
+        ? DroppableStartEvent
         : eventName extends 'droppable:dropped'
         ? DroppableDroppedEvent
         : eventName extends 'droppable:returned'
         ? DroppableReturnedEvent
+        : eventName extends 'droppable:stop'
+        ? DroppableStopEvent
         : eventName extends 'sortable:start'
         ? SortableStartEvent
         : eventName extends 'sortable:sort'
@@ -350,8 +354,10 @@ declare module '@shopify/draggable' {
      * Droppable
      */
     export type DroppableEventNames =
+        'droppable:start' |
         'droppable:dropped' |
         'droppable:returned' |
+        'droppable:stop' |
         DraggableEventNames;
 
     export class DroppableEvent extends AbstractEvent {

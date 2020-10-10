@@ -1,7 +1,7 @@
 ## Sortable
 
 Sortable is built on top of Draggable and allows you to reorder elements. It maintains the order internally and fires
-three events on top of the draggable events: `sortable:start`, `sortable:sort`, `sortable:sorted` and `sortable:stop`.
+four events on top of the draggable events: `sortable:start`, `sortable:sort`, `sortable:sorted` and `sortable:stop`.
 
 Make sure to nest draggable elements as immediate children elements to their corresponding containers, this is a requirement for `Sortable`.
 

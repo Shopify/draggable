@@ -12,7 +12,7 @@ $grid-columns: 4;
 .UniqueDropzone {
   .BlockLayout {
     .BlockWrapper {
-      .Block:nth-child(1n+3):not(.draggable-source--is-dragging) {
+      .Block:nth-child(1n + 3):not(.draggable-source--is-dragging) {
         min-height: 0;
         height: 0;
       }
@@ -71,6 +71,7 @@ $grid-columns: 4;
         opacity: 0;
         transition: opacity get-duration(fast) get-easing();
 
+        // stylelint-disable-next-line max-nesting-depth
         @media screen and (min-width: get-breakpoint(tablet)) {
           top: -(get-border());
           right: -(get-border());
@@ -81,6 +82,7 @@ $grid-columns: 4;
 
       // not focusable, but, whatever... this was hard to solve
       &.draggable-dropzone--occupied:hover {
+        // stylelint-disable-next-line max-nesting-depth
         &::before {
           opacity: 1;
         }
@@ -98,6 +100,7 @@ $grid-columns: 4;
     }
   }
 
+  // stylelint-disable-next-line no-duplicate-selectors
   .BlockLayout--typeFlex {
     .BlockContent {
       @media screen and (min-width: get-breakpoint(tablet)) {
@@ -112,7 +115,9 @@ $grid-columns: 4;
 
   // not quite lining up with the rows correctly...
   // will likely need to tweak `grid` values
+  // stylelint-disable-next-line no-duplicate-selectors
   .BlockLayout--typeGrid {
+    // stylelint-disable-next-line no-duplicate-selectors
     .BlockContent {
       @media screen and (min-width: get-breakpoint(tablet)) {
         min-height: rows(3, false, true);

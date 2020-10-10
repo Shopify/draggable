@@ -30,8 +30,14 @@ $collidable: (
   ),
   obstacle-height: (
     base: $collidable-container-height / 3,
-    tablet: $collidable-container-height-tablet - $collidable-block-height-tablet - (get-border() * 5),
-    desktop: $collidable-container-height-desktop - $collidable-block-height-desktop - (get-border() * 5),
+    tablet: $collidable-container-height-tablet - $collidable-block-height-tablet -
+      (
+        get-border() * 5,
+      ),
+    desktop: $collidable-container-height-desktop - $collidable-block-height-desktop -
+      (
+        get-border() * 5,
+      ),
   ),
 );
 

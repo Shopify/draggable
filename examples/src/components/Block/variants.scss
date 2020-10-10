@@ -159,6 +159,7 @@
 
 ///
 /// Collidable
+// stylelint-disable-next-line no-duplicate-selectors
 .Block--typeStripes {
   // should be a native Draggable class name
   &.isColliding {

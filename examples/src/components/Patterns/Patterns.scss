@@ -21,8 +21,7 @@
 }
 
 .Pattern--typeHalftone {
-  background-image:
-    radial-gradient(currentColor 24%, transparent 25%),
+  background-image: radial-gradient(currentColor 24%, transparent 25%),
     radial-gradient(currentColor 24%, transparent 25%);
   background-position: $halftone-bg-position-start;
   background-size: $halftone-bg-size $halftone-bg-size;

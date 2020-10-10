@@ -1,19 +1,18 @@
-
 {
   "extends": [
     "stylelint-config-shopify/prettier"
   ],
   "rules": {
-    'shopify/content-no-strings': true,
-    'scss/at-if-no-null': null,
+    "shopify/content-no-strings": true,
+    "scss/at-if-no-null": null,
     "scss/partial-no-import": null,
     "color-no-hex": null,
     "comment-empty-line-before": null,
     "scss/double-slash-comment-empty-line-before": null,
-    'declaration-block-no-redundant-longhand-properties': [
+    "declaration-block-no-redundant-longhand-properties": [
       true,
       {
-        ignoreShorthands: ['/^grid.*/'],
+        ignoreShorthands: ["/^grid.*/"],
       },
     ],
     "declaration-property-value-blacklist": null,

@@ -1,27 +1,50 @@
-# Ignore OS Specific files
+# OS files
 .DS_Store
 
-# Ignore the SASS cache
+# Caches
+.cache
+.eslintcache
 .sass-cache
+.npm
+*.tsbuildinfo
+
+# Dev
+.dev
+
+# Environment
+.env
+.env.test
+
+# Build
+dist
+scrap
+packages
+
+# Secrets
+secrets.json
+
+# Reports
+assets-manifest.json
+bundle-report.html
+
+# Node/yarn
+node_modules
+.yarn-integrity
+
+# Coverage
+coverage
+lib-cov
+*.lcov
 
 # Logs
 logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Ignore dev
-.dev
-
-# Ignore secrets.json
-secrets.json
-
-# Ignore scrap and distribution folders
-scrap
-dist
-
-# Ignore generated reports and manifests
-assets-manifest.json
-bundle-report.html
-
-# Dependency directory
-node_modules
-packages
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock

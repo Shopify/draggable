@@ -59,10 +59,10 @@
 
 .BlockLayout--typeGrid {
   display: grid;
-  grid-gap: get-border(thin);
+  gap: get-border(thin);
 
   @media screen and (min-width: get-breakpoint(tablet)) {
-    grid-gap: get-border();
+    gap: get-border();
   }
 }
 
@@ -106,8 +106,8 @@
     color: get-color(coal, dark);
     background-color: white;
     border-color: currentColor;
-    transition: color get-duration(fast) get-easing(), background-color get-duration(fast) get-easing(),
-      transform get-duration() get-easing(bungie);
+    transition: color get-duration(fast) get-easing(),
+      background-color get-duration(fast) get-easing(), transform get-duration() get-easing(bungie);
   }
 
   // interaction

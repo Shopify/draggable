@@ -10,7 +10,7 @@ $grid-columns: 8;
 
 .MultipleContainers {
   display: grid;
-  grid-gap: get-layout-length(gutter);
+  gap: get-layout-length(gutter);
   grid-template-columns: 100%;
   grid-template-areas: 'a' 'b' 'c';
 

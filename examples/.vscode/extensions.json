@@ -1,0 +1,15 @@
+{
+  "recommendations": [
+    "christian-kohler.npm-intellisense",
+    "christian-kohler.path-intellisense",
+    "codezombiech.gitignore",
+    "dbaeumer.vscode-eslint",
+    "EditorConfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "Gruntfuggly.todo-tree",
+    "hex-ci.stylelint-plus",
+    "mariusschulz.yarn-lock-syntax",
+    "mrmlnc.vscode-scss",
+    "ronnidc.nunjucks"
+  ]
+}

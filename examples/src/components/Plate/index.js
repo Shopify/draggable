@@ -16,7 +16,7 @@ function calculatePlateScale(value, max, factor) {
   const step1 = Math.abs(value) / max;
   const step2 = step1 - step1 * factor;
 
-  return 1 - step2; // step 3
+  return 1 - step2;
 }
 
 export default class Plate {
@@ -89,6 +89,7 @@ export default class Plate {
 
   _translateEachPlate(x, y) {
     for (const plateLevel in this.plates) {
+      // eslint-disable-next-line no-prototype-builtins
       if (this.plates.hasOwnProperty(plateLevel)) {
         const translateX = flipSign(x * 2) * translateFactors[plateLevel];
         const translateY = flipSign(y * 2) * translateFactors[plateLevel];

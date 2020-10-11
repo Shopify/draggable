@@ -232,6 +232,7 @@
 
     + .StackedListItem,
     + .draggable--original + .StackedListItem {
+      // stylelint-disable-next-line selector-max-class
       .StackedListContent::before {
         background-color: get-color(brand, blue);
         opacity: 1;

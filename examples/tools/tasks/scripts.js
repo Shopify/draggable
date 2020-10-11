@@ -1,4 +1,5 @@
 import webpack from 'webpack';
+
 import {webpackConfig} from '../webpack.config';
 
 export function scripts() {

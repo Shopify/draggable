@@ -9,9 +9,7 @@ $paper-stack-item-count: 4;
 ///
 /// Size calc functions
 @function paper-stack-height($height, $spacing) {
-  @return $height - (
-    ($spacing / 2) * ($paper-stack-item-count - 1)
-  );
+  @return $height - (($spacing / 2) * ($paper-stack-item-count - 1));
 }
 
 ///
@@ -79,18 +77,10 @@ $paper-stack-shadow: (
 
 $paper-stack: (
   height: (
-    base: paper-stack-height(
-      paper-stack-item(height),
-      paper-stack-item(spacing)
-    ),
-    tablet: paper-stack-height(
-      paper-stack-item(height, tablet),
-      paper-stack-item(spacing, tablet)
-    ),
-    desktop: paper-stack-height(
-      paper-stack-item(height, desktop),
-      paper-stack-item(spacing, desktop)
-    ),
+    base: paper-stack-height(paper-stack-item(height), paper-stack-item(spacing)),
+    tablet: paper-stack-height(paper-stack-item(height, tablet), paper-stack-item(spacing, tablet)),
+    desktop:
+      paper-stack-height(paper-stack-item(height, desktop), paper-stack-item(spacing, desktop)),
   ),
 );
 
@@ -101,10 +91,8 @@ $paper-stack: (
 ///
 /// Mixins
 @mixin paper-stack-item-offset($breakpoint: $threads-default-value) {
-  $adjusted-top-offset: -(
-    (paper-stack-item(width, $breakpoint) / $paper-stack-item-count) +
-    (paper-stack-item(spacing, $breakpoint) / 2)
-  );
+  $adjusted-top-offset: -((paper-stack-item(width, $breakpoint) / $paper-stack-item-count) +
+        (paper-stack-item(spacing, $breakpoint) / 2));
 
   @for $i from 1 through $paper-stack-item-count {
     &:nth-child(#{$i}),

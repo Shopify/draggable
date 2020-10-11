@@ -71,7 +71,7 @@
 // Toggle visibility + opacity
 // @param {String} $state - Switch visibility `on` or `off`.
 @mixin visible($isVisible: true) {
-  @if ($isVisible) {
+  @if $isVisible {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
@@ -98,13 +98,7 @@
 // @param {String} $position (optional) - The position value you wish to use.
 // @param {Number} $z-index (optional) - Allows specifying a `z-index`
 @mixin position-cover($position: absolute, $z-index: auto) {
-  $positions-data: (
-    static
-    relative
-    absolute
-    fixed
-    sticky
-  );
+  $positions-data: (static relative absolute fixed sticky);
 
   @if not index($positions-data, $position) {
     @error 'Position value `#{$position}` not found. Available positions: #{available-names($positions-data)}';
@@ -147,7 +141,7 @@
 // ...elaborate on this explaination - what benefits does this provide?
 @mixin aspect-ratio($width, $height, $pseudo: false) {
   // I think this conditional is broken
-  @if ($width != unitless($width) or $height != unitless($height)) {
+  @if $width != unitless($width) or $height != unitless($height) {
     @error 'You did not provide unitless numbers for `$width` and `$height`.';
   }
 
@@ -155,7 +149,7 @@
   position: relative;
   overflow: hidden;
 
-  @if ($pseudo) {
+  @if $pseudo {
     &::before {
       @include _aspect-ratio-padding-top($ratio-percentage);
       content: '';

@@ -12,7 +12,7 @@ html {
   line-height: 1;
   text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   box-sizing: border-box;
 
   *,
@@ -58,7 +58,7 @@ a {
 
 a:focus,
 [tabindex]:focus {
-  outline: none,
+  outline: none;
 }
 
 ///

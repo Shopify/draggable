@@ -175,6 +175,7 @@
     }
   }
 
+  // stylelint-disable-next-line no-duplicate-selectors
   .CollidableWall {
     &.isColliding {
       background-color: get-color(brand, red);

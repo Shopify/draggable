@@ -1,4 +1,5 @@
 node_modules
+packages
 dist
 scrap
 src/scripts/vendor

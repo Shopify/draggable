@@ -69,7 +69,7 @@
 
 ///
 /// Layout
-.PaperStackItem:nth-child(1n+2) {
+.PaperStackItem:nth-child(1n + 2) {
   .PaperStackContent::after {
     content: '';
     position: absolute;
@@ -93,6 +93,7 @@
   }
 }
 
+// stylelint-disable-next-line no-duplicate-selectors
 .PaperStackItem {
   @for $i from 1 through $paper-stack-item-count {
     &:nth-child(#{$i}) {

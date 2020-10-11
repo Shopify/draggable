@@ -160,7 +160,7 @@ export default class Droppable extends Draggable {
         continue;
       }
 
-      dropzoneElement.classList.add(this.getClassNameFor('droppable:active'));
+      dropzoneElement.classList.add(...this.getClassNamesFor('droppable:active'));
     }
   }
 
@@ -198,14 +198,14 @@ export default class Droppable extends Draggable {
 
     this.trigger(droppableStopEvent);
 
-    const occupiedClass = this.getClassNameFor('droppable:occupied');
+    const occupiedClasses = this.getClassNamesFor('droppable:occupied');
 
     for (const dropzone of this.dropzones) {
-      dropzone.classList.remove(this.getClassNameFor('droppable:active'));
+      dropzone.classList.remove(...this.getClassNamesFor('droppable:active'));
     }
 
     if (this.lastDropzone && this.lastDropzone !== this.initialDropzone) {
-      this.initialDropzone.classList.remove(occupiedClass);
+      this.initialDropzone.classList.remove(...occupiedClasses);
     }
 
     this.dropzones = null;
@@ -231,14 +231,14 @@ export default class Droppable extends Draggable {
       return false;
     }
 
-    const occupiedClass = this.getClassNameFor('droppable:occupied');
+    const occupiedClasses = this.getClassNamesFor('droppable:occupied');
 
     if (this.lastDropzone) {
-      this.lastDropzone.classList.remove(occupiedClass);
+      this.lastDropzone.classList.remove(...occupiedClasses);
     }
 
     dropzone.appendChild(event.source);
-    dropzone.classList.add(occupiedClass);
+    dropzone.classList.add(...occupiedClasses);
 
     return true;
   }
@@ -261,7 +261,7 @@ export default class Droppable extends Draggable {
     }
 
     this.initialDropzone.appendChild(event.source);
-    this.lastDropzone.classList.remove(this.getClassNameFor('droppable:occupied'));
+    this.lastDropzone.classList.remove(...this.getClassNamesFor('droppable:occupied'));
   }
 
   /**

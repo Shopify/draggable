@@ -869,6 +869,50 @@ describe('Draggable', () => {
     expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBeFalsy();
   });
 
+  it('should have multiple classes for `source:original` on start', () => {
+    const sourceOriginalClasses = ['draggable--original', 'class1', 'class2'];
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+      classes: {
+        'source:original': sourceOriginalClasses,
+      },
+    });
+    const draggableElement = sandbox.querySelector('li');
+    document.elementFromPoint = () => draggableElement;
+
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
+
+    // Wait for delay
+    waitForDragDelay();
+
+    expect(newInstance.getClassNamesFor('source:original')).toEqual(sourceOriginalClasses);
+
+    triggerEvent(document.body, 'mouseup', {button: 0});
+  });
+
+  it('should removes all draggable classes for `source:original` on stop', () => {
+    const sourceOriginalClasses = ['draggable--original', 'class1', 'class2'];
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+      classes: {
+        'source:original': sourceOriginalClasses,
+      },
+    });
+    const draggableElement = sandbox.querySelector('li');
+    document.elementFromPoint = () => draggableElement;
+
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
+
+    // Wait for delay
+    waitForDragDelay();
+
+    triggerEvent(document.body, 'mouseup', {button: 0});
+
+    newInstance.getClassNamesFor('source:original').forEach((className) => {
+      expect(draggableElement.classList).not.toContain(className);
+    });
+  });
+
   it('`drag:out:container` event specifies leaving container', () => {
     const newInstance = new Draggable(containers, {
       draggable: 'li',

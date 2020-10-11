@@ -59,11 +59,13 @@
 }
 
 // --- Interaction
+// stylelint-disable-next-line no-duplicate-selectors
 .Brand {
   &:hover {
     @include logo-animation;
   }
 
+  // stylelint-disable-next-line no-duplicate-selectors
   &:active {
     .Wave--colorMask,
     .Wave--colorPurple,

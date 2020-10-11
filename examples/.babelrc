@@ -1,9 +1,13 @@
 {
   "presets": [
-    ["shopify/web", {
-      "shopify/web": {
-        "modules": false
+    [
+      "babel-preset-shopify/web",
+      {
+        "babel-preset-shopify/web": {
+          "modules": false,
+          "useBuiltIns": "entry"
+        }
       }
-    }]
+    ]
   ]
 }

@@ -46,9 +46,7 @@ $stacked-list-item: (
   position: absolute;
   display: block;
   background-color: currentColor;
-  transition:
-    color get-duration(fast) get-easing(),
-    opacity get-duration() get-easing();
+  transition: color get-duration(fast) get-easing(), opacity get-duration() get-easing();
 
   @if $vertical {
     right: 0;

@@ -1,4 +1,6 @@
+// eslint-disable-next-line shopify/strict-component-boundaries
 import Analytics from '../components/Analytics';
+// eslint-disable-next-line shopify/strict-component-boundaries
 import MobileNav from '../components/MobileNav';
 import Content from '../content';
 
@@ -12,6 +14,7 @@ mobileNav.init();
 
 // Initialize all examples
 for (const Example in Content) {
+  // eslint-disable-next-line no-prototype-builtins
   if (Content.hasOwnProperty(Example)) {
     Content[Example]();
   }

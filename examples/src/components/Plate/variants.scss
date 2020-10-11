@@ -76,9 +76,7 @@
   }
 
   .PlateShadowWrapper {
-    transform: translate3d(
-      var(--shadow-offset-x), var(--shadow-offset-y), 0
-    );
+    transform: translate3d(var(--shadow-offset-x), var(--shadow-offset-y), 0);
   }
 
   .PlateShadow::before {
@@ -99,14 +97,8 @@
   }
 
   &.Plate--levelBottom {
-    transform: translate3d(
-      var(--bottom-translate-x),
-      var(--bottom-translate-y),
-      0
-    ) scale(
-      var(--plate-scale-x),
-      var(--plate-scale-y)
-    );
+    transform: translate3d(var(--bottom-translate-x), var(--bottom-translate-y), 0)
+      scale(var(--plate-scale-x), var(--plate-scale-y));
 
     &:focus,
     &:hover {
@@ -118,14 +110,8 @@
   }
 
   &.Plate--levelMiddle {
-    transform: translate3d(
-      var(--middle-translate-x),
-      var(--middle-translate-y),
-      0
-    ) scale(
-      var(--plate-scale-x),
-      var(--plate-scale-y)
-    );
+    transform: translate3d(var(--middle-translate-x), var(--middle-translate-y), 0)
+      scale(var(--plate-scale-x), var(--plate-scale-y));
 
     &:focus,
     &:hover {
@@ -137,14 +123,8 @@
   }
 
   &.Plate--levelTop {
-    transform: translate3d(
-      var(--top-translate-x),
-      var(--top-translate-y),
-      0
-    ) scale(
-      var(--plate-scale-x),
-      var(--plate-scale-y)
-    );
+    transform: translate3d(var(--top-translate-x), var(--top-translate-y), 0)
+      scale(var(--plate-scale-x), var(--plate-scale-y));
 
     &:focus,
     &:hover {

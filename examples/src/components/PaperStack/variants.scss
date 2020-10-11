@@ -23,10 +23,8 @@
     color: get-color(coal, dark);
     background-color: white;
     border-color: currentColor;
-    transition:
-      color get-duration(fast) get-easing(),
-      background-color get-duration(fast) get-easing(),
-      transform get-duration() get-easing();
+    transition: color get-duration(fast) get-easing(),
+      background-color get-duration(fast) get-easing(), transform get-duration() get-easing();
   }
 
   // interaction
@@ -37,9 +35,7 @@
       transform: paper-stack-item(transform) translateY(get-spacing(tightest));
 
       &::after {
-        transform: translateY(
-          -(get-spacing(tightest))
-        );
+        transform: translateY(-(get-spacing(tightest)));
       }
     }
   }

@@ -15,9 +15,7 @@
   color: get-color(coal, dark);
   background-color: white;
   border: 0.4rem solid get-color(coal, dark);
-  transition:
-    color get-duration() get-easing(),
-    background-color get-duration() get-easing(),
+  transition: color get-duration() get-easing(), background-color get-duration() get-easing(),
     border-color get-duration() get-easing();
 
   @media screen and (min-width: get-breakpoint(tablet)) {

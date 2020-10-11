@@ -971,4 +971,29 @@ describe('Draggable', () => {
       releaseMouse(newInstance.source);
     });
   });
+
+  describe('when `drag:out`', () => {
+    it('should trigger dragOutEvent', () => {
+      const newInstance = new Draggable(containers, {
+        draggable: 'li',
+      });
+      const draggableElement = sandbox.querySelector('li');
+      document.elementFromPoint = () => draggableElement;
+
+      newInstance.on('drag:out', (event) => {
+        expect(event.overContainer).toBe(containers[0]);
+      });
+
+      clickMouse(draggableElement);
+
+      waitForDragDelay();
+
+      document.elementFromPoint = () => draggableElement.nextElementSibling;
+      moveMouse(draggableElement.nextElementSibling);
+
+      waitForDragDelay();
+
+      releaseMouse(newInstance.source);
+    });
+  });
 });

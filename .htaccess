@@ -1,0 +1,378 @@
+# Apache Server Configs v2.14.0 | MIT License
+# https://github.com/h5bp/server-configs-apache
+
+# ------------------------------------------------------------------------------
+# CORS-enabled images
+# ------------------------------------------------------------------------------
+
+# Send the CORS header for images when browsers request it
+<IfModule mod_setenvif.c>
+  <IfModule mod_headers.c>
+    <FilesMatch "\.(bmp|cur|gif|ico|jpe?g|png|svgz?|webp)$">
+      SetEnvIf Origin ":" IS_CORS
+      Header set Access-Control-Allow-Origin "*" env=IS_CORS
+    </FilesMatch>
+  </IfModule>
+</IfModule>
+
+
+# ------------------------------------------------------------------------------
+# Webfont access
+# ------------------------------------------------------------------------------
+
+# Allow access to web fonts from all domains
+<IfModule mod_headers.c>
+  <FilesMatch "\.(eot|otf|tt[cf]|woff2?)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+</IfModule>
+
+
+# ------------------------------------------------------------------------------
+# Internet Explorer
+# ------------------------------------------------------------------------------
+
+# Force IE to render pages in the highest available mode in the various cases when it may not
+<IfModule mod_headers.c>
+  Header set X-UA-Compatible "IE=edge"
+  # 'mod_headers' can't match based on the content-type, however, we only
+  # want to send this header for HTML pages and not for the other resources
+  <FilesMatch "\.(appcache|atom|bbaw|bmp|crx|css|cur|eot|f4[abpv]|flv|geojson|gif|htc|ico|jpe?g|js|json(ld)?|m4[av]|manifest|map|mp4|oex|og[agv]|opus|otf|pdf|png|rdf|rss|safariextz|svgz?|swf|topojson|tt[cf]|txt|vcard|vcf|vtt|webapp|web[mp]|webmanifest|woff2?|xloc|xml|xpi)$">
+    Header unset X-UA-Compatible
+  </FilesMatch>
+</IfModule>
+
+
+# ------------------------------------------------------------------------------
+# Proper MIME type for all files
+# ------------------------------------------------------------------------------
+
+<IfModule mod_mime.c>
+  # Data interchange
+  AddType application/atom+xml                        atom
+  AddType application/json                            json map topojson
+  AddType application/ld+json                         jsonld
+  AddType application/rss+xml                         rss
+  AddType application/vnd.geo+json                    geojson
+  AddType application/xml                             rdf xml
+  # JavaScript
+  AddType application/javascript                      js
+  # Manifest files
+  AddType application/manifest+json                   webmanifest
+  AddType application/x-web-app-manifest+json         webapp
+  AddType text/cache-manifest                         appcache
+  # Media files
+  AddType audio/mp4                                   f4a f4b m4a
+  AddType audio/ogg                                   oga ogg opus
+  AddType image/bmp                                   bmp
+  AddType image/svg+xml                               svg svgz
+  AddType image/webp                                  webp
+  AddType video/mp4                                   f4v f4p m4v mp4
+  AddType video/ogg                                   ogv
+  AddType video/webm                                  webm
+  AddType video/x-flv                                 flv
+  AddType image/x-icon                                cur ico
+  # Web fonts
+  AddType application/font-woff                       woff
+  AddType application/font-woff2                      woff2
+  AddType application/vnd.ms-fontobject               eot
+  AddType application/x-font-ttf                      ttc ttf
+  AddType font/opentype                               otf
+  # Other
+  AddType application/octet-stream                    safariextz
+  AddType application/x-bb-appworld                   bbaw
+  AddType application/x-chrome-extension              crx
+  AddType application/x-opera-extension               oex
+  AddType application/x-xpinstall                     xpi
+  AddType text/vcard                                  vcard vcf
+  AddType text/vnd.rim.location.xloc                  xloc
+  AddType text/vtt                                    vtt
+  AddType text/x-component                            htc
+</IfModule>
+
+
+# ------------------------------------------------------------------------------
+# UTF-8 encoding
+# ------------------------------------------------------------------------------
+
+# Use UTF-8 encoding for anything served text/plain or text/html
+AddDefaultCharset utf-8
+
+# Force UTF-8 for a number of file formats
+<IfModule mod_mime.c>
+  AddCharset utf-8 .atom \
+                   .bbaw \
+                   .css \
+                   .geojson \
+                   .js \
+                   .json \
+                   .jsonld \
+                   .manifest \
+                   .rdf \
+                   .rss \
+                   .topojson \
+                   .vtt \
+                   .webapp \
+                   .webmanifest \
+                   .xloc \
+                   .xml
+</IfModule>
+
+
+# ------------------------------------------------------------------------------
+# Start rewrite engine
+# ------------------------------------------------------------------------------
+
+# 1: Turn on the rewrite engine (this is necessary in order for the 'RewriteRule' directives to work)
+# 2: Enable the 'FollowSymLinks' option if it isn't already
+# 3: If your web host doesn't allow the 'FollowSymlinks' option, you need to comment it out or remove it,
+#    and then uncomment the 'Options +SymLinksIfOwnerMatch' (#4), but be aware of the performance impact
+# 4: Some cloud hosting services will require you set 'RewriteBase'
+# 5: Depending on how your server is set up, you may also need to use the 'RewriteOptions' directive
+#    to enable some options for the rewrite engine
+# 6: Set %{ENV:PROTO} variable, to allow rewrites to redirect with the appropriate schema automatically (http or https)
+
+<IfModule mod_rewrite.c>
+  #1
+  RewriteEngine On
+  #2
+  Options +FollowSymlinks
+  #3
+  # Options +SymLinksIfOwnerMatch
+  #4
+  # RewriteBase /
+  #5
+  # RewriteOptions <options>
+  #6
+  RewriteCond %{HTTPS} =on
+  RewriteRule ^ - [env=proto:https]
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ - [env=proto:http]
+</IfModule>
+
+# rewrite www.domain.com to domain.com
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ %{ENV:PROTO}://%1%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+
+# ------------------------------------------------------------------------------
+# Redirects
+# ------------------------------------------------------------------------------
+
+# <IfModule mod_rewrite.c>
+  # RewriteEngine On
+  # RewriteCond %{HTTP_HOST} ^producteursdepoulet.armystage\.com [NC]
+  # RewriteRule (.*) http://www.producteursdepoulet.armystage.com/$1 [L,R=301]
+# </IfModule>
+
+# Redirect 301 /courtyard http://ottawafringe.com/whats-on/fringe-courtyard
+
+ErrorDocument 404 /404.html
+
+
+# ------------------------------------------------------------------------------
+# Error prevention
+# ------------------------------------------------------------------------------
+
+# Disable the pattern matching based on filenames
+Options -MultiViews
+
+
+# ------------------------------------------------------------------------------
+# File access
+# ------------------------------------------------------------------------------
+
+# Block access to directories without a default document
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
+# Block access to hidden files and directories
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_URI} "!(^|/)\.well-known/([^./]+./?)+$" [NC]
+  RewriteCond %{SCRIPT_FILENAME} -d [OR]
+  RewriteCond %{SCRIPT_FILENAME} -f
+  RewriteRule "(^|/)\." - [F]
+</IfModule>
+
+# Block access to files that can expose sensitive information.
+<FilesMatch "(^#.*#|\.(bak|conf|dist|fla|in[ci]|log|psd|sh|sql|sw[op])|~)$">
+
+  # Apache < 2.3
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+    Satisfy All
+  </IfModule>
+
+  # Apache ≥ 2.3
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+
+</FilesMatch>
+
+
+# ------------------------------------------------------------------------------
+# Reducing MIME type security risks
+# ------------------------------------------------------------------------------
+
+# Prevent some browsers from MIME-sniffing the response
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+
+# ------------------------------------------------------------------------------
+# Server-side technology information
+# ------------------------------------------------------------------------------
+
+# Remove the 'X-Powered-By' response header
+<IfModule mod_headers.c>
+  Header unset X-Powered-By
+</IfModule>
+
+
+# ------------------------------------------------------------------------------
+# Server software information
+# ------------------------------------------------------------------------------
+
+# Prevent Apache from adding a trailing footer line containing information about the server to the server-generated documents
+ServerSignature Off
+
+
+# ------------------------------------------------------------------------------
+# Compression
+# ------------------------------------------------------------------------------
+
+<IfModule mod_deflate.c>
+
+  # Force compression for mangled 'Accept-Encoding' request headers
+  <IfModule mod_setenvif.c>
+    <IfModule mod_headers.c>
+      SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
+      RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
+    </IfModule>
+  </IfModule>
+
+  # Compress all output labeled with one of the following media types
+  # (!) For Apache versions below version 2.3.7 you don't need to enable 'mod_filter' and can remove the
+  # '<IfModule mod_filter.c>' and '</IfModule>' lines as 'AddOutputFilterByType' is still in the core directives
+  <IfModule mod_filter.c>
+    AddOutputFilterByType DEFLATE "application/atom+xml" \
+                                  "application/javascript" \
+                                  "application/json" \
+                                  "application/ld+json" \
+                                  "application/manifest+json" \
+                                  "application/rdf+xml" \
+                                  "application/rss+xml" \
+                                  "application/schema+json" \
+                                  "application/vnd.geo+json" \
+                                  "application/vnd.ms-fontobject" \
+                                  "application/x-font-ttf" \
+                                  "application/x-javascript" \
+                                  "application/x-web-app-manifest+json" \
+                                  "application/xhtml+xml" \
+                                  "application/xml" \
+                                  "font/eot" \
+                                  "font/opentype" \
+                                  "image/bmp" \
+                                  "image/svg+xml" \
+                                  "image/vnd.microsoft.icon" \
+                                  "image/x-icon" \
+                                  "text/cache-manifest" \
+                                  "text/css" \
+                                  "text/html" \
+                                  "text/javascript" \
+                                  "text/plain" \
+                                  "text/vcard" \
+                                  "text/vnd.rim.location.xloc" \
+                                  "text/vtt" \
+                                  "text/x-component" \
+                                  "text/x-cross-domain-policy" \
+                                  "text/xml"
+  </IfModule>
+
+  # Map the following filename extensions to the specified encoding type in order to make Apache serve the file types
+  # with the appropriate 'Content-Encoding' response header (do note that this will NOT make Apache compress them)
+  <IfModule mod_mime.c>
+    AddEncoding gzip              svgz
+  </IfModule>
+
+</IfModule>
+
+
+# ------------------------------------------------------------------------------
+# ETag removal
+# ------------------------------------------------------------------------------
+
+# Since we're sending far-future expires headers (see below), ETags can be removed
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+
+FileETag None
+
+
+# ------------------------------------------------------------------------------
+# Expires headers (for better cache control)
+# ------------------------------------------------------------------------------
+
+# The following expires headers are set pretty far in the future. If you don't control versioning with filename-based cache busting,
+# consider lowering the cache time for resources like CSS and JS to something like 1 week.
+<IfModule mod_expires.c>
+  ExpiresActive on
+  ExpiresDefault                                      "access plus 1 year"
+  # CSS
+  ExpiresByType text/css                              "access plus 1 year"
+  # Data interchange
+  ExpiresByType application/atom+xml                  "access plus 1 hour"
+  ExpiresByType application/rdf+xml                   "access plus 1 hour"
+  ExpiresByType application/rss+xml                   "access plus 1 hour"
+  ExpiresByType application/json                      "access plus 0 seconds"
+  ExpiresByType application/ld+json                   "access plus 0 seconds"
+  ExpiresByType application/schema+json               "access plus 0 seconds"
+  ExpiresByType application/vnd.geo+json              "access plus 0 seconds"
+  ExpiresByType application/xml                       "access plus 0 seconds"
+  ExpiresByType text/xml                              "access plus 0 seconds"
+  # Favicon (cannot be renamed!) and cursor images
+  ExpiresByType image/vnd.microsoft.icon              "access plus 1 week"
+  ExpiresByType image/x-icon                          "access plus 1 week"
+  # HTML
+  ExpiresByType text/html                             "access plus 0 seconds"
+  # JavaScript
+  ExpiresByType application/javascript                "access plus 1 year"
+  ExpiresByType application/x-javascript              "access plus 1 year"
+  ExpiresByType text/javascript                       "access plus 1 year"
+  # Manifest files
+  ExpiresByType application/manifest+json             "access plus 1 week"
+  ExpiresByType application/x-web-app-manifest+json   "access plus 0 seconds"
+  ExpiresByType text/cache-manifest                   "access plus 0 seconds"
+  # Media files
+  ExpiresByType audio/ogg                             "access plus 1 month"
+  ExpiresByType image/bmp                             "access plus 1 month"
+  ExpiresByType image/gif                             "access plus 1 month"
+  ExpiresByType image/jpeg                            "access plus 1 month"
+  ExpiresByType image/png                             "access plus 1 month"
+  ExpiresByType image/svg+xml                         "access plus 1 month"
+  ExpiresByType image/webp                            "access plus 1 month"
+  ExpiresByType video/mp4                             "access plus 1 month"
+  ExpiresByType video/ogg                             "access plus 1 month"
+  ExpiresByType video/webm                            "access plus 1 month"
+  # Web fonts
+  ExpiresByType application/vnd.ms-fontobject         "access plus 1 month"
+  ExpiresByType font/eot                              "access plus 1 month"
+  ExpiresByType font/opentype                         "access plus 1 month"
+  ExpiresByType application/x-font-ttf                "access plus 1 month"
+  ExpiresByType application/font-woff                 "access plus 1 month"
+  ExpiresByType application/x-font-woff               "access plus 1 month"
+  ExpiresByType font/woff                             "access plus 1 month"
+  ExpiresByType application/font-woff2                "access plus 1 month"
+  # Other
+  ExpiresByType text/x-cross-domain-policy            "access plus 1 week"
+</IfModule>

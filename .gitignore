@@ -1,24 +1,2 @@
-# Ignore OS Specific files
 .DS_Store
-
-# Ignore the SASS cache
-.sass-cache
-
-# Logs
-logs
-*.log
-
-# Dependency directory
-# Deployed apps should consider commenting this line out:
-# see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
 node_modules
-
-example.html
-
-coverage/
-docs/
-lib/
-coverage/
-
-# 'cause we are all yarny and stuff
-package-lock.json

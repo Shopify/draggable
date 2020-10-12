@@ -1,7 +1,0 @@
-node_modules
-packages
-/.github
-/assets-manifest.json
-/bundle-report.html
-/dist
-/package.json

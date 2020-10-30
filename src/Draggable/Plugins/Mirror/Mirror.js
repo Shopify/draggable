@@ -1,4 +1,5 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
+import {browserInfo} from 'shared/utils';
 
 import {
   MirrorCreateEvent,
@@ -277,13 +278,14 @@ export default class Mirror extends AbstractPlugin {
   [onMirrorCreated]({mirror, source, sensorEvent}) {
     const mirrorClasses = this.draggable.getClassNamesFor('mirror');
 
-    const setState = ({mirrorOffset, initialX, initialY, ...args}) => {
+    const setState = ({mirrorOffset, correctOffset, initialX, initialY, ...args}) => {
       this.mirrorOffset = mirrorOffset;
+      this.correctOffset = correctOffset;
       this.initialX = initialX;
       this.initialY = initialY;
       this.lastMovedX = initialX;
       this.lastMovedY = initialY;
-      return {mirrorOffset, initialX, initialY, ...args};
+      return {mirrorOffset, correctOffset, initialX, initialY, ...args};
     };
 
     mirror.style.display = 'none';
@@ -304,6 +306,7 @@ export default class Mirror extends AbstractPlugin {
         // Fix reflow here
         .then(computeMirrorDimensions)
         .then(calculateMirrorOffset)
+        .then(calculateCorrectOffset)
         .then(resetMirror)
         .then(addMirrorClasses)
         .then(positionMirror({initial: true}))
@@ -334,6 +337,7 @@ export default class Mirror extends AbstractPlugin {
       mirror: mirrorEvent.mirror,
       sensorEvent: mirrorEvent.sensorEvent,
       mirrorOffset: this.mirrorOffset,
+      correctOffset: this.correctOffset,
       options: this.options,
       initialX: this.initialX,
       initialY: this.initialY,
@@ -407,6 +411,49 @@ function calculateMirrorOffset({sensorEvent, sourceRect, options, ...args}) {
 }
 
 /**
+ * Calculates correct offset
+ * Adds correctOffset to state, because `position: fixed;` has some except
+ * See https://developer.mozilla.org/en-US/docs/Web/CSS/position
+ * @param {Object} state
+ * @param {HTMLElement} state.mirror
+ * @return {Promise}
+ * @private
+ */
+function calculateCorrectOffset({mirror, ...args}) {
+  return withPromise((resolve) => {
+    let x = 0;
+    let y = 0;
+    let container = mirror;
+
+    if (!browserInfo.IE11OrLess) {
+      do {
+        if (container && container.getBoundingClientRect) {
+          const containerStyle = getComputedStyle(container);
+          if (
+            (containerStyle.transform && containerStyle.transform !== 'none') ||
+            (containerStyle.perspective && containerStyle.perspective !== 'none') ||
+            (containerStyle.filter && containerStyle.filter !== 'none')
+          ) {
+            const containerRect = container.getBoundingClientRect();
+
+            // Set relative to edges of padding box of container
+            x = containerRect.top + parseInt(containerStyle['border-top-width'], 10);
+            y = containerRect.left + parseInt(containerStyle['border-left-width'], 10);
+
+            break;
+          }
+        }
+        /* jshint boss:true */
+      } while ((container = container.parentNode));
+    }
+
+    const correctOffset = {x, y};
+
+    resolve({mirror, correctOffset, ...args});
+  });
+}
+
+/**
  * Applys mirror styles
  * @param {Object} state
  * @param {HTMLElement} state.mirror
@@ -426,7 +473,7 @@ function resetMirror({mirror, source, options, ...args}) {
       offsetWidth = computedSourceStyles.getPropertyValue('width');
     }
 
-    mirror.style.display = null;
+    mirror.style.display = '';
     mirror.style.position = 'fixed';
     mirror.style.pointerEvents = 'none';
     mirror.style.top = 0;
@@ -478,6 +525,7 @@ function removeMirrorID({mirror, ...args}) {
  * @param {HTMLElement} state.mirror
  * @param {SensorEvent} state.sensorEvent
  * @param {Object} state.mirrorOffset
+ * @param {Object} state.correctOffset
  * @param {Number} state.initialY
  * @param {Number} state.initialX
  * @param {Object} state.options
@@ -489,6 +537,7 @@ function positionMirror({withFrame = false, initial = false} = {}) {
     mirror,
     sensorEvent,
     mirrorOffset,
+    correctOffset,
     initialY,
     initialX,
     scrollOffset,
@@ -505,18 +554,22 @@ function positionMirror({withFrame = false, initial = false} = {}) {
           mirror,
           sensorEvent,
           mirrorOffset,
+          correctOffset,
           options,
           ...args,
         };
 
         if (mirrorOffset) {
+          const thresholdX = options.thresholdX || 1;
+          const thresholdY = options.thresholdY || 1;
+
           const x = passedThreshX
-            ? Math.round((sensorEvent.clientX - mirrorOffset.left - scrollOffset.x) / (options.thresholdX || 1)) *
-              (options.thresholdX || 1)
+            ? Math.round((sensorEvent.clientX - mirrorOffset.left - scrollOffset.x - correctOffset.x) / thresholdX) *
+              thresholdX
             : Math.round(lastMovedX);
           const y = passedThreshY
-            ? Math.round((sensorEvent.clientY - mirrorOffset.top - scrollOffset.y) / (options.thresholdY || 1)) *
-              (options.thresholdY || 1)
+            ? Math.round((sensorEvent.clientY - mirrorOffset.top - scrollOffset.y - correctOffset.y) / thresholdY) *
+              thresholdY
             : Math.round(lastMovedY);
 
           if ((options.xAxis && options.yAxis) || initial) {

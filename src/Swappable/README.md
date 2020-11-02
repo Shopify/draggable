@@ -18,7 +18,7 @@ const swappable = new Swappable(document.querySelectorAll('ul'), {
 
 - Browser (All Bundle):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.bundle.js"></script>
 <script>
     const swappable = new Draggable.Swappable(document.querySelectorAll('ul'), {
       draggable: 'li'
@@ -28,7 +28,7 @@ const swappable = new Swappable(document.querySelectorAll('ul'), {
 
 - Browser (Standalone):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/swappable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/swappable.js"></script>
 <script>
     const swappable = new Swappable.default(document.querySelectorAll('ul'), {
       draggable: 'li'

@@ -31,7 +31,7 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 
 - Browser (All plugins bundle):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.bundle.js"></script>
 <script>
     const sortable = new Draggable.Sortable(document.querySelectorAll('ul'), {
       draggable: 'li',
@@ -46,8 +46,8 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 
 - Browser (Standalone):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/sortable.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.11/lib/plugins/sort-animation.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/sortable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/plugins/sort-animation.js"></script>
 <script>
     const sortable = new Sortable.default(document.querySelectorAll('ul'), {
       draggable: 'li',

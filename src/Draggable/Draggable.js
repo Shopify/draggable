@@ -557,11 +557,12 @@ export default class Draggable {
 
     this.dragging = false;
 
+    const sensorEvent = getSensorEvent(event);
     const dragStopEvent = new DragStopEvent({
       source: this.source,
       originalSource: this.originalSource,
-      sensorEvent: event.sensorEvent,
       sourceContainer: this.sourceContainer,
+      sensorEvent,
     });
 
     this.trigger(dragStopEvent);
@@ -605,8 +606,8 @@ export default class Draggable {
     const dragStoppedEvent = new DragStoppedEvent({
       source: this.source,
       originalSource: this.originalSource,
-      sensorEvent: event.sensorEvent,
       sourceContainer: this.sourceContainer,
+      sensorEvent,
     });
 
     this.trigger(dragStoppedEvent);

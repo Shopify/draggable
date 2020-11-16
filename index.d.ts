@@ -200,7 +200,7 @@ declare module '@shopify/draggable' {
         destroy(): void;
         on<T extends EventListType>(eventName: T, callback: (event: GetEventByEventName<T>) => void): this;
         off<T extends EventListType>(eventName: T, callback: (event: GetEventByEventName<T>) => void): this;
-        trigger(event: typeof AbstractEvent): void;
+        trigger(event: AbstractEvent): void;
         addPlugin(...plugins: Array<typeof AbstractPlugin>): this;
         removePlugin(...plugins: Array<typeof AbstractPlugin>): this;
         addSensor(...sensors: Array<typeof Sensor>): this;

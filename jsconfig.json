@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "helper": ["./scripts/test/helper.js"],
+      "shared/*": ["./src/shared/*"]
+    }
+  }
+}

@@ -22,5 +22,14 @@ Detaches sensors to the DOM
 
 ### Options
 
+**`draggable {String}`**  
+A css selector for draggable elements within the `containers` specified.
+
 **`delay {Number}`**  
-This value will delay touch start
+This value will delay touch start.
+
+**`distance {Number}`**  
+The distance you want the pointer to have moved before drag starts.
+
+**`handle {String}`**  
+Specify a css selector for a handle element if you don't want to allow drag action on the entire element.

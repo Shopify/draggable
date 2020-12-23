@@ -111,6 +111,17 @@ export default class TouchSensor extends Sensor {
     if (!container) {
       return;
     }
+
+    if (this.options.handle && event.target && !closest(event.target, this.options.handle)) {
+      return;
+    }
+
+    const originalSource = closest(event.target, this.options.draggable);
+
+    if (!originalSource) {
+      return;
+    }
+
     const {distance = 0} = this.options;
     const {delay} = this;
     const {pageX, pageY} = touchCoords(event);
@@ -119,6 +130,7 @@ export default class TouchSensor extends Sensor {
     this.onTouchStartAt = Date.now();
     this.startEvent = event;
     this.currentContainer = container;
+    this.originalSource = originalSource;
 
     document.addEventListener('touchend', this[onTouchEnd]);
     document.addEventListener('touchcancel', this[onTouchEnd]);
@@ -142,12 +154,14 @@ export default class TouchSensor extends Sensor {
     const startEvent = this.startEvent;
     const container = this.currentContainer;
     const touch = touchCoords(startEvent);
+    const originalSource = this.originalSource;
 
     const dragStartEvent = new DragStartSensorEvent({
       clientX: touch.pageX,
       clientY: touch.pageY,
       target: startEvent.target,
       container,
+      originalSource,
       originalEvent: startEvent,
     });
 

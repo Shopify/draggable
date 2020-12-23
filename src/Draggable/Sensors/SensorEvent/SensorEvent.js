@@ -59,6 +59,16 @@ export class SensorEvent extends AbstractEvent {
   }
 
   /**
+   * Draggables original source element
+   * @property originalSource
+   * @type {HTMLElement}
+   * @readonly
+   */
+  get originalSource() {
+    return this.data.originalSource;
+  }
+
+  /**
    * Trackpad pressure
    * @property pressure
    * @type {Number}

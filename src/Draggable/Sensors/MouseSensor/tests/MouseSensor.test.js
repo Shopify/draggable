@@ -3,8 +3,18 @@ import MouseSensor from '..';
 
 const sampleMarkup = `
   <ul>
-    <li>First item</li>
-    <li>Second item</li>
+    <li class="draggable">
+      <div class="handle">First handle</div>
+      First item
+    </li>
+    <li class="draggable">
+      <div class="handle">Second handle</div>
+      Second item
+    </li>
+    <li class="non-draggable">
+      <div class="handle">Non draggable handle</div>
+      Non draggable item
+    </li>
   </ul>
 `;
 
@@ -12,11 +22,20 @@ describe('MouseSensor', () => {
   let sandbox;
   let mouseSensor;
   let draggableElement;
+  let nonDraggableElement;
 
-  function setup(options = {delay: 0, distance: 0}) {
+  function setup(optionsParam = {}) {
+    const options = {
+      draggable: '.draggable',
+      delay: 0,
+      distance: 0,
+      ...optionsParam,
+    };
+
     sandbox = createSandbox(sampleMarkup);
     const containers = sandbox.querySelectorAll('ul');
-    draggableElement = sandbox.querySelector('li');
+    draggableElement = sandbox.querySelector('.draggable');
+    nonDraggableElement = sandbox.querySelector('.non-draggable');
     mouseSensor = new MouseSensor(containers, options);
     mouseSensor.attach();
   }
@@ -34,6 +53,8 @@ describe('MouseSensor', () => {
     it('does not trigger `drag:start` event when clicking on non draggable element', () => {
       function dragFlow() {
         clickMouse(document.body);
+        waitForDragDelay();
+        clickMouse(nonDraggableElement);
         waitForDragDelay();
       }
 
@@ -71,6 +92,16 @@ describe('MouseSensor', () => {
       clickMouse(document.body);
       moveMouse(document, {pageX: 1, pageY: 1});
       const nativeDragEvent = triggerEvent(draggableElement, 'dragstart');
+
+      expect(nativeDragEvent).not.toHaveDefaultPrevented();
+
+      releaseMouse(document.body);
+    });
+
+    it('does not prevent `dragstart` event when attempting to drag non draggable element', () => {
+      clickMouse(nonDraggableElement);
+      moveMouse(document, {pageX: 1, pageY: 1});
+      const nativeDragEvent = triggerEvent(nonDraggableElement, 'dragstart');
 
       expect(nativeDragEvent).not.toHaveDefaultPrevented();
 
@@ -126,9 +157,52 @@ describe('MouseSensor', () => {
     });
   });
 
+  describe('using handle', () => {
+    let handleInDraggableElement;
+    let handleInNonDraggableElement;
+
+    beforeEach(() => {
+      setup({handle: '.handle'});
+      handleInDraggableElement = sandbox.querySelector('.draggable .handle');
+      handleInNonDraggableElement = sandbox.querySelector('.non-draggable .handle');
+    });
+
+    afterEach(teardown);
+
+    it('does not prevent `dragstart` event when attempting to drag handle in non draggable element', () => {
+      clickMouse(handleInNonDraggableElement);
+      moveMouse(document, {pageX: 1, pageY: 1});
+      const nativeDragEvent = triggerEvent(handleInNonDraggableElement, 'dragstart');
+
+      expect(nativeDragEvent).not.toHaveDefaultPrevented();
+
+      releaseMouse(document.body);
+    });
+
+    it('prevent `dragstart` event when attempting to drag handle in draggable element', () => {
+      clickMouse(handleInDraggableElement);
+      moveMouse(document, {pageX: 1, pageY: 1});
+      const nativeDragEvent = triggerEvent(handleInDraggableElement, 'dragstart');
+
+      expect(nativeDragEvent).toHaveDefaultPrevented();
+
+      releaseMouse(document.body);
+    });
+
+    it('does not prevent `dragstart` event when attempting to drag outside of handle inside of draggable', () => {
+      clickMouse(draggableElement);
+      moveMouse(document, {pageX: 1, pageY: 1});
+      const nativeDragEvent = triggerEvent(draggableElement, 'dragstart');
+
+      expect(nativeDragEvent).not.toHaveDefaultPrevented();
+
+      releaseMouse(document.body);
+    });
+  });
+
   describe('using distance', () => {
     beforeEach(() => {
-      setup({delay: 0, distance: 1});
+      setup({distance: 1});
     });
 
     afterEach(teardown);
@@ -178,7 +252,7 @@ describe('MouseSensor', () => {
 
   describe('using delay', () => {
     beforeEach(() => {
-      setup({delay: DRAG_DELAY, distance: 0});
+      setup({delay: DRAG_DELAY});
     });
 
     afterEach(teardown);

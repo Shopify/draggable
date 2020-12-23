@@ -80,9 +80,9 @@ export default class DragSensor extends Sensor {
     event.dataTransfer.effectAllowed = this.options.type;
 
     const target = document.elementFromPoint(event.clientX, event.clientY);
-    this.currentContainer = closest(event.target, this.containers);
+    const originalSource = this.draggableElement;
 
-    if (!this.currentContainer) {
+    if (!originalSource) {
       return;
     }
 
@@ -90,6 +90,7 @@ export default class DragSensor extends Sensor {
       clientX: event.clientX,
       clientY: event.clientY,
       target,
+      originalSource,
       container: this.currentContainer,
       originalEvent: event,
     });
@@ -187,6 +188,23 @@ export default class DragSensor extends Sensor {
       return;
     }
 
+    const target = event.target;
+    this.currentContainer = closest(target, this.containers);
+
+    if (!this.currentContainer) {
+      return;
+    }
+
+    if (this.options.handle && target && !closest(target, this.options.handle)) {
+      return;
+    }
+
+    const originalSource = closest(target, this.options.draggable);
+
+    if (!originalSource) {
+      return;
+    }
+
     const nativeDraggableElement = closest(event.target, (element) => element.draggable);
 
     if (nativeDraggableElement) {
@@ -200,17 +218,11 @@ export default class DragSensor extends Sensor {
     document.addEventListener('dragend', this[onDragEnd], false);
     document.addEventListener('drop', this[onDrop], false);
 
-    const target = closest(event.target, this.options.draggable);
-
-    if (!target) {
-      return;
-    }
-
     this.startEvent = event;
 
     this.mouseDownTimeout = setTimeout(() => {
-      target.draggable = true;
-      this.draggableElement = target;
+      originalSource.draggable = true;
+      this.draggableElement = originalSource;
     }, this.delay.drag);
   }
 

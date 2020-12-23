@@ -387,7 +387,7 @@ export default class Draggable {
    */
   [onDragStart](event) {
     const sensorEvent = getSensorEvent(event);
-    const {target, container} = sensorEvent;
+    const {target, container, originalSource} = sensorEvent;
 
     if (!this.containers.includes(container)) {
       return;
@@ -398,14 +398,8 @@ export default class Draggable {
       return;
     }
 
-    // Find draggable source element
-    this.originalSource = closest(target, this.options.draggable);
+    this.originalSource = originalSource;
     this.sourceContainer = container;
-
-    if (!this.originalSource) {
-      sensorEvent.cancel();
-      return;
-    }
 
     if (this.lastPlacedSource && this.lastPlacedContainer) {
       clearTimeout(this.placedTimeoutID);

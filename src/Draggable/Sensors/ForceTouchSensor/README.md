@@ -1,6 +1,6 @@
 ## Force Touch Sensor
 
-__WORK IN PROGRESS__
+**WORK IN PROGRESS**
 
 _Draggable does not use this sensor by default_
 
@@ -26,8 +26,14 @@ Detaches sensors to the DOM
 
 ### Options
 
+**`draggable {String}`**  
+A css selector for draggable elements within the `containers` specified.
+
 **`delay {Number}`**  
 This value will delay force touch start
+
+**`handle {String}`**  
+Specify a css selector for a handle element if you don't want to allow drag action on the entire element.
 
 ### Example
 

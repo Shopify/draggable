@@ -13,8 +13,9 @@ import DragSensor from '..';
 
 const sampleMarkup = `
   <ul>
-    <li>First item</li>
-    <li>Second item</li>
+    <li class="draggable">First item</li>
+    <li class="draggable">Second item</li>
+    <li class="non-draggable">Non draggable item</li>
   </ul>
 `;
 
@@ -22,127 +23,209 @@ describe('DragSensor', () => {
   let sandbox;
   let dragSensor;
   let draggableElement;
+  let nonDraggableElement;
 
-  beforeEach(() => {
+  function setup(optionsParam = {}) {
+    const options = {
+      draggable: '.draggable',
+      delay: 0,
+      distance: 0,
+      ...optionsParam,
+    };
+
     sandbox = createSandbox(sampleMarkup);
     const containers = sandbox.querySelectorAll('ul');
-    draggableElement = sandbox.querySelector('li');
-    dragSensor = new DragSensor(containers, {
-      draggable: 'li',
-      delay: DRAG_DELAY,
-    });
+    draggableElement = sandbox.querySelector('.draggable');
+    nonDraggableElement = sandbox.querySelector('.non-draggable');
+    dragSensor = new DragSensor(containers, options);
     dragSensor.attach();
-  });
+  }
 
-  afterEach(() => {
+  function teardown() {
     dragSensor.detach();
     sandbox.parentNode.removeChild(sandbox);
-  });
+  }
 
-  it('mousedown handler adds draggable attribute', () => {
-    expect(draggableElement.draggable).toBeUndefined();
+  describe('common', () => {
+    beforeEach(setup);
 
-    clickMouse(draggableElement);
-    waitForDragDelay();
+    afterEach(teardown);
 
-    expect(draggableElement.draggable).toBe(true);
+    it('mousedown handler adds draggable attribute', () => {
+      expect(draggableElement.draggable).toBeUndefined();
 
-    releaseMouse(draggableElement);
-
-    expect(draggableElement.draggable).toBe(false);
-  });
-
-  it('triggers `drag:start` sensor event on dragstart', () => {
-    function dragFlow() {
       clickMouse(draggableElement);
       waitForDragDelay();
-      dragStart(draggableElement);
-      waitForDragDelay();
-      dragStop(draggableElement);
-      releaseMouse(document.body);
-    }
 
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:start');
-  });
+      expect(draggableElement.draggable).toBe(true);
 
-  it('cancels `drag:start` event when canceling sensor event', () => {
-    sandbox.addEventListener('drag:start', (event) => {
-      event.detail.cancel();
+      releaseMouse(draggableElement);
+
+      expect(draggableElement.draggable).toBe(false);
     });
 
-    function dragFlow() {
-      clickMouse(draggableElement);
-      waitForDragDelay();
-      dragStart(draggableElement);
-      waitForDragDelay();
-      dragStop(draggableElement);
-      releaseMouse(document.body);
-    }
+    it('triggers `drag:start` sensor event on dragstart', () => {
+      function dragFlow() {
+        clickMouse(draggableElement);
+        waitForDragDelay();
+        dragStart(draggableElement);
+        waitForDragDelay();
+        dragStop(draggableElement);
+        releaseMouse(document.body);
+      }
 
-    expect(dragFlow).toHaveCanceledSensorEvent('drag:start');
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:start');
+    });
+
+    it('cancels `drag:start` event when canceling sensor event', () => {
+      sandbox.addEventListener('drag:start', (event) => {
+        event.detail.cancel();
+      });
+
+      function dragFlow() {
+        clickMouse(draggableElement);
+        waitForDragDelay();
+        dragStart(draggableElement);
+        waitForDragDelay();
+        dragStop(draggableElement);
+        releaseMouse(document.body);
+      }
+
+      expect(dragFlow).toHaveCanceledSensorEvent('drag:start');
+    });
+
+    it('does not trigger `drag:start` event releasing mouse before timeout', () => {
+      function dragFlow() {
+        clickMouse(draggableElement);
+        waitForDragDelay();
+        dragStart(draggableElement);
+        waitForDragDelay();
+        dragStop(draggableElement);
+        releaseMouse(document.body);
+      }
+
+      function hastyDragFlow() {
+        clickMouse(draggableElement);
+        dragStart(draggableElement);
+        releaseMouse(document.body);
+      }
+
+      expect(hastyDragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+
+      expect(hastyDragFlow).not.toHaveTriggeredSensorEvent('drag:stop');
+
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:start');
+
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
+    });
+
+    it('triggers `drag:move` event while moving the mouse', () => {
+      function dragFlow() {
+        clickMouse(draggableElement);
+        waitForDragDelay();
+        dragStart(draggableElement);
+        waitForDragDelay();
+        dragOver(document.body);
+        dragStop(draggableElement);
+        releaseMouse(document.body);
+      }
+
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:move');
+    });
+
+    it('triggers `drag:stop` event when releasing mouse', () => {
+      function dragFlow() {
+        clickMouse(draggableElement);
+        waitForDragDelay();
+        dragStart(draggableElement);
+        waitForDragDelay();
+        dragOver(document.body);
+        dragStop(draggableElement);
+        releaseMouse(document.body);
+      }
+
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
+    });
+
+    it('does not trigger `drag:start` event when clicking on none draggable element', () => {
+      function dragFlow() {
+        clickMouse(document.body);
+        waitForDragDelay();
+        dragStart(document.body);
+        waitForDragDelay();
+        dragStop(draggableElement);
+        releaseMouse(document.body);
+
+        clickMouse(nonDraggableElement);
+        waitForDragDelay();
+        dragStart(nonDraggableElement);
+        waitForDragDelay();
+        dragStop(draggableElement);
+        releaseMouse(document.body);
+      }
+
+      expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+    });
   });
 
-  it('does not trigger `drag:start` event releasing mouse before timeout', () => {
-    function dragFlow() {
-      clickMouse(draggableElement);
-      waitForDragDelay();
-      dragStart(draggableElement);
-      waitForDragDelay();
-      dragStop(draggableElement);
-      releaseMouse(document.body);
-    }
+  describe('using delay', () => {
+    beforeEach(() => {
+      setup({delay: DRAG_DELAY});
+    });
 
-    function hastyDragFlow() {
-      clickMouse(draggableElement);
-      dragStart(draggableElement);
-      releaseMouse(document.body);
-    }
+    afterEach(teardown);
 
-    expect(hastyDragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+    it('triggers `drag:start` sensor event after delay', () => {
+      function dragFlow() {
+        clickMouse(draggableElement);
+        waitForDragDelay();
+        dragStart(draggableElement);
+        waitForDragDelay();
+        dragStop(draggableElement);
+        releaseMouse(document.body);
+      }
 
-    expect(hastyDragFlow).not.toHaveTriggeredSensorEvent('drag:stop');
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:start');
+    });
 
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:start');
+    it('does not trigger `drag:start` event releasing mouse before delay', () => {
+      function dragFlow() {
+        clickMouse(draggableElement);
+        waitForDragDelay();
+        dragStart(draggableElement);
+        waitForDragDelay();
+        dragStop(draggableElement);
+        releaseMouse(document.body);
+      }
 
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
-  });
+      function hastyDragFlow() {
+        clickMouse(draggableElement);
+        dragStart(draggableElement);
+        dragStop(draggableElement);
+        releaseMouse(document.body);
+      }
 
-  it('triggers `drag:move` event while moving the mouse', () => {
-    function dragFlow() {
-      clickMouse(draggableElement);
-      waitForDragDelay();
-      dragStart(draggableElement);
-      waitForDragDelay();
-      dragOver(document.body);
-      dragStop(draggableElement);
-      releaseMouse(document.body);
-    }
+      expect(hastyDragFlow).not.toHaveTriggeredSensorEvent('drag:start');
 
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:move');
-  });
+      expect(hastyDragFlow).not.toHaveTriggeredSensorEvent('drag:stop');
 
-  it('triggers `drag:stop` event when releasing mouse', () => {
-    function dragFlow() {
-      clickMouse(draggableElement);
-      waitForDragDelay();
-      dragStart(draggableElement);
-      waitForDragDelay();
-      dragOver(document.body);
-      dragStop(draggableElement);
-      releaseMouse(document.body);
-    }
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:start');
 
-    expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
-  });
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:stop');
+    });
 
-  it('does not trigger `drag:start` event when clicking on none draggable element', () => {
-    function dragFlow() {
-      clickMouse(document.body);
-      waitForDragDelay();
-      dragStart(document.body);
-      waitForDragDelay();
-    }
+    it('triggers `drag:move` event while moving the mouse after delay', () => {
+      function dragFlow() {
+        clickMouse(draggableElement);
+        waitForDragDelay();
+        dragStart(draggableElement);
+        waitForDragDelay();
+        dragOver(document.body);
+        dragStop(draggableElement);
+        releaseMouse(document.body);
+      }
 
-    expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
+      expect(dragFlow).toHaveTriggeredSensorEvent('drag:move');
+    });
   });
 });

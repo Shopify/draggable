@@ -1,3 +1,4 @@
+import {closest} from 'shared/utils';
 import Sensor from '../Sensor';
 import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent, DragPressureSensorEvent} from '../SensorEvent';
 
@@ -93,11 +94,22 @@ export default class ForceTouchSensor extends Sensor {
     const target = document.elementFromPoint(event.clientX, event.clientY);
     const container = event.currentTarget;
 
+    if (this.options.handle && target && !closest(target, this.options.handle)) {
+      return;
+    }
+
+    const originalSource = closest(target, this.options.draggable);
+
+    if (!originalSource) {
+      return;
+    }
+
     const dragStartEvent = new DragStartSensorEvent({
       clientX: event.clientX,
       clientY: event.clientY,
       target,
       container,
+      originalSource,
       originalEvent: event,
     });
 

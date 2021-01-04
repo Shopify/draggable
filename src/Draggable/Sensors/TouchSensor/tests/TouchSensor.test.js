@@ -4,8 +4,9 @@ import TouchSensor from '..';
 
 const sampleMarkup = `
   <ul>
-    <li>First item</li>
-    <li>Second item</li>
+    <li class="draggable">First item</li>
+    <li class="draggable">Second item</li>
+    <li class="non-draggable">Non draggable item</li>
   </ul>
 `;
 
@@ -13,11 +14,20 @@ describe('TouchSensor', () => {
   let sandbox;
   let touchSensor;
   let draggableElement;
+  let nonDraggableElement;
 
-  function setup(options = {delay: 0, distance: 0}) {
+  function setup(optionsParam = {}) {
+    const options = {
+      draggable: '.draggable',
+      delay: 0,
+      distance: 0,
+      ...optionsParam,
+    };
+
     sandbox = createSandbox(sampleMarkup);
     const containers = sandbox.querySelectorAll('ul');
-    draggableElement = sandbox.querySelector('li');
+    draggableElement = sandbox.querySelector('.draggable');
+    nonDraggableElement = sandbox.querySelector('.non-draggable');
     touchSensor = new TouchSensor(containers, options);
     touchSensor.attach();
   }
@@ -49,6 +59,8 @@ describe('TouchSensor', () => {
     it('prevents `drag:start` when trying to drag a none draggable element', () => {
       function dragFlow() {
         touchStart(document.body);
+        waitForDragDelay();
+        touchStart(nonDraggableElement);
         waitForDragDelay();
       }
 
@@ -101,7 +113,7 @@ describe('TouchSensor', () => {
 
   describe('using distance', () => {
     beforeEach(() => {
-      setup({delay: 0, distance: 1});
+      setup({distance: 1});
     });
 
     afterEach(teardown);
@@ -157,7 +169,7 @@ describe('TouchSensor', () => {
 
   describe('using delay', () => {
     beforeEach(() => {
-      setup({delay: DRAG_DELAY, distance: 0});
+      setup({delay: DRAG_DELAY});
     });
 
     afterEach(teardown);

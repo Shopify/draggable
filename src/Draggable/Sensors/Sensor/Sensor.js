@@ -46,6 +46,13 @@ export default class Sensor {
     this.currentContainer = null;
 
     /**
+     * Draggables original source element
+     * @property originalSource
+     * @type {HTMLElement}
+     */
+    this.originalSource = null;
+
+    /**
      * The event of the initial sensor down
      * @property startEvent
      * @type {Event}

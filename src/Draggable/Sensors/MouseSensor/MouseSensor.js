@@ -83,6 +83,16 @@ export default class MouseSensor extends Sensor {
       return;
     }
 
+    if (this.options.handle && event.target && !closest(event.target, this.options.handle)) {
+      return;
+    }
+
+    const originalSource = closest(event.target, this.options.draggable);
+
+    if (!originalSource) {
+      return;
+    }
+
     const {delay} = this;
     const {pageX, pageY} = event;
 
@@ -91,6 +101,7 @@ export default class MouseSensor extends Sensor {
     this.startEvent = event;
 
     this.currentContainer = container;
+    this.originalSource = originalSource;
     document.addEventListener('mouseup', this[onMouseUp]);
     document.addEventListener('dragstart', preventNativeDragStart);
     document.addEventListener('mousemove', this[onDistanceChange]);
@@ -107,12 +118,14 @@ export default class MouseSensor extends Sensor {
   [startDrag]() {
     const startEvent = this.startEvent;
     const container = this.currentContainer;
+    const originalSource = this.originalSource;
 
     const dragStartEvent = new DragStartSensorEvent({
       clientX: startEvent.clientX,
       clientY: startEvent.clientY,
       target: startEvent.target,
       container,
+      originalSource,
       originalEvent: startEvent,
     });
 

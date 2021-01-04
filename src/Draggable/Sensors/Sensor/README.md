@@ -27,5 +27,14 @@ Triggers sensor event on container element
 
 ### Options
 
+**`draggable {String}`**  
+A css selector for draggable elements within the `containers` specified.
+
 **`delay {Number}`**  
-This value will delay drag start
+This value will delay drag start.
+
+**`distance {Number}`**  
+The distance you want the pointer to have moved before drag starts.
+
+**`handle {String}`**  
+Specify a css selector for a handle element if you don't want to allow drag action on the entire element.

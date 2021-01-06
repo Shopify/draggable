@@ -1,0 +1,11 @@
+{% macro render(id) %}
+  <section id="{{ id }}" class="{{ id }}">
+    <article class="PanImageWrapper">
+      <div class="PanImageContainer">
+        <div class="SvgContainer PanImagePannable">
+          {% include 'content/Pannable/PanImage/image.html' %}
+        </div>
+      </div>
+    </article>
+  </section>
+{% endmacro %}

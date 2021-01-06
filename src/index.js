@@ -10,5 +10,6 @@ export {default as Draggable} from './Draggable';
 export {default as Droppable} from './Droppable';
 export {default as Swappable} from './Swappable';
 export {default as Sortable} from './Sortable';
+export {default as Pannable} from './Pannable';
 
 export {Sensors, Plugins};

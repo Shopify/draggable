@@ -1,0 +1,29 @@
+{% extends 'templates/document.html' %}
+
+{% import 'components/Document/Head.html' as Head %}
+{% import 'components/Sidebar/Sidebar.html' as Sidebar %}
+{% import 'components/PageHeader/PageHeader.html' as PageHeader %}
+
+{% import 'content/Pannable/PanImage/PanImage.html' as PanImage %}
+
+{% set ViewAttr = {
+  id: 'PanImage',
+  parent: 'Pannable',
+  child: 'Pannable image',
+  subheading: 'Pan an image around within it\'s container.'
+} %}
+
+{% block PageId %}{{ ViewAttr.id }}{% endblock %}
+
+{% block head %}
+  {{ Head.render(ViewAttr) }}
+{% endblock %}
+
+{% block sidebar %}
+  {{ Sidebar.render(ViewAttr, DataPages) }}
+{% endblock %}
+
+{% block main %}
+  {{ PageHeader.render(ViewAttr) }}
+  {{ PanImage.render(ViewAttr.id) }}
+{% endblock %}

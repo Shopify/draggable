@@ -381,6 +381,76 @@ export default class Draggable {
   }
 
   /**
+   * Drag stop function
+   * @param {Event} event - DOM Drag event
+   */
+  cancel(event) {
+    if (!this.dragging) {
+      return;
+    }
+
+    this.dragging = false;
+
+    const dragStopEvent = new DragStopEvent({
+      source: this.source,
+      originalSource: this.originalSource,
+      sourceContainer: this.sourceContainer,
+    });
+
+    this.trigger(dragStopEvent);
+
+    this.source.parentNode.insertBefore(this.originalSource, this.source);
+    this.source.parentNode.removeChild(this.source);
+    this.originalSource.style.display = '';
+
+    this.source.classList.remove(...this.getClassNamesFor('source:dragging'));
+    this.originalSource.classList.remove(...this.getClassNamesFor('source:original'));
+    this.originalSource.classList.add(...this.getClassNamesFor('source:placed'));
+    this.sourceContainer.classList.add(...this.getClassNamesFor('container:placed'));
+    this.sourceContainer.classList.remove(...this.getClassNamesFor('container:dragging'));
+    document.body.classList.remove(...this.getClassNamesFor('body:dragging'));
+    applyUserSelect(document.body, '');
+
+    if (this.currentOver) {
+      this.currentOver.classList.remove(...this.getClassNamesFor('draggable:over'));
+    }
+
+    if (this.currentOverContainer) {
+      this.currentOverContainer.classList.remove(...this.getClassNamesFor('container:over'));
+    }
+
+    this.lastPlacedSource = this.originalSource;
+    this.lastPlacedContainer = this.sourceContainer;
+
+    this.placedTimeoutID = setTimeout(() => {
+      if (this.lastPlacedSource) {
+        this.lastPlacedSource.classList.remove(...this.getClassNamesFor('source:placed'));
+      }
+
+      if (this.lastPlacedContainer) {
+        this.lastPlacedContainer.classList.remove(...this.getClassNamesFor('container:placed'));
+      }
+
+      this.lastPlacedSource = null;
+      this.lastPlacedContainer = null;
+    }, this.options.placedTimeout);
+
+    const dragStoppedEvent = new DragStoppedEvent({
+      source: this.source,
+      originalSource: this.originalSource,
+      sourceContainer: this.sourceContainer,
+    });
+
+    this.trigger(dragStoppedEvent);
+
+    this.source = null;
+    this.originalSource = null;
+    this.currentOverContainer = null;
+    this.currentOver = null;
+    this.sourceContainer = null;
+  }
+
+  /**
    * Drag start handler
    * @private
    * @param {Event} event - DOM Drag event

@@ -95,16 +95,12 @@ export default function DragEvents() {
   });
 
   const triggerMouseUpOnESC = (evt) => {
-    if (evt.key == "Escape") {
+    if (evt.key === 'Escape') {
       draggable.cancel();
     }
   };
 
-  draggable.on("drag:start", (evt) => {
-    document.addEventListener('keyup', triggerMouseUpOnESC);
-  });
-
-  draggable.on("drag:start", (evt) => {
+  draggable.on('drag:start', () => {
     document.addEventListener('keyup', triggerMouseUpOnESC);
   });
 

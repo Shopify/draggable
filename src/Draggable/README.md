@@ -82,7 +82,11 @@ Returns array of class name for class identifier, useful when working with atomi
 Returns true or false, depending on this draggables dragging state.
 
 **`draggable.getDraggableElementsForContainer(container: HTMLElement): HTMLElement[]`**  
-Returns draggable elements for given container, excluding potential mirror or original source.
+Returns draggable elements for given container, excluding potential mirror or original so
+urce.
+**`draggable.cancel(): void`**  
+Cancel current dragging state immediately
+*NOTE*: Can't revert elements that were changed to the beginning state (e.g sorted elements)
 
 ### Options
 
@@ -203,6 +207,18 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 
 Create draggable with specific classes:
 
+```js
+import { Draggable } from '@shopify/draggable';
+
+const draggable = new Draggable(document.querySelectorAll('ul'), {
+  draggable: 'li',
+  classes: {
+    'draggable:over': ['draggable--over', 'bg-red-200', 'bg-opacity-25'],
+  },
+});
+```
+
+Cancel dragging on ESC key up:
 ```js
 import { Draggable } from '@shopify/draggable';
 

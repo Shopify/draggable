@@ -22,6 +22,7 @@ const onDragStart = Symbol('onDragStart');
 const onDragMove = Symbol('onDragMove');
 const onDragStop = Symbol('onDragStop');
 const onDragPressure = Symbol('onDragPressure');
+const dragStop = Symbol('dragStop');
 
 /**
  * @const {Object} defaultAnnouncements
@@ -156,6 +157,7 @@ export default class Draggable {
     this[onDragMove] = this[onDragMove].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
     this[onDragPressure] = this[onDragPressure].bind(this);
+    this[dragStop] = this[dragStop].bind(this);
 
     document.addEventListener('drag:start', this[onDragStart], true);
     document.addEventListener('drag:move', this[onDragMove], true);
@@ -381,6 +383,13 @@ export default class Draggable {
   }
 
   /**
+   * Cancel dragging immediately
+   */
+  cancel() {
+    this[dragStop]();
+  }
+
+  /**
    * Drag start handler
    * @private
    * @param {Event} event - DOM Drag event
@@ -550,7 +559,7 @@ export default class Draggable {
    * @private
    * @param {Event} event - DOM Drag event
    */
-  [onDragStop](event) {
+  [dragStop](event) {
     if (!this.dragging) {
       return;
     }
@@ -560,7 +569,7 @@ export default class Draggable {
     const dragStopEvent = new DragStopEvent({
       source: this.source,
       originalSource: this.originalSource,
-      sensorEvent: event.sensorEvent,
+      sensorEvent: event ? event.sensorEvent : null,
       sourceContainer: this.sourceContainer,
     });
 
@@ -605,7 +614,7 @@ export default class Draggable {
     const dragStoppedEvent = new DragStoppedEvent({
       source: this.source,
       originalSource: this.originalSource,
-      sensorEvent: event.sensorEvent,
+      sensorEvent: event ? event.sensorEvent : null,
       sourceContainer: this.sourceContainer,
     });
 
@@ -616,6 +625,13 @@ export default class Draggable {
     this.currentOverContainer = null;
     this.currentOver = null;
     this.sourceContainer = null;
+  }
+
+  /**
+   * Drag stop handler
+   */
+  [onDragStop](event) {
+    this[dragStop](event);
   }
 
   /**

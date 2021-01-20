@@ -608,6 +608,31 @@ describe('Draggable', () => {
     expect(call).toBeInstanceOf(DragStopEvent);
   });
 
+  it('triggers `drag:stop` drag event on cancel', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
+
+    const draggableElement = sandbox.querySelector('li');
+    document.elementFromPoint = () => draggableElement;
+
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
+
+    // Wait for delay
+    waitForDragDelay();
+
+    const callback = jest.fn();
+    newInstance.on('drag:stop', callback);
+
+    newInstance.cancel();
+
+    const call = callback.mock.calls[0][0];
+
+    expect(call.type).toBe('drag:stop');
+
+    expect(call).toBeInstanceOf(DragStopEvent);
+  });
+
   it('triggers `drag:stopped` drag event on mouseup', () => {
     const newInstance = new Draggable(containers, {
       draggable: 'li',
@@ -624,6 +649,30 @@ describe('Draggable', () => {
     newInstance.on('drag:stopped', callback);
 
     triggerEvent(draggableElement, 'mouseup', {button: 0});
+
+    const call = callback.mock.calls[0][0];
+
+    expect(call.type).toBe('drag:stopped');
+
+    expect(call).toBeInstanceOf(DragStoppedEvent);
+  });
+
+  it('triggers `drag:stopped` drag event on cancel', () => {
+    const newInstance = new Draggable(containers, {
+      draggable: 'li',
+    });
+    const draggableElement = sandbox.querySelector('li');
+    document.elementFromPoint = () => draggableElement;
+
+    triggerEvent(draggableElement, 'mousedown', {button: 0});
+
+    // Wait for delay
+    waitForDragDelay();
+
+    const callback = jest.fn();
+    newInstance.on('drag:stopped', callback);
+
+    newInstance.cancel();
 
     const call = callback.mock.calls[0][0];
 

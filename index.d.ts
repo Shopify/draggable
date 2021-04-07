@@ -90,7 +90,7 @@ declare module '@shopify/draggable' {
         ? SnapOutEvent
         : AbstractEvent;
 
-    interface DelayOptions {
+    export interface DelayOptions {
         mouse?: number;
         drag?: number;
         touch?: number;
@@ -173,7 +173,7 @@ declare module '@shopify/draggable' {
 
     export type DraggableContainer = HTMLElement | HTMLElement[] | NodeList;
 
-    interface DraggableOptions {
+    export interface DraggableOptions {
         draggable?: string;
         distance?: number;
         handle?: string | NodeList | HTMLElement[] | HTMLElement | ((currentElement: HTMLElement) => HTMLElement);

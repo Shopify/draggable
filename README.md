@@ -41,6 +41,8 @@ interface, for more information read the documentation below.
 
 ## Install
 
+**NOTE**: When installing with npm or yarn, `@shopify/draggable@1.0.0-beta.8` will be installed by default. If you want to install the latest version, please install `@shopify/draggable@1.0.0-beta.12` or `@shopify/draggable@next`.
+
 You can install the library via npm.
 
 ```
@@ -120,13 +122,15 @@ You can find the documentation for each module within their respective directori
   - [ResizeMirror](src/Plugins/ResizeMirror)
   - [Snappable](src/Plugins/Snappable)
   - [SwapAnimation](src/Plugins/SwapAnimation)
-  - [SortAnimation](src/Plugins/SortAnimation)
+  - [SortAnimation](src/Plugins/SortAnimation) (Added in: v1.0.0-beta.10)
 - [Sortable](src/Sortable)
   - [SortableEvent](src/Sortable/SortableEvent)
 - [Swappable](src/Swappable)
   - [SwappableEvent](src/Swappable/SwappableEvent)
 
 ## TypeScript
+
+(Added in: v1.0.0-beta.9)
 
 Draggable includes [TypeScript](http://typescriptlang.org) definitions.
 

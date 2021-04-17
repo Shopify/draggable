@@ -227,6 +227,8 @@ export class DragStopEvent extends DragEvent {
 }
 
 /**
+ * (Added in: v1.0.0-beta.12)
+ *
  * Drag stopped event
  * @class DragStoppedEvent
  * @module DragStoppedEvent

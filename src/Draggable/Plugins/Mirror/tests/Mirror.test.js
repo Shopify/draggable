@@ -14,6 +14,7 @@ import {
   MirrorCreatedEvent,
   MirrorAttachedEvent,
   MirrorMoveEvent,
+  MirrorMovedEvent,
   MirrorDestroyEvent,
 } from '../MirrorEvent';
 
@@ -208,6 +209,38 @@ describe('Mirror', () => {
       sourceContainer: dragEvent.sourceContainer,
       sensorEvent: dragEvent.sensorEvent,
       originalEvent: dragEvent.originalEvent,
+    });
+
+    releaseMouse(draggable.source);
+  });
+
+  it('triggers `mirror:moved` event on `drag:move` was done', async () => {
+    draggable = new Draggable(container, draggableOptions);
+
+    const mirrorMovedHandler = jest.fn();
+    let mirrorMoveEvent;
+
+    draggable.on('mirror:moved', mirrorMovedHandler);
+    draggable.on('mirror:move', (evt) => (mirrorMoveEvent = evt));
+
+    clickMouse(draggableElement);
+    waitForDragDelay();
+
+    await waitForPromisesToResolve();
+
+    moveMouse(document.body);
+
+    await waitForPromisesToResolve();
+
+    expect(mirrorMovedHandler).toHaveBeenCalledWithEvent(MirrorMovedEvent);
+    expect(mirrorMovedHandler).toHaveBeenCalledWithEventProperties({
+      dragEvent: mirrorMoveEvent.dragEvent,
+      mirror: mirrorMoveEvent.mirror,
+      source: mirrorMoveEvent.source,
+      originalSource: mirrorMoveEvent.originalSource,
+      sourceContainer: mirrorMoveEvent.sourceContainer,
+      sensorEvent: mirrorMoveEvent.sensorEvent,
+      originalEvent: mirrorMoveEvent.originalEvent,
     });
 
     releaseMouse(draggable.source);

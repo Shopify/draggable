@@ -88,7 +88,33 @@ The mirror follows your mouse/touch movements.
 | **Interface**     | `MirrorMoveEvent`     |
 | **Cancelable**    | true                  |
 | **Cancel action** | Stops mirror movement |
-| **type**          | `drag:over`           |
+| **type**          | `mirror:move`           |
+
+### API
+
+**`mirrorEvent.mirror: HTMLElement`**  
+Read-only property for the mirror element, which is also a copy of the `originalSource` element.
+The mirror follows your mouse/touch movements.
+
+**`mirrorEvent.passedThreshX: Booolean`**  
+Read-only property for whether or not the mirror's threshold has been exceeded in the x axis.
+
+**`mirrorEvent.passedThreshY: Booolean`**  
+Read-only property for whether or not the mirror's threshold has been exceeded in the y axis.
+
+## MirrorMovedEvent
+
+**NOTE**: Will be added in the next version (v1.0.0-beta.13)
+
+`MirrorMovedEvent` gets triggered when the **mirror:move** event was done.
+
+|                   |                       |
+| ----------------- | --------------------- |
+| **Specification** | `MirrorEvent`         |
+| **Interface**     | `MirrorMovedEvent`     |
+| **Cancelable**    | false                 |
+| **Cancel action** | -                     |
+| **type**          | `mirror:moved`           |
 
 ### API
 

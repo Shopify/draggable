@@ -5,6 +5,7 @@ import {
   MirrorCreatedEvent,
   MirrorAttachedEvent,
   MirrorMoveEvent,
+  MirrorMovedEvent,
   MirrorDestroyEvent,
 } from './MirrorEvent';
 
@@ -329,6 +330,22 @@ export default class Mirror extends AbstractPlugin {
 
       return {lastMovedX, lastMovedY, ...args};
     };
+    const triggerMoved = (args) => {
+      const mirrorMovedEvent = new MirrorMovedEvent({
+        source: mirrorEvent.source,
+        originalSource: mirrorEvent.originalSource,
+        sourceContainer: mirrorEvent.sourceContainer,
+        sensorEvent: mirrorEvent.sensorEvent,
+        dragEvent: mirrorEvent.dragEvent,
+        mirror: this.mirror,
+        passedThreshX: mirrorEvent.passedThreshX,
+        passedThreshY: mirrorEvent.passedThreshY,
+      });
+
+      this.draggable.trigger(mirrorMovedEvent);
+
+      return args;
+    };
 
     const initialState = {
       mirror: mirrorEvent.mirror,
@@ -346,7 +363,8 @@ export default class Mirror extends AbstractPlugin {
 
     return Promise.resolve(initialState)
       .then(positionMirror({raf: true}))
-      .then(setState);
+      .then(setState)
+      .then(triggerMoved);
   }
 
   /**

@@ -162,6 +162,45 @@ export class MirrorMoveEvent extends MirrorEvent {
 }
 
 /**
+ * NOTE: Will be added in the next version (v1.0.0-beta.13)
+ * Mirror moved event
+ * @class MirrorMovedEvent
+ * @module MirrorMovedEvent
+ * @extends MirrorEvent
+ */
+export class MirrorMovedEvent extends MirrorEvent {
+  static type = 'mirror:moved';
+
+  /**
+   * Draggables mirror element
+   * @property mirror
+   * @type {HTMLElement}
+   * @readonly
+   */
+  get mirror() {
+    return this.data.mirror;
+  }
+
+  /**
+   * Sensor has exceeded mirror's threshold on x axis
+   * @type {Boolean}
+   * @readonly
+   */
+  get passedThreshX() {
+    return this.data.passedThreshX;
+  }
+
+  /**
+   * Sensor has exceeded mirror's threshold on y axis
+   * @type {Boolean}
+   * @readonly
+   */
+  get passedThreshY() {
+    return this.data.passedThreshY;
+  }
+}
+
+/**
  * Mirror destroy event
  * @class MirrorDestroyEvent
  * @module MirrorDestroyEvent

@@ -21,7 +21,7 @@ const droppable = new Droppable(document.querySelectorAll('.container'), {
 
 - Browser (All Bundle):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
 <script>
     const droppable = new Draggable.Droppable(document.querySelectorAll('.container'), {
       draggable: '.item',
@@ -32,7 +32,7 @@ const droppable = new Droppable(document.querySelectorAll('.container'), {
 
 - Browser (Standalone):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/droppable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/droppable.js"></script>
 <script>
     const droppable = new Droppable.default(document.querySelectorAll('.container'), {
       draggable: '.item',

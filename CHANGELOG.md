@@ -1,5 +1,18 @@
 # Changelog
 
+## v1.0.0-beta.13 - 2021-05-17
+
+### Added
+
+- Add `mirror:moved` event
+- Cancel Dragging on ESC key up
+
+### Changed
+
+- Fixes add missing exports `DelayOptions` and `DelayOptions`
+- Fixes return early when the target isn't in handle or draggable elements sensor
+- Fixes the argument type of the `trigger` method
+
 ## v1.0.0-beta.12 - 2020-09-29
 
 ### Added
@@ -10,8 +23,8 @@
 ### Changed
 
 - Fixes incorrect `oldIndex` value when working with **nested sortable**
-- Fixes wrong same container checking bug when working with **nested sortable** 
-- Fixes bug `drag:start` event was triggered  during the delay time
+- Fixes wrong same container checking bug when working with **nested sortable**
+- Fixes bug `drag:start` event was triggered during the delay time
 - Fixes missing `overContainer` property in **DragOutEvent**
 
 ## v1.0.0-beta.11 - 2020-07-14

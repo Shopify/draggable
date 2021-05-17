@@ -15,7 +15,7 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 
 - Browser (All Bundle):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
 <script>
     const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
       draggable: 'li'
@@ -25,7 +25,7 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 
 - Browser (Standalone):
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.js"></script>
 <script>
     const draggable = new Draggable.default(document.querySelectorAll('ul'), {
       draggable: 'li'
@@ -99,6 +99,7 @@ Specify a css selector for a handle element if you don't want to allow drag acti
 on the entire element. Default: `null`
 
 **`delay {Number|Object}`**  
+(Support set object in: v1.0.0-beta.12)  
 If you want to delay a drag start you can specify delay in milliseconds. This can be useful
 for draggable elements within scrollable containers. To allow touch scrolling, we set 100ms delay for TouchSensor by default. Default:
 
@@ -113,6 +114,7 @@ for draggable elements within scrollable containers. To allow touch scrolling, w
 You can set the same delay for all sensors by setting a number, or set an object to set the delay for each sensor separately.
 
 **`distance {Number}`**  
+(Added in: v1.0.0-beta.9)  
 The distance you want the pointer to have moved before drag starts. This can be useful
 for clickable draggable elements, such as links. Default: `0`
 
@@ -125,12 +127,14 @@ Sensors dictate how drag operations get triggered, by listening to native browse
 By default draggable includes the `MouseSensor` & `TouchSensor`. Default: `[]`
 
 **`classes {{String: String|String[]}}`**  
+(Support multiple classes in: v1.0.0-beta.12)  
 Draggable adds classes to elements to indicate state. These classes can be used to add styling
 on elements in certain states. Accept String or Array of strings.
 
 **NOTE**: When specifying multiple classes to an indicate state, the first class MUST be unique for that state to avoid duplicate classes for other states. IE doesn't support add or remove multiple classes. If you want to use multiple classes in IE, you need to add a classList polyfill to your project first.
 
 **`exclude {plugins: Plugin[], sensors: Sensor[]}`**  
+(Added in: v1.0.0-beta.11)  
 Allow excluding default plugins and default sensors. Use with caution as it may create strange behavior.
 
 ### Events
@@ -146,7 +150,7 @@ Allow excluding default plugins and default sensors. Use with caution as it may 
 | [`drag:out`][dragout]                      | Gets fired when dragging out of other draggable           | false      | -                   |
 | [`drag:out:container`][dragoutcontainer]   | Gets fired when dragging out of other draggable container | false      | -                   |
 | [`drag:stop`][dragstop]                    | Gets fired when draggable has been released               | false      | -                   |
-| [`drag:stopped`][dragstopped]              | Gets fired when draggable finished                        | false      | -                   |
+| [`drag:stopped`][dragstopped]              | Gets fired when draggable finished (Added in: v1.0.0-beta.12)                       | false      | -                   |
 | [`drag:pressure`][dragpressure]            | Gets fired when using force touch on draggable element    | false      | -                   |
 
 [draggableinit]: DraggableEvent#draggableinitializedevent

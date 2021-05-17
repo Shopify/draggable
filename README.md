@@ -41,6 +41,8 @@ interface, for more information read the documentation below.
 
 ## Install
 
+**NOTE**: When installing with npm or yarn, `@shopify/draggable@1.0.0-beta.8` will be installed by default. If you want to install the latest version, please install `@shopify/draggable@1.0.0-beta.13` or `@shopify/draggable@next`.
+
 You can install the library via npm.
 
 ```
@@ -57,19 +59,19 @@ or via CDN
 
 ```html
 <!-- Entire bundle -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
 <!-- legacy bundle for older browsers (IE11) -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.bundle.legacy.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.legacy.js"></script>
 <!-- Draggable only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/draggable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.js"></script>
 <!-- Sortable only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/sortable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/sortable.js"></script>
 <!-- Droppable only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/droppable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/droppable.js"></script>
 <!-- Swappable only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/swappable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/swappable.js"></script>
 <!-- Plugins only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.12/lib/plugins.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/plugins.js"></script>
 ```
 
 ## Browser Compatibility
@@ -120,13 +122,15 @@ You can find the documentation for each module within their respective directori
   - [ResizeMirror](src/Plugins/ResizeMirror)
   - [Snappable](src/Plugins/Snappable)
   - [SwapAnimation](src/Plugins/SwapAnimation)
-  - [SortAnimation](src/Plugins/SortAnimation)
+  - [SortAnimation](src/Plugins/SortAnimation) (Added in: v1.0.0-beta.10)
 - [Sortable](src/Sortable)
   - [SortableEvent](src/Sortable/SortableEvent)
 - [Swappable](src/Swappable)
   - [SwappableEvent](src/Swappable/SwappableEvent)
 
 ## TypeScript
+
+(Added in: v1.0.0-beta.9)
 
 Draggable includes [TypeScript](http://typescriptlang.org) definitions.
 

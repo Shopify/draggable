@@ -104,7 +104,7 @@ Read-only property for whether or not the mirror's threshold has been exceeded i
 
 ## MirrorMovedEvent
 
-**NOTE**: Will be added in the next version (v1.0.0-beta.13)
+(Added in: v1.0.0-beta.13)
 
 `MirrorMovedEvent` gets triggered when the **mirror:move** event was done.
 

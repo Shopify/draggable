@@ -54,8 +54,6 @@ declare module '@shopify/draggable' {
         ? MirrorAttachedEvent
         : eventName extends 'mirror:move'
         ? MirrorMoveEvent
-        : eventName extends 'mirror:moved'
-        ? MirrorMovedEvent
         : eventName extends 'mirror:destroy'
         ? MirrorDestroyEvent
         : eventName extends 'droppable:start'
@@ -273,13 +271,6 @@ declare module '@shopify/draggable' {
     }
     export class MirrorMoveEvent extends MirrorEvent {
         readonly mirror: HTMLElement;
-        readonly passedThreshX: boolean;
-        readonly passedThreshY: boolean;
-    }
-    export class MirrorMovedEvent extends MirrorEvent {
-        readonly mirror: HTMLElement;
-        readonly passedThreshX: boolean;
-        readonly passedThreshY: boolean;
     }
     export class MirrorDestroyEvent extends MirrorEvent {
         readonly mirror: HTMLElement;

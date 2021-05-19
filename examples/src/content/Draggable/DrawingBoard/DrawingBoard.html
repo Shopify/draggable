@@ -1,0 +1,13 @@
+{% import 'components/Block/Block.html' as Block %}
+
+{% macro render(id) %}
+  <section id="{{ id }}" class="{{ id }}">
+    <template id="DrawingBlockTemplate">
+      {{ Block.render('', {index: 1, type: 'Shape', draggable: true}) }}
+    </template>
+
+    <article class="BlockLayout BlockLayout--typePositioned">
+      <div class="DrawingBoardCanvas draggable-source"></div>
+    </article>
+  </section>
+{% endmacro %}

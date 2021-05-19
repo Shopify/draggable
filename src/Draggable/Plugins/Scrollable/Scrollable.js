@@ -162,7 +162,7 @@ export default class Scrollable extends AbstractPlugin {
     const sensorEvent = dragEvent.sensorEvent;
     const scrollOffset = {x: 0, y: 0};
 
-    if ('ontouchstart' in window) {
+    if (sensorEvent.originalEvent instanceof TouchEvent) {
       scrollOffset.y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
       scrollOffset.x = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
     }

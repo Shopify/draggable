@@ -10,6 +10,16 @@ declare module '@shopify/draggable/lib/es5/draggable.bundle.legacy' {
     export * from '@shopify/draggable';
 }
 
+declare module '@shopify/draggable/esm/Draggable/Sensors' {
+    export {
+        Sensor,
+        DragSensor,
+        ForceTouchSensor,
+        MouseSensor,
+        TouchSensor,
+    } from '@shopify/draggable';
+}
+
 declare module '@shopify/draggable' {
     abstract class AbstractEvent<DataT = { [key: string]: any }> {
         constructor(data: DataT);
@@ -181,7 +191,7 @@ declare module '@shopify/draggable' {
         handle?: string | NodeList | HTMLElement[] | HTMLElement | ((currentElement: HTMLElement) => HTMLElement);
         delay?: number | DelayOptions;
         plugins?: Array<typeof AbstractPlugin>;
-        sensors?: Sensor[];
+        sensors?: Array<typeof Sensor>;
         classes?: { [key in DraggableClassNames]: string | string[] };
         announcements?: AnnouncementOptions;
         collidables?: Collidables;
@@ -338,6 +348,8 @@ declare module '@shopify/draggable' {
         delay?: number | DelayOptions;
     }
 
+    export * as Sensors from '@shopify/draggable/esm/Draggable/Sensors'
+
     export class Sensor {
         constructor(containers: HTMLElement | HTMLElement[] | NodeList, options?: SensorOptions);
         attach(): this;
@@ -345,10 +357,6 @@ declare module '@shopify/draggable' {
         addContainer(...containers: HTMLElement[]): void;
         removeContainer(...containers: HTMLElement[]): void;
         trigger(element: HTMLElement, sensorEvent: SensorEvent): SensorEvent;
-    }
-
-    export interface Sensors {
-        DragSensor: typeof DragSensor;
     }
 
     export class DragSensor extends Sensor { }

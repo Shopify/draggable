@@ -118,6 +118,10 @@ You can set the same delay for all sensors by setting a number, or set an object
 The distance you want the pointer to have moved before drag starts. This can be useful
 for clickable draggable elements, such as links. Default: `0`
 
+**`insertBy {String}`**  
+The method by which you wish to insert the dragged element. Valid values are `prepend`
+or `append`. Default: `append`
+
 **`plugins {Plugin[]}`**  
 Plugins add behaviour to Draggable by hooking into its life cycle, e.g. one of the default
 plugins controls the mirror movement. Default: `[]`

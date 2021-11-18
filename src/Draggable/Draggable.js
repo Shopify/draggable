@@ -52,6 +52,7 @@ export const defaultOptions = {
   delay: {},
   distance: 0,
   placedTimeout: 800,
+  insertBy: 'append',
   plugins: [],
   sensors: [],
   exclude: {

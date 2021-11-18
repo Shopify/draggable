@@ -237,7 +237,11 @@ export default class Droppable extends Draggable {
       this.lastDropzone.classList.remove(...occupiedClasses);
     }
 
-    dropzone.appendChild(event.source);
+    if (this.options.insertBy === 'prepend') {
+      dropzone.prepend(event.source);
+    } else {
+      dropzone.appendChild(event.source);
+    }
     dropzone.classList.add(...occupiedClasses);
 
     return true;
@@ -260,7 +264,12 @@ export default class Droppable extends Draggable {
       return;
     }
 
-    this.initialDropzone.appendChild(event.source);
+    if (this.options.insertBy === 'prepend') {
+      this.initialDropzone.prepend(event.source);
+    } else {
+      this.initialDropzone.appendChild(event.source);
+    }
+
     this.lastDropzone.classList.remove(...this.getClassNamesFor('droppable:occupied'));
   }
 

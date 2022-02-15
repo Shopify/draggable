@@ -432,7 +432,8 @@ function calculateCorrectOffset({mirror, ...args}) {
           if (
             (containerStyle.transform && containerStyle.transform !== 'none') ||
             (containerStyle.perspective && containerStyle.perspective !== 'none') ||
-            (containerStyle.filter && containerStyle.filter !== 'none')
+            (containerStyle.filter && containerStyle.filter !== 'none') ||
+            (containerStyle.backdropFilter && containerStyle.backdropFilter !== 'none')
           ) {
             const containerRect = container.getBoundingClientRect();
 

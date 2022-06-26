@@ -156,13 +156,13 @@ Read-only property for pressure applied on a draggable element. Value ranges fro
 
 `DragStopEvent` gets triggered after `DragStartEvent`, once drag interactions have completed.
 
-|                   |                 |
-| ----------------- | --------------- |
-| **Specification** | `DragEvent`     |
-| **Interface**     | `DragStopEvent` |
-| **Cancelable**    | false           |
-| **Cancel action** | -               |
-| **type**          | `drag:stop`     |
+|                   |                                                    |
+| ----------------- | -------------------------------------------------- |
+| **Specification** | `DragEvent`                                        |
+| **Interface**     | `DragStopEvent`                                    |
+| **Cancelable**    | true                                               |
+| **Cancel action** | Prevent item from being added where it was dropped |
+| **type**          | `drag:stop`                                        |
 
 ## DragStoppedEvent
 

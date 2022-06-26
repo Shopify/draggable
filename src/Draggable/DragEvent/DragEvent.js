@@ -224,6 +224,7 @@ export class DragPressureEvent extends DragEvent {
  */
 export class DragStopEvent extends DragEvent {
   static type = 'drag:stop';
+  static cancelable = true;
 }
 
 /**

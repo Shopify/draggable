@@ -420,19 +420,19 @@ export default class Draggable {
     this.originalSource.parentNode.insertBefore(this.source, this.originalSource);
     this.originalSource.style.display = 'none';
 
-    const dragEvent = new DragStartEvent({
+    const dragStartEvent = new DragStartEvent({
       source: this.source,
       originalSource: this.originalSource,
       sourceContainer: container,
       sensorEvent,
     });
 
-    this.trigger(dragEvent);
+    this.trigger(dragStartEvent);
 
-    this.dragging = !dragEvent.canceled();
+    this.dragging = !dragStartEvent.canceled();
 
-    if (dragEvent.canceled()) {
-      this.source.parentNode.removeChild(this.source);
+    if (dragStartEvent.canceled()) {
+      this.source.remove();
       this.originalSource.style.display = null;
       return;
     }
@@ -575,8 +575,8 @@ export default class Draggable {
 
     this.trigger(dragStopEvent);
 
-    this.source.parentNode.insertBefore(this.originalSource, this.source);
-    this.source.parentNode.removeChild(this.source);
+    if (!dragStopEvent.canceled()) this.source.parentNode.insertBefore(this.originalSource, this.source);
+    this.source.remove();
     this.originalSource.style.display = '';
 
     this.source.classList.remove(...this.getClassNamesFor('source:dragging'));

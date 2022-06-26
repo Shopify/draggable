@@ -43,7 +43,7 @@ describe('DragSensor', () => {
 
   function teardown() {
     dragSensor.detach();
-    sandbox.parentNode.removeChild(sandbox);
+    sandbox.remove();
   }
 
   describe('common', () => {

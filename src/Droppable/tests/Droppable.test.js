@@ -47,7 +47,7 @@ describe('Droppable', () => {
 
   afterEach(() => {
     droppable.destroy();
-    sandbox.parentNode.removeChild(sandbox);
+    sandbox.remove();
   });
 
   describe('triggers', () => {

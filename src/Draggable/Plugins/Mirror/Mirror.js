@@ -258,7 +258,7 @@ export default class Mirror extends AbstractPlugin {
     this.draggable.trigger(mirrorDestroyEvent);
 
     if (!mirrorDestroyEvent.canceled()) {
-      this.mirror.parentNode.removeChild(this.mirror);
+      this.mirror.remove();
     }
   }
 

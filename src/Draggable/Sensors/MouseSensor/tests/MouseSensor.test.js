@@ -42,7 +42,7 @@ describe('MouseSensor', () => {
 
   function teardown() {
     mouseSensor.detach();
-    sandbox.parentNode.removeChild(sandbox);
+    sandbox.remove();
   }
 
   describe('common', () => {

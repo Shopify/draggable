@@ -18,7 +18,7 @@ export function withElementFromPoint(elementFromPoint, callback) {
 export const REQUEST_ANIMATION_FRAME_TIMEOUT = 15;
 
 export function waitForRequestAnimationFrame(requestAnimationFrameTimeout = REQUEST_ANIMATION_FRAME_TIMEOUT) {
-  jest.runTimersToTime(requestAnimationFrameTimeout + 1);
+  jest.advanceTimersByTime(requestAnimationFrameTimeout + 1);
 }
 
 export function waitForPromisesToResolve() {

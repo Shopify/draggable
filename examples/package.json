@@ -26,13 +26,13 @@
     "scripts": "gulp scripts $npm_package_config_tools",
     "styles": "gulp styles $npm_package_config_tools",
     "start": "gulp start $npm_package_config_tools",
-    "build": "yarn run clean && gulp build $npm_package_config_tools",
-    "build:prod": "NODE_ENV=production yarn run build",
+    "build": "npm run clean && gulp build $npm_package_config_tools",
+    "build:prod": "NODE_ENV=production npm run build",
     "lint:scss": "stylelint './src/**/*.scss'",
     "prettier:scss": "prettier-stylelint './src/**/*.scss' --write -q",
     "lint:js": "eslint './src/**/*.js' './tools/**/*.js' --max-warnings 0",
-    "prettier:js": "yarn run lint:js --fix",
-    "prepublish": "yarn run build"
+    "prettier:js": "npm run lint:js --fix",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "core-js": "^3.6.5",

@@ -36,6 +36,11 @@ export default function MultipleContainers() {
     containerTwoParent.classList.toggle(Classes.capacity, capacityReached);
   });
 
+  sortable.on('drag:stop', (evt) => {
+    evt.cancel();
+    evt.originalSource.remove();
+  });
+
   sortable.on('sortable:sort', (evt) => {
     if (!capacityReached) {
       return;
@@ -47,7 +52,6 @@ export default function MultipleContainers() {
       evt.cancel();
     }
   });
-
   sortable.on('sortable:sorted', (evt) => {
     if (lastOverContainer === evt.dragEvent.overContainer) {
       return;

@@ -1,12 +1,12 @@
 {
-  "name": "@shopify/draggable",
+  "name": "@hnrq/dragon",
   "version": "1.0.0-beta.13",
   "private": false,
   "license": "MIT",
-  "description": "The JavaScript Drag & Drop library your grandparents warned you about.",
-  "author": "Shopify <dev@shopify.com>",
-  "homepage": "https://github.com/Shopify/draggable#readme",
-  "repository": "https://github.com/Shopify/draggable",
+  "description": "The JavaScript Drag & Drop library your grand-grandparents warned your father about.",
+  "author": "Shopify <dev@shopify.com> | hnrq <henriquealberone@outlook.com>",
+  "homepage": "https://github.com/hnrq/dragon#readme",
+  "repository": "https://github.com/hnrq/dragon",
   "contributors": [
     {
       "name": "Max Hoffmann",
@@ -15,10 +15,14 @@
     {
       "name": "Curtis Dulmage",
       "email": "curtis.dulmage@shopify.com"
+    },
+    {
+      "name": "Henrique Ramos",
+      "email": "henriquealberone@outlook.com"
     }
   ],
   "bugs": {
-    "url": "https://github.com/Shopify/draggable/issues"
+    "url": "https://github.com/hnrq/dragon/issues"
   },
   "keywords": [
     "shopify",
@@ -29,55 +33,50 @@
   "main": "./lib/draggable.bundle.js",
   "types": "./index.d.ts",
   "scripts": {
-    "start": "concurrently \"yarn watch\" \"cd examples && yarn && yarn start\"",
-    "build": "yarn build:production",
+    "start": "concurrently \"npm run watch\" \"cd examples && npm i && npm start\"",
+    "build": "npm run build:production",
     "watch": "node scripts/watch.js",
-    "prepare": "yarn build:development",
-    "prepublishOnly": "yarn build:production",
+    "prepare": "npm run build:development",
+    "prepublishOnly": "npm run build:production",
     "lint": "eslint ./src ./scripts --max-warnings 0",
     "esdoc": "esdoc -c esdoc.json",
-    "test": "jest --config config.json",
-    "test-ci": "jest --config config.json --coverage && codecov",
+    "test": "jest",
+    "test-ci": "jest --coverage && codecov",
     "build:development": "node scripts/build.js",
-    "build:production": "node scripts/build.js --production"
+    "build:production": "node scripts/build.js --production",
+    "serve-vite": "vite",
+    "build-vite": "vite build",
+    "preview-vite": "vite preview"
   },
   "files": [
     "lib/**/*.js",
     "index.d.ts"
   ],
   "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-jest": "^23.0.1",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-es2015-classes": "^6.24.1",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-shopify": "^16.5.0",
-    "codecov": "^3.0.2",
-    "concurrently": "^3.5.1",
-    "core-js": "^2.5.7",
-    "esdoc": "^1.1.0",
-    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
-    "esdoc-standard-plugin": "^1.0.0",
-    "eslint": "^4.19.1",
-    "eslint-loader": "^2.0.0",
-    "eslint-plugin-shopify": "^22.1.0",
-    "jest": "^23.1.0",
-    "webpack": "^4.12.0",
-    "webpack-bundle-analyzer": "^2.13.1",
-    "webpack-cli": "^3.0.3"
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-typescript": "^7.17.12",
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "@types/jest": "^28.1.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.0",
+    "@typescript-eslint/parser": "^5.30.0",
+    "codecov": "^3.8.2",
+    "concurrently": "^7.2.2",
+    "core-js": "^3.23.3",
+    "eslint": "^8.18.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "jest": "^28.1.1",
+    "jest-environment-jsdom": "^28.1.1",
+    "jsdom": "^20.0.0",
+    "typescript": "^4.7.4",
+    "vite": "^2.9.13",
+    "vite-plugin-env-compatible": "^1.1.1",
+    "vite-plugin-html": "3.2.0",
+    "vite-tsconfig-paths": "^3.5.0"
   },
   "eslintConfig": {
-    "extends": "plugin:shopify/esnext",
     "env": {}
-  },
-  "babel": {
-    "plugins": [
-      "transform-class-properties",
-      "transform-object-rest-spread",
-      "transform-es2015-modules-commonjs"
-    ]
   },
   "publishConfig": {
     "access": "public",

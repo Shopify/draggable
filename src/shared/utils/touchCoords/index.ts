@@ -3,7 +3,9 @@
  * @param {TouchEvent} event a touch event
  * @return {Touch} a touch object
  */
-export default function touchCoords(event = {}) {
+const touchCoords = (event: TouchEvent = {} as TouchEvent): Touch => {
   const {touches, changedTouches} = event;
   return (touches && touches[0]) || (changedTouches && changedTouches[0]);
-}
+};
+
+export default touchCoords;

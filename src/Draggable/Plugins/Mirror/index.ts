@@ -1,3 +1,4 @@
+import {DragMoveEvent, DragStartEvent} from 'Draggable/DragEvent';
 import AbstractPlugin from 'shared/AbstractPlugin';
 
 import {
@@ -17,16 +18,6 @@ export const onMirrorMove = Symbol('onMirrorMove');
 export const onScroll = Symbol('onScroll');
 export const getAppendableContainer = Symbol('getAppendableContainer');
 
-/**
- * Mirror default options
- * @property {Object} defaultOptions
- * @property {Boolean} defaultOptions.constrainDimensions
- * @property {Boolean} defaultOptions.xAxis
- * @property {Boolean} defaultOptions.yAxis
- * @property {null} defaultOptions.cursorOffsetX
- * @property {null} defaultOptions.cursorOffsetY
- * @type {Object}
- */
 export const defaultOptions = {
   constrainDimensions: false,
   xAxis: true,
@@ -37,6 +28,17 @@ export const defaultOptions = {
   thresholdY: null,
 };
 
+export interface MirrorOptions {
+  constrainDimensions?: boolean;
+  xAxis?: boolean;
+  yAxis?: boolean;
+  cursorOffsetX?: number | null;
+  cursorOffsetY?: number | null;
+  appendTo?: String | HTMLElement | (() => void);
+  thresholdX?: number;
+  thresholdY?: number;
+}
+
 /**
  * Mirror plugin which controls the mirror positioning while dragging
  * @class Mirror
@@ -44,55 +46,32 @@ export const defaultOptions = {
  * @extends AbstractPlugin
  */
 export default class Mirror extends AbstractPlugin {
-  /**
-   * Mirror constructor.
-   * @constructs Mirror
-   * @param {Draggable} draggable - Draggable instance
-   */
+  options: MirrorOptions;
+  scrollOffset: {x: number; y: number} = {x: 0, y: 0};
+  initialScrollOffset: {x: number; y: number} = {x: 0, y: 0};
+  lastMirrorMovedClient: {x: number; y: number};
+  mirrorOffset: {x: number; y: number};
+  initialX: number;
+  initialY: number;
+  lastMovedX: number;
+  lastMovedY: number;
+  mirror: HTMLElement;
+
   constructor(draggable) {
     super(draggable);
 
-    /**
-     * Mirror options
-     * @property {Object} options
-     * @property {Boolean} options.constrainDimensions
-     * @property {Boolean} options.xAxis
-     * @property {Boolean} options.yAxis
-     * @property {Number|null} options.cursorOffsetX
-     * @property {Number|null} options.cursorOffsetY
-     * @property {String|HTMLElement|Function} options.appendTo
-     * @type {Object}
-     */
     this.options = {
       ...defaultOptions,
       ...this.getOptions(),
     };
 
-    /**
-     * Scroll offset for touch devices because the mirror is positioned fixed
-     * @property {Object} scrollOffset
-     * @property {Number} scrollOffset.x
-     * @property {Number} scrollOffset.y
-     */
-    this.scrollOffset = {x: 0, y: 0};
-
-    /**
-     * Initial scroll offset for touch devices because the mirror is positioned fixed
-     * @property {Object} scrollOffset
-     * @property {Number} scrollOffset.x
-     * @property {Number} scrollOffset.y
-     */
     this.initialScrollOffset = {
       x: window.scrollX,
       y: window.scrollY,
     };
 
-    this[onDragStart] = this[onDragStart].bind(this);
-    this[onDragMove] = this[onDragMove].bind(this);
-    this[onDragStop] = this[onDragStop].bind(this);
     this[onMirrorCreated] = this[onMirrorCreated].bind(this);
     this[onMirrorMove] = this[onMirrorMove].bind(this);
-    this[onScroll] = this[onScroll].bind(this);
   }
 
   /**
@@ -119,18 +98,11 @@ export default class Mirror extends AbstractPlugin {
       .off('mirror:move', this[onMirrorMove]);
   }
 
-  /**
-   * Returns options passed through draggable
-   * @return {Object}
-   */
-  getOptions() {
-    return this.draggable.options.mirror || {};
-  }
+  /*** Returns options passed through draggable */
+  getOptions = () => this.draggable.options.mirror ?? {};
 
-  [onDragStart](dragEvent) {
-    if (dragEvent.canceled()) {
-      return;
-    }
+  [onDragStart] = (dragEvent: DragStartEvent) => {
+    if (dragEvent.canceled()) return;
 
     if ('ontouchstart' in window) {
       document.addEventListener('scroll', this[onScroll], true);
@@ -164,7 +136,7 @@ export default class Mirror extends AbstractPlugin {
     }
 
     const appendableContainer = this[getAppendableContainer](source) || sourceContainer;
-    this.mirror = source.cloneNode(true);
+    this.mirror = <HTMLElement>source.cloneNode(true);
 
     const mirrorCreatedEvent = new MirrorCreatedEvent({
       source,
@@ -187,12 +159,10 @@ export default class Mirror extends AbstractPlugin {
     this.draggable.trigger(mirrorCreatedEvent);
     appendableContainer.appendChild(this.mirror);
     this.draggable.trigger(mirrorAttachedEvent);
-  }
+  };
 
-  [onDragMove](dragEvent) {
-    if (!this.mirror || dragEvent.canceled()) {
-      return;
-    }
+  [onDragMove] = (dragEvent: DragMoveEvent) => {
+    if (!this.mirror || dragEvent.canceled()) return;
 
     const {source, originalSource, sourceContainer, sensorEvent} = dragEvent;
 
@@ -231,9 +201,9 @@ export default class Mirror extends AbstractPlugin {
     });
 
     this.draggable.trigger(mirrorMoveEvent);
-  }
+  };
 
-  [onDragStop](dragEvent) {
+  [onDragStop] = (dragEvent) => {
     if ('ontouchstart' in window) {
       document.removeEventListener('scroll', this[onScroll], true);
     }
@@ -241,9 +211,7 @@ export default class Mirror extends AbstractPlugin {
     this.initialScrollOffset = {x: 0, y: 0};
     this.scrollOffset = {x: 0, y: 0};
 
-    if (!this.mirror) {
-      return;
-    }
+    if (!this.mirror) return;
 
     const {source, sourceContainer, sensorEvent} = dragEvent;
 
@@ -260,22 +228,16 @@ export default class Mirror extends AbstractPlugin {
     if (!mirrorDestroyEvent.canceled()) {
       this.mirror.remove();
     }
-  }
+  };
 
-  [onScroll]() {
+  [onScroll] = () => {
     this.scrollOffset = {
       x: window.scrollX - this.initialScrollOffset.x,
       y: window.scrollY - this.initialScrollOffset.y,
     };
-  }
+  };
 
-  /**
-   * Mirror created handler
-   * @param {MirrorCreatedEvent} mirrorEvent
-   * @return {Promise}
-   * @private
-   */
-  [onMirrorCreated]({mirror, source, sensorEvent}) {
+  private [onMirrorCreated] = ({mirror, source, sensorEvent}: MirrorCreatedEvent) => {
     const mirrorClasses = this.draggable.getClassNamesFor('mirror');
 
     const setState = ({mirrorOffset, initialX, initialY, ...args}) => {
@@ -311,18 +273,10 @@ export default class Mirror extends AbstractPlugin {
         .then(removeMirrorID)
         .then(setState)
     );
-  }
+  };
 
-  /**
-   * Mirror move handler
-   * @param {MirrorMoveEvent} mirrorEvent
-   * @return {Promise|null}
-   * @private
-   */
-  [onMirrorMove](mirrorEvent) {
-    if (mirrorEvent.canceled()) {
-      return null;
-    }
+  private [onMirrorMove] = (mirrorEvent: MirrorMoveEvent) => {
+    if (mirrorEvent.canceled()) return null;
 
     const setState = ({lastMovedX, lastMovedY, ...args}) => {
       this.lastMovedX = lastMovedX;
@@ -365,7 +319,7 @@ export default class Mirror extends AbstractPlugin {
       .then(positionMirror({raf: true}))
       .then(setState)
       .then(triggerMoved);
-  }
+  };
 
   /**
    * Returns appendable container for mirror based on the appendTo option
@@ -374,7 +328,7 @@ export default class Mirror extends AbstractPlugin {
    * @param {HTMLElement} options.source - Current source
    * @return {HTMLElement}
    */
-  [getAppendableContainer](source) {
+  private [getAppendableContainer](source: HTMLElement) {
     const appendTo = this.options.appendTo;
 
     if (typeof appendTo === 'string') {
@@ -502,7 +456,7 @@ function removeMirrorID({mirror, ...args}) {
  * @return {Promise}
  * @private
  */
-function positionMirror({withFrame = false, initial = false} = {}) {
+function positionMirror({withFrame = false, initial = false, raf = false} = {}) {
   return ({
     mirror,
     sensorEvent,
@@ -556,7 +510,7 @@ function positionMirror({withFrame = false, initial = false} = {}) {
 
         resolve(result);
       },
-      {frame: withFrame},
+      {withFrame},
     );
   };
 }
@@ -569,9 +523,9 @@ function positionMirror({withFrame = false, initial = false} = {}) {
  * @return {Promise}
  * @private
  */
-function withPromise(callback, {raf = false} = {}) {
+function withPromise(callback, {withFrame = false} = {}) {
   return new Promise((resolve, reject) => {
-    if (raf) {
+    if (withFrame) {
       requestAnimationFrame(() => {
         callback(resolve, reject);
       });

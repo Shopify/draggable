@@ -7,7 +7,7 @@ import {
   waitForDragDelay,
   waitForPromisesToResolve,
   waitForRequestAnimationFrame,
-} from 'helper';
+} from 'test-utils/helper';
 
 import {
   MirrorCreateEvent,
@@ -16,9 +16,9 @@ import {
   MirrorMoveEvent,
   MirrorMovedEvent,
   MirrorDestroyEvent,
-} from '../MirrorEvent';
+} from './MirrorEvent';
 
-import Draggable from '../../..';
+import Draggable from '../..';
 
 const sampleMarkup = `
   <ul>

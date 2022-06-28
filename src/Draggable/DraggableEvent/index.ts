@@ -1,3 +1,4 @@
+import Draggable from 'Draggable/Draggable';
 import AbstractEvent from 'shared/AbstractEvent';
 
 /**
@@ -8,7 +9,9 @@ import AbstractEvent from 'shared/AbstractEvent';
  */
 export class DraggableEvent extends AbstractEvent {
   static type = 'draggable';
-
+  declare data: {
+    draggable: Draggable;
+  };
   /**
    * Draggable instance
    * @property draggable

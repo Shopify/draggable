@@ -1,3 +1,5 @@
+import {DragOutEvent, DragOverEvent, DragStartEvent} from 'Draggable/DragEvent';
+import {MirrorCreatedEvent} from 'Draggable/Plugins/Mirror/MirrorEvent';
 import AbstractPlugin from 'shared/AbstractPlugin';
 import {SnapInEvent, SnapOutEvent} from './SnappableEvent';
 
@@ -15,37 +17,11 @@ const onMirrorDestroy = Symbol('onMirrorDestroy');
  * @extends AbstractPlugin
  */
 export default class Snappable extends AbstractPlugin {
-  /**
-   * Snappable constructor.
-   * @constructs Snappable
-   * @param {Draggable} draggable - Draggable instance
-   */
-  constructor(draggable) {
-    super(draggable);
+  /*** Keeps track of the first source element */
+  firstSource: HTMLElement | null = null;
+  /*** Keeps track of the mirror element */
+  mirror: HTMLElement = null;
 
-    /**
-     * Keeps track of the first source element
-     * @property {HTMLElement|null} firstSource
-     */
-    this.firstSource = null;
-
-    /**
-     * Keeps track of the mirror element
-     * @property {HTMLElement} mirror
-     */
-    this.mirror = null;
-
-    this[onDragStart] = this[onDragStart].bind(this);
-    this[onDragStop] = this[onDragStop].bind(this);
-    this[onDragOver] = this[onDragOver].bind(this);
-    this[onDragOut] = this[onDragOut].bind(this);
-    this[onMirrorCreated] = this[onMirrorCreated].bind(this);
-    this[onMirrorDestroy] = this[onMirrorDestroy].bind(this);
-  }
-
-  /**
-   * Attaches plugins event listeners
-   */
   attach() {
     this.draggable
       .on('drag:start', this[onDragStart])
@@ -58,9 +34,6 @@ export default class Snappable extends AbstractPlugin {
       .on('mirror:destroy', this[onMirrorDestroy]);
   }
 
-  /**
-   * Detaches plugins event listeners
-   */
   detach() {
     this.draggable
       .off('drag:start', this[onDragStart])
@@ -73,37 +46,17 @@ export default class Snappable extends AbstractPlugin {
       .off('mirror:destroy', this[onMirrorDestroy]);
   }
 
-  /**
-   * Drag start handler
-   * @private
-   * @param {DragStartEvent} event - Drag start event
-   */
-  [onDragStart](event) {
-    if (event.canceled()) {
-      return;
-    }
-
+  private [onDragStart] = (event: DragStartEvent) => {
+    if (event.canceled()) return;
     this.firstSource = event.source;
-  }
+  };
 
-  /**
-   * Drag stop handler
-   * @private
-   * @param {DragStopEvent} event - Drag stop event
-   */
-  [onDragStop]() {
+  private [onDragStop] = () => {
     this.firstSource = null;
-  }
+  };
 
-  /**
-   * Drag over handler
-   * @private
-   * @param {DragOverEvent|DroppableOverEvent} event - Drag over event
-   */
-  [onDragOver](event) {
-    if (event.canceled()) {
-      return;
-    }
+  private [onDragOver] = (event: DragOverEvent | DroppableOverEvent) => {
+    if (event.canceled()) return;
 
     const source = event.source || event.dragEvent.source;
 
@@ -119,13 +72,9 @@ export default class Snappable extends AbstractPlugin {
 
     this.draggable.trigger(snapInEvent);
 
-    if (snapInEvent.canceled()) {
-      return;
-    }
+    if (snapInEvent.canceled()) return;
 
-    if (this.mirror) {
-      this.mirror.style.display = 'none';
-    }
+    if (this.mirror) this.mirror.style.display = 'none';
 
     source.classList.remove(...this.draggable.getClassNamesFor('source:dragging'));
     source.classList.add(...this.draggable.getClassNamesFor('source:placed'));
@@ -134,17 +83,10 @@ export default class Snappable extends AbstractPlugin {
     setTimeout(() => {
       source.classList.remove(...this.draggable.getClassNamesFor('source:placed'));
     }, this.draggable.options.placedTimeout);
-  }
+  };
 
-  /**
-   * Drag out handler
-   * @private
-   * @param {DragOutEvent|DroppableOutEvent} event - Drag out event
-   */
-  [onDragOut](event) {
-    if (event.canceled()) {
-      return;
-    }
+  private [onDragOut] = (event: DragOutEvent | DroppableOutEvent) => {
+    if (event.canceled()) return;
 
     const source = event.source || event.dragEvent.source;
 
@@ -155,32 +97,17 @@ export default class Snappable extends AbstractPlugin {
 
     this.draggable.trigger(snapOutEvent);
 
-    if (snapOutEvent.canceled()) {
-      return;
-    }
-
-    if (this.mirror) {
-      this.mirror.style.display = '';
-    }
+    if (snapOutEvent.canceled()) return;
+    if (this.mirror) this.mirror.style.display = '';
 
     source.classList.add(...this.draggable.getClassNamesFor('source:dragging'));
-  }
+  };
 
-  /**
-   * Mirror created handler
-   * @param {MirrorCreatedEvent} mirrorEvent
-   * @private
-   */
-  [onMirrorCreated]({mirror}) {
+  private [onMirrorCreated] = ({mirror}: MirrorCreatedEvent) => {
     this.mirror = mirror;
-  }
+  };
 
-  /**
-   * Mirror destroy handler
-   * @param {MirrorDestroyEvent} mirrorEvent
-   * @private
-   */
-  [onMirrorDestroy]() {
+  private [onMirrorDestroy] = () => {
     this.mirror = null;
-  }
+  };
 }

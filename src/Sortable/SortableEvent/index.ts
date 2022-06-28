@@ -79,7 +79,7 @@ export class SortableSortedEvent extends SortableEvent {
   }
 
   clone(data) {
-    return new SortableSorted({
+    return new SortableSortedEvent({
       ...this.data,
       ...data,
     });

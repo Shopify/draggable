@@ -1,6 +1,6 @@
-import {createSandbox, waitForRequestAnimationFrame} from 'helper';
-import Draggable from '../../..';
-import Focusable from '..';
+// import {createSandbox, waitForRequestAnimationFrame} from 'helper';
+import Draggable from '../..';
+import Focusable from '.';
 
 const sampleMarkup = `
   <ul class="Container">
@@ -35,7 +35,9 @@ describe('Focusable', () => {
       draggable: 'li',
     });
 
-    const focusablePlugin = draggable.plugins.find((plugin) => plugin.constructor === Focusable);
+    const focusablePlugin = draggable.plugins.find(
+      (plugin) => plugin.constructor === Focusable
+    );
 
     expect(focusablePlugin).toBeInstanceOf(Focusable);
   });
@@ -45,7 +47,10 @@ describe('Focusable', () => {
       draggable: 'li',
     });
 
-    const elements = [...draggable.containers, ...draggable.getDraggableElements()];
+    const elements = [
+      ...draggable.containers,
+      ...draggable.getDraggableElements(),
+    ];
 
     waitForRequestAnimationFrame();
 
@@ -59,7 +64,10 @@ describe('Focusable', () => {
       draggable: 'li',
     });
 
-    const elements = [...draggable.containers, ...draggable.getDraggableElements()];
+    const elements = [
+      ...draggable.containers,
+      ...draggable.getDraggableElements(),
+    ];
 
     waitForRequestAnimationFrame();
 

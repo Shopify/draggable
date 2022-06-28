@@ -3,12 +3,9 @@ import AbstractPlugin from 'shared/AbstractPlugin';
 const onInitialize = Symbol('onInitialize');
 const onDestroy = Symbol('onDestroy');
 
-/**
- * Focusable default options
- * @property {Object} defaultOptions
- * @type {Object}
- */
 const defaultOptions = {};
+
+export interface FocusableOptions extends Record<string, unknown> {}
 
 /**
  * Focusable plugin
@@ -17,26 +14,14 @@ const defaultOptions = {};
  * @extends AbstractPlugin
  */
 export default class Focusable extends AbstractPlugin {
-  /**
-   * Focusable constructor.
-   * @constructs Focusable
-   * @param {Draggable} draggable - Draggable instance
-   */
+  options: FocusableOptions;
+
   constructor(draggable) {
     super(draggable);
-
-    /**
-     * Focusable options
-     * @property {Object} options
-     * @type {Object}
-     */
     this.options = {
       ...defaultOptions,
       ...this.getOptions(),
     };
-
-    this[onInitialize] = this[onInitialize].bind(this);
-    this[onDestroy] = this[onDestroy].bind(this);
   }
 
   /**
@@ -58,57 +43,38 @@ export default class Focusable extends AbstractPlugin {
 
   /**
    * Returns options passed through draggable
-   * @return {Object}
    */
-  getOptions() {
-    return this.draggable.options.focusable || {};
-  }
+  getOptions = () => this.draggable.options.focusable ?? {};
 
   /**
    * Returns draggable containers and elements
-   * @return {HTMLElement[]}
    */
-  getElements() {
-    return [...this.draggable.containers, ...this.draggable.getDraggableElements()];
-  }
+  getElements = () => [...this.draggable.containers, ...this.draggable.getDraggableElements()];
 
-  /**
-   * Intialize handler
-   * @private
-   */
-  [onInitialize]() {
+  /*** Intialize handler */
+  private [onInitialize] = () => {
     // Can wait until the next best frame is available
     requestAnimationFrame(() => {
       this.getElements().forEach((element) => decorateElement(element));
     });
-  }
+  };
 
-  /**
-   * Destroy handler
-   * @private
-   */
-  [onDestroy]() {
+  /*** Destroy handler */
+  private [onDestroy] = () => {
     // Can wait until the next best frame is available
     requestAnimationFrame(() => {
       this.getElements().forEach((element) => stripElement(element));
     });
-  }
+  };
 }
 
 /**
  * Keeps track of all the elements that are missing tabindex attributes
  * so they can be reset when draggable gets destroyed
- * @const {HTMLElement[]} elementsWithMissingTabIndex
  */
-const elementsWithMissingTabIndex = [];
+const elementsWithMissingTabIndex: HTMLElement[] = [];
 
-/**
- * Decorates element with tabindex attributes
- * @param {HTMLElement} element
- * @return {Object}
- * @private
- */
-function decorateElement(element) {
+function decorateElement(element: HTMLElement) {
   const hasMissingTabIndex = Boolean(!element.getAttribute('tabindex') && element.tabIndex === -1);
 
   if (hasMissingTabIndex) {
@@ -117,12 +83,7 @@ function decorateElement(element) {
   }
 }
 
-/**
- * Removes elements tabindex attributes
- * @param {HTMLElement} element
- * @private
- */
-function stripElement(element) {
+function stripElement(element: HTMLElement) {
   const tabIndexElementPosition = elementsWithMissingTabIndex.indexOf(element);
 
   if (tabIndexElementPosition !== -1) {

@@ -1,5 +1,5 @@
 import AbstractEvent from 'shared/AbstractEvent';
-import Emitter from '../Emitter';
+import Emitter from '.';
 
 class TestEvent extends AbstractEvent {}
 
@@ -77,7 +77,10 @@ describe('Emitter', () => {
       emitter.trigger(testEvent);
 
       expect(consoleErrorSpy).toHaveBeenCalled();
-      expect(consoleErrorSpy).toHaveBeenCalledWith("Draggable caught errors while triggering 'event'", [error]);
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        "Draggable caught errors while triggering 'event'",
+        [error]
+      );
 
       expect(callbacks[0]).toHaveBeenCalled();
       expect(callbacks[2]).toHaveBeenCalled();

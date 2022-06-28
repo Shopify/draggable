@@ -1,9 +1,16 @@
+import AbstractEvent from 'shared/AbstractEvent';
+
 /**
  * The Emitter is a simple emitter class that provides you with `on()`, `off()` and `trigger()` methods
  * @class Emitter
  * @module Emitter
  */
+
+type EmitterEventCallback = (event?: AbstractEvent) => void;
+
 export default class Emitter {
+  callbacks: Record<string, Array<EmitterEventCallback>>;
+
   constructor() {
     this.callbacks = {};
   }
@@ -13,7 +20,7 @@ export default class Emitter {
    * @param {String} type
    * @param {...Function} callbacks
    */
-  on(type, ...callbacks) {
+  on(type: string, ...callbacks: Array<EmitterEventCallback>) {
     if (!this.callbacks[type]) {
       this.callbacks[type] = [];
     }
@@ -23,35 +30,22 @@ export default class Emitter {
     return this;
   }
 
-  /**
-   * Unregisters callbacks by event name
-   * @param {String} type
-   * @param {Function} callback
-   */
-  off(type, callback) {
-    if (!this.callbacks[type]) {
-      return null;
-    }
+  off(type: string, callback: EmitterEventCallback) {
+    if (!this.callbacks[type]) return null;
+    const copy = [...this.callbacks[type]];
 
-    const copy = this.callbacks[type].slice(0);
-
-    for (let i = 0; i < copy.length; i++) {
-      if (callback === copy[i]) {
-        this.callbacks[type].splice(i, 1);
-      }
-    }
+    copy.forEach((copyCallback, index) => {
+      if (callback === copyCallback) this.callbacks[type].splice(index, 1);
+    });
 
     return this;
   }
 
   /**
    * Triggers event callbacks by event object
-   * @param {AbstractEvent} event
    */
-  trigger(event) {
-    if (!this.callbacks[event.type]) {
-      return null;
-    }
+  trigger(event: AbstractEvent) {
+    if (!this.callbacks[event.type]) return null;
 
     const callbacks = [...this.callbacks[event.type]];
     const caughtErrors = [];
@@ -68,7 +62,10 @@ export default class Emitter {
 
     if (caughtErrors.length) {
       /* eslint-disable no-console */
-      console.error(`Draggable caught errors while triggering '${event.type}'`, caughtErrors);
+      console.error(
+        `Draggable caught errors while triggering '${event.type}'`,
+        caughtErrors
+      );
       /* eslint-disable no-console */
     }
 

@@ -1,4 +1,4 @@
-import {createSandbox} from '../test-utils/helper';
+import { createSandbox } from '../test-utils/helpers';
 import closest from '.';
 
 const sampleMarkup = `
@@ -57,7 +57,16 @@ describe('utils/closest', () => {
     expect(closest(element, callback)).toBe(element);
   });
 
-  ['.twig', 'ul', '.branch', 'section', '.tree', 'div', 'body', 'document'].forEach((expectedMatchingSelector) => {
+  [
+    '.twig',
+    'ul',
+    '.branch',
+    'section',
+    '.tree',
+    'div',
+    'body',
+    'document',
+  ].forEach((expectedMatchingSelector) => {
     it(`returns matched element when selector targets parent element matching selector ${expectedMatchingSelector}`, () => {
       const element = sandbox.querySelector('.leaf');
       const expected = sandbox.querySelector(expectedMatchingSelector);

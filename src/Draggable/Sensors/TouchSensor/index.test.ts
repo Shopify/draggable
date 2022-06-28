@@ -6,7 +6,7 @@ import {
   touchStart,
   touchMove,
   touchRelease,
-} from '../test-utils/helper';
+} from '../test-utils/helpers';
 
 import TouchSensor from '.';
 
@@ -121,7 +121,7 @@ describe('TouchSensor', () => {
 
   describe('using distance', () => {
     beforeEach(() => {
-      setup({distance: 1});
+      setup({ distance: 1 });
     });
 
     afterEach(teardown);
@@ -138,7 +138,7 @@ describe('TouchSensor', () => {
     it('triggers `drag:start` sensor event after distance requirement has been met', () => {
       function dragFlow() {
         touchStart(draggableElement);
-        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
+        touchMove(draggableElement, { touches: [{ pageX: 1, pageY: 0 }] });
       }
 
       expect(dragFlow).toHaveTriggeredSensorEvent('drag:start');
@@ -147,7 +147,7 @@ describe('TouchSensor', () => {
     it('triggers `drag:move` event while moving the finger after delay', () => {
       function dragFlow() {
         touchStart(draggableElement);
-        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
+        touchMove(draggableElement, { touches: [{ pageX: 1, pageY: 0 }] });
         touchMove(draggableElement);
         touchRelease(draggableElement);
       }
@@ -158,7 +158,7 @@ describe('TouchSensor', () => {
     it('triggers `drag:stop` event when releasing the finger after dragging has started', () => {
       function dragFlow() {
         touchStart(draggableElement);
-        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
+        touchMove(draggableElement, { touches: [{ pageX: 1, pageY: 0 }] });
         touchRelease(draggableElement);
       }
 
@@ -177,7 +177,7 @@ describe('TouchSensor', () => {
 
   describe('using delay', () => {
     beforeEach(() => {
-      setup({delay: DRAG_DELAY});
+      setup({ delay: DRAG_DELAY });
     });
 
     afterEach(teardown);
@@ -235,7 +235,7 @@ describe('TouchSensor', () => {
 
   describe('delay and distance', () => {
     beforeEach(() => {
-      setup({delay: DRAG_DELAY, distance: 1});
+      setup({ delay: DRAG_DELAY, distance: 1 });
     });
 
     afterEach(teardown);
@@ -243,7 +243,7 @@ describe('TouchSensor', () => {
     it('does not trigger `drag:start` before delay ends', () => {
       function dragFlow() {
         touchStart(draggableElement);
-        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
+        touchMove(draggableElement, { touches: [{ pageX: 1, pageY: 0 }] });
         touchRelease(draggableElement);
       }
 
@@ -263,9 +263,9 @@ describe('TouchSensor', () => {
     it('does not trigger `drag:start` sensor event when moved during delay', () => {
       function dragFlow() {
         touchStart(draggableElement);
-        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
-        const dateMock = waitForDragDelay({restoreDateMock: false});
-        touchMove(draggableElement, {touches: [{pageX: 2, pageY: 0}]});
+        touchMove(draggableElement, { touches: [{ pageX: 1, pageY: 0 }] });
+        const dateMock = waitForDragDelay({ restoreDateMock: false });
+        touchMove(draggableElement, { touches: [{ pageX: 2, pageY: 0 }] });
         touchRelease(draggableElement);
         dateMock.mockRestore();
       }
@@ -280,7 +280,7 @@ describe('TouchSensor', () => {
         const dateMock = jest.spyOn(Date, 'now').mockImplementation(() => {
           return next;
         });
-        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
+        touchMove(draggableElement, { touches: [{ pageX: 1, pageY: 0 }] });
         jest.advanceTimersByTime(DRAG_DELAY);
         touchRelease(draggableElement);
         dateMock.mockRestore();
@@ -298,7 +298,7 @@ describe('TouchSensor', () => {
           return next;
         });
         jest.advanceTimersByTime(DRAG_DELAY + 1);
-        touchMove(draggableElement, {touches: [{pageX: 1, pageY: 1}]});
+        touchMove(draggableElement, { touches: [{ pageX: 1, pageY: 1 }] });
         dateMock.mockRestore();
         touchRelease(draggableElement);
       }

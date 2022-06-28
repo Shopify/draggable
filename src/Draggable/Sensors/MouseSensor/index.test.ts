@@ -6,7 +6,7 @@ import {
   clickMouse,
   moveMouse,
   releaseMouse,
-} from 'test-utils/helper';
+} from 'test-utils/helpers';
 import MouseSensor from '.';
 
 const sampleMarkup = `
@@ -98,7 +98,7 @@ describe('MouseSensor', () => {
 
     it('does not prevent `dragstart` event when attempting to drag outside of draggable container', () => {
       clickMouse(document.body);
-      moveMouse(document, {pageX: 1, pageY: 1});
+      moveMouse(document, { pageX: 1, pageY: 1 });
       const nativeDragEvent = triggerEvent(draggableElement, 'dragstart');
 
       expect(nativeDragEvent).not.toHaveDefaultPrevented();
@@ -108,7 +108,7 @@ describe('MouseSensor', () => {
 
     it('does not prevent `dragstart` event when attempting to drag non draggable element', () => {
       clickMouse(nonDraggableElement);
-      moveMouse(document, {pageX: 1, pageY: 1});
+      moveMouse(document, { pageX: 1, pageY: 1 });
       const nativeDragEvent = triggerEvent(nonDraggableElement, 'dragstart');
 
       expect(nativeDragEvent).not.toHaveDefaultPrevented();
@@ -128,24 +128,28 @@ describe('MouseSensor', () => {
 
     it('does not trigger `drag:start` event when right clicking or holding ctrl or meta key', () => {
       function dragFlowWithRightClick() {
-        clickMouse(draggableElement, {button: 2});
+        clickMouse(draggableElement, { button: 2 });
         waitForDragDelay();
         releaseMouse(document.body);
       }
 
       function dragFlowWithCtrlKey() {
-        clickMouse(draggableElement, {ctrlKey: true});
+        clickMouse(draggableElement, { ctrlKey: true });
         waitForDragDelay();
         releaseMouse(document.body);
       }
 
       function dragFlowWithMetaKey() {
-        clickMouse(draggableElement, {metaKey: true});
+        clickMouse(draggableElement, { metaKey: true });
         waitForDragDelay();
         releaseMouse(document.body);
       }
 
-      [dragFlowWithRightClick, dragFlowWithCtrlKey, dragFlowWithMetaKey].forEach((dragFlow) => {
+      [
+        dragFlowWithRightClick,
+        dragFlowWithCtrlKey,
+        dragFlowWithMetaKey,
+      ].forEach((dragFlow) => {
         expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
       });
     });
@@ -170,17 +174,22 @@ describe('MouseSensor', () => {
     let handleInNonDraggableElement;
 
     beforeEach(() => {
-      setup({handle: '.handle'});
+      setup({ handle: '.handle' });
       handleInDraggableElement = sandbox.querySelector('.draggable .handle');
-      handleInNonDraggableElement = sandbox.querySelector('.non-draggable .handle');
+      handleInNonDraggableElement = sandbox.querySelector(
+        '.non-draggable .handle'
+      );
     });
 
     afterEach(teardown);
 
     it('does not prevent `dragstart` event when attempting to drag handle in non draggable element', () => {
       clickMouse(handleInNonDraggableElement);
-      moveMouse(document, {pageX: 1, pageY: 1});
-      const nativeDragEvent = triggerEvent(handleInNonDraggableElement, 'dragstart');
+      moveMouse(document, { pageX: 1, pageY: 1 });
+      const nativeDragEvent = triggerEvent(
+        handleInNonDraggableElement,
+        'dragstart'
+      );
 
       expect(nativeDragEvent).not.toHaveDefaultPrevented();
 
@@ -189,8 +198,11 @@ describe('MouseSensor', () => {
 
     it('prevent `dragstart` event when attempting to drag handle in draggable element', () => {
       clickMouse(handleInDraggableElement);
-      moveMouse(document, {pageX: 1, pageY: 1});
-      const nativeDragEvent = triggerEvent(handleInDraggableElement, 'dragstart');
+      moveMouse(document, { pageX: 1, pageY: 1 });
+      const nativeDragEvent = triggerEvent(
+        handleInDraggableElement,
+        'dragstart'
+      );
 
       expect(nativeDragEvent).toHaveDefaultPrevented();
 
@@ -199,7 +211,7 @@ describe('MouseSensor', () => {
 
     it('does not prevent `dragstart` event when attempting to drag outside of handle inside of draggable', () => {
       clickMouse(draggableElement);
-      moveMouse(document, {pageX: 1, pageY: 1});
+      moveMouse(document, { pageX: 1, pageY: 1 });
       const nativeDragEvent = triggerEvent(draggableElement, 'dragstart');
 
       expect(nativeDragEvent).not.toHaveDefaultPrevented();
@@ -210,7 +222,7 @@ describe('MouseSensor', () => {
 
   describe('using distance', () => {
     beforeEach(() => {
-      setup({distance: 1});
+      setup({ distance: 1 });
     });
 
     afterEach(teardown);
@@ -218,7 +230,7 @@ describe('MouseSensor', () => {
     it('triggers `drag:start` sensor event on mousemove after distance has been met', () => {
       function dragFlow() {
         clickMouse(draggableElement);
-        moveMouse(draggableElement, {pageY: 1, pageX: 0});
+        moveMouse(draggableElement, { pageY: 1, pageX: 0 });
         releaseMouse(document.body);
       }
 
@@ -228,7 +240,7 @@ describe('MouseSensor', () => {
     it('does not trigger `drag:start` event releasing mouse before distance has been met', () => {
       function dragFlow() {
         clickMouse(draggableElement);
-        moveMouse(draggableElement, {pageY: 1, pageX: 0});
+        moveMouse(draggableElement, { pageY: 1, pageX: 0 });
         releaseMouse(document.body);
       }
 
@@ -249,7 +261,7 @@ describe('MouseSensor', () => {
     it('triggers `drag:move` event while moving the mouse after distance has been met', () => {
       function dragFlow() {
         clickMouse(draggableElement);
-        moveMouse(draggableElement, {pageY: 1, pageX: 0});
+        moveMouse(draggableElement, { pageY: 1, pageX: 0 });
         moveMouse(document.body);
         releaseMouse(document.body);
       }
@@ -260,7 +272,7 @@ describe('MouseSensor', () => {
 
   describe('using delay', () => {
     beforeEach(() => {
-      setup({delay: DRAG_DELAY});
+      setup({ delay: DRAG_DELAY });
     });
 
     afterEach(teardown);
@@ -310,7 +322,7 @@ describe('MouseSensor', () => {
 
   describe('delay and distance', () => {
     beforeEach(() => {
-      setup({delay: DRAG_DELAY, distance: 1});
+      setup({ delay: DRAG_DELAY, distance: 1 });
     });
 
     afterEach(teardown);
@@ -318,7 +330,7 @@ describe('MouseSensor', () => {
     it('does not trigger `drag:start` before delay ends', () => {
       function dragFlow() {
         clickMouse(draggableElement);
-        moveMouse(draggableElement, {pageY: 1, pageX: 0});
+        moveMouse(draggableElement, { pageY: 1, pageX: 0 });
         releaseMouse(document.body);
       }
       expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
@@ -336,9 +348,9 @@ describe('MouseSensor', () => {
     it('does not trigger `drag:start` sensor event when moved during delay', () => {
       function dragFlow() {
         clickMouse(draggableElement);
-        moveMouse(draggableElement, {pageY: 1, pageX: 0});
-        const dateMock = waitForDragDelay({restoreDateMock: false});
-        moveMouse(draggableElement, {pageY: 2, pageX: 0});
+        moveMouse(draggableElement, { pageY: 1, pageX: 0 });
+        const dateMock = waitForDragDelay({ restoreDateMock: false });
+        moveMouse(draggableElement, { pageY: 2, pageX: 0 });
         waitForDragDelay();
         releaseMouse(document.body);
         dateMock.mockRestore();
@@ -353,7 +365,7 @@ describe('MouseSensor', () => {
         const dateMock = jest.spyOn(Date, 'now').mockImplementation(() => {
           return next;
         });
-        moveMouse(draggableElement, {pageY: 1, pageX: 0});
+        moveMouse(draggableElement, { pageY: 1, pageX: 0 });
         jest.advanceTimersByTime(DRAG_DELAY);
         releaseMouse(document.body);
         dateMock.mockRestore();
@@ -369,7 +381,7 @@ describe('MouseSensor', () => {
           return next;
         });
         jest.advanceTimersByTime(DRAG_DELAY + 1);
-        moveMouse(draggableElement, {pageY: 1, pageX: 0});
+        moveMouse(draggableElement, { pageY: 1, pageX: 0 });
         releaseMouse(document.body);
         dateMock.mockRestore();
       }

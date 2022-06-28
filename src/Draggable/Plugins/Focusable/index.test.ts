@@ -1,4 +1,7 @@
-import { createSandbox, waitForRequestAnimationFrame } from 'test-utils/helper';
+import {
+  createSandbox,
+  waitForRequestAnimationFrame,
+} from 'test-utils/helpers';
 import Draggable from '../..';
 import Focusable from '.';
 
@@ -97,7 +100,9 @@ describe('Focusable', () => {
   });
 
   it('does not remove tabindex properties for element with tabindex attribute', () => {
-    const elementWithTabIndexAttribute = document.querySelector('[tabindex]');
+    const elementWithTabIndexAttribute = <HTMLElement>(
+      document.querySelector('[tabindex]')
+    );
     const originalTabIndex = elementWithTabIndexAttribute.tabIndex;
 
     draggable = new Draggable(containers, {

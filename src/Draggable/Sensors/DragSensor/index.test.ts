@@ -7,7 +7,7 @@ import {
   releaseMouse,
   DRAG_DELAY,
   waitForDragDelay,
-} from 'test-utils/helper';
+} from 'test-utils/helpers';
 
 import DragSensor from '.';
 
@@ -170,7 +170,7 @@ describe('DragSensor', () => {
 
   describe('using delay', () => {
     beforeEach(() => {
-      setup({delay: DRAG_DELAY});
+      setup({ delay: DRAG_DELAY });
     });
 
     afterEach(teardown);

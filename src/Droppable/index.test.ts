@@ -5,7 +5,7 @@ import {
   releaseMouse,
   waitForDragDelay,
   DRAG_DELAY,
-} from 'test-utils/helper';
+} from 'test-utils/helpers';
 
 import Droppable from './Droppable';
 import {

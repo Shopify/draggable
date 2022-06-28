@@ -1,6 +1,10 @@
-import {expectation} from './utils';
+import AbstractEvent from 'shared/AbstractEvent';
+import expectation from './utils';
 
-function toHaveBeenCalledWithEvent(jestFunction, expectedEventConstructor) {
+export function toHaveBeenCalledWithEvent(
+  jestFunction?: jest.Mock,
+  expectedEventConstructor?: typeof AbstractEvent
+) {
   const mockFunction = jestFunction.mock;
   const mockCalls = mockFunction.calls;
   let pass;
@@ -9,14 +13,20 @@ function toHaveBeenCalledWithEvent(jestFunction, expectedEventConstructor) {
   // eslint-disable-next-line babel/no-invalid-this
   pass = this.isNot && mockCalls.length === 0;
   if (pass) {
-    message = () => `Expected ${expectedEventConstructor.type} event ${expectation(!pass)} triggered`;
-    return {pass: !pass, message};
+    message = () =>
+      `Expected ${expectedEventConstructor.type} event ${expectation(
+        !pass
+      )} triggered`;
+    return { pass: !pass, message };
   }
 
   pass = !mockCalls.length;
   if (pass) {
-    message = () => `Expected ${expectedEventConstructor.type} event ${expectation(pass)} triggered`;
-    return {pass, message};
+    message = () =>
+      `Expected ${expectedEventConstructor.type} event ${expectation(
+        pass
+      )} triggered`;
+    return { pass, message };
   }
 
   const event = mockCalls[0][0];
@@ -24,8 +34,10 @@ function toHaveBeenCalledWithEvent(jestFunction, expectedEventConstructor) {
   pass = !event;
   if (pass) {
     message = () =>
-      `Expected ${expectedEventConstructor.type} event ${expectation(pass)} triggered with an event instance`;
-    return {pass, message};
+      `Expected ${expectedEventConstructor.type} event ${expectation(
+        pass
+      )} triggered with an event instance`;
+    return { pass, message };
   }
 
   pass = event.constructor === expectedEventConstructor;
@@ -33,19 +45,24 @@ function toHaveBeenCalledWithEvent(jestFunction, expectedEventConstructor) {
   return {
     pass,
     message: () =>
-      `Expected ${event.type} event ${expectation(pass)} triggered with ${expectedEventConstructor.name} instance`,
+      `Expected ${event.type} event ${expectation(pass)} triggered with ${
+        expectedEventConstructor.name
+      } instance`,
   };
 }
 
-function toHaveBeenCalledWithEventProperties(jestFunction, expectedProperties) {
+export function toHaveBeenCalledWithEventProperties(
+  jestFunction: jest.Mock,
+  expectedProperties: Record<string, unknown>
+) {
   const mockFunction = jestFunction.mock;
   const mockCalls = mockFunction.calls;
   const event = mockCalls[0][0];
   const expectedPropertyEntries = Object.entries(expectedProperties);
 
   const badMatches = expectedPropertyEntries
-    .map(([key, value]) => ({key, value}))
-    .filter(({key, value}) => event[key] !== value);
+    .map(([key, value]) => ({ key, value }))
+    .filter(({ key, value }) => event[key] !== value);
 
   const receivedPropertyEntries = Object.entries(event);
 
@@ -54,19 +71,18 @@ function toHaveBeenCalledWithEventProperties(jestFunction, expectedProperties) {
   return {
     pass,
     message: () => {
-      const listOfExpectedProperties = expectedPropertyEntries.map(([key, value]) => `${key}=${JSON.stringify(value)}`);
-      const listOfReceivedProperties = receivedPropertyEntries.map(([key, value]) => `${key}=${JSON.stringify(value)}`);
+      const listOfExpectedProperties = expectedPropertyEntries.map(
+        ([key, value]) => `${key}=${JSON.stringify(value)}`
+      );
+      const listOfReceivedProperties = receivedPropertyEntries.map(
+        ([key, value]) => `${key}=${JSON.stringify(value)}`
+      );
 
       return `Expected ${event.type} event ${expectation(
-        pass,
+        pass
       )} the following properties:\n${listOfExpectedProperties.join(
-        '\n',
+        '\n'
       )}\n\nInstead received:\n${listOfReceivedProperties.join('\n')}\n`;
     },
   };
 }
-
-expect.extend({
-  toHaveBeenCalledWithEvent,
-  toHaveBeenCalledWithEventProperties,
-});

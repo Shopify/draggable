@@ -1,4 +1,7 @@
-function toHaveOrder(actualOrder, expectedOrder) {
+export function toHaveOrder(
+  actualOrder: HTMLElement[],
+  expectedOrder: HTMLElement[]
+) {
   const incorrectPositions = expectedOrder
     .map((element, index) => actualOrder[index] === element)
     .filter((isCorrectOrder) => !isCorrectOrder);
@@ -29,7 +32,3 @@ function toHaveOrder(actualOrder, expectedOrder) {
     },
   };
 }
-
-expect.extend({
-  toHaveOrder,
-});

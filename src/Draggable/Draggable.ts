@@ -104,8 +104,8 @@ export interface DraggableOptions {
   sortAnimation?: SortAnimationOptions;
   placedTimeout?: number;
   exclude?: {
-    plugins: typeof AbstractPlugin[];
-    sensors: typeof Sensor[];
+    plugins?: typeof AbstractPlugin[];
+    sensors?: typeof Sensor[];
   };
 }
 

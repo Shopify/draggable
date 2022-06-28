@@ -1,18 +1,15 @@
-function toHaveTriggeredSensorEvent(received, expectedEventName, count) {
-  let triggered = false;
-  let callCount = 0;
-  function callback() {
-    if (count !== undefined) {
-      callCount++;
-    }
-    triggered = true;
-  }
+export function toHaveTriggeredSensorEvent(
+  received: () => void,
+  expectedEventName: string,
+  expectedCount: number
+) {
+  const callback = jest.fn();
 
   document.addEventListener(expectedEventName, callback);
   received();
   document.removeEventListener(expectedEventName, callback);
 
-  const pass = Boolean(triggered) && Boolean(count === undefined || callCount === count);
+  const pass = callback.mock.calls.length > 0;
 
   return {
     pass,
@@ -20,12 +17,17 @@ function toHaveTriggeredSensorEvent(received, expectedEventName, count) {
       const expectation = pass ? 'not to have been' : 'to have been';
       const defaultMessage = `Expected sensor event '${expectedEventName}' ${expectation} to be triggered`;
 
-      return count ? `${defaultMessage} ${count} time(s)` : defaultMessage;
+      return expectedCount
+        ? `${defaultMessage} ${expectedCount} time(s)`
+        : defaultMessage;
     },
   };
 }
 
-function toHaveCanceledSensorEvent(received, expectedEventName) {
+export function toHaveCanceledSensorEvent(
+  received: () => void,
+  expectedEventName: string
+) {
   let canceled = false;
 
   function callback(event) {
@@ -47,8 +49,3 @@ function toHaveCanceledSensorEvent(received, expectedEventName) {
     },
   };
 }
-
-expect.extend({
-  toHaveTriggeredSensorEvent,
-  toHaveCanceledSensorEvent,
-});

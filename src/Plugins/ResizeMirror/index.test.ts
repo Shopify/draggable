@@ -8,8 +8,8 @@ import {
   waitForPromisesToResolve,
   DRAG_DELAY,
   drag,
-} from 'test-utils/helper';
-import {Draggable} from '../..';
+} from 'test-utils/helpers';
+import { Draggable } from '../..';
 import ResizeMirror from '.';
 
 const sampleMarkup = `
@@ -132,8 +132,8 @@ describe('ResizeMirror', () => {
   });
 
   it('dont appends mirror when mirror was removed', async () => {
-    drag({from: smallerDraggable, to: smallerDraggable});
-    drag({from: smallerDraggable, to: smallerDraggable});
+    drag({ from: smallerDraggable, to: smallerDraggable });
+    drag({ from: smallerDraggable, to: smallerDraggable });
 
     await waitForPromisesToResolve();
     waitForRequestAnimationFrame();
@@ -144,7 +144,7 @@ describe('ResizeMirror', () => {
   });
 });
 
-function mockDimensions(element, {width = 0, height = 0}) {
+function mockDimensions(element, { width = 0, height = 0 }) {
   Object.assign(element.style, {
     width: `${width}px`,
     height: `${height}px`,

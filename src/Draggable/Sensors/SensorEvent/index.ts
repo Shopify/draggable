@@ -2,16 +2,20 @@ import AbstractEvent from 'shared/AbstractEvent';
 
 /**
  * Base sensor event
- * @class SensorEvent
- * @module SensorEvent
- * @extends AbstractEvent
  */
 export class SensorEvent extends AbstractEvent {
+  declare data: {
+    originalEvent?: Event;
+    clientX?: number;
+    clientY?: number;
+    target?: HTMLElement;
+    container?: HTMLElement;
+    originalSource?: HTMLElement;
+    pressure?: number;
+  };
+
   /**
    * Original browser event that triggered a sensor
-   * @property originalEvent
-   * @type {Event}
-   * @readonly
    */
   get originalEvent() {
     return this.data.originalEvent;
@@ -19,9 +23,6 @@ export class SensorEvent extends AbstractEvent {
 
   /**
    * Normalized clientX for both touch and mouse events
-   * @property clientX
-   * @type {Number}
-   * @readonly
    */
   get clientX() {
     return this.data.clientX;
@@ -29,9 +30,6 @@ export class SensorEvent extends AbstractEvent {
 
   /**
    * Normalized clientY for both touch and mouse events
-   * @property clientY
-   * @type {Number}
-   * @readonly
    */
   get clientY() {
     return this.data.clientY;
@@ -40,9 +38,6 @@ export class SensorEvent extends AbstractEvent {
   /**
    * Normalized target for both touch and mouse events
    * Returns the element that is behind cursor or touch pointer
-   * @property target
-   * @type {HTMLElement}
-   * @readonly
    */
   get target() {
     return this.data.target;
@@ -60,9 +55,6 @@ export class SensorEvent extends AbstractEvent {
 
   /**
    * Draggables original source element
-   * @property originalSource
-   * @type {HTMLElement}
-   * @readonly
    */
   get originalSource() {
     return this.data.originalSource;
@@ -70,9 +62,6 @@ export class SensorEvent extends AbstractEvent {
 
   /**
    * Trackpad pressure
-   * @property pressure
-   * @type {Number}
-   * @readonly
    */
   get pressure() {
     return this.data.pressure;
@@ -81,9 +70,6 @@ export class SensorEvent extends AbstractEvent {
 
 /**
  * Drag start sensor event
- * @class DragStartSensorEvent
- * @module DragStartSensorEvent
- * @extends SensorEvent
  */
 export class DragStartSensorEvent extends SensorEvent {
   static type = 'drag:start';
@@ -91,9 +77,6 @@ export class DragStartSensorEvent extends SensorEvent {
 
 /**
  * Drag move sensor event
- * @class DragMoveSensorEvent
- * @module DragMoveSensorEvent
- * @extends SensorEvent
  */
 export class DragMoveSensorEvent extends SensorEvent {
   static type = 'drag:move';
@@ -101,9 +84,6 @@ export class DragMoveSensorEvent extends SensorEvent {
 
 /**
  * Drag stop sensor event
- * @class DragStopSensorEvent
- * @module DragStopSensorEvent
- * @extends SensorEvent
  */
 export class DragStopSensorEvent extends SensorEvent {
   static type = 'drag:stop';
@@ -111,9 +91,6 @@ export class DragStopSensorEvent extends SensorEvent {
 
 /**
  * Drag pressure sensor event
- * @class DragPressureSensorEvent
- * @module DragPressureSensorEvent
- * @extends SensorEvent
  */
 export class DragPressureSensorEvent extends SensorEvent {
   static type = 'drag:pressure';

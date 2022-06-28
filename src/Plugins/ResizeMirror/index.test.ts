@@ -8,9 +8,9 @@ import {
   waitForPromisesToResolve,
   DRAG_DELAY,
   drag,
-} from 'helper';
-import {Draggable} from '../../..';
-import ResizeMirror from '..';
+} from 'test-utils/helper';
+import {Draggable} from '../..';
+import ResizeMirror from '.';
 
 const sampleMarkup = `
   <ul class="Container">
@@ -170,7 +170,7 @@ function waitForNextRequestAnimationFrame() {
 function withMockedAppendChild(callback) {
   const mock = jest.fn();
   const appendChild = Node.prototype.appendChild;
-  Node.prototype.appendChild = function(...args) {
+  Node.prototype.appendChild = function (...args) {
     mock(...args);
     return appendChild.call(this, ...args);
   };

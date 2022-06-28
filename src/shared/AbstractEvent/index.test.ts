@@ -1,4 +1,4 @@
-import AbstractEvent from '../AbstractEvent';
+import AbstractEvent from '.';
 
 describe('AbstractEvent', () => {
   it('should be of type AbstractEvent', () => {

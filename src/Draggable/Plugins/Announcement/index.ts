@@ -1,3 +1,4 @@
+import AbstractEvent from 'shared/AbstractEvent';
 import AbstractPlugin from 'shared/AbstractPlugin';
 
 const onInitialize = Symbol('onInitialize');
@@ -10,15 +11,13 @@ const ARIA_ATOMIC = 'aria-atomic';
 const ARIA_LIVE = 'aria-live';
 const ROLE = 'role';
 
-/**
- * Announcement default options
- * @property {Object} defaultOptions
- * @property {Number} defaultOptions.expire
- * @type {Object}
- */
 export const defaultOptions = {
   expire: 7000,
 };
+
+export interface AnnouncementOptions {
+  expire: number;
+}
 
 /**
  * Announcement plugin
@@ -27,6 +26,11 @@ export const defaultOptions = {
  * @extends AbstractPlugin
  */
 export default class Announcement extends AbstractPlugin {
+  /*** Plugin options */
+  options: AnnouncementOptions;
+  /*** Original draggable trigger method. Hack until we have onAll or on('all') */
+  originalTriggerMethod: () => void;
+
   /**
    * Announcement constructor.
    * @constructs Announcement
@@ -35,25 +39,11 @@ export default class Announcement extends AbstractPlugin {
   constructor(draggable) {
     super(draggable);
 
-    /**
-     * Plugin options
-     * @property options
-     * @type {Object}
-     */
     this.options = {
       ...defaultOptions,
       ...this.getOptions(),
     };
-
-    /**
-     * Original draggable trigger method. Hack until we have onAll or on('all')
-     * @property originalTriggerMethod
-     * @type {Function}
-     */
     this.originalTriggerMethod = this.draggable.trigger;
-
-    this[onInitialize] = this[onInitialize].bind(this);
-    this[onDestroy] = this[onDestroy].bind(this);
   }
 
   /**
@@ -73,25 +63,18 @@ export default class Announcement extends AbstractPlugin {
   /**
    * Returns passed in options
    */
-  getOptions() {
-    return this.draggable.options.announcements || {};
-  }
+  getOptions = () => this.draggable.options.announcements ?? {};
 
   /**
    * Announces event
    * @private
    * @param {AbstractEvent} event
    */
-  [announceEvent](event) {
+  private [announceEvent](event: AbstractEvent) {
     const message = this.options[event.type];
 
-    if (message && typeof message === 'string') {
-      this[announceMessage](message);
-    }
-
-    if (message && typeof message === 'function') {
-      this[announceMessage](message(event));
-    }
+    if (message && typeof message === 'string') this[announceMessage](message);
+    if (message && typeof message === 'function') this[announceMessage](message(event));
   }
 
   /**
@@ -99,15 +82,12 @@ export default class Announcement extends AbstractPlugin {
    * @private
    * @param {String} message
    */
-  [announceMessage](message) {
+  private [announceMessage](message: string) {
     announce(message, {expire: this.options.expire});
   }
 
-  /**
-   * Initialize hander
-   * @private
-   */
-  [onInitialize]() {
+  /*** Initialize hander */
+  private [onInitialize] = () => {
     // Hack until there is an api for listening for all events
     this.draggable.trigger = (event) => {
       try {
@@ -117,29 +97,17 @@ export default class Announcement extends AbstractPlugin {
         this.originalTriggerMethod.call(this.draggable, event);
       }
     };
-  }
+  };
 
-  /**
-   * Destroy hander
-   * @private
-   */
-  [onDestroy]() {
+  /*** Destroy hander */
+  private [onDestroy] = () => {
     this.draggable.trigger = this.originalTriggerMethod;
-  }
+  };
 }
 
-/**
- * @const {HTMLElement} liveRegion
- */
-const liveRegion = createRegion();
+const liveRegion: HTMLElement = createRegion();
 
-/**
- * Announces message via live region
- * @param {String} message
- * @param {Object} options
- * @param {Number} options.expire
- */
-function announce(message, {expire}) {
+function announce(message: string, {expire}: AnnouncementOptions) {
   const element = document.createElement('div');
 
   element.textContent = message;
@@ -150,10 +118,7 @@ function announce(message, {expire}) {
   }, expire);
 }
 
-/**
- * Creates region element
- * @return {HTMLElement}
- */
+/*** Creates region element */
 function createRegion() {
   const element = document.createElement('div');
 

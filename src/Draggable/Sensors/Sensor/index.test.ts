@@ -1,4 +1,4 @@
-import Sensor from '../Sensor';
+import Sensor from '.';
 
 describe('Sensor', () => {
   describe('#constructor', () => {
@@ -10,8 +10,8 @@ describe('Sensor', () => {
     });
 
     it('should initialize with containers and options', () => {
-      const expectedContainers = ['expectedContainer'];
-      const expectedOptions = {expectedOptions: true};
+      const expectedContainers = ['expectedContainer'] as unknown as HTMLElement[];
+      const expectedOptions = {delay: 2};
       const sensor = new Sensor(expectedContainers, expectedOptions);
 
       expect(sensor.containers).toEqual(expectedContainers);

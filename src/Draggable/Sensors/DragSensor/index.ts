@@ -1,5 +1,5 @@
 import {closest} from 'shared/utils';
-import Sensor from '../Sensor';
+import Sensor, {SensorOptions} from '../Sensor';
 import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
 
 const onMouseDown = Symbol('onMouseDown');
@@ -17,43 +17,16 @@ const reset = Symbol('reset');
  * @extends Sensor
  */
 export default class DragSensor extends Sensor {
-  /**
-   * DragSensor constructor.
-   * @constructs DragSensor
-   * @param {HTMLElement[]|NodeList|HTMLElement} containers - Containers
-   * @param {Object} options - Options
-   */
-  constructor(containers = [], options = {}) {
-    super(containers, options);
+  /*** Mouse down timer which will end up setting the draggable attribute, unless canceled */
+  mouseDownTimeout: ReturnType<typeof setTimeout> = null;
+  /*** Draggable element needs to be remembered to unset the draggable attribute after drag operation has completed */
+  draggableElement: HTMLElement = null;
+  /*** Native draggable element could be links or images, their draggable state will be disabled during drag operation */
+  nativeDraggableElement: HTMLElement = null;
 
-    /**
-     * Mouse down timer which will end up setting the draggable attribute, unless canceled
-     * @property mouseDownTimeout
-     * @type {Number}
-     */
-    this.mouseDownTimeout = null;
-
-    /**
-     * Draggable element needs to be remembered to unset the draggable attribute after drag operation has completed
-     * @property draggableElement
-     * @type {HTMLElement}
-     */
-    this.draggableElement = null;
-
-    /**
-     * Native draggable element could be links or images, their draggable state will be disabled during drag operation
-     * @property nativeDraggableElement
-     * @type {HTMLElement}
-     */
-    this.nativeDraggableElement = null;
-
-    this[onMouseDown] = this[onMouseDown].bind(this);
-    this[onMouseUp] = this[onMouseUp].bind(this);
-    this[onDragStart] = this[onDragStart].bind(this);
-    this[onDragOver] = this[onDragOver].bind(this);
-    this[onDragEnd] = this[onDragEnd].bind(this);
-    this[onDrop] = this[onDrop].bind(this);
-  }
+  declare options: SensorOptions & {
+    type: string;
+  };
 
   /**
    * Attaches sensors event listeners to the DOM
@@ -71,10 +44,9 @@ export default class DragSensor extends Sensor {
 
   /**
    * Drag start handler
-   * @private
    * @param {Event} event - Drag start event
    */
-  [onDragStart](event) {
+  private [onDragStart] = (event) => {
     // Need for firefox. "text" key is needed for IE
     event.dataTransfer.setData('text', '');
     event.dataTransfer.effectAllowed = this.options.type;
@@ -105,17 +77,14 @@ export default class DragSensor extends Sensor {
         this.dragging = true;
       }
     }, 0);
-  }
+  };
 
   /**
    * Drag over handler
-   * @private
    * @param {Event} event - Drag over event
    */
-  [onDragOver](event) {
-    if (!this.dragging) {
-      return;
-    }
+  private [onDragOver] = (event) => {
+    if (!this.dragging) return;
 
     const target = document.elementFromPoint(event.clientX, event.clientY);
     const container = this.currentContainer;
@@ -134,17 +103,14 @@ export default class DragSensor extends Sensor {
       event.preventDefault();
       event.dataTransfer.dropEffect = this.options.type;
     }
-  }
+  };
 
   /**
    * Drag end handler
-   * @private
    * @param {Event} event - Drag end event
    */
-  [onDragEnd](event) {
-    if (!this.dragging) {
-      return;
-    }
+  private [onDragEnd] = (event) => {
+    if (!this.dragging) return;
 
     document.removeEventListener('mouseup', this[onMouseUp], true);
 
@@ -165,45 +131,33 @@ export default class DragSensor extends Sensor {
     this.startEvent = null;
 
     this[reset]();
-  }
+  };
 
   /**
    * Drop handler
-   * @private
    * @param {Event} event - Drop event
    */
-  [onDrop](event) {
-    // eslint-disable-line class-methods-use-this
+  private [onDrop] = (event) => {
     event.preventDefault();
-  }
+  };
 
   /**
    * Mouse down handler
-   * @private
    * @param {Event} event - Mouse down event
    */
-  [onMouseDown](event) {
+  private [onMouseDown] = (event) => {
     // Firefox bug for inputs within draggables https://bugzilla.mozilla.org/show_bug.cgi?id=739071
-    if (event.target && (event.target.form || event.target.contenteditable)) {
-      return;
-    }
+    if (event.target && (event.target.form || event.target.contenteditable)) return;
 
     const target = event.target;
-    this.currentContainer = closest(target, this.containers);
+    this.currentContainer = <HTMLElement>closest(target, this.containers);
 
-    if (!this.currentContainer) {
-      return;
-    }
-
-    if (this.options.handle && target && !closest(target, this.options.handle)) {
-      return;
-    }
+    if (!this.currentContainer) return;
+    if (this.options.handle && target && !closest(target, this.options.handle)) return;
 
     const originalSource = closest(target, this.options.draggable);
 
-    if (!originalSource) {
-      return;
-    }
+    if (!originalSource) return;
 
     const nativeDraggableElement = closest(event.target, (element) => element.draggable);
 
@@ -224,20 +178,19 @@ export default class DragSensor extends Sensor {
       originalSource.draggable = true;
       this.draggableElement = originalSource;
     }, this.delay.drag);
-  }
+  };
 
   /**
    * Mouse up handler
    * @private
    * @param {Event} event - Mouse up event
    */
-  [onMouseUp]() {
+  [onMouseUp] = () => {
     this[reset]();
-  }
+  };
 
   /**
    * Mouse up handler
-   * @private
    * @param {Event} event - Mouse up event
    */
   [reset]() {

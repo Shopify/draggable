@@ -7,9 +7,9 @@ import {
   releaseMouse,
   DRAG_DELAY,
   waitForDragDelay,
-} from 'helper';
+} from 'test-utils/helper';
 
-import DragSensor from '..';
+import DragSensor from '.';
 
 const sampleMarkup = `
   <ul>

@@ -1,5 +1,11 @@
+import { DraggableOptions } from 'Draggable/Draggable';
 import Draggable from '../Draggable';
-import {SwappableStartEvent, SwappableSwapEvent, SwappableSwappedEvent, SwappableStopEvent} from './SwappableEvent';
+import {
+  SwappableStartEvent,
+  SwappableSwapEvent,
+  SwappableSwappedEvent,
+  SwappableStopEvent,
+} from './SwappableEvent';
 
 const onDragStart = Symbol('onDragStart');
 const onDragOver = Symbol('onDragOver');
@@ -7,12 +13,19 @@ const onDragStop = Symbol('onDragStop');
 
 /**
  * Returns an announcement message when the Draggable element is swapped with another draggable element
- * @param {SwappableSwappedEvent} swappableEvent
- * @return {String}
  */
-function onSwappableSwappedDefaultAnnouncement({dragEvent, swappedElement}) {
-  const sourceText = dragEvent.source.textContent.trim() || dragEvent.source.id || 'swappable element';
-  const overText = swappedElement.textContent.trim() || swappedElement.id || 'swappable element';
+function onSwappableSwappedDefaultAnnouncement({
+  dragEvent,
+  swappedElement,
+}: SwappableSwappedEvent) {
+  const sourceText =
+    dragEvent.source.textContent.trim() ||
+    dragEvent.source.id ||
+    'swappable element';
+  const overText =
+    swappedElement.textContent.trim() ||
+    swappedElement.id ||
+    'swappable element';
 
   return `Swapped ${sourceText} with ${overText}`;
 }
@@ -28,18 +41,17 @@ const defaultAnnouncements = {
 /**
  * Swappable is built on top of Draggable and allows swapping of draggable elements.
  * Order is irrelevant to Swappable.
- * @class Swappable
- * @module Swappable
- * @extends Draggable
  */
 export default class Swappable extends Draggable {
   /**
-   * Swappable constructor.
-   * @constructs Swappable
-   * @param {HTMLElement[]|NodeList|HTMLElement} containers - Swappable containers
-   * @param {Object} options - Options for Swappable
+   * Last draggable element that was dragged over
    */
-  constructor(containers = [], options = {}) {
+  lastOver: HTMLElement = null;
+
+  /**
+   * Swappable constructor.
+   */
+  constructor(containers: HTMLElement[] = [], options: DraggableOptions = {}) {
     super(containers, {
       ...options,
       announcements: {
@@ -47,13 +59,6 @@ export default class Swappable extends Draggable {
         ...(options.announcements || {}),
       },
     });
-
-    /**
-     * Last draggable element that was dragged over
-     * @property lastOver
-     * @type {HTMLElement}
-     */
-    this.lastOver = null;
 
     this[onDragStart] = this[onDragStart].bind(this);
     this[onDragOver] = this[onDragOver].bind(this);
@@ -70,9 +75,9 @@ export default class Swappable extends Draggable {
   destroy() {
     super.destroy();
 
-    this.off('drag:start', this._onDragStart)
-      .off('drag:over', this._onDragOver)
-      .off('drag:stop', this._onDragStop);
+    this.off('drag:start', this[onDragStart])
+      .off('drag:over', this[onDragOver])
+      .off('drag:stop', this[onDragStop]);
   }
 
   /**
@@ -98,7 +103,11 @@ export default class Swappable extends Draggable {
    * @param {DragOverEvent} event - Drag over event
    */
   [onDragOver](event) {
-    if (event.over === event.originalSource || event.over === event.source || event.canceled()) {
+    if (
+      event.over === event.originalSource ||
+      event.over === event.source ||
+      event.canceled()
+    ) {
       return;
     }
 

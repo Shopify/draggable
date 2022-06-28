@@ -1,10 +1,22 @@
-import {closest} from 'shared/utils';
+import { SwapAnimationOptions, SortAnimationOptions } from 'Plugins';
+import AbstractPlugin from 'shared/AbstractPlugin';
+import { closest } from 'shared/utils';
 
-import {Announcement, Focusable, Mirror, Scrollable} from './Plugins';
+import {
+  Announcement,
+  Focusable,
+  Mirror,
+  MirrorOptions,
+  Scrollable,
+  ScrollableOptions,
+} from './Plugins';
 
 import Emitter from './Emitter';
-import {MouseSensor, TouchSensor} from './Sensors';
-import {DraggableInitializedEvent, DraggableDestroyEvent} from './DraggableEvent';
+import { MouseSensor, Sensor, TouchSensor } from './Sensors';
+import {
+  DraggableInitializedEvent,
+  DraggableDestroyEvent,
+} from './DraggableEvent';
 
 import {
   DragStartEvent,
@@ -17,6 +29,7 @@ import {
   DragPressureEvent,
   DragStoppedEvent,
 } from './DragEvent';
+import { SensorOptions } from './Sensors/Sensor';
 
 const onDragStart = Symbol('onDragStart');
 const onDragMove = Symbol('onDragMove');
@@ -30,8 +43,14 @@ const dragStop = Symbol('dragStop');
  * @const {Function} defaultAnnouncements['drag:stop']
  */
 const defaultAnnouncements = {
-  'drag:start': (event) => `Picked up ${event.source.textContent.trim() || event.source.id || 'draggable element'}`,
-  'drag:stop': (event) => `Released ${event.source.textContent.trim() || event.source.id || 'draggable element'}`,
+  'drag:start': (event) =>
+    `Picked up ${
+      event.source.textContent.trim() || event.source.id || 'draggable element'
+    }`,
+  'drag:stop': (event) =>
+    `Released ${
+      event.source.textContent.trim() || event.source.id || 'draggable element'
+    }`,
 };
 
 const defaultClasses = {
@@ -60,101 +79,98 @@ export const defaultOptions = {
   },
 };
 
+export interface DraggableOptions {
+  draggable?: string;
+  distance?: number;
+  handle?:
+    | string
+    | NodeList
+    | HTMLElement[]
+    | HTMLElement
+    | ((currentElement: HTMLElement) => HTMLElement);
+  delay?: number | DelayOptions;
+  plugins?: typeof AbstractPlugin[];
+  sensors?: typeof Sensor[];
+  classes?: { [key in keyof typeof defaultClasses]: string | string[] };
+  announcements?: Record<string, (event: Event) => void>;
+  collidables?:
+    | string
+    | NodeList
+    | HTMLElement[]
+    | (() => NodeList | HTMLElement[]);
+  mirror?: MirrorOptions;
+  scrollable?: ScrollableOptions;
+  swapAnimation?: SwapAnimationOptions;
+  sortAnimation?: SortAnimationOptions;
+  placedTimeout?: number;
+  exclude?: {
+    plugins: typeof AbstractPlugin[];
+    sensors: typeof Sensor[];
+  };
+}
+
 /**
  * This is the core draggable library that does the heavy lifting
  * @class Draggable
  * @module Draggable
  */
 export default class Draggable {
-  /**
-   * Default plugins draggable uses
-   * @static
-   * @property {Object} Plugins
-   * @property {Announcement} Plugins.Announcement
-   * @property {Focusable} Plugins.Focusable
-   * @property {Mirror} Plugins.Mirror
-   * @property {Scrollable} Plugins.Scrollable
-   * @type {Object}
-   */
-  static Plugins = {Announcement, Focusable, Mirror, Scrollable};
+  containers: HTMLElement[];
+  options: DraggableOptions;
+  /*** Draggables event emitter */
+  emitter: Emitter = new Emitter();
+  /*** Current drag state */
+  dragging: boolean = false;
+  /*** Active plugins */
+  plugins: AbstractPlugin[] = [];
+  /*** Active sensors */
+  sensors: Sensor[] = [];
+  /*** Mirror */
+  mirror: HTMLElement;
+  /*** Original HTML Element */
+  originalSource: HTMLElement;
+  /*** Source container ref */
+  sourceContainer: HTMLElement;
+  /*** Source container ref */
+  source: HTMLElement;
+  /*** Last placed element ref */
+  lastPlacedSource: HTMLElement;
+  /*** Last placed element container ref */
+  lastPlacedContainer: HTMLElement;
+  /** Current over element container ref */
+  currentOverContainer: HTMLElement;
+  /** Current over element ref */
+  currentOver: HTMLElement;
+  /*** Placement timeout ID */
+  placedTimeoutID: ReturnType<typeof setTimeout>;
 
-  /**
-   * Default sensors draggable uses
-   * @static
-   * @property {Object} Sensors
-   * @property {MouseSensor} Sensors.MouseSensor
-   * @property {TouchSensor} Sensors.TouchSensor
-   * @type {Object}
-   */
-  static Sensors = {MouseSensor, TouchSensor};
-
-  /**
-   * Draggable constructor.
-   * @constructs Draggable
-   * @param {HTMLElement[]|NodeList|HTMLElement} containers - Draggable containers
-   * @param {Object} options - Options for draggable
-   */
-  constructor(containers = [document.body], options = {}) {
-    /**
-     * Draggable containers
-     * @property containers
-     * @type {HTMLElement[]}
-     */
-    if (containers instanceof NodeList || containers instanceof Array) {
+  constructor(containers = [document.body], options: DraggableOptions = {}) {
+    if (containers instanceof NodeList || containers instanceof Array)
       this.containers = [...containers];
-    } else if (containers instanceof HTMLElement) {
+    else if ((containers as any) instanceof HTMLElement)
       this.containers = [containers];
-    } else {
-      throw new Error('Draggable containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`');
-    }
+    else
+      throw new Error(
+        'Draggable containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`'
+      );
 
     this.options = {
       ...defaultOptions,
       ...options,
       classes: {
         ...defaultClasses,
-        ...(options.classes || {}),
+        ...(options.classes ?? {}),
       },
       announcements: {
         ...defaultAnnouncements,
-        ...(options.announcements || {}),
+        ...(options.announcements ?? {}),
       },
       exclude: {
-        plugins: (options.exclude && options.exclude.plugins) || [],
-        sensors: (options.exclude && options.exclude.sensors) || [],
+        plugins: options.exclude?.plugins ?? [],
+        sensors: options.exclude?.sensors ?? [],
       },
     };
 
-    /**
-     * Draggables event emitter
-     * @property emitter
-     * @type {Emitter}
-     */
-    this.emitter = new Emitter();
-
-    /**
-     * Current drag state
-     * @property dragging
-     * @type {Boolean}
-     */
-    this.dragging = false;
-
-    /**
-     * Active plugins
-     * @property plugins
-     * @type {Plugin[]}
-     */
-    this.plugins = [];
-
-    /**
-     * Active sensors
-     * @property sensors
-     * @type {Sensor[]}
-     */
-    this.sensors = [];
-
-    this[onDragStart] = this[onDragStart].bind(this);
-    this[onDragMove] = this[onDragMove].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
     this[onDragPressure] = this[onDragPressure].bind(this);
     this[dragStop] = this[dragStop].bind(this);
@@ -165,10 +181,10 @@ export default class Draggable {
     document.addEventListener('drag:pressure', this[onDragPressure], true);
 
     const defaultPlugins = Object.values(Draggable.Plugins).filter(
-      (Plugin) => !this.options.exclude.plugins.includes(Plugin),
+      (plugin) => !this.options.exclude.plugins.includes(plugin)
     );
     const defaultSensors = Object.values(Draggable.Sensors).filter(
-      (sensor) => !this.options.exclude.sensors.includes(sensor),
+      (sensor) => !this.options.exclude.sensors.includes(sensor)
     );
 
     this.addPlugin(...[...defaultPlugins, ...this.options.plugins]);
@@ -178,7 +194,7 @@ export default class Draggable {
       draggable: this,
     });
 
-    this.on('mirror:created', ({mirror}) => (this.mirror = mirror));
+    this.on('mirror:created', ({ mirror }) => (this.mirror = mirror));
     this.on('mirror:destroy', () => (this.mirror = null));
 
     this.trigger(draggableInitializedEvent);
@@ -206,12 +222,9 @@ export default class Draggable {
 
   /**
    * Adds plugin to this draggable instance. This will end up calling the attach method of the plugin
-   * @param {...typeof Plugin} plugins - Plugins that you want attached to draggable
-   * @return {Draggable}
-   * @example draggable.addPlugin(CustomA11yPlugin, CustomMirrorPlugin)
    */
-  addPlugin(...plugins) {
-    const activePlugins = plugins.map((Plugin) => new Plugin(this));
+  addPlugin(...plugins: typeof AbstractPlugin[]) {
+    const activePlugins = plugins.map((plugin) => new plugin(this));
 
     activePlugins.forEach((plugin) => plugin.attach());
     this.plugins = [...this.plugins, ...activePlugins];
@@ -222,27 +235,27 @@ export default class Draggable {
   /**
    * Removes plugins that are already attached to this draggable instance. This will end up calling
    * the detach method of the plugin
-   * @param {...typeof Plugin} plugins - Plugins that you want detached from draggable
-   * @return {Draggable}
-   * @example draggable.removePlugin(MirrorPlugin, CustomMirrorPlugin)
    */
-  removePlugin(...plugins) {
-    const removedPlugins = this.plugins.filter((plugin) => plugins.includes(plugin.constructor));
+  removePlugin(...plugins: typeof AbstractPlugin['constructor'][]) {
+    const removedPlugins = this.plugins.filter((plugin) =>
+      plugins.includes(plugin.constructor)
+    );
 
     removedPlugins.forEach((plugin) => plugin.detach());
-    this.plugins = this.plugins.filter((plugin) => !plugins.includes(plugin.constructor));
+    this.plugins = this.plugins.filter(
+      (plugin) => !plugins.includes(plugin.constructor)
+    );
 
     return this;
   }
 
   /**
    * Adds sensors to this draggable instance. This will end up calling the attach method of the sensor
-   * @param {...typeof Sensor} sensors - Sensors that you want attached to draggable
-   * @return {Draggable}
-   * @example draggable.addSensor(ForceTouchSensor, CustomSensor)
    */
-  addSensor(...sensors) {
-    const activeSensors = sensors.map((Sensor) => new Sensor(this.containers, this.options));
+  addSensor(...sensors: typeof Sensor[]) {
+    const activeSensors = sensors.map(
+      (sensor) => new sensor(this.containers, this.options as SensorOptions)
+    );
 
     activeSensors.forEach((sensor) => sensor.attach());
     this.sensors = [...this.sensors, ...activeSensors];
@@ -253,26 +266,24 @@ export default class Draggable {
   /**
    * Removes sensors that are already attached to this draggable instance. This will end up calling
    * the detach method of the sensor
-   * @param {...typeof Sensor} sensors - Sensors that you want attached to draggable
-   * @return {Draggable}
-   * @example draggable.removeSensor(TouchSensor, DragSensor)
    */
-  removeSensor(...sensors) {
-    const removedSensors = this.sensors.filter((sensor) => sensors.includes(sensor.constructor));
+  removeSensor(...sensors: typeof Sensor['constructor'][]) {
+    const removedSensors = this.sensors.filter((sensor) =>
+      sensors.includes(sensor.constructor)
+    );
 
     removedSensors.forEach((sensor) => sensor.detach());
-    this.sensors = this.sensors.filter((sensor) => !sensors.includes(sensor.constructor));
+    this.sensors = this.sensors.filter(
+      (sensor) => !sensors.includes(sensor.constructor)
+    );
 
     return this;
   }
 
   /**
    * Adds container to this draggable instance
-   * @param {...HTMLElement} containers - Containers you want to add to draggable
-   * @return {Draggable}
-   * @example draggable.addContainer(document.body)
    */
-  addContainer(...containers) {
+  addContainer(...containers: HTMLElement[]) {
     this.containers = [...this.containers, ...containers];
     this.sensors.forEach((sensor) => sensor.addContainer(...containers));
     return this;
@@ -280,22 +291,17 @@ export default class Draggable {
 
   /**
    * Removes container from this draggable instance
-   * @param {...HTMLElement} containers - Containers you want to remove from draggable
-   * @return {Draggable}
-   * @example draggable.removeContainer(document.body)
    */
   removeContainer(...containers) {
-    this.containers = this.containers.filter((container) => !containers.includes(container));
+    this.containers = this.containers.filter(
+      (container) => !containers.includes(container)
+    );
     this.sensors.forEach((sensor) => sensor.removeContainer(...containers));
     return this;
   }
 
   /**
    * Adds listener for draggable events
-   * @param {String} type - Event name
-   * @param {...Function} callbacks - Event callbacks
-   * @return {Draggable}
-   * @example draggable.on('drag:start', (dragEvent) => dragEvent.cancel());
    */
   on(type, ...callbacks) {
     this.emitter.on(type, ...callbacks);
@@ -304,10 +310,6 @@ export default class Draggable {
 
   /**
    * Removes listener from draggable
-   * @param {String} type - Event name
-   * @param {Function} callback - Event callback
-   * @return {Draggable}
-   * @example draggable.off('drag:start', handlerFunction);
    */
   off(type, callback) {
     this.emitter.off(type, callback);
@@ -316,9 +318,6 @@ export default class Draggable {
 
   /**
    * Triggers draggable event
-   * @param {AbstractEvent} event - Event instance
-   * @return {Draggable}
-   * @example draggable.trigger(event);
    */
   trigger(event) {
     this.emitter.trigger(event);
@@ -327,60 +326,48 @@ export default class Draggable {
 
   /**
    * Returns class name for class identifier
-   * @param {String} name - Name of class identifier
-   * @return {String|null}
    */
-  getClassNameFor(name) {
-    return this.getClassNamesFor(name)[0];
-  }
+  getClassNameFor = (name: string) => this.getClassNamesFor(name)[0];
 
   /**
    * Returns class names for class identifier
-   * @return {String[]}
    */
-  getClassNamesFor(name) {
+  getClassNamesFor = (name: string): string[] => {
     const classNames = this.options.classes[name];
 
-    if (classNames instanceof Array) {
-      return classNames;
-    } else if (typeof classNames === 'string' || classNames instanceof String) {
-      return [classNames];
-    } else {
-      return [];
-    }
-  }
+    if (classNames instanceof Array) return classNames;
+    else if (typeof classNames === 'string') return [<string>classNames];
+    else return [];
+  };
 
-  /**
-   * Returns true if this draggable instance is currently dragging
-   * @return {Boolean}
-   */
-  isDragging() {
-    return Boolean(this.dragging);
-  }
+  isDragging = () => Boolean(this.dragging);
 
   /**
    * Returns all draggable elements
-   * @return {HTMLElement[]}
    */
-  getDraggableElements() {
-    return this.containers.reduce((current, container) => {
-      return [...current, ...this.getDraggableElementsForContainer(container)];
-    }, []);
-  }
+  getDraggableElements = (): HTMLElement[] =>
+    this.containers.reduce(
+      (current, container) => [
+        ...current,
+        ...this.getDraggableElementsForContainer(container),
+      ],
+      []
+    );
 
   /**
    * Returns draggable elements for a given container, excluding the mirror and
-   * original source element if present
-   * @param {HTMLElement} container
-   * @return {HTMLElement[]}
    */
-  getDraggableElementsForContainer(container) {
-    const allDraggableElements = container.querySelectorAll(this.options.draggable);
+  getDraggableElementsForContainer = (container: HTMLElement) => {
+    const allDraggableElements = container.querySelectorAll(
+      this.options.draggable
+    );
 
     return [...allDraggableElements].filter((childElement) => {
-      return childElement !== this.originalSource && childElement !== this.mirror;
+      return (
+        childElement !== this.originalSource && childElement !== this.mirror
+      );
     });
-  }
+  };
 
   /**
    * Cancel dragging immediately
@@ -389,20 +376,17 @@ export default class Draggable {
     this[dragStop]();
   }
 
-  /**
-   * Drag start handler
-   * @private
-   * @param {Event} event - DOM Drag event
-   */
-  [onDragStart](event) {
+  private [onDragStart] = (event: Event) => {
     const sensorEvent = getSensorEvent(event);
-    const {target, container, originalSource} = sensorEvent;
+    const { target, container, originalSource } = sensorEvent;
 
-    if (!this.containers.includes(container)) {
-      return;
-    }
+    if (!this.containers.includes(container)) return;
 
-    if (this.options.handle && target && !closest(target, this.options.handle)) {
+    if (
+      this.options.handle &&
+      target &&
+      !closest(target, this.options.handle)
+    ) {
       sensorEvent.cancel();
       return;
     }
@@ -412,12 +396,19 @@ export default class Draggable {
 
     if (this.lastPlacedSource && this.lastPlacedContainer) {
       clearTimeout(this.placedTimeoutID);
-      this.lastPlacedSource.classList.remove(...this.getClassNamesFor('source:placed'));
-      this.lastPlacedContainer.classList.remove(...this.getClassNamesFor('container:placed'));
+      this.lastPlacedSource.classList.remove(
+        ...this.getClassNamesFor('source:placed')
+      );
+      this.lastPlacedContainer.classList.remove(
+        ...this.getClassNamesFor('container:placed')
+      );
     }
 
-    this.source = this.originalSource.cloneNode(true);
-    this.originalSource.parentNode.insertBefore(this.source, this.originalSource);
+    this.source = <HTMLElement>this.originalSource.cloneNode(true);
+    this.originalSource.parentNode.insertBefore(
+      this.source,
+      this.originalSource
+    );
     this.originalSource.style.display = 'none';
 
     const dragStartEvent = new DragStartEvent({
@@ -437,35 +428,32 @@ export default class Draggable {
       return;
     }
 
-    this.originalSource.classList.add(...this.getClassNamesFor('source:original'));
+    this.originalSource.classList.add(
+      ...this.getClassNamesFor('source:original')
+    );
     this.source.classList.add(...this.getClassNamesFor('source:dragging'));
-    this.sourceContainer.classList.add(...this.getClassNamesFor('container:dragging'));
+    this.sourceContainer.classList.add(
+      ...this.getClassNamesFor('container:dragging')
+    );
     document.body.classList.add(...this.getClassNamesFor('body:dragging'));
     applyUserSelect(document.body, 'none');
 
     requestAnimationFrame(() => {
       const oldSensorEvent = getSensorEvent(event);
-      const newSensorEvent = oldSensorEvent.clone({target: this.source});
+      const newSensorEvent = oldSensorEvent.clone({ target: this.source });
 
       this[onDragMove]({
         ...event,
         detail: newSensorEvent,
       });
     });
-  }
+  };
 
-  /**
-   * Drag move handler
-   * @private
-   * @param {Event} event - DOM Drag event
-   */
-  [onDragMove](event) {
-    if (!this.dragging) {
-      return;
-    }
+  private [onDragMove] = (event: Event) => {
+    if (!this.dragging) return;
 
     const sensorEvent = getSensorEvent(event);
-    const {container} = sensorEvent;
+    const { container } = sensorEvent;
     let target = sensorEvent.target;
 
     const dragMoveEvent = new DragMoveEvent({
@@ -477,17 +465,18 @@ export default class Draggable {
 
     this.trigger(dragMoveEvent);
 
-    if (dragMoveEvent.canceled()) {
-      sensorEvent.cancel();
-    }
+    if (dragMoveEvent.canceled()) sensorEvent.cancel();
 
     target = closest(target, this.options.draggable);
     const withinCorrectContainer = closest(sensorEvent.target, this.containers);
     const overContainer = sensorEvent.overContainer || withinCorrectContainer;
-    const isLeavingContainer = this.currentOverContainer && overContainer !== this.currentOverContainer;
+    const isLeavingContainer =
+      this.currentOverContainer && overContainer !== this.currentOverContainer;
     const isLeavingDraggable = this.currentOver && target !== this.currentOver;
-    const isOverContainer = overContainer && this.currentOverContainer !== overContainer;
-    const isOverDraggable = withinCorrectContainer && target && this.currentOver !== target;
+    const isOverContainer =
+      overContainer && this.currentOverContainer !== overContainer;
+    const isOverDraggable =
+      withinCorrectContainer && target && this.currentOver !== target;
 
     if (isLeavingDraggable) {
       const dragOutEvent = new DragOutEvent({
@@ -499,7 +488,9 @@ export default class Draggable {
         overContainer: this.currentOverContainer,
       });
 
-      this.currentOver.classList.remove(...this.getClassNamesFor('draggable:over'));
+      this.currentOver.classList.remove(
+        ...this.getClassNamesFor('draggable:over')
+      );
       this.currentOver = null;
 
       this.trigger(dragOutEvent);
@@ -514,7 +505,9 @@ export default class Draggable {
         overContainer: this.currentOverContainer,
       });
 
-      this.currentOverContainer.classList.remove(...this.getClassNamesFor('container:over'));
+      this.currentOverContainer.classList.remove(
+        ...this.getClassNamesFor('container:over')
+      );
       this.currentOverContainer = null;
 
       this.trigger(dragOutContainerEvent);
@@ -552,17 +545,10 @@ export default class Draggable {
 
       this.trigger(dragOverEvent);
     }
-  }
+  };
 
-  /**
-   * Drag stop handler
-   * @private
-   * @param {Event} event - DOM Drag event
-   */
-  [dragStop](event) {
-    if (!this.dragging) {
-      return;
-    }
+  private [dragStop] = (event?: DragStopEvent) => {
+    if (!this.dragging) return;
 
     this.dragging = false;
 
@@ -575,24 +561,38 @@ export default class Draggable {
 
     this.trigger(dragStopEvent);
 
-    if (!dragStopEvent.canceled()) this.source.parentNode.insertBefore(this.originalSource, this.source);
+    if (!dragStopEvent.canceled())
+      this.source.parentNode.insertBefore(this.originalSource, this.source);
+
     this.source.remove();
     this.originalSource.style.display = '';
 
     this.source.classList.remove(...this.getClassNamesFor('source:dragging'));
-    this.originalSource.classList.remove(...this.getClassNamesFor('source:original'));
-    this.originalSource.classList.add(...this.getClassNamesFor('source:placed'));
-    this.sourceContainer.classList.add(...this.getClassNamesFor('container:placed'));
-    this.sourceContainer.classList.remove(...this.getClassNamesFor('container:dragging'));
+    this.originalSource.classList.remove(
+      ...this.getClassNamesFor('source:original')
+    );
+    this.originalSource.classList.add(
+      ...this.getClassNamesFor('source:placed')
+    );
+    this.sourceContainer.classList.add(
+      ...this.getClassNamesFor('container:placed')
+    );
+    this.sourceContainer.classList.remove(
+      ...this.getClassNamesFor('container:dragging')
+    );
     document.body.classList.remove(...this.getClassNamesFor('body:dragging'));
     applyUserSelect(document.body, '');
 
     if (this.currentOver) {
-      this.currentOver.classList.remove(...this.getClassNamesFor('draggable:over'));
+      this.currentOver.classList.remove(
+        ...this.getClassNamesFor('draggable:over')
+      );
     }
 
     if (this.currentOverContainer) {
-      this.currentOverContainer.classList.remove(...this.getClassNamesFor('container:over'));
+      this.currentOverContainer.classList.remove(
+        ...this.getClassNamesFor('container:over')
+      );
     }
 
     this.lastPlacedSource = this.originalSource;
@@ -600,11 +600,15 @@ export default class Draggable {
 
     this.placedTimeoutID = setTimeout(() => {
       if (this.lastPlacedSource) {
-        this.lastPlacedSource.classList.remove(...this.getClassNamesFor('source:placed'));
+        this.lastPlacedSource.classList.remove(
+          ...this.getClassNamesFor('source:placed')
+        );
       }
 
       if (this.lastPlacedContainer) {
-        this.lastPlacedContainer.classList.remove(...this.getClassNamesFor('container:placed'));
+        this.lastPlacedContainer.classList.remove(
+          ...this.getClassNamesFor('container:placed')
+        );
       }
 
       this.lastPlacedSource = null;
@@ -625,27 +629,19 @@ export default class Draggable {
     this.currentOverContainer = null;
     this.currentOver = null;
     this.sourceContainer = null;
-  }
+  };
 
-  /**
-   * Drag stop handler
-   */
-  [onDragStop](event) {
+  private [onDragStop] = (event) => {
     this[dragStop](event);
-  }
+  };
 
-  /**
-   * Drag pressure handler
-   * @private
-   * @param {Event} event - DOM Drag event
-   */
-  [onDragPressure](event) {
-    if (!this.dragging) {
-      return;
-    }
+  private [onDragPressure] = (event: Event) => {
+    if (!this.dragging) return;
 
     const sensorEvent = getSensorEvent(event);
-    const source = this.source || closest(sensorEvent.originalEvent.target, this.options.draggable);
+    const source =
+      this.source ||
+      closest(sensorEvent.originalEvent.target, this.options.draggable);
 
     const dragPressureEvent = new DragPressureEvent({
       sensorEvent,
@@ -654,7 +650,18 @@ export default class Draggable {
     });
 
     this.trigger(dragPressureEvent);
-  }
+  };
+
+  /** Default plugins draggable uses */
+  static Plugins: Record<string, typeof AbstractPlugin> = {
+    Announcement,
+    Focusable,
+    Mirror,
+    Scrollable,
+  };
+
+  /** Default sensors draggable uses */
+  static Sensors: Record<string, typeof Sensor> = { MouseSensor, TouchSensor };
 }
 
 function getSensorEvent(event) {

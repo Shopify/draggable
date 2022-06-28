@@ -7,12 +7,12 @@ import {
   releaseMouse,
   waitForDragDelay,
   waitForRequestAnimationFrame,
-} from 'helper';
-import Draggable, {defaultOptions} from '../Draggable';
-import {DragStartEvent, DragMoveEvent, DragStopEvent, DragStoppedEvent} from '../DragEvent';
-import {DraggableInitializedEvent, DraggableDestroyEvent} from '../DraggableEvent';
-import {Focusable, Mirror, Scrollable, Announcement} from '../Plugins';
-import {MouseSensor, TouchSensor} from '../Sensors';
+} from 'test-utils/helper';
+import Draggable, {defaultOptions} from './Draggable';
+import {DragStartEvent, DragMoveEvent, DragStopEvent, DragStoppedEvent} from './DragEvent';
+import {DraggableInitializedEvent, DraggableDestroyEvent} from './DraggableEvent';
+import {Focusable, Mirror, Scrollable, Announcement} from './Plugins';
+import {MouseSensor, TouchSensor} from './Sensors';
 
 const sampleMarkup = `
   <ul class="Container">
@@ -836,7 +836,7 @@ describe('Draggable', () => {
     expect(containers[0].classList).toContain('draggable-container--placed');
 
     // Wait for default draggable.options.placedTimeout delay
-    jest.runTimersToTime(800);
+    jest.advanceTimersByTime(800);
 
     expect(containers[0].classList).not.toContain('draggable-container--placed');
   });

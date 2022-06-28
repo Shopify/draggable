@@ -1,3 +1,4 @@
+import {DragMoveEvent, DragStopEvent} from 'Draggable/DragEvent';
 import AbstractPlugin from 'shared/AbstractPlugin';
 import {closest} from 'shared/utils';
 import {CollidableInEvent, CollidableOutEvent} from './CollidableEvent';
@@ -13,39 +14,12 @@ const onRequestAnimationFrame = Symbol('onRequestAnimationFrame');
  * @extends AbstractPlugin
  */
 export default class Collidable extends AbstractPlugin {
-  /**
-   * Collidable constructor.
-   * @constructs Collidable
-   * @param {Draggable} draggable - Draggable instance
-   */
-  constructor(draggable) {
-    super(draggable);
-
-    /**
-     * Keeps track of currently colliding elements
-     * @property {HTMLElement|null} currentlyCollidingElement
-     * @type {HTMLElement|null}
-     */
-    this.currentlyCollidingElement = null;
-
-    /**
-     * Keeps track of currently colliding elements
-     * @property {HTMLElement|null} lastCollidingElement
-     * @type {HTMLElement|null}
-     */
-    this.lastCollidingElement = null;
-
-    /**
-     * Animation frame for finding colliding elements
-     * @property {Number|null} currentAnimationFrame
-     * @type {Number|null}
-     */
-    this.currentAnimationFrame = null;
-
-    this[onDragMove] = this[onDragMove].bind(this);
-    this[onDragStop] = this[onDragStop].bind(this);
-    this[onRequestAnimationFrame] = this[onRequestAnimationFrame].bind(this);
-  }
+  /*** Keeps track of currently colliding elements */
+  currentlyCollidingElement: HTMLElement | null = null;
+  /*** Keeps track of currently colliding elements */
+  lastCollidingElement: HTMLElement | null = null;
+  /*** Animation frame for finding colliding elements */
+  currentAnimationFrame: Number | null = null;
 
   /**
    * Attaches plugins event listeners
@@ -61,11 +35,8 @@ export default class Collidable extends AbstractPlugin {
     this.draggable.off('drag:move', this[onDragMove]).off('drag:stop', this[onDragStop]);
   }
 
-  /**
-   * Returns current collidables based on `collidables` option
-   * @return {HTMLElement[]}
-   */
-  getCollidables() {
+  /*** Returns current collidables based on `collidables` option */
+  getCollidables(): HTMLElement[] {
     const collidables = this.draggable.options.collidables;
 
     if (typeof collidables === 'string') {
@@ -81,12 +52,8 @@ export default class Collidable extends AbstractPlugin {
     }
   }
 
-  /**
-   * Drag move handler
-   * @private
-   * @param {DragMoveEvent} event - Drag move event
-   */
-  [onDragMove](event) {
+  /*** Drag move handler */
+  private [onDragMove] = (event: DragMoveEvent) => {
     const target = event.sensorEvent.target;
 
     this.currentAnimationFrame = requestAnimationFrame(this[onRequestAnimationFrame](target));
@@ -121,38 +88,27 @@ export default class Collidable extends AbstractPlugin {
     }
 
     this.lastCollidingElement = this.currentlyCollidingElement;
-  }
+  };
 
-  /**
-   * Drag stop handler
-   * @private
-   * @param {DragStopEvent} event - Drag stop event
-   */
-  [onDragStop](event) {
+  /*** Drag stop handler */
+  private [onDragStop] = (event: DragStopEvent) => {
     const lastCollidingElement = this.currentlyCollidingElement || this.lastCollidingElement;
     const collidableOutEvent = new CollidableOutEvent({
       dragEvent: event,
       collidingElement: lastCollidingElement,
     });
 
-    if (lastCollidingElement) {
-      this.draggable.trigger(collidableOutEvent);
-    }
+    if (lastCollidingElement) this.draggable.trigger(collidableOutEvent);
 
     this.lastCollidingElement = null;
     this.currentlyCollidingElement = null;
-  }
+  };
 
-  /**
-   * Animation frame function
-   * @private
-   * @param {HTMLElement} target - Current move target
-   * @return {Function}
-   */
-  [onRequestAnimationFrame](target) {
+  /*** Animation frame function */
+  private [onRequestAnimationFrame] = (target: HTMLElement) => {
     return () => {
       const collidables = this.getCollidables();
       this.currentlyCollidingElement = closest(target, (element) => collidables.includes(element));
     };
-  }
+  };
 }

@@ -1,5 +1,5 @@
-import {createSandbox} from 'helper';
-import closest from '../closest';
+import {createSandbox} from '../test-utils/helper';
+import closest from '.';
 
 const sampleMarkup = `
   <div class="tree">
@@ -11,7 +11,7 @@ const sampleMarkup = `
   </div>
 `;
 
-describe('utils', () => {
+describe('utils/closest', () => {
   let sandbox;
 
   beforeEach(() => {
@@ -22,17 +22,17 @@ describe('utils', () => {
     sandbox.remove();
   });
 
-  it('should return null when no element specified', () => {
+  it('returns null when no element specified', () => {
     expect(closest()).toBeNull();
   });
 
-  it('should return null when string selector does not match', () => {
+  it('returns null when string selector does not match', () => {
     const element = sandbox.querySelector('.leaf');
 
     expect(closest(element, 'will-not-match')).toBeNull();
   });
 
-  it('should return null when function selector does not match', () => {
+  it('returns null when function selector does not match', () => {
     const element = sandbox.querySelector('.leaf');
     function selector() {
       return false;
@@ -41,13 +41,13 @@ describe('utils', () => {
     expect(closest(element, selector)).toBeNull();
   });
 
-  it('should return null when selector targets child element', () => {
+  it('returns null when selector targets child element', () => {
     const element = sandbox.querySelector('.twig');
 
     expect(closest(element, '.leaf')).toBeNull();
   });
 
-  it('should match element via callback', () => {
+  it('matches element via callback', () => {
     const element = sandbox.querySelector('.leaf');
 
     function callback(currentElement) {
@@ -58,7 +58,7 @@ describe('utils', () => {
   });
 
   ['.twig', 'ul', '.branch', 'section', '.tree', 'div', 'body', 'document'].forEach((expectedMatchingSelector) => {
-    it(`should return matched element when selector targets parent element matching selector ${expectedMatchingSelector}`, () => {
+    it(`returns matched element when selector targets parent element matching selector ${expectedMatchingSelector}`, () => {
       const element = sandbox.querySelector('.leaf');
       const expected = sandbox.querySelector(expectedMatchingSelector);
 

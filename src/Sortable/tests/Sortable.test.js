@@ -58,7 +58,7 @@ describe('Sortable', () => {
 
   afterEach(() => {
     sortable.destroy();
-    sandbox.parentNode.removeChild(sandbox);
+    sandbox.remove();
   });
 
   it('triggers events', () => {

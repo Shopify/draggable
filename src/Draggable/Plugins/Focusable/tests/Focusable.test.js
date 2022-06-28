@@ -27,7 +27,7 @@ describe('Focusable', () => {
 
   afterEach(() => {
     draggable.destroy();
-    sandbox.parentNode.removeChild(sandbox);
+    sandbox.remove();
   });
 
   it('is included by default', () => {

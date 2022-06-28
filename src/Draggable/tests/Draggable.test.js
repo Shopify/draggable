@@ -37,7 +37,7 @@ describe('Draggable', () => {
   });
 
   afterEach(() => {
-    sandbox.parentNode.removeChild(sandbox);
+    sandbox.remove();
   });
 
   describe('.Plugins', () => {

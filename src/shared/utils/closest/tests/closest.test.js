@@ -19,7 +19,7 @@ describe('utils', () => {
   });
 
   afterEach(() => {
-    sandbox.parentNode.removeChild(sandbox);
+    sandbox.remove();
   });
 
   it('should return null when no element specified', () => {

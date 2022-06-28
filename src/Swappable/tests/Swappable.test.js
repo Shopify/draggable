@@ -58,7 +58,7 @@ describe('Swappable', () => {
 
   afterEach(() => {
     swappable.destroy();
-    sandbox.parentNode.removeChild(sandbox);
+    sandbox.remove();
   });
 
   it('triggers events', () => {

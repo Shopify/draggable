@@ -153,7 +153,7 @@ export default class Swappable extends Draggable {
 function withTempElement(callback) {
   const tmpElement = document.createElement('div');
   callback(tmpElement);
-  tmpElement.parentNode.removeChild(tmpElement);
+  tmpElement.remove();
 }
 
 function swap(source, over) {

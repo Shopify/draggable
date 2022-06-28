@@ -45,7 +45,7 @@ describe('Mirror', () => {
 
   afterEach(() => {
     draggable.destroy();
-    sandbox.parentNode.removeChild(sandbox);
+    sandbox.remove();
   });
 
   it('creates mirror element on `drag:start`', async () => {

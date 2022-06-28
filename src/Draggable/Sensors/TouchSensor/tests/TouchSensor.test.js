@@ -34,7 +34,7 @@ describe('TouchSensor', () => {
 
   function teardown() {
     touchSensor.detach();
-    sandbox.parentNode.removeChild(sandbox);
+    sandbox.remove();
   }
 
   describe('common', () => {

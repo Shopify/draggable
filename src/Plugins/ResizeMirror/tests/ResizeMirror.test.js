@@ -62,7 +62,7 @@ describe('ResizeMirror', () => {
 
   afterEach(() => {
     draggable.destroy();
-    sandbox.parentNode.removeChild(sandbox);
+    sandbox.remove();
   });
 
   it('resizes mirror based on over element', async () => {

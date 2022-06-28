@@ -1,6 +1,19 @@
-import {createSandbox, clickMouse, moveMouse, releaseMouse, waitForDragDelay, DRAG_DELAY} from 'helper';
+import {
+  createSandbox,
+  clickMouse,
+  moveMouse,
+  releaseMouse,
+  waitForDragDelay,
+  DRAG_DELAY,
+} from 'test-utils/helper';
 
-import Droppable, {DroppableStartEvent, DroppableDroppedEvent, DroppableReturnedEvent, DroppableStopEvent} from '..';
+import Droppable from './Droppable';
+import {
+  DroppableStartEvent,
+  DroppableDroppedEvent,
+  DroppableReturnedEvent,
+  DroppableStopEvent,
+} from './DroppableEvent';
 
 const sampleMarkup = `
   <div class="Container">
@@ -60,7 +73,9 @@ describe('Droppable', () => {
     });
 
     it('droppable:start event', () => {
-      droppable.on('drag:start', (dragEvent) => originalDragEvents.push(dragEvent));
+      droppable.on('drag:start', (dragEvent) =>
+        originalDragEvents.push(dragEvent)
+      );
       droppable.on('droppable:start', eventHandler);
 
       move();
@@ -74,7 +89,9 @@ describe('Droppable', () => {
     });
 
     it('droppable:dropped event', () => {
-      droppable.on('drag:move', (dragEvent) => originalDragEvents.push(dragEvent));
+      droppable.on('drag:move', (dragEvent) =>
+        originalDragEvents.push(dragEvent)
+      );
       droppable.on('droppable:dropped', eventHandler);
 
       move();
@@ -88,7 +105,9 @@ describe('Droppable', () => {
     });
 
     it('droppable:returned event', () => {
-      droppable.on('drag:move', (dragEvent) => originalDragEvents.push(dragEvent));
+      droppable.on('drag:move', (dragEvent) =>
+        originalDragEvents.push(dragEvent)
+      );
       droppable.on('droppable:returned', eventHandler);
 
       move(() => {
@@ -105,7 +124,9 @@ describe('Droppable', () => {
     });
 
     it('droppable:stop event', () => {
-      droppable.on('drag:stop', (dragEvent) => originalDragEvents.push(dragEvent));
+      droppable.on('drag:stop', (dragEvent) =>
+        originalDragEvents.push(dragEvent)
+      );
       droppable.on('droppable:stop', eventHandler);
 
       move();
@@ -224,7 +245,7 @@ describe('Droppable', () => {
   function move(
     optionalMoves = () => {
       /* noop */
-    },
+    }
   ) {
     clickMouse(draggableElement);
     waitForDragDelay();

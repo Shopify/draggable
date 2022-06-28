@@ -1,7 +1,13 @@
+import { DragEvent } from 'Draggable/DragEvent';
 import AbstractEvent from 'shared/AbstractEvent';
 
 export class DroppableEvent extends AbstractEvent {
   static type = 'droppable';
+
+  declare data: {
+    dragEvent: DragEvent;
+    dropzone: HTMLElement;
+  };
 
   get dragEvent() {
     return this.data.dragEvent;

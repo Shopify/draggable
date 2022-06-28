@@ -30,6 +30,7 @@ import {
   DragStoppedEvent,
 } from './DragEvent';
 import { SensorOptions } from './Sensors/Sensor';
+import AbstractEvent from 'shared/AbstractEvent';
 
 const onDragStart = Symbol('onDragStart');
 const onDragMove = Symbol('onDragMove');
@@ -84,15 +85,14 @@ export interface DraggableOptions {
   distance?: number;
   handle?:
     | string
-    | NodeList
     | HTMLElement[]
     | HTMLElement
     | ((currentElement: HTMLElement) => HTMLElement);
   delay?: number | DelayOptions;
   plugins?: typeof AbstractPlugin[];
   sensors?: typeof Sensor[];
-  classes?: { [key in keyof typeof defaultClasses]: string | string[] };
-  announcements?: Record<string, (event: Event) => void>;
+  classes?: { [key in keyof typeof defaultClasses]?: string | string[] };
+  announcements?: Record<string, (event: AbstractEvent) => unknown>;
   collidables?:
     | string
     | NodeList

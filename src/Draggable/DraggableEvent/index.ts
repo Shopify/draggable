@@ -11,6 +11,7 @@ export class DraggableEvent extends AbstractEvent {
   static type = 'draggable';
   declare data: {
     draggable: Draggable;
+    source: HTMLElement;
   };
   /**
    * Draggable instance

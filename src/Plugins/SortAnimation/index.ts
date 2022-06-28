@@ -15,97 +15,63 @@ export const defaultOptions = {
   easingFunction: 'ease-in-out',
 };
 
+export interface SortAnimationOptions {
+  duration: number;
+  easingFunction: string;
+}
+
+export interface SortAnimationElement {
+  domEl: HTMLElement;
+  offsetTop: number;
+  offsetLeft: number;
+}
+
 /**
  * (Added in: v1.0.0-beta.10)
  *
  * SortAnimation plugin adds sort animation for sortable
- * @class SortAnimation
- * @module SortAnimation
- * @extends AbstractPlugin
- */
+ * */
 export default class SortAnimation extends AbstractPlugin {
-  /**
-   * SortAnimation constructor.
-   * @constructs SortAnimation
-   * @param {Draggable} draggable - Draggable instance
-   */
+  options: SortAnimationOptions;
+  lastAnimationFrame: number = null;
+  lastElements: SortAnimationElement[] = [];
+
   constructor(draggable) {
     super(draggable);
 
-    /**
-     * SortAnimation options
-     * @property {Object} options
-     * @property {Number} defaultOptions.duration
-     * @property {String} defaultOptions.easingFunction
-     * @type {Object}
-     */
     this.options = {
       ...defaultOptions,
       ...this.getOptions(),
     };
 
-    /**
-     * Last animation frame
-     * @property {Number} lastAnimationFrame
-     * @type {Number}
-     */
-    this.lastAnimationFrame = null;
-    this.lastElements = [];
-
     this[onSortableSorted] = this[onSortableSorted].bind(this);
     this[onSortableSort] = this[onSortableSort].bind(this);
   }
 
-  /**
-   * Attaches plugins event listeners
-   */
   attach() {
     this.draggable.on('sortable:sort', this[onSortableSort]);
     this.draggable.on('sortable:sorted', this[onSortableSorted]);
   }
 
-  /**
-   * Detaches plugins event listeners
-   */
   detach() {
     this.draggable.off('sortable:sort', this[onSortableSort]);
     this.draggable.off('sortable:sorted', this[onSortableSorted]);
   }
 
-  /**
-   * Returns options passed through draggable
-   * @return {Object}
-   */
-  getOptions() {
-    return this.draggable.options.sortAnimation || {};
-  }
+  getOptions = () => this.draggable.options.sortAnimation ?? {};
 
-  /**
-   * Sortable sort handler
-   * @param {SortableSortEvent} sortableEvent
-   * @private
-   */
-  [onSortableSort]({dragEvent}) {
+  private [onSortableSort] = ({dragEvent}: SortableSortEvent) => {
     const {sourceContainer} = dragEvent;
     const elements = this.draggable.getDraggableElementsForContainer(sourceContainer);
-    this.lastElements = Array.from(elements).map((el) => {
-      return {
-        domEl: el,
-        offsetTop: el.offsetTop,
-        offsetLeft: el.offsetLeft,
-      };
-    });
-  }
+    this.lastElements = Array.from(elements).map((el: HTMLElement) => ({
+      domEl: el,
+      offsetTop: el.offsetTop,
+      offsetLeft: el.offsetLeft,
+    }));
+  };
 
-  /**
-   * Sortable sorted handler
-   * @param {SortableSortedEvent} sortableEvent
-   * @private
-   */
-  [onSortableSorted]({oldIndex, newIndex}) {
-    if (oldIndex === newIndex) {
-      return;
-    }
+  private [onSortableSorted] = ({oldIndex, newIndex}: SortableSortedEvent) => {
+    if (oldIndex === newIndex) return;
 
     const effectedElements = [];
     let start;
@@ -132,7 +98,7 @@ export default class SortAnimation extends AbstractPlugin {
     this.lastAnimationFrame = requestAnimationFrame(() => {
       effectedElements.forEach((element) => animate(element, this.options));
     });
-  }
+  };
 }
 
 /**
@@ -145,7 +111,10 @@ export default class SortAnimation extends AbstractPlugin {
  * @param {String} options.easingFunction
  * @private
  */
-function animate({from, to}, {duration, easingFunction}) {
+function animate(
+  {from, to}: {from: SortAnimationElement; to: SortAnimationElement},
+  {duration, easingFunction}: SortAnimationOptions,
+) {
   const domEl = from.domEl;
   const x = from.offsetLeft - to.offsetLeft;
   const y = from.offsetTop - to.offsetTop;
@@ -165,8 +134,8 @@ function animate({from, to}, {duration, easingFunction}) {
  * @param {Event} event
  * @private
  */
-function resetElementOnTransitionEnd(event) {
-  event.target.style.transition = '';
-  event.target.style.pointerEvents = '';
+function resetElementOnTransitionEnd(event: Event) {
+  (<HTMLElement>event.target).style.transition = '';
+  (<HTMLElement>event.target).style.pointerEvents = '';
   event.target.removeEventListener('transitionend', resetElementOnTransitionEnd);
 }

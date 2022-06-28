@@ -21,6 +21,13 @@ export class DraggableEvent extends AbstractEvent {
   get draggable() {
     return this.data.draggable;
   }
+
+  clone(data) {
+    return new DraggableEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
 /**
@@ -31,6 +38,13 @@ export class DraggableEvent extends AbstractEvent {
  */
 export class DraggableInitializedEvent extends DraggableEvent {
   static type = 'draggable:initialize';
+
+  clone(data) {
+    return new DraggableInitializedEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
 /**
@@ -41,4 +55,11 @@ export class DraggableInitializedEvent extends DraggableEvent {
  */
 export class DraggableDestroyEvent extends DraggableEvent {
   static type = 'draggable:destroy';
+
+  clone(data) {
+    return new DraggableDestroyEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }

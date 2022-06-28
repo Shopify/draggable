@@ -1,4 +1,4 @@
-import {SensorEvent} from 'Draggable/Sensors/SensorEvent';
+import { SensorEvent } from 'Draggable/Sensors/SensorEvent';
 import AbstractEvent from 'shared/AbstractEvent';
 
 interface DragEventData {
@@ -45,6 +45,13 @@ export class DragEvent extends AbstractEvent {
     return this.sensorEvent ? this.sensorEvent.originalEvent : null;
   }
 
+  clone(data) {
+    return new DragEvent({
+      ...this.data,
+      ...data,
+    });
+  }
+
   static type = 'drag';
 }
 
@@ -57,6 +64,13 @@ export class DragEvent extends AbstractEvent {
 export class DragStartEvent extends DragEvent {
   static type = 'drag:start';
   static cancelable = true;
+
+  clone(data) {
+    return new DragStartEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
 /**
@@ -67,6 +81,13 @@ export class DragStartEvent extends DragEvent {
  */
 export class DragMoveEvent extends DragEvent {
   static type = 'drag:move';
+
+  clone(data) {
+    return new DragMoveEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
 /**
@@ -93,6 +114,13 @@ export class DragOverEvent extends DragEvent {
 
   static type = 'drag:over';
   static cancelable = true;
+
+  clone(data) {
+    return new DragOverEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
 /**
@@ -117,6 +145,13 @@ export class DragOutEvent extends DragEvent {
   /*** Draggable element you left */
   get over() {
     return this.data.over;
+  }
+
+  clone(data) {
+    return new DragOutEvent({
+      ...this.data,
+      ...data,
+    });
   }
 }
 
@@ -143,6 +178,13 @@ export class DragOverContainerEvent extends DragEvent {
   get over() {
     return this.data.over;
   }
+
+  clone(data) {
+    return new DragOverContainerEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
 /**
@@ -162,6 +204,13 @@ export class DragOutContainerEvent extends DragEvent {
   get overContainer() {
     return this.data.overContainer;
   }
+
+  clone(data) {
+    return new DragOutContainerEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
 export class DragPressureEvent extends DragEvent {
@@ -174,11 +223,25 @@ export class DragPressureEvent extends DragEvent {
   get pressure() {
     return this.data.pressure;
   }
+
+  clone(data) {
+    return new DragPressureEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
 export class DragStopEvent extends DragEvent {
   static type = 'drag:stop';
   static cancelable = true;
+
+  clone(data) {
+    return new DragStopEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
 /**
@@ -191,4 +254,11 @@ export class DragStopEvent extends DragEvent {
  */
 export class DragStoppedEvent extends DragEvent {
   static type = 'drag:stopped';
+
+  clone(data) {
+    return new DragStoppedEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }

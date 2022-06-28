@@ -1,4 +1,4 @@
-import {SensorEvent} from 'Draggable/Sensors';
+import { SensorEvent } from 'Draggable/Sensors';
 import AbstractEvent from 'shared/AbstractEvent';
 
 interface MirrorEventData {
@@ -16,45 +16,47 @@ interface MirrorEventData {
 export class MirrorEvent extends AbstractEvent {
   declare data: MirrorEventData;
 
-  /*** Draggables source element */
   get source() {
     return this.data.source;
   }
 
-  /*** Draggables original source element */
   get originalSource() {
     return this.data.originalSource;
   }
 
-  /*** Draggables source container element */
   get sourceContainer() {
     return this.data.sourceContainer;
   }
 
-  /*** Sensor event */
   get sensorEvent() {
     return this.data.sensorEvent;
   }
 
-  /*** Drag event */
   get dragEvent() {
     return this.data.dragEvent;
   }
 
-  /*** Original event that triggered sensor event */
   get originalEvent() {
     return this.sensorEvent ? this.sensorEvent.originalEvent : null;
   }
+
+  clone(data) {
+    return new MirrorEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
-/**
- * Mirror create event
- * @class MirrorCreateEvent
- * @module MirrorCreateEvent
- * @extends MirrorEvent
- */
 export class MirrorCreateEvent extends MirrorEvent {
   static type = 'mirror:create';
+
+  clone(data) {
+    return new MirrorCreateEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
 export class MirrorCreatedEvent extends MirrorEvent {
@@ -67,6 +69,13 @@ export class MirrorCreatedEvent extends MirrorEvent {
   get mirror() {
     return this.data.mirror;
   }
+
+  clone(data) {
+    return new MirrorCreatedEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
 export class MirrorAttachedEvent extends MirrorEvent {
@@ -78,6 +87,13 @@ export class MirrorAttachedEvent extends MirrorEvent {
 
   get mirror() {
     return this.data.mirror;
+  }
+
+  clone(data) {
+    return new MirrorAttachedEvent({
+      ...this.data,
+      ...data,
+    });
   }
 }
 
@@ -104,6 +120,13 @@ export class MirrorMoveEvent extends MirrorEvent {
 
   static type = 'mirror:move';
   static cancelable = true;
+
+  clone(data) {
+    return new MirrorMoveEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
 /**
@@ -137,6 +160,13 @@ export class MirrorMovedEvent extends MirrorEvent {
   get passedThreshY() {
     return this.data.passedThreshY;
   }
+
+  clone(data) {
+    return new MirrorMovedEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
 /**
@@ -156,5 +186,12 @@ export class MirrorDestroyEvent extends MirrorEvent {
   /*** Draggables mirror element */
   get mirror() {
     return this.data.mirror;
+  }
+
+  clone(data) {
+    return new MirrorDestroyEvent({
+      ...this.data,
+      ...data,
+    });
   }
 }

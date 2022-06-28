@@ -31,7 +31,7 @@ export default class AbstractEvent {
   }
 
   clone(data) {
-    return this.constructor({
+    return new AbstractEvent({
       ...this.data,
       ...data,
     });

@@ -1,8 +1,5 @@
 import AbstractEvent from 'shared/AbstractEvent';
 
-/**
- * Base sensor event
- */
 export class SensorEvent extends AbstractEvent {
   declare data: {
     originalEvent?: Event;
@@ -14,84 +11,82 @@ export class SensorEvent extends AbstractEvent {
     pressure?: number;
   };
 
-  /**
-   * Original browser event that triggered a sensor
-   */
   get originalEvent() {
     return this.data.originalEvent;
   }
 
-  /**
-   * Normalized clientX for both touch and mouse events
-   */
   get clientX() {
     return this.data.clientX;
   }
 
-  /**
-   * Normalized clientY for both touch and mouse events
-   */
   get clientY() {
     return this.data.clientY;
   }
 
-  /**
-   * Normalized target for both touch and mouse events
-   * Returns the element that is behind cursor or touch pointer
-   */
   get target() {
     return this.data.target;
   }
 
-  /**
-   * Container that initiated the sensor
-   * @property container
-   * @type {HTMLElement}
-   * @readonly
-   */
   get container() {
     return this.data.container;
   }
 
-  /**
-   * Draggables original source element
-   */
   get originalSource() {
     return this.data.originalSource;
   }
 
-  /**
-   * Trackpad pressure
-   */
   get pressure() {
     return this.data.pressure;
   }
+
+  clone(data) {
+    return new SensorEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
-/**
- * Drag start sensor event
- */
 export class DragStartSensorEvent extends SensorEvent {
   static type = 'drag:start';
+
+  clone(data) {
+    return new DragStartSensorEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
-/**
- * Drag move sensor event
- */
 export class DragMoveSensorEvent extends SensorEvent {
   static type = 'drag:move';
+
+  clone(data) {
+    return new DragMoveSensorEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
-/**
- * Drag stop sensor event
- */
 export class DragStopSensorEvent extends SensorEvent {
   static type = 'drag:stop';
+
+  clone(data) {
+    return new DragStopSensorEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }
 
-/**
- * Drag pressure sensor event
- */
 export class DragPressureSensorEvent extends SensorEvent {
   static type = 'drag:pressure';
+
+  clone(data) {
+    return new DragPressureSensorEvent({
+      ...this.data,
+      ...data,
+    });
+  }
 }

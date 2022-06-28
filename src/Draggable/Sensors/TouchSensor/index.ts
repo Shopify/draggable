@@ -35,60 +35,19 @@ window.addEventListener(
  * @extends Sensor
  */
 export default class TouchSensor extends Sensor {
-  /**
-   * TouchSensor constructor.
-   * @constructs TouchSensor
-   * @param {HTMLElement[]|NodeList|HTMLElement} containers - Containers
-   * @param {Object} options - Options
-   */
-  constructor(containers = [], options = {}) {
-    super(containers, options);
+  /*** Closest scrollable container so accidental scroll can cancel long touch */
+  currentScrollableParent: HTMLElement = null;
+  /*** TimeoutID for managing delay */
+  tapTimeout: number = null;
+  /*** touchMoved indicates if touch has moved during tapTimeout */
+  touchMoved: boolean = false;
+  /** Moment when touch event is triggered */
+  onTouchStartAt: number = null;
+  /*** Save pageX coordinates for delay drag */
+  private pageX: number = null;
+  /*** Save pageY coordinates for delay drag */
+  private pageY: number = null;
 
-    /**
-     * Closest scrollable container so accidental scroll can cancel long touch
-     * @property currentScrollableParent
-     * @type {HTMLElement}
-     */
-    this.currentScrollableParent = null;
-
-    /**
-     * TimeoutID for managing delay
-     * @property tapTimeout
-     * @type {Number}
-     */
-    this.tapTimeout = null;
-
-    /**
-     * touchMoved indicates if touch has moved during tapTimeout
-     * @property touchMoved
-     * @type {Boolean}
-     */
-    this.touchMoved = false;
-
-    /**
-     * Save pageX coordinates for delay drag
-     * @property {Numbre} pageX
-     * @private
-     */
-    this.pageX = null;
-
-    /**
-     * Save pageY coordinates for delay drag
-     * @property {Numbre} pageY
-     * @private
-     */
-    this.pageY = null;
-
-    this[onTouchStart] = this[onTouchStart].bind(this);
-    this[onTouchEnd] = this[onTouchEnd].bind(this);
-    this[onTouchMove] = this[onTouchMove].bind(this);
-    this[startDrag] = this[startDrag].bind(this);
-    this[onDistanceChange] = this[onDistanceChange].bind(this);
-  }
-
-  /**
-   * Attaches sensors event listeners to the DOM
-   */
   attach() {
     document.addEventListener('touchstart', this[onTouchStart]);
   }
@@ -100,27 +59,16 @@ export default class TouchSensor extends Sensor {
     document.removeEventListener('touchstart', this[onTouchStart]);
   }
 
-  /**
-   * Touch start handler
-   * @private
-   * @param {Event} event - Touch start event
-   */
-  [onTouchStart](event) {
+  /*** Touch start handler */
+  private [onTouchStart] = (event) => {
     const container = closest(event.target, this.containers);
 
-    if (!container) {
-      return;
-    }
-
-    if (this.options.handle && event.target && !closest(event.target, this.options.handle)) {
-      return;
-    }
+    if (!container) return;
+    if (this.options.handle && event.target && !closest(event.target, this.options.handle)) return;
 
     const originalSource = closest(event.target, this.options.draggable);
 
-    if (!originalSource) {
-      return;
-    }
+    if (!originalSource) return;
 
     const {distance = 0} = this.options;
     const {delay} = this;
@@ -144,16 +92,13 @@ export default class TouchSensor extends Sensor {
     this.tapTimeout = window.setTimeout(() => {
       this[onDistanceChange]({touches: [{pageX: this.pageX, pageY: this.pageY}]});
     }, delay.touch);
-  }
+  };
 
-  /**
-   * Start the drag
-   * @private
-   */
-  [startDrag]() {
+  /*** Start the drag */
+  private [startDrag] = () => {
     const startEvent = this.startEvent;
     const container = this.currentContainer;
-    const touch = touchCoords(startEvent);
+    const touch = touchCoords(<TouchEvent>startEvent);
     const originalSource = this.originalSource;
 
     const dragStartEvent = new DragStartSensorEvent({
@@ -173,17 +118,13 @@ export default class TouchSensor extends Sensor {
       document.addEventListener('touchmove', this[onTouchMove]);
     }
     preventScrolling = this.dragging;
-  }
+  };
 
-  /**
-   * Touch move handler prior to drag start.
-   * @private
-   * @param {Event} event - Touch move event
-   */
-  [onDistanceChange](event) {
+  /*** Touch move handler prior to drag start. */
+  private [onDistanceChange] = (event: TouchEvent) => {
     const {distance} = this.options;
     const {startEvent, delay} = this;
-    const start = touchCoords(startEvent);
+    const start = touchCoords(<TouchEvent>startEvent);
     const current = touchCoords(event);
     const timeElapsed = Date.now() - this.onTouchStartAt;
     const distanceTravelled = euclideanDistance(start.pageX, start.pageY, current.pageX, current.pageY);
@@ -199,17 +140,11 @@ export default class TouchSensor extends Sensor {
       document.removeEventListener('touchmove', this[onDistanceChange]);
       this[startDrag]();
     }
-  }
+  };
 
-  /**
-   * Mouse move handler while dragging
-   * @private
-   * @param {Event} event - Touch move event
-   */
-  [onTouchMove](event) {
-    if (!this.dragging) {
-      return;
-    }
+  /*** Mouse move handler while dragging */
+  private [onTouchMove] = (event: TouchEvent) => {
+    if (!this.dragging) return;
     const {pageX, pageY} = touchCoords(event);
     const target = document.elementFromPoint(pageX - window.scrollX, pageY - window.scrollY);
 
@@ -222,14 +157,10 @@ export default class TouchSensor extends Sensor {
     });
 
     this.trigger(this.currentContainer, dragMoveEvent);
-  }
+  };
 
-  /**
-   * Touch end handler
-   * @private
-   * @param {Event} event - Touch end event
-   */
-  [onTouchEnd](event) {
+  /*** Touch end handler */
+  private [onTouchEnd](event: TouchEvent) {
     clearTimeout(this.tapTimeout);
     preventScrolling = false;
 
@@ -237,13 +168,9 @@ export default class TouchSensor extends Sensor {
     document.removeEventListener('touchcancel', this[onTouchEnd]);
     document.removeEventListener('touchmove', this[onDistanceChange]);
 
-    if (this.currentContainer) {
-      this.currentContainer.removeEventListener('contextmenu', onContextMenu);
-    }
+    if (this.currentContainer) this.currentContainer.removeEventListener('contextmenu', onContextMenu);
 
-    if (!this.dragging) {
-      return;
-    }
+    if (!this.dragging) return;
 
     document.removeEventListener('touchmove', this[onTouchMove]);
 

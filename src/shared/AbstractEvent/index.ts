@@ -7,7 +7,7 @@ const canceled = Symbol('canceled');
  */
 
 export default class AbstractEvent {
-  protected data;
+  data: Record<string, unknown>;
 
   constructor(data?: Record<string, unknown>) {
     this[canceled] = false;
@@ -37,6 +37,6 @@ export default class AbstractEvent {
     });
   }
 
-  static type: string = 'event';
-  static cancelable: boolean = false;
+  static type = 'event';
+  static cancelable = false;
 }

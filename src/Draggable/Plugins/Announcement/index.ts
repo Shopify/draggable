@@ -1,3 +1,4 @@
+import Draggable from 'Draggable';
 import AbstractEvent from 'shared/AbstractEvent';
 import AbstractPlugin from 'shared/AbstractPlugin';
 
@@ -19,23 +20,49 @@ export interface AnnouncementOptions {
   expire: number;
 }
 
-/**
- * Announcement plugin
- * @class Announcement
- * @module Announcement
- * @extends AbstractPlugin
- */
+/*** Creates region element */
+function createRegion() {
+  const element = document.createElement('div');
+
+  element.setAttribute('id', 'draggable-live-region');
+  element.setAttribute(ARIA_RELEVANT, 'additions');
+  element.setAttribute(ARIA_ATOMIC, 'true');
+  element.setAttribute(ARIA_LIVE, 'assertive');
+  element.setAttribute(ROLE, 'log');
+
+  element.style.position = 'fixed';
+  element.style.width = '1px';
+  element.style.height = '1px';
+  element.style.top = '-1px';
+  element.style.overflow = 'hidden';
+
+  return element;
+}
+
+const liveRegion: HTMLElement = createRegion();
+
+function announce(message: string, { expire }: AnnouncementOptions) {
+  const element = document.createElement('div');
+
+  element.textContent = message;
+  liveRegion.appendChild(element);
+
+  return setTimeout(() => {
+    liveRegion.removeChild(element);
+  }, expire);
+}
+
+// Append live region element as early as possible
+document.addEventListener('DOMContentLoaded', () => {
+  document.body.appendChild(liveRegion);
+});
+
 export default class Announcement extends AbstractPlugin {
   /*** Plugin options */
   options: AnnouncementOptions;
   /*** Original draggable trigger method. Hack until we have onAll or on('all') */
-  originalTriggerMethod: () => void;
+  originalTriggerMethod: (event: AbstractEvent) => Draggable;
 
-  /**
-   * Announcement constructor.
-   * @constructs Announcement
-   * @param {Draggable} draggable - Draggable instance
-   */
   constructor(draggable) {
     super(draggable);
 
@@ -90,13 +117,15 @@ export default class Announcement extends AbstractPlugin {
   /*** Initialize hander */
   private [onInitialize] = () => {
     // Hack until there is an api for listening for all events
-    this.draggable.trigger = (event) => {
+    this.draggable.trigger = (event: AbstractEvent) => {
       try {
         this[announceEvent](event);
       } finally {
         // Ensure that original trigger is called
         this.originalTriggerMethod.call(this.draggable, event);
       }
+
+      return this.draggable;
     };
   };
 
@@ -105,40 +134,3 @@ export default class Announcement extends AbstractPlugin {
     this.draggable.trigger = this.originalTriggerMethod;
   };
 }
-
-const liveRegion: HTMLElement = createRegion();
-
-function announce(message: string, { expire }: AnnouncementOptions) {
-  const element = document.createElement('div');
-
-  element.textContent = message;
-  liveRegion.appendChild(element);
-
-  return setTimeout(() => {
-    liveRegion.removeChild(element);
-  }, expire);
-}
-
-/*** Creates region element */
-function createRegion() {
-  const element = document.createElement('div');
-
-  element.setAttribute('id', 'draggable-live-region');
-  element.setAttribute(ARIA_RELEVANT, 'additions');
-  element.setAttribute(ARIA_ATOMIC, 'true');
-  element.setAttribute(ARIA_LIVE, 'assertive');
-  element.setAttribute(ROLE, 'log');
-
-  element.style.position = 'fixed';
-  element.style.width = '1px';
-  element.style.height = '1px';
-  element.style.top = '-1px';
-  element.style.overflow = 'hidden';
-
-  return element;
-}
-
-// Append live region element as early as possible
-document.addEventListener('DOMContentLoaded', () => {
-  document.body.appendChild(liveRegion);
-});

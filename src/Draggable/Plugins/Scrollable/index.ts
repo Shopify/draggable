@@ -8,8 +8,8 @@ export const onDragStop = Symbol('onDragStop');
 export const scroll = Symbol('scroll');
 
 export interface ScrollableOptions {
-  speed: number[];
-  sensitivity: number[];
+  speed: number;
+  sensitivity: number;
   scrollableElements: HTMLElement[];
 }
 
@@ -19,24 +19,55 @@ export const defaultOptions = {
   scrollableElements: [],
 };
 
-/**
- * Scrollable plugin which scrolls the closest scrollable parent
- * @class Scrollable
- * @module Scrollable
- * @extends AbstractPlugin
- */
+/*** Returns element that scrolls document */
+const getDocumentScrollingElement = (): HTMLElement =>
+  <HTMLElement>document.scrollingElement ?? document.documentElement;
+
+/*** Returns true if the passed element has overflow */
+function hasOverflow(element: HTMLElement) {
+  const overflowRegex = /(auto|scroll)/;
+  const computedStyles = getComputedStyle(element, null);
+
+  const overflow =
+    computedStyles.getPropertyValue('overflow') +
+    computedStyles.getPropertyValue('overflow-y') +
+    computedStyles.getPropertyValue('overflow-x');
+
+  return overflowRegex.test(overflow);
+}
+
+/*** Returns true if the passed element is statically positioned */
+function isStaticallyPositioned(element: HTMLElement) {
+  const position = getComputedStyle(element).getPropertyValue('position');
+  return position === 'static';
+}
+
+/*** Finds closest scrollable element */
+function closestScrollableElement(element: HTMLElement) {
+  if (!element) return getDocumentScrollingElement();
+
+  const position = getComputedStyle(element).getPropertyValue('position');
+  const excludeStaticParents = position === 'absolute';
+
+  const scrollableElement = closest(element, (parent: HTMLElement) => {
+    if (excludeStaticParents && isStaticallyPositioned(parent)) {
+      return false;
+    }
+    return hasOverflow(parent);
+  });
+
+  if (position === 'fixed' || !scrollableElement)
+    return getDocumentScrollingElement();
+  else return scrollableElement;
+}
+
 export default class Scrollable extends AbstractPlugin {
   options: ScrollableOptions;
   currentMousePosition: { clientX: number; clientY: number } = null;
   scrollAnimationFrame: number = null;
-  scrollableElement: Element = null;
+  scrollableElement: HTMLElement = null;
   findScrollableElementFrame: number = null;
 
-  /**
-   * Scrollable constructor.
-   * @constructs Scrollable
-   * @param {Draggable} draggable - Draggable instance
-   */
   constructor(draggable) {
     super(draggable);
     this.options = { ...defaultOptions, ...this.getOptions() };
@@ -62,15 +93,13 @@ export default class Scrollable extends AbstractPlugin {
   getOptions = () => this.draggable.options.scrollable ?? {};
 
   /*** Returns closest scrollable elements by element */
-  getScrollableElement(target: HTMLElement) {
+  getScrollableElement(target: HTMLElement): HTMLElement {
     if (this.hasDefinedScrollableElements()) {
       return (
         closest(target, this.options.scrollableElements) ||
         document.documentElement
       );
-    } else {
-      return closestScrollableElement(target);
-    }
+    } else return closestScrollableElement(target);
   }
 
   hasDefinedScrollableElements = () =>
@@ -183,49 +212,3 @@ export default class Scrollable extends AbstractPlugin {
     this.scrollAnimationFrame = requestAnimationFrame(this[scroll]);
   };
 }
-
-/*** Returns true if the passed element has overflow */
-function hasOverflow(element: HTMLElement) {
-  const overflowRegex = /(auto|scroll)/;
-  const computedStyles = getComputedStyle(element, null);
-
-  const overflow =
-    computedStyles.getPropertyValue('overflow') +
-    computedStyles.getPropertyValue('overflow-y') +
-    computedStyles.getPropertyValue('overflow-x');
-
-  return overflowRegex.test(overflow);
-}
-
-/*** Returns true if the passed element is statically positioned */
-function isStaticallyPositioned(element: HTMLElement) {
-  const position = getComputedStyle(element).getPropertyValue('position');
-  return position === 'static';
-}
-
-/*** Finds closest scrollable element */
-function closestScrollableElement(element: HTMLElement) {
-  if (!element) {
-    return getDocumentScrollingElement();
-  }
-
-  const position = getComputedStyle(element).getPropertyValue('position');
-  const excludeStaticParents = position === 'absolute';
-
-  const scrollableElement = closest(element, (parent) => {
-    if (excludeStaticParents && isStaticallyPositioned(parent)) {
-      return false;
-    }
-    return hasOverflow(parent);
-  });
-
-  if (position === 'fixed' || !scrollableElement) {
-    return getDocumentScrollingElement();
-  } else {
-    return scrollableElement;
-  }
-}
-
-/*** Returns element that scrolls document */
-const getDocumentScrollingElement = () =>
-  document.scrollingElement || document.documentElement;

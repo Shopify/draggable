@@ -3,6 +3,7 @@ import {
   distance as euclideanDistance,
   touchCoords,
 } from 'shared/utils';
+
 import Sensor from '../Sensor';
 import {
   DragStartSensorEvent,
@@ -16,10 +17,6 @@ const onTouchMove = Symbol('onTouchMove');
 const startDrag = Symbol('startDrag');
 const onDistanceChange = Symbol('onDistanceChange');
 
-/**
- * Prevents scrolling when set to true
- * @var {Boolean} preventScrolling
- */
 let preventScrolling = false;
 
 // WebKit requires cancelable `touchmove` events to be added as early as possible
@@ -36,38 +33,27 @@ window.addEventListener(
   { passive: false }
 );
 
-/**
- * This sensor picks up native browser touch events and dictates drag operations
- * @class TouchSensor
- * @module TouchSensor
- * @extends Sensor
- */
+function onContextMenu(event) {
+  event.preventDefault();
+  event.stopPropagation();
+}
+
 export default class TouchSensor extends Sensor {
-  /*** Closest scrollable container so accidental scroll can cancel long touch */
   currentScrollableParent: HTMLElement = null;
-  /*** TimeoutID for managing delay */
   tapTimeout: number = null;
-  /*** touchMoved indicates if touch has moved during tapTimeout */
-  touchMoved: boolean = false;
-  /** Moment when touch event is triggered */
+  touchMoved = false;
   onTouchStartAt: number = null;
-  /*** Save pageX coordinates for delay drag */
   private pageX: number = null;
-  /*** Save pageY coordinates for delay drag */
   private pageY: number = null;
 
   attach() {
     document.addEventListener('touchstart', this[onTouchStart]);
   }
 
-  /**
-   * Detaches sensors event listeners to the DOM
-   */
   detach() {
     document.removeEventListener('touchstart', this[onTouchStart]);
   }
 
-  /*** Touch start handler */
   private [onTouchStart] = (event) => {
     const container = closest(event.target, this.containers);
 
@@ -103,13 +89,14 @@ export default class TouchSensor extends Sensor {
     }
 
     this.tapTimeout = window.setTimeout(() => {
-      this[onDistanceChange]({
-        touches: [{ pageX: this.pageX, pageY: this.pageY }],
-      });
+      this[onDistanceChange](
+        new TouchEvent('touch', {
+          touches: [<Touch>{ pageX: this.pageX, pageY: this.pageY }],
+        })
+      );
     }, delay.touch);
   };
 
-  /*** Start the drag */
   private [startDrag] = () => {
     const startEvent = this.startEvent;
     const container = this.currentContainer;
@@ -135,7 +122,6 @@ export default class TouchSensor extends Sensor {
     preventScrolling = this.dragging;
   };
 
-  /*** Touch move handler prior to drag start. */
   private [onDistanceChange] = (event: TouchEvent) => {
     const { distance } = this.options;
     const { startEvent, delay } = this;
@@ -162,7 +148,6 @@ export default class TouchSensor extends Sensor {
     }
   };
 
-  /*** Mouse move handler while dragging */
   private [onTouchMove] = (event: TouchEvent) => {
     if (!this.dragging) return;
     const { pageX, pageY } = touchCoords(event);
@@ -182,7 +167,6 @@ export default class TouchSensor extends Sensor {
     this.trigger(this.currentContainer, dragMoveEvent);
   };
 
-  /*** Touch end handler */
   private [onTouchEnd](event: TouchEvent) {
     clearTimeout(this.tapTimeout);
     preventScrolling = false;
@@ -220,9 +204,4 @@ export default class TouchSensor extends Sensor {
     this.dragging = false;
     this.startEvent = null;
   }
-}
-
-function onContextMenu(event) {
-  event.preventDefault();
-  event.stopPropagation();
 }

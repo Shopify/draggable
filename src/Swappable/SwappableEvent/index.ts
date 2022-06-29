@@ -1,7 +1,15 @@
+import { DragEvent } from 'Draggable';
 import AbstractEvent from 'shared/AbstractEvent';
 
+export type SwappableEventData = {
+  dragEvent?: DragEvent;
+  over?: Element;
+  overContainer?: Element;
+  swappedElement?: Element;
+};
+
 export class SwappableEvent extends AbstractEvent {
-  static type = 'swappable';
+  declare data: SwappableEventData;
 
   get dragEvent() {
     return this.data.dragEvent;
@@ -13,24 +21,23 @@ export class SwappableEvent extends AbstractEvent {
       ...data,
     });
   }
+
+  static type = 'swappable';
 }
 
 export class SwappableStartEvent extends SwappableEvent {
-  static type = 'swappable:start';
-  static cancelable = true;
-
   clone(data) {
     return new SwappableStartEvent({
       ...this.data,
       ...data,
     });
   }
+
+  static type = 'swappable:start';
+  static cancelable = true;
 }
 
 export class SwappableSwapEvent extends SwappableEvent {
-  static type = 'swappable:swap';
-  static cancelable = true;
-
   get over() {
     return this.data.over;
   }
@@ -45,11 +52,12 @@ export class SwappableSwapEvent extends SwappableEvent {
       ...data,
     });
   }
+
+  static type = 'swappable:swap';
+  static cancelable = true;
 }
 
 export class SwappableSwappedEvent extends SwappableEvent {
-  static type = 'swappable:swapped';
-
   get swappedElement() {
     return this.data.swappedElement;
   }
@@ -60,15 +68,17 @@ export class SwappableSwappedEvent extends SwappableEvent {
       ...data,
     });
   }
+
+  static type = 'swappable:swapped';
 }
 
 export class SwappableStopEvent extends SwappableEvent {
-  static type = 'swappable:stop';
-
   clone(data) {
     return new SwappableStopEvent({
       ...this.data,
       ...data,
     });
   }
+
+  static type = 'swappable:stop';
 }

@@ -1,15 +1,9 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
+import { SortableSortedEvent, SortableSortEvent } from 'Sortable';
 
 const onSortableSorted = Symbol('onSortableSorted');
 const onSortableSort = Symbol('onSortableSort');
 
-/**
- * SortAnimation default options
- * @property {Object} defaultOptions
- * @property {Number} defaultOptions.duration
- * @property {String} defaultOptions.easingFunction
- * @type {Object}
- */
 export const defaultOptions = {
   duration: 150,
   easingFunction: 'ease-in-out',
@@ -26,11 +20,33 @@ export interface SortAnimationElement {
   offsetLeft: number;
 }
 
-/**
- * (Added in: v1.0.0-beta.10)
- *
- * SortAnimation plugin adds sort animation for sortable
- * */
+function resetElementOnTransitionEnd(event: Event) {
+  (<HTMLElement>event.target).style.transition = '';
+  (<HTMLElement>event.target).style.pointerEvents = '';
+  event.target.removeEventListener(
+    'transitionend',
+    resetElementOnTransitionEnd
+  );
+}
+
+function animate(
+  { from, to }: { from: SortAnimationElement; to: SortAnimationElement },
+  { duration, easingFunction }: SortAnimationOptions
+) {
+  const domEl = from.domEl;
+  const x = from.offsetLeft - to.offsetLeft;
+  const y = from.offsetTop - to.offsetTop;
+
+  domEl.style.pointerEvents = 'none';
+  domEl.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+
+  requestAnimationFrame(() => {
+    domEl.addEventListener('transitionend', resetElementOnTransitionEnd);
+    domEl.style.transition = `transform ${duration}ms ${easingFunction}`;
+    domEl.style.transform = '';
+  });
+}
+
 export default class SortAnimation extends AbstractPlugin {
   options: SortAnimationOptions;
   lastAnimationFrame: number = null;
@@ -103,46 +119,4 @@ export default class SortAnimation extends AbstractPlugin {
       effectedElements.forEach((element) => animate(element, this.options));
     });
   };
-}
-
-/**
- * Animates two elements
- * @param {Object} element
- * @param {Object} element.from
- * @param {Object} element.to
- * @param {Object} options
- * @param {Number} options.duration
- * @param {String} options.easingFunction
- * @private
- */
-function animate(
-  { from, to }: { from: SortAnimationElement; to: SortAnimationElement },
-  { duration, easingFunction }: SortAnimationOptions
-) {
-  const domEl = from.domEl;
-  const x = from.offsetLeft - to.offsetLeft;
-  const y = from.offsetTop - to.offsetTop;
-
-  domEl.style.pointerEvents = 'none';
-  domEl.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-
-  requestAnimationFrame(() => {
-    domEl.addEventListener('transitionend', resetElementOnTransitionEnd);
-    domEl.style.transition = `transform ${duration}ms ${easingFunction}`;
-    domEl.style.transform = '';
-  });
-}
-
-/**
- * Resets animation style properties after animation has completed
- * @param {Event} event
- * @private
- */
-function resetElementOnTransitionEnd(event: Event) {
-  (<HTMLElement>event.target).style.transition = '';
-  (<HTMLElement>event.target).style.pointerEvents = '';
-  event.target.removeEventListener(
-    'transitionend',
-    resetElementOnTransitionEnd
-  );
 }

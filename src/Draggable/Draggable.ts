@@ -1,22 +1,11 @@
-import { SwapAnimationOptions, SortAnimationOptions } from 'Plugins';
+import {
+  SwapAnimationOptions,
+  SortAnimationOptions,
+  ResizeMirrorOptions,
+} from 'Plugins';
+import AbstractEvent from 'shared/AbstractEvent';
 import AbstractPlugin from 'shared/AbstractPlugin';
 import { closest } from 'shared/utils';
-
-import {
-  Announcement,
-  Focusable,
-  Mirror,
-  MirrorOptions,
-  Scrollable,
-  ScrollableOptions,
-} from './Plugins';
-
-import Emitter from './Emitter';
-import { MouseSensor, Sensor, TouchSensor } from './Sensors';
-import {
-  DraggableInitializedEvent,
-  DraggableDestroyEvent,
-} from './DraggableEvent';
 
 import {
   DragStartEvent,
@@ -29,8 +18,22 @@ import {
   DragPressureEvent,
   DragStoppedEvent,
 } from './DragEvent';
+import {
+  DraggableInitializedEvent,
+  DraggableDestroyEvent,
+} from './DraggableEvent';
+import Emitter from './Emitter';
+import {
+  Announcement,
+  Focusable,
+  FocusableOptions,
+  Mirror,
+  MirrorOptions,
+  Scrollable,
+  ScrollableOptions,
+} from './Plugins';
+import { MouseSensor, Sensor, TouchSensor } from './Sensors';
 import { SensorOptions } from './Sensors/Sensor';
-import AbstractEvent from 'shared/AbstractEvent';
 
 const onDragStart = Symbol('onDragStart');
 const onDragMove = Symbol('onDragMove');
@@ -38,11 +41,6 @@ const onDragStop = Symbol('onDragStop');
 const onDragPressure = Symbol('onDragPressure');
 const dragStop = Symbol('dragStop');
 
-/**
- * @const {Object} defaultAnnouncements
- * @const {Function} defaultAnnouncements['drag:start']
- * @const {Function} defaultAnnouncements['drag:stop']
- */
 const defaultAnnouncements = {
   'drag:start': (event) =>
     `Picked up ${
@@ -80,29 +78,37 @@ export const defaultOptions = {
   },
 };
 
+const getSensorEvent = (event: CustomEvent) => event.detail;
+
+function applyUserSelect(element, value) {
+  element.style.webkitUserSelect = value;
+  element.style.mozUserSelect = value;
+  element.style.msUserSelect = value;
+  element.style.oUserSelect = value;
+  element.style.userSelect = value;
+}
+
 export interface DraggableOptions {
   draggable?: string;
   distance?: number;
   handle?:
     | string
-    | HTMLElement[]
-    | HTMLElement
-    | ((currentElement: HTMLElement) => HTMLElement);
+    | Element[]
+    | Element
+    | ((currentElement: Element) => Element);
   delay?: number | DelayOptions;
   plugins?: typeof AbstractPlugin[];
   sensors?: typeof Sensor[];
   classes?: { [key in keyof typeof defaultClasses]?: string | string[] };
   announcements?: Record<string, (event: AbstractEvent) => unknown>;
-  collidables?:
-    | string
-    | NodeList
-    | HTMLElement[]
-    | (() => NodeList | HTMLElement[]);
+  collidables?: string | Element[] | (() => Element[]);
   mirror?: MirrorOptions;
   scrollable?: ScrollableOptions;
   swapAnimation?: SwapAnimationOptions;
   sortAnimation?: SortAnimationOptions;
   placedTimeout?: number;
+  resizeMirror?: ResizeMirrorOptions;
+  focusable?: FocusableOptions;
   exclude?: {
     plugins?: typeof AbstractPlugin[];
     sensors?: typeof Sensor[];
@@ -120,13 +126,13 @@ export default class Draggable {
   /*** Draggables event emitter */
   emitter: Emitter = new Emitter();
   /*** Current drag state */
-  dragging: boolean = false;
+  dragging = false;
   /*** Active plugins */
   plugins: AbstractPlugin[] = [];
   /*** Active sensors */
   sensors: Sensor[] = [];
   /*** Mirror */
-  mirror: HTMLElement;
+  mirror: Element;
   /*** Original HTML Element */
   originalSource: HTMLElement;
   /*** Source container ref */
@@ -134,9 +140,9 @@ export default class Draggable {
   /*** Source container ref */
   source: HTMLElement;
   /*** Last placed element ref */
-  lastPlacedSource: HTMLElement;
+  lastPlacedSource: Element;
   /*** Last placed element container ref */
-  lastPlacedContainer: HTMLElement;
+  lastPlacedContainer: Element;
   /** Current over element container ref */
   currentOverContainer: HTMLElement;
   /** Current over element ref */
@@ -144,14 +150,17 @@ export default class Draggable {
   /*** Placement timeout ID */
   placedTimeoutID: ReturnType<typeof setTimeout>;
 
-  constructor(containers = [document.body], options: DraggableOptions = {}) {
+  constructor(
+    containers: HTMLElement[] = [document.body],
+    options: DraggableOptions = {}
+  ) {
     if (containers instanceof NodeList || containers instanceof Array)
       this.containers = [...containers];
-    else if ((containers as any) instanceof HTMLElement)
+    else if ((containers as unknown) instanceof Element)
       this.containers = [containers];
     else
       throw new Error(
-        'Draggable containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`'
+        'Draggable containers are expected to be of type `NodeList`, `Element[]` or `Element`'
       );
 
     this.options = {
@@ -319,7 +328,7 @@ export default class Draggable {
   /**
    * Triggers draggable event
    */
-  trigger(event) {
+  trigger(event: AbstractEvent) {
     this.emitter.trigger(event);
     return this;
   }
@@ -357,7 +366,7 @@ export default class Draggable {
   /**
    * Returns draggable elements for a given container, excluding the mirror and
    */
-  getDraggableElementsForContainer = (container: HTMLElement) => {
+  getDraggableElementsForContainer = (container: Element) => {
     const allDraggableElements = container.querySelectorAll(
       this.options.draggable
     );
@@ -376,7 +385,7 @@ export default class Draggable {
     this[dragStop]();
   }
 
-  private [onDragStart] = (event: Event) => {
+  private [onDragStart] = (event: CustomEvent) => {
     const sensorEvent = getSensorEvent(event);
     const { target, container, originalSource } = sensorEvent;
 
@@ -449,7 +458,7 @@ export default class Draggable {
     });
   };
 
-  private [onDragMove] = (event: Event) => {
+  private [onDragMove] = (event: CustomEvent) => {
     if (!this.dragging) return;
 
     const sensorEvent = getSensorEvent(event);
@@ -635,7 +644,7 @@ export default class Draggable {
     this[dragStop](event);
   };
 
-  private [onDragPressure] = (event: Event) => {
+  private [onDragPressure] = (event: CustomEvent) => {
     if (!this.dragging) return;
 
     const sensorEvent = getSensorEvent(event);
@@ -662,16 +671,4 @@ export default class Draggable {
 
   /** Default sensors draggable uses */
   static Sensors: Record<string, typeof Sensor> = { MouseSensor, TouchSensor };
-}
-
-function getSensorEvent(event) {
-  return event.detail;
-}
-
-function applyUserSelect(element, value) {
-  element.style.webkitUserSelect = value;
-  element.style.mozUserSelect = value;
-  element.style.msUserSelect = value;
-  element.style.oUserSelect = value;
-  element.style.userSelect = value;
 }

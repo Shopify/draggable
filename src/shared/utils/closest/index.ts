@@ -6,50 +6,43 @@ const matchFunction =
 /**
  * Get the closest parent element of a given element that matches the given
  * selector string or matching function
- *
- * @param {Element} element The child element to find a parent of
- * @param {String|Function} selector The string or function to use to match
- *     the parent element
- * @return {Element|null}
  */
 
 export type Value =
   | string
-  | ((element: HTMLElement) => void)
+  | ((element: Element) => void)
   | NodeList
-  | Array<HTMLElement>
-  | HTMLElement;
+  | Array<Element>
+  | Element;
 
 export default function closest(
-  element?: HTMLElement,
+  element?: Element,
   value?: Value
 ): HTMLElement | null {
   if (!element) return null;
 
-  function conditionFn(currentElement: HTMLElement) {
+  function conditionFn(currentElement: Element) {
     if (!currentElement) return currentElement;
-    else if (Boolean(typeof value === 'string'))
+    else if (typeof value === 'string')
       return matchFunction.call(currentElement, value);
-    else if (Boolean(value instanceof NodeList || value instanceof Array))
+    else if (value instanceof NodeList || value instanceof Array)
       return [...(<Element[]>value)].includes(currentElement);
-    else if (Boolean(value instanceof Element)) return value === currentElement;
-    else if (Boolean(typeof value === 'function'))
-      return (<Function>value)(currentElement);
+    else if (value instanceof Element) return value === currentElement;
+    else if (typeof value === 'function')
+      return (<(element: Element) => void>value)(currentElement);
     else return null;
   }
 
-  let current: any = element;
+  let current: Element = element;
 
   do {
-    current =
-      current.correspondingUseElement ||
-      current.correspondingElement ||
-      current;
-
-    if (conditionFn(current)) return current;
-
-    current = current.parentNode;
-  } while (current && current !== document.body && current !== document);
+    if (conditionFn(current)) return <HTMLElement>current;
+    current = <Element>current.parentNode;
+  } while (
+    current &&
+    current !== document.body &&
+    current !== <Element>(<unknown>document)
+  );
 
   return null;
 }

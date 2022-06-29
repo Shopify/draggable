@@ -1,15 +1,17 @@
 import AbstractEvent from 'shared/AbstractEvent';
 
+export type SensorEventData = {
+  originalEvent?: Event;
+  clientX?: number;
+  clientY?: number;
+  target?: HTMLElement;
+  container?: HTMLElement;
+  originalSource?: HTMLElement;
+  pressure?: number;
+};
+
 export class SensorEvent extends AbstractEvent {
-  declare data: {
-    originalEvent?: Event;
-    clientX?: number;
-    clientY?: number;
-    target?: HTMLElement;
-    container?: HTMLElement;
-    originalSource?: HTMLElement;
-    pressure?: number;
-  };
+  declare data: SensorEventData;
 
   get originalEvent() {
     return this.data.originalEvent;
@@ -48,45 +50,45 @@ export class SensorEvent extends AbstractEvent {
 }
 
 export class DragStartSensorEvent extends SensorEvent {
-  static type = 'drag:start';
-
   clone(data) {
     return new DragStartSensorEvent({
       ...this.data,
       ...data,
     });
   }
+
+  static type = 'drag:start';
 }
 
 export class DragMoveSensorEvent extends SensorEvent {
-  static type = 'drag:move';
-
   clone(data) {
     return new DragMoveSensorEvent({
       ...this.data,
       ...data,
     });
   }
+
+  static type = 'drag:move';
 }
 
 export class DragStopSensorEvent extends SensorEvent {
-  static type = 'drag:stop';
-
   clone(data) {
     return new DragStopSensorEvent({
       ...this.data,
       ...data,
     });
   }
+
+  static type = 'drag:stop';
 }
 
 export class DragPressureSensorEvent extends SensorEvent {
-  static type = 'drag:pressure';
-
   clone(data) {
     return new DragPressureSensorEvent({
       ...this.data,
       ...data,
     });
   }
+
+  static type = 'drag:pressure';
 }

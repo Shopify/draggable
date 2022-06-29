@@ -5,14 +5,34 @@ const onDestroy = Symbol('onDestroy');
 
 const defaultOptions = {};
 
-export interface FocusableOptions extends Record<string, unknown> {}
+export type FocusableOptions = Record<string, unknown>;
 
 /**
- * Focusable plugin
- * @class Focusable
- * @module Focusable
- * @extends AbstractPlugin
+ * Keeps track of all the elements that are missing tabindex attributes
+ * so they can be reset when draggable gets destroyed
  */
+const elementsWithMissingTabIndex: HTMLElement[] = [];
+
+function decorateElement(element: HTMLElement) {
+  const hasMissingTabIndex = Boolean(
+    !element.getAttribute('tabindex') && element.tabIndex === -1
+  );
+
+  if (hasMissingTabIndex) {
+    elementsWithMissingTabIndex.push(element);
+    element.tabIndex = 0;
+  }
+}
+
+function stripElement(element: HTMLElement) {
+  const tabIndexElementPosition = elementsWithMissingTabIndex.indexOf(element);
+
+  if (tabIndexElementPosition !== -1) {
+    element.tabIndex = -1;
+    elementsWithMissingTabIndex.splice(tabIndexElementPosition, 1);
+  }
+}
+
 export default class Focusable extends AbstractPlugin {
   options: FocusableOptions;
 
@@ -73,30 +93,4 @@ export default class Focusable extends AbstractPlugin {
       this.getElements().forEach((element) => stripElement(element));
     });
   };
-}
-
-/**
- * Keeps track of all the elements that are missing tabindex attributes
- * so they can be reset when draggable gets destroyed
- */
-const elementsWithMissingTabIndex: HTMLElement[] = [];
-
-function decorateElement(element: HTMLElement) {
-  const hasMissingTabIndex = Boolean(
-    !element.getAttribute('tabindex') && element.tabIndex === -1
-  );
-
-  if (hasMissingTabIndex) {
-    elementsWithMissingTabIndex.push(element);
-    element.tabIndex = 0;
-  }
-}
-
-function stripElement(element: HTMLElement) {
-  const tabIndexElementPosition = elementsWithMissingTabIndex.indexOf(element);
-
-  if (tabIndexElementPosition !== -1) {
-    element.tabIndex = -1;
-    elementsWithMissingTabIndex.splice(tabIndexElementPosition, 1);
-  }
 }

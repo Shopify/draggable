@@ -1,7 +1,20 @@
+import { DragEvent, DragOutEvent, DragOverEvent } from 'Draggable';
 import AbstractEvent from 'shared/AbstractEvent';
 
+export type SortableEventData = {
+  dragEvent?: DragEvent;
+  over?: HTMLElement;
+  startContainer?: HTMLElement;
+  oldContainer?: HTMLElement;
+  newContainer?: HTMLElement;
+  currentIndex?: number;
+  startIndex?: number;
+  oldIndex?: number;
+  newIndex?: number;
+};
+
 export class SortableEvent extends AbstractEvent {
-  static type = 'sortable';
+  declare data: SortableEventData;
 
   get dragEvent() {
     return this.data.dragEvent;
@@ -13,12 +26,11 @@ export class SortableEvent extends AbstractEvent {
       ...data,
     });
   }
+
+  static type = 'sortable';
 }
 
 export class SortableStartEvent extends SortableEvent {
-  static type = 'sortable:start';
-  static cancelable = true;
-
   get startIndex() {
     return this.data.startIndex;
   }
@@ -33,11 +45,15 @@ export class SortableStartEvent extends SortableEvent {
       ...data,
     });
   }
+
+  static type = 'sortable:start';
+  static cancelable = true;
 }
 
 export class SortableSortEvent extends SortableEvent {
-  static type = 'sortable:sort';
-  static cancelable = true;
+  declare data: SortableEventData & {
+    dragEvent?: DragOverEvent;
+  };
 
   get currentIndex() {
     return this.data.currentIndex;
@@ -57,10 +73,19 @@ export class SortableSortEvent extends SortableEvent {
       ...data,
     });
   }
+
+  static type = 'sortable:sort';
+  static cancelable = true;
 }
 
 export class SortableSortedEvent extends SortableEvent {
-  static type = 'sortable:sorted';
+  declare data: SortableEventData & {
+    dragEvent?: DragOutEvent;
+  };
+
+  get dragEvent() {
+    return this.data.dragEvent;
+  }
 
   get oldIndex() {
     return this.data.oldIndex;
@@ -84,11 +109,11 @@ export class SortableSortedEvent extends SortableEvent {
       ...data,
     });
   }
+
+  static type = 'sortable:sorted';
 }
 
 export class SortableStopEvent extends SortableEvent {
-  static type = 'sortable:stop';
-
   get oldIndex() {
     return this.data.oldIndex;
   }
@@ -111,4 +136,6 @@ export class SortableStopEvent extends SortableEvent {
       ...data,
     });
   }
+
+  static type = 'sortable:stop';
 }

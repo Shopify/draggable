@@ -15,7 +15,7 @@ const resize = Symbol('resize');
  */
 export const defaultOptions = {};
 
-export interface ResizeMirrorOptions extends Record<string, unknown> {}
+export type ResizeMirrorOptions = Record<string, unknown>;
 
 /**
  * The ResizeMirror plugin resizes the mirror element to the dimensions of the draggable element that the mirror is hovering over
@@ -25,8 +25,8 @@ export interface ResizeMirrorOptions extends Record<string, unknown> {}
  */
 export default class ResizeMirror extends AbstractPlugin {
   options: ResizeMirrorOptions;
-  lastWidth: number = 0;
-  lastHeight: number = 0;
+  lastWidth = 0;
+  lastHeight = 0;
   mirror: HTMLElement = null;
 
   /**

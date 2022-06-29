@@ -6,6 +6,7 @@ import {
   waitForDragDelay,
   DRAG_DELAY,
 } from 'test-utils/helpers';
+
 import Swappable from '.';
 
 const sampleMarkup = `
@@ -13,7 +14,7 @@ const sampleMarkup = `
     <li>First item</li>
     <li>Second item</li>
     <li>Third item</li>
-    <li>Forth item</li>
+    <li>Fourth item</li>
   </ul>
   <ul>
     <li>Fith item</li>
@@ -34,7 +35,7 @@ describe('Swappable', () => {
   let firstItem;
   let secondItem;
   let thirdItem;
-  let forthItem;
+  let fourthItem;
   let fifthItem;
   let sixthItem;
   let seventhItem;
@@ -56,7 +57,7 @@ describe('Swappable', () => {
     firstItem = draggableElements[0];
     secondItem = draggableElements[1];
     thirdItem = draggableElements[2];
-    forthItem = draggableElements[3];
+    fourthItem = draggableElements[3];
     fifthItem = draggableElements[4];
     sixthItem = draggableElements[5];
     seventhItem = draggableElements[6];
@@ -134,7 +135,7 @@ describe('Swappable', () => {
       firstItem,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     clickMouse(firstItem);
@@ -148,7 +149,7 @@ describe('Swappable', () => {
       // original firstItem
       swappable.source,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     moveMouse(thirdItem);
@@ -160,15 +161,15 @@ describe('Swappable', () => {
       secondItem,
       // original firstItem
       swappable.source,
-      forthItem,
+      fourthItem,
     ]);
 
-    moveMouse(forthItem);
+    moveMouse(fourthItem);
 
     draggableElements =
       swappable.getDraggableElementsForContainer(firstContainer);
     expect(draggableElements).toHaveOrder([
-      forthItem,
+      fourthItem,
       secondItem,
       thirdItem,
       // original firstItem
@@ -180,7 +181,7 @@ describe('Swappable', () => {
     draggableElements =
       swappable.getDraggableElementsForContainer(firstContainer);
     expect(draggableElements).toHaveOrder([
-      forthItem,
+      fourthItem,
       secondItem,
       thirdItem,
       firstItem,
@@ -194,7 +195,7 @@ describe('Swappable', () => {
       firstItem,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     draggableElements =
@@ -216,7 +217,7 @@ describe('Swappable', () => {
       fifthItem,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     draggableElements =
@@ -237,7 +238,7 @@ describe('Swappable', () => {
       eighthItem,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     draggableElements =
@@ -258,7 +259,7 @@ describe('Swappable', () => {
       eighthItem,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     draggableElements =
@@ -286,7 +287,7 @@ describe('Swappable', () => {
       swappable.source,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     releaseMouse(swappable.source);
@@ -297,7 +298,7 @@ describe('Swappable', () => {
       firstItem,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
   });
 });

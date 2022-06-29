@@ -1,0 +1,3 @@
+src/test-utils/*
+*.test.ts
+jest.config.js

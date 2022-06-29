@@ -10,7 +10,7 @@ const sampleMarkup = `
     <li>First item</li>
     <li>Second item</li>
     <li>Third item</li>
-    <li>Forth item</li>
+    <li>Fourth item</li>
     <button>Fifth item</button>
   </ul>
   <div class="Container">

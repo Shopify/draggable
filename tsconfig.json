@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "sourceMap": true,
-    "target": "es5",
-    "module": "commonjs",
+    "target": "es6",
+    "module": "es6",
     "baseUrl": "./src",
     "moduleResolution": "node",
     "skipLibCheck": true,
@@ -10,9 +10,5 @@
     "esModuleInterop": true,
     "types": ["jest", "node", "@types/jest"]
   },
-  "exclude": [
-    "**/node_modules",
-    "./src/**/*.test.ts",
-    "./src/test-utils/**/*.ts"
-  ]
+  "exclude": ["**/node_modules", "./src/**/*.test.ts"]
 }

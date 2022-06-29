@@ -1,4 +1,5 @@
 import { DragMoveEvent, DragStartEvent } from 'Draggable/DragEvent';
+import { SensorEvent } from 'Draggable/Sensors';
 import AbstractPlugin from 'shared/AbstractPlugin';
 
 import {
@@ -28,13 +29,173 @@ export const defaultOptions = {
   thresholdY: null,
 };
 
+function withPromise(callback, { withFrame = false } = {}) {
+  return new Promise((resolve, reject) => {
+    if (withFrame) {
+      requestAnimationFrame(() => {
+        callback(resolve, reject);
+      });
+    } else callback(resolve, reject);
+  });
+}
+
+/**
+ * Computes mirror dimensions based on the source element
+ */
+function computeMirrorDimensions({ source, ...args }) {
+  return withPromise((resolve) => {
+    const sourceRect = source.getBoundingClientRect();
+    resolve({ source, sourceRect, ...args });
+  });
+}
+
+/**
+ * Calculates mirror offset
+ */
+function calculateMirrorOffset({ sensorEvent, sourceRect, options, ...args }) {
+  return withPromise((resolve) => {
+    const top =
+      options.cursorOffsetY === null
+        ? sensorEvent.clientY - sourceRect.top
+        : options.cursorOffsetY;
+    const left =
+      options.cursorOffsetX === null
+        ? sensorEvent.clientX - sourceRect.left
+        : options.cursorOffsetX;
+
+    const mirrorOffset = { top, left };
+
+    resolve({ sensorEvent, sourceRect, mirrorOffset, options, ...args });
+  });
+}
+
+/**
+ * Applies mirror styles
+ */
+function resetMirror({ mirror, source, options, ...args }) {
+  return withPromise((resolve) => {
+    let offsetHeight;
+    let offsetWidth;
+
+    if (options.constrainDimensions) {
+      const computedSourceStyles = getComputedStyle(source);
+      offsetHeight = computedSourceStyles.getPropertyValue('height');
+      offsetWidth = computedSourceStyles.getPropertyValue('width');
+    }
+
+    mirror.style.display = null;
+    mirror.style.position = 'fixed';
+    mirror.style.pointerEvents = 'none';
+    mirror.style.top = 0;
+    mirror.style.left = 0;
+    mirror.style.margin = 0;
+
+    if (options.constrainDimensions) {
+      mirror.style.height = offsetHeight;
+      mirror.style.width = offsetWidth;
+    }
+
+    resolve({ mirror, source, options, ...args });
+  });
+}
+
+/**
+ * Applys mirror class on mirror element
+ */
+function addMirrorClasses({ mirror, mirrorClasses, ...args }) {
+  return withPromise((resolve) => {
+    mirror.classList.add(...mirrorClasses);
+    resolve({ mirror, mirrorClasses, ...args });
+  });
+}
+
+/**
+ * Removes source ID from cloned mirror element
+ */
+function removeMirrorID({ mirror, ...args }) {
+  return withPromise((resolve) => {
+    mirror.removeAttribute('id');
+    delete mirror.id;
+    resolve({ mirror, ...args });
+  });
+}
+
+function positionMirror({ withFrame = false, initial = false } = {}) {
+  return ({
+    mirror,
+    sensorEvent,
+    mirrorOffset,
+    initialY,
+    initialX,
+    scrollOffset,
+    options,
+    passedThreshX,
+    passedThreshY,
+    lastMovedX,
+    lastMovedY,
+    ...args
+  }) => {
+    return withPromise(
+      (resolve) => {
+        const result: Partial<Mirror> = {
+          mirror,
+          sensorEvent,
+          mirrorOffset,
+          options,
+          ...args,
+        };
+
+        if (mirrorOffset) {
+          const x = passedThreshX
+            ? Math.round(
+                (sensorEvent.clientX - mirrorOffset.left - scrollOffset.x) /
+                  (options.thresholdX || 1)
+              ) * (options.thresholdX || 1)
+            : Math.round(lastMovedX);
+          const y = passedThreshY
+            ? Math.round(
+                (sensorEvent.clientY - mirrorOffset.top - scrollOffset.y) /
+                  (options.thresholdY || 1)
+              ) * (options.thresholdY || 1)
+            : Math.round(lastMovedY);
+
+          if ((options.xAxis && options.yAxis) || initial) {
+            mirror.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+          } else if (options.xAxis && !options.yAxis) {
+            mirror.style.transform = `translate3d(${x}px, ${initialY}px, 0)`;
+          } else if (options.yAxis && !options.xAxis) {
+            mirror.style.transform = `translate3d(${initialX}px, ${y}px, 0)`;
+          }
+
+          if (initial) {
+            result.initialX = x;
+            result.initialY = y;
+          }
+
+          result.lastMovedX = x;
+          result.lastMovedY = y;
+        }
+
+        resolve(result);
+      },
+      { withFrame }
+    );
+  };
+}
+
+/**
+ * Returns true if the sensor event was triggered by a native browser drag event
+ */
+const isNativeDragEvent = (sensorEvent: SensorEvent) =>
+  /^drag/.test(sensorEvent.originalEvent.type);
+
 export interface MirrorOptions {
   constrainDimensions?: boolean;
   xAxis?: boolean;
   yAxis?: boolean;
   cursorOffsetX?: number | null;
   cursorOffsetY?: number | null;
-  appendTo?: String | HTMLElement | (() => void);
+  appendTo?: string | HTMLElement | ((element: HTMLElement) => void);
   thresholdX?: number;
   thresholdY?: number;
 }
@@ -56,6 +217,7 @@ export default class Mirror extends AbstractPlugin {
   lastMovedX: number;
   lastMovedY: number;
   mirror: HTMLElement;
+  sensorEvent: SensorEvent;
 
   constructor(draggable) {
     super(draggable);
@@ -321,17 +483,13 @@ export default class Mirror extends AbstractPlugin {
     };
 
     return Promise.resolve(initialState)
-      .then(positionMirror({ raf: true }))
+      .then(positionMirror({ withFrame: true }))
       .then(setState)
       .then(triggerMoved);
   };
 
   /**
    * Returns appendable container for mirror based on the appendTo option
-   * @private
-   * @param {Object} options
-   * @param {HTMLElement} options.source - Current source
-   * @return {HTMLElement}
    */
   private [getAppendableContainer](source: HTMLElement) {
     const appendTo = this.options.appendTo;
@@ -341,223 +499,9 @@ export default class Mirror extends AbstractPlugin {
     } else if (appendTo instanceof HTMLElement) {
       return appendTo;
     } else if (typeof appendTo === 'function') {
-      return appendTo(source);
+      return (<(element: HTMLElement) => void>appendTo)(source);
     } else {
       return source.parentNode;
     }
   }
-}
-
-/**
- * Computes mirror dimensions based on the source element
- * Adds sourceRect to state
- * @param {Object} state
- * @param {HTMLElement} state.source
- * @return {Promise}
- * @private
- */
-function computeMirrorDimensions({ source, ...args }) {
-  return withPromise((resolve) => {
-    const sourceRect = source.getBoundingClientRect();
-    resolve({ source, sourceRect, ...args });
-  });
-}
-
-/**
- * Calculates mirror offset
- * Adds mirrorOffset to state
- * @param {Object} state
- * @param {SensorEvent} state.sensorEvent
- * @param {DOMRect} state.sourceRect
- * @return {Promise}
- * @private
- */
-function calculateMirrorOffset({ sensorEvent, sourceRect, options, ...args }) {
-  return withPromise((resolve) => {
-    const top =
-      options.cursorOffsetY === null
-        ? sensorEvent.clientY - sourceRect.top
-        : options.cursorOffsetY;
-    const left =
-      options.cursorOffsetX === null
-        ? sensorEvent.clientX - sourceRect.left
-        : options.cursorOffsetX;
-
-    const mirrorOffset = { top, left };
-
-    resolve({ sensorEvent, sourceRect, mirrorOffset, options, ...args });
-  });
-}
-
-/**
- * Applys mirror styles
- * @param {Object} state
- * @param {HTMLElement} state.mirror
- * @param {HTMLElement} state.source
- * @param {Object} state.options
- * @return {Promise}
- * @private
- */
-function resetMirror({ mirror, source, options, ...args }) {
-  return withPromise((resolve) => {
-    let offsetHeight;
-    let offsetWidth;
-
-    if (options.constrainDimensions) {
-      const computedSourceStyles = getComputedStyle(source);
-      offsetHeight = computedSourceStyles.getPropertyValue('height');
-      offsetWidth = computedSourceStyles.getPropertyValue('width');
-    }
-
-    mirror.style.display = null;
-    mirror.style.position = 'fixed';
-    mirror.style.pointerEvents = 'none';
-    mirror.style.top = 0;
-    mirror.style.left = 0;
-    mirror.style.margin = 0;
-
-    if (options.constrainDimensions) {
-      mirror.style.height = offsetHeight;
-      mirror.style.width = offsetWidth;
-    }
-
-    resolve({ mirror, source, options, ...args });
-  });
-}
-
-/**
- * Applys mirror class on mirror element
- * @param {Object} state
- * @param {HTMLElement} state.mirror
- * @param {String[]} state.mirrorClasses
- * @return {Promise}
- * @private
- */
-function addMirrorClasses({ mirror, mirrorClasses, ...args }) {
-  return withPromise((resolve) => {
-    mirror.classList.add(...mirrorClasses);
-    resolve({ mirror, mirrorClasses, ...args });
-  });
-}
-
-/**
- * Removes source ID from cloned mirror element
- * @param {Object} state
- * @param {HTMLElement} state.mirror
- * @return {Promise}
- * @private
- */
-function removeMirrorID({ mirror, ...args }) {
-  return withPromise((resolve) => {
-    mirror.removeAttribute('id');
-    delete mirror.id;
-    resolve({ mirror, ...args });
-  });
-}
-
-/**
- * Positions mirror with translate3d
- * @param {Object} state
- * @param {HTMLElement} state.mirror
- * @param {SensorEvent} state.sensorEvent
- * @param {Object} state.mirrorOffset
- * @param {Number} state.initialY
- * @param {Number} state.initialX
- * @param {Object} state.options
- * @return {Promise}
- * @private
- */
-function positionMirror({
-  withFrame = false,
-  initial = false,
-  raf = false,
-} = {}) {
-  return ({
-    mirror,
-    sensorEvent,
-    mirrorOffset,
-    initialY,
-    initialX,
-    scrollOffset,
-    options,
-    passedThreshX,
-    passedThreshY,
-    lastMovedX,
-    lastMovedY,
-    ...args
-  }) => {
-    return withPromise(
-      (resolve) => {
-        const result = {
-          mirror,
-          sensorEvent,
-          mirrorOffset,
-          options,
-          ...args,
-        };
-
-        if (mirrorOffset) {
-          const x = passedThreshX
-            ? Math.round(
-                (sensorEvent.clientX - mirrorOffset.left - scrollOffset.x) /
-                  (options.thresholdX || 1)
-              ) * (options.thresholdX || 1)
-            : Math.round(lastMovedX);
-          const y = passedThreshY
-            ? Math.round(
-                (sensorEvent.clientY - mirrorOffset.top - scrollOffset.y) /
-                  (options.thresholdY || 1)
-              ) * (options.thresholdY || 1)
-            : Math.round(lastMovedY);
-
-          if ((options.xAxis && options.yAxis) || initial) {
-            mirror.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-          } else if (options.xAxis && !options.yAxis) {
-            mirror.style.transform = `translate3d(${x}px, ${initialY}px, 0)`;
-          } else if (options.yAxis && !options.xAxis) {
-            mirror.style.transform = `translate3d(${initialX}px, ${y}px, 0)`;
-          }
-
-          if (initial) {
-            result.initialX = x;
-            result.initialY = y;
-          }
-
-          result.lastMovedX = x;
-          result.lastMovedY = y;
-        }
-
-        resolve(result);
-      },
-      { withFrame }
-    );
-  };
-}
-
-/**
- * Wraps functions in promise with potential animation frame option
- * @param {Function} callback
- * @param {Object} options
- * @param {Boolean} options.raf
- * @return {Promise}
- * @private
- */
-function withPromise(callback, { withFrame = false } = {}) {
-  return new Promise((resolve, reject) => {
-    if (withFrame) {
-      requestAnimationFrame(() => {
-        callback(resolve, reject);
-      });
-    } else {
-      callback(resolve, reject);
-    }
-  });
-}
-
-/**
- * Returns true if the sensor event was triggered by a native browser drag event
- * @param {SensorEvent} sensorEvent
- */
-function isNativeDragEvent(sensorEvent) {
-  return /^drag/.test(sensorEvent.originalEvent.type);
 }

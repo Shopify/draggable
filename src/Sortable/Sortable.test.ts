@@ -6,6 +6,7 @@ import {
   waitForDragDelay,
   DRAG_DELAY,
 } from 'test-utils/helpers';
+
 import Sortable from '.';
 
 const sampleMarkup = `
@@ -13,7 +14,7 @@ const sampleMarkup = `
     <li>First item</li>
     <li>Second item</li>
     <li>Third item</li>
-    <li>Forth item</li>
+    <li>Fourth item</li>
   </ul>
   <ul>
     <li>Fith item</li>
@@ -34,7 +35,7 @@ describe('Sortable', () => {
   let firstItem;
   let secondItem;
   let thirdItem;
-  let forthItem;
+  let fourthItem;
   let fifthItem;
   let sixthItem;
   let seventhItem;
@@ -56,7 +57,7 @@ describe('Sortable', () => {
     firstItem = draggableElements[0];
     secondItem = draggableElements[1];
     thirdItem = draggableElements[2];
-    forthItem = draggableElements[3];
+    fourthItem = draggableElements[3];
     fifthItem = draggableElements[4];
     sixthItem = draggableElements[5];
     seventhItem = draggableElements[6];
@@ -134,7 +135,7 @@ describe('Sortable', () => {
       firstItem,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     clickMouse(firstItem);
@@ -148,7 +149,7 @@ describe('Sortable', () => {
       // original firstItem
       sortable.source,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     moveMouse(thirdItem);
@@ -160,17 +161,17 @@ describe('Sortable', () => {
       thirdItem,
       // original firstItem
       sortable.source,
-      forthItem,
+      fourthItem,
     ]);
 
-    moveMouse(forthItem);
+    moveMouse(fourthItem);
 
     draggableElements =
       sortable.getDraggableElementsForContainer(firstContainer);
     expect(draggableElements).toHaveOrder([
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
       // original firstItem
       sortable.source,
     ]);
@@ -182,7 +183,7 @@ describe('Sortable', () => {
     expect(draggableElements).toHaveOrder([
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
       firstItem,
     ]);
   });
@@ -194,7 +195,7 @@ describe('Sortable', () => {
       firstItem,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     draggableElements =
@@ -212,7 +213,7 @@ describe('Sortable', () => {
 
     draggableElements =
       sortable.getDraggableElementsForContainer(firstContainer);
-    expect(draggableElements).toHaveOrder([secondItem, thirdItem, forthItem]);
+    expect(draggableElements).toHaveOrder([secondItem, thirdItem, fourthItem]);
 
     draggableElements =
       sortable.getDraggableElementsForContainer(secondContainer);
@@ -229,7 +230,7 @@ describe('Sortable', () => {
 
     draggableElements =
       sortable.getDraggableElementsForContainer(firstContainer);
-    expect(draggableElements).toHaveOrder([secondItem, thirdItem, forthItem]);
+    expect(draggableElements).toHaveOrder([secondItem, thirdItem, fourthItem]);
 
     draggableElements =
       sortable.getDraggableElementsForContainer(secondContainer);
@@ -246,7 +247,7 @@ describe('Sortable', () => {
 
     draggableElements =
       sortable.getDraggableElementsForContainer(firstContainer);
-    expect(draggableElements).toHaveOrder([secondItem, thirdItem, forthItem]);
+    expect(draggableElements).toHaveOrder([secondItem, thirdItem, fourthItem]);
 
     draggableElements =
       sortable.getDraggableElementsForContainer(secondContainer);
@@ -274,7 +275,7 @@ describe('Sortable', () => {
       sortable.source,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     releaseMouse(sortable.source);
@@ -285,7 +286,7 @@ describe('Sortable', () => {
       firstItem,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
   });
 
@@ -307,7 +308,7 @@ describe('Sortable', () => {
       firstItem,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     draggableElements =
@@ -327,7 +328,7 @@ describe('Sortable', () => {
       eighthItem,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     draggableElements =
@@ -345,7 +346,7 @@ describe('Sortable', () => {
       eighthItem,
       secondItem,
       thirdItem,
-      forthItem,
+      fourthItem,
     ]);
 
     draggableElements =

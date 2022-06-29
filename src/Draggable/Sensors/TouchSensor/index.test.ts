@@ -6,7 +6,7 @@ import {
   touchStart,
   touchMove,
   touchRelease,
-} from '../test-utils/helpers';
+} from 'test-utils/helpers';
 
 import TouchSensor from '.';
 

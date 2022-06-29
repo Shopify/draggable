@@ -1,20 +1,18 @@
 import { SensorEvent } from 'Draggable/Sensors/SensorEvent';
 import AbstractEvent from 'shared/AbstractEvent';
 
-interface DragEventData extends Record<string, unknown> {
-  source: HTMLElement;
-  originalSource: HTMLElement;
-  mirror: HTMLElement;
-  sourceContainer: HTMLElement;
-  sensorEvent: SensorEvent;
-}
+type DragEventData = {
+  overContainer?: HTMLElement;
+  sourceContainer?: HTMLElement;
+  mirror?: HTMLElement;
+  over?: HTMLElement;
+  source?: HTMLElement;
+  sensorEvent?: SensorEvent;
+  originalSource?: HTMLElement;
+  pressure?: number;
+  detail?: SensorEvent;
+};
 
-/**
- * Base drag event
- * @class DragEvent
- * @module DragEvent
- * @extends AbstractEvent
- */
 export class DragEvent extends AbstractEvent {
   declare data: DragEventData;
 
@@ -34,19 +32,20 @@ export class DragEvent extends AbstractEvent {
     return this.data.mirror;
   }
 
-  /*** Draggables source container element */
   get sourceContainer() {
     return this.data.sourceContainer;
   }
 
-  /*** Sensor event*/
   get sensorEvent() {
     return this.data.sensorEvent;
   }
 
-  /*** Original event that triggered sensor event */
   get originalEvent() {
     return this.sensorEvent ? this.sensorEvent.originalEvent : null;
+  }
+
+  get detail() {
+    return this.detail;
   }
 
   clone(data) {
@@ -59,59 +58,34 @@ export class DragEvent extends AbstractEvent {
   static type = 'drag';
 }
 
-/**
- * Drag start event
- * @class DragStartEvent
- * @module DragStartEvent
- * @extends DragEvent
- */
 export class DragStartEvent extends DragEvent {
-  static type = 'drag:start';
-  static cancelable = true;
-
   clone(data) {
     return new DragStartEvent({
       ...this.data,
       ...data,
     });
   }
+
+  static type = 'drag:start';
+  static cancelable = true;
 }
 
-/**
- * Drag move event
- * @class DragMoveEvent
- * @module DragMoveEvent
- * @extends DragEvent
- */
 export class DragMoveEvent extends DragEvent {
-  static type = 'drag:move';
-
   clone(data) {
     return new DragMoveEvent({
       ...this.data,
       ...data,
     });
   }
+
+  static type = 'drag:move';
 }
 
-/**
- * Drag over event
- * @class DragOverEvent
- * @module DragOverEvent
- * @extends DragEvent
- */
 export class DragOverEvent extends DragEvent {
-  declare data: DragEventData & {
-    overContainer: HTMLElement;
-    over: HTMLElement;
-  };
-
-  /*** Draggable container you are over */
   get overContainer() {
     return this.data.overContainer;
   }
 
-  /*** Draggable element you are over */
   get over() {
     return this.data.over;
   }
@@ -127,26 +101,13 @@ export class DragOverEvent extends DragEvent {
   }
 }
 
-/**
- * Drag out event
- * @class DragOutEvent
- * @module DragOutEvent
- * @extends DragEvent
- */
 export class DragOutEvent extends DragEvent {
   static type = 'drag:out';
 
-  declare data: DragEventData & {
-    overContainer: HTMLElement;
-    over: HTMLElement;
-  };
-
-  /*** Draggable container you are over */
   get overContainer() {
     return this.data.overContainer;
   }
 
-  /*** Draggable element you left */
   get over() {
     return this.data.over;
   }
@@ -159,26 +120,13 @@ export class DragOutEvent extends DragEvent {
   }
 }
 
-/**
- * Drag over container event
- * @class DragOverContainerEvent
- * @module DragOverContainerEvent
- * @extends DragEvent
- */
 export class DragOverContainerEvent extends DragEvent {
   static type = 'drag:over:container';
 
-  declare data: DragEventData & {
-    overContainer: HTMLElement;
-    over: HTMLElement;
-  };
-
-  /*** Draggable container you are over */
   get overContainer() {
     return this.data.overContainer;
   }
 
-  /*** Draggable element you are over */
   get over() {
     return this.data.over;
   }
@@ -191,20 +139,9 @@ export class DragOverContainerEvent extends DragEvent {
   }
 }
 
-/**
- * Drag out container event
- * @class DragOutContainerEvent
- * @module DragOutContainerEvent
- * @extends DragEvent
- */
 export class DragOutContainerEvent extends DragEvent {
   static type = 'drag:out:container';
 
-  declare data: DragEventData & {
-    overContainer: HTMLElement;
-  };
-
-  /*** Draggable container you left */
   get overContainer() {
     return this.data.overContainer;
   }
@@ -219,10 +156,6 @@ export class DragOutContainerEvent extends DragEvent {
 
 export class DragPressureEvent extends DragEvent {
   static type = 'drag:pressure';
-
-  declare data: DragEventData & {
-    pressure: number;
-  };
 
   get pressure() {
     return this.data.pressure;
@@ -248,14 +181,6 @@ export class DragStopEvent extends DragEvent {
   }
 }
 
-/**
- * (Added in: v1.0.0-beta.12)
- *
- * Drag stopped event
- * @class DragStoppedEvent
- * @module DragStoppedEvent
- * @extends DragEvent
- */
 export class DragStoppedEvent extends DragEvent {
   static type = 'drag:stopped';
 

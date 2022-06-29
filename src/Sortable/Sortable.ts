@@ -1,4 +1,5 @@
 import { DraggableOptions } from 'Draggable/Draggable';
+
 import Draggable, {
   DragOverContainerEvent,
   DragOverEvent,
@@ -46,6 +47,67 @@ function onSortableSortedDefaultAnnouncement({
   }
 }
 
+const index = (element: Element) =>
+  Array.prototype.indexOf.call(element.parentNode.children, element);
+
+function moveInsideEmptyContainer(source: Element, overContainer: Element) {
+  const oldContainer = <Element>source.parentNode;
+
+  overContainer.appendChild(source);
+
+  return { oldContainer, newContainer: overContainer };
+}
+
+function moveWithinContainer(source: Element, over: Element) {
+  const oldIndex = index(source);
+  const newIndex = index(over);
+
+  if (oldIndex < newIndex)
+    source.parentNode.insertBefore(source, over.nextElementSibling);
+  else source.parentNode.insertBefore(source, over);
+
+  return {
+    oldContainer: <Element>source.parentNode,
+    newContainer: <Element>source.parentNode,
+  };
+}
+
+function moveOutsideContainer(
+  source: Element,
+  over: Element,
+  overContainer: Element
+) {
+  const oldContainer = source.parentNode;
+
+  if (over) over.parentNode.insertBefore(source, over);
+  else overContainer.appendChild(source);
+
+  return { oldContainer, newContainer: source.parentNode };
+}
+
+function move({
+  source,
+  over,
+  overContainer,
+  children,
+}: {
+  source: Element;
+  over: Element;
+  overContainer: Element;
+  children: Element[];
+}) {
+  const emptyOverContainer = !children.length;
+  const differentContainer = source.parentNode !== overContainer;
+  const sameContainer = over && source.parentNode === over.parentNode;
+
+  if (emptyOverContainer)
+    return moveInsideEmptyContainer(source, overContainer);
+  else if (sameContainer) return moveWithinContainer(source, over);
+  else if (differentContainer)
+    return moveOutsideContainer(source, over, overContainer);
+  else return null;
+}
+
 const defaultAnnouncements = {
   'sortable:sorted': onSortableSortedDefaultAnnouncement,
 };
@@ -55,8 +117,8 @@ const defaultAnnouncements = {
  * track of the original index and emits the new index as you drag over draggable elements.
  */
 export default class Sortable extends Draggable {
-  startIndex: Number = null;
-  startContainer: HTMLElement = null;
+  startIndex: number = null;
+  startContainer: Element = null;
 
   constructor(containers: HTMLElement[] = [], options: DraggableOptions = {}) {
     super(containers, {
@@ -88,9 +150,9 @@ export default class Sortable extends Draggable {
   /**
    * Returns true index of element within its container during drag operation, i.e. excluding mirror and original source
    */
-  index(element: HTMLElement): number {
+  index(element: Element): number {
     return this.getSortableElementsForContainer(
-      <HTMLElement>element.parentNode
+      <Element>element.parentNode
     ).indexOf(element);
   }
 
@@ -98,7 +160,7 @@ export default class Sortable extends Draggable {
    * Returns sortable elements for a given container, excluding the mirror and
    * original source element if present
    */
-  getSortableElementsForContainer(container: HTMLElement): Element[] {
+  getSortableElementsForContainer(container: Element): Element[] {
     const allSortableElements = <Element[]>(
       (<unknown>container.querySelectorAll(this.options.draggable))
     );
@@ -112,7 +174,7 @@ export default class Sortable extends Draggable {
   }
 
   private [onDragStart] = (event: DragStartEvent) => {
-    this.startContainer = <HTMLElement>event.source.parentNode;
+    this.startContainer = <Element>event.source.parentNode;
     this.startIndex = this.index(event.source);
 
     const sortableStartEvent = new SortableStartEvent({
@@ -213,68 +275,4 @@ export default class Sortable extends Draggable {
     this.startIndex = null;
     this.startContainer = null;
   };
-}
-
-const index = (element: HTMLElement) =>
-  Array.prototype.indexOf.call(element.parentNode.children, element);
-
-function move({
-  source,
-  over,
-  overContainer,
-  children,
-}: {
-  source: HTMLElement;
-  over: HTMLElement;
-  overContainer: HTMLElement;
-  children: Element[];
-}) {
-  const emptyOverContainer = !children.length;
-  const differentContainer = source.parentNode !== overContainer;
-  const sameContainer = over && source.parentNode === over.parentNode;
-
-  if (emptyOverContainer)
-    return moveInsideEmptyContainer(source, overContainer);
-  else if (sameContainer) return moveWithinContainer(source, over);
-  else if (differentContainer)
-    return moveOutsideContainer(source, over, overContainer);
-  else return null;
-}
-
-function moveInsideEmptyContainer(
-  source: HTMLElement,
-  overContainer: HTMLElement
-) {
-  const oldContainer = <HTMLElement>source.parentNode;
-
-  overContainer.appendChild(source);
-
-  return { oldContainer, newContainer: overContainer };
-}
-
-function moveWithinContainer(source: HTMLElement, over: HTMLElement) {
-  const oldIndex = index(source);
-  const newIndex = index(over);
-
-  if (oldIndex < newIndex)
-    source.parentNode.insertBefore(source, over.nextElementSibling);
-  else source.parentNode.insertBefore(source, over);
-
-  return {
-    oldContainer: <HTMLElement>source.parentNode,
-    newContainer: <HTMLElement>source.parentNode,
-  };
-}
-
-function moveOutsideContainer(
-  source: HTMLElement,
-  over: HTMLElement,
-  overContainer: HTMLElement
-) {
-  const oldContainer = source.parentNode;
-
-  if (over) over.parentNode.insertBefore(source, over);
-  else overContainer.appendChild(source);
-
-  return { oldContainer, newContainer: source.parentNode };
 }

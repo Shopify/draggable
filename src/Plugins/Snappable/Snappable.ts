@@ -4,7 +4,9 @@ import {
   DragStartEvent,
 } from 'Draggable/DragEvent';
 import { MirrorCreatedEvent } from 'Draggable/Plugins/Mirror/MirrorEvent';
+import { DroppableEvent, DroppableStopEvent } from 'Droppable';
 import AbstractPlugin from 'shared/AbstractPlugin';
+
 import { SnapInEvent, SnapOutEvent } from './SnappableEvent';
 
 const onDragStart = Symbol('onDragStart');
@@ -59,10 +61,10 @@ export default class Snappable extends AbstractPlugin {
     this.firstSource = null;
   };
 
-  private [onDragOver] = (event: DragOverEvent | DroppableOverEvent) => {
+  private [onDragOver] = (event: Partial<DragOverEvent & DroppableEvent>) => {
     if (event.canceled()) return;
 
-    const source = event.source || event.dragEvent.source;
+    const source = event.source ?? event.dragEvent.source;
 
     if (source === this.firstSource) {
       this.firstSource = null;
@@ -93,7 +95,7 @@ export default class Snappable extends AbstractPlugin {
     }, this.draggable.options.placedTimeout);
   };
 
-  private [onDragOut] = (event: DragOutEvent | DroppableOutEvent) => {
+  private [onDragOut] = (event: Partial<DragOutEvent & DroppableStopEvent>) => {
     if (event.canceled()) return;
 
     const source = event.source || event.dragEvent.source;

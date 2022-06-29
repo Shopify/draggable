@@ -1,6 +1,7 @@
 import { DragMoveEvent, DragStopEvent } from 'Draggable/DragEvent';
 import AbstractPlugin from 'shared/AbstractPlugin';
 import { closest } from 'shared/utils';
+
 import { CollidableInEvent, CollidableOutEvent } from './CollidableEvent';
 
 const onDragMove = Symbol('onDragMove');
@@ -19,7 +20,7 @@ export default class Collidable extends AbstractPlugin {
   /*** Keeps track of currently colliding elements */
   lastCollidingElement: HTMLElement | null = null;
   /*** Animation frame for finding colliding elements */
-  currentAnimationFrame: Number | null = null;
+  currentAnimationFrame: number | null = null;
 
   /**
    * Attaches plugins event listeners
@@ -40,7 +41,7 @@ export default class Collidable extends AbstractPlugin {
   }
 
   /*** Returns current collidables based on `collidables` option */
-  getCollidables(): HTMLElement[] {
+  getCollidables(): Element[] {
     const collidables = this.draggable.options.collidables;
 
     if (typeof collidables === 'string') {

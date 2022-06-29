@@ -1,4 +1,5 @@
 import { closest } from 'shared/utils';
+
 import Sensor, { SensorOptions } from '../Sensor';
 import {
   DragStartSensorEvent,
@@ -167,7 +168,7 @@ export default class DragSensor extends Sensor {
 
     const nativeDraggableElement = closest(
       event.target,
-      (element) => element.draggable
+      (element) => (<HTMLElement>element).draggable
     );
 
     if (nativeDraggableElement) {

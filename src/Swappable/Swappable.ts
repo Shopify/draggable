@@ -1,4 +1,5 @@
 import { DraggableOptions } from 'Draggable/Draggable';
+
 import Draggable from '../Draggable';
 import {
   SwappableStartEvent,
@@ -30,27 +31,30 @@ function onSwappableSwappedDefaultAnnouncement({
   return `Swapped ${sourceText} with ${overText}`;
 }
 
-/**
- * @const {Object} defaultAnnouncements
- * @const {Function} defaultAnnouncements['swappabled:swapped']
- */
+function withTempElement(callback) {
+  const tmpElement = document.createElement('div');
+  callback(tmpElement);
+  tmpElement.remove();
+}
+
+function swap(source, over) {
+  const overParent = over.parentNode;
+  const sourceParent = source.parentNode;
+
+  withTempElement((tmpElement) => {
+    sourceParent.insertBefore(tmpElement, source);
+    overParent.insertBefore(source, over);
+    sourceParent.insertBefore(over, tmpElement);
+  });
+}
+
 const defaultAnnouncements = {
   'swappabled:swapped': onSwappableSwappedDefaultAnnouncement,
 };
 
-/**
- * Swappable is built on top of Draggable and allows swapping of draggable elements.
- * Order is irrelevant to Swappable.
- */
 export default class Swappable extends Draggable {
-  /**
-   * Last draggable element that was dragged over
-   */
   lastOver: HTMLElement = null;
 
-  /**
-   * Swappable constructor.
-   */
   constructor(containers: HTMLElement[] = [], options: DraggableOptions = {}) {
     super(containers, {
       ...options,
@@ -69,9 +73,6 @@ export default class Swappable extends Draggable {
       .on('drag:stop', this[onDragStop]);
   }
 
-  /**
-   * Destroys Swappable instance.
-   */
   destroy() {
     super.destroy();
 
@@ -80,11 +81,6 @@ export default class Swappable extends Draggable {
       .off('drag:stop', this[onDragStop]);
   }
 
-  /**
-   * Drag start handler
-   * @private
-   * @param {DragStartEvent} event - Drag start event
-   */
   [onDragStart](event) {
     const swappableStartEvent = new SwappableStartEvent({
       dragEvent: event,
@@ -97,11 +93,6 @@ export default class Swappable extends Draggable {
     }
   }
 
-  /**
-   * Drag over handler
-   * @private
-   * @param {DragOverEvent} event - Drag over event
-   */
   [onDragOver](event) {
     if (
       event.over === event.originalSource ||
@@ -144,11 +135,6 @@ export default class Swappable extends Draggable {
     this.trigger(swappableSwappedEvent);
   }
 
-  /**
-   * Drag stop handler
-   * @private
-   * @param {DragStopEvent} event - Drag stop event
-   */
   [onDragStop](event) {
     const swappableStopEvent = new SwappableStopEvent({
       dragEvent: event,
@@ -157,21 +143,4 @@ export default class Swappable extends Draggable {
     this.trigger(swappableStopEvent);
     this.lastOver = null;
   }
-}
-
-function withTempElement(callback) {
-  const tmpElement = document.createElement('div');
-  callback(tmpElement);
-  tmpElement.remove();
-}
-
-function swap(source, over) {
-  const overParent = over.parentNode;
-  const sourceParent = source.parentNode;
-
-  withTempElement((tmpElement) => {
-    sourceParent.insertBefore(tmpElement, source);
-    overParent.insertBefore(source, over);
-    sourceParent.insertBefore(over, tmpElement);
-  });
 }

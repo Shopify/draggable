@@ -1,4 +1,5 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
+import { SortableSortedEvent } from 'Sortable';
 
 const onSortableSorted = Symbol('onSortableSorted');
 
@@ -14,6 +15,44 @@ export interface SwapAnimationOptions {
   horizontal: boolean;
 }
 
+/*** Resets animation style properties after animation has completed */
+function resetElementOnTransitionEnd(event: Event) {
+  (<HTMLElement>event.target).style.transition = '';
+  (<HTMLElement>event.target).style.pointerEvents = '';
+  event.target.removeEventListener(
+    'transitionend',
+    resetElementOnTransitionEnd
+  );
+}
+
+function animate(
+  from: HTMLElement,
+  to: HTMLElement,
+  { duration, easingFunction, horizontal }: SwapAnimationOptions
+) {
+  for (const element of [from, to]) {
+    element.style.pointerEvents = 'none';
+  }
+
+  if (horizontal) {
+    const width = from.offsetWidth;
+    from.style.transform = `translate3d(${width}px, 0, 0)`;
+    to.style.transform = `translate3d(-${width}px, 0, 0)`;
+  } else {
+    const height = from.offsetHeight;
+    from.style.transform = `translate3d(0, ${height}px, 0)`;
+    to.style.transform = `translate3d(0, -${height}px, 0)`;
+  }
+
+  requestAnimationFrame(() => {
+    for (const element of [from, to]) {
+      element.addEventListener('transitionend', resetElementOnTransitionEnd);
+      element.style.transition = `transform ${duration}ms ${easingFunction}`;
+      element.style.transform = '';
+    }
+  });
+}
+
 /**
  * SwapAnimation plugin adds swap animations for sortable
  * @class SwapAnimation
@@ -24,11 +63,6 @@ export interface SwapAnimationOptions {
 export default class SwapAnimation extends AbstractPlugin {
   options: SwapAnimationOptions;
   lastAnimationFrame: number = null;
-  /**
-   * SwapAnimation constructor.
-   * @constructs SwapAnimation
-   * @param {Draggable} draggable - Draggable instance
-   */
   constructor(draggable) {
     super(draggable);
 
@@ -61,49 +95,8 @@ export default class SwapAnimation extends AbstractPlugin {
 
     // Can be done in a separate frame
     this.lastAnimationFrame = requestAnimationFrame(() => {
-      if (oldIndex >= newIndex) {
-        animate(source, over, this.options);
-      } else {
-        animate(over, source, this.options);
-      }
+      if (oldIndex >= newIndex) animate(source, over, this.options);
+      else animate(over, source, this.options);
     });
   };
-}
-
-function animate(
-  from: HTMLElement,
-  to: HTMLElement,
-  { duration, easingFunction, horizontal }: SwapAnimationOptions
-) {
-  for (const element of [from, to]) {
-    element.style.pointerEvents = 'none';
-  }
-
-  if (horizontal) {
-    const width = from.offsetWidth;
-    from.style.transform = `translate3d(${width}px, 0, 0)`;
-    to.style.transform = `translate3d(-${width}px, 0, 0)`;
-  } else {
-    const height = from.offsetHeight;
-    from.style.transform = `translate3d(0, ${height}px, 0)`;
-    to.style.transform = `translate3d(0, -${height}px, 0)`;
-  }
-
-  requestAnimationFrame(() => {
-    for (const element of [from, to]) {
-      element.addEventListener('transitionend', resetElementOnTransitionEnd);
-      element.style.transition = `transform ${duration}ms ${easingFunction}`;
-      element.style.transform = '';
-    }
-  });
-}
-
-/*** Resets animation style properties after animation has completed */
-function resetElementOnTransitionEnd(event: Event) {
-  (<HTMLElement>event.target).style.transition = '';
-  (<HTMLElement>event.target).style.pointerEvents = '';
-  event.target.removeEventListener(
-    'transitionend',
-    resetElementOnTransitionEnd
-  );
 }

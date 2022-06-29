@@ -1,7 +1,7 @@
 import { SensorEvent } from 'Draggable/Sensors';
 import AbstractEvent from 'shared/AbstractEvent';
 
-interface MirrorEventData {
+export type MirrorEventData = {
   dragEvent?: DragEvent;
   sensorEvent?: SensorEvent;
   originalEvent?: Event;
@@ -11,7 +11,7 @@ interface MirrorEventData {
   sourceContainer?: HTMLElement;
   originalSource?: HTMLElement;
   pressure?: number;
-}
+};
 
 export class MirrorEvent extends AbstractEvent {
   declare data: MirrorEventData;

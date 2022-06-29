@@ -1,6 +1,10 @@
-import {closest, distance as euclideanDistance} from 'shared/utils';
-import Sensor, {SensorOptions} from '../Sensor';
-import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
+import { closest, distance as euclideanDistance } from 'shared/utils';
+import Sensor, { SensorOptions } from '../Sensor';
+import {
+  DragStartSensorEvent,
+  DragMoveSensorEvent,
+  DragStopSensorEvent,
+} from '../SensorEvent';
 
 const onContextMenuWhileDragging = Symbol('onContextMenuWhileDragging');
 const onMouseDown = Symbol('onMouseDown');
@@ -41,20 +45,27 @@ export default class MouseSensor extends Sensor {
       return;
     }
 
-    if (this.options.handle && event.target && !closest(<HTMLElement>event.target, this.options.handle)) {
+    if (
+      this.options.handle &&
+      event.target &&
+      !closest(<HTMLElement>event.target, this.options.handle)
+    ) {
       return;
     }
 
-    const originalSource = closest(<HTMLElement>event.target, this.options.draggable);
+    const originalSource = closest(
+      <HTMLElement>event.target,
+      this.options.draggable
+    );
 
     if (!originalSource) {
       return;
     }
 
-    const {delay} = this;
-    const {pageX, pageY} = event;
+    const { delay } = this;
+    const { pageX, pageY } = event;
 
-    Object.assign(this, {pageX, pageY});
+    Object.assign(this, { pageX, pageY });
     this.onMouseDownAt = Date.now();
     this.startEvent = event;
 
@@ -65,7 +76,10 @@ export default class MouseSensor extends Sensor {
     document.addEventListener('mousemove', this[onDistanceChange]);
 
     this.mouseDownTimeout = window.setTimeout(() => {
-      this[onDistanceChange](<MouseEvent>{pageX: this.pageX, pageY: this.pageY});
+      this[onDistanceChange](<MouseEvent>{
+        pageX: this.pageX,
+        pageY: this.pageY,
+      });
     }, delay.mouse);
   };
 
@@ -91,7 +105,11 @@ export default class MouseSensor extends Sensor {
     this.dragging = !dragStartEvent.canceled();
 
     if (this.dragging) {
-      document.addEventListener('contextmenu', this[onContextMenuWhileDragging], true);
+      document.addEventListener(
+        'contextmenu',
+        this[onContextMenuWhileDragging],
+        true
+      );
       document.addEventListener('mousemove', this[onMouseMove]);
     }
   };
@@ -102,16 +120,17 @@ export default class MouseSensor extends Sensor {
    * @param {MouseEvent} event - Mouse move event
    */
   private [onDistanceChange] = (event: MouseEvent) => {
-    const {pageX, pageY} = event;
-    const {distance} = this.options;
-    const {startEvent, delay} = this;
+    const { pageX, pageY } = event;
+    const { distance } = this.options;
+    const { startEvent, delay } = this;
 
-    Object.assign(this, {pageX, pageY});
+    Object.assign(this, { pageX, pageY });
 
     if (!this.currentContainer) return;
 
     const timeElapsed = Date.now() - this.onMouseDownAt;
-    const distanceTravelled = euclideanDistance(startEvent.pageX, startEvent.pageY, pageX, pageY) || 0;
+    const distanceTravelled =
+      euclideanDistance(startEvent.pageX, startEvent.pageY, pageX, pageY) || 0;
 
     clearTimeout(this.mouseDownTimeout);
 
@@ -171,7 +190,11 @@ export default class MouseSensor extends Sensor {
 
     this.trigger(this.currentContainer, dragStopEvent);
 
-    document.removeEventListener('contextmenu', this[onContextMenuWhileDragging], true);
+    document.removeEventListener(
+      'contextmenu',
+      this[onContextMenuWhileDragging],
+      true
+    );
     document.removeEventListener('mousemove', this[onMouseMove]);
 
     this.currentContainer = null;

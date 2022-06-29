@@ -50,8 +50,12 @@ export default class SwapAnimation extends AbstractPlugin {
 
   getOptions = () => this.draggable.options.swapAnimation ?? {};
 
-  private [onSortableSorted] = ({oldIndex, newIndex, dragEvent}: SortableSortedEvent) => {
-    const {source, over} = dragEvent;
+  private [onSortableSorted] = ({
+    oldIndex,
+    newIndex,
+    dragEvent,
+  }: SortableSortedEvent) => {
+    const { source, over } = dragEvent;
 
     cancelAnimationFrame(this.lastAnimationFrame);
 
@@ -66,7 +70,11 @@ export default class SwapAnimation extends AbstractPlugin {
   };
 }
 
-function animate(from: HTMLElement, to: HTMLElement, {duration, easingFunction, horizontal}: SwapAnimationOptions) {
+function animate(
+  from: HTMLElement,
+  to: HTMLElement,
+  { duration, easingFunction, horizontal }: SwapAnimationOptions
+) {
   for (const element of [from, to]) {
     element.style.pointerEvents = 'none';
   }
@@ -94,5 +102,8 @@ function animate(from: HTMLElement, to: HTMLElement, {duration, easingFunction, 
 function resetElementOnTransitionEnd(event: Event) {
   (<HTMLElement>event.target).style.transition = '';
   (<HTMLElement>event.target).style.pointerEvents = '';
-  event.target.removeEventListener('transitionend', resetElementOnTransitionEnd);
+  event.target.removeEventListener(
+    'transitionend',
+    resetElementOnTransitionEnd
+  );
 }

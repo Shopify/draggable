@@ -35,13 +35,13 @@ _And any other events you can think of..._
 #### Static messages
 
 ```js
-import {Sortable} from '@shopify/draggable';
+import { Sortable } from '@shopify/draggable';
 
 const announcements = {
   'drag:start': 'Draggable element picked up',
   'drag:stop': 'Draggable element dropped',
   'sortable:stopped': 'Draggable elements swapped',
-}
+};
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -52,7 +52,7 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 #### Dynamic messages
 
 ```js
-import {Sortable} from '@shopify/draggable';
+import { Sortable } from '@shopify/draggable';
 
 const announcements = {
   'drag:start': (dragEvent) => {
@@ -60,13 +60,15 @@ const announcements = {
   },
 
   'drag:stop': (dragEvent) => {
-    return `Dropped ${dragEvent.source.getAttribute('data-name')}`
+    return `Dropped ${dragEvent.source.getAttribute('data-name')}`;
   },
 
   'sortable:sorted': (sortableEvent) => {
-    return `Sorted ${sortableEvent.dragEvent.source.getAttribute('data-name')} with ${sortableEvent.dragEvent.over.getAttribute('data-name')}`;
+    return `Sorted ${sortableEvent.dragEvent.source.getAttribute(
+      'data-name'
+    )} with ${sortableEvent.dragEvent.over.getAttribute('data-name')}`;
   },
-}
+};
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',

@@ -13,25 +13,38 @@ const matchFunction =
  * @return {Element|null}
  */
 
-export type Value = string | ((element: HTMLElement) => void) | NodeList | Array<HTMLElement> | HTMLElement;
+export type Value =
+  | string
+  | ((element: HTMLElement) => void)
+  | NodeList
+  | Array<HTMLElement>
+  | HTMLElement;
 
-export default function closest(element?: HTMLElement, value?: Value): HTMLElement | null {
+export default function closest(
+  element?: HTMLElement,
+  value?: Value
+): HTMLElement | null {
   if (!element) return null;
 
   function conditionFn(currentElement: HTMLElement) {
     if (!currentElement) return currentElement;
-    else if (Boolean(typeof value === 'string')) return matchFunction.call(currentElement, value);
+    else if (Boolean(typeof value === 'string'))
+      return matchFunction.call(currentElement, value);
     else if (Boolean(value instanceof NodeList || value instanceof Array))
       return [...(<Element[]>value)].includes(currentElement);
     else if (Boolean(value instanceof Element)) return value === currentElement;
-    else if (Boolean(typeof value === 'function')) return (<Function>value)(currentElement);
+    else if (Boolean(typeof value === 'function'))
+      return (<Function>value)(currentElement);
     else return null;
   }
 
   let current: any = element;
 
   do {
-    current = current.correspondingUseElement || current.correspondingElement || current;
+    current =
+      current.correspondingUseElement ||
+      current.correspondingElement ||
+      current;
 
     if (conditionFn(current)) return current;
 

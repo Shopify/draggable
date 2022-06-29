@@ -1,4 +1,4 @@
-import {SensorEvent} from 'Draggable/Sensors/SensorEvent';
+import { SensorEvent } from 'Draggable/Sensors/SensorEvent';
 
 const defaultDelay: SensorDelayOptions = {
   mouse: 0,
@@ -14,8 +14,18 @@ export interface SensorDelayOptions {
 
 export interface SensorOptions {
   delay?: number | SensorDelayOptions;
-  handle?: string | NodeList | HTMLElement[] | HTMLElement | ((currentElement: HTMLElement) => HTMLElement);
-  draggable?: string | ((element: HTMLElement) => void) | NodeList | Array<HTMLElement> | HTMLElement;
+  handle?:
+    | string
+    | NodeList
+    | HTMLElement[]
+    | HTMLElement
+    | ((currentElement: HTMLElement) => HTMLElement);
+  draggable?:
+    | string
+    | ((element: HTMLElement) => void)
+    | NodeList
+    | Array<HTMLElement>
+    | HTMLElement;
   distance?: number;
 }
 
@@ -38,11 +48,15 @@ export default class Sensor {
   delay: SensorDelayOptions;
   lastEvent: SensorEvent;
 
-  constructor(containers: HTMLElement[] | NodeList | HTMLElement = [], options: SensorOptions = {}) {
-    if (containers instanceof NodeList || containers instanceof Array) this.containers = <HTMLElement[]>[...containers];
+  constructor(
+    containers: HTMLElement[] | NodeList | HTMLElement = [],
+    options: SensorOptions = {}
+  ) {
+    if (containers instanceof NodeList || containers instanceof Array)
+      this.containers = <HTMLElement[]>[...containers];
     else if (containers instanceof HTMLElement) this.containers = [containers];
 
-    this.options = {...options};
+    this.options = { ...options };
     this.delay = calcDelay(options.delay);
   }
 
@@ -69,7 +83,9 @@ export default class Sensor {
    * @example draggable.removeContainer(document.body)
    */
   removeContainer(...containers) {
-    this.containers = this.containers.filter((container) => !containers.includes(container));
+    this.containers = this.containers.filter(
+      (container) => !containers.includes(container)
+    );
   }
 
   /**
@@ -91,10 +107,12 @@ export default class Sensor {
 }
 
 /** Calculate the delay of each sensor through the delay in the options */
-function calcDelay(optionsDelay?: number | SensorDelayOptions): SensorDelayOptions {
+function calcDelay(
+  optionsDelay?: number | SensorDelayOptions
+): SensorDelayOptions {
   const delay = {};
 
-  if (optionsDelay === undefined) return {...defaultDelay};
+  if (optionsDelay === undefined) return { ...defaultDelay };
 
   if (typeof optionsDelay === 'number') {
     for (const key in defaultDelay) {

@@ -12,7 +12,7 @@ import {
   dragStop,
 } from './sensor';
 
-export function drag({from, to, sensor = 'mouse'}) {
+export function drag({ from, to, sensor = 'mouse' }) {
   if (sensor === 'mouse') {
     clickMouse(from);
     waitForDragDelay();

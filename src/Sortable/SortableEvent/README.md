@@ -2,12 +2,12 @@
 
 The base sortable event for all Sortable events that `Sortable` emits.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Interface**         | `SortableEvent`                                            |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `sortable`                                                 |
+|                   |                 |
+| ----------------- | --------------- |
+| **Interface**     | `SortableEvent` |
+| **Cancelable**    | false           |
+| **Cancel action** | -               |
+| **type**          | `sortable`      |
 
 ### API
 
@@ -18,13 +18,13 @@ Read-only property for the original drag event that triggered the sortable event
 
 `SortableStartEvent` gets triggered by `Sortable` when on drag start.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `SortableEvent`                                            |
-| **Interface**         | `SortableStartEvent`                                       |
-| **Cancelable**        | true                                                       |
-| **Cancel action**     | Prevents drag start                                        |
-| **type**              | `sortable:start`                                           |
+|                   |                      |
+| ----------------- | -------------------- |
+| **Specification** | `SortableEvent`      |
+| **Interface**     | `SortableStartEvent` |
+| **Cancelable**    | true                 |
+| **Cancel action** | Prevents drag start  |
+| **type**          | `sortable:start`     |
 
 ### API
 
@@ -38,13 +38,13 @@ Read-only property for the start container of the current draggable source.
 
 `SortableSortEvent` gets triggered by `Sortable` before sorting with another draggable.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `SortableEvent`                                            |
-| **Interface**         | `SortableSortEvent`                                        |
-| **Cancelable**        | true                                                       |
-| **Cancel action**     | Prevents sorting                                           |
-| **type**              | `sortable:sort`                                            |
+|                   |                     |
+| ----------------- | ------------------- |
+| **Specification** | `SortableEvent`     |
+| **Interface**     | `SortableSortEvent` |
+| **Cancelable**    | true                |
+| **Cancel action** | Prevents sorting    |
+| **type**          | `sortable:sort`     |
 
 ### API
 
@@ -61,13 +61,13 @@ Read-only property for the container of the draggable source you are hovering ov
 
 `SortableSortedEvent` gets triggered by `Sortable` when sorted with another draggable.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `SortableEvent`                                            |
-| **Interface**         | `SortableSortedEvent`                                      |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `sortable:sorted`                                          |
+|                   |                       |
+| ----------------- | --------------------- |
+| **Specification** | `SortableEvent`       |
+| **Interface**     | `SortableSortedEvent` |
+| **Cancelable**    | false                 |
+| **Cancel action** | -                     |
+| **type**          | `sortable:sorted`     |
 
 ### API
 
@@ -87,13 +87,13 @@ Read-only property for the new container of the current draggable source.
 
 `SortableStopEvent` gets triggered by `Sortable` on drag stop.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `SortableEvent`                                            |
-| **Interface**         | `SortableStopEvent`                                        |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `sortable:stop`                                            |
+|                   |                     |
+| ----------------- | ------------------- |
+| **Specification** | `SortableEvent`     |
+| **Interface**     | `SortableStopEvent` |
+| **Cancelable**    | false               |
+| **Cancel action** | -                   |
+| **type**          | `sortable:stop`     |
 
 ### API
 

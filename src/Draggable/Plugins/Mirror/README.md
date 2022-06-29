@@ -69,8 +69,8 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
     constrainDimensions: true,
     cursorOffsetX: 10,
     cursorOffsetY: 10,
-    xAxis: false
-  }
+    xAxis: false,
+  },
 });
 ```
 
@@ -85,8 +85,8 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
     constrainDimensions: true,
     cursorOffsetX: 10,
     cursorOffsetY: 10,
-    yAxis: false
-  }
+    yAxis: false,
+  },
 });
 ```
 
@@ -98,7 +98,7 @@ import { Sortable } from '@shopify/draggable';
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
   mirror: {
-    appendTo: '.some-other-element'
-  }
+    appendTo: '.some-other-element',
+  },
 });
 ```

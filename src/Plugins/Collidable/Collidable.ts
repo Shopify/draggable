@@ -1,7 +1,7 @@
-import {DragMoveEvent, DragStopEvent} from 'Draggable/DragEvent';
+import { DragMoveEvent, DragStopEvent } from 'Draggable/DragEvent';
 import AbstractPlugin from 'shared/AbstractPlugin';
-import {closest} from 'shared/utils';
-import {CollidableInEvent, CollidableOutEvent} from './CollidableEvent';
+import { closest } from 'shared/utils';
+import { CollidableInEvent, CollidableOutEvent } from './CollidableEvent';
 
 const onDragMove = Symbol('onDragMove');
 const onDragStop = Symbol('onDragStop');
@@ -25,14 +25,18 @@ export default class Collidable extends AbstractPlugin {
    * Attaches plugins event listeners
    */
   attach() {
-    this.draggable.on('drag:move', this[onDragMove]).on('drag:stop', this[onDragStop]);
+    this.draggable
+      .on('drag:move', this[onDragMove])
+      .on('drag:stop', this[onDragStop]);
   }
 
   /**
    * Detaches plugins event listeners
    */
   detach() {
-    this.draggable.off('drag:move', this[onDragMove]).off('drag:stop', this[onDragStop]);
+    this.draggable
+      .off('drag:move', this[onDragMove])
+      .off('drag:stop', this[onDragStop]);
   }
 
   /*** Returns current collidables based on `collidables` option */
@@ -41,7 +45,10 @@ export default class Collidable extends AbstractPlugin {
 
     if (typeof collidables === 'string') {
       return Array.prototype.slice.call(document.querySelectorAll(collidables));
-    } else if (collidables instanceof NodeList || collidables instanceof Array) {
+    } else if (
+      collidables instanceof NodeList ||
+      collidables instanceof Array
+    ) {
       return Array.prototype.slice.call(collidables);
     } else if (collidables instanceof HTMLElement) {
       return [collidables];
@@ -56,7 +63,9 @@ export default class Collidable extends AbstractPlugin {
   private [onDragMove] = (event: DragMoveEvent) => {
     const target = event.sensorEvent.target;
 
-    this.currentAnimationFrame = requestAnimationFrame(this[onRequestAnimationFrame](target));
+    this.currentAnimationFrame = requestAnimationFrame(
+      this[onRequestAnimationFrame](target)
+    );
 
     if (this.currentlyCollidingElement) {
       event.cancel();
@@ -73,9 +82,12 @@ export default class Collidable extends AbstractPlugin {
     });
 
     const enteringCollidable = Boolean(
-      this.currentlyCollidingElement && this.lastCollidingElement !== this.currentlyCollidingElement,
+      this.currentlyCollidingElement &&
+        this.lastCollidingElement !== this.currentlyCollidingElement
     );
-    const leavingCollidable = Boolean(!this.currentlyCollidingElement && this.lastCollidingElement);
+    const leavingCollidable = Boolean(
+      !this.currentlyCollidingElement && this.lastCollidingElement
+    );
 
     if (enteringCollidable) {
       if (this.lastCollidingElement) {
@@ -92,7 +104,8 @@ export default class Collidable extends AbstractPlugin {
 
   /*** Drag stop handler */
   private [onDragStop] = (event: DragStopEvent) => {
-    const lastCollidingElement = this.currentlyCollidingElement || this.lastCollidingElement;
+    const lastCollidingElement =
+      this.currentlyCollidingElement || this.lastCollidingElement;
     const collidableOutEvent = new CollidableOutEvent({
       dragEvent: event,
       collidingElement: lastCollidingElement,
@@ -108,7 +121,9 @@ export default class Collidable extends AbstractPlugin {
   private [onRequestAnimationFrame] = (target: HTMLElement) => {
     return () => {
       const collidables = this.getCollidables();
-      this.currentlyCollidingElement = closest(target, (element) => collidables.includes(element));
+      this.currentlyCollidingElement = closest(target, (element) =>
+        collidables.includes(element)
+      );
     };
   };
 }

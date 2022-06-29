@@ -60,9 +60,10 @@ export default class SortAnimation extends AbstractPlugin {
 
   getOptions = () => this.draggable.options.sortAnimation ?? {};
 
-  private [onSortableSort] = ({dragEvent}: SortableSortEvent) => {
-    const {sourceContainer} = dragEvent;
-    const elements = this.draggable.getDraggableElementsForContainer(sourceContainer);
+  private [onSortableSort] = ({ dragEvent }: SortableSortEvent) => {
+    const { sourceContainer } = dragEvent;
+    const elements =
+      this.draggable.getDraggableElementsForContainer(sourceContainer);
     this.lastElements = Array.from(elements).map((el: HTMLElement) => ({
       domEl: el,
       offsetTop: el.offsetTop,
@@ -70,7 +71,10 @@ export default class SortAnimation extends AbstractPlugin {
     }));
   };
 
-  private [onSortableSorted] = ({oldIndex, newIndex}: SortableSortedEvent) => {
+  private [onSortableSorted] = ({
+    oldIndex,
+    newIndex,
+  }: SortableSortedEvent) => {
     if (oldIndex === newIndex) return;
 
     const effectedElements = [];
@@ -90,7 +94,7 @@ export default class SortAnimation extends AbstractPlugin {
     for (let i = start; i <= end; i++) {
       const from = this.lastElements[i];
       const to = this.lastElements[i + num];
-      effectedElements.push({from, to});
+      effectedElements.push({ from, to });
     }
     cancelAnimationFrame(this.lastAnimationFrame);
 
@@ -112,8 +116,8 @@ export default class SortAnimation extends AbstractPlugin {
  * @private
  */
 function animate(
-  {from, to}: {from: SortAnimationElement; to: SortAnimationElement},
-  {duration, easingFunction}: SortAnimationOptions,
+  { from, to }: { from: SortAnimationElement; to: SortAnimationElement },
+  { duration, easingFunction }: SortAnimationOptions
 ) {
   const domEl = from.domEl;
   const x = from.offsetLeft - to.offsetLeft;
@@ -137,5 +141,8 @@ function animate(
 function resetElementOnTransitionEnd(event: Event) {
   (<HTMLElement>event.target).style.transition = '';
   (<HTMLElement>event.target).style.pointerEvents = '';
-  event.target.removeEventListener('transitionend', resetElementOnTransitionEnd);
+  event.target.removeEventListener(
+    'transitionend',
+    resetElementOnTransitionEnd
+  );
 }

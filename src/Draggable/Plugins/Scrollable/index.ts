@@ -1,6 +1,6 @@
-import {DragMoveEvent, DragStartEvent} from 'Draggable/DragEvent';
+import { DragMoveEvent, DragStartEvent } from 'Draggable/DragEvent';
 import AbstractPlugin from 'shared/AbstractPlugin';
-import {closest} from 'shared/utils';
+import { closest } from 'shared/utils';
 
 export const onDragStart = Symbol('onDragStart');
 export const onDragMove = Symbol('onDragMove');
@@ -27,7 +27,7 @@ export const defaultOptions = {
  */
 export default class Scrollable extends AbstractPlugin {
   options: ScrollableOptions;
-  currentMousePosition: {clientX: number; clientY: number} = null;
+  currentMousePosition: { clientX: number; clientY: number } = null;
   scrollAnimationFrame: number = null;
   scrollableElement: Element = null;
   findScrollableElementFrame: number = null;
@@ -39,7 +39,7 @@ export default class Scrollable extends AbstractPlugin {
    */
   constructor(draggable) {
     super(draggable);
-    this.options = {...defaultOptions, ...this.getOptions()};
+    this.options = { ...defaultOptions, ...this.getOptions() };
   }
 
   /*** Attaches plugins event listeners */
@@ -64,13 +64,17 @@ export default class Scrollable extends AbstractPlugin {
   /*** Returns closest scrollable elements by element */
   getScrollableElement(target: HTMLElement) {
     if (this.hasDefinedScrollableElements()) {
-      return closest(target, this.options.scrollableElements) || document.documentElement;
+      return (
+        closest(target, this.options.scrollableElements) ||
+        document.documentElement
+      );
     } else {
       return closestScrollableElement(target);
     }
   }
 
-  hasDefinedScrollableElements = () => Boolean(this.options.scrollableElements.length !== 0);
+  hasDefinedScrollableElements = () =>
+    Boolean(this.options.scrollableElements.length !== 0);
 
   /*** Drag start handler. Finds closest scrollable parent in separate frame */
   private [onDragStart] = (dragEvent: DragStartEvent) => {
@@ -82,17 +86,27 @@ export default class Scrollable extends AbstractPlugin {
   /*** Drag move handler. Remembers mouse position and initiates scrolling */
   private [onDragMove] = (dragEvent: DragMoveEvent) => {
     this.findScrollableElementFrame = requestAnimationFrame(() => {
-      this.scrollableElement = this.getScrollableElement(dragEvent.sensorEvent.target);
+      this.scrollableElement = this.getScrollableElement(
+        dragEvent.sensorEvent.target
+      );
     });
 
     if (!this.scrollableElement) return;
 
     const sensorEvent = dragEvent.sensorEvent;
-    const scrollOffset = {x: 0, y: 0};
+    const scrollOffset = { x: 0, y: 0 };
 
     if ('ontouchstart' in window) {
-      scrollOffset.y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      scrollOffset.x = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+      scrollOffset.y =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+      scrollOffset.x =
+        window.pageXOffset ||
+        document.documentElement.scrollLeft ||
+        document.body.scrollLeft ||
+        0;
     }
 
     this.currentMousePosition = {
@@ -120,7 +134,7 @@ export default class Scrollable extends AbstractPlugin {
 
     cancelAnimationFrame(this.scrollAnimationFrame);
 
-    const {speed, sensitivity} = this.options;
+    const { speed, sensitivity } = this.options;
 
     const rect = this.scrollableElement.getBoundingClientRect();
     const bottomCutOff = rect.bottom > window.innerHeight;
@@ -132,8 +146,12 @@ export default class Scrollable extends AbstractPlugin {
     const clientX = this.currentMousePosition.clientX;
     const clientY = this.currentMousePosition.clientY;
 
-    if (scrollableElement !== document.body && scrollableElement !== document.documentElement && !cutOff) {
-      const {offsetHeight, offsetWidth} = scrollableElement;
+    if (
+      scrollableElement !== document.body &&
+      scrollableElement !== document.documentElement &&
+      !cutOff
+    ) {
+      const { offsetHeight, offsetWidth } = scrollableElement;
 
       if (rect.top + offsetHeight - clientY < sensitivity) {
         scrollableElement.scrollTop += speed;
@@ -147,7 +165,7 @@ export default class Scrollable extends AbstractPlugin {
         scrollableElement.scrollLeft -= speed;
       }
     } else {
-      const {innerHeight, innerWidth} = window;
+      const { innerHeight, innerWidth } = window;
 
       if (clientY < sensitivity) {
         documentScrollingElement.scrollTop -= speed;
@@ -209,4 +227,5 @@ function closestScrollableElement(element: HTMLElement) {
 }
 
 /*** Returns element that scrolls document */
-const getDocumentScrollingElement = () => document.scrollingElement || document.documentElement;
+const getDocumentScrollingElement = () =>
+  document.scrollingElement || document.documentElement;

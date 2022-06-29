@@ -1,6 +1,10 @@
-import {closest} from 'shared/utils';
-import Sensor, {SensorOptions} from '../Sensor';
-import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
+import { closest } from 'shared/utils';
+import Sensor, { SensorOptions } from '../Sensor';
+import {
+  DragStartSensorEvent,
+  DragMoveSensorEvent,
+  DragStopSensorEvent,
+} from '../SensorEvent';
 
 const onMouseDown = Symbol('onMouseDown');
 const onMouseUp = Symbol('onMouseUp');
@@ -147,19 +151,24 @@ export default class DragSensor extends Sensor {
    */
   private [onMouseDown] = (event) => {
     // Firefox bug for inputs within draggables https://bugzilla.mozilla.org/show_bug.cgi?id=739071
-    if (event.target && (event.target.form || event.target.contenteditable)) return;
+    if (event.target && (event.target.form || event.target.contenteditable))
+      return;
 
     const target = event.target;
     this.currentContainer = <HTMLElement>closest(target, this.containers);
 
     if (!this.currentContainer) return;
-    if (this.options.handle && target && !closest(target, this.options.handle)) return;
+    if (this.options.handle && target && !closest(target, this.options.handle))
+      return;
 
     const originalSource = closest(target, this.options.draggable);
 
     if (!originalSource) return;
 
-    const nativeDraggableElement = closest(event.target, (element) => element.draggable);
+    const nativeDraggableElement = closest(
+      event.target,
+      (element) => element.draggable
+    );
 
     if (nativeDraggableElement) {
       nativeDraggableElement.draggable = false;

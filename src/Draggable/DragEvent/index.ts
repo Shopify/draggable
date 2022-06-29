@@ -1,7 +1,7 @@
 import { SensorEvent } from 'Draggable/Sensors/SensorEvent';
 import AbstractEvent from 'shared/AbstractEvent';
 
-interface DragEventData {
+interface DragEventData extends Record<string, unknown> {
   source: HTMLElement;
   originalSource: HTMLElement;
   mirror: HTMLElement;
@@ -17,6 +17,10 @@ interface DragEventData {
  */
 export class DragEvent extends AbstractEvent {
   declare data: DragEventData;
+
+  constructor(data?: DragEventData) {
+    super(data);
+  }
 
   get source() {
     return this.data.source;

@@ -6,33 +6,36 @@ so any draggable element that gets dragged over will be swapped with the source 
 ### Usage
 
 - ES6:
+
 ```js
 import { Swappable } from '@shopify/draggable';
 // Or
 // import Swappable from '@shopify/draggable/lib/swappable';
 
 const swappable = new Swappable(document.querySelectorAll('ul'), {
-  draggable: 'li'
+  draggable: 'li',
 });
 ```
 
 - Browser (All Bundle):
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
 <script>
-    const swappable = new Draggable.Swappable(document.querySelectorAll('ul'), {
-      draggable: 'li'
-    });
+  const swappable = new Draggable.Swappable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+  });
 </script>
 ```
 
 - Browser (Standalone):
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/swappable.js"></script>
 <script>
-    const swappable = new Swappable.default(document.querySelectorAll('ul'), {
-      draggable: 'li'
-    });
+  const swappable = new Swappable.default(document.querySelectorAll('ul'), {
+    draggable: 'li',
+  });
 </script>
 ```
 
@@ -72,7 +75,7 @@ This sample code will make list items draggable and allows you to swap them with
 import { Swappable } from '@shopify/draggable';
 
 const swappable = new Swappable(document.querySelectorAll('ul'), {
-  draggable: 'li'
+  draggable: 'li',
 });
 
 swappable.on('swappable:start', () => console.log('swappable:start'));

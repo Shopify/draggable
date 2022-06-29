@@ -2,12 +2,12 @@
 
 The base swappable event for all Swappable events that `Swappable` emits.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Interface**         | `SwappableEvent`                                           |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `swappable`                                                |
+|                   |                  |
+| ----------------- | ---------------- |
+| **Interface**     | `SwappableEvent` |
+| **Cancelable**    | false            |
+| **Cancel action** | -                |
+| **type**          | `swappable`      |
 
 ### API
 
@@ -18,25 +18,25 @@ Read-only property for the original drag event that triggered the swappable even
 
 `SwappableStartEvent` gets triggered by `Swappable` on drag start.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `SwappableEvent`                                           |
-| **Interface**         | `SwappableStartEvent`                                      |
-| **Cancelable**        | true                                                       |
-| **Cancel action**     | Prevents drag start                                        |
-| **type**              | `swappable:start`                                          |
+|                   |                       |
+| ----------------- | --------------------- |
+| **Specification** | `SwappableEvent`      |
+| **Interface**     | `SwappableStartEvent` |
+| **Cancelable**    | true                  |
+| **Cancel action** | Prevents drag start   |
+| **type**          | `swappable:start`     |
 
 ## SwappableSwapEvent
 
 `SwappableSwapEvent` gets triggered by `Swappable` before swapping with another draggable.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `SwappableEvent`                                           |
-| **Interface**         | `SwappableSwapEvent`                                       |
-| **Cancelable**        | true                                                       |
-| **Cancel action**     | Prevents swapping                                          |
-| **type**              | `swappable:swap`                                           |
+|                   |                      |
+| ----------------- | -------------------- |
+| **Specification** | `SwappableEvent`     |
+| **Interface**     | `SwappableSwapEvent` |
+| **Cancelable**    | true                 |
+| **Cancel action** | Prevents swapping    |
+| **type**          | `swappable:swap`     |
 
 ### API
 
@@ -50,13 +50,13 @@ Read-only property for the draggable container element that you are over.
 
 `SwappableSwappedEvent` gets triggered by `Swappable` when sorted with another draggable.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `SwappableEvent`                                           |
-| **Interface**         | `SwappableSwappedEvent`                                    |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `swappable:swapped`                                         |
+|                   |                         |
+| ----------------- | ----------------------- |
+| **Specification** | `SwappableEvent`        |
+| **Interface**     | `SwappableSwappedEvent` |
+| **Cancelable**    | false                   |
+| **Cancel action** | -                       |
+| **type**          | `swappable:swapped`     |
 
 ### API
 
@@ -67,10 +67,10 @@ Read-only property for the draggable element you swapped with.
 
 `SwappableStopEvent` gets triggered by `Swappable` on drag stop.
 
-| | |
-| --------------------- | ---------------------------------------------------------- |
-| **Specification**     | `SwappableEvent`                                           |
-| **Interface**         | `SwappableStopEvent`                                       |
-| **Cancelable**        | false                                                      |
-| **Cancel action**     | -                                                          |
-| **type**              | `swappable:stop`                                           |
+|                   |                      |
+| ----------------- | -------------------- |
+| **Specification** | `SwappableEvent`     |
+| **Interface**     | `SwappableStopEvent` |
+| **Cancelable**    | false                |
+| **Cancel action** | -                    |
+| **type**          | `swappable:stop`     |

@@ -3,33 +3,36 @@
 ### Usage
 
 - ES6:
+
 ```js
 import { Draggable } from '@shopify/draggable';
 // Or
 // import Draggable from '@shopify/draggable/lib/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
-  draggable: 'li'
+  draggable: 'li',
 });
 ```
 
 - Browser (All Bundle):
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
 <script>
-    const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
-      draggable: 'li'
-    });
+  const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+  });
 </script>
 ```
 
 - Browser (Standalone):
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.js"></script>
 <script>
-    const draggable = new Draggable.default(document.querySelectorAll('ul'), {
-      draggable: 'li'
-    });
+  const draggable = new Draggable.default(document.querySelectorAll('ul'), {
+    draggable: 'li',
+  });
 </script>
 ```
 
@@ -86,7 +89,7 @@ Returns draggable elements for given container, excluding potential mirror or or
 urce.
 **`draggable.cancel(): void`**  
 Cancel current dragging state immediately
-*NOTE*: Can't revert elements that were changed to the beginning state (e.g sorted elements)
+_NOTE_: Can't revert elements that were changed to the beginning state (e.g sorted elements)
 
 ### Options
 
@@ -139,19 +142,19 @@ Allow excluding default plugins and default sensors. Use with caution as it may 
 
 ### Events
 
-| Name                                       | Description                                               | Cancelable | Cancelable action   |
-| ------------------------------------------ | --------------------------------------------------------- | ---------- | ------------------- |
-| [`draggable:initialize`][draggableinit]    | Gets fired when draggable gets initialized                | false      | -                   |
-| [`draggable:destroy`][draggabledest]       | Gets fired when draggable gets destroyed                  | false      | -                   |
-| [`drag:start`][dragstart]                  | Gets fired when drag action begins                        | true       | Prevents drag start |
-| [`drag:move`][dragmove]                    | Gets fired when moving a draggable around                 | false      | -                   |
-| [`drag:over`][dragover]                    | Gets fired when dragging over other draggable             | false      | -                   |
-| [`drag:over:container`][dragovercontainer] | Gets fired when dragging over other draggable container   | false      | -                   |
-| [`drag:out`][dragout]                      | Gets fired when dragging out of other draggable           | false      | -                   |
-| [`drag:out:container`][dragoutcontainer]   | Gets fired when dragging out of other draggable container | false      | -                   |
-| [`drag:stop`][dragstop]                    | Gets fired when draggable has been released               | false      | -                   |
-| [`drag:stopped`][dragstopped]              | Gets fired when draggable finished (Added in: v1.0.0-beta.12)                       | false      | -                   |
-| [`drag:pressure`][dragpressure]            | Gets fired when using force touch on draggable element    | false      | -                   |
+| Name                                       | Description                                                   | Cancelable | Cancelable action   |
+| ------------------------------------------ | ------------------------------------------------------------- | ---------- | ------------------- |
+| [`draggable:initialize`][draggableinit]    | Gets fired when draggable gets initialized                    | false      | -                   |
+| [`draggable:destroy`][draggabledest]       | Gets fired when draggable gets destroyed                      | false      | -                   |
+| [`drag:start`][dragstart]                  | Gets fired when drag action begins                            | true       | Prevents drag start |
+| [`drag:move`][dragmove]                    | Gets fired when moving a draggable around                     | false      | -                   |
+| [`drag:over`][dragover]                    | Gets fired when dragging over other draggable                 | false      | -                   |
+| [`drag:over:container`][dragovercontainer] | Gets fired when dragging over other draggable container       | false      | -                   |
+| [`drag:out`][dragout]                      | Gets fired when dragging out of other draggable               | false      | -                   |
+| [`drag:out:container`][dragoutcontainer]   | Gets fired when dragging out of other draggable container     | false      | -                   |
+| [`drag:stop`][dragstop]                    | Gets fired when draggable has been released                   | false      | -                   |
+| [`drag:stopped`][dragstopped]              | Gets fired when draggable finished (Added in: v1.0.0-beta.12) | false      | -                   |
+| [`drag:pressure`][dragpressure]            | Gets fired when using force touch on draggable element        | false      | -                   |
 
 [draggableinit]: DraggableEvent#draggableinitializedevent
 [draggabledest]: DraggableEvent#draggabledestroyevent
@@ -167,8 +170,8 @@ Allow excluding default plugins and default sensors. Use with caution as it may 
 
 ### Classes
 
-| Name                 | Description                                                         | Default                            |
-| -------------------- | ------------------------------------------------------------------- | ---------------------------------- |
+| Name                 | Description                                                           | Default                            |
+| -------------------- | --------------------------------------------------------------------- | ---------------------------------- |
 | `body:dragging`      | Classes added on the document body while dragging                     | `draggable--is-dragging`           |
 | `container:dragging` | Classes added on the container where the draggable was picked up from | `draggable-container--is-dragging` |
 | `source:dragging`    | Classes added on the draggable element that has been picked up        | `draggable-source--is-dragging`    |
@@ -187,7 +190,7 @@ This sample code will make list items draggable:
 import { Draggable } from '@shopify/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
-  draggable: 'li'
+  draggable: 'li',
 });
 
 draggable.on('drag:start', () => console.log('drag:start'));
@@ -205,7 +208,7 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
   exclude: {
     plugins: [Draggable.Plugins.Focusable],
     sensors: [Draggable.Sensors.TouchSensor],
-  }
+  },
 });
 ```
 
@@ -223,6 +226,7 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 ```
 
 Cancel dragging on ESC key up:
+
 ```js
 import { Draggable } from '@shopify/draggable';
 

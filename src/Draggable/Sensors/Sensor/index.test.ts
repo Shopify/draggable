@@ -10,8 +10,10 @@ describe('Sensor', () => {
     });
 
     it('should initialize with containers and options', () => {
-      const expectedContainers = ['expectedContainer'] as unknown as HTMLElement[];
-      const expectedOptions = {delay: 2};
+      const expectedContainers = [
+        'expectedContainer',
+      ] as unknown as HTMLElement[];
+      const expectedOptions = { delay: 2 };
       const sensor = new Sensor(expectedContainers, expectedOptions);
 
       expect(sensor.containers).toEqual(expectedContainers);
@@ -30,7 +32,7 @@ describe('Sensor', () => {
       });
 
       it('number', () => {
-        const sensor = new Sensor(undefined, {delay: 42});
+        const sensor = new Sensor(undefined, { delay: 42 });
 
         expect(sensor.delay).toEqual({
           mouse: 42,
@@ -40,7 +42,9 @@ describe('Sensor', () => {
       });
 
       it('object', () => {
-        const sensor = new Sensor(undefined, {delay: {mouse: 42, drag: 142}});
+        const sensor = new Sensor(undefined, {
+          delay: { mouse: 42, drag: 142 },
+        });
 
         expect(sensor.delay).toEqual({
           mouse: 42,
@@ -111,7 +115,7 @@ describe('Sensor', () => {
         (event) => {
           eventDispatched = event;
         },
-        true,
+        true
       );
 
       const returnValue = sensor.trigger(element, expectedEvent);

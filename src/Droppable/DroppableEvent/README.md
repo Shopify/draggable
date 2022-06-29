@@ -75,7 +75,7 @@ Read-only property for the dropzone element you dragged away from
 | **Interface**     | `DroppableStopEvent` |
 | **Cancelable**    | false                |
 | **Cancel action** | -                    |
-| **type**          | `droppable:stop`    |
+| **type**          | `droppable:stop`     |
 
 ### API
 

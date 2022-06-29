@@ -74,7 +74,8 @@ export default class Announcement extends AbstractPlugin {
     const message = this.options[event.type];
 
     if (message && typeof message === 'string') this[announceMessage](message);
-    if (message && typeof message === 'function') this[announceMessage](message(event));
+    if (message && typeof message === 'function')
+      this[announceMessage](message(event));
   }
 
   /**
@@ -83,7 +84,7 @@ export default class Announcement extends AbstractPlugin {
    * @param {String} message
    */
   private [announceMessage](message: string) {
-    announce(message, {expire: this.options.expire});
+    announce(message, { expire: this.options.expire });
   }
 
   /*** Initialize hander */
@@ -107,7 +108,7 @@ export default class Announcement extends AbstractPlugin {
 
 const liveRegion: HTMLElement = createRegion();
 
-function announce(message: string, {expire}: AnnouncementOptions) {
+function announce(message: string, { expire }: AnnouncementOptions) {
   const element = document.createElement('div');
 
   element.textContent = message;

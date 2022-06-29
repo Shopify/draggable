@@ -8,33 +8,36 @@ Make sure to nest draggable elements as immediate children elements to their cor
 ### Usage
 
 - ES6:
+
 ```js
 import { Sortable } from '@shopify/draggable';
 // Or
 // import Sortable from '@shopify/draggable/lib/sortable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
-  draggable: 'li'
+  draggable: 'li',
 });
 ```
 
 - Browser (All Bundle):
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
 <script>
-    const sortable = new Draggable.Sortable(document.querySelectorAll('ul'), {
-      draggable: 'li'
-    });
+  const sortable = new Draggable.Sortable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+  });
 </script>
 ```
 
 - Browser (Standalone):
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/sortable.js"></script>
 <script>
-    const sortable = new Sortable.default(document.querySelectorAll('ul'), {
-      draggable: 'li'
-    });
+  const sortable = new Sortable.default(document.querySelectorAll('ul'), {
+    draggable: 'li',
+  });
 </script>
 ```
 
@@ -74,7 +77,7 @@ This sample code will make list items sortable:
 import { Sortable } from '@shopify/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
-  draggable: 'li'
+  draggable: 'li',
 });
 
 sortable.on('sortable:start', () => console.log('sortable:start'));

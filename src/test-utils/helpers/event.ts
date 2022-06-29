@@ -1,4 +1,4 @@
-import {withElementFromPoint} from './environment';
+import { withElementFromPoint } from './environment';
 
 export function triggerEvent(element, type, data = {}) {
   const event = new CustomEvent(type, {

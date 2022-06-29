@@ -1,6 +1,14 @@
-import {closest, distance as euclideanDistance, touchCoords} from 'shared/utils';
+import {
+  closest,
+  distance as euclideanDistance,
+  touchCoords,
+} from 'shared/utils';
 import Sensor from '../Sensor';
-import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
+import {
+  DragStartSensorEvent,
+  DragMoveSensorEvent,
+  DragStopSensorEvent,
+} from '../SensorEvent';
 
 const onTouchStart = Symbol('onTouchStart');
 const onTouchEnd = Symbol('onTouchEnd');
@@ -25,7 +33,7 @@ window.addEventListener(
     // Prevent scrolling
     event.preventDefault();
   },
-  {passive: false},
+  { passive: false }
 );
 
 /**
@@ -64,17 +72,22 @@ export default class TouchSensor extends Sensor {
     const container = closest(event.target, this.containers);
 
     if (!container) return;
-    if (this.options.handle && event.target && !closest(event.target, this.options.handle)) return;
+    if (
+      this.options.handle &&
+      event.target &&
+      !closest(event.target, this.options.handle)
+    )
+      return;
 
     const originalSource = closest(event.target, this.options.draggable);
 
     if (!originalSource) return;
 
-    const {distance = 0} = this.options;
-    const {delay} = this;
-    const {pageX, pageY} = touchCoords(event);
+    const { distance = 0 } = this.options;
+    const { delay } = this;
+    const { pageX, pageY } = touchCoords(event);
 
-    Object.assign(this, {pageX, pageY});
+    Object.assign(this, { pageX, pageY });
     this.onTouchStartAt = Date.now();
     this.startEvent = event;
     this.currentContainer = container;
@@ -90,7 +103,9 @@ export default class TouchSensor extends Sensor {
     }
 
     this.tapTimeout = window.setTimeout(() => {
-      this[onDistanceChange]({touches: [{pageX: this.pageX, pageY: this.pageY}]});
+      this[onDistanceChange]({
+        touches: [{ pageX: this.pageX, pageY: this.pageY }],
+      });
     }, delay.touch);
   };
 
@@ -122,12 +137,17 @@ export default class TouchSensor extends Sensor {
 
   /*** Touch move handler prior to drag start. */
   private [onDistanceChange] = (event: TouchEvent) => {
-    const {distance} = this.options;
-    const {startEvent, delay} = this;
+    const { distance } = this.options;
+    const { startEvent, delay } = this;
     const start = touchCoords(<TouchEvent>startEvent);
     const current = touchCoords(event);
     const timeElapsed = Date.now() - this.onTouchStartAt;
-    const distanceTravelled = euclideanDistance(start.pageX, start.pageY, current.pageX, current.pageY);
+    const distanceTravelled = euclideanDistance(
+      start.pageX,
+      start.pageY,
+      current.pageX,
+      current.pageY
+    );
 
     Object.assign(this, current);
 
@@ -145,8 +165,11 @@ export default class TouchSensor extends Sensor {
   /*** Mouse move handler while dragging */
   private [onTouchMove] = (event: TouchEvent) => {
     if (!this.dragging) return;
-    const {pageX, pageY} = touchCoords(event);
-    const target = document.elementFromPoint(pageX - window.scrollX, pageY - window.scrollY);
+    const { pageX, pageY } = touchCoords(event);
+    const target = document.elementFromPoint(
+      pageX - window.scrollX,
+      pageY - window.scrollY
+    );
 
     const dragMoveEvent = new DragMoveSensorEvent({
       clientX: pageX,
@@ -168,14 +191,18 @@ export default class TouchSensor extends Sensor {
     document.removeEventListener('touchcancel', this[onTouchEnd]);
     document.removeEventListener('touchmove', this[onDistanceChange]);
 
-    if (this.currentContainer) this.currentContainer.removeEventListener('contextmenu', onContextMenu);
+    if (this.currentContainer)
+      this.currentContainer.removeEventListener('contextmenu', onContextMenu);
 
     if (!this.dragging) return;
 
     document.removeEventListener('touchmove', this[onTouchMove]);
 
-    const {pageX, pageY} = touchCoords(event);
-    const target = document.elementFromPoint(pageX - window.scrollX, pageY - window.scrollY);
+    const { pageX, pageY } = touchCoords(event);
+    const target = document.elementFromPoint(
+      pageX - window.scrollX,
+      pageY - window.scrollY
+    );
 
     event.preventDefault();
 

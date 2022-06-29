@@ -70,7 +70,7 @@ const defaultOptions = {
 };
 
 interface DroppableOptions extends Omit<DraggableOptions, 'classes'> {
-  dropzone?: string | HTMLElement[] | HTMLElement | (() => HTMLElement);
+  dropzone?: string | HTMLElement[] | (() => HTMLElement);
   classes?: DraggableOptions['classes'] & {
     [key in keyof typeof defaultClasses]?: string | string[];
   };
@@ -81,7 +81,7 @@ interface DroppableOptions extends Omit<DraggableOptions, 'classes'> {
  * into dropzone element
  */
 export default class Droppable extends Draggable {
-  options: DroppableOptions;
+  declare options: DroppableOptions;
   dropzones: HTMLElement[] = null;
   lastDropzone: HTMLElement = null;
   initialDropzone: HTMLElement = null;
@@ -241,14 +241,13 @@ export default class Droppable extends Draggable {
   private [closestDropzone] = (target: HTMLElement) =>
     this.dropzones ? closest(target, this.dropzones) : null;
 
-  private [getDropzones] = () => {
+  private [getDropzones] = (): HTMLElement[] => {
     const dropzone = this.options.dropzone;
 
     if (typeof dropzone === 'string')
-      return document.querySelectorAll(dropzone);
-    else if (dropzone instanceof NodeList || dropzone instanceof Array)
-      return dropzone;
-    else if (typeof dropzone === 'function') return dropzone();
-    else return [];
+      return <HTMLElement[]>(<unknown>document.querySelectorAll(dropzone));
+    else if (dropzone instanceof Array) return dropzone;
+    else if (typeof dropzone === 'function') return [dropzone()];
+    else return [dropzone];
   };
 }

@@ -8,41 +8,44 @@ This plugin is not included by default, so make sure to import it before using.
 ### Usage
 
 - ES6:
+
 ```js
-import { Draggable, Plugins } from "@shopify/draggable";
+import { Draggable, Plugins } from '@shopify/draggable';
 // Or
 // import Draggable from '@shopify/draggable/lib/draggable';
 // import Collidable from '@shopify/draggable/lib/plugins/collidable';
 
-const draggable = new Draggable(document.querySelectorAll("ul"), {
-  draggable: "li",
-  collidables: ".other-list",
+const draggable = new Draggable(document.querySelectorAll('ul'), {
+  draggable: 'li',
+  collidables: '.other-list',
   plugins: [Plugins.Collidable], // Or [Collidable]
 });
 ```
 
 - Browser (All bundle):
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
 <script>
-    const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      collidables: '.other-list',
-      plugins: [Draggable.Plugins.Collidable]
-    });
+  const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    collidables: '.other-list',
+    plugins: [Draggable.Plugins.Collidable],
+  });
 </script>
 ```
 
 - Browser (Standalone):
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/plugins/collidable.js"></script>
 <script>
-    const draggable = new Draggable.default(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      collidables: '.other-list',
-      plugins: [Collidable.default]
-    });
+  const draggable = new Draggable.default(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    collidables: '.other-list',
+    plugins: [Collidable.default],
+  });
 </script>
 ```
 
@@ -69,7 +72,7 @@ import { Sortable, Plugins } from '@shopify/draggable';
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
   collidables: '.other-list',
-  plugins: [Plugins.Collidable]
+  plugins: [Plugins.Collidable],
 });
 
 sortable.on('collidable:in', () => console.log('collidable:in'));

@@ -1,7 +1,7 @@
-import {DragOverContainerEvent, DragOverEvent} from 'Draggable';
-import {MirrorCreatedEvent} from 'Draggable/Plugins/Mirror/MirrorEvent';
+import { DragOverContainerEvent, DragOverEvent } from 'Draggable';
+import { MirrorCreatedEvent } from 'Draggable/Plugins/Mirror/MirrorEvent';
 import AbstractPlugin from 'shared/AbstractPlugin';
-import {requestNextAnimationFrame} from 'shared/utils';
+import { requestNextAnimationFrame } from 'shared/utils';
 
 const onMirrorCreated = Symbol('onMirrorCreated');
 const onMirrorDestroy = Symbol('onMirrorDestroy');
@@ -64,7 +64,7 @@ export default class ResizeMirror extends AbstractPlugin {
 
   getOptions = () => this.draggable.options.resizeMirror ?? {};
 
-  private [onMirrorCreated] = ({mirror}: MirrorCreatedEvent) => {
+  private [onMirrorCreated] = ({ mirror }: MirrorCreatedEvent) => {
     this.mirror = mirror;
   };
 
@@ -72,24 +72,35 @@ export default class ResizeMirror extends AbstractPlugin {
     this.mirror = null;
   };
 
-  private [onDragOver] = (dragEvent: DragOverEvent | DragOverContainerEvent) => {
+  private [onDragOver] = (
+    dragEvent: DragOverEvent | DragOverContainerEvent
+  ) => {
     this[resize](dragEvent);
   };
 
-  private [resize] = ({overContainer, over}: DragOverEvent | DragOverContainerEvent) => {
+  private [resize] = ({
+    overContainer,
+    over,
+  }: DragOverEvent | DragOverContainerEvent) => {
     requestAnimationFrame(() => {
       if (!this.mirror.parentNode) return;
 
-      if (this.mirror.parentNode !== overContainer) overContainer.appendChild(this.mirror);
+      if (this.mirror.parentNode !== overContainer)
+        overContainer.appendChild(this.mirror);
 
-      const overElement = over || this.draggable.getDraggableElementsForContainer(overContainer)[0];
+      const overElement =
+        over ||
+        this.draggable.getDraggableElementsForContainer(overContainer)[0];
 
       if (!overElement) return;
 
       requestNextAnimationFrame(() => {
         const overRect = overElement.getBoundingClientRect();
 
-        if (this.lastHeight === overRect.height && this.lastWidth === overRect.width) {
+        if (
+          this.lastHeight === overRect.height &&
+          this.lastWidth === overRect.width
+        ) {
           return;
         }
 

@@ -4,7 +4,7 @@
  * @return {Touch} a touch object
  */
 const touchCoords = (event: TouchEvent = {} as TouchEvent): Touch => {
-  const {touches, changedTouches} = event;
+  const { touches, changedTouches } = event;
   return (touches && touches[0]) || (changedTouches && changedTouches[0]);
 };
 

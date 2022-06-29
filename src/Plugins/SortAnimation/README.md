@@ -13,8 +13,9 @@ This plugin is not included by default, so make sure to import it before using.
 ### Usage
 
 - ES6:
+
 ```js
-import { Sortable, Plugins } from "@shopify/draggable";
+import { Sortable, Plugins } from '@shopify/draggable';
 // Or
 // import Sortable from '@shopify/draggable/lib/sortable';
 // import SortAnimation from '@shopify/draggable/lib/plugins/sort-animation';
@@ -25,38 +26,40 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
     duration: 200,
     easingFunction: 'ease-in-out',
   },
-  plugins: [Plugins.SortAnimation] // Or [SortAnimation]
+  plugins: [Plugins.SortAnimation], // Or [SortAnimation]
 });
 ```
 
 - Browser (All plugins bundle):
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
 <script>
-    const sortable = new Draggable.Sortable(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      sortAnimation: {
-        duration: 200,
-        easingFunction: 'ease-in-out',
-      },
-      plugins: [Draggable.Plugins.SortAnimation]
-    });
+  const sortable = new Draggable.Sortable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    sortAnimation: {
+      duration: 200,
+      easingFunction: 'ease-in-out',
+    },
+    plugins: [Draggable.Plugins.SortAnimation],
+  });
 </script>
 ```
 
 - Browser (Standalone):
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/sortable.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/plugins/sort-animation.js"></script>
 <script>
-    const sortable = new Sortable.default(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      sortAnimation: {
-        duration: 200,
-        easingFunction: 'ease-in-out',
-      },
-      plugins: [SortAnimation.default]
-    });
+  const sortable = new Sortable.default(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    sortAnimation: {
+      duration: 200,
+      easingFunction: 'ease-in-out',
+    },
+    plugins: [SortAnimation.default],
+  });
 </script>
 ```
 
@@ -84,7 +87,7 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
     duration: 200,
     easingFunction: 'ease-in-out',
   },
-  plugins: [Plugins.SortAnimation]
+  plugins: [Plugins.SortAnimation],
 });
 ```
 

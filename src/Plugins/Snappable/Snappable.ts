@@ -1,7 +1,11 @@
-import {DragOutEvent, DragOverEvent, DragStartEvent} from 'Draggable/DragEvent';
-import {MirrorCreatedEvent} from 'Draggable/Plugins/Mirror/MirrorEvent';
+import {
+  DragOutEvent,
+  DragOverEvent,
+  DragStartEvent,
+} from 'Draggable/DragEvent';
+import { MirrorCreatedEvent } from 'Draggable/Plugins/Mirror/MirrorEvent';
 import AbstractPlugin from 'shared/AbstractPlugin';
-import {SnapInEvent, SnapOutEvent} from './SnappableEvent';
+import { SnapInEvent, SnapOutEvent } from './SnappableEvent';
 
 const onDragStart = Symbol('onDragStart');
 const onDragStop = Symbol('onDragStop');
@@ -76,12 +80,16 @@ export default class Snappable extends AbstractPlugin {
 
     if (this.mirror) this.mirror.style.display = 'none';
 
-    source.classList.remove(...this.draggable.getClassNamesFor('source:dragging'));
+    source.classList.remove(
+      ...this.draggable.getClassNamesFor('source:dragging')
+    );
     source.classList.add(...this.draggable.getClassNamesFor('source:placed'));
 
     // Need to cancel this in drag out
     setTimeout(() => {
-      source.classList.remove(...this.draggable.getClassNamesFor('source:placed'));
+      source.classList.remove(
+        ...this.draggable.getClassNamesFor('source:placed')
+      );
     }, this.draggable.options.placedTimeout);
   };
 
@@ -103,7 +111,7 @@ export default class Snappable extends AbstractPlugin {
     source.classList.add(...this.draggable.getClassNamesFor('source:dragging'));
   };
 
-  private [onMirrorCreated] = ({mirror}: MirrorCreatedEvent) => {
+  private [onMirrorCreated] = ({ mirror }: MirrorCreatedEvent) => {
     this.mirror = mirror;
   };
 

@@ -1,8 +1,7 @@
-import AbstractEvent from 'shared/AbstractEvent';
-import AbstractPlugin from 'shared/AbstractPlugin';
-
 import * as Sensors from './Draggable/Sensors';
 import * as Plugins from './Plugins';
+import AbstractEvent from './shared/AbstractEvent';
+import AbstractPlugin from './shared/AbstractPlugin';
 
 export { AbstractEvent as BaseEvent, AbstractPlugin as BasePlugin };
 

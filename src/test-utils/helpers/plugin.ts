@@ -1,4 +1,4 @@
-import AbstractPlugin from 'shared/AbstractPlugin';
+import AbstractPlugin from '../../shared/AbstractPlugin';
 
 export class TestPlugin extends AbstractPlugin {
   attachFunction? = jest.fn();

@@ -1,5 +1,5 @@
-import AbstractPlugin from 'shared/AbstractPlugin';
-import { SortableSortedEvent, SortableSortEvent } from 'Sortable';
+import AbstractPlugin from '../../shared/AbstractPlugin';
+import { SortableSortedEvent, SortableSortEvent } from '../../Sortable';
 
 const onSortableSorted = Symbol('onSortableSorted');
 const onSortableSort = Symbol('onSortableSort');
@@ -80,7 +80,7 @@ export default class SortAnimation extends AbstractPlugin {
     const { sourceContainer } = dragEvent;
     const elements =
       this.draggable.getDraggableElementsForContainer(sourceContainer);
-    this.lastElements = Array.from(elements).map((el: HTMLElement) => ({
+    this.lastElements = [...elements].map((el: HTMLElement) => ({
       domEl: el,
       offsetTop: el.offsetTop,
       offsetLeft: el.offsetLeft,

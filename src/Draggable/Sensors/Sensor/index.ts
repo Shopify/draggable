@@ -1,4 +1,4 @@
-import { SensorEvent } from 'Draggable/Sensors/SensorEvent';
+import { SensorEvent } from '../../../Draggable/Sensors/SensorEvent';
 
 const defaultDelay: SensorDelayOptions = {
   mouse: 0,

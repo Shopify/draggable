@@ -1,5 +1,5 @@
-import { DragEvent, DragOutEvent, DragOverEvent } from 'Draggable';
-import AbstractEvent from 'shared/AbstractEvent';
+import { DragEvent, DragOutEvent, DragOverEvent } from '../../Draggable';
+import AbstractEvent from '../../shared/AbstractEvent';
 
 export type SortableEventData = {
   dragEvent?: DragEvent;

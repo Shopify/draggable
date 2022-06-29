@@ -1,4 +1,4 @@
-import { createSandbox } from '../test-utils/helpers';
+import { createSandbox } from '../../../test-utils/helpers';
 import closest from '.';
 
 const sampleMarkup = `

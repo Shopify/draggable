@@ -2,8 +2,7 @@ import {
   closest,
   distance as euclideanDistance,
   touchCoords,
-} from 'shared/utils';
-
+} from '../../../shared/utils';
 import Sensor from '../Sensor';
 import {
   DragStartSensorEvent,
@@ -99,14 +98,14 @@ export default class TouchSensor extends Sensor {
 
   private [startDrag] = () => {
     const startEvent = this.startEvent;
-    const container = this.currentContainer;
+    const container = <HTMLElement>this.currentContainer;
+    const originalSource = <HTMLElement>this.originalSource;
     const touch = touchCoords(<TouchEvent>startEvent);
-    const originalSource = this.originalSource;
 
     const dragStartEvent = new DragStartSensorEvent({
       clientX: touch.pageX,
       clientY: touch.pageY,
-      target: startEvent.target,
+      target: <HTMLElement>startEvent.target,
       container,
       originalSource,
       originalEvent: startEvent,
@@ -151,23 +150,22 @@ export default class TouchSensor extends Sensor {
   private [onTouchMove] = (event: TouchEvent) => {
     if (!this.dragging) return;
     const { pageX, pageY } = touchCoords(event);
-    const target = document.elementFromPoint(
-      pageX - window.scrollX,
-      pageY - window.scrollY
+    const target = <HTMLElement>(
+      document.elementFromPoint(pageX - window.scrollX, pageY - window.scrollY)
     );
 
     const dragMoveEvent = new DragMoveSensorEvent({
       clientX: pageX,
       clientY: pageY,
       target,
-      container: this.currentContainer,
+      container: <HTMLElement>this.currentContainer,
       originalEvent: event,
     });
 
     this.trigger(this.currentContainer, dragMoveEvent);
   };
 
-  private [onTouchEnd](event: TouchEvent) {
+  private [onTouchEnd] = (event: TouchEvent) => {
     clearTimeout(this.tapTimeout);
     preventScrolling = false;
 
@@ -183,9 +181,8 @@ export default class TouchSensor extends Sensor {
     document.removeEventListener('touchmove', this[onTouchMove]);
 
     const { pageX, pageY } = touchCoords(event);
-    const target = document.elementFromPoint(
-      pageX - window.scrollX,
-      pageY - window.scrollY
+    const target = <HTMLElement>(
+      document.elementFromPoint(pageX - window.scrollX, pageY - window.scrollY)
     );
 
     event.preventDefault();
@@ -194,7 +191,7 @@ export default class TouchSensor extends Sensor {
       clientX: pageX,
       clientY: pageY,
       target,
-      container: this.currentContainer,
+      container: <HTMLElement>this.currentContainer,
       originalEvent: event,
     });
 
@@ -203,5 +200,5 @@ export default class TouchSensor extends Sensor {
     this.currentContainer = null;
     this.dragging = false;
     this.startEvent = null;
-  }
+  };
 }

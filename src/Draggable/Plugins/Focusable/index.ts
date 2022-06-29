@@ -1,4 +1,4 @@
-import AbstractPlugin from 'shared/AbstractPlugin';
+import AbstractPlugin from '../../../shared/AbstractPlugin';
 
 const onInitialize = Symbol('onInitialize');
 const onDestroy = Symbol('onDestroy');
@@ -7,10 +7,6 @@ const defaultOptions = {};
 
 export type FocusableOptions = Record<string, unknown>;
 
-/**
- * Keeps track of all the elements that are missing tabindex attributes
- * so they can be reset when draggable gets destroyed
- */
 const elementsWithMissingTabIndex: HTMLElement[] = [];
 
 function decorateElement(element: HTMLElement) {
@@ -44,18 +40,12 @@ export default class Focusable extends AbstractPlugin {
     };
   }
 
-  /**
-   * Attaches listeners to draggable
-   */
   attach() {
     this.draggable
       .on('draggable:initialize', this[onInitialize])
       .on('draggable:destroy', this[onDestroy]);
   }
 
-  /**
-   * Detaches listeners from draggable
-   */
   detach() {
     this.draggable
       .off('draggable:initialize', this[onInitialize])
@@ -65,20 +55,13 @@ export default class Focusable extends AbstractPlugin {
     this[onDestroy]();
   }
 
-  /**
-   * Returns options passed through draggable
-   */
   getOptions = () => this.draggable.options.focusable ?? {};
 
-  /**
-   * Returns draggable containers and elements
-   */
   getElements = () => [
     ...this.draggable.containers,
     ...this.draggable.getDraggableElements(),
   ];
 
-  /*** Intialize handler */
   private [onInitialize] = () => {
     // Can wait until the next best frame is available
     requestAnimationFrame(() => {
@@ -86,7 +69,6 @@ export default class Focusable extends AbstractPlugin {
     });
   };
 
-  /*** Destroy handler */
   private [onDestroy] = () => {
     // Can wait until the next best frame is available
     requestAnimationFrame(() => {

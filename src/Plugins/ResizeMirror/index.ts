@@ -1,7 +1,10 @@
-import { DragOverContainerEvent, DragOverEvent } from 'Draggable';
-import { MirrorCreatedEvent } from 'Draggable/Plugins/Mirror/MirrorEvent';
-import AbstractPlugin from 'shared/AbstractPlugin';
-import { requestNextAnimationFrame } from 'shared/utils';
+import {
+  DragOverContainerEvent,
+  DragOverEvent,
+  MirrorCreatedEvent,
+} from '../../Draggable';
+import AbstractPlugin from '../../shared/AbstractPlugin';
+import { requestNextAnimationFrame } from '../../shared/utils';
 
 const onMirrorCreated = Symbol('onMirrorCreated');
 const onMirrorDestroy = Symbol('onMirrorDestroy');

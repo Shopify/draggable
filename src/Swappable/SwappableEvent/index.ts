@@ -1,5 +1,5 @@
-import { DragEvent } from 'Draggable';
-import AbstractEvent from 'shared/AbstractEvent';
+import { DragEvent } from '../../Draggable';
+import AbstractEvent from '../../shared/AbstractEvent';
 
 export type SwappableEventData = {
   dragEvent?: DragEvent;

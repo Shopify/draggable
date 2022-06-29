@@ -115,11 +115,6 @@ export interface DraggableOptions {
   };
 }
 
-/**
- * This is the core draggable library that does the heavy lifting
- * @class Draggable
- * @module Draggable
- */
 export default class Draggable {
   containers: HTMLElement[];
   options: DraggableOptions;
@@ -209,10 +204,6 @@ export default class Draggable {
     this.trigger(draggableInitializedEvent);
   }
 
-  /**
-   * Destroys Draggable instance. This removes all internal event listeners and
-   * deactivates sensors and plugins
-   */
   destroy() {
     document.removeEventListener('drag:start', this[onDragStart], true);
     document.removeEventListener('drag:move', this[onDragMove], true);
@@ -229,9 +220,6 @@ export default class Draggable {
     this.removeSensor(...this.sensors.map((sensor) => sensor.constructor));
   }
 
-  /**
-   * Adds plugin to this draggable instance. This will end up calling the attach method of the plugin
-   */
   addPlugin(...plugins: typeof AbstractPlugin[]) {
     const activePlugins = plugins.map((plugin) => new plugin(this));
 
@@ -241,10 +229,6 @@ export default class Draggable {
     return this;
   }
 
-  /**
-   * Removes plugins that are already attached to this draggable instance. This will end up calling
-   * the detach method of the plugin
-   */
   removePlugin(...plugins: typeof AbstractPlugin['constructor'][]) {
     const removedPlugins = this.plugins.filter((plugin) =>
       plugins.includes(plugin.constructor)
@@ -258,9 +242,6 @@ export default class Draggable {
     return this;
   }
 
-  /**
-   * Adds sensors to this draggable instance. This will end up calling the attach method of the sensor
-   */
   addSensor(...sensors: typeof Sensor[]) {
     const activeSensors = sensors.map(
       (sensor) => new sensor(this.containers, this.options as SensorOptions)
@@ -272,10 +253,6 @@ export default class Draggable {
     return this;
   }
 
-  /**
-   * Removes sensors that are already attached to this draggable instance. This will end up calling
-   * the detach method of the sensor
-   */
   removeSensor(...sensors: typeof Sensor['constructor'][]) {
     const removedSensors = this.sensors.filter((sensor) =>
       sensors.includes(sensor.constructor)
@@ -289,18 +266,12 @@ export default class Draggable {
     return this;
   }
 
-  /**
-   * Adds container to this draggable instance
-   */
   addContainer(...containers: HTMLElement[]) {
     this.containers = [...this.containers, ...containers];
     this.sensors.forEach((sensor) => sensor.addContainer(...containers));
     return this;
   }
 
-  /**
-   * Removes container from this draggable instance
-   */
   removeContainer(...containers) {
     this.containers = this.containers.filter(
       (container) => !containers.includes(container)
@@ -309,38 +280,23 @@ export default class Draggable {
     return this;
   }
 
-  /**
-   * Adds listener for draggable events
-   */
   on(type, ...callbacks) {
     this.emitter.on(type, ...callbacks);
     return this;
   }
 
-  /**
-   * Removes listener from draggable
-   */
   off(type, callback) {
     this.emitter.off(type, callback);
     return this;
   }
 
-  /**
-   * Triggers draggable event
-   */
   trigger(event: AbstractEvent) {
     this.emitter.trigger(event);
     return this;
   }
 
-  /**
-   * Returns class name for class identifier
-   */
   getClassNameFor = (name: string) => this.getClassNamesFor(name)[0];
 
-  /**
-   * Returns class names for class identifier
-   */
   getClassNamesFor = (name: string): string[] => {
     const classNames = this.options.classes[name];
 
@@ -351,9 +307,6 @@ export default class Draggable {
 
   isDragging = () => Boolean(this.dragging);
 
-  /**
-   * Returns all draggable elements
-   */
   getDraggableElements = (): HTMLElement[] =>
     this.containers.reduce(
       (current, container) => [
@@ -363,12 +316,9 @@ export default class Draggable {
       []
     );
 
-  /**
-   * Returns draggable elements for a given container, excluding the mirror and
-   */
   getDraggableElementsForContainer = (container: Element) => {
-    const allDraggableElements = container.querySelectorAll(
-      this.options.draggable
+    const allDraggableElements = <HTMLElement[]>(
+      (<unknown>container.querySelectorAll(this.options.draggable))
     );
 
     return [...allDraggableElements].filter((childElement) => {
@@ -378,9 +328,6 @@ export default class Draggable {
     });
   };
 
-  /**
-   * Cancel dragging immediately
-   */
   cancel() {
     this[dragStop]();
   }

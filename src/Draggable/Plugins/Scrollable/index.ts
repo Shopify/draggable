@@ -1,6 +1,6 @@
-import { DragMoveEvent, DragStartEvent } from 'Draggable/DragEvent';
-import AbstractPlugin from 'shared/AbstractPlugin';
-import { closest } from 'shared/utils';
+import AbstractPlugin from '../../../shared/AbstractPlugin';
+import { closest } from '../../../shared/utils';
+import { DragMoveEvent, DragStartEvent } from '../../DragEvent';
 
 export const onDragStart = Symbol('onDragStart');
 export const onDragMove = Symbol('onDragMove');

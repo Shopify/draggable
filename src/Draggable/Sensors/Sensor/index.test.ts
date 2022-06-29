@@ -1,4 +1,5 @@
 import Sensor from '.';
+import { SensorEvent } from '../SensorEvent';
 
 describe('Sensor', () => {
   describe('#constructor', () => {
@@ -103,10 +104,10 @@ describe('Sensor', () => {
     it('should dispatch event on element', () => {
       const sensor = new Sensor();
       const element = document.createElement('div');
-      const expectedEvent = {
+      const expectedEvent = new SensorEvent({
         type: 'my:event',
         value: 'some value',
-      };
+      });
 
       let eventDispatched;
 

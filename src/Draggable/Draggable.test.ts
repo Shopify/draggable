@@ -7,7 +7,7 @@ import {
   releaseMouse,
   waitForDragDelay,
   waitForRequestAnimationFrame,
-} from 'test-utils/helpers';
+} from '../test-utils/helpers';
 import Draggable, { defaultOptions } from './Draggable';
 import {
   DragStartEvent,
@@ -18,9 +18,11 @@ import {
 import {
   DraggableInitializedEvent,
   DraggableDestroyEvent,
+  DraggableEvent,
 } from './DraggableEvent';
 import { Focusable, Mirror, Scrollable, Announcement } from './Plugins';
 import { MouseSensor, TouchSensor } from './Sensors';
+import AbstractEvent from 'shared/AbstractEvent';
 
 const sampleMarkup = `
   <ul class="Container">
@@ -175,7 +177,9 @@ describe('Draggable', () => {
 
       expect(spy.mock.calls[0][0]).toBeInstanceOf(DraggableInitializedEvent);
 
-      expect(spy.mock.calls[0][0].draggable).toBe(newInstance);
+      expect((<DraggableEvent>spy.mock.calls[0][0]).draggable).toBe(
+        newInstance
+      );
 
       spy.mockReset();
       spy.mockRestore();
@@ -314,7 +318,7 @@ describe('Draggable', () => {
 
       newInstance.on('my:event', handler);
 
-      newInstance.trigger(expectedEvent);
+      newInstance.trigger(<AbstractEvent>(<unknown>expectedEvent));
 
       expect(handler.mock.calls).toHaveLength(1);
 

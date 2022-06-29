@@ -1,24 +1,13 @@
-import Draggable from 'Draggable/Draggable';
-import AbstractEvent from 'shared/AbstractEvent';
+import Draggable from '..';
+import AbstractEvent from '../../shared/AbstractEvent';
 
-/**
- * Base draggable event
- * @class DraggableEvent
- * @module DraggableEvent
- * @extends AbstractEvent
- */
 export class DraggableEvent extends AbstractEvent {
   static type = 'draggable';
   declare data: {
     draggable: Draggable;
     source: HTMLElement;
   };
-  /**
-   * Draggable instance
-   * @property draggable
-   * @type {Draggable}
-   * @readonly
-   */
+
   get draggable() {
     return this.data.draggable;
   }
@@ -31,12 +20,6 @@ export class DraggableEvent extends AbstractEvent {
   }
 }
 
-/**
- * Draggable initialized event
- * @class DraggableInitializedEvent
- * @module DraggableInitializedEvent
- * @extends DraggableEvent
- */
 export class DraggableInitializedEvent extends DraggableEvent {
   static type = 'draggable:initialize';
 
@@ -48,12 +31,6 @@ export class DraggableInitializedEvent extends DraggableEvent {
   }
 }
 
-/**
- * Draggable destory event
- * @class DraggableInitializedEvent
- * @module DraggableDestroyEvent
- * @extends DraggableDestroyEvent
- */
 export class DraggableDestroyEvent extends DraggableEvent {
   static type = 'draggable:destroy';
 

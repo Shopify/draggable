@@ -8,7 +8,7 @@ import {
   waitForPromisesToResolve,
   DRAG_DELAY,
   drag,
-} from 'test-utils/helpers';
+} from '../../test-utils/helpers';
 import { Draggable } from '../..';
 import ResizeMirror from '.';
 
@@ -70,7 +70,7 @@ describe('ResizeMirror', () => {
     waitForDragDelay();
     await waitForPromisesToResolve();
 
-    const mirror = document.querySelector('.draggable-mirror');
+    const mirror = <HTMLElement>document.querySelector('.draggable-mirror');
 
     expect(mirror.style).toMatchObject({
       width: `${smallerDraggableDimensions.width}px`,

@@ -5,7 +5,7 @@ import {
   releaseMouse,
   waitForDragDelay,
   DRAG_DELAY,
-} from 'test-utils/helpers';
+} from '../test-utils/helpers';
 
 import Sortable from '.';
 

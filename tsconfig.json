@@ -1,14 +1,15 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "target": "es6",
-    "module": "es6",
+    "target": "ES6",
+    "module": "ES6",
     "baseUrl": "./src",
     "moduleResolution": "node",
     "skipLibCheck": true,
+    "declaration": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "types": ["jest", "node", "@types/jest"]
   },
-  "exclude": ["**/node_modules", "./src/**/*.test.ts"]
+  "include": ["src/**/*", "test/**/*"],
+  "exclude": ["node_modules", "vite.config.ts"]
 }

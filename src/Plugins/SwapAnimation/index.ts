@@ -1,5 +1,5 @@
-import AbstractPlugin from 'shared/AbstractPlugin';
-import { SortableSortedEvent } from 'Sortable';
+import AbstractPlugin from '../../shared/AbstractPlugin';
+import { SortableSortedEvent } from '../../Sortable';
 
 const onSortableSorted = Symbol('onSortableSorted');
 

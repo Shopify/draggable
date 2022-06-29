@@ -1,4 +1,4 @@
-import AbstractEvent from 'shared/AbstractEvent';
+import AbstractEvent from '../../../shared/AbstractEvent';
 
 export type SensorEventData = {
   originalEvent?: Event;
@@ -7,11 +7,17 @@ export type SensorEventData = {
   target?: HTMLElement;
   container?: HTMLElement;
   originalSource?: HTMLElement;
+  type?: string;
+  value?: unknown;
   pressure?: number;
 };
 
 export class SensorEvent extends AbstractEvent {
   declare data: SensorEventData;
+
+  constructor(data?: SensorEventData) {
+    super(data);
+  }
 
   get originalEvent() {
     return this.data.originalEvent;
@@ -41,7 +47,7 @@ export class SensorEvent extends AbstractEvent {
     return this.data.pressure;
   }
 
-  clone(data) {
+  clone(data: typeof this.data) {
     return new SensorEvent({
       ...this.data,
       ...data,
@@ -50,7 +56,7 @@ export class SensorEvent extends AbstractEvent {
 }
 
 export class DragStartSensorEvent extends SensorEvent {
-  clone(data) {
+  clone(data: typeof this.data) {
     return new DragStartSensorEvent({
       ...this.data,
       ...data,
@@ -61,7 +67,7 @@ export class DragStartSensorEvent extends SensorEvent {
 }
 
 export class DragMoveSensorEvent extends SensorEvent {
-  clone(data) {
+  clone(data: typeof this.data) {
     return new DragMoveSensorEvent({
       ...this.data,
       ...data,
@@ -72,7 +78,7 @@ export class DragMoveSensorEvent extends SensorEvent {
 }
 
 export class DragStopSensorEvent extends SensorEvent {
-  clone(data) {
+  clone(data: typeof this.data) {
     return new DragStopSensorEvent({
       ...this.data,
       ...data,
@@ -83,7 +89,7 @@ export class DragStopSensorEvent extends SensorEvent {
 }
 
 export class DragPressureSensorEvent extends SensorEvent {
-  clone(data) {
+  clone(data: typeof this.data) {
     return new DragPressureSensorEvent({
       ...this.data,
       ...data,

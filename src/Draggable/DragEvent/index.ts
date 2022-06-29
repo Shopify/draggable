@@ -1,5 +1,5 @@
-import { SensorEvent } from 'Draggable/Sensors/SensorEvent';
-import AbstractEvent from 'shared/AbstractEvent';
+import AbstractEvent from '../../shared/AbstractEvent';
+import { SensorEvent } from '../Sensors/SensorEvent';
 
 type DragEventData = {
   overContainer?: HTMLElement;
@@ -10,6 +10,7 @@ type DragEventData = {
   sensorEvent?: SensorEvent;
   originalSource?: HTMLElement;
   pressure?: number;
+  draggable?: string;
   detail?: SensorEvent;
 };
 

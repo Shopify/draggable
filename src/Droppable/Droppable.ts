@@ -1,11 +1,10 @@
-import { DraggableOptions } from 'Draggable/Draggable';
-import { closest } from 'shared/utils';
-
 import Draggable, {
   DragMoveEvent,
   DragStartEvent,
   DragStopEvent,
+  DraggableOptions,
 } from '../Draggable';
+import { closest } from '../shared/utils';
 import {
   DroppableStartEvent,
   DroppableDroppedEvent,

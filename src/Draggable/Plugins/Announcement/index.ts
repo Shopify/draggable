@@ -1,6 +1,6 @@
-import Draggable from 'Draggable';
-import AbstractEvent from 'shared/AbstractEvent';
-import AbstractPlugin from 'shared/AbstractPlugin';
+import Draggable from '../..';
+import AbstractEvent from '../../../shared/AbstractEvent';
+import AbstractPlugin from '../../../shared/AbstractPlugin';
 
 const onInitialize = Symbol('onInitialize');
 const onDestroy = Symbol('onDestroy');

@@ -1,10 +1,4 @@
-import AbstractEvent from 'shared/AbstractEvent';
-
-/**
- * The Emitter is a simple emitter class that provides you with `on()`, `off()` and `trigger()` methods
- * @class Emitter
- * @module Emitter
- */
+import AbstractEvent from '../../shared/AbstractEvent';
 
 type EmitterEventCallback = (event?: AbstractEvent) => void;
 
@@ -15,11 +9,6 @@ export default class Emitter {
     this.callbacks = {};
   }
 
-  /**
-   * Registers callbacks by event name
-   * @param {String} type
-   * @param {...Function} callbacks
-   */
   on(type: string, ...callbacks: Array<EmitterEventCallback>) {
     if (!this.callbacks[type]) {
       this.callbacks[type] = [];
@@ -41,18 +30,16 @@ export default class Emitter {
     return this;
   }
 
-  /**
-   * Triggers event callbacks by event object
-   */
   trigger(event: AbstractEvent) {
     if (!this.callbacks[event.type]) return null;
 
     const callbacks = [...this.callbacks[event.type]];
     const caughtErrors = [];
 
+    console.log(callbacks);
+
     for (let i = callbacks.length - 1; i >= 0; i--) {
       const callback = callbacks[i];
-
       try {
         callback(event);
       } catch (error) {
@@ -66,7 +53,6 @@ export default class Emitter {
         `Draggable caught errors while triggering '${event.type}'`,
         caughtErrors
       );
-      /* eslint-disable no-console */
     }
 
     return this;

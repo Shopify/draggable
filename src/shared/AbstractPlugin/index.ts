@@ -1,4 +1,4 @@
-import Draggable from 'Draggable';
+import Draggable from '../../Draggable';
 
 export default class AbstractPlugin {
   draggable: Draggable;

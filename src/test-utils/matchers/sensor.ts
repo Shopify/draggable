@@ -15,7 +15,7 @@ export function toHaveTriggeredSensorEvent(
     pass,
     message: () => {
       const expectation = pass ? 'not to have been' : 'to have been';
-      const defaultMessage = `Expected sensor event '${expectedEventName}' ${expectation} to be triggered`;
+      const defaultMessage = `Expected sensor event '${expectedEventName}' ${expectation} triggered`;
 
       return expectedCount
         ? `${defaultMessage} ${expectedCount} time(s)`

@@ -1,7 +1,7 @@
 import {
   createSandbox,
   waitForRequestAnimationFrame,
-} from 'test-utils/helpers';
+} from '../../../test-utils/helpers';
 import Draggable from '../..';
 import Focusable from '.';
 

@@ -6,7 +6,7 @@ import {
   clickMouse,
   moveMouse,
   releaseMouse,
-} from 'test-utils/helpers';
+} from '../../../test-utils/helpers';
 import MouseSensor from '.';
 
 const sampleMarkup = `

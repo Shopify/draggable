@@ -1,6 +1,4 @@
-import { DraggableOptions } from 'Draggable/Draggable';
-
-import Draggable from '../Draggable';
+import Draggable, { DraggableOptions } from '../Draggable';
 import {
   SwappableStartEvent,
   SwappableSwapEvent,

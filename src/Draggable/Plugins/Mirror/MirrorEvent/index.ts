@@ -1,13 +1,13 @@
-import { SensorEvent } from 'Draggable/Sensors';
-import AbstractEvent from 'shared/AbstractEvent';
+import AbstractEvent from '../../../../shared/AbstractEvent';
+import { SensorEvent } from '../../../Sensors';
 
 export type MirrorEventData = {
   dragEvent?: DragEvent;
   sensorEvent?: SensorEvent;
   originalEvent?: Event;
-  source?: HTMLElement;
   target?: HTMLElement;
   container?: HTMLElement;
+  source?: HTMLElement;
   sourceContainer?: HTMLElement;
   originalSource?: HTMLElement;
   pressure?: number;

@@ -1,10 +1,9 @@
-import { DraggableOptions } from 'Draggable/Draggable';
-
 import Draggable, {
   DragOverContainerEvent,
   DragOverEvent,
   DragStartEvent,
   DragStopEvent,
+  DraggableOptions,
 } from '../Draggable';
 import {
   SortableStartEvent,
@@ -165,7 +164,7 @@ export default class Sortable extends Draggable {
       (<unknown>container.querySelectorAll(this.options.draggable))
     );
 
-    return allSortableElements.filter(
+    return [...allSortableElements].filter(
       (childElement) =>
         childElement !== this.originalSource &&
         childElement !== this.mirror &&

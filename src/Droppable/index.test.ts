@@ -5,7 +5,7 @@ import {
   releaseMouse,
   waitForDragDelay,
   DRAG_DELAY,
-} from 'test-utils/helpers';
+} from '../test-utils/helpers';
 
 import Droppable from './Droppable';
 import {
@@ -80,7 +80,9 @@ describe('Droppable', () => {
 
       move();
 
-      expect(eventHandler).toHaveBeenCalledWithEvent(DroppableStartEvent);
+      expect(eventHandler).toHaveBeenCalledWithEvent(
+        <Event>(<unknown>DroppableStartEvent)
+      );
 
       expect(eventHandler).toHaveBeenCalledWithEventProperties({
         dragEvent: originalDragEvents[0],
@@ -96,7 +98,9 @@ describe('Droppable', () => {
 
       move();
 
-      expect(eventHandler).toHaveBeenCalledWithEvent(DroppableDroppedEvent);
+      expect(eventHandler).toHaveBeenCalledWithEvent(
+        <Event>(<unknown>DroppableDroppedEvent)
+      );
 
       expect(eventHandler).toHaveBeenCalledWithEventProperties({
         dragEvent: originalDragEvents[0],
@@ -115,7 +119,9 @@ describe('Droppable', () => {
         moveMouse(secondDropzone);
       });
 
-      expect(eventHandler).toHaveBeenCalledWithEvent(DroppableReturnedEvent);
+      expect(eventHandler).toHaveBeenCalledWithEvent(
+        <Event>(<unknown>DroppableReturnedEvent)
+      );
 
       expect(eventHandler).toHaveBeenCalledWithEventProperties({
         dragEvent: originalDragEvents[1],
@@ -131,7 +137,9 @@ describe('Droppable', () => {
 
       move();
 
-      expect(eventHandler).toHaveBeenCalledWithEvent(DroppableStopEvent);
+      expect(eventHandler).toHaveBeenCalledWithEvent(
+        <Event>(<unknown>DroppableStopEvent)
+      );
 
       expect(eventHandler).toHaveBeenCalledWithEventProperties({
         dragEvent: originalDragEvents[0],

@@ -84,5 +84,8 @@
   "publishConfig": {
     "access": "public",
     "@shopify:registry": "https://registry.npmjs.org"
+  },
+  "dependencies": {
+    "setimmediate": "^1.0.5"
   }
 }

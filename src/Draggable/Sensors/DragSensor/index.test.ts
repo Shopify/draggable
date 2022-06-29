@@ -7,7 +7,7 @@ import {
   releaseMouse,
   DRAG_DELAY,
   waitForDragDelay,
-} from 'test-utils/helpers';
+} from '../../../test-utils/helpers';
 
 import DragSensor from '.';
 
@@ -51,7 +51,7 @@ describe('DragSensor', () => {
 
     afterEach(teardown);
 
-    it('mousedown handler adds draggable attribute', () => {
+    it('adds draggable attribute on mouse down', () => {
       expect(draggableElement.draggable).toBeUndefined();
 
       clickMouse(draggableElement);

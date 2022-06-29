@@ -1,5 +1,5 @@
-import { DragEvent } from 'Draggable/DragEvent';
-import AbstractEvent from 'shared/AbstractEvent';
+import { DragEvent } from '../../Draggable/DragEvent';
+import AbstractEvent from '../../shared/AbstractEvent';
 
 export class DroppableEvent extends AbstractEvent {
   static type = 'droppable';

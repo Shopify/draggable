@@ -1,7 +1,6 @@
-import { DragMoveEvent, DragStartEvent } from 'Draggable/DragEvent';
-import { SensorEvent } from 'Draggable/Sensors';
-import AbstractPlugin from 'shared/AbstractPlugin';
-
+import AbstractPlugin from '../../../shared/AbstractPlugin';
+import { DragMoveEvent, DragStartEvent } from '../../DragEvent';
+import { SensorEvent } from '../../Sensors';
 import {
   MirrorCreateEvent,
   MirrorCreatedEvent,
@@ -39,9 +38,6 @@ function withPromise(callback, { withFrame = false } = {}) {
   });
 }
 
-/**
- * Computes mirror dimensions based on the source element
- */
 function computeMirrorDimensions({ source, ...args }) {
   return withPromise((resolve) => {
     const sourceRect = source.getBoundingClientRect();
@@ -49,9 +45,6 @@ function computeMirrorDimensions({ source, ...args }) {
   });
 }
 
-/**
- * Calculates mirror offset
- */
 function calculateMirrorOffset({ sensorEvent, sourceRect, options, ...args }) {
   return withPromise((resolve) => {
     const top =
@@ -69,9 +62,6 @@ function calculateMirrorOffset({ sensorEvent, sourceRect, options, ...args }) {
   });
 }
 
-/**
- * Applies mirror styles
- */
 function resetMirror({ mirror, source, options, ...args }) {
   return withPromise((resolve) => {
     let offsetHeight;
@@ -99,9 +89,6 @@ function resetMirror({ mirror, source, options, ...args }) {
   });
 }
 
-/**
- * Applys mirror class on mirror element
- */
 function addMirrorClasses({ mirror, mirrorClasses, ...args }) {
   return withPromise((resolve) => {
     mirror.classList.add(...mirrorClasses);
@@ -109,9 +96,6 @@ function addMirrorClasses({ mirror, mirrorClasses, ...args }) {
   });
 }
 
-/**
- * Removes source ID from cloned mirror element
- */
 function removeMirrorID({ mirror, ...args }) {
   return withPromise((resolve) => {
     mirror.removeAttribute('id');
@@ -183,9 +167,6 @@ function positionMirror({ withFrame = false, initial = false } = {}) {
   };
 }
 
-/**
- * Returns true if the sensor event was triggered by a native browser drag event
- */
 const isNativeDragEvent = (sensorEvent: SensorEvent) =>
   /^drag/.test(sensorEvent.originalEvent.type);
 
@@ -200,12 +181,6 @@ export interface MirrorOptions {
   thresholdY?: number;
 }
 
-/**
- * Mirror plugin which controls the mirror positioning while dragging
- * @class Mirror
- * @module Mirror
- * @extends AbstractPlugin
- */
 export default class Mirror extends AbstractPlugin {
   options: MirrorOptions;
   scrollOffset: { x: number; y: number } = { x: 0, y: 0 };
@@ -231,14 +206,8 @@ export default class Mirror extends AbstractPlugin {
       x: window.scrollX,
       y: window.scrollY,
     };
-
-    this[onMirrorCreated] = this[onMirrorCreated].bind(this);
-    this[onMirrorMove] = this[onMirrorMove].bind(this);
   }
 
-  /**
-   * Attaches plugins event listeners
-   */
   attach() {
     this.draggable
       .on('drag:start', this[onDragStart])
@@ -248,9 +217,6 @@ export default class Mirror extends AbstractPlugin {
       .on('mirror:move', this[onMirrorMove]);
   }
 
-  /**
-   * Detaches plugins event listeners
-   */
   detach() {
     this.draggable
       .off('drag:start', this[onDragStart])
@@ -488,20 +454,13 @@ export default class Mirror extends AbstractPlugin {
       .then(triggerMoved);
   };
 
-  /**
-   * Returns appendable container for mirror based on the appendTo option
-   */
   private [getAppendableContainer](source: HTMLElement) {
     const appendTo = this.options.appendTo;
 
-    if (typeof appendTo === 'string') {
-      return document.querySelector(appendTo);
-    } else if (appendTo instanceof HTMLElement) {
-      return appendTo;
-    } else if (typeof appendTo === 'function') {
+    if (typeof appendTo === 'string') return document.querySelector(appendTo);
+    else if (appendTo instanceof HTMLElement) return appendTo;
+    else if (typeof appendTo === 'function')
       return (<(element: HTMLElement) => void>appendTo)(source);
-    } else {
-      return source.parentNode;
-    }
+    else return source.parentNode;
   }
 }

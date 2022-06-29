@@ -1,4 +1,4 @@
-import AbstractEvent from 'shared/AbstractEvent';
+import AbstractEvent from '../../shared/AbstractEvent';
 import Emitter from '.';
 
 class TestEvent extends AbstractEvent {}

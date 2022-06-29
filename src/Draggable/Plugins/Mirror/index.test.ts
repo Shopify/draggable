@@ -7,7 +7,7 @@ import {
   waitForDragDelay,
   waitForPromisesToResolve,
   waitForRequestAnimationFrame,
-} from 'test-utils/helper';
+} from '../../../test-utils/helpers';
 
 import {
   MirrorCreateEvent,
@@ -54,9 +54,11 @@ describe('Mirror', () => {
     clickMouse(draggableElement);
     waitForDragDelay();
 
-    await waitForPromisesToResolve();
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    await waitForPromisesToResolve();
 
     expect(mirrorElement).toBeInstanceOf(HTMLElement);
 
@@ -78,7 +80,9 @@ describe('Mirror', () => {
     clickMouse(draggableElement);
     waitForDragDelay();
 
-    expect(mirrorCreateHandler).toHaveBeenCalledWithEvent(MirrorCreateEvent);
+    expect(mirrorCreateHandler).toHaveBeenCalledWithEvent(
+      <Event>(<unknown>MirrorCreateEvent)
+    );
     expect(mirrorCreateHandler).toHaveBeenCalledWithEventProperties({
       dragEvent,
       source: dragEvent.source,
@@ -101,7 +105,9 @@ describe('Mirror', () => {
     clickMouse(draggableElement);
     waitForDragDelay();
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
 
     expect(mirrorElement).toBeNull();
 
@@ -118,7 +124,9 @@ describe('Mirror', () => {
     clickMouse(draggableElement);
     waitForDragDelay();
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
 
     expect(mirrorElement).toBeNull();
 
@@ -142,9 +150,13 @@ describe('Mirror', () => {
 
     await waitForPromisesToResolve();
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
 
-    expect(mirrorCreatedHandler).toHaveBeenCalledWithEvent(MirrorCreatedEvent);
+    expect(mirrorCreatedHandler).toHaveBeenCalledWithEvent(
+      <Event>(<unknown>MirrorCreatedEvent)
+    );
     expect(mirrorCreatedHandler).toHaveBeenCalledWithEventProperties({
       dragEvent,
       mirror: mirrorElement,
@@ -158,7 +170,7 @@ describe('Mirror', () => {
     releaseMouse(draggable.source);
   });
 
-  it('triggers `mirror:attached` event on `drag:start`', async () => {
+  it.only('triggers `mirror:attached` event on `drag:start`', async () => {
     draggable = new Draggable(container, draggableOptions);
 
     const mirrorAttachedHandler = jest.fn();
@@ -175,10 +187,12 @@ describe('Mirror', () => {
 
     await waitForPromisesToResolve();
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
 
     expect(mirrorAttachedHandler).toHaveBeenCalledWithEvent(
-      MirrorAttachedEvent
+      <Event>(<unknown>MirrorAttachedEvent)
     );
     expect(mirrorAttachedHandler).toHaveBeenCalledWithEventProperties({
       dragEvent,
@@ -209,9 +223,13 @@ describe('Mirror', () => {
 
     moveMouse(document.body);
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
 
-    expect(mirrorMoveHandler).toHaveBeenCalledWithEvent(MirrorMoveEvent);
+    expect(mirrorMoveHandler).toHaveBeenCalledWithEvent(
+      <Event>(<unknown>MirrorMoveEvent)
+    );
     expect(mirrorMoveHandler).toHaveBeenCalledWithEventProperties({
       dragEvent,
       mirror: mirrorElement,
@@ -243,7 +261,9 @@ describe('Mirror', () => {
 
     await waitForPromisesToResolve();
 
-    expect(mirrorMovedHandler).toHaveBeenCalledWithEvent(MirrorMovedEvent);
+    expect(mirrorMovedHandler).toHaveBeenCalledWithEvent(
+      <Event>(<unknown>MirrorMovedEvent)
+    );
     expect(mirrorMovedHandler).toHaveBeenCalledWithEventProperties({
       dragEvent: mirrorMoveEvent.dragEvent,
       mirror: mirrorMoveEvent.mirror,
@@ -273,7 +293,9 @@ describe('Mirror', () => {
 
     moveMouse(document.body);
 
-    expect(mirrorMoveHandler).not.toHaveBeenCalledWithEvent(MirrorMoveEvent);
+    expect(mirrorMoveHandler).not.toHaveBeenCalledWithEvent(
+      <Event>(<unknown>MirrorMoveEvent)
+    );
 
     releaseMouse(draggable.source);
   });
@@ -287,7 +309,9 @@ describe('Mirror', () => {
 
     await waitForPromisesToResolve();
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
 
     expect(mirrorElement.style.transform).toBe('translate3d(0px, 0px, 0)');
 
@@ -329,7 +353,9 @@ describe('Mirror', () => {
 
     await waitForPromisesToResolve();
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
 
     moveMouse(document.body, {
       clientX: 5,
@@ -377,7 +403,9 @@ describe('Mirror', () => {
 
     await waitForPromisesToResolve();
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
     const originalTransform = mirrorElement.style.transform;
 
     expect(originalTransform).toBe('translate3d(0px, 0px, 0)');
@@ -409,19 +437,25 @@ describe('Mirror', () => {
 
     await waitForPromisesToResolve();
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
 
     releaseMouse(draggable.source);
 
-    expect(mirrorDestroyHandler).toHaveBeenCalledWithEvent(MirrorDestroyEvent);
-    expect(mirrorDestroyHandler).toHaveBeenCalledWithEventProperties({
-      dragEvent,
-      mirror: mirrorElement,
-      source: dragEvent.source,
-      sourceContainer: dragEvent.sourceContainer,
-      sensorEvent: dragEvent.sensorEvent,
-      originalEvent: dragEvent.originalEvent,
-    });
+    expect(mirrorDestroyHandler).toHaveBeenCalledWithEvent(
+      <Event>(<unknown>MirrorDestroyEvent)
+    );
+    expect(mirrorDestroyHandler.mock.calls).toHaveBeenCalledWithEventProperties(
+      {
+        dragEvent,
+        mirror: mirrorElement,
+        source: dragEvent.source,
+        sourceContainer: dragEvent.sourceContainer,
+        sensorEvent: dragEvent.sensorEvent,
+        originalEvent: dragEvent.originalEvent,
+      }
+    );
   });
 
   it('destroys mirror on `mirror:destroy`', async () => {
@@ -434,13 +468,13 @@ describe('Mirror', () => {
 
     await waitForPromisesToResolve();
 
-    mirrorElement = document.querySelector('.draggable-mirror');
+    mirrorElement = <HTMLElement>document.querySelector('.draggable-mirror');
 
     expect(mirrorElement).toBeInstanceOf(HTMLElement);
 
     releaseMouse(draggable.source);
 
-    mirrorElement = document.querySelector('.draggable-mirror');
+    mirrorElement = <HTMLElement>document.querySelector('.draggable-mirror');
 
     expect(mirrorElement).toBeNull();
   });
@@ -459,13 +493,13 @@ describe('Mirror', () => {
 
     await waitForPromisesToResolve();
 
-    mirrorElement = document.querySelector('.draggable-mirror');
+    mirrorElement = <HTMLElement>document.querySelector('.draggable-mirror');
 
     expect(mirrorElement).toBeInstanceOf(HTMLElement);
 
     releaseMouse(draggable.source);
 
-    mirrorElement = document.querySelector('.draggable-mirror');
+    mirrorElement = <HTMLElement>document.querySelector('.draggable-mirror');
 
     expect(mirrorElement).toBeInstanceOf(HTMLElement);
   });
@@ -478,7 +512,9 @@ describe('Mirror', () => {
 
     await waitForPromisesToResolve();
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
 
     expect(mirrorElement.parentNode).toBe(draggable.sourceContainer);
 
@@ -496,7 +532,9 @@ describe('Mirror', () => {
 
     await waitForPromisesToResolve();
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
 
     expect(mirrorElement.parentNode).toBe(document.body);
 
@@ -514,7 +552,9 @@ describe('Mirror', () => {
 
     await waitForPromisesToResolve();
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
 
     expect(mirrorElement.parentNode).toBe(document.body);
 
@@ -532,7 +572,9 @@ describe('Mirror', () => {
 
     await waitForPromisesToResolve();
 
-    const mirrorElement = document.querySelector('.draggable-mirror');
+    const mirrorElement = <HTMLElement>(
+      document.querySelector('.draggable-mirror')
+    );
 
     expect(mirrorElement.parentNode).toBe(document.body);
 
@@ -548,7 +590,9 @@ describe('Mirror', () => {
 
       await waitForPromisesToResolve();
 
-      const mirrorElement = document.querySelector('.draggable-mirror');
+      const mirrorElement = <HTMLElement>(
+        document.querySelector('.draggable-mirror')
+      );
 
       draggable.on('drag:stopped', () => {
         expect(mirrorElement.parentNode).toBeNull();

@@ -6,7 +6,7 @@ import {
   touchStart,
   touchMove,
   touchRelease,
-} from 'test-utils/helpers';
+} from '../../../test-utils/helpers';
 
 import TouchSensor from '.';
 
@@ -75,21 +75,27 @@ describe('TouchSensor', () => {
       expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
     });
 
-    it('prevents context menu while dragging', () => {
+    it('prevents context menu while dragging', async () => {
       touchStart(draggableElement);
       let contextMenuEvent = triggerEvent(draggableElement, 'contextmenu');
       waitForDragDelay();
 
-      expect(contextMenuEvent.defaultPrevented).toBe(true);
+      await expect(contextMenuEvent.defaultPrevented).toBe(true);
 
-      expect(contextMenuEvent.stoppedPropagation).toBe(true);
+      await expect(
+        (<Record<string, unknown>>(<unknown>contextMenuEvent))
+          .stoppedPropagation
+      ).toBe(true);
 
       touchRelease(draggableElement);
       contextMenuEvent = triggerEvent(draggableElement, 'contextmenu');
 
       expect(contextMenuEvent.defaultPrevented).toBe(false);
 
-      expect(contextMenuEvent.stoppedPropagation).toBeUndefined();
+      expect(
+        (<Record<string, unknown>>(<unknown>contextMenuEvent))
+          .stoppedPropagation
+      ).toBeUndefined();
     });
 
     it('prevents scroll on touchmove while dragging', () => {

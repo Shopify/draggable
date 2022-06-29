@@ -1,4 +1,4 @@
-import AbstractEvent from 'shared/AbstractEvent';
+import AbstractEvent from '../../../shared/AbstractEvent';
 
 export class CollidableEvent extends AbstractEvent {
   static type = 'collidable';

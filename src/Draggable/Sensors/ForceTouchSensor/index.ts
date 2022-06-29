@@ -1,4 +1,4 @@
-import { closest } from 'shared/utils';
+import { closest } from '../../../shared/utils';
 import Sensor from '../Sensor';
 import {
   DragStartSensorEvent,
@@ -16,7 +16,7 @@ const onMouseUp = Symbol('onMouseUp');
 const onMouseForceGlobalChange = Symbol('onMouseForceGlobalChange');
 
 export default class ForceTouchSensor extends Sensor {
-  mightDrag: boolean = false;
+  mightDrag = false;
 
   attach() {
     for (const container of this.containers) {
@@ -116,7 +116,7 @@ export default class ForceTouchSensor extends Sensor {
       clientX: event.clientX,
       clientY: event.clientY,
       target: null,
-      container: this.currentContainer,
+      container: <HTMLElement>this.currentContainer,
       originalEvent: event,
     });
 
@@ -140,13 +140,15 @@ export default class ForceTouchSensor extends Sensor {
   private [onMouseMove] = (event) => {
     if (!this.dragging) return;
 
-    const target = document.elementFromPoint(event.clientX, event.clientY);
+    const target = <HTMLElement>(
+      document.elementFromPoint(event.clientX, event.clientY)
+    );
 
     const dragMoveEvent = new DragMoveSensorEvent({
       clientX: event.clientX,
       clientY: event.clientY,
       target,
-      container: this.currentContainer,
+      container: <HTMLElement>this.currentContainer,
       originalEvent: event,
     });
 
@@ -174,14 +176,14 @@ export default class ForceTouchSensor extends Sensor {
   private [onMouseForceGlobalChange] = (event) => {
     if (!this.dragging) return;
 
-    const target = event.target;
+    const target = <HTMLElement>event.target;
 
     const dragPressureEvent = new DragPressureSensorEvent({
       pressure: event.webkitForce,
       clientX: event.clientX,
       clientY: event.clientY,
       target,
-      container: this.currentContainer,
+      container: <HTMLElement>this.currentContainer,
       originalEvent: event,
     });
 

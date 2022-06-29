@@ -1,5 +1,5 @@
-import { closest, distance as euclideanDistance } from 'shared/utils';
-import Sensor, { SensorOptions } from '../Sensor';
+import { closest, distance as euclideanDistance } from '../../../shared/utils';
+import Sensor from '../Sensor';
 import {
   DragStartSensorEvent,
   DragMoveSensorEvent,
@@ -13,12 +13,10 @@ const onMouseUp = Symbol('onMouseUp');
 const startDrag = Symbol('startDrag');
 const onDistanceChange = Symbol('onDistanceChange');
 
-/**
- * This sensor picks up native browser mouse events and dictates drag operations
- * @class MouseSensor
- * @module MouseSensor
- * @extends Sensor
- */
+function preventNativeDragStart(event) {
+  event.preventDefault();
+}
+
 export default class MouseSensor extends Sensor {
   declare startEvent: MouseEvent;
 
@@ -31,10 +29,6 @@ export default class MouseSensor extends Sensor {
   /*** Moment when mouseDown event happened */
   private onMouseDownAt: number;
 
-  /**
-   * Mouse down handler
-   * @param {MouseEvent} event - Mouse down event
-   */
   private [onMouseDown] = (event: MouseEvent) => {
     if (event.button !== 0 || event.ctrlKey || event.metaKey) {
       return;
@@ -83,18 +77,15 @@ export default class MouseSensor extends Sensor {
     }, delay.mouse);
   };
 
-  /**
-   * Start the drag
-   */
   private [startDrag] = () => {
     const startEvent = this.startEvent;
-    const container = this.currentContainer;
-    const originalSource = this.originalSource;
+    const container = <HTMLElement>this.currentContainer;
+    const originalSource = <HTMLElement>this.originalSource;
 
     const dragStartEvent = new DragStartSensorEvent({
       clientX: startEvent.clientX,
       clientY: startEvent.clientY,
-      target: startEvent.target,
+      target: <HTMLElement>startEvent.target,
       container,
       originalSource,
       originalEvent: startEvent,
@@ -114,11 +105,6 @@ export default class MouseSensor extends Sensor {
     }
   };
 
-  /**
-   * Detect change in distance, starting drag when both
-   * delay and distance requirements are met
-   * @param {MouseEvent} event - Mouse move event
-   */
   private [onDistanceChange] = (event: MouseEvent) => {
     const { pageX, pageY } = event;
     const { distance } = this.options;
@@ -143,30 +129,24 @@ export default class MouseSensor extends Sensor {
     }
   };
 
-  /**
-   * Mouse move handler
-   * @param {MouseEvent} event - Mouse move event
-   */
   private [onMouseMove] = (event: MouseEvent) => {
     if (!this.dragging) return;
 
-    const target = document.elementFromPoint(event.clientX, event.clientY);
+    const target = <HTMLElement>(
+      document.elementFromPoint(event.clientX, event.clientY)
+    );
 
     const dragMoveEvent = new DragMoveSensorEvent({
       clientX: event.clientX,
       clientY: event.clientY,
       target,
-      container: this.currentContainer,
+      container: <HTMLElement>this.currentContainer,
       originalEvent: event,
     });
 
     this.trigger(this.currentContainer, dragMoveEvent);
   };
 
-  /**
-   * Mouse up handler
-   * @param {MouseEvent} event - Mouse up event
-   */
   private [onMouseUp] = (event: MouseEvent) => {
     clearTimeout(this.mouseDownTimeout);
 
@@ -178,13 +158,15 @@ export default class MouseSensor extends Sensor {
 
     if (!this.dragging) return;
 
-    const target = document.elementFromPoint(event.clientX, event.clientY);
+    const target = <HTMLElement>(
+      document.elementFromPoint(event.clientX, event.clientY)
+    );
 
     const dragStopEvent = new DragStopSensorEvent({
       clientX: event.clientX,
       clientY: event.clientY,
       target,
-      container: this.currentContainer,
+      container: <HTMLElement>this.currentContainer,
       originalEvent: event,
     });
 
@@ -202,29 +184,15 @@ export default class MouseSensor extends Sensor {
     this.startEvent = null;
   };
 
-  /**
-   * Context menu handler
-   * @param {Event} event - Context menu event
-   */
   private [onContextMenuWhileDragging] = (event) => {
     event.preventDefault();
   };
 
-  /**
-   * Attaches sensors event listeners to the DOM
-   */
   attach() {
     document.addEventListener('mousedown', this[onMouseDown], true);
   }
 
-  /**
-   * Detaches sensors event listeners to the DOM
-   */
   detach() {
     document.removeEventListener('mousedown', this[onMouseDown], true);
   }
-}
-
-function preventNativeDragStart(event) {
-  event.preventDefault();
 }

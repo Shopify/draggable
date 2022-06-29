@@ -107,12 +107,14 @@ export default class Sensor {
    * @param {SensorEvent} sensorEvent - Sensor event to trigger
    */
   trigger(element, sensorEvent) {
-    const event = document.createEvent('Event');
-    event.detail = sensorEvent;
-    event.initEvent(sensorEvent.type, true, true);
+    const event = new CustomEvent(sensorEvent.type, {
+      detail: sensorEvent,
+      bubbles: true,
+      cancelable: true,
+    });
+
     element.dispatchEvent(event);
     this.lastEvent = sensorEvent;
-
     return sensorEvent;
   }
 }

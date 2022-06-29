@@ -1,8 +1,10 @@
 import {withElementFromPoint} from './environment';
 
 export function triggerEvent(element, type, data = {}) {
-  const event = document.createEvent('Event');
-  event.initEvent(type, true, true);
+  const event = new CustomEvent(type, {
+    bubbles: true,
+    cancelable: true,
+  });
 
   for (const key in data) {
     if (data.hasOwnProperty(key)) {

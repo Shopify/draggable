@@ -36,8 +36,6 @@ export default class Emitter {
     const callbacks = [...this.callbacks[event.type]];
     const caughtErrors = [];
 
-    console.log(callbacks);
-
     for (let i = callbacks.length - 1; i >= 0; i--) {
       const callback = callbacks[i];
       try {

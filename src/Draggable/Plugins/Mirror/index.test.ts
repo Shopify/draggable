@@ -170,7 +170,7 @@ describe('Mirror', () => {
     releaseMouse(draggable.source);
   });
 
-  it.only('triggers `mirror:attached` event on `drag:start`', async () => {
+  it('triggers `mirror:attached` event on `drag:start`', async () => {
     draggable = new Draggable(container, draggableOptions);
 
     const mirrorAttachedHandler = jest.fn();

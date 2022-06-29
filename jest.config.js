@@ -5,5 +5,6 @@ module.exports = {
     '<rootDir>/src/test-utils/setup.ts',
     '<rootDir>/src/test-utils/environment.ts',
   ],
+  modulePathIgnorePatterns: ['<rootDir>/lib/'],
   moduleDirectories: ['node_modules', 'src'],
 };

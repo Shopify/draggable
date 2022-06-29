@@ -2,11 +2,10 @@ import {
   SwapAnimationOptions,
   SortAnimationOptions,
   ResizeMirrorOptions,
-} from 'Plugins';
-import AbstractEvent from 'shared/AbstractEvent';
-import AbstractPlugin from 'shared/AbstractPlugin';
-import { closest } from 'shared/utils';
-
+} from '../Plugins';
+import AbstractEvent from '../shared/AbstractEvent';
+import AbstractPlugin from '../shared/AbstractPlugin';
+import { closest } from '../shared/utils';
 import {
   DragStartEvent,
   DragMoveEvent,

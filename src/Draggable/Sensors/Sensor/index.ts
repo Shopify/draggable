@@ -46,14 +46,7 @@ function calcDelay(
     return delay;
   }
 
-  for (const key in defaultDelay) {
-    if (Object.prototype.hasOwnProperty.call(defaultDelay, key)) {
-      if (optionsDelay[key] === undefined) delay[key] = defaultDelay[key];
-      else delay[key] = optionsDelay[key];
-    }
-  }
-
-  return delay;
+  return { ...defaultDelay, ...optionsDelay };
 }
 
 /**
@@ -126,9 +119,9 @@ export default class Sensor {
       bubbles: true,
       cancelable: true,
     });
+
     element.dispatchEvent(event);
     this.lastEvent = sensorEvent;
-
     return sensorEvent;
   }
 }

@@ -47,7 +47,7 @@ export class SensorEvent extends AbstractEvent {
     return this.data.pressure;
   }
 
-  clone(data: typeof this.data) {
+  clone(data: SensorEventData) {
     return new SensorEvent({
       ...this.data,
       ...data,
@@ -56,7 +56,7 @@ export class SensorEvent extends AbstractEvent {
 }
 
 export class DragStartSensorEvent extends SensorEvent {
-  clone(data: typeof this.data) {
+  clone(data: SensorEventData) {
     return new DragStartSensorEvent({
       ...this.data,
       ...data,
@@ -67,7 +67,7 @@ export class DragStartSensorEvent extends SensorEvent {
 }
 
 export class DragMoveSensorEvent extends SensorEvent {
-  clone(data: typeof this.data) {
+  clone(data: SensorEventData) {
     return new DragMoveSensorEvent({
       ...this.data,
       ...data,
@@ -78,7 +78,7 @@ export class DragMoveSensorEvent extends SensorEvent {
 }
 
 export class DragStopSensorEvent extends SensorEvent {
-  clone(data: typeof this.data) {
+  clone(data: SensorEventData) {
     return new DragStopSensorEvent({
       ...this.data,
       ...data,
@@ -89,7 +89,7 @@ export class DragStopSensorEvent extends SensorEvent {
 }
 
 export class DragPressureSensorEvent extends SensorEvent {
-  clone(data: typeof this.data) {
+  clone(data: SensorEventData) {
     return new DragPressureSensorEvent({
       ...this.data,
       ...data,

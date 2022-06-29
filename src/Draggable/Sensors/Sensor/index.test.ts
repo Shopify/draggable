@@ -3,14 +3,14 @@ import { SensorEvent } from '../SensorEvent';
 
 describe('Sensor', () => {
   describe('#constructor', () => {
-    it('should initialize with default containers and options', () => {
+    it('initializes with default containers and options', () => {
       const sensor = new Sensor();
 
       expect(sensor.containers).toMatchObject([]);
       expect(sensor.options).toMatchObject({});
     });
 
-    it('should initialize with containers and options', () => {
+    it('initializes with containers and options', () => {
       const expectedContainers = [
         'expectedContainer',
       ] as unknown as HTMLElement[];
@@ -21,7 +21,7 @@ describe('Sensor', () => {
       expect(sensor.options).toEqual(expectedOptions);
     });
 
-    describe('should initialize with correct delay', () => {
+    describe('initializes with correct delay', () => {
       it('unset', () => {
         const sensor = new Sensor(undefined, {});
 
@@ -57,7 +57,7 @@ describe('Sensor', () => {
   });
 
   describe('#attach', () => {
-    it('should return self', () => {
+    it('returns self', () => {
       const sensor = new Sensor();
       const returnValue = sensor.attach();
 
@@ -66,7 +66,7 @@ describe('Sensor', () => {
   });
 
   describe('#detach', () => {
-    it('should return self', () => {
+    it('returns self', () => {
       const sensor = new Sensor();
       const returnValue = sensor.attach();
 
@@ -101,28 +101,28 @@ describe('Sensor', () => {
   });
 
   describe('#trigger', () => {
-    it('should dispatch event on element', () => {
+    it('dispatches event on element', async () => {
       const sensor = new Sensor();
+      const dispatchEventSpy = jest.spyOn(document, 'dispatchEvent');
       const element = document.createElement('div');
       const expectedEvent = new SensorEvent({
         type: 'my:event',
         value: 'some value',
       });
-
-      let eventDispatched;
+      let eventDispatched: CustomEvent<SensorEvent>;
 
       element.addEventListener(
         'my:event',
-        (event) => {
+        (event: CustomEvent<SensorEvent>) => {
+          console.log('aaaaaaa');
           eventDispatched = event;
         },
         true
       );
-
-      const returnValue = sensor.trigger(element, expectedEvent);
-
-      expect(eventDispatched.detail).toBe(expectedEvent);
+      console.log(dispatchEventSpy.mock);
+      const returnValue = await sensor.trigger(element, expectedEvent);
       expect(eventDispatched.type).toBe('my:event');
+      expect(eventDispatched.detail).toBe(expectedEvent);
       expect(eventDispatched.target).toBe(element);
       expect(returnValue).toBe(expectedEvent);
       expect(sensor.lastEvent).toBe(expectedEvent);

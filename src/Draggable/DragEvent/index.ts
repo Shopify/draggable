@@ -2,11 +2,11 @@ import AbstractEvent from '../../shared/AbstractEvent';
 import { SensorEvent } from '../Sensors/SensorEvent';
 
 type DragEventData = {
-  overContainer?: HTMLElement;
-  sourceContainer?: HTMLElement;
   mirror?: HTMLElement;
   over?: HTMLElement;
-  source?: HTMLElement;
+  source: HTMLElement;
+  overContainer?: HTMLElement;
+  sourceContainer?: HTMLElement;
   sensorEvent?: SensorEvent;
   originalSource?: HTMLElement;
   pressure?: number;
@@ -83,6 +83,11 @@ export class DragMoveEvent extends DragEvent {
 }
 
 export class DragOverEvent extends DragEvent {
+  declare data: DragEventData & {
+    overContainer: HTMLElement;
+    over: HTMLElement;
+  }
+
   get overContainer() {
     return this.data.overContainer;
   }
@@ -105,6 +110,11 @@ export class DragOverEvent extends DragEvent {
 export class DragOutEvent extends DragEvent {
   static type = 'drag:out';
 
+  declare data: DragEventData & {
+    overContainer: HTMLElement;
+    over: HTMLElement;
+  }
+
   get overContainer() {
     return this.data.overContainer;
   }
@@ -123,6 +133,11 @@ export class DragOutEvent extends DragEvent {
 
 export class DragOverContainerEvent extends DragEvent {
   static type = 'drag:over:container';
+
+  declare data: DragEventData & {
+    overContainer: HTMLElement;
+    over: HTMLElement;
+  }
 
   get overContainer() {
     return this.data.overContainer;
@@ -143,6 +158,10 @@ export class DragOverContainerEvent extends DragEvent {
 export class DragOutContainerEvent extends DragEvent {
   static type = 'drag:out:container';
 
+  declare data: DragEventData & {
+    overContainer: HTMLElement;
+  }
+
   get overContainer() {
     return this.data.overContainer;
   }
@@ -157,6 +176,11 @@ export class DragOutContainerEvent extends DragEvent {
 
 export class DragPressureEvent extends DragEvent {
   static type = 'drag:pressure';
+
+  declare data: DragEventData & {
+    pressure?: number;
+
+  }
 
   get pressure() {
     return this.data.pressure;

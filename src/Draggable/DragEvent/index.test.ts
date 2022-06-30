@@ -35,21 +35,30 @@ describe('DragEvent', () => {
 
     it('should initialize with mirror', () => {
       const mirror = document.createElement('div');
-      const event = new DragEvent({ mirror });
+      const event = new DragEvent({
+        mirror,
+        source: document.createElement('div'),
+      });
 
       expect(event.mirror).toBe(mirror);
     });
 
     it('should initialize with sourceContainer', () => {
       const sourceContainer = document.createElement('div');
-      const event = new DragEvent({ sourceContainer });
+      const event = new DragEvent({
+        sourceContainer,
+        source: document.createElement('div'),
+      });
 
       expect(event.sourceContainer).toBe(sourceContainer);
     });
 
     it('should initialize with sensorEvent', () => {
       const sensorEvent = new SensorEvent();
-      const event = new DragEvent({ sensorEvent });
+      const event = new DragEvent({
+        sensorEvent,
+        source: document.createElement('div'),
+      });
 
       expect(event.sensorEvent).toBe(sensorEvent);
     });
@@ -58,6 +67,7 @@ describe('DragEvent', () => {
       const originalEvent = new Event('drag');
       const event = new DragEvent({
         sensorEvent: new SensorEvent({ originalEvent }),
+        source: document.createElement('div'),
       });
 
       expect(event.originalEvent).toBe('expected originalEvent');
@@ -66,7 +76,7 @@ describe('DragEvent', () => {
 
   describe('#originalEvent', () => {
     it('should return null when initialized without sensorEvent', () => {
-      const event = new DragEvent({});
+      const event = new DragEvent({ source: document.createElement('div') });
 
       expect(event.originalEvent).toBeNull();
     });
@@ -121,7 +131,10 @@ describe('DragOutContainerEvent', () => {
 
     it('should initialize with overContainer', () => {
       const overContainer = document.createElement('div');
-      const event = new DragOutContainerEvent({ overContainer });
+      const event = new DragOutContainerEvent({
+        overContainer,
+        source: document.createElement('div'),
+      });
 
       expect(event.overContainer).toBe(overContainer);
     });
@@ -144,14 +157,20 @@ describe('DragOutEvent', () => {
 
     it('should initialize with overContainer', () => {
       const overContainer = document.createElement('div');
-      const event = new DragOutEvent({ overContainer });
+      const event = new DragOutEvent({
+        overContainer,
+        source: document.createElement('div'),
+      });
 
       expect(event.overContainer).toBe(overContainer);
     });
 
     it('should initialize with over', () => {
       const over = document.createElement('div');
-      const event = new DragOutEvent({ over });
+      const event = new DragOutEvent({
+        over,
+        source: document.createElement('div'),
+      });
 
       expect(event.over).toBe(over);
     });
@@ -174,7 +193,10 @@ describe('DragOverContainerEvent', () => {
 
     it('should initialize with overContainer', () => {
       const overContainer = document.createElement('div');
-      const event = new DragOverContainerEvent({ overContainer });
+      const event = new DragOverContainerEvent({
+        overContainer,
+        source: document.createElement('div'),
+      });
 
       expect(event.overContainer).toBe(overContainer);
     });
@@ -197,14 +219,20 @@ describe('DragOverEvent', () => {
 
     it('should initialize with overContainer', () => {
       const overContainer = document.createElement('div');
-      const event = new DragOverEvent({ overContainer });
+      const event = new DragOverEvent({
+        overContainer,
+        source: document.createElement('div'),
+      });
 
       expect(event.overContainer).toBe(overContainer);
     });
 
     it('should initialize with over', () => {
       const over = document.createElement('div');
-      const event = new DragOverEvent({ over });
+      const event = new DragOverEvent({
+        over,
+        source: document.createElement('div'),
+      });
 
       expect(event.over).toBe(over);
     });
@@ -227,7 +255,10 @@ describe('DragPressureEvent', () => {
 
     it('should initialize with pressure', () => {
       const pressure = 4;
-      const event = new DragPressureEvent({ pressure });
+      const event = new DragPressureEvent({
+        pressure,
+        source: document.createElement('div'),
+      });
 
       expect(event.pressure).toBe(pressure);
     });

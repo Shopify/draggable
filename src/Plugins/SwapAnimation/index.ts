@@ -19,7 +19,7 @@ export interface SwapAnimationOptions {
 function resetElementOnTransitionEnd(event: Event) {
   (<HTMLElement>event.target).style.transition = '';
   (<HTMLElement>event.target).style.pointerEvents = '';
-  event.target.removeEventListener(
+  event.target?.removeEventListener(
     'transitionend',
     resetElementOnTransitionEnd
   );
@@ -62,7 +62,7 @@ function animate(
 
 export default class SwapAnimation extends AbstractPlugin {
   options: SwapAnimationOptions;
-  lastAnimationFrame: number = null;
+  lastAnimationFrame: number;
   constructor(draggable) {
     super(draggable);
 

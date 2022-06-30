@@ -22,7 +22,7 @@ import {
 } from './DraggableEvent';
 import { Focusable, Mirror, Scrollable, Announcement } from './Plugins';
 import { MouseSensor, TouchSensor } from './Sensors';
-import AbstractEvent from 'shared/AbstractEvent';
+import AbstractEvent from '../shared/AbstractEvent';
 
 const sampleMarkup = `
   <ul class="Container">

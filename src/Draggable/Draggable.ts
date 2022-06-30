@@ -88,7 +88,7 @@ function applyUserSelect(element, value) {
 }
 
 export interface DraggableOptions {
-  draggable?: string;
+  draggable: string;
   distance?: number;
   handle?:
     | string
@@ -146,7 +146,7 @@ export default class Draggable {
 
   constructor(
     containers: HTMLElement[] = [document.body],
-    options: DraggableOptions = {}
+    options: Partial<DraggableOptions> = {}
   ) {
     if (containers instanceof NodeList || containers instanceof Array)
       this.containers = [...containers];

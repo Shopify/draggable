@@ -85,7 +85,7 @@ export default class Droppable extends Draggable {
   lastDropzone: HTMLElement = null;
   initialDropzone: HTMLElement = null;
 
-  constructor(containers: HTMLElement[] = [], options: DroppableOptions = {}) {
+  constructor(containers: HTMLElement[] = [], options: Partial<DroppableOptions> = {}) {
     super(containers, {
       ...defaultOptions,
       ...options,

@@ -1,9 +1,11 @@
 import Draggable, { DraggableOptions } from '../Draggable';
+import AbstractEvent from '../shared/AbstractEvent';
 import {
   SwappableStartEvent,
   SwappableSwapEvent,
   SwappableSwappedEvent,
   SwappableStopEvent,
+  SwappableEvent,
 } from './SwappableEvent';
 
 const onDragStart = Symbol('onDragStart');
@@ -18,11 +20,11 @@ function onSwappableSwappedDefaultAnnouncement({
   swappedElement,
 }: SwappableSwappedEvent) {
   const sourceText =
-    dragEvent.source.textContent.trim() ||
+    dragEvent.source.textContent?.trim() ||
     dragEvent.source.id ||
     'swappable element';
   const overText =
-    swappedElement.textContent.trim() ||
+    swappedElement.textContent?.trim() ||
     swappedElement.id ||
     'swappable element';
 
@@ -50,15 +52,19 @@ const defaultAnnouncements = {
   'swappabled:swapped': onSwappableSwappedDefaultAnnouncement,
 };
 
-export default class Swappable extends Draggable {
-  lastOver: HTMLElement = null;
+interface SwappableOptions extends Omit<DraggableOptions, 'announcements'> {
+  announcements: Record<string, (event: SwappableEvent | AbstractEvent) => unknown>
+}
 
-  constructor(containers: HTMLElement[] = [], options: DraggableOptions = {}) {
+export default class Swappable extends Draggable {
+  lastOver: HTMLElement | null = null;
+
+  constructor(containers: HTMLElement[] = [], options: Partial<SwappableOptions> = {}) {
     super(containers, {
       ...options,
       announcements: {
         ...defaultAnnouncements,
-        ...(options.announcements || {}),
+        ...(options.announcements ?? {}),
       },
     });
 

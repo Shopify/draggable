@@ -2,10 +2,10 @@ import { DragEvent } from '../../Draggable';
 import AbstractEvent from '../../shared/AbstractEvent';
 
 export type SwappableEventData = {
-  dragEvent?: DragEvent;
+  dragEvent: DragEvent;
   over?: Element;
   overContainer?: Element;
-  swappedElement?: Element;
+  swappedElement: Element;
 };
 
 export class SwappableEvent extends AbstractEvent {

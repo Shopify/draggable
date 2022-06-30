@@ -20,17 +20,22 @@ export interface SortAnimationElement {
   offsetLeft: number;
 }
 
+export interface SortAnimationAnimateElement {
+  from: SortAnimationElement;
+  to: SortAnimationElement;
+}
+
 function resetElementOnTransitionEnd(event: Event) {
   (<HTMLElement>event.target).style.transition = '';
   (<HTMLElement>event.target).style.pointerEvents = '';
-  event.target.removeEventListener(
+  event.target?.removeEventListener(
     'transitionend',
     resetElementOnTransitionEnd
   );
 }
 
 function animate(
-  { from, to }: { from: SortAnimationElement; to: SortAnimationElement },
+  { from, to }: SortAnimationAnimateElement,
   { duration, easingFunction }: SortAnimationOptions
 ) {
   const domEl = from.domEl;
@@ -49,7 +54,7 @@ function animate(
 
 export default class SortAnimation extends AbstractPlugin {
   options: SortAnimationOptions;
-  lastAnimationFrame: number = null;
+  lastAnimationFrame: number;
   lastElements: SortAnimationElement[] = [];
 
   constructor(draggable) {
@@ -76,8 +81,8 @@ export default class SortAnimation extends AbstractPlugin {
 
   getOptions = () => this.draggable.options.sortAnimation ?? {};
 
-  private [onSortableSort] = ({ dragEvent }: SortableSortEvent) => {
-    const { sourceContainer } = dragEvent;
+  private [onSortableSort] = (event: SortableSortEvent) => {
+    const { sourceContainer } = event.dragEvent;
     const elements =
       this.draggable.getDraggableElementsForContainer(sourceContainer);
     this.lastElements = [...elements].map((el: HTMLElement) => ({
@@ -93,10 +98,9 @@ export default class SortAnimation extends AbstractPlugin {
   }: SortableSortedEvent) => {
     if (oldIndex === newIndex) return;
 
-    const effectedElements = [];
-    let start;
-    let end;
-    let num;
+    const effectedElements: SortAnimationAnimateElement[] = [];
+    let start, end, num;
+
     if (oldIndex > newIndex) {
       start = newIndex;
       end = oldIndex - 1;

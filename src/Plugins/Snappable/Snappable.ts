@@ -2,11 +2,10 @@ import {
   DragOutEvent,
   DragOverEvent,
   DragStartEvent,
-} from 'Draggable/DragEvent';
-import { MirrorCreatedEvent } from 'Draggable/Plugins/Mirror/MirrorEvent';
-import { DroppableEvent, DroppableStopEvent } from 'Droppable';
-import AbstractPlugin from 'shared/AbstractPlugin';
-
+  MirrorCreatedEvent,
+} from '../../Draggable';
+import { DroppableEvent, DroppableStopEvent } from '../../Droppable';
+import AbstractPlugin from '../../shared/AbstractPlugin';
 import { SnapInEvent, SnapOutEvent } from './SnappableEvent';
 
 const onDragStart = Symbol('onDragStart');
@@ -26,7 +25,7 @@ export default class Snappable extends AbstractPlugin {
   /*** Keeps track of the first source element */
   firstSource: HTMLElement | null = null;
   /*** Keeps track of the mirror element */
-  mirror: HTMLElement = null;
+  mirror: HTMLElement | null = null;
 
   attach() {
     this.draggable
@@ -61,10 +60,11 @@ export default class Snappable extends AbstractPlugin {
     this.firstSource = null;
   };
 
-  private [onDragOver] = (event: Partial<DragOverEvent & DroppableEvent>) => {
+  private [onDragOver] = (event: DragOverEvent | DroppableEvent) => {
     if (event.canceled()) return;
 
-    const source = event.source ?? event.dragEvent.source;
+    const source =
+      (<DragOverEvent>event).source ?? (<DroppableEvent>event).dragEvent.source;
 
     if (source === this.firstSource) {
       this.firstSource = null;
@@ -73,7 +73,8 @@ export default class Snappable extends AbstractPlugin {
 
     const snapInEvent = new SnapInEvent({
       dragEvent: event,
-      snappable: event.over || event.droppable,
+      snappable:
+        (<DragOverEvent>event).over ?? (<DroppableEvent>event).droppable,
     });
 
     this.draggable.trigger(snapInEvent);
@@ -89,20 +90,23 @@ export default class Snappable extends AbstractPlugin {
 
     // Need to cancel this in drag out
     setTimeout(() => {
-      source.classList.remove(
+      source?.classList.remove(
         ...this.draggable.getClassNamesFor('source:placed')
       );
     }, this.draggable.options.placedTimeout);
   };
 
-  private [onDragOut] = (event: Partial<DragOutEvent & DroppableStopEvent>) => {
+  private [onDragOut] = (event: DragOutEvent | DroppableStopEvent) => {
     if (event.canceled()) return;
 
-    const source = event.source || event.dragEvent.source;
+    const source =
+      (<DragOutEvent>event).source ??
+      (<DroppableStopEvent>event).dragEvent.source;
 
     const snapOutEvent = new SnapOutEvent({
       dragEvent: event,
-      snappable: event.over || event.droppable,
+      snappable:
+        (<DragOutEvent>event).over ?? (<DroppableStopEvent>event).droppable,
     });
 
     this.draggable.trigger(snapOutEvent);

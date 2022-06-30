@@ -9,8 +9,8 @@ export type SortableEventData = {
   newContainer?: HTMLElement;
   currentIndex?: number;
   startIndex?: number;
-  oldIndex?: number;
-  newIndex?: number;
+  oldIndex: number;
+  newIndex: number;
 };
 
 export class SortableEvent extends AbstractEvent {
@@ -52,7 +52,7 @@ export class SortableStartEvent extends SortableEvent {
 
 export class SortableSortEvent extends SortableEvent {
   declare data: SortableEventData & {
-    dragEvent?: DragOverEvent;
+    dragEvent: DragOverEvent;
   };
 
   get currentIndex() {
@@ -65,6 +65,10 @@ export class SortableSortEvent extends SortableEvent {
 
   get overContainer() {
     return this.data.dragEvent.overContainer;
+  }
+
+  get dragEvent() {
+    return this.data.dragEvent;
   }
 
   clone(data) {
@@ -80,7 +84,8 @@ export class SortableSortEvent extends SortableEvent {
 
 export class SortableSortedEvent extends SortableEvent {
   declare data: SortableEventData & {
-    dragEvent?: DragOutEvent;
+    dragEvent: DragOutEvent;
+    over: HTMLElement;
   };
 
   get dragEvent() {

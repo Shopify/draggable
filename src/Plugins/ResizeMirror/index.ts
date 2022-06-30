@@ -92,7 +92,7 @@ export default class ResizeMirror extends AbstractPlugin {
         overContainer.appendChild(this.mirror);
 
       const overElement =
-        over ||
+        over ??
         this.draggable.getDraggableElementsForContainer(overContainer)[0];
 
       if (!overElement) return;

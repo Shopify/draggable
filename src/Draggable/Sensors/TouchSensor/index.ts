@@ -53,18 +53,21 @@ export default class TouchSensor extends Sensor {
     document.removeEventListener('touchstart', this[onTouchStart]);
   }
 
-  private [onTouchStart] = (event) => {
-    const container = closest(event.target, this.containers);
+  private [onTouchStart] = (event: TouchEvent) => {
+    const container = closest(<HTMLElement>event.target, this.containers);
 
     if (!container) return;
     if (
       this.options.handle &&
       event.target &&
-      !closest(event.target, this.options.handle)
+      !closest(<HTMLElement>event.target, this.options.handle)
     )
       return;
 
-    const originalSource = closest(event.target, this.options.draggable);
+    const originalSource = closest(
+      <HTMLElement>event.target,
+      this.options.draggable
+    );
 
     if (!originalSource) return;
 
@@ -88,11 +91,7 @@ export default class TouchSensor extends Sensor {
     }
 
     this.tapTimeout = window.setTimeout(() => {
-      this[onDistanceChange](
-        new TouchEvent('touch', {
-          touches: [<Touch>{ pageX: this.pageX, pageY: this.pageY }],
-        })
-      );
+      this[onDistanceChange](event);
     }, delay.touch);
   };
 

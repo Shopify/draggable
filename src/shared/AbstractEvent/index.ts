@@ -10,11 +10,11 @@ export default class AbstractEvent extends Event {
   }
 
   get type() {
-    return (<typeof AbstractEvent>this.constructor).type;
+    return Object.getPrototypeOf(this).constructor.type;
   }
 
   get cancelable() {
-    return (<typeof AbstractEvent>this.constructor).cancelable;
+    return Object.getPrototypeOf(this).constructor.cancelable;
   }
 
   cancel() {

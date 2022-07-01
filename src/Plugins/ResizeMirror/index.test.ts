@@ -1,11 +1,11 @@
+import { findByRole, waitFor, queryByRole } from '@testing-library/dom';
+
 import {
   createSandbox,
   waitForRequestAnimationFrame,
   clickMouse,
   moveMouse,
   releaseMouse,
-  waitForDragDelay,
-  waitForPromisesToResolve,
   DRAG_DELAY,
   drag,
 } from '../../test-utils/helpers';
@@ -67,10 +67,8 @@ describe('ResizeMirror', () => {
 
   it('resizes mirror based on over element', async () => {
     clickMouse(smallerDraggable);
-    waitForDragDelay();
-    await waitForPromisesToResolve();
 
-    const mirror = <HTMLElement>document.querySelector('.draggable-mirror');
+    const mirror = await findByRole(sandbox, 'dragmirror');
 
     expect(mirror.style).toMatchObject({
       width: `${smallerDraggableDimensions.width}px`,
@@ -100,10 +98,8 @@ describe('ResizeMirror', () => {
 
   it('appends mirror in over container', async () => {
     clickMouse(smallerDraggable);
-    waitForDragDelay();
-    await waitForPromisesToResolve();
 
-    const mirror = document.querySelector('.draggable-mirror');
+    const mirror = await findByRole(sandbox, 'dragmirror');
 
     moveMouse(largerDraggable);
     waitForRequestAnimationFrame();
@@ -115,10 +111,8 @@ describe('ResizeMirror', () => {
 
   it('appends mirror only for different parent containers', async () => {
     clickMouse(smallerDraggable);
-    waitForDragDelay();
-    await waitForPromisesToResolve();
 
-    const mirror = document.querySelector('.draggable-mirror');
+    const mirror = await findByRole(sandbox, 'dragmirror');
 
     const mockedAppendChild = withMockedAppendChild(() => {
       moveMouse(smallerDraggable);
@@ -131,16 +125,14 @@ describe('ResizeMirror', () => {
     releaseMouse(largerDraggable);
   });
 
-  it('dont appends mirror when mirror was removed', async () => {
+  it('prevents appending mirror when mirror was removed', async () => {
     drag({ from: smallerDraggable, to: smallerDraggable });
     drag({ from: smallerDraggable, to: smallerDraggable });
 
-    await waitForPromisesToResolve();
-    waitForRequestAnimationFrame();
-
-    const mirror = document.querySelector('.draggable-mirror');
-
-    expect(mirror).toBeNull();
+    await waitFor(() => {
+      const mirror = queryByRole(sandbox, 'dragmirror');
+      expect(mirror).not.toBeInTheDocument();
+    });
   });
 });
 

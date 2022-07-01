@@ -70,7 +70,7 @@ describe('DragEvent', () => {
         source: document.createElement('div'),
       });
 
-      expect(event.originalEvent).toBe('expected originalEvent');
+      expect(event.originalEvent).toBe(originalEvent);
     });
   });
 

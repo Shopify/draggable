@@ -1,5 +1,10 @@
+import { waitFor } from '@testing-library/dom';
 import Sensor from '.';
 import { SensorEvent } from '../SensorEvent';
+
+class MyEvent extends SensorEvent {
+  static type = 'my:event';
+}
 
 describe('Sensor', () => {
   describe('#constructor', () => {
@@ -103,24 +108,22 @@ describe('Sensor', () => {
   describe('#trigger', () => {
     it('dispatches event on element', async () => {
       const sensor = new Sensor();
-      const dispatchEventSpy = jest.spyOn(document, 'dispatchEvent');
-      const element = document.createElement('div');
-      const expectedEvent = new SensorEvent({
-        type: 'my:event',
-        value: 'some value',
-      });
+      const element = document.createElement('button');
       let eventDispatched: CustomEvent<SensorEvent>;
 
       element.addEventListener(
-        'my:event',
+        MyEvent.type,
         (event: CustomEvent<SensorEvent>) => {
-          console.log('aaaaaaa');
           eventDispatched = event;
-        },
-        true
+        }
       );
-      console.log(dispatchEventSpy.mock);
+
+      const expectedEvent = new MyEvent({
+        value: 'value',
+      });
+
       const returnValue = await sensor.trigger(element, expectedEvent);
+
       expect(eventDispatched.type).toBe('my:event');
       expect(eventDispatched.detail).toBe(expectedEvent);
       expect(eventDispatched.target).toBe(element);

@@ -6,7 +6,7 @@ export default class AbstractEvent extends Event {
   constructor(data?: Record<string, unknown>) {
     super(<string>data?.type, { ...data });
     this[canceled] = false;
-    this.data = {...data};
+    this.data = { ...data };
   }
 
   get type() {

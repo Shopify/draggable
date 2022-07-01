@@ -22,11 +22,3 @@ declare global {
     }
   }
 }
-
-beforeEach(() => {
-  jest.useFakeTimers();
-});
-
-afterEach(() => {
-  jest.runOnlyPendingTimers();
-});

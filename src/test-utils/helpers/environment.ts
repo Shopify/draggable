@@ -20,5 +20,3 @@ export function waitForRequestAnimationFrame(
 ) {
   jest.advanceTimersByTime(requestAnimationFrameTimeout + 1);
 }
-
-export const waitForPromisesToResolve = async () => process.nextTick;

@@ -1,3 +1,5 @@
+import Draggable from 'Draggable/Draggable';
+
 import AbstractPlugin from '../../../shared/AbstractPlugin';
 import { DragMoveEvent, DragStartEvent } from '../../DragEvent';
 import { SensorEvent } from '../../Sensors';
@@ -55,7 +57,6 @@ function calculateMirrorOffset({ sensorEvent, sourceRect, options, ...args }) {
       options.cursorOffsetX === null
         ? sensorEvent.clientX - sourceRect.left
         : options.cursorOffsetX;
-
     const mirrorOffset = { top, left };
 
     resolve({ sensorEvent, sourceRect, mirrorOffset, options, ...args });
@@ -118,8 +119,8 @@ function positionMirror({ withFrame = false, initial = false } = {}) {
     lastMovedX,
     lastMovedY,
     ...args
-  }) => {
-    return withPromise(
+  }) =>
+    withPromise(
       (resolve) => {
         const result: Partial<Mirror> = {
           mirror,
@@ -133,23 +134,20 @@ function positionMirror({ withFrame = false, initial = false } = {}) {
           const x = passedThreshX
             ? Math.round(
                 (sensorEvent.clientX - mirrorOffset.left - scrollOffset.x) /
-                  (options.thresholdX || 1)
-              ) * (options.thresholdX || 1)
+                  (options.thresholdX ?? 1)
+              ) * (options.thresholdX ?? 1)
             : Math.round(lastMovedX);
           const y = passedThreshY
             ? Math.round(
                 (sensorEvent.clientY - mirrorOffset.top - scrollOffset.y) /
-                  (options.thresholdY || 1)
-              ) * (options.thresholdY || 1)
+                  (options.thresholdY ?? 1)
+              ) * (options.thresholdY ?? 1)
             : Math.round(lastMovedY);
 
-          if ((options.xAxis && options.yAxis) || initial) {
-            mirror.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-          } else if (options.xAxis && !options.yAxis) {
-            mirror.style.transform = `translate3d(${x}px, ${initialY}px, 0)`;
-          } else if (options.yAxis && !options.xAxis) {
-            mirror.style.transform = `translate3d(${initialX}px, ${y}px, 0)`;
-          }
+          const { xAxis, yAxis } = options;
+          mirror.style.transform = `translate3d(${
+            xAxis || initial ? x : initialX
+          }px, ${yAxis || initial ? y : initialY}px, 0)`;
 
           if (initial) {
             result.initialX = x;
@@ -164,7 +162,6 @@ function positionMirror({ withFrame = false, initial = false } = {}) {
       },
       { withFrame }
     );
-  };
 }
 
 const isNativeDragEvent = (sensorEvent: SensorEvent) =>
@@ -194,7 +191,7 @@ export default class Mirror extends AbstractPlugin {
   mirror: HTMLElement;
   sensorEvent: SensorEvent;
 
-  constructor(draggable) {
+  constructor(draggable: Draggable) {
     super(draggable);
 
     this.options = {
@@ -265,7 +262,9 @@ export default class Mirror extends AbstractPlugin {
 
     const appendableContainer =
       this[getAppendableContainer](source) || sourceContainer;
+
     this.mirror = <HTMLElement>source.cloneNode(true);
+    this.mirror.setAttribute('role', 'dragmirror');
 
     const mirrorCreatedEvent = new MirrorCreatedEvent({
       source,
@@ -273,6 +272,7 @@ export default class Mirror extends AbstractPlugin {
       sourceContainer,
       sensorEvent,
       dragEvent,
+      originalEvent: dragEvent.originalEvent,
       mirror: this.mirror,
     });
 
@@ -293,29 +293,29 @@ export default class Mirror extends AbstractPlugin {
   [onDragMove] = (dragEvent: DragMoveEvent) => {
     if (!this.mirror || dragEvent.canceled()) return;
 
-    const { source, originalSource, sourceContainer, sensorEvent } = dragEvent;
+    const {
+      source,
+      originalSource,
+      sourceContainer,
+      sensorEvent,
+      originalEvent,
+    } = dragEvent;
 
-    let passedThreshX = true;
-    let passedThreshY = true;
+    let passedThreshX = true,
+      passedThreshY = true;
+    const { thresholdX, thresholdY } = this.options;
 
-    if (this.options.thresholdX || this.options.thresholdY) {
+    if (thresholdX || thresholdY) {
       const { x: lastX, y: lastY } = this.lastMirrorMovedClient;
-
-      if (Math.abs(lastX - sensorEvent.clientX) < this.options.thresholdX) {
+      if (Math.abs(lastX - sensorEvent.clientX) < thresholdX)
         passedThreshX = false;
-      } else {
-        this.lastMirrorMovedClient.x = sensorEvent.clientX;
-      }
+      else this.lastMirrorMovedClient.x = sensorEvent.clientX;
 
-      if (Math.abs(lastY - sensorEvent.clientY) < this.options.thresholdY) {
+      if (Math.abs(lastY - sensorEvent.clientY) < thresholdY)
         passedThreshY = false;
-      } else {
-        this.lastMirrorMovedClient.y = sensorEvent.clientY;
-      }
+      else this.lastMirrorMovedClient.y = sensorEvent.clientY;
 
-      if (!passedThreshX && !passedThreshY) {
-        return;
-      }
+      if (!passedThreshX && !passedThreshY) return;
     }
 
     const mirrorMoveEvent = new MirrorMoveEvent({
@@ -324,6 +324,7 @@ export default class Mirror extends AbstractPlugin {
       sourceContainer,
       sensorEvent,
       dragEvent,
+      originalEvent,
       mirror: this.mirror,
       passedThreshX,
       passedThreshY,
@@ -372,7 +373,6 @@ export default class Mirror extends AbstractPlugin {
     sensorEvent,
   }: MirrorCreatedEvent) => {
     const mirrorClasses = this.draggable.getClassNamesFor('mirror');
-
     const setState = ({ mirrorOffset, initialX, initialY, ...args }) => {
       this.mirrorOffset = mirrorOffset;
       this.initialX = initialX;
@@ -433,17 +433,16 @@ export default class Mirror extends AbstractPlugin {
 
       return args;
     };
-
     const initialState = {
       mirror: mirrorEvent.mirror,
       sensorEvent: mirrorEvent.sensorEvent,
-      mirrorOffset: this.mirrorOffset,
-      options: this.options,
-      initialX: this.initialX,
-      initialY: this.initialY,
-      scrollOffset: this.scrollOffset,
       passedThreshX: mirrorEvent.passedThreshX,
       passedThreshY: mirrorEvent.passedThreshY,
+      mirrorOffset: this.mirrorOffset,
+      options: this.options,
+      scrollOffset: this.scrollOffset,
+      initialX: this.initialX,
+      initialY: this.initialY,
       lastMovedX: this.lastMovedX,
       lastMovedY: this.lastMovedY,
     };
@@ -455,8 +454,7 @@ export default class Mirror extends AbstractPlugin {
   };
 
   private [getAppendableContainer](source: HTMLElement) {
-    const appendTo = this.options.appendTo;
-
+    const { appendTo } = this.options;
     if (typeof appendTo === 'string') return document.querySelector(appendTo);
     else if (appendTo instanceof HTMLElement) return appendTo;
     else if (typeof appendTo === 'function')

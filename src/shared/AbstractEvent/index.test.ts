@@ -1,31 +1,31 @@
 import AbstractEvent from '.';
 
 describe('AbstractEvent', () => {
-  it('should be of type AbstractEvent', () => {
+  it('is of type AbstractEvent', () => {
     const event = new AbstractEvent();
 
     expect(event).toBeInstanceOf(AbstractEvent);
   });
 
-  it('should initialize with correct type', () => {
+  it('initializes with correct type', () => {
     const event = new AbstractEvent();
 
     expect(event.type).toBe('event');
   });
 
-  it('should initialize in uncancelable state', () => {
+  it('initializes in uncancelable state', () => {
     const event = new AbstractEvent();
 
     expect(event.cancelable).toBe(false);
   });
 
-  it('should initialize in uncancelled state', () => {
+  it('initializes in uncancelled state', () => {
     const event = new AbstractEvent();
 
     expect(event.canceled()).toBe(false);
   });
 
-  it('should initialize with data', () => {
+  it('initializes with data', () => {
     const event = new AbstractEvent({
       foo: 'bar',
     });
@@ -35,7 +35,7 @@ describe('AbstractEvent', () => {
     });
   });
 
-  it('should cancel event', () => {
+  it('cancels the event', () => {
     const event = new AbstractEvent();
 
     expect(event.canceled()).toBe(false);

@@ -1,3 +1,5 @@
+import '@testing-library/jest-dom';
+
 import * as matchers from './matchers';
 
 expect.extend(matchers);
@@ -26,5 +28,5 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  jest.runAllTimers();
+  jest.runOnlyPendingTimers();
 });

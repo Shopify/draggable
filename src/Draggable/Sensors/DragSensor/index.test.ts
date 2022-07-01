@@ -48,11 +48,10 @@ describe('DragSensor', () => {
 
   describe('common', () => {
     beforeEach(setup);
-
     afterEach(teardown);
 
     it('adds draggable attribute on mouse down', () => {
-      expect(draggableElement.draggable).toBeUndefined();
+      expect(draggableElement.draggable).toBe(false);
 
       clickMouse(draggableElement);
       waitForDragDelay();

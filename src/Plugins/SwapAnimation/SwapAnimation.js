@@ -13,7 +13,6 @@ const onSortableSorted = Symbol('onSortableSorted');
 export const defaultOptions = {
   duration: 150,
   easingFunction: 'ease-in-out',
-  horizontal: false,
 };
 
 /**
@@ -80,18 +79,14 @@ export default class SwapAnimation extends AbstractPlugin {
    * @param {SortableSortedEvent} sortableEvent
    * @private
    */
-  [onSortableSorted]({oldIndex, newIndex, dragEvent}) {
+  [onSortableSorted]({dragEvent}) {
     const {source, over} = dragEvent;
 
     cancelAnimationFrame(this.lastAnimationFrame);
 
     // Can be done in a separate frame
     this.lastAnimationFrame = requestAnimationFrame(() => {
-      if (oldIndex >= newIndex) {
-        animate(source, over, this.options);
-      } else {
-        animate(over, source, this.options);
-      }
+      animate(source, over, this.options);
     });
   }
 }
@@ -103,23 +98,28 @@ export default class SwapAnimation extends AbstractPlugin {
  * @param {Object} options
  * @param {Number} options.duration
  * @param {String} options.easingFunction
- * @param {String} options.horizontal
  * @private
  */
-function animate(from, to, {duration, easingFunction, horizontal}) {
+function animate(from, to, {duration, easingFunction}) {
   for (const element of [from, to]) {
     element.style.pointerEvents = 'none';
   }
 
-  if (horizontal) {
-    const width = from.offsetWidth;
-    from.style.transform = `translate3d(${width}px, 0, 0)`;
-    to.style.transform = `translate3d(-${width}px, 0, 0)`;
-  } else {
-    const height = from.offsetHeight;
-    from.style.transform = `translate3d(0, ${height}px, 0)`;
-    to.style.transform = `translate3d(0, -${height}px, 0)`;
-  }
+  const fromRect = from.getBoundingClientRect();
+  const toRect = to.getBoundingClientRect();
+
+  /* 
+    Calculate the displacement for the given move.
+    Here we could also calculate the inverted scale and opacity if needed.
+    Using this technique we can avoid specifying the direction of the swap and
+    let the browser naturally animate based on layout (particularly useful for flex, grid, and floating layouts)
+    Inspired by FLIP (https://aerotwist.com/blog/flip-your-animations/)
+  */
+  const dx = fromRect.left - toRect.left;
+  const dy = fromRect.top - toRect.top;
+
+  to.style.transform = `translate3d(${dx}px, ${dy}px, 0)`;
+  from.style.transform = `translate3d(${-dx}px, ${-dy}px, 0)`;
 
   requestAnimationFrame(() => {
     for (const element of [from, to]) {

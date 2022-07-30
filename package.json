@@ -1,9 +1,9 @@
 {
-  "name": "@shopify/draggable",
+  "name": "draggable",
   "version": "1.0.0-beta.14",
   "private": false,
   "license": "MIT",
-  "description": "The JavaScript Drag & Drop library your grandparents warned you about.",
+  "description": "The JavaScript Drag & Drop library your grandgrandparents warned you about.",
   "author": "Shopify <dev@shopify.com>",
   "homepage": "https://github.com/Shopify/draggable#readme",
   "repository": "https://github.com/Shopify/draggable",
@@ -51,9 +51,9 @@
     "index.d.ts"
   ],
   "devDependencies": {
+    "@babel/core": "^7.18.9",
     "@babel/preset-env": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
-    "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@testing-library/dom": "^8.14.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@types/jest": "^28.1.3",
@@ -79,6 +79,6 @@
   },
   "publishConfig": {
     "access": "public",
-    "@shopify:registry": "https://registry.npmjs.org"
+    "registry": "https://registry.npmjs.org"
   }
 }

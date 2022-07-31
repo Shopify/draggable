@@ -1,0 +1,16 @@
+.navigation {
+	&__link {
+		font-weight: get-type-scale(subheading, weight);
+		color: get-color(coal, light);
+
+		&--current {
+			pointer-events: none;
+			color: get-color(purple);
+		}
+
+		&--disabled {
+			pointer-events: none;
+			color: get-color(coal, light);
+		}
+	}
+}

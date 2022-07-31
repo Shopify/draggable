@@ -3,10 +3,10 @@
   "version": "1.0.0-beta.14",
   "private": false,
   "license": "MIT",
-  "description": "The JavaScript Drag & Drop library your grandgrandparents warned you about.",
-  "author": "Shopify <dev@shopify.com>",
-  "homepage": "https://github.com/Shopify/draggable#readme",
-  "repository": "https://github.com/Shopify/draggable",
+  "description": "The JavaScript Drag & Drop library your grand-grandparents warned you about.",
+  "author": "Henrique <henriquealberone@outlook.com>",
+  "homepage": "https://github.com/hnrq/draggable#readme",
+  "repository": "https://github.com/hnrq/draggable",
   "contributors": [
     {
       "name": "Max Hoffmann",
@@ -15,23 +15,25 @@
     {
       "name": "Curtis Dulmage",
       "email": "curtis.dulmage@shopify.com"
+    },
+    {
+      "name": "Henrique Ramos",
+      "email": "henriquealberone@outlook.com"
     }
   ],
   "bugs": {
-    "url": "https://github.com/Shopify/draggable/issues"
+    "url": "https://github.com/hnrq/draggable/issues"
   },
   "keywords": [
-    "shopify",
     "draggable",
     "drag-and-drop",
     "es6"
   ],
-  "main": "./lib/draggable.bundle.js",
-  "module": "./lib/draggable.es.js",
+  "main": "./lib/draggable.js",
+  "module": "./lib/draggable.js",
   "exports": {
     ".": {
-      "import": "./lib/draggable.es.js",
-      "require": "./lib/draggable.umd.js"
+      "import": "./lib/draggable.js"
     }
   },
   "types": "./index.d.ts",

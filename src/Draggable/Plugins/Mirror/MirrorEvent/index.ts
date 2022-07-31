@@ -2,14 +2,14 @@ import AbstractEvent from '../../../../shared/AbstractEvent';
 import { SensorEvent } from '../../../Sensors';
 
 export type MirrorEventData = {
-  dragEvent?: DragEvent;
-  sensorEvent?: SensorEvent;
-  originalEvent?: Event;
+  dragEvent: DragEvent;
+  sensorEvent: SensorEvent;
+  originalEvent: Event;
   target?: HTMLElement;
   container?: HTMLElement;
-  source?: HTMLElement;
-  sourceContainer?: HTMLElement;
-  originalSource?: HTMLElement;
+  source: HTMLElement;
+  sourceContainer: HTMLElement;
+  originalSource: HTMLElement;
   pressure?: number;
 };
 

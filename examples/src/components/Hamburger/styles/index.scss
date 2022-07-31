@@ -1,0 +1,79 @@
+@use '../../../styles/utils/shared/layout';
+@use 'props';
+@use 'keyframes';
+
+.hamburger {
+	top: $hamburger-vertical-center;
+	animation-name: hamburger-out;
+
+	z-index: get-z-index(hamburger);
+	position: absolute;
+	top: get-spacing();
+	left: 50%;
+	margin-left: -$hamburger-offset;
+	padding: get-spacing(tightest);
+	// prevent the 'X' on page load
+	opacity: 0;
+	animation: FadeActivator get-duration(slow) get-easing() forwards;
+
+	@media only screen and (min-width: get-breakpoint()) {
+		@include visually-hidden;
+	}
+
+	&-bun {
+		position: relative;
+		width: $hamburger-width;
+		height: $hamburger-height;
+
+		&::before,
+		&::after {
+			content: '';
+			top: 0;
+			display: block;
+			transition: background-color get-duration() get-easing();
+		}
+
+		&::before,
+		&::after,
+		.hamburger-patty {
+			position: absolute;
+			left: 0;
+			width: 100%;
+			height: $hamburger-line-height;
+			border-radius: $hamburger-line-height;
+			background-color: get-color(coal, dark);
+			animation-duration: get-duration();
+			animation-timing-function: get-easing();
+			animation-fill-mode: both;
+		}
+
+		&::before {
+			transform: translateY(0) rotate(0);
+			animation-name: hamburger-before-out;
+		}
+
+		&::after {
+			transform: translateY($hamburger-after-y) rotate(0);
+			animation-name: hamburger-after-out;
+		}
+	}
+
+	&__expanded {
+		.hamburger-bun::before,
+		.hamburger-bun::after {
+			background-color: white;
+		}
+
+		.hamburger-bun::before {
+			animation-name: hamburger-before-in;
+		}
+
+		.hamburger-bun::after {
+			animation-name: hamburger-after-in;
+		}
+
+		.hamburger-patty {
+			animation-name: hamburger-in;
+		}
+	}
+}

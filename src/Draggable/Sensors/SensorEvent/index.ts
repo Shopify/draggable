@@ -1,12 +1,12 @@
 import AbstractEvent from '../../../shared/AbstractEvent';
 
 export type SensorEventData = {
-  originalEvent?: Event;
-  clientX?: number;
-  clientY?: number;
-  target?: HTMLElement;
-  container?: HTMLElement;
-  originalSource?: HTMLElement;
+  originalEvent: Event;
+  clientX: number;
+  clientY: number;
+  target: HTMLElement;
+  container: HTMLElement;
+  originalSource: HTMLElement;
   type?: string;
   value?: unknown;
   pressure?: number;

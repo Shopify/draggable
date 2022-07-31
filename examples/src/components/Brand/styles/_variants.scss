@@ -1,0 +1,17 @@
+.wave {
+	&--mask {
+		fill: get-color(coal, dark);
+	}
+
+	&--purple {
+		fill: get-color(brand, purple);
+	}
+
+	&--red {
+		fill: get-color(brand, red);
+	}
+
+	&--orange {
+		fill: get-color(brand, orange);
+	}
+}

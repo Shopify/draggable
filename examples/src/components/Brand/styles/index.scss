@@ -1,0 +1,72 @@
+////
+/// Components
+/// Brand
+////
+
+@use 'keyframes';
+@use 'props';
+@use 'variants';
+
+.brand {
+	cursor: get-cursor(rock);
+	display: flex;
+
+	&:active {
+		cursor: get-cursor(rock, active);
+
+		.brand--mask,
+		.brand--purple,
+		.brand--red,
+		.brand--orange,
+		.hand {
+			animation-duration: get-duration();
+		}
+	}
+
+	@media screen and (max-width: get-breakpoint() - 1px) {
+		justify-content: center;
+	}
+
+	@media screen and (min-width: get-breakpoint(desktop)) {
+		margin-left: -(get-spacing(tightest));
+	}
+
+	&__logo {
+		flex: 0 0 $logo-width;
+	}
+
+	&__wordmark {
+		flex: 0 0 $wordmark-width;
+		margin-left: get-spacing(tighter);
+	}
+
+	&:hover {
+		.wave--mask {
+			animation: logo-rainbow-mask get-duration(slow) get-easing() infinite;
+		}
+
+		.wave--purple {
+			animation: logo-rainbow-purple get-duration(slow) get-easing() infinite;
+		}
+
+		.wave--red {
+			animation: logo-rainbow-red get-duration(slow) get-easing() infinite;
+		}
+
+		.wave--orange {
+			animation: logo-rainbow-orange get-duration(slow) get-easing() infinite;
+		}
+
+		.hand {
+			animation: logo-outline-bounce get-duration(slow) linear infinite;
+		}
+	}
+}
+
+.svg--wordmark {
+	fill: get-color(brand, yellow);
+}
+
+.hand {
+	fill: get-color(brand, yellow);
+}

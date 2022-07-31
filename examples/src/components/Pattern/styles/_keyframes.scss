@@ -1,0 +1,15 @@
+@keyframes placed {
+	to {
+		transform: scale(0);
+	}
+}
+
+@keyframes halftone {
+	from {
+		background-position: $halftone-bg-position-start;
+	}
+
+	to {
+		background-position: $halftone-bg-position-end;
+	}
+}

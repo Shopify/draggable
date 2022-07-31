@@ -1,0 +1,17 @@
+.pattern {
+	&--stripes {
+		@include stripes-bg;
+	}
+
+	&--halftone {
+		background-image: radial-gradient(currentColor 24%, transparent 25%),
+			radial-gradient(currentColor 24%, transparent 25%);
+		background-position: $halftone-bg-position-start;
+		background-size: $halftone-bg-size $halftone-bg-size;
+		animation: halftone get-duration(slow) steps(3) infinite both paused;
+	}
+
+	&--placed {
+		background-color: get-color(brand, blue);
+	}
+}

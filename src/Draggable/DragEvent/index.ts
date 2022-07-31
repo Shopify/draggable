@@ -3,15 +3,16 @@ import { SensorEvent } from '../Sensors/SensorEvent';
 
 type DragEventData = {
   mirror?: HTMLElement;
-  over: HTMLElement;
+  over?: HTMLElement;
   source: HTMLElement;
-  overContainer: HTMLElement;
-  sourceContainer: HTMLElement;
+  overContainer?: HTMLElement;
+  sourceContainer?: HTMLElement;
   sensorEvent: SensorEvent;
-  originalSource: HTMLElement;
+  originalSource?: HTMLElement;
   pressure?: number;
-  draggable: string;
-  detail: SensorEvent;
+  draggable?: string;
+  detail?: SensorEvent;
+  originalEvent?: Event;
 };
 
 export class DragEvent extends AbstractEvent {

@@ -1,0 +1,134 @@
+.plate {
+	&--bottom {
+		padding-top: 100%;
+		width: 100%;
+
+		.plate__shadow {
+			transform: rotate(55deg);
+		}
+	}
+
+	&--middle {
+		padding-top: 75%;
+		width: 75%;
+
+		.plate__shadow {
+			transform: rotate(45deg);
+		}
+	}
+
+	&--top {
+		padding-top: 50%;
+		width: 50%;
+
+		.plate__shadow {
+			transform: rotate(35deg);
+		}
+	}
+
+	&__wrapper {
+		&.draggable-container--placed {
+			.plate--bottom,
+			.plate--middle,
+			.plate--top {
+				animation-name: plate-placed;
+				animation-duration: get-duration();
+				animation-timing-function: get-easing();
+			}
+
+			.plate--bottom {
+				animation-delay: get-duration() / 2;
+			}
+
+			.plate--middle {
+				animation-delay: get-duration() / 4;
+			}
+		}
+	}
+
+	.plate--draggable {
+		color: get-color(coal, dark);
+		// helps smooth out on some devices: + transform get-duration(faster) linear
+		transition: color get-duration(fast) get-easing();
+
+		&:focus,
+		&:hover {
+			color: get-color(brand, blue);
+		}
+
+		.plate__shadow::before {
+			background-color: currentColor;
+			animation-duration: get-duration(slow);
+			animation-timing-function: get-easing();
+		}
+
+		.plate__content {
+			background-color: white;
+			border: get-border(flexible) solid currentColor;
+			animation-duration: get-duration(slow);
+			animation-timing-function: get-easing();
+
+			@media screen and (min-width: get-breakpoint()) {
+				border-width: get-border(thick);
+			}
+		}
+
+		&.plate--bottom {
+			&:focus,
+			&:hover {
+				.plate__content,
+				.plate__shadow::before {
+					animation-name: plate-small;
+				}
+			}
+		}
+
+		&.plate--middle {
+			&:focus,
+			&:hover {
+				.plate__content,
+				.plate__shadow::before {
+					animation-name: plate-medium;
+				}
+			}
+		}
+
+		&.plate--top {
+			&:focus,
+			&:hover {
+				.plate__content,
+				.plate__shadow::before {
+					animation-name: plate-big;
+				}
+			}
+		}
+
+		// would be nice if there was a better way to suppress the creation of the mirror
+		&.draggable-mirror {
+			display: none;
+		}
+	}
+}
+
+.draggable-container--placed {
+	.plate--bottom {
+		.plate__content,
+		.plate__shadow::before {
+			animation-name: plate-small;
+		}
+	}
+
+	.plate--middle {
+		.plate__content,
+		.plate__shadow::before {
+			animation-name: plate-medium;
+		}
+	}
+
+	.plate--top {
+		.plate__content,
+		.plate__shadow::before {
+			animation-name: plate-big;
+		}
+	}
+}

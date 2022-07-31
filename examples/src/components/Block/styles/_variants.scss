@@ -1,0 +1,135 @@
+.block {
+	&__content {
+		&--shell {
+			color: get-color(coal, dark);
+			background-color: white;
+			border-color: currentColor;
+		}
+
+		&--hollow {
+			color: get-color(ash, dark);
+			background-color: white;
+			border-color: currentColor;
+		}
+
+		&--stripes {
+			@include stripes-bg;
+			color: get-color(coal, dark);
+			border-color: currentColor;
+			transition: color get-duration(fast) get-easing();
+			&.is-colliding {
+				color: get-color(brand, red);
+			}
+		}
+	}
+
+	&__layout {
+		&--flex,
+		&--float {
+			margin-top: -(get-border(thin));
+			margin-left: -(get-border(thin));
+
+			> .block-wrapper {
+				margin-top: get-border(thin);
+				margin-left: get-border(thin);
+			}
+
+			> .block {
+				padding-top: get-border(thin);
+				padding-left: get-border(thin);
+			}
+
+			@media screen and (min-width: get-breakpoint(tablet)) {
+				margin-top: -(get-border());
+				margin-left: -(get-border());
+
+				> .block-wrapper {
+					margin-top: get-border();
+					margin-left: get-border();
+				}
+
+				> .block {
+					padding-top: get-border();
+					padding-left: get-border();
+				}
+			}
+		}
+
+		&--flex {
+			display: flex;
+			flex-wrap: wrap;
+
+			.block {
+				flex: 1 1 100%;
+			}
+		}
+
+		&--float {
+			@include clearfix;
+
+			.block {
+				float: left;
+				width: 100%;
+			}
+		}
+
+		&--grid {
+			display: grid;
+			gap: get-border(thin);
+
+			@media screen and (min-width: get-breakpoint(tablet)) {
+				gap: get-border();
+			}
+		}
+
+		&--positioned {
+			position: relative;
+		}
+	}
+
+	&--is-draggable {
+		cursor: get-cursor(drag);
+
+		.block-content {
+			color: get-color(coal, dark);
+			background-color: white;
+			border-color: currentColor;
+			transition: color get-duration(fast) get-easing(),
+				background-color get-duration(fast) get-easing(),
+				transform get-duration() get-easing(bungie);
+		}
+
+		// interaction
+		&:focus .block-content,
+		&:hover .block-content {
+			color: get-color(brand, blue);
+		}
+
+		&.draggable-source--is-dragging .block-content {
+			color: get-color(brand, blue);
+
+			.pattern--halftone {
+				@include pattern-halftone-animated;
+			}
+		}
+
+		&.draggable-source--placed .block-content {
+			.pattern--placed {
+				@include pattern-placed-animated;
+			}
+		}
+
+		&.draggable-mirror {
+			z-index: get-z-index(overlay);
+			transition: width get-duration() get-easing(bungie), height get-duration() get-easing(bungie);
+
+			.block-content {
+				height: 100%;
+				color: white;
+				background-color: get-color(brand, blue);
+				border-color: get-color(brand, blue);
+				transform: scale(1.025);
+			}
+		}
+	}
+}

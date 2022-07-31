@@ -1,0 +1,31 @@
+$handle-size: 2rem;
+$handle-stroke-width: 0.4rem;
+$handle-center: ($handle-size / 2) - ($handle-stroke-width / 2);
+
+.drag-handle {
+	position: relative;
+	width: $handle-size;
+	height: $handle-size;
+	background-color: currentColor;
+	transition: background-color get-duration(fast) get-easing();
+
+	&::before,
+	&::after {
+		content: '';
+		position: absolute;
+		right: 0;
+		left: 0;
+		display: block;
+		height: $handle-stroke-width;
+		background-color: white;
+		transition: background-color get-duration(fast) get-easing();
+	}
+
+	&::before {
+		top: $handle-stroke-width;
+	}
+
+	&::after {
+		bottom: $handle-stroke-width;
+	}
+}

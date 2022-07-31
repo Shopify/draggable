@@ -1,28 +1,28 @@
 // eslint-disable-next-line import/no-unresolved
-import {Swappable, Plugins} from '@shopify/draggable';
+import { Swappable, Plugins } from '@shopify/draggable';
 
 export default function PluginsSnappable() {
-  const containerSelector = '#Snappable .BlockLayout';
-  const containers = document.querySelectorAll(containerSelector);
+	const containerSelector = '#Snappable .block-layout';
+	const containers = document.querySelectorAll(containerSelector);
 
-  if (containers.length === 0) {
-    return false;
-  }
+	if (containers.length === 0) {
+		return false;
+	}
 
-  const swappable = new Swappable(containers, {
-    mirror: {
-      appendTo: containerSelector,
-      constrainDimensions: true,
-    },
-    plugins: [Plugins.Snappable],
-  });
+	const swappable = new Swappable(containers, {
+		mirror: {
+			appendTo: containerSelector,
+			constrainDimensions: true
+		},
+		plugins: [Plugins.Snappable]
+	});
 
-  // --- Draggable events --- //
-  swappable.on('drag:start', (evt) => {
-    if (evt.originalSource.classList.contains('Block--typeStripes')) {
-      evt.cancel();
-    }
-  });
+	// --- Draggable events --- //
+	swappable.on('drag:start', (evt) => {
+		if (evt.originalSource.classList.contains('Block--typeStripes')) {
+			evt.cancel();
+		}
+	});
 
-  return swappable;
+	return swappable;
 }

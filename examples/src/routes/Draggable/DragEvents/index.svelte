@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { Draggable } from '@draggable';
 	import type { DragStartEvent, MirrorCreatedEvent, MirrorMoveEvent } from '@draggable/Draggable';
-	import type Position from 'src/common/types/Position';
+	import type Position from '@src/common/types/Position';
 	import { onMount } from 'svelte';
 
-	import PillSwitch from 'src/components/PillSwitch/PillSwitch.svelte';
-import { calcOffset, translateMirror } from 'src/utils';
+	import PillSwitch from '@src/components/PillSwitch/PillSwitch.svelte';
+	import { calcOffset, translateMirror } from '@src/utils';
 
 	const toggleClass = 'pill-switch--on';
 	let container: HTMLElement;
@@ -21,10 +21,11 @@ import { calcOffset, translateMirror } from 'src/utils';
 		let containerRect: DOMRect;
 		let dragRect: DOMRect;
 		let dragThreshold = 0.5;
-		let headings: { source: HTMLElement; mirror: HTMLElement };
 
 		// --- Draggable events --- //
 		draggable.on('drag:start', (evt: DragStartEvent) => {
+			document.addEventListener('keyup', abortDragOnESC);
+
 			initialMousePosition = {
 				x: evt.sensorEvent?.clientX ?? 0,
 				y: evt.sensorEvent?.clientY ?? 0
@@ -74,10 +75,6 @@ import { calcOffset, translateMirror } from 'src/utils';
 				draggable.cancel();
 			}
 		};
-
-		draggable.on('drag:start', () => {
-			document.addEventListener('keyup', abortDragOnESC);
-		});
 	});
 </script>
 

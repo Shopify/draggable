@@ -2,8 +2,8 @@
 	import { Droppable } from '@draggable';
 	import type { DragStartEvent } from '@draggable/Draggable';
 	import type { DroppableDroppedEvent } from '@draggable/Droppable';
-	import Block from 'src/components/Block/Block.svelte';
-	import { onMount } from 'svelte/types/runtime/internal/lifecycle';
+	import Block from '@src/components/Block/Block.svelte';
+	import { onMount } from 'svelte';
 
 	let containers: HTMLElement[];
 	const wrappers = [

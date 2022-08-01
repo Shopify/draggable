@@ -2,7 +2,7 @@
 	import { Sortable } from '@draggable';
 	import { onMount } from 'svelte';
 
-	import StackedListItem from 'src/components/StackedListItem/StackedListItem.svelte';
+	import StackedListItem from '@src/components/StackedListItem/StackedListItem.svelte';
 
 	let container: HTMLElement;
 

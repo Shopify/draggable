@@ -2,7 +2,7 @@
 	import { Sortable, Plugins } from '@draggable';
 	import { onMount } from 'svelte';
 
-	import StackedListItem from 'src/components/StackedListItem/StackedListItem.svelte';
+	import StackedListItem from '@src/components/StackedListItem/StackedListItem.svelte';
 	import type { DragStartEvent, DragStopEvent } from '@draggable/Draggable';
 	import type { SortableSortedEvent, SortableSortEvent } from '@draggable/Sortable';
 

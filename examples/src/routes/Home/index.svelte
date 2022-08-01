@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { Draggable } from '@draggable';
 	import type { SensorEvent, DragMoveEvent, DragStartEvent } from '@draggable/Draggable';
-	import type Position from 'src/common/types/Position';
+	import type Position from '@src/common/types/Position';
 
-	import Plate from 'src/components/Plate/Plate.svelte';
-	import flipSign from 'src/scripts/utils/flip-sign';
-	import { offsetWithinThreshold } from 'src/utils';
-	import { onMount } from 'svelte/types/runtime/internal/lifecycle';
+	import Plate from '@src/components/Plate/Plate.svelte';
+	import { flipSign, offsetWithinThreshold } from '@src/utils';
+	import { onMount } from 'svelte';
 
 	let container: HTMLElement;
 	let threshold = {

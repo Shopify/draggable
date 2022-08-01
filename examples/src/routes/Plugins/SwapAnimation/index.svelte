@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { Sortable, Plugins } from '@draggable';
 
-	import Block from 'src/components/Block/Block.svelte';
+	import Block from '@src/components/Block/Block.svelte';
 
 	let container: HTMLElement;
 

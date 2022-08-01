@@ -2,8 +2,8 @@
 	import { Droppable, Plugins } from '@draggable';
 	import type { CollidableInEvent, CollidableOutEvent } from '@draggable/Plugins/Collidable';
 
-	import Block from 'src/components/Block/Block.svelte';
-	import { onMount } from 'svelte/types/runtime/internal/lifecycle';
+	import Block from '@src/components/Block/Block.svelte';
+	import { onMount } from 'svelte';
 
 	let container: HTMLElement;
 	let walls: HTMLElement[];

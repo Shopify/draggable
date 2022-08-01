@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import { Sortable } from '@draggable';
 
-	import PaperStackItem from 'src/components/PaperStack/PaperStackItem.svelte';
+	import PaperStackItem from '@src/components/PaperStack/PaperStackItem.svelte';
 
 	let container: HTMLElement;
 

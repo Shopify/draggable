@@ -1,0 +1,34 @@
+@use '../../../../styles/utils/shared/functions';
+@use '../../../../styles/utils/shared/layout';
+
+$sort-anim-block-name: unquote('block');
+
+.SortAnimation {
+	@include layout.draggable-source-layout($sort-anim-block-name, 1, 2, 4, 5, 7, 8) {
+		flex-basis: 50%;
+	}
+
+	@include layout.draggable-source-layout($sort-anim-block-name, 3, 6, 9) {
+		flex-basis: 100%;
+	}
+
+	@media screen and (min-width: get-breakpoint(tablet)) {
+		@include layout.draggable-source-layout($sort-anim-block-name, 1, 2, 3, 4, 5, 6, 7, 8, 9) {
+			flex-basis: 33.333%;
+		}
+	}
+
+	.BlockContent {
+		@media screen and (min-width: get-breakpoint(tablet)) {
+			height: functions.rows(3);
+		}
+
+		@media screen and (min-width: get-breakpoint(desktop)) {
+			height: functions.rows(4);
+		}
+
+		@media screen and (min-width: get-breakpoint('1080p', wide)) {
+			height: functions.rows(5);
+		}
+	}
+}

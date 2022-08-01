@@ -1,0 +1,47 @@
+@use '../../../../styles/utils/shared/layout';
+@use '../../../components/StackedList/styles/props';
+
+$grid-columns: 8;
+
+.multiple-containers {
+	display: grid;
+	gap: get-layout-length(gutter);
+	grid-template-columns: 100%;
+	grid-template-areas: 'a' 'b' 'c';
+
+	@media screen and (min-width: get-breakpoint(desktop)) {
+		grid-template-columns: repeat($grid-columns, 1fr);
+		grid-template-areas:
+			'a a a a a a a a'
+			'b b b b b c c c';
+	}
+
+	@media screen and (min-width: get-breakpoint('1080p', wide)) {
+		@include centered-width(functions.columns(6));
+	}
+
+	.Container {
+		&:nth-child(1) {
+			grid-area: a;
+		}
+
+		&:nth-child(2) {
+			grid-area: b;
+		}
+
+		&:nth-child(3) {
+			grid-area: c;
+		}
+	}
+
+	// resolve slim padding-bottom when single column
+	.stacked-list-header {
+		@media screen and (min-width: get-breakpoint(tablet)) and (max-width: get-breakpoint(desktop) - 1px) {
+			height: auto;
+		}
+	}
+
+	.draggable--is-dragging & .draggable-container-parent--capacity {
+		color: get-color(brand, blue);
+	}
+}

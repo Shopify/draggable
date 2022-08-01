@@ -370,6 +370,7 @@ export default class Draggable {
       source: this.source,
       originalSource: this.originalSource,
       sourceContainer: container,
+      originalEvent: event,
       sensorEvent,
     });
 
@@ -415,6 +416,7 @@ export default class Draggable {
       source: this.source,
       originalSource: this.originalSource,
       sourceContainer: container,
+      originalEvent: event,
       sensorEvent,
     });
 
@@ -440,6 +442,7 @@ export default class Draggable {
         sourceContainer: container,
         sensorEvent,
         over: this.currentOver,
+        originalEvent: event,
         overContainer: this.currentOverContainer,
       });
 
@@ -455,6 +458,7 @@ export default class Draggable {
       const dragOutContainerEvent = new DragOutContainerEvent({
         source: this.source,
         originalSource: this.originalSource,
+        originalEvent: event,
         sourceContainer: container,
         sensorEvent,
         overContainer: this.currentOverContainer,
@@ -475,6 +479,7 @@ export default class Draggable {
         source: this.source,
         originalSource: this.originalSource,
         sourceContainer: container,
+        originalEvent: event,
         sensorEvent,
         overContainer,
       });
@@ -491,6 +496,7 @@ export default class Draggable {
         source: this.source,
         originalSource: this.originalSource,
         sourceContainer: container,
+        originalEvent: event,
         sensorEvent,
         overContainer,
         over: target,
@@ -510,6 +516,7 @@ export default class Draggable {
     const dragStopEvent = new DragStopEvent({
       source: this.source,
       originalSource: this.originalSource,
+      originalEvent: event,
       sensorEvent: event ? event.sensorEvent : null,
       sourceContainer: this.sourceContainer,
     });

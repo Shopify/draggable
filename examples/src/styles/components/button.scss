@@ -1,73 +1,69 @@
-////
-/// Components
-/// Button
-////
-
-@import '../utils/shared/layout';
+@use '../utils/shared/layout';
+@use '../theme';
 
 .button {
 	display: inline-block;
-	padding: get-spacing(tightest);
-	font-size: get-type-scale(button);
-	font-weight: get-type-scale(button, weight);
+	padding: map-get(theme.$spacing, 'tightest');
+	font-size: 1.2rem;
+	font-weight: 900;
 	text-align: center;
 	white-space: nowrap;
-	color: get-color(coal, dark);
+	color: map-get(theme.$color, 'coal-dark');
 	background-color: white;
-	border: 0.4rem solid get-color(coal, dark);
-	transition: color get-duration() get-easing(), background-color get-duration() get-easing(),
-		border-color get-duration() get-easing();
+	border: 0.4rem solid map-get(theme.$color, 'coal-dark');
+	transition: color map-get(theme.$duration, 'base') map-get(theme.$easing, 'base'),
+		background-color map-get(theme.$duration, 'base') map-get(theme.$easing, 'base'),
+		border-color map-get(theme.$duration, 'base') map-get(theme.$easing, 'base');
 
-	@media screen and (min-width: get-breakpoint(tablet)) {
-		padding-right: get-spacing(tighter);
-		padding-left: get-spacing(tighter);
-		font-size: get-type-scale(button, tablet);
+	@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
+		padding-right: map-get(theme.$spacing, 'tighter');
+		padding-left: map-get(theme.$spacing, 'tighter');
 	}
 
 	&:focus,
 	&:hover {
-		color: get-color(brand, blue);
-		border-color: get-color(brand, blue);
+		color: map-get(theme.$color, 'brand-blue');
+		border-color: map-get(theme.$color, 'brand-blue');
 	}
 
 	&:active {
-		color: darken(get-color(brand, blue), 10%);
-		border-color: get-color(brand, blue);
+		color: darken(map-get(theme.$color, 'brand-blue'), 10%);
+		border-color: map-get(theme.$color, 'brand-blue');
 	}
 
 	&:disabled {
 		pointer-events: none;
-		color: get-color(ash);
-		border-color: get-color(ash);
+		color: map-get(theme.$color, 'ash');
+		border-color: map-get(theme.$color, 'ash');
 	}
 
 	&--active {
 		color: white;
-		background-color: get-color(coal, dark);
+		background-color: map-get(theme.$color, 'coal-dark');
 
 		&:focus,
 		&:hover {
 			color: white;
-			background-color: get-color(brand, blue);
-			border-color: get-color(brand, blue);
+			background-color: map-get(theme.$color, 'brand-blue');
+			border-color: map-get(theme.$color, 'brand-blue');
 		}
 
 		&:active {
 			color: white;
-			background-color: darken(get-color(brand, blue), 10%);
-			border-color: darken(get-color(brand, blue), 10%);
+			background-color: darken(map-get(theme.$color, 'brand-blue'), 10%);
+			border-color: darken(map-get(theme.$color, 'brand-blue'), 10%);
 		}
 
 		&:disabled {
 			pointer-events: none;
 			color: white;
-			background-color: get-color(ash);
-			border-color: get-color(ash);
+			background-color: map-get(theme.$color, 'ash');
+			border-color: map-get(theme.$color, 'ash');
 		}
 	}
 
 	.button--pill {
-		border-radius: get-type-scale(button) * 2;
+		border-radius: 2.4rem;
 	}
 }
 
@@ -78,14 +74,14 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	margin-top: -(get-spacing(tightest));
-	margin-left: -(get-spacing(tightest));
+	margin-top: -(map-get(theme.$spacing, 'tightest'));
+	margin-left: -(map-get(theme.$spacing, 'tightest'));
 
 	.button {
 		@include flex-item-fix;
 		display: block;
 		flex: 0 0 auto;
-		margin-top: get-spacing(tightest);
-		margin-left: get-spacing(tightest);
+		margin-top: map-get(theme.$spacing, 'tightest');
+		margin-left: map-get(theme.$spacing, 'tightest');
 	}
 }

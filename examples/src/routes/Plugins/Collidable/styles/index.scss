@@ -5,11 +5,11 @@
 		width: 100%;
 		height: props.collidable(container-height);
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 			height: props.collidable(container-height, tablet);
 		}
 
-		@media screen and (min-width: get-breakpoint(desktop)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
 			height: props.collidable(container-height, desktop);
 		}
 	}
@@ -19,10 +19,10 @@
 	.block__wrapper:nth-child(1),
 	.block__wrapper:nth-child(4) {
 		position: absolute;
-		width: calc(50% - #{get-border(thin) * 2.5});
+		width: calc(50% - #{map-get(theme.$border, 'thin') * 2.5});
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
-			width: calc(25% - #{get-border()});
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			width: calc(25% - #{map-get(theme.$border, 'base')});
 		}
 	}
 
@@ -30,11 +30,11 @@
 	.block--3 {
 		height: props.collidable(obstacle-height);
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 			height: props.collidable(obstacle-height, tablet);
 		}
 
-		@media screen and (min-width: get-breakpoint(desktop)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
 			height: props.collidable(obstacle-height, desktop);
 		}
 	}
@@ -43,7 +43,7 @@
 		top: props.collidable(container-padding);
 		right: props.collidable(container-padding);
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 			top: props.collidable(container-padding, tablet);
 			right: auto;
 			left: calc(25% + #{props.collidable(container-padding, tablet)});
@@ -54,7 +54,7 @@
 		bottom: props.collidable(container-padding);
 		left: props.collidable(container-padding);
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 			bottom: props.collidable(container-padding, tablet);
 			right: props.collidable(container-padding, tablet);
 			left: auto;
@@ -65,11 +65,11 @@
 	.block__wrapper:nth-child(4) {
 		height: props.collidable(block-height);
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 			height: props.collidable(block-height, tablet);
 		}
 
-		@media screen and (min-width: get-breakpoint(desktop)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
 			height: props.collidable(block-height, desktop);
 		}
 	}
@@ -78,7 +78,7 @@
 		top: props.collidable(container-padding);
 		left: props.collidable(container-padding);
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 			top: props.collidable(container-padding, tablet);
 			left: props.collidable(container-padding, tablet);
 		}
@@ -88,7 +88,7 @@
 		bottom: props.collidable(container-padding);
 		right: props.collidable(container-padding);
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 			top: props.collidable(container-padding, tablet);
 			right: props.collidable(container-padding, tablet);
 			bottom: auto;
@@ -99,18 +99,18 @@
 	/// Walls
 	.collidable-wall {
 		position: absolute;
-		background-color: get-color(coal, dark);
-		transition: background-color get-duration() get-easing();
+		background-color: map-get(theme.$color, 'coal-dark');
+		transition: background-color map-get(theme.$duration, 'base') map-get(theme.$easing, 'base');
 	}
 
 	.collidable-wall--itemTop {
 		top: 0;
 		right: 0;
 		left: 0;
-		height: get-border(thin);
+		height: map-get(theme.$border, 'thin');
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
-			height: get-border();
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			height: map-get(theme.$border, 'base');
 		}
 	}
 
@@ -118,10 +118,10 @@
 		top: 0;
 		right: 0;
 		bottom: 0;
-		width: get-border(thin);
+		width: map-get(theme.$border, 'thin');
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
-			width: get-border();
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			width: map-get(theme.$border, 'base');
 		}
 	}
 
@@ -129,10 +129,10 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
-		height: get-border(thin);
+		height: map-get(theme.$border, 'thin');
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
-			height: get-border();
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			height: map-get(theme.$border, 'base');
 		}
 	}
 
@@ -140,10 +140,10 @@
 		top: 0;
 		bottom: 0;
 		left: 0;
-		width: get-border(thin);
+		width: map-get(theme.$border, 'thin');
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
-			width: get-border();
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			width: map-get(theme.$border, 'base');
 		}
 	}
 
@@ -157,19 +157,19 @@
 	.draggable-container--is-dragging:not(.draggable-container--over) {
 		.Block--typeStripes {
 			.BlockContent {
-				color: get-color(brand, red);
+				color: map-get(theme.$color, 'brand-red');
 			}
 		}
 
 		.collidable-wall {
-			background-color: get-color(brand, red);
+			background-color: map-get(theme.$color, 'brand-red');
 		}
 	}
 
 	// stylelint-disable-next-line no-duplicate-selectors
 	.collidable-wall {
 		&.isColliding {
-			background-color: get-color(brand, red);
+			background-color: map-get(theme.$color, 'brand-red');
 		}
 	}
 }

@@ -1,17 +1,17 @@
 .wave {
 	&--mask {
-		fill: get-color(coal, dark);
+		fill: map-get(theme.$color, 'coal-dark');
 	}
 
 	&--purple {
-		fill: get-color(brand, purple);
+		fill: map-get(theme.$color, 'brand-purple');
 	}
 
 	&--red {
-		fill: get-color(brand, red);
+		fill: map-get(theme.$color, 'brand-red');
 	}
 
 	&--orange {
-		fill: get-color(brand, orange);
+		fill: map-get(theme.$color, 'brand-orange');
 	}
 }

@@ -1,7 +1,7 @@
 $stripes-bg-size: 0.8rem;
 $halftone-bg-size: 1.2rem;
-$halftone-bg-position-start: 0 0, ($halftone-bg-size / 2) ($halftone-bg-size / 2);
-$halftone-bg-position-end: ($halftone-bg-size / 2) ($halftone-bg-size / 2),
+$halftone-bg-position-start: 0 0, calc($halftone-bg-size / 2) calc($halftone-bg-size / 2);
+$halftone-bg-position-end: calc($halftone-bg-size / 2) calc($halftone-bg-size / 2),
 	$halftone-bg-size $halftone-bg-size;
 
 @mixin stripes-bg {
@@ -29,5 +29,5 @@ $halftone-bg-position-end: ($halftone-bg-size / 2) ($halftone-bg-size / 2),
 
 @mixin pattern-placed-animated {
 	@include visible;
-	animation: placed get-duration() get-easing() both;
+	animation: placed map-get(theme.$duration, 'base') map-get(theme.$easing, 'base') both;
 }

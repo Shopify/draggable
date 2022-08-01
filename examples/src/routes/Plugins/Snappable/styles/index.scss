@@ -4,12 +4,12 @@
 	.block-layout--grid {
 		grid-template-columns: repeat(2, 1fr);
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 			grid-template-rows: repeat(4, functions.rows(3));
 			grid-template-columns: repeat(4, 1fr);
 		}
 
-		@media screen and (min-width: get-breakpoint(desktop)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
 			grid-template-rows: repeat(4, functions.rows(4));
 		}
 	}

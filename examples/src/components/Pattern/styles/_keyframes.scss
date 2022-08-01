@@ -1,3 +1,5 @@
+@use 'props';
+
 @keyframes placed {
 	to {
 		transform: scale(0);
@@ -6,10 +8,10 @@
 
 @keyframes halftone {
 	from {
-		background-position: $halftone-bg-position-start;
+		background-position: props.$halftone-bg-position-start;
 	}
 
 	to {
-		background-position: $halftone-bg-position-end;
+		background-position: props.$halftone-bg-position-end;
 	}
 }

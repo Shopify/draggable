@@ -1,5 +1,5 @@
 @use '../../../styles/utils/shared/layout';
-@use '../../components/Pattern/styles';
+@use '../../components/Pattern/styles' as pattern;
 @use 'props';
 @use 'variants';
 
@@ -7,21 +7,21 @@
 	position: relative;
 	margin-right: auto;
 	margin-left: auto;
-	width: pill-switch(size);
-	height: pill-switch(size);
+	width: props.pill-switch(size);
+	height: props.pill-switch(size);
 
-	@media screen and (min-width: get-breakpoint(tablet)) {
-		width: pill-switch(size, tablet);
-		height: pill-switch(size, tablet);
+	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+		width: props.pill-switch(size, tablet);
+		height: props.pill-switch(size, tablet);
 	}
 
 	&__track {
-		@include pill-switch-track-layout;
-		@include pill-switch-border(get-border());
+		@include props.pill-switch-track-layout;
+		@include props.pill-switch-border(map-get(theme.$border, 'base'));
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		color: get-color(brand, blue);
+		color: map-get(theme.$color, 'brand-blue');
 		background-color: white;
 		transform: rotate(-45deg);
 		overflow: hidden;
@@ -29,29 +29,27 @@
 		&::after {
 			content: '';
 			position: absolute;
-			top: -(get-border());
-			right: -(get-border());
-			bottom: -(get-border());
-			left: -(get-border());
+			top: -(map-get(theme.$border, 'base'));
+			right: -(map-get(theme.$border, 'base'));
+			bottom: -(map-get(theme.$border, 'base'));
+			left: -(map-get(theme.$border, 'base'));
 			display: block;
-			background-color: get-color(coal, dark);
-			transition: opacity get-duration(fast) get-easing();
+			background-color: map-get(theme.$color, 'coal-dark');
+			transition: opacity map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base');
 		}
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
-			@include pill-switch-track-layout('tablet');
-			@include pill-switch-border(get-border(thick));
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			@include props.pill-switch-track-layout('tablet');
+			@include props.pill-switch-border(map-get(theme.$border, 'thick'));
 		}
 
-		// halftone is always animated and blue to mitigate slight transition inconsistency...
-		// ::after overlays it so its fine
 		.pattern--halftone {
-			@include pattern-halftone-animated;
-			height: pill-switch(size);
+			@include pattern.pattern-halftone-animated;
+			height: props.pill-switch(size);
 			transform: rotate(45deg);
 
-			@media screen and (min-width: get-breakpoint(tablet)) {
-				height: pill-switch(size, tablet);
+			@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+				height: props.pill-switch(size, tablet);
 			}
 		}
 	}
@@ -61,18 +59,18 @@
 		position: absolute;
 		bottom: 0;
 		left: 0;
-		width: pill-switch(control-size);
-		height: pill-switch(control-size);
-		color: get-color(coal, dark);
+		width: props.pill-switch(control-size);
+		height: props.pill-switch(control-size);
+		color: map-get(theme.$color, 'coal-dark');
 		background-color: white;
-		border: get-border() solid currentColor;
+		border: map-get(theme.$border, 'base') solid currentColor;
 		border-radius: 50%;
-		transition: color get-duration(fast) get-easing();
+		transition: color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base');
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
-			width: pill-switch(control-size, tablet);
-			height: pill-switch(control-size, tablet);
-			border-width: get-border(thick);
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			width: props.pill-switch(control-size, tablet);
+			height: props.pill-switch(control-size, tablet);
+			border-width: map-get(theme.$border, 'thick');
 		}
 
 		// visually center
@@ -84,11 +82,11 @@
 		&:focus,
 		&:hover,
 		&.draggable-mirror {
-			color: get-color(brand, blue);
+			color: map-get(theme.$color, 'brand-blue');
 		}
 
 		&:active {
-			color: get-color(brand, blue-dark);
+			color: map-get(theme.$color, 'brand-blue-dark');
 		}
 
 		&.draggable-source--is-dragging {

@@ -140,7 +140,7 @@
 		@error 'You did not provide unitless numbers for `$width` and `$height`.';
 	}
 
-	$ratio-percentage: ($height / $width) * 100%;
+	$ratio-percentage: calc(($height / $width) * 100%);
 	position: relative;
 	overflow: hidden;
 

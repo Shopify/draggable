@@ -4,7 +4,7 @@
 $floated-block-name: unquote('block');
 
 .floated {
-	@media screen and (max-width: calc(get-breakpoint(tablet) - 1px)) {
+	@media screen and (max-width: calc(map-get(theme.$breakpoint, 'md') - 1px)) {
 		@include layout.draggable-source-layout($floated-block-name, 1, 2, 3, 4, 5, 7, 8) {
 			width: 50%;
 		}
@@ -26,7 +26,7 @@ $floated-block-name: unquote('block');
 		}
 	}
 
-	@media screen and (min-width: get-breakpoint(tablet)) {
+	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 		@include layout.draggable-source-layout($floated-block-name, 1, 2, 3) {
 			width: 33.333%;
 		}
@@ -54,30 +54,10 @@ $floated-block-name: unquote('block');
 		}
 	}
 
-	@media screen and (min-width: get-breakpoint(desktop)) {
+	@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
 		@include layout.draggable-source-layout($floated-block-name, 1, 2, 3, 7, 8) {
 			.block__content {
 				height: rows(4);
-			}
-		}
-	}
-
-	@media screen and (min-width: get-breakpoint('1080p', wide)) {
-		@include layout.draggable-source-layout($floated-block-name, 4) {
-			.block__content {
-				height: rows(8);
-			}
-		}
-
-		@include layout.draggable-source-layout($floated-block-name, 5, 6) {
-			.block__content {
-				height: rows(4);
-			}
-		}
-
-		@include layout.draggable-source-layout($floated-block-name, 7, 8) {
-			.block__content {
-				height: rows(5);
 			}
 		}
 	}

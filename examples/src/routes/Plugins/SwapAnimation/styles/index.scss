@@ -12,23 +12,19 @@ $swap-anim-block-name: unquote('block');
 		flex-basis: 100%;
 	}
 
-	@media screen and (min-width: get-breakpoint(tablet)) {
+	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 		@include layout.draggable-source-layout($swap-anim-block-name, 1, 2, 3, 4, 5, 6, 7, 8, 9) {
 			flex-basis: 33.333%;
 		}
 	}
 
 	.BlockContent {
-		@media screen and (min-width: get-breakpoint(tablet)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 			height: functions.rows(3);
 		}
 
-		@media screen and (min-width: get-breakpoint(desktop)) {
+		@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
 			height: functions.rows(4);
-		}
-
-		@media screen and (min-width: get-breakpoint('1080p', wide)) {
-			height: functions.rows(5);
 		}
 	}
 }

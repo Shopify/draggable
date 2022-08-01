@@ -1,24 +1,24 @@
 @import '../../../styles/utils/shared/layout';
 
 .page-header {
-	@include layout.centered-width(get-layout-length(page-header));
-	margin-bottom: get-spacing(loose);
+	@include layout.centered-width(map-get(theme.$layout-length, 'page-header'));
+	margin-bottom: map-get(theme.$spacing, 'loose');
 	text-align: center;
-	color: get-color(coal, dark);
+	color: map-get(theme.$color, 'coal-dark');
 
-	@media screen and (min-width: get-breakpoint(tablet)) {
-		margin-bottom: get-spacing(loosest);
+	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+		margin-bottom: map-get(theme.$spacing, 'loosest');
 	}
 
-	@media screen and (min-width: get-breakpoint(desktop)) {
-		margin-bottom: get-spacing(fattest);
+	@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
+		margin-bottom: map-get(theme.$spacing, 'fattest');
 	}
 
 	.link {
-		margin-top: get-spacing(tight);
+		margin-top: map-get(theme.$spacing, 'tight');
 
-		@media screen and (min-width: get-breakpoint(desktop)) {
-			margin-top: get-spacing();
+		@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
+			margin-top: map-get(theme.$spacing, 'base');
 		}
 	}
 }

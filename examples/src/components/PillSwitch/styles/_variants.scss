@@ -12,18 +12,18 @@
 			bottom: auto;
 			left: auto;
 			color: white;
-			background-color: get-color(brand, blue);
-			border-color: get-color(brand, blue);
+			background-color: map-get(theme.$color, 'brand-blue');
+			border-color: map-get(theme.$color, 'brand-blue');
 
 			&:focus,
 			&:hover,
 			&.draggable-mirror {
-				color: get-color(brand, blue);
+				color: map-get(theme.$color, 'brand-blue');
 				background-color: white;
 			}
 
 			&:active {
-				color: get-color(brand, blue-dark);
+				color: map-get(theme.$color, 'brand-blue-dark');
 			}
 		}
 	}

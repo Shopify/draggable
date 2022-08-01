@@ -5,24 +5,12 @@
 		@include stacked-list-scroll-height;
 		overflow-y: scroll;
 
-		@media screen and (min-width: get-breakpoint(desktop)) {
-			@include stacked-list-scroll-height(props.stacked-list-item(base, desktop), 7, base);
-		}
-
 		.stacked-list__wrapper--medium & {
-			@include stacked-list-scroll-height(props.stacked-list-item(medium), 3);
-
-			@media screen and (min-width: get-breakpoint(desktop)) {
-				@include stacked-list-scroll-height(props.stacked-list-item(medium, desktop), 3, base);
-			}
+			@include stacked-list-scroll-height(10rem, 3);
 		}
 
 		.stacked-list__wrapper--large & {
-			@include stacked-list-scroll-height(props.stacked-list-item(large), 3);
-
-			@media screen and (min-width: get-breakpoint(desktop)) {
-				@include stacked-list-scroll-height(props.stacked-list-item(large, desktop), 3, base);
-			}
+			@include stacked-list-scroll-height(14.4rem, 3);
 		}
 	}
 
@@ -30,22 +18,14 @@
 		&--medium {
 			.stacked-list__header,
 			.stacked-list__content {
-				height: props.stacked-list-item(medium);
-
-				@media screen and (min-width: get-breakpoint(desktop)) {
-					height: props.stacked-list-item(medium, desktop);
-				}
+				height: 10rem;
 			}
 		}
 
 		&--large {
 			.stacked-list__header,
 			.stacked-list__content {
-				height: props.stacked-list-item(large);
-
-				@media screen and (min-width: get-breakpoint(desktop)) {
-					height: props.stacked-list-item(large, desktop);
-				}
+				height: 14.4rem;
 			}
 		}
 
@@ -77,49 +57,36 @@
 
 			.stacked-list__header,
 			.stacked-list__content {
-				height: props.stacked-list-item();
-
-				@media screen and (min-width: get-breakpoint(tablet)) {
-					height: props.stacked-list-item(base, desktop);
-				}
+				height: 7.2rem;
 			}
 
 			.stacked-list__header {
-				flex: 0 0 props.stacked-list-item(large);
-
-				@media screen and (min-width: get-breakpoint(tablet)) {
-					flex-basis: props.stacked-list-item(large, desktop);
-				}
+				flex: 0 0 14.4rem;
 			}
 
 			.StackedList {
 				display: flex;
 				flex: 1 1 auto;
 				margin-top: 0;
-				margin-left: -(get-border(thin));
+				margin-left: -(map-get(theme.$border, 'thin'));
 				overflow-x: scroll;
 
-				@media screen and (min-width: get-breakpoint(tablet)) {
-					margin-left: -(get-border());
+				@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+					margin-left: -(map-get(theme.$border, 'base'));
 				}
 			}
 
 			.stacked-list__item {
-				flex: 1 0 props.stacked-list-item(large);
-				max-width: props.stacked-list-item(large) * 2;
+				flex: 1 0 14.4rem;
+				max-width: 14.4rem * 2;
 
 				&:nth-child(1n + 2) {
 					margin-top: 0;
-					margin-left: -(get-border(thin));
+					margin-left: -(map-get(theme.$border, 'thin'));
 
-					@media screen and (min-width: get-breakpoint(tablet)) {
-						margin-left: -(get-border());
+					@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+						margin-left: -(map-get(theme.$border, 'base'));
 					}
-				}
-
-				@media screen and (min-width: get-breakpoint(tablet)) {
-					flex-basis: props.stacked-list-item(large, desktop);
-					max-width: props.stacked-list-item(large, desktop) * 2;
 				}
 			}
 
@@ -133,18 +100,18 @@
 				text-align: center;
 
 				&::before {
-					top: -(get-border(thin));
+					top: -(map-get(theme.$border, 'thin'));
 					right: auto;
-					bottom: -(get-border(thin));
-					left: -(get-border(thin));
-					width: get-border(thin);
+					bottom: -(map-get(theme.$border, 'thin'));
+					left: -(map-get(theme.$border, 'thin'));
+					width: map-get(theme.$border, 'thin');
 					height: auto;
 
-					@media screen and (min-width: get-breakpoint(tablet)) {
-						top: -(get-border());
-						bottom: -(get-border());
-						left: -(get-border());
-						width: get-border();
+					@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+						top: -(map-get(theme.$border, 'base'));
+						bottom: -(map-get(theme.$border, 'base'));
+						left: -(map-get(theme.$border, 'base'));
+						width: map-get(theme.$border, 'base');
 					}
 				}
 			}
@@ -157,22 +124,14 @@
 			&.stacked-list__wrapper--medium {
 				.stacked-list__header,
 				.stacked-list__content {
-					height: props.stacked-list-item(medium);
-
-					@media screen and (min-width: get-breakpoint(tablet)) {
-						height: props.stacked-list-item(medium, desktop);
-					}
+					height: 10rem;
 				}
 			}
 
 			&.stacked-list__wrapper--large {
 				.stacked-list__header,
 				.stacked-list__content {
-					height: props.stacked-list-item(large);
-
-					@media screen and (min-width: get-breakpoint(tablet)) {
-						height: props.stacked-list-item(large, desktop);
-					}
+					height: 14.4rem;
 				}
 			}
 		}
@@ -180,7 +139,7 @@
 
 	&__item {
 		&--draggable {
-			cursor: get-cursor(drag);
+			cursor: map-get(theme.$cursor, 'drag-base');
 
 			.stacked-list__content {
 				background-color: white;
@@ -193,12 +152,12 @@
 			&:focus,
 			&:hover {
 				.stacked-list__content {
-					color: get-color(brand, blue);
+					color: map-get(theme.$color, 'brand-blue');
 				}
 
 				+ .stacked-list__item {
 					.stacked-list__content::before {
-						background-color: get-color(brand, blue);
+						background-color: map-get(theme.$color, 'brand-blue');
 						opacity: 1;
 					}
 				}
@@ -206,7 +165,7 @@
 
 			&.draggable-source--is-dragging {
 				.stacked-list__content {
-					color: get-color(brand, blue);
+					color: map-get(theme.$color, 'brand-blue');
 
 					.Pattern--typeHalftone {
 						@include pattern-halftone-animated;
@@ -217,7 +176,7 @@
 				+ .draggable--original + .stacked-list__item {
 					// stylelint-disable-next-line selector-max-class
 					.stacked-list__content::before {
-						background-color: get-color(brand, blue);
+						background-color: map-get(theme.$color, 'brand-blue');
 						opacity: 1;
 					}
 				}
@@ -232,15 +191,15 @@
 			}
 
 			&.draggable-mirror {
-				z-index: get-z-index(overlay);
-				transition: width get-duration() get-easing(bungie),
-					height get-duration() get-easing(bungie);
+				z-index: map-get(theme.$z-index, 'overlay');
+				transition: width map-get(theme.$duration, 'base') map-get(theme.$easing, 'bungie'),
+					height map-get(theme.$duration, 'base') map-get(theme.$easing, 'bungie');
 
 				.stacked-list__content {
 					height: 100%;
 					color: white;
-					background-color: get-color(brand, blue);
-					border-color: get-color(brand, blue);
+					background-color: map-get(theme.$color, 'brand-blue');
+					border-color: map-get(theme.$color, 'brand-blue');
 					transform: scale(1.025);
 
 					&::before,
@@ -254,7 +213,7 @@
 
 					&::before,
 					&::after {
-						background-color: get-color(brand, blue);
+						background-color: map-get(theme.$color, 'brand-blue');
 					}
 				}
 			}

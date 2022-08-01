@@ -1,16 +1,16 @@
 .navigation {
 	&__link {
-		font-weight: get-type-scale(subheading, weight);
-		color: get-color(coal, light);
+		font-weight: 600;
+		color: map-get(theme.$color, 'coal-light');
 
 		&--current {
 			pointer-events: none;
-			color: get-color(purple);
+			color: map-get(theme.$color, 'purple-base');
 		}
 
 		&--disabled {
 			pointer-events: none;
-			color: get-color(coal, light);
+			color: map-get(theme.$color, 'coal-light');
 		}
 	}
 }

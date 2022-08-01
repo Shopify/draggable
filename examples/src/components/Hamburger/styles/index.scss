@@ -6,17 +6,17 @@
 	top: $hamburger-vertical-center;
 	animation-name: hamburger-out;
 
-	z-index: get-z-index(hamburger);
+	z-index: map-get(theme.$z-index, 'hamburger');
 	position: absolute;
-	top: get-spacing();
+	top: map-get(theme.$spacing, 'base');
 	left: 50%;
 	margin-left: -$hamburger-offset;
-	padding: get-spacing(tightest);
+	padding: map-get(theme.$spacing, 'tightest');
 	// prevent the 'X' on page load
 	opacity: 0;
-	animation: FadeActivator get-duration(slow) get-easing() forwards;
+	animation: FadeActivator map-get(theme.$duration, 'slow') map-get(theme.$easing, 'base') forwards;
 
-	@media only screen and (min-width: get-breakpoint()) {
+	@media only screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 		@include visually-hidden;
 	}
 
@@ -30,7 +30,7 @@
 			content: '';
 			top: 0;
 			display: block;
-			transition: background-color get-duration() get-easing();
+			transition: background-color map-get(theme.$duration, 'base') map-get(theme.$easing, 'base');
 		}
 
 		&::before,
@@ -41,9 +41,9 @@
 			width: 100%;
 			height: $hamburger-line-height;
 			border-radius: $hamburger-line-height;
-			background-color: get-color(coal, dark);
-			animation-duration: get-duration();
-			animation-timing-function: get-easing();
+			background-color: map-get(theme.$color, 'coal-dark');
+			animation-duration: map-get(theme.$duration, 'base');
+			animation-timing-function: map-get(theme.$easing, 'base');
 			animation-fill-mode: both;
 		}
 

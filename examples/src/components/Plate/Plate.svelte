@@ -1,7 +1,7 @@
 <script lang="ts">
 	import classNames from 'classnames';
-	import type Position from 'src/common/types/Position';
-	import flipSign from 'src/scripts/utils/flip-sign';
+	import type Position from '@src/common/types/Position';
+	import { flipSign } from '@src/utils';
 
 	export let level: 'top' | 'middle' | 'bottom';
 	export let label: string = '';

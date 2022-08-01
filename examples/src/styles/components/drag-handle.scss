@@ -1,13 +1,15 @@
+@use '../theme';
+
 $handle-size: 2rem;
 $handle-stroke-width: 0.4rem;
-$handle-center: ($handle-size / 2) - ($handle-stroke-width / 2);
+$handle-center: calc(($handle-size / 2) - ($handle-stroke-width / 2));
 
 .drag-handle {
 	position: relative;
 	width: $handle-size;
 	height: $handle-size;
 	background-color: currentColor;
-	transition: background-color get-duration(fast) get-easing();
+	transition: background-color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base');
 
 	&::before,
 	&::after {
@@ -18,7 +20,7 @@ $handle-center: ($handle-size / 2) - ($handle-stroke-width / 2);
 		display: block;
 		height: $handle-stroke-width;
 		background-color: white;
-		transition: background-color get-duration(fast) get-easing();
+		transition: background-color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base');
 	}
 
 	&::before {

@@ -1,6 +1,8 @@
+@use '../theme';
+
 $handle-size: 2rem;
 $handle-stroke-width: 0.4rem;
-$handle-center: ($handle-size / 2) - ($handle-stroke-width / 2);
+$handle-center: calc(($handle-size / 2) - ($handle-stroke-width / 2));
 
 .nope-handle {
 	position: relative;
@@ -8,13 +10,13 @@ $handle-center: ($handle-size / 2) - ($handle-stroke-width / 2);
 	height: $handle-size;
 	border: $handle-stroke-width solid currentColor;
 	border-radius: 50%;
-	transition: border-color get-duration(fast) get-easing();
+	transition: border-color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base');
 
 	&::before {
 		content: '';
 		position: absolute;
 		top: $handle-center - $handle-stroke-width;
-		left: -($handle-stroke-width / 2);
+		left: calc(- ($handle-stroke-width / 2));
 		display: block;
 		width: $handle-size - $handle-stroke-width;
 		height: $handle-stroke-width;

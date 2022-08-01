@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type Page from 'src/common/types/Page';
+	import type Page from 'common/types/Page';
 	import Brand from '../Brand/Brand.svelte';
 	import Navigation from '../Navigation/Navigation.svelte';
 

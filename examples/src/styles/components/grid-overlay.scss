@@ -1,5 +1,6 @@
 @use '../utils/shared/functions';
 @use '../utils/shared/layout';
+@use '../theme';
 @use '../Main/props';
 
 $grid-overlay-baseline: 0.1rem;
@@ -7,48 +8,48 @@ $grid-overlay-baseline: 0.1rem;
 .grid-overlay {
 	--columns: 4;
 	--repeating-width: calc(100% / var(--columns));
-	--gutter-size: get-layout-length(gutter, mobile);
+	--gutter-size: map-get(theme.$layout-length, 'gutter-mobile');
 	--column-width: calc((100% / var(--columns)) - var(--gutter-size));
 	--baseline-stop: calc(var(--gutter-size) - #{$grid-overlay-baseline});
 	--row-height: calc(#{rows(1, true)} + var(--gutter-size));
 	--bg-width: calc(100% + var(--gutter-size));
 	--bg-baseline: repeating-linear-gradient(
 		to bottom,
-		get-color(purple),
-		get-color(purple) $grid-overlay-baseline,
+		map-get(theme.$color, 'purple-base'),
+		map-get(theme.$color, 'purple-base') $grid-overlay-baseline,
 		transparent $grid-overlay-baseline,
 		transparent var(--baseline-stop),
-		get-color(purple) var(--baseline-stop),
-		get-color(purple) var(--gutter-size),
+		map-get(theme.$color, 'purple-base') var(--baseline-stop),
+		map-get(theme.$color, 'purple-base') var(--gutter-size),
 		transparent var(--gutter-size),
 		transparent var(--row-height)
 	);
 	--bg-columns: repeating-linear-gradient(
 		to right,
-		get-color(purple, light),
-		get-color(purple, light) var(--column-width),
+		map-get(theme.$color, 'purple-light'),
+		map-get(theme.$color, 'purple-light') var(--column-width),
 		transparent var(--column-width),
 		transparent var(--repeating-width)
 	);
 
-	@media screen and (min-width: get-breakpoint(tablet)) {
+	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 		--columns: 6;
-		--gutter-size: get-layout-length(gutter);
+		--gutter-size: map-get(theme.$layout-length, 'gutter');
 		--row-height: calc(#{rows()} + var(--gutter-size));
 	}
 
-	@media screen and (min-width: get-breakpoint(desktop)) {
+	@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
 		--columns: 8;
 	}
 
 	// positioned parent will be `body`
-	@include centered-width(get-layout-length(main-interior));
+	@include centered-width(map-get(theme.$layout-length, 'main-interior'));
 	z-index: 1;
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	left: get-spacing(tight);
-	right: get-spacing(tight);
+	left: map-get(theme.$spacing, 'tight');
+	right: map-get(theme.$spacing, 'tight');
 	min-height: 100vh;
 	background-image: var(--bg-baseline), var(--bg-columns);
 	background-size: var(--bg-width) 100%;
@@ -57,12 +58,8 @@ $grid-overlay-baseline: 0.1rem;
 	opacity: 0.8;
 	pointer-events: none;
 
-	@media screen and (min-width: get-breakpoint()) {
-		left: $main-padding-left-tablet;
-	}
-
-	@media screen and (min-width: get-breakpoint(desktop)) {
-		right: get-spacing(fattest);
+	@media screen and (min-width: map-get(theme.$breakpoint, desktop)) {
+		right: map-get(theme.$spacing, 'fattest');
 		left: $main-padding-left-desktop;
 	}
 

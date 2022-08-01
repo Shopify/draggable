@@ -5,7 +5,8 @@ import { fileURLToPath, URL } from 'url';
 const config = {
 	resolve: {
 		alias: {
-			'@draggable': fileURLToPath(new URL('../src', import.meta.url))
+			'@draggable': fileURLToPath(new URL('../src', import.meta.url)),
+			'@src': fileURLToPath(new URL('./src', import.meta.url))
 		}
 	},
 	plugins: [sveltekit()]

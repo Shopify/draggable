@@ -1,26 +1,28 @@
+@use '../theme';
+
 .link {
-	color: get-color(purple, light);
-	transition: color get-duration() get-easing();
+	color: map-get(theme.$color, 'purple-light');
+	transition: color map-get(theme.$duration, 'base') map-get(theme.$easing, 'base');
 
 	&:focus,
 	&:hover {
-		color: get-color(purple);
+		color: map-get(theme.$color, 'purple-base');
 	}
 
 	&:active {
-		color: get-color(purple, dark);
+		color: map-get(theme.$color, 'purple-dark');
 	}
 
 	&--dark {
-		color: get-color(purple);
+		color: map-get(theme.$color, 'purple-base');
 
 		&:focus,
 		&:hover {
-			color: get-color(brand, yellow);
+			color: map-get(theme.$color, 'brand-yellow');
 		}
 
 		&:active {
-			color: get-color(brand, orange);
+			color: map-get(theme.$color, 'brand-orange');
 		}
 	}
 
@@ -28,18 +30,18 @@
 		display: inline-block;
 		font-size: 1.6rem;
 		font-weight: 700;
-		color: get-color(coal, dark);
+		color: map-get(theme.$color, 'coal-dark');
 		text-decoration: underline;
 		text-decoration-line: underline;
 		text-decoration-skip: ink;
 
 		&:focus,
 		&:hover {
-			color: get-color(brand, blue);
+			color: map-get(theme.$color, 'brand-blue');
 		}
 
 		&:active {
-			color: darken(get-color(brand, blue), 10%);
+			color: darken(map-get(theme.$color, 'brand-blue'), 10%);
 		}
 	}
 

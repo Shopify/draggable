@@ -1,68 +1,64 @@
 @use 'variants';
 
 .navigation {
-	padding: get-spacing(tight);
+	padding: map-get(theme.$spacing, 'tight');
 
-	@media screen and (min-width: get-breakpoint()) {
+	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
 		flex: 1; // for sticky footer
 	}
 
-	@media screen and (min-width: get-breakpoint(desktop)) {
-		padding-right: get-spacing(loose);
-		padding-left: get-spacing(loose);
+	@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
+		padding-right: map-get(theme.$spacing, 'loose');
+		padding-left: map-get(theme.$spacing, 'loose');
 	}
 
 	&__list {
 		& + & {
-			margin-top: get-spacing();
+			margin-top: map-get(theme.$spacing, 'base');
 
-			@media screen and (min-width: get-breakpoint()) {
-				margin-top: get-spacing(looser);
+			@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+				margin-top: map-get(theme.$spacing, 'looser');
 			}
 		}
 	}
 
 	&__item {
 		& + & {
-			margin-top: get-spacing(tightest) + $spacing-unit;
+			margin-top: map-get(theme.$spacing, 'tightest') + $spacing-unit;
 
-			@media screen and (min-width: get-breakpoint()) {
-				margin-top: get-spacing(tighter);
+			@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+				margin-top: map-get(theme.$spacing, 'tighter');
 			}
 		}
 	}
 
 	&__heading,
 	&__link {
-		font-size: get-type-scale(nav);
-		letter-spacing: get-type-scale(nav, tracking);
-		line-height: get-type-scale(nav, leading);
-
-		@media screen and (min-width: get-breakpoint()) {
-			font-size: get-type-scale(nav, '960');
-		}
+		font-size: 3.2rem;
+		letter-spacing: -0.1rem;
+		line-height: 0.9;
 	}
 
 	&__heading {
-		font-weight: get-type-scale(h1, weight);
+		font-weight: 700;
 		color: white;
 
 		.NavList--isCurrent & {
-			color: get-color(brand, yellow);
+			color: map-get(theme.$color, 'brand-yellow');
 		}
 	}
 
 	a&__link {
-		color: get-color(ash, dark);
-		transition: color get-duration() get-easing();
+		color: map-get(theme.$color, 'ash-dark');
+		transition: color map-get(theme.$duration, 'base') map-get(theme.$easing, 'base');
 
 		&:focus,
 		&:hover {
-			color: get-color(purple);
+			color: map-get(theme.$color, 'purple-base');
 		}
 
 		&:active {
-			color: get-color(purple, dark);
+			color: map-get(theme.$color, 'purple-dark');
 		}
 	}
 }

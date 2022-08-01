@@ -1,6 +1,6 @@
 <script lang="ts">
 	import classNames from 'classnames';
-	import type Page from 'src/common/types/Page';
+	import type Page from 'common/types/Page';
 
 	export let pages: Page[];
 	export let linkClasses: string | string[] | undefined = undefined;

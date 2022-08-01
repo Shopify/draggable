@@ -3,22 +3,27 @@
 @use 'props';
 @use 'variants';
 
+$paper-stack-heading: (
+	size: (
+		base: 7.2rem,
+		tablet: 12rem,
+		desktop: 16rem
+	),
+	weight: 700,
+	leading: 1,
+	margin: 0.5em
+);
+
+@function paper-stack-heading($group: $threads-default-value, $variant: $threads-default-value) {
+	@return threads-value-get($paper-stack-heading, $group, $variant);
+}
+
 .paper-stack {
 	position: relative;
 	margin-right: auto;
 	margin-left: auto;
-	width: paper-stack-item(width);
-	height: paper-stack(height);
-
-	@media screen and (min-width: get-breakpoint(tablet)) {
-		width: paper-stack-item(width, tablet);
-		height: paper-stack(height, tablet);
-	}
-
-	@media screen and (min-width: get-breakpoint('1080p', wide)) {
-		width: paper-stack-item(width, desktop);
-		height: paper-stack(height, desktop);
-	}
+	width: 24rem;
+	height: 38rem;
 
 	&__item {
 		position: absolute;
@@ -34,35 +39,17 @@
 
 		@include paper-stack-item-offset;
 
-		@media screen and (min-width: get-breakpoint(tablet)) {
-			@include paper-stack-item-offset(tablet);
-		}
-
-		@media screen and (min-width: get-breakpoint('1080p', wide)) {
-			@include paper-stack-item-offset(desktop);
-		}
-
 		&:nth-child(1n + 2) {
 			.paper-stack__content::after {
 				content: '';
 				position: absolute;
-				right: -(paper-stack-shadow(offset));
-				bottom: paper-stack-shadow(bottom);
-				left: -(paper-stack-shadow(offset));
+				right: -0.8rem;
+				bottom: calc(map-get(theme.$spacing, 'base') / 2);
+				left: -0.8rem;
 				display: block;
-				height: paper-stack-shadow(height);
-				background-color: get-color(coal, dark);
-				transition: transform get-duration() get-easing();
-
-				@media screen and (min-width: get-breakpoint(tablet)) {
-					bottom: paper-stack-shadow(bottom, tablet);
-					height: paper-stack-shadow(height, tablet);
-				}
-
-				@media screen and (min-width: get-breakpoint('1080p', wide)) {
-					bottom: paper-stack-shadow(bottom, desktop);
-					height: paper-stack-shadow(height, desktop);
-				}
+				height: map-get(theme.$spacing, 'base');
+				background-color: map-get(theme.$color, 'coal-dark');
+				transition: transform map-get(theme.$duration, 'base') map-get(theme.$easing, 'base');
 			}
 		}
 	}
@@ -71,36 +58,20 @@
 		@include flex-center;
 		position: relative;
 		width: 100%;
-		height: paper-stack-item(height);
+		height: 38rem;
 		color: white;
-		background-color: get-color(coal, dark);
-		border: get-border() solid get-color(coal, dark);
-		border-top-width: get-border(thick);
-		transform: paper-stack-item(transform);
+		background-color: map-get(theme.$color, 'coal-dark');
+		border: map-get(theme.$border, 'base') solid map-get(theme.$color, 'coal-dark');
+		border-top-width: map-get(theme.$border, 'thick');
+		transform: perspective(90rem) rotateX(60deg);
 		backface-visibility: hidden; // this might not be making any difference...
-
-		@media screen and (min-width: get-breakpoint(tablet)) {
-			height: paper-stack-item(height, tablet);
-		}
-
-		@media screen and (min-width: get-breakpoint('1080p', wide)) {
-			height: paper-stack-item(height, desktop);
-		}
 	}
 
 	&__heading {
-		margin-top: paper-stack-heading(margin);
-		font-size: paper-stack-heading(size);
-		font-weight: paper-stack-heading(weight);
-		line-height: paper-stack-heading(leading);
-
-		@media screen and (min-width: get-breakpoint(tablet)) {
-			font-size: paper-stack-heading(size, tablet);
-		}
-
-		@media screen and (min-width: get-breakpoint('1080p', wide)) {
-			font-size: paper-stack-heading(size, desktop);
-		}
+		margin-top: 0.5rem;
+		font-size: 7.2rem;
+		font-weight: 700;
+		line-height: 1;
 	}
 }
 

@@ -33,7 +33,8 @@
 .line-break--tablet-up {
 	display: none;
 
-	@media screen and (min-width: get-breakpoint(mobile, wide)) {
+	@media screen and;
+	) {
 		display: block;
 	}
 }

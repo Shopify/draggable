@@ -12,7 +12,7 @@ type DragEventData = {
   pressure?: number;
   draggable?: string;
   detail?: SensorEvent;
-  originalEvent?: Event;
+  originalEvent: Event;
 };
 
 export class DragEvent extends AbstractEvent {
@@ -61,11 +61,24 @@ export class DragEvent extends AbstractEvent {
 }
 
 export class DragStartEvent extends DragEvent {
+  declare data: Omit<DragEventData, 'originalSource' | 'sourceContainer'> & {
+    originalSource: HTMLElement;
+    sourceContainer: HTMLElement;
+  };
+
   clone(data) {
     return new DragStartEvent({
       ...this.data,
       ...data,
     });
+  }
+
+  get originalSource() {
+    return this.data.originalSource;
+  }
+
+  get sourceContainer() {
+    return this.data.originalSource;
   }
 
   static type = 'drag:start';
@@ -195,8 +208,16 @@ export class DragPressureEvent extends DragEvent {
 }
 
 export class DragStopEvent extends DragEvent {
+  declare data: Omit<DragEventData, 'originalSource'> & {
+    originalSource: HTMLElement;
+  };
+
   static type = 'drag:stop';
   static cancelable = true;
+
+  get originalSource() {
+    return this.data.originalSource;
+  }
 
   clone(data) {
     return new DragStopEvent({

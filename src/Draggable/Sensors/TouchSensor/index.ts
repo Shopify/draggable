@@ -157,6 +157,7 @@ export default class TouchSensor extends Sensor {
       clientX: pageX,
       clientY: pageY,
       target,
+
       container: <HTMLElement>this.currentContainer,
       originalEvent: event,
     });

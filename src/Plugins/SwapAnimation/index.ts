@@ -12,7 +12,7 @@ export const defaultOptions = {
 export interface SwapAnimationOptions {
   duration: number;
   easingFunction: string;
-  horizontal: boolean;
+  horizontal?: boolean;
 }
 
 /*** Resets animation style properties after animation has completed */

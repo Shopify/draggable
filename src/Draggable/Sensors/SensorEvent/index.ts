@@ -6,7 +6,7 @@ export type SensorEventData = {
   clientY: number;
   target: HTMLElement;
   container: HTMLElement;
-  originalSource: HTMLElement;
+  originalSource?: HTMLElement;
   type?: string;
   value?: unknown;
   pressure?: number;

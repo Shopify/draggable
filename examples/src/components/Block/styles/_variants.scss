@@ -29,7 +29,7 @@
 			margin-top: -(get-border(thin));
 			margin-left: -(get-border(thin));
 
-			> .block-wrapper {
+			> .block__wrapper {
 				margin-top: get-border(thin);
 				margin-left: get-border(thin);
 			}
@@ -43,7 +43,7 @@
 				margin-top: -(get-border());
 				margin-left: -(get-border());
 
-				> .block-wrapper {
+				> .block__wrapper {
 					margin-top: get-border();
 					margin-left: get-border();
 				}

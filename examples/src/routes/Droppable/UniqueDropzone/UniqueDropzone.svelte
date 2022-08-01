@@ -5,7 +5,7 @@
 	import Block from 'src/components/Block/Block.svelte';
 	import { onMount } from 'svelte/types/runtime/internal/lifecycle';
 
-	let container: HTMLElement;
+	let containers: HTMLElement[];
 	const wrappers = [
 		{ id: 1, label: 'one' },
 		{ id: 2, label: 'two' },
@@ -14,9 +14,9 @@
 	];
 
 	onMount(() => {
-		const droppable = new Droppable([container], {
+		const droppable = new Droppable(containers, {
 			draggable: '.block--draggable',
-			dropzone: '.block-wrapper--dropzone',
+			dropzone: '.block__wrapper--dropzone',
 			mirror: {
 				constrainDimensions: true
 			}
@@ -37,11 +37,11 @@
 	});
 </script>
 
-<section bind:this={container}>
-	<article class="block-layout block-layout--flex">
+<section>
+	<article bind:this={containers[0]} class="block-layout block-layout--flex">
 		{#each wrappers as { id, label }}
 			<div
-				class="block-wrapper block-wrapper--dropzone draggable-dropzone--occupied"
+				class="block__wrapper block__wrapper--dropzone draggable-dropzone--occupied"
 				data-dropzone={id}
 			>
 				<Block {label} variant="hollow" />
@@ -51,7 +51,7 @@
 
 		{#each wrappers as { id, label }}
 			<div
-				class="block-wrapper block-wrapper--dropzone draggable-dropzone--occupied"
+				class="block__wrapper block__wrapper--dropzone draggable-dropzone--occupied"
 				data-dropzone={id}
 			>
 				<Block {label} variant="hollow" />
@@ -60,21 +60,21 @@
 		{/each}
 	</article>
 
-	<article class="block-layout block-layout--grid">
-		<div class="block-wrapper block-wrapper--dropzone" data-dropzone="1">
+	<article bind:this={containers[1]} class="block-layout block-layout--grid">
+		<div class="block__wrapper block__wrapper--dropzone" data-dropzone="1">
 			<Block variant="stripes" />
 		</div>
-		<div class="block-wrapper block-wrapper--dropzone" data-dropzone="2">
+		<div class="block__wrapper block__wrapper--dropzone" data-dropzone="2">
 			<Block variant="stripes" />
 		</div>
-		<div class="block-wrapper"><Block variant="shell" classes="block--3" /></div>
-		<div class="block-wrapper block-wrapper--dropzone" data-dropzone="4">
+		<div class="block__wrapper"><Block variant="shell" classes="block--3" /></div>
+		<div class="block__wrapper block__wrapper--dropzone" data-dropzone="4">
 			<Block variant="stripes" />
 		</div>
-		<div class="block-wrapper"><Block variant="shell" classes="block--5" /></div>
-		<div class="block-wrapper"><Block variant="shell" classes="block--6" /></div>
-		<div class="block-wrapper"><Block variant="shell" classes="block--7" /></div>
-		<div class="block-wrapper block-wrapper--dropzone" data-dropzone="8">
+		<div class="block__wrapper"><Block variant="shell" classes="block--5" /></div>
+		<div class="block__wrapper"><Block variant="shell" classes="block--6" /></div>
+		<div class="block__wrapper"><Block variant="shell" classes="block--7" /></div>
+		<div class="block__wrapper block__wrapper--dropzone" data-dropzone="8">
 			<Block variant="stripes" />
 		</div>
 	</article>

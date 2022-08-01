@@ -16,8 +16,8 @@
 
 	.block--2,
 	.block--3,
-	.block-wrapper:nth-child(1),
-	.block-wrapper:nth-child(4) {
+	.block__wrapper:nth-child(1),
+	.block__wrapper:nth-child(4) {
 		position: absolute;
 		width: calc(50% - #{get-border(thin) * 2.5});
 
@@ -61,8 +61,8 @@
 		}
 	}
 
-	.block-wrapper:nth-child(1),
-	.block-wrapper:nth-child(4) {
+	.block__wrapper:nth-child(1),
+	.block__wrapper:nth-child(4) {
 		height: props.collidable(block-height);
 
 		@media screen and (min-width: get-breakpoint(tablet)) {
@@ -74,7 +74,7 @@
 		}
 	}
 
-	.block-wrapper:nth-child(1) {
+	.block__wrapper:nth-child(1) {
 		top: props.collidable(container-padding);
 		left: props.collidable(container-padding);
 
@@ -84,7 +84,7 @@
 		}
 	}
 
-	.block-wrapper:nth-child(4) {
+	.block__wrapper:nth-child(4) {
 		bottom: props.collidable(container-padding);
 		right: props.collidable(container-padding);
 

@@ -6,7 +6,7 @@ $grid-columns: 4;
 
 .unique-dropzone {
 	.block-layout {
-		.block-wrapper {
+		.block__wrapper {
 			.block:nth-child(1n + 3):not(.draggable-source--is-dragging) {
 				min-height: 0;
 				height: 0;
@@ -15,7 +15,7 @@ $grid-columns: 4;
 	}
 
 	.block-layout--flex {
-		.block-wrapper {
+		.block__wrapper {
 			flex: 1 1 calc(50% - #{get-layout-length(gutter)});
 
 			@media screen and (min-width: get-breakpoint(mobile, wide)) {
@@ -52,7 +52,7 @@ $grid-columns: 4;
 			border-width: get-border();
 		}
 
-		.block-wrapper--dropzone {
+		.block__wrapper--dropzone {
 			&::before {
 				content: '';
 				position: absolute;
@@ -89,7 +89,7 @@ $grid-columns: 4;
 		}
 
 		@for $i from 1 through length($grid-area-names) {
-			.block-wrapper:nth-child(#{$i}) {
+			.block__wrapper:nth-child(#{$i}) {
 				grid-area: nth($grid-area-names, $i);
 			}
 		}

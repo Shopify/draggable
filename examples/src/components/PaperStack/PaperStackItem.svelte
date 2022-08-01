@@ -4,7 +4,7 @@
 
 	export let draggable: boolean = false;
 	export let classes: string | string[] | undefined;
-	export let heading: string;
+	export let label: string;
 </script>
 
 <li
@@ -13,7 +13,7 @@
 	tabIndex={draggable ? 1 : 0}
 >
 	<div class="paper-stack__content">
-		<h4 class="heading text-no-select paper-stack__heading">{heading}</h4>
+		<h4 class="heading text-no-select paper-stack__heading">{label}</h4>
 		{#if draggable}
 			<Pattern variant="halftone" />
 			<Pattern variant="placed" />

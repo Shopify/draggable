@@ -14,7 +14,7 @@
 
 		const droppable = new Droppable([container], {
 			draggable: '.block--draggable',
-			dropzone: '.block-wrapper--dropzone',
+			dropzone: '.block__wrapper--dropzone',
 			collidables: '.collidable-obstacle',
 			mirror: {
 				appendTo: container,
@@ -42,16 +42,16 @@
 	});
 </script>
 
-<section bind:this={container}>
-	<article class="block-layout block-layout--positioned">
-		<div class="block-wrapper block-wrapper--dropzone draggable-dropzone--occupied">
+<section>
+	<article bind:this={container} class="block-layout block-layout--positioned">
+		<div class="block__wrapper block__wrapper--dropzone draggable-dropzone--occupied">
 			<Block variant="hollow" label="drop" />
 			<Block draggable label="drag" classes={'block--1'} />
 		</div>
 		<Block variant="stripes" classes="block--2 collidable-obstacle" />
 		<Block variant="stripes" classes="block--3 collidable-obstacle" />
 
-		<div class="block-wrapper block-wrapper--dropzone">
+		<div class="block__wrapper block__wrapper--dropzone">
 			<Block label="drop" variant="hollow" classes="block--4" />
 		</div>
 

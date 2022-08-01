@@ -45,7 +45,7 @@
 </script>
 
 <section>
-	<article class="PlateWrapper">
+	<article bind:this={container} class="plate__wrapper">
 		<Plate {position} {threshold} classes="plate--two" draggable level="middle" />
 		<Plate {position} {threshold} classes="plate--one" draggable level="top" label="hello" />
 		<Plate {position} {threshold} classes="plate--three" draggable level="bottom" />

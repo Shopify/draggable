@@ -29,5 +29,5 @@ $halftone-bg-position-end: calc($halftone-bg-size / 2) calc($halftone-bg-size / 
 
 @mixin pattern-placed-animated {
 	@include visible;
-	animation: placed map-get(theme.$duration, 'base') map-get(theme.$easing, 'base') both;
+	animation: placed map-get(theme.$durations, 'base') map-get(theme.$easings, 'base') both;
 }

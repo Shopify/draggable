@@ -1,24 +1,24 @@
 @import '../../../styles/utils/shared/layout';
 
 .page-header {
-	@include layout.centered-width(map-get(theme.$layout-length, 'page-header'));
-	margin-bottom: map-get(theme.$spacing, 'loose');
+	@include layout.centered-width(map-get(theme.$layout-lengths, 'page-header'));
+	margin-bottom: map-get(theme.$spacings, 'loose');
 	text-align: center;
-	color: map-get(theme.$color, 'coal-dark');
+	color: map-get(theme.$colors, 'coal-dark');
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
-		margin-bottom: map-get(theme.$spacing, 'loosest');
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		margin-bottom: map-get(theme.$spacings, 'loosest');
 	}
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
-		margin-bottom: map-get(theme.$spacing, 'fattest');
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		margin-bottom: map-get(theme.$spacings, 'fattest');
 	}
 
 	.link {
-		margin-top: map-get(theme.$spacing, 'tight');
+		margin-top: map-get(theme.$spacings, 'tight');
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
-			margin-top: map-get(theme.$spacing, 'base');
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			margin-top: map-get(theme.$spacings, 'base');
 		}
 	}
 }

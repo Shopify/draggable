@@ -9,7 +9,7 @@ const config = {
 		scss: {
 			prependData: `
         @use './src/styles';
-        @use 'theme';
+        @use './src/styles/theme';
       `
 		}
 	}),

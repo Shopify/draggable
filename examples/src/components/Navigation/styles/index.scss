@@ -1,33 +1,33 @@
 @use 'variants';
 
 .navigation {
-	padding: map-get(theme.$spacing, 'tight');
+	padding: map-get(theme.$spacings, 'tight');
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		flex: 1; // for sticky footer
 	}
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
-		padding-right: map-get(theme.$spacing, 'loose');
-		padding-left: map-get(theme.$spacing, 'loose');
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		padding-right: map-get(theme.$spacings, 'loose');
+		padding-left: map-get(theme.$spacings, 'loose');
 	}
 
 	&__list {
 		& + & {
-			margin-top: map-get(theme.$spacing, 'base');
+			margin-top: map-get(theme.$spacings, 'base');
 
-			@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
-				margin-top: map-get(theme.$spacing, 'looser');
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				margin-top: map-get(theme.$spacings, 'looser');
 			}
 		}
 	}
 
 	&__item {
 		& + & {
-			margin-top: map-get(theme.$spacing, 'tightest') + $spacing-unit;
+			margin-top: map-get(theme.$spacings, 'tightest') + $spacing-unit;
 
-			@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
-				margin-top: map-get(theme.$spacing, 'tighter');
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				margin-top: map-get(theme.$spacings, 'tighter');
 			}
 		}
 	}
@@ -44,21 +44,21 @@
 		color: white;
 
 		.NavList--isCurrent & {
-			color: map-get(theme.$color, 'brand-yellow');
+			color: map-get(theme.$colors, 'brand-yellow');
 		}
 	}
 
 	a&__link {
-		color: map-get(theme.$color, 'ash-dark');
-		transition: color map-get(theme.$duration, 'base') map-get(theme.$easing, 'base');
+		color: map-get(theme.$colors, 'ash-dark');
+		transition: color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
 
 		&:focus,
 		&:hover {
-			color: map-get(theme.$color, 'purple-base');
+			color: map-get(theme.$colors, 'purple-base');
 		}
 
 		&:active {
-			color: map-get(theme.$color, 'purple-dark');
+			color: map-get(theme.$colors, 'purple-dark');
 		}
 	}
 }

@@ -35,7 +35,7 @@ $plate-max-size: 80rem;
 			display: block;
 			width: 100%;
 			height: 100%;
-			background-color: map-get(theme.$color, 'coal-dark');
+			background-color: map-get(theme.$colors, 'coal-dark');
 			border-radius: 50%;
 		}
 	}
@@ -43,7 +43,7 @@ $plate-max-size: 80rem;
 	&__content {
 		@include position-cover;
 		@include flex-center;
-		background-color: map-get(theme.$color, 'coal-dark');
+		background-color: map-get(theme.$colors, 'coal-dark');
 		border-radius: 50%;
 
 		.heading {

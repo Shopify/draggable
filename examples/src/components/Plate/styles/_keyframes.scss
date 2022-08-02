@@ -82,10 +82,10 @@
 @keyframes plate-placed {
 	0%,
 	100% {
-		color: map-get(theme.$color, 'coal-dark');
+		color: map-get(theme.$colors, 'coal-dark');
 	}
 
 	50% {
-		color: map-get(theme.$color, 'brand-blue');
+		color: map-get(theme.$colors, 'brand-blue');
 	}
 }

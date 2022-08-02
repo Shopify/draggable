@@ -11,7 +11,7 @@
 	font-weight: 600;
 	letter-spacing: -0.01em;
 	line-height: 1.2;
-	color: map-get(theme.$color, 'coal-light');
+	color: map-get(theme.$colors, 'coal-light');
 }
 
 @mixin heading-jumbo {
@@ -21,7 +21,7 @@
 }
 
 @mixin heading-1 {
-	margin-bottom: map-get(theme.$spacing, 'tight');
+	margin-bottom: map-get(theme.$spacings, 'tight');
 	font-size: 4.2rem;
 	font-weight: 700;
 }

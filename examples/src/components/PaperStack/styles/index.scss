@@ -44,12 +44,12 @@ $paper-stack-heading: (
 				content: '';
 				position: absolute;
 				right: -0.8rem;
-				bottom: calc(map-get(theme.$spacing, 'base') / 2);
+				bottom: calc(map-get(theme.$spacings, 'base') / 2);
 				left: -0.8rem;
 				display: block;
-				height: map-get(theme.$spacing, 'base');
-				background-color: map-get(theme.$color, 'coal-dark');
-				transition: transform map-get(theme.$duration, 'base') map-get(theme.$easing, 'base');
+				height: map-get(theme.$spacings, 'base');
+				background-color: map-get(theme.$colors, 'coal-dark');
+				transition: transform map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
 			}
 		}
 	}
@@ -60,8 +60,8 @@ $paper-stack-heading: (
 		width: 100%;
 		height: 38rem;
 		color: white;
-		background-color: map-get(theme.$color, 'coal-dark');
-		border: map-get(theme.$border, 'base') solid map-get(theme.$color, 'coal-dark');
+		background-color: map-get(theme.$colors, 'coal-dark');
+		border: map-get(theme.$border, 'base') solid map-get(theme.$colors, 'coal-dark');
 		border-top-width: map-get(theme.$border, 'thick');
 		transform: perspective(90rem) rotateX(60deg);
 		backface-visibility: hidden; // this might not be making any difference...

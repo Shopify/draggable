@@ -24,7 +24,7 @@ $flexbox-block-name: unquote('block');
 		}
 	}
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		@include layout.draggable-source-layout($flexbox-block-name, 1, 2, 4, 5, 7) {
 			.block__content {
 				height: functions.rows(3);
@@ -38,7 +38,7 @@ $flexbox-block-name: unquote('block');
 		}
 	}
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 		@include layout.draggable-source-layout($flexbox-block-name, 1, 2, 3) {
 			flex-basis: 33.333%;
 		}

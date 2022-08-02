@@ -1,24 +1,24 @@
 .block {
 	&__content {
 		&--shell {
-			color: map-get(theme.$color, 'coal-dark');
+			color: map-get(theme.$colors, 'coal-dark');
 			background-color: white;
 			border-color: currentColor;
 		}
 
 		&--hollow {
-			color: map-get(theme.$color, 'ash-dark');
+			color: map-get(theme.$colors, 'ash-dark');
 			background-color: white;
 			border-color: currentColor;
 		}
 
 		&--stripes {
 			@include stripes-bg;
-			color: map-get(theme.$color, 'coal-dark');
+			color: map-get(theme.$colors, 'coal-dark');
 			border-color: currentColor;
-			transition: color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base');
+			transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
 			&.is-colliding {
-				color: map-get(theme.$color, 'brand-red');
+				color: map-get(theme.$colors, 'brand-red');
 			}
 		}
 	}
@@ -39,7 +39,7 @@
 				padding-left: map-get(theme.$border, 'thin');
 			}
 
-			@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 				margin-top: -(map-get(theme.$border, 'base'));
 				margin-left: -(map-get(theme.$border, 'base'));
 
@@ -77,7 +77,7 @@
 			display: grid;
 			gap: map-get(theme.$border, 'thin');
 
-			@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 				gap: map-get(theme.$border, 'base');
 			}
 		}
@@ -88,25 +88,25 @@
 	}
 
 	&--is-draggable {
-		cursor: map-get(theme.$cursor, 'drag-base');
+		cursor: map-get(theme.$cursors, 'drag-base');
 
 		.block-content {
-			color: map-get(theme.$color, 'coal-dark');
+			color: map-get(theme.$colors, 'coal-dark');
 			background-color: white;
 			border-color: currentColor;
-			transition: color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base'),
-				background-color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base'),
-				transform map-get(theme.$duration, 'base') map-get(theme.$easing, 'bungie');
+			transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+				background-color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+				transform map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie');
 		}
 
 		// interaction
 		&:focus .block-content,
 		&:hover .block-content {
-			color: map-get(theme.$color, 'brand-blue');
+			color: map-get(theme.$colors, 'brand-blue');
 		}
 
 		&.draggable-source--is-dragging .block-content {
-			color: map-get(theme.$color, 'brand-blue');
+			color: map-get(theme.$colors, 'brand-blue');
 
 			.pattern--halftone {
 				@include pattern-halftone-animated;
@@ -121,14 +121,14 @@
 
 		&.draggable-mirror {
 			z-index: map-get(theme.$z-index, 'overlay');
-			transition: width map-get(theme.$duration, 'base') map-get(theme.$easing, 'bungie'),
-				height map-get(theme.$duration, 'base') map-get(theme.$easing, 'bungie');
+			transition: width map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie'),
+				height map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie');
 
 			.block-content {
 				height: 100%;
 				color: white;
-				background-color: map-get(theme.$color, 'brand-blue');
-				border-color: map-get(theme.$color, 'brand-blue');
+				background-color: map-get(theme.$colors, 'brand-blue');
+				border-color: map-get(theme.$colors, 'brand-blue');
 				transform: scale(1.025);
 			}
 		}

@@ -39,5 +39,5 @@ $pill-switch-data: (
 }
 
 @mixin pill-switch-border($width) {
-	box-shadow: inset 0 0 0 $width map-get(theme.$color, 'brand-blue');
+	box-shadow: inset 0 0 0 $width map-get(theme.$colors, 'brand-blue');
 }

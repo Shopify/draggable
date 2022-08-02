@@ -16,10 +16,10 @@ $grid-columns: 4;
 
 	.block-layout--flex {
 		.block__wrapper {
-			flex: 1 1 calc(50% - #{map-get(theme.$layout-length, 'gutter')});
+			flex: 1 1 calc(50% - #{map-get(theme.$layout-lengths, 'gutter')});
 
-			@media screen and (min-width: map-get(theme.$breakpoint, 'sm')) {
-				flex-basis: calc(25% - #{map-get(theme.$layout-length, 'gutter')});
+			@media screen and (min-width: map-get(theme.$breakpoints, 'sm')) {
+				flex-basis: calc(25% - #{map-get(theme.$layout-lengths, 'gutter')});
 			}
 		}
 	}
@@ -35,10 +35,10 @@ $grid-columns: 4;
 			'e e g g'
 			'h h h h';
 		margin-top: map-get(theme.$border, 'thin');
-		border: map-get(theme.$border, 'thin') solid map-get(theme.$color, 'coal-dark');
-		background-color: map-get(theme.$color, 'coal-dark');
+		border: map-get(theme.$border, 'thin') solid map-get(theme.$colors, 'coal-dark');
+		background-color: map-get(theme.$colors, 'coal-dark');
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			// special fractions to line up with the flexContainer
 			grid-template-columns: 1fr 1.025fr 1.025fr 1fr;
 			grid-template-areas:
@@ -62,12 +62,12 @@ $grid-columns: 4;
 				left: -(map-get(theme.$border, 'thin'));
 				display: block;
 				pointer-events: none;
-				background-color: map-get(theme.$color, 'brand-blue');
+				background-color: map-get(theme.$colors, 'brand-blue');
 				opacity: 0;
-				transition: opacity map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base');
+				transition: opacity map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
 
 				// stylelint-disable-next-line max-nesting-depth
-				@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 					top: -(map-get(theme.$border, 'base'));
 					right: -(map-get(theme.$border, 'base'));
 					bottom: -(map-get(theme.$border, 'base'));
@@ -98,11 +98,11 @@ $grid-columns: 4;
 	// stylelint-disable-next-line no-duplicate-selectors
 	.block-layout--flex {
 		.blockContent {
-			@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 				min-height: functions.rows(3);
 			}
 
-			@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
+			@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 				min-height: functions.rows(4);
 			}
 		}
@@ -114,11 +114,11 @@ $grid-columns: 4;
 	.block-layout--grid {
 		// stylelint-disable-next-line no-duplicate-selectors
 		.blockContent {
-			@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 				min-height: functions.rows(3, false, true);
 			}
 
-			@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
+			@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 				min-height: functions.rows(4, false, true);
 			}
 		}

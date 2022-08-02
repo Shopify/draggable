@@ -7,7 +7,7 @@
 	position: relative;
 	margin-top: -(map-get(theme.$border, 'thin'));
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		margin-top: -(map-get(theme.$border, 'base'));
 	}
 
@@ -26,8 +26,8 @@
 		width: 80%;
 		height: 80%;
 		background-color: white;
-		transition: opacity map-get(theme.$duration, 'base') map-get(theme.$easing, 'base'),
-			visibility map-get(theme.$duration, 'base') map-get(theme.$easing, 'base');
+		transition: opacity map-get(theme.$durations, 'base') map-get(theme.$easings, 'base'),
+			visibility map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
 	}
 
 	&:empty {
@@ -39,15 +39,15 @@
 	&__wrapper {
 		@include stripes-bg;
 		position: relative;
-		color: map-get(theme.$color, 'coal-dark');
+		color: map-get(theme.$colors, 'coal-dark');
 		box-shadow: inset 0 0 0 map-get(theme.$border, 'thin') currentColor;
 		// `draggable-container-parent--capacity` changes the `color` on `stacked-listWrapper`...
 		// This is supposed to "trickle" down and cause all children to transition color as well...
 		// Problem is, sometimes these transitions seem to collide and we don't get syncronised timing...
 		// Sadly, there is no way to target `box-shadow`'s color without the use of currentColor.
-		// transition: color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base');
+		// transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			box-shadow: inset 0 0 0 map-get(theme.$border, 'base') currentColor;
 		}
 	}
@@ -58,7 +58,7 @@
 		// by using `height`, we will get visible scrollbars
 		height: props.stacked-list-item();
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 			height: props.stacked-list-item(base, desktop);
 		}
 	}
@@ -66,9 +66,9 @@
 	&__header {
 		padding: props.stacked-list-header(padding);
 		background-color: currentColor;
-		transition: color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base');
+		transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			padding: props.stacked-list-header(padding, tablet);
 		}
 
@@ -80,12 +80,12 @@
 	}
 
 	&__item {
-		cursor: cursor: map-get(theme.$cursor, 'base');
+		cursor: cursor: map-get(theme.$cursors, 'base');
 
 		&:nth-child(1n + 2) {
 			margin-top: -(map-get(theme.$border, 'thin'));
 
-			@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 				margin-top: -(map-get(theme.$border, 'base'));
 			}
 		}
@@ -99,15 +99,15 @@
 		position: relative;
 		display: flex;
 		align-items: center;
-		padding: map-get(theme.$spacing, 'tighter');
+		padding: map-get(theme.$spacings, 'tighter');
 		color: currentColor;
-		background-color: map-get(theme.$color, 'ash-light');
+		background-color: map-get(theme.$colors, 'ash-light');
 		border: map-get(theme.$border, 'thin') solid currentColor;
-		transition: color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base'),
-			background-color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base'),
-			transform map-get(theme.$duration, 'base') map-get(theme.$easing, 'bungie');
+		transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+			background-color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+			transform map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie');
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			border-width: map-get(theme.$border, 'base');
 		}
 
@@ -118,7 +118,7 @@
 		.drag-handle,
 		.nope-handle {
 			flex: 0 0 $handle-size;
-			margin-left: map-get(theme.$spacing, 'tight');
+			margin-left: map-get(theme.$spacings, 'tight');
 		}
 
 		// top border psuedo element... solution to create a collapsed border
@@ -133,10 +133,10 @@
 			height: map-get(theme.$border, 'thin');
 			background-color: currentColor;
 			opacity: 0;
-			transition: color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base'),
-				opacity map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base');
+			transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+				opacity map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
 
-			@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 				top: -(map-get(theme.$border, 'base'));
 				right: -(map-get(theme.$border, 'base'));
 				left: -(map-get(theme.$border, 'base'));

@@ -1,17 +1,17 @@
 @use '../../../styles/utils/shared/layout';
-@import '../../components/MobileNav/styles';
+@import '';
 
 .sidebar {
 	@include position-cover;
 	z-index: map-get(theme.$z-index, 'sidebar');
-	background-color: map-get(theme.$color, 'coal-dark');
+	background-color: map-get(theme.$colors, 'coal-dark');
 	overflow-y: scroll;
 	-webkit-overflow-scrolling: touch;
 
-	@media screen and (max-width: calc(map-get(theme.$breakpoint, 'md') - 1px)) {
+	@media screen and (max-width: calc(map-get(theme.$breakpoints, 'md') - 1px)) {
 		text-align: center;
-		transition: opacity map-get(theme.$duration, 'base') map-get(theme.$easing, 'base'),
-			visibility map-get(theme.$duration, 'base') map-get(theme.$easing, 'base');
+		transition: opacity map-get(theme.$durations, 'base') map-get(theme.$easings, 'base'),
+			visibility map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
 
 		&::before {
 			content: '';
@@ -22,8 +22,8 @@
 			display: block;
 			height: $mobile-nav-padding-top;
 			background: linear-gradient(
-				rgba(map-get(theme.$color, 'coal-dark'), 0.9) 40%,
-				rgba(map-get(theme.$color, 'coal-dark'), 0)
+				rgba(map-get(theme.$colors, 'coal-dark'), 0.9) 40%,
+				rgba(map-get(theme.$colors, 'coal-dark'), 0)
 			);
 		}
 
@@ -37,34 +37,34 @@
 		}
 	}
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		position: fixed;
 		right: auto;
 		display: flex; // for sticky footer
 		flex-direction: column; // for sticky footer
-		width: map-get(theme.$layout-length, 'sidebar');
+		width: map-get(theme.$layout-lengths, 'sidebar');
 	}
 
 	&__header {
-		padding: $mobile-nav-padding-top map-get(theme.$spacing, 'tight')
-			map-get(theme.$spacing, 'tight');
+		padding: $mobile-nav-padding-top map-get(theme.$spacings, 'tight')
+			map-get(theme.$spacings, 'tight');
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
-			padding-top: map-get(theme.$spacing, 'looser');
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			padding-top: map-get(theme.$spacings, 'looser');
 		}
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
-			padding-top: map-get(theme.$spacing, 'fat');
-			padding-right: map-get(theme.$spacing, 'loose');
-			padding-left: map-get(theme.$spacing, 'loose');
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			padding-top: map-get(theme.$spacings, 'fat');
+			padding-right: map-get(theme.$spacings, 'loose');
+			padding-left: map-get(theme.$spacings, 'loose');
 		}
 	}
 
 	&__footer {
-		padding: map-get(theme.$spacing, 'loose') map-get(theme.$spacing, 'tight');
+		padding: map-get(theme.$spacings, 'loose') map-get(theme.$spacings, 'tight');
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
-			padding: map-get(theme.$spacing, 'fat') map-get(theme.$spacing, 'loose');
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			padding: map-get(theme.$spacings, 'fat') map-get(theme.$spacings, 'loose');
 		}
 	}
 }
@@ -76,12 +76,12 @@
 	color: white;
 
 	& + & {
-		margin-top: map-get(theme.$spacing, 'tighter');
+		margin-top: map-get(theme.$spacings, 'tighter');
 	}
 
-	@media screen and (max-width: calc(map-get(theme.$breakpoint, 'md') - 1px)) {
+	@media screen and (max-width: calc(map-get(theme.$breakpoints, 'md') - 1px)) {
 		margin-left: auto;
 		margin-right: auto;
-		max-width: map-get(theme.$layout-length, 'sidebar');
+		max-width: map-get(theme.$layout-lengths, 'sidebar');
 	}
 }

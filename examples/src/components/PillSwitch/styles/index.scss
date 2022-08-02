@@ -10,7 +10,7 @@
 	width: props.pill-switch(size);
 	height: props.pill-switch(size);
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		width: props.pill-switch(size, tablet);
 		height: props.pill-switch(size, tablet);
 	}
@@ -21,7 +21,7 @@
 		position: absolute;
 		top: 50%;
 		left: 50%;
-		color: map-get(theme.$color, 'brand-blue');
+		color: map-get(theme.$colors, 'brand-blue');
 		background-color: white;
 		transform: rotate(-45deg);
 		overflow: hidden;
@@ -34,11 +34,11 @@
 			bottom: -(map-get(theme.$border, 'base'));
 			left: -(map-get(theme.$border, 'base'));
 			display: block;
-			background-color: map-get(theme.$color, 'coal-dark');
-			transition: opacity map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base');
+			background-color: map-get(theme.$colors, 'coal-dark');
+			transition: opacity map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
 		}
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			@include props.pill-switch-track-layout('tablet');
 			@include props.pill-switch-border(map-get(theme.$border, 'thick'));
 		}
@@ -48,7 +48,7 @@
 			height: props.pill-switch(size);
 			transform: rotate(45deg);
 
-			@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 				height: props.pill-switch(size, tablet);
 			}
 		}
@@ -61,13 +61,13 @@
 		left: 0;
 		width: props.pill-switch(control-size);
 		height: props.pill-switch(control-size);
-		color: map-get(theme.$color, 'coal-dark');
+		color: map-get(theme.$colors, 'coal-dark');
 		background-color: white;
 		border: map-get(theme.$border, 'base') solid currentColor;
 		border-radius: 50%;
-		transition: color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base');
+		transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			width: props.pill-switch(control-size, tablet);
 			height: props.pill-switch(control-size, tablet);
 			border-width: map-get(theme.$border, 'thick');
@@ -82,11 +82,11 @@
 		&:focus,
 		&:hover,
 		&.draggable-mirror {
-			color: map-get(theme.$color, 'brand-blue');
+			color: map-get(theme.$colors, 'brand-blue');
 		}
 
 		&:active {
-			color: map-get(theme.$color, 'brand-blue-dark');
+			color: map-get(theme.$colors, 'brand-blue-dark');
 		}
 
 		&.draggable-source--is-dragging {

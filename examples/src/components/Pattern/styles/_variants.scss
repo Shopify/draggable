@@ -11,10 +11,10 @@
 			radial-gradient(currentColor 24%, transparent 25%);
 		background-position: props.$halftone-bg-position-start;
 		background-size: props.$halftone-bg-size props.$halftone-bg-size;
-		animation: halftone map-get(theme.$duration, 'slow') steps(3) infinite both paused;
+		animation: halftone map-get(theme.$durations, 'slow') steps(3) infinite both paused;
 	}
 
 	&--placed {
-		background-color: map-get(theme.$color, 'brand-blue');
+		background-color: map-get(theme.$colors, 'brand-blue');
 	}
 }

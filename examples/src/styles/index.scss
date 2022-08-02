@@ -1,47 +1,48 @@
 @use 'reset';
 @use 'theme';
 
-@use 'utils/components';
+@use 'components';
 @use 'utils/global';
 @use 'utils/shared/layout';
 
 html {
-	@include scroll-lock;
-	font-family: map-get(theme.$font-stack, 'base');
+	@include layout.scroll-lock;
+	@debug theme.$colors;
+	font-family: map-get(theme.$font-stacks, 'base');
 
 	::selection {
 		color: white;
-		background-color: map-get(theme.$color, 'coal-dark');
+		background-color: map-get(theme.$colors, 'coal-dark');
 	}
 }
 
 body {
-	cursor: map-get(theme.$cursor, 'base');
+	cursor: map-get(theme.$cursors, 'base');
 	position: relative;
 	background-color: white;
 
 	// Better page overscroll... specifically adds color above and below the Sidebar
-	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		&::before,
 		&::after {
 			content: '';
 			position: sticky;
 			left: 0;
 			display: block;
-			width: map-get(theme.$layout-length, 'sidebar') - map-get(theme.$spacing, 'fattest');
+			width: map-get(theme.$layout-lengths, 'sidebar') - map-get(theme.$spacings, 'fattest');
 			height: 0;
 		}
 
 		&::before {
 			top: 0;
-			box-shadow: 0 -#{map-get(theme.$spacing, 'fattest')} 0 map-get(theme.$spacing, 'fattest')
-				map-get(theme.$color 'coal-dark');
+			box-shadow: 0 -#{map-get(theme.$spacings, 'fattest')} 0 map-get(theme.$spacings, 'fattest')
+				#212529;
 		}
 
 		&::after {
 			bottom: 0;
-			box-shadow: 0 map-get(theme.$spacing, 'fattest') 0 map-get(theme.$spacing, 'fattest')
-				map-get(theme.$color 'coal-dark');
+			box-shadow: 0 map-get(theme.$spacings, 'fattest') 0 map-get(theme.$spacings, 'fattest')
+				#212529;
 		}
 	}
 }
@@ -51,39 +52,39 @@ li,
 dd,
 .heading,
 .subheading {
-	cursor: map-get(theme.$cursor, 'text');
+	cursor: map-get(theme.$cursors, 'text');
 }
 
 a,
 button {
-	cursor: map-get(theme.$cursor, 'pointer');
+	cursor: map-get(theme.$cursors, 'pointer');
 
 	&:active {
-		cursor: map-get(theme.$cursor, 'pointer-active');
+		cursor: map-get(theme.$cursors, 'pointer-active');
 	}
 }
 
 .draggable--is-dragging {
 	&,
 	* {
-		cursor: map-get(theme.$cursor, 'drag-active');
+		cursor: map-get(theme.$cursors, 'drag-active');
 	}
 }
 
 // Set `state` cursors to never used tags only so they can be fetched on page load,
 // rather than the instance they are first requested...
 .preload-cursors {
-	@include visually-hidden;
+	@include layout.visually-hidden;
 
 	b {
-		cursor: map-get(theme.$cursor, 'drag-active');
+		cursor: map-get(theme.$cursors, 'drag-active');
 	}
 
 	u {
-		cursor: map-get(theme.$cursor, 'pointer-active');
+		cursor: map-get(theme.$cursors, 'pointer-active');
 	}
 
 	a {
-		cursor: map-get(theme.$cursor, 'rock-active');
+		cursor: map-get(theme.$cursors, 'rock-active');
 	}
 }

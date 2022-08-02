@@ -1,34 +1,34 @@
 .paper-stack {
 	&__item {
 		&--draggable {
-			cursor: map-get(theme.$cursor, 'drag-base');
+			cursor: map-get(theme.$cursors, 'drag-base');
 
 			.paper-stack__content {
-				color: map-get(theme.$color, 'coal-dark');
+				color: map-get(theme.$colors, 'coal-dark');
 				background-color: white;
 				border-color: currentColor;
-				transition: color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base'),
-					background-color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base'),
-					transform map-get(theme.$duration, 'base') map-get(theme.$easing, 'base');
+				transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+					background-color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+					transform map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
 			}
 
 			// interaction
 			&:focus,
 			&:hover {
 				.paper-stack__content {
-					color: map-get(theme.$color, 'brand-blue');
+					color: map-get(theme.$colors, 'brand-blue');
 					transform: perspective(90rem) rotateX(60deg)
-						translateY(map-get(theme.$spacing, 'tightest'));
+						translateY(map-get(theme.$spacings, 'tightest'));
 
 					&::after {
-						transform: translateY(-(map-get(theme.$spacing, 'tightest')));
+						transform: translateY(-(map-get(theme.$spacings, 'tightest')));
 					}
 				}
 			}
 
 			&.draggable-source--is-dragging {
 				.paper-stack__content {
-					color: map-get(theme.$color, 'brand-blue');
+					color: map-get(theme.$colors, 'brand-blue');
 
 					.pattern--halftone {
 						@include pattern-halftone-animated;
@@ -49,8 +49,8 @@
 
 				.paper-stack__content {
 					color: white;
-					background-color: map-get(theme.$color, 'brand-blue');
-					border-color: map-get(theme.$color, 'brand-blue');
+					background-color: map-get(theme.$colors, 'brand-blue');
+					border-color: map-get(theme.$colors, 'brand-blue');
 					transform: perspective(90rem) rotateX(58deg) scale(1.025);
 
 					&::after {

@@ -32,42 +32,42 @@
 			.plate--middle,
 			.plate--top {
 				animation-name: plate-placed;
-				animation-duration: map-get(theme.$duration, 'base');
-				animation-timing-function: map-get(theme.$easing, 'base');
+				animation-duration: map-get(theme.$durations, 'base');
+				animation-timing-function: map-get(theme.$easings, 'base');
 			}
 
 			.plate--bottom {
-				animation-delay: calc(map-get(theme.$duration, 'base') / 2);
+				animation-delay: calc(map-get(theme.$durations, 'base') / 2);
 			}
 
 			.plate--middle {
-				animation-delay: calc(map-get(theme.$duration, 'base') / 4);
+				animation-delay: calc(map-get(theme.$durations, 'base') / 4);
 			}
 		}
 	}
 
 	.plate--draggable {
-		color: map-get(theme.$color, 'coal-dark');
-		transition: color map-get(theme.$duration, 'fast') map-get(theme.$easing, 'base');
+		color: map-get(theme.$colors, 'coal-dark');
+		transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
 
 		&:focus,
 		&:hover {
-			color: map-get(theme.$color, 'brand-blue');
+			color: map-get(theme.$colors, 'brand-blue');
 		}
 
 		.plate__shadow::before {
 			background-color: currentColor;
-			animation-duration: map-get(theme.$duration, 'slow');
-			animation-timing-function: map-get(theme.$easing, 'base');
+			animation-duration: map-get(theme.$durations, 'slow');
+			animation-timing-function: map-get(theme.$easings, 'base');
 		}
 
 		.plate__content {
 			background-color: white;
 			border: map-get(theme.$border, 'flexible') solid currentColor;
-			animation-duration: map-get(theme.$duration, 'slow');
-			animation-timing-function: map-get(theme.$easing, 'base');
+			animation-duration: map-get(theme.$durations, 'slow');
+			animation-timing-function: map-get(theme.$easings, 'base');
 
-			@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 				border-width: map-get(theme.$border, 'thick');
 			}
 		}

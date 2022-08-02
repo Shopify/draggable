@@ -12,10 +12,10 @@
 		min-height: rows(2, true);
 		height: 100%;
 		color: white;
-		background-color: map-get(theme.$color, 'coal-dark');
-		border: map-get(theme.$border, 'thin') solid map-get(theme.$color, 'coal-dark');
+		background-color: map-get(theme.$colors, 'coal-dark');
+		border: map-get(theme.$border, 'thin') solid map-get(theme.$colors, 'coal-dark');
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			min-height: rows(2);
 			border-width: map-get(theme.$border, 'base');
 		}

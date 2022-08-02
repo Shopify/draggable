@@ -6,7 +6,7 @@ $paper-stack-item-count: 4;
 }
 
 @mixin paper-stack-item-offset {
-	$adjusted-top-offset: -((24rem / $paper-stack-item-count) + (map-get(theme.$spacing, 'base') / 2));
+	$adjusted-top-offset: -((24rem / $paper-stack-item-count) + (map-get(theme.$spacings, 'base') / 2));
 
 	@for $i from 1 through $paper-stack-item-count {
 		&:nth-child(#{$i}),
@@ -14,6 +14,6 @@ $paper-stack-item-count: 4;
 			top: $adjusted-top-offset;
 		}
 
-		$adjusted-top-offset: $adjusted-top-offset + map-get(theme.$spacing, 'base');
+		$adjusted-top-offset: $adjusted-top-offset + map-get(theme.$spacings, 'base');
 	}
 }

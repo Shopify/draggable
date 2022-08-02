@@ -71,7 +71,7 @@
 				margin-left: -(map-get(theme.$border, 'thin'));
 				overflow-x: scroll;
 
-				@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 					margin-left: -(map-get(theme.$border, 'base'));
 				}
 			}
@@ -84,7 +84,7 @@
 					margin-top: 0;
 					margin-left: -(map-get(theme.$border, 'thin'));
 
-					@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+					@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 						margin-left: -(map-get(theme.$border, 'base'));
 					}
 				}
@@ -107,7 +107,7 @@
 					width: map-get(theme.$border, 'thin');
 					height: auto;
 
-					@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+					@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 						top: -(map-get(theme.$border, 'base'));
 						bottom: -(map-get(theme.$border, 'base'));
 						left: -(map-get(theme.$border, 'base'));
@@ -139,7 +139,7 @@
 
 	&__item {
 		&--draggable {
-			cursor: map-get(theme.$cursor, 'drag-base');
+			cursor: map-get(theme.$cursors, 'drag-base');
 
 			.stacked-list__content {
 				background-color: white;
@@ -152,12 +152,12 @@
 			&:focus,
 			&:hover {
 				.stacked-list__content {
-					color: map-get(theme.$color, 'brand-blue');
+					color: map-get(theme.$colors, 'brand-blue');
 				}
 
 				+ .stacked-list__item {
 					.stacked-list__content::before {
-						background-color: map-get(theme.$color, 'brand-blue');
+						background-color: map-get(theme.$colors, 'brand-blue');
 						opacity: 1;
 					}
 				}
@@ -165,7 +165,7 @@
 
 			&.draggable-source--is-dragging {
 				.stacked-list__content {
-					color: map-get(theme.$color, 'brand-blue');
+					color: map-get(theme.$colors, 'brand-blue');
 
 					.Pattern--typeHalftone {
 						@include pattern-halftone-animated;
@@ -176,7 +176,7 @@
 				+ .draggable--original + .stacked-list__item {
 					// stylelint-disable-next-line selector-max-class
 					.stacked-list__content::before {
-						background-color: map-get(theme.$color, 'brand-blue');
+						background-color: map-get(theme.$colors, 'brand-blue');
 						opacity: 1;
 					}
 				}
@@ -192,14 +192,14 @@
 
 			&.draggable-mirror {
 				z-index: map-get(theme.$z-index, 'overlay');
-				transition: width map-get(theme.$duration, 'base') map-get(theme.$easing, 'bungie'),
-					height map-get(theme.$duration, 'base') map-get(theme.$easing, 'bungie');
+				transition: width map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie'),
+					height map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie');
 
 				.stacked-list__content {
 					height: 100%;
 					color: white;
-					background-color: map-get(theme.$color, 'brand-blue');
-					border-color: map-get(theme.$color, 'brand-blue');
+					background-color: map-get(theme.$colors, 'brand-blue');
+					border-color: map-get(theme.$colors, 'brand-blue');
 					transform: scale(1.025);
 
 					&::before,
@@ -213,7 +213,7 @@
 
 					&::before,
 					&::after {
-						background-color: map-get(theme.$color, 'brand-blue');
+						background-color: map-get(theme.$colors, 'brand-blue');
 					}
 				}
 			}

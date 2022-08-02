@@ -12,18 +12,18 @@ $sort-anim-block-name: unquote('block');
 		flex-basis: 100%;
 	}
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		@include layout.draggable-source-layout($sort-anim-block-name, 1, 2, 3, 4, 5, 6, 7, 8, 9) {
 			flex-basis: 33.333%;
 		}
 	}
 
 	.BlockContent {
-		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			height: functions.rows(3);
 		}
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 			height: functions.rows(4);
 		}
 	}

@@ -12,7 +12,7 @@ $grid-columns-tablet: 8;
 		grid-template-columns: repeat($grid-columns, 1fr);
 		grid-template-areas: 'a a a a a' 'b b c c c' 'd d c c c' 'd d e e e' 'f f f g g';
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			grid-template-rows: repeat($grid-rows-tablet, functions.rows(3));
 			grid-template-columns: repeat($grid-columns-tablet, 1fr);
 			grid-template-areas:
@@ -24,7 +24,7 @@ $grid-columns-tablet: 8;
 				'f f f g g g g g';
 		}
 
-		@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 			grid-template-rows: repeat($grid-rows-tablet, rows(4));
 		}
 	}

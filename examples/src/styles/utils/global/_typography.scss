@@ -1,4 +1,4 @@
-@import '../shared/typography';
+@use '../shared/typography';
 
 .text-truncate {
 	@include typography.text-truncate;
@@ -28,13 +28,4 @@
 	white-space: normal;
 	word-wrap: break-word;
 	word-break: break-word;
-}
-
-.line-break--tablet-up {
-	display: none;
-
-	@media screen and;
-	) {
-		display: block;
-	}
 }

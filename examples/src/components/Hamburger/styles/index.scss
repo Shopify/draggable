@@ -8,16 +8,17 @@
 
 	z-index: map-get(theme.$z-index, 'hamburger');
 	position: absolute;
-	top: map-get(theme.$spacing, 'base');
+	top: map-get(theme.$spacings, 'base');
 	left: 50%;
 	margin-left: -$hamburger-offset;
-	padding: map-get(theme.$spacing, 'tightest');
+	padding: map-get(theme.$spacings, 'tightest');
 	// prevent the 'X' on page load
 	opacity: 0;
-	animation: FadeActivator map-get(theme.$duration, 'slow') map-get(theme.$easing, 'base') forwards;
+	animation: FadeActivator map-get(theme.$durations, 'slow') map-get(theme.$easings, 'base')
+		forwards;
 
-	@media only screen and (min-width: map-get(theme.$breakpoint, 'md')) {
-		@include visually-hidden;
+	@media only screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		@include layout.visually-hidden;
 	}
 
 	&-bun {
@@ -30,7 +31,7 @@
 			content: '';
 			top: 0;
 			display: block;
-			transition: background-color map-get(theme.$duration, 'base') map-get(theme.$easing, 'base');
+			transition: background-color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
 		}
 
 		&::before,
@@ -41,9 +42,9 @@
 			width: 100%;
 			height: $hamburger-line-height;
 			border-radius: $hamburger-line-height;
-			background-color: map-get(theme.$color, 'coal-dark');
-			animation-duration: map-get(theme.$duration, 'base');
-			animation-timing-function: map-get(theme.$easing, 'base');
+			background-color: map-get(theme.$colors, 'coal-dark');
+			animation-duration: map-get(theme.$durations, 'base');
+			animation-timing-function: map-get(theme.$easings, 'base');
 			animation-fill-mode: both;
 		}
 

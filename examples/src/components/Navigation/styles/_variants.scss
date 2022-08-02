@@ -1,16 +1,16 @@
 .navigation {
 	&__link {
 		font-weight: 600;
-		color: map-get(theme.$color, 'coal-light');
+		color: map-get(theme.$colors, 'coal-light');
 
 		&--current {
 			pointer-events: none;
-			color: map-get(theme.$color, 'purple-base');
+			color: map-get(theme.$colors, 'purple-base');
 		}
 
 		&--disabled {
 			pointer-events: none;
-			color: map-get(theme.$color, 'coal-light');
+			color: map-get(theme.$colors, 'coal-light');
 		}
 	}
 }

@@ -1,23 +1,23 @@
 @use '../utils/shared/layout';
 @use '../theme';
 
-$main-padding-left-tablet: map-get(theme.$layout-length, 'sidebar-base') +
-	map-get(theme.$spacing, 'tight');
-$main-padding-left-desktop: map-get(theme.$layout-length, 'sidebar-base') +
-	map-get(theme.$spacing, 'fattest');
+$main-padding-left-tablet: map-get(theme.$layout-lengths, 'sidebar-base') +
+	map-get(theme.$spacings, 'tight');
+$main-padding-left-desktop: map-get(theme.$layout-lengths, 'sidebar-base') +
+	map-get(theme.$spacings, 'fattest');
 
 .main {
-	padding: $mobile-nav-padding-top map-get(theme.$spacing, 'tight')
-		map-get(theme.$spacing, 'looser');
+	padding: map-get(theme.$spacings, 'tighter') map-get(theme.$spacings, 'tight')
+		map-get(theme.$spacings, 'looser');
 	min-height: 100vh;
 	overflow: hidden;
 	background-color: white;
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
-		padding: map-get(theme.$spacing, 'fat') map-get(theme.$spacing, 'fattest')
-			map-get(theme.$spacing, 'fat') $main-padding-left-desktop;
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		padding: map-get(theme.$spacings, 'fat') map-get(theme.$spacings, 'fattest')
+			map-get(theme.$spacings, 'fat') $main-padding-left-desktop;
 	}
 	&-interior {
-		@include layout.centered-width(map-get(theme.$layout-length, 'main-interior-base'));
+		@include layout.centered-width(map-get(theme.$layout-lengths, 'main-interior-base'));
 	}
 }

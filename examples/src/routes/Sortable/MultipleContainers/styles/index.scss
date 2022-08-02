@@ -5,11 +5,11 @@ $grid-columns: 8;
 
 .multiple-containers {
 	display: grid;
-	gap: map-get(theme.$layout-length, 'gutter');
+	gap: map-get(theme.$layout-lengths, 'gutter');
 	grid-template-columns: 100%;
 	grid-template-areas: 'a' 'b' 'c';
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 		grid-template-columns: repeat($grid-columns, 1fr);
 		grid-template-areas:
 			'a a a a a a a a'
@@ -32,12 +32,12 @@ $grid-columns: 8;
 
 	// resolve slim padding-bottom when single column
 	.stacked-list-header {
-		@media screen and (min-width: map-get(theme.$breakpoint, 'md')) and (max-width: map-get(theme.$breakpoint, 'lg') - 1px) {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) and (max-width: map-get(theme.$breakpoints, 'lg') - 1px) {
 			height: auto;
 		}
 	}
 
 	.draggable--is-dragging & .draggable-container-parent--capacity {
-		color: map-get(theme.$color, 'brand-blue');
+		color: map-get(theme.$colors, 'brand-blue');
 	}
 }

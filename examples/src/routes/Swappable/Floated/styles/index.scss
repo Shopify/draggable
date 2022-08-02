@@ -4,7 +4,7 @@
 $floated-block-name: unquote('block');
 
 .floated {
-	@media screen and (max-width: calc(map-get(theme.$breakpoint, 'md') - 1px)) {
+	@media screen and (max-width: calc(map-get(theme.$breakpoints, 'md') - 1px)) {
 		@include layout.draggable-source-layout($floated-block-name, 1, 2, 3, 4, 5, 7, 8) {
 			width: 50%;
 		}
@@ -26,7 +26,7 @@ $floated-block-name: unquote('block');
 		}
 	}
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'md')) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		@include layout.draggable-source-layout($floated-block-name, 1, 2, 3) {
 			width: 33.333%;
 		}
@@ -54,7 +54,7 @@ $floated-block-name: unquote('block');
 		}
 	}
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 		@include layout.draggable-source-layout($floated-block-name, 1, 2, 3, 7, 8) {
 			.block__content {
 				height: rows(4);

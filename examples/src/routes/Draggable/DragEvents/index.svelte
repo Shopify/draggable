@@ -81,7 +81,3 @@
 <section bind:this={container}>
 	<PillSwitch />
 </section>
-
-<style lang="scss">
-	@use 'styles';
-</style>

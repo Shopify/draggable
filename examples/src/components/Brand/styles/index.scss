@@ -8,27 +8,27 @@
 @use 'variants';
 
 .brand {
-	cursor: map-get(theme.$cursor, 'rock-base');
+	cursor: map-get(theme.$cursors, 'rock-base');
 	display: flex;
 
 	&:active {
-		cursor: map-get(theme.$cursor, 'rock-active');
+		cursor: map-get(theme.$cursors, 'rock-active');
 
 		.brand--mask,
 		.brand--purple,
 		.brand--red,
 		.brand--orange,
 		.hand {
-			animation-duration: map-get(theme.$duration, 'base');
+			animation-duration: map-get(theme.$durations, 'base');
 		}
 	}
 
-	@media screen and (max-width: calc(map-get(theme.$breakpoint, 'base') - 1px)) {
+	@media screen and (max-width: calc(map-get(theme.$breakpoints, 'base') - 1px)) {
 		justify-content: center;
 	}
 
-	@media screen and (min-width: map-get(theme.$breakpoint, 'lg')) {
-		margin-left: -(map-get(theme.$spacing, 'tightest'));
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		margin-left: -(map-get(theme.$spacings, 'tightest'));
 	}
 
 	&__logo {
@@ -37,40 +37,40 @@
 
 	&__wordmark {
 		flex: 0 0 $wordmark-width;
-		margin-left: map-get(theme.$spacing, 'tighter');
+		margin-left: map-get(theme.$spacings, 'tighter');
 	}
 
 	&:hover {
 		.wave--mask {
-			animation: logo-rainbow-mask map-get(theme.$duration, 'slow') map-get(theme.$easing, 'base')
+			animation: logo-rainbow-mask map-get(theme.$durations, 'slow') map-get(theme.$easings, 'base')
 				infinite;
 		}
 
 		.wave--purple {
-			animation: logo-rainbow-purple map-get(theme.$duration, 'slow') map-get(theme.$easing, 'base')
-				infinite;
+			animation: logo-rainbow-purple map-get(theme.$durations, 'slow')
+				map-get(theme.$easings, 'base') infinite;
 		}
 
 		.wave--red {
-			animation: logo-rainbow-red map-get(theme.$duration, 'slow') map-get(theme.$easing, 'base')
+			animation: logo-rainbow-red map-get(theme.$durations, 'slow') map-get(theme.$easings, 'base')
 				infinite;
 		}
 
 		.wave--orange {
-			animation: logo-rainbow-orange map-get(theme.$duration, 'slow') map-get(theme.$easing, 'base')
-				infinite;
+			animation: logo-rainbow-orange map-get(theme.$durations, 'slow')
+				map-get(theme.$easings, 'base') infinite;
 		}
 
 		.hand {
-			animation: logo-outline-bounce map-get(theme.$duration, 'slow') linear infinite;
+			animation: logo-outline-bounce map-get(theme.$durations, 'slow') linear infinite;
 		}
 	}
 }
 
 .svg--wordmark {
-	fill: map-get(theme.$color, 'brand-yellow');
+	fill: map-get(theme.$colors, 'brand-yellow');
 }
 
 .hand {
-	fill: map-get(theme.$color, 'brand-yellow');
+	fill: map-get(theme.$colors, 'brand-yellow');
 }

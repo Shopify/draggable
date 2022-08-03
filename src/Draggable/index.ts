@@ -1,6 +1,6 @@
 import Draggable from './Draggable';
 
-export { DraggableOptions } from './Draggable';
+export { type DraggableOptions } from './Draggable';
 export default Draggable;
 
 export * from './DragEvent';

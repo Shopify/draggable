@@ -78,7 +78,7 @@ export class DragStartEvent extends DragEvent {
   }
 
   get sourceContainer() {
-    return this.data.originalSource;
+    return this.data.sourceContainer;
   }
 
   static type = 'drag:start';

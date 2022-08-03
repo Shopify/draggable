@@ -7,38 +7,81 @@
 }
 
 @mixin subheading {
-	font-size: 2.2rem;
-	font-weight: 600;
-	letter-spacing: -0.01em;
-	line-height: 1.2;
+	font-size: map-get(theme.$type-scales, 'subheading-base');
+	font-weight: map-get(theme.$type-scales, 'subheading-weight');
 	color: map-get(theme.$colors, 'coal-light');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		font-size: map-get(theme.$type-scales, 'subheading-tablet');
+	}
 }
 
-@mixin heading-jumbo {
-	font-size: 5.6rem;
-	font-weight: 700;
+@mixin heading--jumbo {
+	font-size: map-get(theme.$type-scales, 'jumbo-base');
+	font-weight: map-get(theme.$type-scales, 'jumbo-weight');
 	line-height: 1;
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		font-size: map-get(theme.$type-scales, 'jumbo-tablet');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		font-size: map-get(theme.$type-scales, 'jumbo-desktop');
+	}
 }
 
-@mixin heading-1 {
+@mixin heading--1 {
+	font-size: map-get(theme.$type-scales, 'h1-base');
+	font-weight: map-get(theme.$type-scales, 'h1-weight');
 	margin-bottom: map-get(theme.$spacings, 'tight');
-	font-size: 4.2rem;
-	font-weight: 700;
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		margin-bottom: map-get(theme.$spacings, 'base');
+		font-size: map-get(theme.$type-scales, 'h1-tablet');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		font-size: map-get(theme.$type-scales, 'h1-desktop');
+	}
 }
 
-@mixin heading-2 {
-	font-size: 3.2rem;
-	font-weight: 700;
+@mixin heading--2 {
+	font-size: map-get(theme.$type-scales, 'h2-base');
+	font-weight: map-get(theme.$type-scales, 'h2-weight');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		font-size: map-get(theme.$type-scales, 'h2-tablet');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		font-size: map-get(theme.$type-scales, 'h2-desktop');
+	}
 }
 
-@mixin heading-3 {
-	font-size: 2.4rem;
-	font-weight: 700;
+@mixin heading--3 {
+	font-size: map-get(theme.$type-scales, 'h3-base');
+	font-weight: map-get(theme.$type-scales, 'h3-weight');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		font-size: map-get(theme.$type-scales, 'h3-tablet');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		font-size: map-get(theme.$type-scales, 'h3-desktop');
+	}
 }
 
-@mixin heading-4 {
-	font-size: 2rem;
-	font-weight: 700;
+@mixin heading--4 {
+	font-size: map-get(theme.$type-scales, 'h4-base');
+	font-weight: map-get(theme.$type-scales, 'h4-weight');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		font-size: map-get(theme.$type-scales, 'h4-tablet');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		font-size: map-get(theme.$type-scales, 'h4-desktop');
+	}
 }
 
 .heading {

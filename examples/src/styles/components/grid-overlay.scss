@@ -58,7 +58,7 @@ $grid-overlay-baseline: 0.1rem;
 	opacity: 0.8;
 	pointer-events: none;
 
-	@media screen and (min-width: map-get(theme.$breakpoints, desktop)) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 		right: map-get(theme.$spacings, 'fattest');
 		left: main.$main-padding-left-desktop;
 	}

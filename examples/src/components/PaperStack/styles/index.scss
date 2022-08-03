@@ -55,14 +55,14 @@ $paper-stack-heading: (
 	}
 
 	&__content {
-		@include flex-center;
+		@include layout.flex-center;
 		position: relative;
 		width: 100%;
 		height: 38rem;
 		color: white;
 		background-color: map-get(theme.$colors, 'coal-dark');
-		border: map-get(theme.$border, 'base') solid map-get(theme.$colors, 'coal-dark');
-		border-top-width: map-get(theme.$border, 'thick');
+		border: map-get(theme.$borders, 'base') solid map-get(theme.$colors, 'coal-dark');
+		border-top-width: map-get(theme.$borders, 'thick');
 		transform: perspective(90rem) rotateX(60deg);
 		backface-visibility: hidden; // this might not be making any difference...
 	}

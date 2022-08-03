@@ -7,7 +7,6 @@
 
 html {
 	@include layout.scroll-lock;
-	@debug theme.$colors;
 	font-family: map-get(theme.$font-stacks, 'base');
 
 	::selection {
@@ -31,18 +30,6 @@ body {
 			display: block;
 			width: map-get(theme.$layout-lengths, 'sidebar') - map-get(theme.$spacings, 'fattest');
 			height: 0;
-		}
-
-		&::before {
-			top: 0;
-			box-shadow: 0 -#{map-get(theme.$spacings, 'fattest')} 0 map-get(theme.$spacings, 'fattest')
-				#212529;
-		}
-
-		&::after {
-			bottom: 0;
-			box-shadow: 0 map-get(theme.$spacings, 'fattest') 0 map-get(theme.$spacings, 'fattest')
-				#212529;
 		}
 	}
 }

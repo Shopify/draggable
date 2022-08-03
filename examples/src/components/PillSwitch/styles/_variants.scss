@@ -1,3 +1,5 @@
+@use '../../../styles/theme';
+
 .pill-switch {
 	&--on {
 		.pill-switch__track {
@@ -17,12 +19,8 @@
 
 			&:focus,
 			&:hover,
-			&.draggable-mirror {
-				color: map-get(theme.$colors, 'brand-blue');
-				background-color: white;
-			}
-
 			&:active {
+				background-color: white;
 				color: map-get(theme.$colors, 'brand-blue-dark');
 			}
 		}

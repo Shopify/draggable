@@ -10,8 +10,6 @@ export const translateMirror = (
 	});
 };
 
-export const calcOffset = (offset: number) => offset * 2 * 0.5;
-
 export const offsetWithinThreshold = (
 	initialCoord: number,
 	currentCoord: number,

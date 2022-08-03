@@ -63,12 +63,12 @@
 
 		.plate__content {
 			background-color: white;
-			border: map-get(theme.$border, 'flexible') solid currentColor;
+			border: map-get(theme.$borders, 'flexible') solid currentColor;
 			animation-duration: map-get(theme.$durations, 'slow');
 			animation-timing-function: map-get(theme.$easings, 'base');
 
 			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-				border-width: map-get(theme.$border, 'thick');
+				border-width: map-get(theme.$borders, 'thick');
 			}
 		}
 

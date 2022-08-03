@@ -42,7 +42,7 @@ $plate-max-size: 80rem;
 
 	&__content {
 		@include position-cover;
-		@include flex-center;
+		@include layout.flex-center;
 		background-color: map-get(theme.$colors, 'coal-dark');
 		border-radius: 50%;
 

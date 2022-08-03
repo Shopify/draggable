@@ -1,5 +1,5 @@
 @mixin stacked-list-scroll-height($size: 7.2rem, $rows: 6, $border-width: thin) {
-	height: ($size * $rows) - (map-get(theme.$border, $border-width) * ($rows - 1));
+	height: ($size * $rows) - (map-get(theme.$borders, $border-width) * ($rows - 1));
 }
 
 @mixin scroll-indicator($vertical: true) {
@@ -14,19 +14,19 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
-		height: map-get(theme.$border, 'thin');
+		height: map-get(theme.$borders, 'thin');
 	} @else {
 		top: 0;
 		right: 0;
 		bottom: 0;
-		width: map-get(theme.$border, 'thin');
+		width: map-get(theme.$borders, 'thin');
 	}
 
 	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		@if $vertical {
-			height: map-get(theme.$border, 'base');
+			height: map-get(theme.$borders, 'base');
 		} @else {
-			width: map-get(theme.$border, 'base');
+			width: map-get(theme.$borders, 'base');
 		}
 	}
 }

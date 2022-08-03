@@ -34,8 +34,8 @@ $grid-columns: 4;
 			'e e f f'
 			'e e g g'
 			'h h h h';
-		margin-top: map-get(theme.$border, 'thin');
-		border: map-get(theme.$border, 'thin') solid map-get(theme.$colors, 'coal-dark');
+		margin-top: map-get(theme.$borders, 'thin');
+		border: map-get(theme.$borders, 'thin') solid map-get(theme.$colors, 'coal-dark');
 		background-color: map-get(theme.$colors, 'coal-dark');
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
@@ -48,18 +48,18 @@ $grid-columns: 4;
 				'b d f g'
 				'b e f h'
 				'b e f h';
-			margin-top: map-get(theme.$border, 'base');
-			border-width: map-get(theme.$border, 'base');
+			margin-top: map-get(theme.$borders, 'base');
+			border-width: map-get(theme.$borders, 'base');
 		}
 
 		.block__wrapper--dropzone {
 			&::before {
 				content: '';
 				position: absolute;
-				top: -(map-get(theme.$border, 'thin'));
-				right: -(map-get(theme.$border, 'thin'));
-				bottom: -(map-get(theme.$border, 'thin'));
-				left: -(map-get(theme.$border, 'thin'));
+				top: -(map-get(theme.$borders, 'thin'));
+				right: -(map-get(theme.$borders, 'thin'));
+				bottom: -(map-get(theme.$borders, 'thin'));
+				left: -(map-get(theme.$borders, 'thin'));
 				display: block;
 				pointer-events: none;
 				background-color: map-get(theme.$colors, 'brand-blue');
@@ -68,10 +68,10 @@ $grid-columns: 4;
 
 				// stylelint-disable-next-line max-nesting-depth
 				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-					top: -(map-get(theme.$border, 'base'));
-					right: -(map-get(theme.$border, 'base'));
-					bottom: -(map-get(theme.$border, 'base'));
-					left: -(map-get(theme.$border, 'base'));
+					top: -(map-get(theme.$borders, 'base'));
+					right: -(map-get(theme.$borders, 'base'));
+					bottom: -(map-get(theme.$borders, 'base'));
+					left: -(map-get(theme.$borders, 'base'));
 				}
 			}
 

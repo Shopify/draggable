@@ -1,3 +1,5 @@
+@use '../../../styles/utils/shared/layout';
+
 $stripes-bg-size: 0.8rem;
 $halftone-bg-size: 1.2rem;
 $halftone-bg-position-start: 0 0, calc($halftone-bg-size / 2) calc($halftone-bg-size / 2);
@@ -23,11 +25,11 @@ $halftone-bg-position-end: calc($halftone-bg-size / 2) calc($halftone-bg-size / 
 }
 
 @mixin pattern-halftone-animated {
-	@include visible;
+	@include layout.visible;
 	animation-play-state: running;
 }
 
 @mixin pattern-placed-animated {
-	@include visible;
+	@include layout.visible;
 	animation: placed map-get(theme.$durations, 'base') map-get(theme.$easings, 'base') both;
 }

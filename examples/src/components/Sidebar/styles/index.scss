@@ -33,7 +33,7 @@
 		}
 
 		&[aria-hidden='true'] {
-			@include visible(false);
+			@include layout.visible(false);
 		}
 	}
 

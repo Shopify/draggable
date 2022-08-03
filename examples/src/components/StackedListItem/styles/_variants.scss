@@ -68,11 +68,11 @@
 				display: flex;
 				flex: 1 1 auto;
 				margin-top: 0;
-				margin-left: -(map-get(theme.$border, 'thin'));
+				margin-left: -(map-get(theme.$borders, 'thin'));
 				overflow-x: scroll;
 
 				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-					margin-left: -(map-get(theme.$border, 'base'));
+					margin-left: -(map-get(theme.$borders, 'base'));
 				}
 			}
 
@@ -82,10 +82,10 @@
 
 				&:nth-child(1n + 2) {
 					margin-top: 0;
-					margin-left: -(map-get(theme.$border, 'thin'));
+					margin-left: -(map-get(theme.$borders, 'thin'));
 
 					@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-						margin-left: -(map-get(theme.$border, 'base'));
+						margin-left: -(map-get(theme.$borders, 'base'));
 					}
 				}
 			}
@@ -100,18 +100,18 @@
 				text-align: center;
 
 				&::before {
-					top: -(map-get(theme.$border, 'thin'));
+					top: -(map-get(theme.$borders, 'thin'));
 					right: auto;
-					bottom: -(map-get(theme.$border, 'thin'));
-					left: -(map-get(theme.$border, 'thin'));
-					width: map-get(theme.$border, 'thin');
+					bottom: -(map-get(theme.$borders, 'thin'));
+					left: -(map-get(theme.$borders, 'thin'));
+					width: map-get(theme.$borders, 'thin');
 					height: auto;
 
 					@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-						top: -(map-get(theme.$border, 'base'));
-						bottom: -(map-get(theme.$border, 'base'));
-						left: -(map-get(theme.$border, 'base'));
-						width: map-get(theme.$border, 'base');
+						top: -(map-get(theme.$borders, 'base'));
+						bottom: -(map-get(theme.$borders, 'base'));
+						left: -(map-get(theme.$borders, 'base'));
+						width: map-get(theme.$borders, 'base');
 					}
 				}
 			}

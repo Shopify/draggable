@@ -15,8 +15,8 @@ $collidable: (
 		desktop: $collidable-container-height-desktop
 	),
 	container-padding: (
-		base: map-get(theme.$border, 'thin') * 2,
-		tablet: map-get(theme.$border, 'base') * 2
+		base: map-get(theme.$borders, 'thin') * 2,
+		tablet: map-get(theme.$borders, 'base') * 2
 	),
 	block-height: (
 		base: $collidable-block-height,
@@ -27,11 +27,11 @@ $collidable: (
 		base: calc($collidable-container-height / 3),
 		tablet: $collidable-container-height-tablet - $collidable-block-height-tablet -
 			(
-				map-get(theme.$border, 'base') * 5
+				map-get(theme.$borders, 'base') * 5
 			),
 		desktop: $collidable-container-height-desktop - $collidable-block-height-desktop -
 			(
-				map-get(theme.$border, 'base') * 5
+				map-get(theme.$borders, 'base') * 5
 			)
 	)
 );

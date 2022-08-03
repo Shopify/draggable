@@ -26,31 +26,31 @@
 	&__layout {
 		&--flex,
 		&--float {
-			margin-top: -(map-get(theme.$border, 'thin'));
-			margin-left: -(map-get(theme.$border, 'thin'));
+			margin-top: -(map-get(theme.$borders, 'thin'));
+			margin-left: -(map-get(theme.$borders, 'thin'));
 
 			> .block__wrapper {
-				margin-top: map-get(theme.$border, 'thin');
-				margin-left: map-get(theme.$border, 'thin');
+				margin-top: map-get(theme.$borders, 'thin');
+				margin-left: map-get(theme.$borders, 'thin');
 			}
 
 			> .block {
-				padding-top: map-get(theme.$border, 'thin');
-				padding-left: map-get(theme.$border, 'thin');
+				padding-top: map-get(theme.$borders, 'thin');
+				padding-left: map-get(theme.$borders, 'thin');
 			}
 
 			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-				margin-top: -(map-get(theme.$border, 'base'));
-				margin-left: -(map-get(theme.$border, 'base'));
+				margin-top: -(map-get(theme.$borders, 'base'));
+				margin-left: -(map-get(theme.$borders, 'base'));
 
 				> .block__wrapper {
-					margin-top: map-get(theme.$border, 'base');
-					margin-left: map-get(theme.$border, 'base');
+					margin-top: map-get(theme.$borders, 'base');
+					margin-left: map-get(theme.$borders, 'base');
 				}
 
 				> .block {
-					padding-top: map-get(theme.$border, 'base');
-					padding-left: map-get(theme.$border, 'base');
+					padding-top: map-get(theme.$borders, 'base');
+					padding-left: map-get(theme.$borders, 'base');
 				}
 			}
 		}
@@ -75,10 +75,10 @@
 
 		&--grid {
 			display: grid;
-			gap: map-get(theme.$border, 'thin');
+			gap: map-get(theme.$borders, 'thin');
 
 			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-				gap: map-get(theme.$border, 'base');
+				gap: map-get(theme.$borders, 'base');
 			}
 		}
 

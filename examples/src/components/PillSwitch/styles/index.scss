@@ -1,5 +1,5 @@
+@use '../../../styles/theme';
 @use '../../../styles/utils/shared/layout';
-@use '../../components/Pattern/styles' as pattern;
 @use 'props';
 @use 'variants';
 
@@ -7,17 +7,17 @@
 	position: relative;
 	margin-right: auto;
 	margin-left: auto;
-	width: props.pill-switch(size);
-	height: props.pill-switch(size);
+	width: map-get(props.$pill-switch-sizes, 'base');
+	height: map-get(props.$pill-switch-sizes, 'base');
 
 	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-		width: props.pill-switch(size, tablet);
-		height: props.pill-switch(size, tablet);
+		width: map-get(props.$pill-switch-sizes, 'tablet');
+		height: map-get(props.$pill-switch-sizes, 'tablet');
 	}
 
 	&__track {
 		@include props.pill-switch-track-layout;
-		@include props.pill-switch-border(map-get(theme.$border, 'base'));
+		@include props.pill-switch-border(map-get(theme.$borders, 'base'));
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -29,10 +29,10 @@
 		&::after {
 			content: '';
 			position: absolute;
-			top: -(map-get(theme.$border, 'base'));
-			right: -(map-get(theme.$border, 'base'));
-			bottom: -(map-get(theme.$border, 'base'));
-			left: -(map-get(theme.$border, 'base'));
+			top: -(map-get(theme.$borders, 'base'));
+			right: -(map-get(theme.$borders, 'base'));
+			bottom: -(map-get(theme.$borders, 'base'));
+			left: -(map-get(theme.$borders, 'base'));
 			display: block;
 			background-color: map-get(theme.$colors, 'coal-dark');
 			transition: opacity map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
@@ -40,37 +40,27 @@
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			@include props.pill-switch-track-layout('tablet');
-			@include props.pill-switch-border(map-get(theme.$border, 'thick'));
-		}
-
-		.pattern--halftone {
-			@include pattern.pattern-halftone-animated;
-			height: props.pill-switch(size);
-			transform: rotate(45deg);
-
-			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-				height: props.pill-switch(size, tablet);
-			}
+			@include props.pill-switch-border(map-get(theme.$borders, 'thick'));
 		}
 	}
 
 	&__control {
-		@include flex-center;
+		@include layout.flex-center;
 		position: absolute;
 		bottom: 0;
 		left: 0;
-		width: props.pill-switch(control-size);
-		height: props.pill-switch(control-size);
+		width: map-get(props.$pill-switch-control-sizes, 'base');
+		height: map-get(props.$pill-switch-control-sizes, 'base');
 		color: map-get(theme.$colors, 'coal-dark');
 		background-color: white;
-		border: map-get(theme.$border, 'base') solid currentColor;
+		border: map-get(theme.$borders, 'base') solid currentColor;
 		border-radius: 50%;
 		transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-			width: props.pill-switch(control-size, tablet);
-			height: props.pill-switch(control-size, tablet);
-			border-width: map-get(theme.$border, 'thick');
+			width: map-get(props.$pill-switch-control-sizes, tablet);
+			height: map-get(props.$pill-switch-control-sizes, tablet);
+			border-width: get-border(thick);
 		}
 
 		// visually center
@@ -81,16 +71,8 @@
 
 		&:focus,
 		&:hover,
-		&.draggable-mirror {
-			color: map-get(theme.$colors, 'brand-blue');
-		}
-
 		&:active {
 			color: map-get(theme.$colors, 'brand-blue-dark');
-		}
-
-		&.draggable-source--is-dragging {
-			@include visible(false);
 		}
 	}
 }

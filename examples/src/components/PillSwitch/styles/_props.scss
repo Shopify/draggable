@@ -1,41 +1,40 @@
-$pill-switch-size: 27.2rem;
+@use '../../../styles/theme';
+
+$pill-switch-size-base: 27.2rem;
 $pill-switch-size-tablet: 54.8rem;
 
-$pill-switch-control-size: 13rem;
+$pill-switch-control-size-base: 13rem;
 $pill-switch-control-size-tablet: 32rem;
 
-$pill-switch-radius: calc($pill-switch-control-size / 2);
+$pill-switch-radius-base: calc($pill-switch-control-size-base / 2);
 $pill-switch-radius-tablet: calc($pill-switch-control-size-tablet / 2);
 
-$pill-switch-data: (
-	size: (
-		base: $pill-switch-size,
-		tablet: $pill-switch-size-tablet
-	),
-	radius: (
-		base: $pill-switch-radius,
-		tablet: $pill-switch-radius-tablet
-	),
-	control-size: (
-		base: $pill-switch-control-size,
-		tablet: $pill-switch-control-size-tablet
-	),
-	track-width: (
-		base: $pill-switch-control-size * 2 + $pill-switch-radius,
-		tablet: $pill-switch-control-size-tablet * 2
-	)
+$pill-switch-sizes: (
+	base: $pill-switch-size-base,
+	tablet: $pill-switch-size-tablet
 );
 
-@function pill-switch($group: $threads-default-value, $variant: $threads-default-value) {
-	@return threads-value-get($pill-switch-data, $group, $variant);
-}
+$pill-switch-radius: (
+	base: $pill-switch-radius-base,
+	tablet: $pill-switch-radius-tablet
+);
+
+$pill-switch-control-sizes: (
+	base: $pill-switch-control-size-base,
+	tablet: $pill-switch-control-size-tablet
+);
+
+$pill-switch-track-width: (
+	base: calc($pill-switch-control-size-base * 2 + $pill-switch-radius-base),
+	tablet: calc($pill-switch-control-size-tablet * 2)
+);
 
 @mixin pill-switch-track-layout($breakpoint: 'base') {
-	margin-top: -(pill-switch(radius, $breakpoint));
-	margin-left: -(pill-switch(track-width, $breakpoint) / 2);
-	width: pill-switch(track-width, $breakpoint);
-	height: pill-switch(control-size, $breakpoint);
-	border-radius: pill-switch(radius, $breakpoint);
+	margin-top: calc(-1 * map-get($pill-switch-radius, $breakpoint));
+	margin-left: calc(-1 * map-get($pill-switch-track-width, $breakpoint) / 2);
+	width: map-get($pill-switch-track-width, $breakpoint);
+	height: map-get($pill-switch-control-sizes, $breakpoint);
+	border-radius: map-get($pill-switch-radius, $breakpoint);
 }
 
 @mixin pill-switch-border($width) {

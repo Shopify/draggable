@@ -19,10 +19,10 @@
 	.block__wrapper:nth-child(1),
 	.block__wrapper:nth-child(4) {
 		position: absolute;
-		width: calc(50% - #{map-get(theme.$border, 'thin') * 2.5});
+		width: calc(50% - #{map-get(theme.$borders, 'thin') * 2.5});
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-			width: calc(25% - #{map-get(theme.$border, 'base')});
+			width: calc(25% - #{map-get(theme.$borders, 'base')});
 		}
 	}
 
@@ -107,10 +107,10 @@
 		top: 0;
 		right: 0;
 		left: 0;
-		height: map-get(theme.$border, 'thin');
+		height: map-get(theme.$borders, 'thin');
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-			height: map-get(theme.$border, 'base');
+			height: map-get(theme.$borders, 'base');
 		}
 	}
 
@@ -118,10 +118,10 @@
 		top: 0;
 		right: 0;
 		bottom: 0;
-		width: map-get(theme.$border, 'thin');
+		width: map-get(theme.$borders, 'thin');
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-			width: map-get(theme.$border, 'base');
+			width: map-get(theme.$borders, 'base');
 		}
 	}
 
@@ -129,10 +129,10 @@
 		right: 0;
 		bottom: 0;
 		left: 0;
-		height: map-get(theme.$border, 'thin');
+		height: map-get(theme.$borders, 'thin');
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-			height: map-get(theme.$border, 'base');
+			height: map-get(theme.$borders, 'base');
 		}
 	}
 
@@ -140,10 +140,10 @@
 		top: 0;
 		bottom: 0;
 		left: 0;
-		width: map-get(theme.$border, 'thin');
+		width: map-get(theme.$borders, 'thin');
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-			width: map-get(theme.$border, 'base');
+			width: map-get(theme.$borders, 'base');
 		}
 	}
 

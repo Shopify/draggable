@@ -2,7 +2,7 @@
 @use '../../../../styles/utils/shared/layout';
 @use '../../../../styles/theme';
 
-@use '../../../../components/Pattern/styles/props' as pattern;
+@use '../../../components/Pattern/styles/props' as pattern;
 
 $grid-area-names: a, b, c, d, e, f, g, h;
 $grid-rows: 6;
@@ -93,7 +93,7 @@ $grid-columns: 4;
 		&--grid {
 			display: grid;
 			gap: map-get(theme.$borders, 'thin');
-			margin-top: map-get(theme.$spacings, 'fat');
+			margin-top: map-get(theme.$spacings, 'loose');
 
 			grid-template-rows: repeat($grid-rows, 1fr);
 			grid-template-columns: repeat($grid-columns, 1fr);

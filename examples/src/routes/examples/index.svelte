@@ -1,11 +1,6 @@
 <script lang="ts">
 	import { Draggable } from '@draggable';
-	import type {
-		SensorEvent,
-		DragMoveEvent,
-		DragStartEvent,
-		MirrorCreateEvent
-	} from '@draggable/Draggable';
+	import type { DragMoveEvent, DragStartEvent, MirrorCreateEvent } from '@draggable/Draggable';
 	import type Position from '@src/common/types/Position';
 	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 

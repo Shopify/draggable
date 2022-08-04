@@ -1,0 +1,41 @@
+@use '../../styles/theme';
+@use '../../styles/utils/shared/layout';
+
+.content {
+	display: flex;
+	height: 100vh;
+
+	.hamburger {
+		flex-shrink: 0;
+	}
+
+	& section {
+		width: 100%;
+	}
+
+	@media screen and (max-width: calc(map-get(theme.$breakpoints, 'md') - 1px)) {
+		.sidebar {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			top: 0;
+			@include layout.visible(false);
+
+			&.open {
+				@include layout.visible;
+			}
+		}
+
+		.main {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+
+	.main {
+		flex: 1;
+		overflow-y: auto;
+	}
+}

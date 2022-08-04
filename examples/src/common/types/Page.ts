@@ -1,6 +1,6 @@
+import type Link from './Link';
+
 export default interface Page {
-	subNav: {
-		section: string;
-		links: string[];
-	}[];
+	section: string;
+	links: Link[];
 }

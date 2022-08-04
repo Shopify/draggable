@@ -1,12 +1,10 @@
+@use '../../../styles/theme';
 @use 'variants';
 
 .navigation {
 	padding: map-get(theme.$spacings, 'tight');
-
-	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-		flex: 1; // for sticky footer
-	}
-
+	min-height: 0;
+	overflow-y: auto;
 	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 		padding-right: map-get(theme.$spacings, 'loose');
 		padding-left: map-get(theme.$spacings, 'loose');
@@ -23,8 +21,12 @@
 	}
 
 	&__item {
+		&:hover {
+			cursor: map-get(theme.$cursors, 'base');
+		}
+
 		& + & {
-			margin-top: map-get(theme.$spacings, 'tightest') + $spacing-unit;
+			margin-top: calc(map-get(theme.$spacings, 'tightest') + theme.$base-spacing);
 
 			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 				margin-top: map-get(theme.$spacings, 'tighter');
@@ -34,21 +36,21 @@
 
 	&__heading,
 	&__link {
-		font-size: 3.2rem;
+		font-size: map-get(theme.$type-scales, 'nav-base');
 		letter-spacing: -0.1rem;
 		line-height: 0.9;
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			font-size: map-get(theme.$type-scales, 'nav-tablet');
+		}
 	}
 
 	&__heading {
 		font-weight: 700;
 		color: white;
-
-		.NavList--isCurrent & {
-			color: map-get(theme.$colors, 'brand-yellow');
-		}
 	}
 
-	a&__link {
+	a.navigation__link {
 		color: map-get(theme.$colors, 'ash-dark');
 		transition: color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
 
@@ -57,8 +59,21 @@
 			color: map-get(theme.$colors, 'purple-base');
 		}
 
+		&--current {
+			color: map-get(theme.$colors, 'brand-yellow');
+		}
+
+		&:focus {
+			cursor: map-get(theme.$cursors, 'pointer-active');
+		}
+
+		&:hover {
+			cursor: map-get(theme.$cursors, 'pointer-base');
+		}
+
 		&:active {
 			color: map-get(theme.$colors, 'purple-dark');
+			cursor: map-get(theme.$cursors, 'pointer-active');
 		}
 	}
 }

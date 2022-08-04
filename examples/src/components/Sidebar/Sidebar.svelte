@@ -1,12 +1,14 @@
 <script lang="ts">
-	import type Page from 'common/types/Page';
+	import type Page from '@src/common/types/Page';
+	import classNames from 'classnames';
 	import Brand from '../Brand/Brand.svelte';
 	import Navigation from '../Navigation/Navigation.svelte';
 
 	export let pages: Page[];
+	export let classes: string | string[] | undefined = undefined;
 </script>
 
-<aside id="sidebar" class="sidebar" aria-hidden="true">
+<aside class={classNames('sidebar', classes)}>
 	<header class="sidebar__header">
 		<Brand />
 	</header>
@@ -20,11 +22,11 @@
 				title="Visit Draggable JS">draggable.js</a
 			>
 			was developed by
-			<a href="https://github.com/tsov" class="Link Link--noWrap" title="Github: tsov"
+			<a href="https://github.com/tsov" class="link link--no-wrap" title="Github: tsov"
 				>Max Hoffmann</a
 			>
 			and
-			<a href="https://github.com/beefchimi" class="Link Link--noWrap" title="Github: beefchimi"
+			<a href="https://github.com/beefchimi" class="link link--no-wrap" title="Github: beefchimi"
 				>Curtis Dulmage</a
 			>.
 		</p>
@@ -33,7 +35,7 @@
 			Draggable is released under the
 			<a
 				href="https://github.com/Shopify/shopify.github.com/blob/master/LICENSE.md"
-				class="Link Link--noWrap"
+				class="link link--no-wrap"
 				title="View MIT License"
 				target="_blank"
 				rel="noopener">MIT license</a
@@ -49,3 +51,7 @@
 		</p>
 	</footer>
 </aside>
+
+<style lang="scss">
+	@use 'styles';
+</style>

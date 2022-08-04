@@ -1,31 +1,37 @@
 <script lang="ts">
 	import classNames from 'classnames';
-	import type Page from 'common/types/Page';
+	import type Page from '@src/common/types/Page';
+	import { page } from '$app/stores';
 
 	export let pages: Page[];
 	export let linkClasses: string | string[] | undefined = undefined;
 </script>
 
 <nav class="navigation">
-	{#each pages as { subNav }}
-		{#each subNav as { section, links }}
-			<ul class="navigation__list">
+	{#each pages as { section, links }}
+		<ul class="navigation__list">
+			<li class="navigation__item">
+				<span class="navigation__heading">{section}</span>
+			</li>
+			{#each links as { title, href }}
 				<li class="navigation__item">
-					<span class="navigation__header">{section}</span>
-				</li>
-				{#each links as link}
-					<li class="navigation__item">
+					{#if href}
 						<a
 							class={classNames('navigation__link', linkClasses)}
-							href={link.includes('~') ? '' : link.toLowerCase().replace(' ', '-')}
-							title={`See example: ${link}`}
+							class:navigation__link--current={href === $page.url.pathname}
+							title={`See example: ${href}`}
+							{href}
 						>
-							{link.replace('~', '')}
+							{title}
 						</a>
-					</li>
-				{/each}
-			</ul>
-		{/each}
+					{:else}
+						<span class={classNames('navigation__link', linkClasses)}>
+							{title}
+						</span>
+					{/if}
+				</li>
+			{/each}
+		</ul>
 	{/each}
 </nav>
 

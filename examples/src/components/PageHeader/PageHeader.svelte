@@ -5,6 +5,10 @@
 	export let subheading: string;
 </script>
 
+<svelte:head>
+	<title>{section} | {child} | Draggable JS Examples</title>
+</svelte:head>
+
 <header class="page-header">
 	<h1 class="heading heading--1">{section}</h1>
 	<h2 class="subheading">{subheading}</h2>

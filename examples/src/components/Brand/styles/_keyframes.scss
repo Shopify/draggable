@@ -1,10 +1,13 @@
+@use 'props';
+@use '../../../styles/theme';
+
 @keyframes logo-outline-bounce {
 	25% {
-		transform: translate(-$logo-bounce-offset, $logo-bounce-offset);
+		transform: translate(-#{props.$logo-bounce-offset}, props.$logo-bounce-offset);
 	}
 
 	75% {
-		transform: translate($logo-bounce-offset, -$logo-bounce-offset);
+		transform: translate(props.$logo-bounce-offset, -#{props.$logo-bounce-offset});
 	}
 }
 

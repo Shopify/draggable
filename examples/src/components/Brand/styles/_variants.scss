@@ -1,3 +1,5 @@
+@use '../../../styles/theme';
+
 .wave {
 	&--mask {
 		fill: map-get(theme.$colors, 'coal-dark');

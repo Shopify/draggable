@@ -2,7 +2,8 @@
 @use '../../../styles/theme';
 
 .page-header {
-	@include layout.centered-width(map-get(theme.$layout-lengths, 'page-header'));
+	margin-left: map-get(theme.$spacings, 'tight');
+	margin-right: map-get(theme.$spacings, 'tight');
 	margin-bottom: map-get(theme.$spacings, 'loose');
 	text-align: center;
 	color: map-get(theme.$colors, 'coal-dark');

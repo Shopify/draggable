@@ -26,6 +26,14 @@
 		border-color: map-get(theme.$colors, 'brand-blue');
 	}
 
+	&:hover {
+		cursor: map-get(theme.$cursors, 'pointer-base');
+	}
+
+	&:focus {
+		cursor: map-get(theme.$cursors, 'pointer-active');
+	}
+
 	&:active {
 		color: darken(map-get(theme.$colors, 'brand-blue'), 10%);
 		border-color: map-get(theme.$colors, 'brand-blue');

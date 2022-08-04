@@ -19,19 +19,6 @@ body {
 	cursor: map-get(theme.$cursors, 'base');
 	position: relative;
 	background-color: white;
-
-	// Better page overscroll... specifically adds color above and below the Sidebar
-	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-		&::before,
-		&::after {
-			content: '';
-			position: sticky;
-			left: 0;
-			display: block;
-			width: map-get(theme.$layout-lengths, 'sidebar') - map-get(theme.$spacings, 'fattest');
-			height: 0;
-		}
-	}
 }
 
 p,

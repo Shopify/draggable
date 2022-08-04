@@ -1,96 +1,37 @@
+@use '../../../styles/theme';
+@use '../../../styles/utils/shared/layout';
+@use '../../Pattern/styles/props' as pattern;
+
 .block {
-	&__content {
-		&--shell {
+	&--shell {
+		.block__content {
 			color: map-get(theme.$colors, 'coal-dark');
-			background-color: white;
 			border-color: currentColor;
+			background-color: white;
 		}
+	}
 
-		&--hollow {
+	&--hollow {
+		.block__content {
 			color: map-get(theme.$colors, 'ash-dark');
-			background-color: white;
 			border-color: currentColor;
+			background-color: white;
 		}
+	}
 
-		&--stripes {
-			@include stripes-bg;
+	&--stripes {
+		.block__content {
+			@include pattern.stripes-bg;
 			color: map-get(theme.$colors, 'coal-dark');
 			border-color: currentColor;
 			transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
-			&.is-colliding {
-				color: map-get(theme.$colors, 'brand-red');
-			}
 		}
 	}
 
-	&__layout {
-		&--flex,
-		&--float {
-			margin-top: -(map-get(theme.$borders, 'thin'));
-			margin-left: -(map-get(theme.$borders, 'thin'));
-
-			> .block__wrapper {
-				margin-top: map-get(theme.$borders, 'thin');
-				margin-left: map-get(theme.$borders, 'thin');
-			}
-
-			> .block {
-				padding-top: map-get(theme.$borders, 'thin');
-				padding-left: map-get(theme.$borders, 'thin');
-			}
-
-			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-				margin-top: -(map-get(theme.$borders, 'base'));
-				margin-left: -(map-get(theme.$borders, 'base'));
-
-				> .block__wrapper {
-					margin-top: map-get(theme.$borders, 'base');
-					margin-left: map-get(theme.$borders, 'base');
-				}
-
-				> .block {
-					padding-top: map-get(theme.$borders, 'base');
-					padding-left: map-get(theme.$borders, 'base');
-				}
-			}
-		}
-
-		&--flex {
-			display: flex;
-			flex-wrap: wrap;
-
-			.block {
-				flex: 1 1 100%;
-			}
-		}
-
-		&--float {
-			@include clearfix;
-
-			.block {
-				float: left;
-				width: 100%;
-			}
-		}
-
-		&--grid {
-			display: grid;
-			gap: map-get(theme.$borders, 'thin');
-
-			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-				gap: map-get(theme.$borders, 'base');
-			}
-		}
-
-		&--positioned {
-			position: relative;
-		}
-	}
-
-	&--is-draggable {
+	&--draggable {
 		cursor: map-get(theme.$cursors, 'drag-base');
 
-		.block-content {
+		.block__content {
 			color: map-get(theme.$colors, 'coal-dark');
 			background-color: white;
 			border-color: currentColor;
@@ -100,22 +41,22 @@
 		}
 
 		// interaction
-		&:focus .block-content,
-		&:hover .block-content {
+		&:focus .block__content,
+		&:hover .block__content {
 			color: map-get(theme.$colors, 'brand-blue');
 		}
 
-		&.draggable-source--is-dragging .block-content {
+		&.draggable-source--is-dragging .block__content {
 			color: map-get(theme.$colors, 'brand-blue');
 
-			.pattern--halftone {
-				@include pattern-halftone-animated;
+			:global(.pattern--halftone) {
+				@include pattern.pattern-halftone-animated;
 			}
 		}
 
-		&.draggable-source--placed .block-content {
-			.pattern--placed {
-				@include pattern-placed-animated;
+		&.draggable-source--placed .block__content {
+			:global(.pattern--placed) {
+				@include pattern.pattern-placed-animated;
 			}
 		}
 
@@ -124,7 +65,7 @@
 			transition: width map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie'),
 				height map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie');
 
-			.block-content {
+			.block__content {
 				height: 100%;
 				color: white;
 				background-color: map-get(theme.$colors, 'brand-blue');

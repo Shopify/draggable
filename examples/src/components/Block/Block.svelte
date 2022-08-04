@@ -12,15 +12,13 @@
 <span
 	class={classNames('block', classes)}
 	class:block--draggable={draggable}
+	class:block--shell={variant === 'shell'}
+	class:block--hollow={variant === 'hollow'}
+	class:block--stripes={variant === 'stripes'}
 	title={draggable ? 'Click to drag' : ''}
 >
-	<div
-		class="block__content"
-		class:block__content--shell={variant === 'shell'}
-		class:block__content--hollow={variant === 'hollow'}
-		class:block__content--stripes={variant === 'stripes'}
-	>
-		<h3 class="heading heading--size2 text-no-select">{label}</h3>
+	<div class="block__content">
+		<h2 class="heading heading--2 text-no-select">{label}</h2>
 
 		{#if draggable}
 			<Pattern variant="halftone" />

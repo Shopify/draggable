@@ -10,7 +10,7 @@
 	}
 
 	$percentage: calc(($count / $column-count-max) * 100%);
-	$gutter-width: ($count - 1) * map-get(theme.$layout-lengths, 'gutter');
+	$gutter-width: ($count - 1) * map-get(theme.$layout-lengths, 'gutter-base');
 
 	@return $percentage;
 }
@@ -27,7 +27,7 @@
 	$gutter: if(
 		$mobile,
 		map-get(theme.$layout-lengths, 'gutter-mobile'),
-		map-get(theme.$layout-lengths, 'gutter')
+		map-get(theme.$layout-lengths, 'gutter-base')
 	);
 	$inclusive-gutters: if($inclusive, $gutter, 0);
 

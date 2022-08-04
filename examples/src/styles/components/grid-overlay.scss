@@ -34,7 +34,7 @@ $grid-overlay-baseline: 0.1rem;
 
 	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		--columns: 6;
-		--gutter-size: map-get(theme.$layout-lengths, 'gutter');
+		--gutter-size: map-get(theme.$layout-lengths, 'gutter-base');
 		--row-height: calc(#{rows()} + var(--gutter-size));
 	}
 

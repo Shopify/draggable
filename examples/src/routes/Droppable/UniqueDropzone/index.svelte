@@ -3,9 +3,10 @@
 	import type { DragStartEvent } from '@draggable/Draggable';
 	import type { DroppableDroppedEvent } from '@draggable/Droppable';
 	import Block from '@src/components/Block/Block.svelte';
+	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 	import { onMount } from 'svelte';
 
-	let containers: HTMLElement[];
+	let containers: HTMLElement[] = [];
 	const wrappers = [
 		{ id: 1, label: 'one' },
 		{ id: 2, label: 'two' },
@@ -37,6 +38,13 @@
 	});
 </script>
 
+<PageHeader
+	id="UniqueDropzone"
+	section="Droppable"
+	child="Unique dropzone"
+	subheading="Dropzones are intended to hold only one Droppable child. This example restricts each Droppable item to a specific Dropzone identifier."
+/>
+
 <section>
 	<article bind:this={containers[0]} class="block-layout block-layout--flex">
 		{#each wrappers as { id, label }}
@@ -45,17 +53,7 @@
 				data-dropzone={id}
 			>
 				<Block {label} variant="hollow" />
-				<Block {label} draggable variant="hollow" classes={`block--${id}`} />
-			</div>
-		{/each}
-
-		{#each wrappers as { id, label }}
-			<div
-				class="block__wrapper block__wrapper--dropzone draggable-dropzone--occupied"
-				data-dropzone={id}
-			>
-				<Block {label} variant="hollow" />
-				<Block {label} draggable variant="hollow" classes={`block--${id}`} />
+				<Block {label} draggable classes={`block--${id}`} />
 			</div>
 		{/each}
 	</article>
@@ -67,15 +65,19 @@
 		<div class="block__wrapper block__wrapper--dropzone" data-dropzone="2">
 			<Block variant="stripes" />
 		</div>
-		<div class="block__wrapper"><Block variant="shell" classes="block--3" /></div>
+		<div class="block__wrapper"><Block variant="shell" label="three" classes="block--3" /></div>
 		<div class="block__wrapper block__wrapper--dropzone" data-dropzone="4">
 			<Block variant="stripes" />
 		</div>
-		<div class="block__wrapper"><Block variant="shell" classes="block--5" /></div>
-		<div class="block__wrapper"><Block variant="shell" classes="block--6" /></div>
-		<div class="block__wrapper"><Block variant="shell" classes="block--7" /></div>
+		<div class="block__wrapper"><Block variant="shell" label="five" classes="block--5" /></div>
+		<div class="block__wrapper"><Block variant="shell" label="six" classes="block--6" /></div>
+		<div class="block__wrapper"><Block variant="shell" label="seven" classes="block--7" /></div>
 		<div class="block__wrapper block__wrapper--dropzone" data-dropzone="8">
 			<Block variant="stripes" />
 		</div>
 	</article>
 </section>
+
+<style lang="scss" global>
+	@use 'styles';
+</style>

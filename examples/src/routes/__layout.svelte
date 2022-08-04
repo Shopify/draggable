@@ -1,4 +1,4 @@
-<main>
+<main class="main">
 	<slot />
 </main>
 

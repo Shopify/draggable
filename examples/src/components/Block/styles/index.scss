@@ -1,5 +1,6 @@
 @use '../../../styles/utils/shared/functions';
 @use '../../../styles/utils/shared/layout';
+@use '../../../styles/theme';
 @use 'variants';
 
 .block {
@@ -9,35 +10,20 @@
 	&__content {
 		@include layout.flex-center;
 		position: relative;
-		min-height: rows(2, true);
+		min-height: functions.rows(2, true);
 		height: 100%;
 		color: white;
 		background-color: map-get(theme.$colors, 'coal-dark');
 		border: map-get(theme.$borders, 'thin') solid map-get(theme.$colors, 'coal-dark');
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-			min-height: rows(2);
+			min-height: functions.rows(2);
 			border-width: map-get(theme.$borders, 'base');
 		}
 
 		.heading {
 			// vertical alignment
 			margin-top: -0.1em;
-		}
-	}
-
-	&__wrapper {
-		position: relative;
-
-		&.draggable-dropzone--occupied {
-			.block--hollow,
-			.block--stripes {
-				@include position-cover;
-			}
-		}
-
-		.block {
-			height: 100%;
 		}
 	}
 }

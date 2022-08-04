@@ -3,8 +3,11 @@
 	import pages from '@src/common/data/pages';
 	import Hamburger from '@src/components/Hamburger/Hamburger.svelte';
 	import classNames from 'classnames';
+	import { page } from '$app/stores';
 
 	let open = false;
+
+	$: $page.url.pathname, (open = false);
 </script>
 
 <div class="content">

@@ -1,6 +1,7 @@
+@use '../../../styles/theme';
+
 $hamburger-width: 2.4rem;
-$hamburger-height: 2rem;
+$hamburger-height: 2.1rem;
 $hamburger-line-height: 0.3rem;
-$hamburger-after-y: $hamburger-height - $hamburger-line-height;
-$hamburger-vertical-center: ($hamburger-height / 2) - ($hamburger-line-height / 2);
-$hamburger-offset: (map-get(theme.$spacings, 'tightest') * 2 + $hamburger-width) / 2;
+$hamburger-after-y: calc($hamburger-height - $hamburger-line-height);
+$hamburger-vertical-center: calc(($hamburger-height / 2) - ($hamburger-line-height / 2));

@@ -1,19 +1,16 @@
 <script type="ts">
-	let expanded: boolean = false;
+	export let expanded: boolean = false;
+	export let onClick: () => void;
 </script>
 
-<button
-	type="button"
-	id="mobile-nav-activator"
-	class="hamburger"
-	class:hamburger__expanded={expanded}
-	aria-controls="sidebar"
->
-	<div class="hamburger-bun">
-		<div class="hamburger-patty" />
-	</div>
+<svelte:body style={`overflow-y: ${expanded ? 'hidden' : 'auto'};`} />
+
+<button class="hamburger" class:hamburger--expanded={expanded} on:click={onClick}>
+	<div class="hamburger__bun-top" />
+	<div class="hamburger__patty" />
+	<div class="hamburger__bun-bottom" />
 </button>
 
 <style lang="scss">
-	@use './Hamburger.scss';
+	@use 'styles';
 </style>

@@ -1,79 +1,75 @@
 @use '../../../styles/utils/shared/layout';
+@use '../../../styles/theme';
 @use 'props';
 @use 'keyframes';
 
 .hamburger {
-	top: $hamburger-vertical-center;
+	width: props.$hamburger-width;
+	height: props.$hamburger-height;
 	animation-name: hamburger-out;
 
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+	&:hover {
+		cursor: map-get(theme.$cursors, 'pointer-base');
+	}
+
+	&:active {
+		cursor: map-get(theme.$cursors, 'pointer-active');
+	}
+
 	z-index: map-get(theme.$z-index, 'hamburger');
-	position: absolute;
-	top: map-get(theme.$spacings, 'base');
-	left: 50%;
-	margin-left: -$hamburger-offset;
-	padding: map-get(theme.$spacings, 'tightest');
 	// prevent the 'X' on page load
 	opacity: 0;
-	animation: FadeActivator map-get(theme.$durations, 'slow') map-get(theme.$easings, 'base')
+	animation: fade-activator map-get(theme.$durations, 'slow') map-get(theme.$easings, 'base')
 		forwards;
 
 	@media only screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		@include layout.visually-hidden;
 	}
 
-	&-bun {
-		position: relative;
-		width: $hamburger-width;
-		height: $hamburger-height;
-
-		&::before,
-		&::after {
-			content: '';
-			top: 0;
-			display: block;
-			transition: background-color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
-		}
-
-		&::before,
-		&::after,
-		.hamburger-patty {
-			position: absolute;
-			left: 0;
-			width: 100%;
-			height: $hamburger-line-height;
-			border-radius: $hamburger-line-height;
-			background-color: map-get(theme.$colors, 'coal-dark');
-			animation-duration: map-get(theme.$durations, 'base');
-			animation-timing-function: map-get(theme.$easings, 'base');
-			animation-fill-mode: both;
-		}
-
-		&::before {
-			transform: translateY(0) rotate(0);
-			animation-name: hamburger-before-out;
-		}
-
-		&::after {
-			transform: translateY($hamburger-after-y) rotate(0);
-			animation-name: hamburger-after-out;
-		}
+	&__bun-top,
+	&__bun-bottom {
+		transition: background-color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
 	}
 
-	&__expanded {
-		.hamburger-bun::before,
-		.hamburger-bun::after {
+	&__bun-top,
+	&__bun-bottom,
+	.hamburger__patty {
+		width: 100%;
+		height: props.$hamburger-line-height;
+		border-radius: props.$hamburger-line-height;
+		background-color: map-get(theme.$colors, 'coal-dark');
+		animation-duration: map-get(theme.$durations, 'base');
+		animation-timing-function: map-get(theme.$easings, 'base');
+		animation-fill-mode: both;
+	}
+
+	&__bun-top {
+		animation-name: hamburger-bun-top-out;
+	}
+
+	&__bun-bottom {
+		animation-name: hamburger-bun-bottom-out;
+	}
+
+	&--expanded {
+		.hamburger__bun-top,
+		.hamburger__bun-bottom {
 			background-color: white;
 		}
 
-		.hamburger-bun::before {
-			animation-name: hamburger-before-in;
+		.hamburger__bun-top {
+			animation-name: hamburger-bun-top-in;
 		}
 
-		.hamburger-bun::after {
-			animation-name: hamburger-after-in;
+		.hamburger__bun-bottom {
+			animation-name: hamburger-bun-bottom-in;
 		}
 
-		.hamburger-patty {
+		.hamburger__patty {
 			animation-name: hamburger-in;
 		}
 	}

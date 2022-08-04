@@ -1,3 +1,5 @@
+@use '../../../styles/theme';
+
 @keyframes plate-small {
 	0%,
 	100% {
@@ -76,16 +78,5 @@
 
 	95% {
 		transform: scale(1.0125, 0.98);
-	}
-}
-
-@keyframes plate-placed {
-	0%,
-	100% {
-		color: map-get(theme.$colors, 'coal-dark');
-	}
-
-	50% {
-		color: map-get(theme.$colors, 'brand-blue');
 	}
 }

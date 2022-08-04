@@ -1,0 +1,13 @@
+@forward '../../../components/Plate/styles/keyframes';
+@use '../../../styles/theme';
+
+@keyframes plate-placed {
+	0%,
+	100% {
+		color: map-get(theme.$colors, 'coal-dark');
+	}
+
+	50% {
+		color: map-get(theme.$colors, 'brand-blue');
+	}
+}

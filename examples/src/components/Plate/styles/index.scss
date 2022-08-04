@@ -1,26 +1,21 @@
 @use '../../../styles/utils/shared/layout';
+@use '../../../styles/theme';
 @use 'variants';
 @use 'keyframes';
 
 $plate-max-size: 80rem;
 
 .plate {
-	@include position-cover;
+	@include layout.position-cover;
 	height: 0;
 	color: white;
 	// required for more accurate :hover hitbox
 	border-radius: 50%;
 
-	&__wrapper {
-		@include centered-width($plate-max-size);
-		position: relative;
-		padding-top: 100%;
-		height: 0;
-	}
-
 	&__shadow-wrapper {
-		@include position-cover;
+		@include layout.position-cover;
 		pointer-events: none;
+		overflow: hidden;
 	}
 
 	&__shadow {
@@ -41,10 +36,14 @@ $plate-max-size: 80rem;
 	}
 
 	&__content {
-		@include position-cover;
+		@include layout.position-cover;
 		@include layout.flex-center;
 		background-color: map-get(theme.$colors, 'coal-dark');
 		border-radius: 50%;
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			border-width: map-get(theme.$borders, 'thick');
+		}
 
 		.heading {
 			margin-bottom: 0;

@@ -1,4 +1,11 @@
 @use '../../../styles/utils/shared/layout';
+@use '../../../styles/theme';
+
+@keyframes placed {
+	to {
+		transform: scale(0);
+	}
+}
 
 $stripes-bg-size: 0.8rem;
 $halftone-bg-size: 1.2rem;

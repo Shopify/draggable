@@ -1,3 +1,5 @@
+@use '../../../styles/theme';
+
 .plate {
 	&--bottom {
 		padding-top: 100%;
@@ -26,27 +28,7 @@
 		}
 	}
 
-	&__wrapper {
-		&.draggable-container--placed {
-			.plate--bottom,
-			.plate--middle,
-			.plate--top {
-				animation-name: plate-placed;
-				animation-duration: map-get(theme.$durations, 'base');
-				animation-timing-function: map-get(theme.$easings, 'base');
-			}
-
-			.plate--bottom {
-				animation-delay: calc(map-get(theme.$durations, 'base') / 2);
-			}
-
-			.plate--middle {
-				animation-delay: calc(map-get(theme.$durations, 'base') / 4);
-			}
-		}
-	}
-
-	.plate--draggable {
+	&.plate--draggable {
 		color: map-get(theme.$colors, 'coal-dark');
 		transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
 
@@ -100,34 +82,6 @@
 					animation-name: plate-big;
 				}
 			}
-		}
-
-		// would be nice if there was a better way to suppress the creation of the mirror
-		&.draggable-mirror {
-			display: none;
-		}
-	}
-}
-
-.draggable-container--placed {
-	.plate--bottom {
-		.plate__content,
-		.plate__shadow::before {
-			animation-name: plate-small;
-		}
-	}
-
-	.plate--middle {
-		.plate__content,
-		.plate__shadow::before {
-			animation-name: plate-medium;
-		}
-	}
-
-	.plate--top {
-		.plate__content,
-		.plate__shadow::before {
-			animation-name: plate-big;
 		}
 	}
 }

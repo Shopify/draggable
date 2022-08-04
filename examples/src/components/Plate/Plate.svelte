@@ -16,9 +16,9 @@
 		middle: 0.5,
 		top: 0.975
 	};
-	let translation: Position = { x: 0, y: 0 };
-	let shadowOffset: Position = { x: 0, y: 0 };
-	let scaling: Position = { x: 1, y: 1 };
+	export let translation: Position = { x: 0, y: 0 };
+	export let shadowOffset: Position = { x: 0, y: 0 };
+	export let scaling: Position = { x: 1, y: 1 };
 
 	const calculatePlateScale = (value: number, max: number, factor: number) => {
 		const step1 = Math.abs(value) / max;
@@ -48,17 +48,18 @@
 	class:plate--middle={level === 'middle'}
 	class:plate--bottom={level === 'bottom'}
 	class:plate--draggable={draggable}
-	style={`transform: translate3d(${translation.x}, ${translation.y}, 0) scale(${scaling.x}, ${scaling.y});`}
+	title={draggable ? 'Click to drag' : undefined}
+	style={`transform: translate3d(${translation.x}px, ${translation.y}px, 0) scale(${scaling.x}, ${scaling.y});`}
 >
 	<div
 		class="plate__shadow-wrapper"
-		style={`transform: transform: translate3d(${shadowOffset.x}, ${shadowOffset.y}, 0);`}
+		style={`transform: translate3d(${shadowOffset.x}px, ${shadowOffset.y}px, 0);`}
 	>
 		<div class="plate__shadow" />
 	</div>
 
 	<div class="plate__content">
-		<h2 class="heading heading--1 text-no-select">{label}</h2>
+		<h1 class="heading heading--1 text-no-select">{label}</h1>
 	</div>
 </span>
 

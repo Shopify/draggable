@@ -1,21 +1,33 @@
 <script lang="ts">
-	import { Sortable } from '@draggable';
 	import { onMount } from 'svelte';
 
 	import StackedListItem from '@src/components/StackedListItem/StackedListItem.svelte';
+	import { browser } from '$app/env';
+	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 
 	let container: HTMLElement;
 
-	onMount(() => {
-		const sortable = new Sortable([container], {
-			draggable: '.stacked-list__item--draggable',
-			mirror: {
-				appendTo: container,
-				constrainDimensions: true
-			}
-		});
+	onMount(async () => {
+		if (browser) {
+			const { Sortable } = await import('@draggable');
+
+			const sortable = new Sortable([container], {
+				draggable: '.stacked-list__item--draggable',
+				mirror: {
+					appendTo: container,
+					constrainDimensions: true
+				}
+			});
+		}
 	});
 </script>
+
+<PageHeader
+	id="SimpleList"
+	section="Sortable"
+	child="Simple list"
+	subheading="Sort elements in a single collection, maintaining order for all but the element being dragged."
+/>
 
 <section>
 	<article class="stacked-list__wrapper stacked-list__wrapper--scroll-indicator">
@@ -23,7 +35,7 @@
 			<h3 class="heading heading--3 heading--white">Simple list</h3>
 		</header>
 
-		<ul bind:this={container} class="StackedList StackedList--hasScroll">
+		<ul bind:this={container} class="stacked-list stacked-list--scroll">
 			<StackedListItem label="item one" classes="stacked-list__item--1" draggable />
 			<StackedListItem label="item two" classes="stacked-list__item--2" draggable />
 			<StackedListItem label="item three" classes="stacked-list__item--3" draggable />

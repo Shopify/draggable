@@ -1,101 +1,21 @@
-@use '../../../styles/utils/shared/layout';
-@use '../../../styles/utils/shared/typography';
+@use '../../../styles/theme';
+@use '../../../styles/components/handle';
+
 @use 'props';
 @use 'variants';
 
-.stacked-list {
-	position: relative;
-	margin-top: -(map-get(theme.$borders, 'thin'));
+.stacked-list__item {
+	cursor: map-get(theme.$cursors, 'base');
 
-	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-		margin-top: -(map-get(theme.$borders, 'base'));
-	}
-
-	&::before {
-		@include layout.visible(false);
-		@include layout.position-cover;
-		@include heading;
-		@include heading-4;
-		@include text-no-select;
-		// stylelint-disable-next-line shopify/content-no-strings
-		content: 'drop items here';
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
-		width: 80%;
-		height: 80%;
-		background-color: white;
-		transition: opacity map-get(theme.$durations, 'base') map-get(theme.$easings, 'base'),
-			visibility map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
-	}
-
-	&:empty {
-		&::before {
-			@include layout.visible;
-		}
-	}
-
-	&__wrapper {
-		@include stripes-bg;
-		position: relative;
-		color: map-get(theme.$colors, 'coal-dark');
-		box-shadow: inset 0 0 0 map-get(theme.$borders, 'thin') currentColor;
-		// `draggable-container-parent--capacity` changes the `color` on `stacked-listWrapper`...
-		// This is supposed to "trickle" down and cause all children to transition color as well...
-		// Problem is, sometimes these transitions seem to collide and we don't get syncronised timing...
-		// Sadly, there is no way to target `box-shadow`'s color without the use of currentColor.
-		// transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
+	&:nth-child(1n + 2) {
+		margin-top: -(map-get(theme.$borders, 'thin'));
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-			box-shadow: inset 0 0 0 map-get(theme.$borders, 'base') currentColor;
+			margin-top: -(map-get(theme.$borders, 'base'));
 		}
 	}
 
-	&__header,
-	&__content {
-		// cannot be `min-height`, as a child's `height: 100%` will not work
-		// by using `height`, we will get visible scrollbars
-		height: props.stacked-list-item();
-
-		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
-			height: props.stacked-list-item(base, desktop);
-		}
-	}
-
-	&__header {
-		padding: props.stacked-list-header(padding);
-		background-color: currentColor;
-		transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
-
-		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-			padding: props.stacked-list-header(padding, tablet);
-		}
-
-		p {
-			margin-top: 0.2em;
-			font-size: 2rem;
-			color: white;
-		}
-	}
-
-	&__item {
-		cursor: cursor: map-get(theme.$cursors, 'base');
-
-		&:nth-child(1n + 2) {
-			margin-top: -(map-get(theme.$borders, 'thin'));
-
-			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-				margin-top: -(map-get(theme.$borders, 'base'));
-			}
-		}
-
-		.draggable--original:first-child + & {
-			margin-top: 0;
-		}
-	}
-
-	&__content {
+	&-content {
 		position: relative;
 		display: flex;
 		align-items: center;
@@ -107,6 +27,14 @@
 			background-color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
 			transform map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie');
 
+		// cannot be `min-height`, as a child's `height: 100%` will not work
+		// by using `height`, we will get visible scrollbars
+		height: map-get(props.$stacked-list-item-base, 'base');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			height: map-get(props.$stacked-list-item-base, 'desktop');
+		}
+
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			border-width: map-get(theme.$borders, 'base');
 		}
@@ -117,13 +45,13 @@
 
 		.drag-handle,
 		.nope-handle {
-			flex: 0 0 $handle-size;
+			flex: 0 0 handle.$handle-size;
 			margin-left: map-get(theme.$spacings, 'tight');
 		}
 
 		// top border psuedo element... solution to create a collapsed border
 		// required to make the hover style highlight each side of the element
-		&::before {
+		&:before {
 			content: '';
 			position: absolute;
 			top: -(map-get(theme.$borders, 'thin'));
@@ -143,5 +71,9 @@
 				height: map-get(theme.$borders, 'base');
 			}
 		}
+	}
+
+	:global(.draggable--original:first-child + &) {
+		margin-top: 0;
 	}
 }

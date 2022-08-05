@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Draggable } from '@draggable';
+	import { browser } from '$app/env';
+
 	import type { DragMoveEvent, DragStartEvent, MirrorCreateEvent } from '@draggable/Draggable';
 	import type Position from '@src/common/types/Position';
 	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
@@ -19,34 +20,38 @@
 	};
 	let position: Position = { x: 0, y: 0 };
 
-	onMount(() => {
-		const draggable = new Draggable([container], {
-			draggable: '.plate--draggable'
-		});
+	onMount(async () => {
+		if (browser) {
+			const { Draggable } = await import('@draggable');
 
-		// --- Draggable events --- //
-		draggable.on('drag:start', (evt: DragStartEvent) => {
-			evt.originalSource.style.display = 'block';
-			evt.source.style.display = 'none';
-			const newThreshold = container.offsetWidth / 10;
-			threshold = { min: flipSign(newThreshold), max: newThreshold };
-			initialMousePosition = { x: evt.sensorEvent.clientX, y: evt.sensorEvent.clientY };
-		});
+			const draggable = new Draggable([container], {
+				draggable: '.plate--draggable'
+			});
 
-		draggable.on('mirror:create', (evt: MirrorCreateEvent) => {
-			evt.cancel();
-		});
+			// --- Draggable events --- //
+			draggable.on('drag:start', (evt: DragStartEvent) => {
+				evt.originalSource.style.display = 'block';
+				evt.source.style.display = 'none';
+				const newThreshold = container.offsetWidth / 10;
+				threshold = { min: flipSign(newThreshold), max: newThreshold };
+				initialMousePosition = { x: evt.sensorEvent.clientX, y: evt.sensorEvent.clientY };
+			});
 
-		draggable.on('drag:move', (evt: DragMoveEvent) => {
-			position = {
-				x: offsetWithinThreshold(initialMousePosition.x, evt.sensorEvent.clientX, threshold),
-				y: offsetWithinThreshold(initialMousePosition.y, evt.sensorEvent.clientY, threshold)
-			};
-		});
+			draggable.on('mirror:create', (evt: MirrorCreateEvent) => {
+				evt.cancel();
+			});
 
-		draggable.on('drag:stop', () => {
-			position = { x: 0, y: 0 };
-		});
+			draggable.on('drag:move', (evt: DragMoveEvent) => {
+				position = {
+					x: offsetWithinThreshold(initialMousePosition.x, evt.sensorEvent.clientX, threshold),
+					y: offsetWithinThreshold(initialMousePosition.y, evt.sensorEvent.clientY, threshold)
+				};
+			});
+
+			draggable.on('drag:stop', () => {
+				position = { x: 0, y: 0 };
+			});
+		}
 	});
 </script>
 

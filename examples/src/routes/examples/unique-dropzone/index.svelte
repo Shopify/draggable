@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { Droppable } from '@draggable';
+	import { browser } from '$app/env';
+
 	import type { DragStartEvent } from '@draggable/Draggable';
 	import type { DroppableDroppedEvent } from '@draggable/Droppable';
 	import Block from '@src/components/Block/Block.svelte';
@@ -14,27 +15,30 @@
 		{ id: 8, label: 'eight' }
 	];
 
-	onMount(() => {
-		const droppable = new Droppable(containers, {
-			draggable: '.block--draggable',
-			dropzone: '.block__wrapper--dropzone',
-			mirror: {
-				constrainDimensions: true
-			}
-		});
+	onMount(async () => {
+		if (browser) {
+			const { Droppable } = await import('@draggable');
 
-		let droppableOrigin: string | undefined;
+			const droppable = new Droppable(containers, {
+				draggable: '.block--draggable',
+				dropzone: '.block__wrapper--dropzone',
+				mirror: {
+					constrainDimensions: true
+				}
+			});
 
-		// --- Draggable events --- //
-		droppable.on('drag:start', (evt: DragStartEvent) => {
-			droppableOrigin = evt.originalSource.parentElement?.dataset.dropzone;
-		});
+			let droppableOrigin: string | undefined;
 
-		droppable.on('droppable:dropped', (evt: DroppableDroppedEvent) => {
-			if (droppableOrigin !== evt.dropzone.dataset.dropzone) {
-				evt.cancel();
-			}
-		});
+			droppable.on('drag:start', (evt: DragStartEvent) => {
+				droppableOrigin = evt.originalSource.parentElement?.dataset.dropzone;
+			});
+
+			droppable.on('droppable:dropped', (evt: DroppableDroppedEvent) => {
+				if (droppableOrigin !== evt.dropzone.dataset.dropzone) {
+					evt.cancel();
+				}
+			});
+		}
 	});
 </script>
 

@@ -1,147 +1,19 @@
+@use '../../../styles/theme';
+@use '../../../styles/components/handle';
+@use '../../Pattern/styles/props' as pattern;
 @use 'props';
 
 .stacked-list {
 	&--scroll {
-		@include stacked-list-scroll-height;
+		@include props.stacked-list-scroll-height;
 		overflow-y: scroll;
-
-		.stacked-list__wrapper--medium & {
-			@include stacked-list-scroll-height(10rem, 3);
-		}
-
-		.stacked-list__wrapper--large & {
-			@include stacked-list-scroll-height(14.4rem, 3);
-		}
-	}
-
-	&__wrapper {
-		&--medium {
-			.stacked-list__header,
-			.stacked-list__content {
-				height: 10rem;
-			}
-		}
-
-		&--large {
-			.stacked-list__header,
-			.stacked-list__content {
-				height: 14.4rem;
-			}
-		}
-
-		&--scroll-indicator {
-			&::after {
-				@include scroll-indicator;
-			}
-
-			&:hover {
-				&::after {
-					opacity: 0.1;
-				}
-			}
-		}
-
-		&--horizontal {
-			display: flex;
-
-			&::after {
-				@include scroll-indicator(false);
-			}
-
-			// does not address :focus on child elements
-			&:hover {
-				&::after {
-					opacity: 0.1;
-				}
-			}
-
-			.stacked-list__header,
-			.stacked-list__content {
-				height: 7.2rem;
-			}
-
-			.stacked-list__header {
-				flex: 0 0 14.4rem;
-			}
-
-			.StackedList {
-				display: flex;
-				flex: 1 1 auto;
-				margin-top: 0;
-				margin-left: -(map-get(theme.$borders, 'thin'));
-				overflow-x: scroll;
-
-				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-					margin-left: -(map-get(theme.$borders, 'base'));
-				}
-			}
-
-			.stacked-list__item {
-				flex: 1 0 14.4rem;
-				max-width: 14.4rem * 2;
-
-				&:nth-child(1n + 2) {
-					margin-top: 0;
-					margin-left: -(map-get(theme.$borders, 'thin'));
-
-					@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-						margin-left: -(map-get(theme.$borders, 'base'));
-					}
-				}
-			}
-
-			.draggable--original:first-child + .stacked-list__item {
-				margin-left: 0;
-			}
-
-			.stacked-list__content {
-				flex-direction: column;
-				justify-content: center;
-				text-align: center;
-
-				&::before {
-					top: -(map-get(theme.$borders, 'thin'));
-					right: auto;
-					bottom: -(map-get(theme.$borders, 'thin'));
-					left: -(map-get(theme.$borders, 'thin'));
-					width: map-get(theme.$borders, 'thin');
-					height: auto;
-
-					@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-						top: -(map-get(theme.$borders, 'base'));
-						bottom: -(map-get(theme.$borders, 'base'));
-						left: -(map-get(theme.$borders, 'base'));
-						width: map-get(theme.$borders, 'base');
-					}
-				}
-			}
-
-			.DragHandle,
-			.NopeHandle {
-				margin-left: 0;
-			}
-
-			&.stacked-list__wrapper--medium {
-				.stacked-list__header,
-				.stacked-list__content {
-					height: 10rem;
-				}
-			}
-
-			&.stacked-list__wrapper--large {
-				.stacked-list__header,
-				.stacked-list__content {
-					height: 14.4rem;
-				}
-			}
-		}
 	}
 
 	&__item {
 		&--draggable {
 			cursor: map-get(theme.$cursors, 'drag-base');
 
-			.stacked-list__content {
+			.stacked-list__item-content {
 				background-color: white;
 			}
 
@@ -151,70 +23,57 @@
 
 			&:focus,
 			&:hover {
-				.stacked-list__content {
+				.stacked-list__item-content {
 					color: map-get(theme.$colors, 'brand-blue');
 				}
 
 				+ .stacked-list__item {
-					.stacked-list__content::before {
+					.stacked-list__item-content::before {
 						background-color: map-get(theme.$colors, 'brand-blue');
 						opacity: 1;
 					}
 				}
 			}
+		}
+	}
+}
 
-			&.draggable-source--is-dragging {
-				.stacked-list__content {
-					color: map-get(theme.$colors, 'brand-blue');
-
-					.Pattern--typeHalftone {
-						@include pattern-halftone-animated;
-					}
-				}
-
-				+ .stacked-list__item,
-				+ .draggable--original + .stacked-list__item {
-					// stylelint-disable-next-line selector-max-class
-					.stacked-list__content::before {
-						background-color: map-get(theme.$colors, 'brand-blue');
-						opacity: 1;
-					}
+:global {
+	.stacked-list__item {
+		&.draggable-source--placed {
+			.stacked-list__item-content {
+				.pattern--placed {
+					@include pattern.pattern-placed-animated;
 				}
 			}
+		}
 
-			&.draggable-source--placed {
-				.stacked-list__content {
-					.Pattern--typePlaced {
-						@include pattern-placed-animated;
-					}
-				}
+		&.stacked-list__item--draggable.draggable-mirror {
+			z-index: map-get(theme.$z-index, 'overlay');
+			transition: width map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie'),
+				height map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie');
+
+			.stacked-list__item-content {
+				height: 100%;
+				color: white;
+				background-color: map-get(theme.$colors, 'brand-blue');
+				border-color: map-get(theme.$colors, 'brand-blue');
+				transform: scale(1.025);
 			}
 
-			&.draggable-mirror {
-				z-index: map-get(theme.$z-index, 'overlay');
-				transition: width map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie'),
-					height map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie');
+			.drag-handle {
+				@include handle.drag-handle-dragging;
+				color: red;
+			}
+		}
 
-				.stacked-list__content {
-					height: 100%;
-					color: white;
-					background-color: map-get(theme.$colors, 'brand-blue');
-					border-color: map-get(theme.$colors, 'brand-blue');
-					transform: scale(1.025);
+		&.draggable-source--is-dragging {
+			z-index: 2;
+			.stacked-list__item-content {
+				color: map-get(theme.$colors, 'brand-blue');
 
-					&::before,
-					&::after {
-						display: none;
-					}
-				}
-
-				.drag-handle {
-					background-color: white;
-
-					&::before,
-					&::after {
-						background-color: map-get(theme.$colors, 'brand-blue');
-					}
+				.pattern--halftone {
+					@include pattern.pattern-halftone-animated;
 				}
 			}
 		}

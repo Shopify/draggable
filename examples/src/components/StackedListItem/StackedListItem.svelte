@@ -9,10 +9,10 @@
 
 <li
 	class={classNames('stacked-list__item', classes)}
-	class:stacked-list__draggable={draggable}
+	class:stacked-list__item--draggable={draggable}
 	tabindex={draggable ? 1 : 0}
 >
-	<div class="stacked-list__content">
+	<div class="stacked-list__item-content">
 		<h4 class="heading heading--4 text-no-select">{label}</h4>
 		<div class={draggable ? 'drag-handle' : 'nope-handle'} />
 		{#if draggable}

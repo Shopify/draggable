@@ -1,9 +1,0 @@
-@use '../../../../styles/utils/shared/layout';
-@use '../../../../components/StackedListItem/props';
-
-// using an arbitrary width until I have time to fix the `columns` function
-$simple-list-width: 42rem;
-
-.SimpleList {
-	@include layout.centered-width(layout.columns(5));
-}

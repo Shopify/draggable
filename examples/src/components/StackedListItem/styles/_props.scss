@@ -1,3 +1,20 @@
+@use '../../../styles/theme';
+
+$stacked-list-item-base: (
+	base: 7.2rem,
+	desktop: 8.6rem
+);
+
+$stacked-list-item-medium: (
+	base: 10rem,
+	desktop: 16.4rem
+);
+
+$stacked-list-item-large: (
+	base: 14.4rem,
+	desktop: 20.6rem
+);
+
 @mixin stacked-list-scroll-height($size: 7.2rem, $rows: 6, $border-width: thin) {
 	height: ($size * $rows) - (map-get(theme.$borders, $border-width) * ($rows - 1));
 }

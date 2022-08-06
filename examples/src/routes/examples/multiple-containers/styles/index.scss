@@ -1,5 +1,7 @@
 @use '../../../../styles/utils/shared/layout';
-@use '../../../components/StackedList/styles/props';
+@use '../../../../styles/theme';
+@use '../../../../components/StackedListItem/styles/props';
+@use '../../../../styles/components/stacked-list';
 
 $grid-columns: 8;
 
@@ -16,7 +18,7 @@ $grid-columns: 8;
 			'b b b b b c c c';
 	}
 
-	.Container {
+	.container {
 		&:nth-child(1) {
 			grid-area: a;
 		}
@@ -30,11 +32,8 @@ $grid-columns: 8;
 		}
 	}
 
-	// resolve slim padding-bottom when single column
-	.stacked-list-header {
-		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) and (max-width: map-get(theme.$breakpoints, 'lg') - 1px) {
-			height: auto;
-		}
+	.stacked-list__header {
+		height: auto;
 	}
 
 	.draggable--is-dragging & .draggable-container-parent--capacity {

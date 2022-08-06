@@ -11,12 +11,12 @@ jobs:
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "package.json" }}
+            - v1-dependencies-
 
       - run:
           name: Install packages
-          command: yarn install
+          command: pnpm install
 
       - save_cache:
           paths:
@@ -25,8 +25,8 @@ jobs:
 
       - run:
           name: ESLint code
-          command: yarn lint
+          command: pnpm lint
 
       - run:
           name: Jest tests
-          command: yarn test-ci
+          command: pnpm test-ci

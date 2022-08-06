@@ -1,58 +1,10 @@
+@use '../../../../styles/components/stacked-list';
 @use '../../../../styles/utils/shared/functions';
 @use '../../../../styles/utils/shared/layout';
-@use '../../../../styles/theme';
-@use '../../../../components/Pattern/styles/props' as pattern;
-@use '../../../../components/StackedListItem/styles/props';
-@use 'variants';
 
 // using an arbitrary width until I have time to fix the `columns` function
 $simple-list-width: 42rem;
 
 section {
 	@include layout.centered-width(functions.columns(5));
-
-	.stacked-list {
-		position: relative;
-		margin-top: -(map-get(theme.$borders, 'thin'));
-
-		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-			margin-top: -(map-get(theme.$borders, 'base'));
-		}
-
-		&__wrapper {
-			@include pattern.stripes-bg;
-			position: relative;
-			color: map-get(theme.$colors, 'coal-dark');
-			box-shadow: inset 0 0 0 map-get(theme.$borders, 'thin') currentColor;
-			// `draggable-container-parent--capacity` changes the `color` on `stacked-listWrapper`...
-			// This is supposed to "trickle" down and cause all children to transition color as well...
-			// Problem is, sometimes these transitions seem to collide and we don't get syncronised timing...
-			// Sadly, there is no way to target `box-shadow`'s color without the use of currentColor.
-			// transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
-
-			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-				box-shadow: inset 0 0 0 map-get(theme.$borders, 'base') currentColor;
-			}
-		}
-
-		&__header {
-			// cannot be `min-height`, as a child's `height: 100%` will not work
-			// by using `height`, we will get visible scrollbars
-			height: map-get(props.$stacked-list-item-base, 'base');
-
-			@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
-				height: map-get(props.$stacked-list-item-base, 'desktop');
-			}
-		}
-
-		&__header {
-			padding: map-get(theme.$spacings, 'tighter') + map-get(theme.$borders, 'thin');
-			background-color: currentColor;
-			transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
-
-			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-				padding: map-get(theme.$spacings, 'tighter') + map-get(theme.$borders, 'base');
-			}
-		}
-	}
 }

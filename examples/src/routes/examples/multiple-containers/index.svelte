@@ -1,60 +1,63 @@
 <script lang="ts">
-	import { Sortable, Plugins } from '@draggable';
 	import { onMount } from 'svelte';
 
 	import StackedListItem from '@src/components/StackedListItem/StackedListItem.svelte';
 	import type { DragStartEvent, DragStopEvent } from '@draggable/Draggable';
 	import type { SortableSortedEvent, SortableSortEvent } from '@draggable/Sortable';
+	import { browser } from '$app/env';
 
-	let containers: HTMLElement[];
+	let containers: HTMLElement[] = [];
 
-	onMount(() => {
-		const sortable = new Sortable(containers, {
-			draggable: 'stacked-list__item--draggable',
-			mirror: {
-				constrainDimensions: true
-			},
-			plugins: [Plugins.ResizeMirror]
-		});
+	onMount(async () => {
+		if (browser) {
+			const { Sortable, Plugins } = await import('@draggable');
 
-		const containerTwoCapacity = 3;
-		let currentMediumChildren;
-		let capacityReached = false;
-		let lastOverContainer: HTMLElement;
+			const sortable = new Sortable(containers, {
+				draggable: 'stacked-list__item--draggable',
+				mirror: { constrainDimensions: true },
+				plugins: [Plugins.ResizeMirror]
+			});
 
-		// --- Draggable events --- //
-		sortable.on('drag:start', (evt: DragStartEvent) => {
-			currentMediumChildren = sortable.getDraggableElementsForContainer(
-				sortable.containers[1]
-			).length;
-			capacityReached = currentMediumChildren === containerTwoCapacity;
-			lastOverContainer = evt.sourceContainer;
-			sortable.containers[1].parentElement?.classList.toggle(
-				'draggable-container-parent--capacity',
-				capacityReached
-			);
-		});
+			const containerTwoCapacity = 3;
+			let currentMediumChildren;
+			let capacityReached = false;
+			let lastOverContainer: HTMLElement;
 
-		sortable.on('drag:stop', (evt: DragStopEvent) => {
-			evt.cancel();
-			evt.originalSource.remove();
-		});
+			// --- Draggable events --- //
+			sortable.on('drag:start', (evt: DragStartEvent) => {
+				currentMediumChildren = sortable.getDraggableElementsForContainer(
+					sortable.containers[1]
+				).length;
+				capacityReached = currentMediumChildren === containerTwoCapacity;
+				lastOverContainer = evt.sourceContainer;
+				sortable.containers[1].parentElement?.classList.toggle(
+					'draggable-container-parent--capacity',
+					capacityReached
+				);
+			});
 
-		sortable.on('sortable:sort', (evt: SortableSortEvent) => {
-			if (!capacityReached) return;
-			const sourceIsCapacityContainer = evt.dragEvent.sourceContainer === sortable.containers[1];
-			if (!sourceIsCapacityContainer && evt.dragEvent.overContainer === sortable.containers[1]) {
+			sortable.on('drag:stop', (evt: DragStopEvent) => {
 				evt.cancel();
-			}
-		});
-		sortable.on('sortable:sorted', (evt: SortableSortedEvent) => {
-			if (lastOverContainer === evt.dragEvent.overContainer) return;
-			lastOverContainer = evt.dragEvent.overContainer;
-		});
+				evt.originalSource.remove();
+			});
+
+			sortable.on('sortable:sort', (evt: SortableSortEvent) => {
+				if (!capacityReached) return;
+				const sourceIsCapacityContainer = evt.dragEvent.sourceContainer === sortable.containers[1];
+				if (!sourceIsCapacityContainer && evt.dragEvent.overContainer === sortable.containers[1]) {
+					evt.cancel();
+				}
+			});
+
+			sortable.on('sortable:sorted', (evt: SortableSortedEvent) => {
+				if (lastOverContainer === evt.dragEvent.overContainer) return;
+				lastOverContainer = evt.dragEvent.overContainer;
+			});
+		}
 	});
 </script>
 
-<section>
+<section class="multiple-containers">
 	<article
 		class="stacked-list stacked-list__wrapper--large stacked-list__wrapper--horizontal container"
 	>
@@ -79,7 +82,7 @@
 			<p><em>3 item capacity</em></p>
 		</header>
 
-		<ul bind:this={containers[1]} class="stacked-list stacked-list--scroll">
+		<ul bind:this={containers[1]} class="stacked-list">
 			<StackedListItem label="fluorescent grey" classes="stacked-list__item--6" />
 			<StackedListItem label="rebecca purple" classes="stacked-list__item--7" />
 		</ul>
@@ -102,6 +105,6 @@
 	</article>
 </section>
 
-<style lang="scss">
+<style lang="scss" global>
 	@use 'styles';
 </style>

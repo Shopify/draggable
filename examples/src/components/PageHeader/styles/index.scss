@@ -2,18 +2,20 @@
 @use '../../../styles/theme';
 
 .page-header {
-	margin-left: map-get(theme.$spacings, 'tight');
-	margin-right: map-get(theme.$spacings, 'tight');
 	margin-bottom: map-get(theme.$spacings, 'loose');
 	text-align: center;
 	color: map-get(theme.$colors, 'coal-dark');
 
-	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'sm')) {
+		margin-left: calc(map-get(theme.$spacings, 'fattest'));
+		margin-right: calc(map-get(theme.$spacings, 'fattest'));
 		margin-bottom: map-get(theme.$spacings, 'loosest');
 	}
 
 	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
-		margin-bottom: map-get(theme.$spacings, 'fattest');
+		margin-left: calc(map-get(theme.$spacings, 'fattest') * 3);
+		margin-right: calc(map-get(theme.$spacings, 'fattest') * 3);
+		margin-bottom: map-get(theme.$spacings, 'loosest');
 	}
 
 	.link {

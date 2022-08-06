@@ -69,14 +69,15 @@ $grid-columns: 4;
 				@media screen and (min-width: map-get(theme.$breakpoints, 'sm')) {
 					flex-basis: calc(25% - #{map-get(theme.$layout-lengths, 'gutter-base')});
 				}
-			}
-			.block__content {
-				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-					min-height: functions.rows(3);
-				}
 
-				@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
-					min-height: functions.rows(4);
+				.block__content {
+					@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+						min-height: functions.rows(3);
+					}
+
+					@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+						min-height: functions.rows(4);
+					}
 				}
 			}
 		}
@@ -124,7 +125,7 @@ $grid-columns: 4;
 				}
 			}
 
-			.block__content {
+			.block__wrapper .block__content {
 				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 					min-height: functions.rows(3, false, true);
 				}

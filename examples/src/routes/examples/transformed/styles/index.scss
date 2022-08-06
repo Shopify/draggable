@@ -1,0 +1,38 @@
+@use '../../../../styles/theme';
+@use '../../../../components/PaperStackItem/styles/props';
+
+$paper-stack-width: (
+	base: 24rem,
+	tablet: 42rem,
+	desktop: 60rem
+);
+
+@function paper-stack-height($height, $spacing) {
+	@return calc($height - (($spacing / 2) * (props.$paper-stack-item-count - 1)));
+}
+
+$paper-stack-height: (
+	base:
+		paper-stack-height(
+			map-get(props.$paper-stack-item-height, 'base'),
+			map-get(props.$paper-stack-item-spacing, 'base')
+		),
+	tablet:
+		paper-stack-height(
+			map-get(props.$paper-stack-item-height, 'tablet'),
+			map-get(props.$paper-stack-item-spacing, 'tablet')
+		)
+);
+
+.paper-stack {
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+	width: map-get($paper-stack-width, 'base');
+	height: map-get($paper-stack-height, 'base');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		width: map-get($paper-stack-width, 'tablet');
+		height: map-get($paper-stack-height, 'tablet');
+	}
+}

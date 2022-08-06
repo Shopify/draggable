@@ -1,3 +1,7 @@
+@use '../../../styles/theme';
+@use '../../Pattern/styles/props' as pattern;
+@use 'props';
+
 .paper-stack {
 	&__item {
 		&--draggable {
@@ -22,39 +26,6 @@
 
 					&::after {
 						transform: translateY(-(map-get(theme.$spacings, 'tightest')));
-					}
-				}
-			}
-
-			&.draggable-source--is-dragging {
-				.paper-stack__content {
-					color: map-get(theme.$colors, 'brand-blue');
-
-					.pattern--halftone {
-						@include pattern-halftone-animated;
-					}
-				}
-			}
-
-			&.draggable-source--placed {
-				.paper-stack__content {
-					.pattern--placed {
-						@include pattern-placed-animated;
-					}
-				}
-			}
-
-			&.draggable-mirror {
-				z-index: map-get(theme.$z-index, 'overlay');
-
-				.paper-stack__content {
-					color: white;
-					background-color: map-get(theme.$colors, 'brand-blue');
-					border-color: map-get(theme.$colors, 'brand-blue');
-					transform: perspective(90rem) rotateX(58deg) scale(1.025);
-
-					&::after {
-						content: none;
 					}
 				}
 			}

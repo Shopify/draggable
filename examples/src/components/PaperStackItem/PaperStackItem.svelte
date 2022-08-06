@@ -9,7 +9,7 @@
 
 <li
 	class={classNames('paper-stack__item', classes)}
-	class:paper__stack-item--draggable={draggable}
+	class:paper-stack__item--draggable={draggable}
 	tabIndex={draggable ? 1 : 0}
 >
 	<div class="paper-stack__content">

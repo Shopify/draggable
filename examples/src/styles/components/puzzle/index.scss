@@ -1,0 +1,29 @@
+@use '../../utils/shared/layout';
+@use '../../theme';
+@use 'outline';
+@use 'shadow';
+@use 'states';
+@use 'props';
+
+.puzzle {
+	@include layout.centered-width;
+	position: relative;
+	width: props.$puzzle-width;
+	font-size: props.$puzzle-font-size;
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		font-size: props.$puzzle-font-size-tablet;
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		font-size: props.$puzzle-font-size-desktop;
+	}
+
+	&__interior {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+}

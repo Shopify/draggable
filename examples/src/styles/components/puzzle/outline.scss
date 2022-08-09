@@ -1,0 +1,34 @@
+@use '../../utils/shared/layout';
+@use '../../theme';
+@use 'props';
+
+.outline {
+	position: absolute;
+	top: calc(-1 * (props.$puzzle-outline-width + (props.$puzzle-outline-width / 4)));
+	left: -#{props.$puzzle-outline-width};
+	width: 100%;
+	height: 100%;
+	margin: auto;
+	pointer-events: none;
+
+	.svg {
+		fill: black;
+
+		@media screen and (max-width: calc(map-get(theme.$breakpoints, 'lg') - 1px)) {
+			stroke: black;
+			stroke-width: props.$puzzle-outline-stroke;
+			stroke-linecap: round;
+		}
+	}
+
+	&--cube {
+		top: -#{props.$puzzle-outline-width};
+		left: -#{props.$puzzle-outline-width};
+		width: props.$puzzle-supplement-width-cube;
+		height: props.$puzzle-supplement-height-cube;
+	}
+}
+
+.cube__outline {
+	@include layout.position-cover;
+}

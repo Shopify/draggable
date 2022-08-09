@@ -113,4 +113,9 @@
 
 .subheading {
 	@include subheading;
+
+	&--mono {
+		font-family: map-get(theme.$font-stacks, 'monospace');
+		text-transform: uppercase;
+	}
 }

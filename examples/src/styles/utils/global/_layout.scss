@@ -8,10 +8,6 @@
 	@include layout.visually-hidden;
 }
 
-.clearfix {
-	@include layout.clearfix;
-}
-
 .hidden {
 	display: none !important; /* stylelint-disable-line declaration-no-important */
 }

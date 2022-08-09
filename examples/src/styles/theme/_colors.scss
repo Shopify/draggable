@@ -16,3 +16,138 @@ $colors: (
 	'brand-red': #ff0000,
 	'brand-purple': #800080
 );
+
+$ash: (
+	lightest: #fcfcfc,
+	lighter: #fafbfc,
+	light: #f5f6f7,
+	base: #ebeef0,
+	dark: #d3dbe2,
+	darker: #c3cfd8,
+	darkest: #a9b8c4
+);
+
+$coal: (
+	lightest: #95a7b7,
+	lighter: #798c9c,
+	light: #454e57,
+	base: #31373d,
+	dark: #272c30,
+	darker: #212529,
+	darkest: #0e0d0e
+);
+
+$ink: (
+	lightest: hsla(0, 0%, 0%, 0.58),
+	lighter: hsla(0, 0%, 0%, 0.64),
+	light: hsla(0, 0%, 0%, 0.7),
+	base: hsla(0, 0%, 0%, 0.76),
+	dark: hsla(0, 0%, 0%, 0.82),
+	darker: hsla(0, 0%, 0%, 0.88),
+	darkest: hsla(0, 0%, 0%, 0.94)
+);
+
+$yellow: (
+	lightest: #fff6d4,
+	lighter: #ffea95,
+	light: #ffdd56,
+	base: #ffd117,
+	dark: #d1ac13,
+	darker: #a3860f,
+	darkest: #745f0b
+);
+
+$orange: (
+	lightest: #fff0dd,
+	lighter: #ffd9ac,
+	light: #ffc37a,
+	base: #ffad49,
+	dark: #d18e3c,
+	darker: #a36f2f,
+	darkest: #744f22
+);
+
+$red: (
+	lightest: #ffe0e4,
+	lighter: #ffb2bd,
+	light: #ff8496,
+	base: #ff576f,
+	dark: #d1485b,
+	darker: #a33847,
+	darkest: #742833
+);
+
+$purple: (
+	lightest: #f1e2ff,
+	lighter: #deb7ff,
+	light: #ca8cff,
+	base: #b762ff,
+	dark: #9651d1,
+	darker: #753fa3,
+	darkest: #542d74
+);
+
+$blue: (
+	lightest: #d0e6ff,
+	lighter: #8bc2ff,
+	light: #459dff,
+	base: #0079ff,
+	dark: #0064d1,
+	darker: #004ea3,
+	darkest: #003774
+);
+
+$aqua: (
+	lightest: #defaf4,
+	lighter: #aef2e4,
+	light: #7eebd4,
+	base: #4ee4c4,
+	dark: #40bba1,
+	darker: #32927d,
+	darkest: #24685a
+);
+
+$euca: (
+	lightest: #ddfbeb,
+	lighter: #aaf6cd,
+	light: #77f1b0,
+	base: #44ed93,
+	dark: #38c279,
+	darker: #2c975e,
+	darkest: #1f6c43
+);
+
+$green: (
+	lightest: #eef9e2,
+	lighter: #d4f1b7,
+	light: #bbe98c,
+	base: #a2e261,
+	dark: #85b950,
+	darker: #68903e,
+	darkest: #4a672d
+);
+
+$brand: (
+	blue: #0042ff,
+	yellow: #ffff00,
+	orange: #ffa500,
+	red: #ff0000,
+	purple: #800080
+);
+
+$brand-muted: (
+	blue-lighter: #c0effb,
+	blue-light: #57b8ff,
+	orange: #ff9e2c,
+	red: #dd4540,
+	purple: #8042b7
+);
+
+$stars: (
+	base: black,
+	haze: #06101c,
+	purple: #1b061c,
+	blue: #04041b,
+	coal: #04000d,
+	tail: #e7ffff
+);

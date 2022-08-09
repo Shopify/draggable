@@ -1,0 +1,69 @@
+// --- Isometric variables
+$isometric-degree: 30deg;
+$isometric-skew: calc($isometric-degree * -1);
+$isometric-scale: 0.864; // unsure how this number was discovered
+
+// --- One-time variables
+$face-top-scale: 1.02040816; // unsure how this number was discovered
+$cube-width-scale: 0.58139535; // unsure how this number was discovered
+
+// -- Cube variables
+$face-size: 10em;
+$cube-width: calc($face-size / $cube-width-scale); // 172px;
+$cube-height: calc($face-size + ($face-size / $face-top-scale)); // 198px;
+
+// --- Font sizes
+$puzzle-font-size: 3.4px;
+$puzzle-font-size-tablet: 6px;
+$puzzle-font-size-desktop: 10px;
+
+// --- Widths
+$puzzle-width: calc($cube-width * 5);
+$puzzle-width-720p: calc($cube-width * 6);
+$puzzle-outline-stroke: 3;
+$puzzle-outline-width: 0.6em;
+$puzzle-supplement-width-cube: calc($cube-width + ($puzzle-outline-width * 2));
+$puzzle-supplement-height-cube: calc($cube-height + ($puzzle-outline-width * 2));
+
+// --- Offsets
+$puzzle-offset-y: calc($cube-height * 0.75); // distance the puzzle overlaps the next section
+$puzzle-shadow-offset-y: calc($cube-height / 6);
+$puzzle-shadow-offset-y-cube: calc($puzzle-shadow-offset-y / 2);
+$puzzle-supplement-offset: 0.75em; // IS THIS NEEDED?
+$puzzle-supplement-offset-x-multi: calc($cube-width * 0.025);
+
+// --- Presentation
+$puzzle-shadow-opacity: 0.2;
+
+///
+/// Cube layout functions
+@function cube-move-x($column: 0) {
+	@return calc($column * ($cube-width / 2));
+}
+
+@function cube-move-y($row: 0) {
+	@return calc(-1 * ($row * ($cube-height / 4)) + ($cube-height / 4));
+}
+
+///
+/// Cube layout mixins
+@mixin isometric-transform($rotation) {
+	transform: rotate($rotation) skewX($isometric-skew) scaleY($isometric-scale);
+}
+
+@mixin isometric($face) {
+	top: calc($cube-height / 2);
+	left: calc($cube-width / 2);
+
+	@if $face == top {
+		@include isometric-transform(calc($isometric-degree * 7));
+	} @else if $face == right {
+		@include isometric-transform(calc(-1 * $isometric-degree));
+	} @else if $face == left {
+		@include isometric-transform(calc($isometric-degree * 3));
+	}
+}
+
+@mixin cube-layout($x: 0, $y: 0) {
+	transform: translate3d(cube-move-x($x), cube-move-y($y), 0);
+}

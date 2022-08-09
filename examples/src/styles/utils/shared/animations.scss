@@ -1,0 +1,17 @@
+@use '../../theme';
+
+@mixin jelly {
+	animation: jelly map-get(theme.$durations, 'slower') linear both;
+}
+
+@mixin pop {
+	animation: pop map-get(theme.$durations, 'base') map-get(theme.$easings, 'excite') both;
+}
+
+@mixin jelly {
+	animation: jelly map-get(theme.$durations, 'slower') linear both;
+}
+
+@mixin jelly-reverse {
+	animation: jelly-reverse map-get(theme.$durations, 'slow') linear both;
+}

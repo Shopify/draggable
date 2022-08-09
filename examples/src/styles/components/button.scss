@@ -4,8 +4,8 @@
 .button {
 	display: inline-block;
 	padding: map-get(theme.$spacings, 'tightest');
-	font-size: 1.2rem;
-	font-weight: 900;
+	font-size: map-get(theme.$type-scales, 'button-base');
+	font-weight: map-get(theme.$type-scales, 'button-weight');
 	text-align: center;
 	white-space: nowrap;
 	color: map-get(theme.$colors, 'coal-dark');
@@ -14,6 +14,10 @@
 	transition: color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base'),
 		background-color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base'),
 		border-color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		font-size: map-get(theme.$type-scales, 'button-tablet');
+	}
 
 	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 		padding-right: map-get(theme.$spacings, 'tighter');
@@ -70,6 +74,44 @@
 		}
 	}
 
+	&__interior {
+		transition-duration: map-get(theme.$durations, 'base');
+		font-size: 1.4rem;
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			font-size: 1.8rem;
+		}
+	}
+
+	&--cosmic {
+		background-color: map-get(theme.$colors, 'base');
+		border-color: map-get(theme.$colors, 'brand-yellow');
+
+		&:hover {
+			border-color: #fff;
+			.button__interior {
+				color: #fff;
+			}
+		}
+
+		&:before {
+			transition-duration: map-get(theme.$durations, 'slower'), map-get(theme.$durations, 'base');
+			transition-delay: map-get(theme.$durations, 'slow'), 0ms;
+			opacity: 0;
+		}
+
+		&:focus:before,
+		&:hover:before {
+			transform: none;
+		}
+
+		&:active .button__interior,
+		&:focus .button__interior,
+		&:hover .button__interior {
+			background-color: transparent;
+		}
+	}
+
 	.button--pill {
 		border-radius: 2.4rem;
 	}
@@ -77,7 +119,7 @@
 
 ///
 /// Button container
-.button-container {
+.button__container {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
@@ -91,5 +133,15 @@
 		flex: 0 0 auto;
 		margin-top: map-get(theme.$spacings, 'tightest');
 		margin-left: map-get(theme.$spacings, 'tightest');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		margin-top: -(map-get(theme.$spacings, 'tight'));
+		margin-left: -(map-get(theme.$spacings, 'tight'));
+
+		.button {
+			margin-top: (map-get(theme.$spacings, 'tight'));
+			margin-left: (map-get(theme.$spacings, 'tight'));
+		}
 	}
 }

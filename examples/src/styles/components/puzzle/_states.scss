@@ -1,0 +1,120 @@
+@use '../../utils/shared/animations';
+@use '../../utils/shared/layout';
+@use '../../theme';
+
+.puzzle--hero {
+	transition: opacity map-get(theme.$durations, 'slow') map-get(theme.$easings, 'base');
+}
+
+.section--loading {
+	.puzzle--hero {
+		opacity: 0;
+	}
+}
+
+.shadow--cube {
+	.draggable-source--is-dragging & {
+		opacity: 0;
+		transform: translateY(-(map-get(theme.$spacings, 'base')));
+	}
+
+	.collidable__cube-8 &,
+	.collidable__cube-10 & {
+		display: none;
+	}
+}
+
+///
+/// Common dragging
+.draggable--is-dragging {
+	&,
+	.draggable-source,
+	.draggable-mirror {
+		cursor: map-get(theme.$cursors, 'drag-active');
+	}
+
+	&,
+	> * {
+		user-select: none;
+	}
+}
+
+.draggable-dropzone--occupied {
+	.cube {
+		transform: none;
+	}
+}
+
+.draggable-source {
+	cursor: map-get(theme.$cursors, 'drag-base');
+	outline: none;
+}
+
+.draggable-source--placed {
+	.jelly {
+		@include animations.jelly-reverse;
+	}
+}
+
+.draggable-source--is-dragging {
+	&.face__wrapper {
+		.face {
+			overflow: hidden;
+
+			&::before {
+				@include layout.position-cover;
+				content: '';
+				display: block;
+				border-radius: 50%;
+				background-color: rgba(white, 0.08);
+				box-shadow: map-get(theme.$shadows, 'pulse');
+				animation: pulse map-get(theme.$durations, 'slower') map-get(theme.$easings, 'base')
+					infinite both;
+			}
+
+			.svg {
+				opacity: 0;
+			}
+		}
+	}
+}
+
+.draggable-mirror {
+	z-index: map-get(theme.$z-index, 'surface');
+
+	&.cube {
+		transform: none;
+	}
+
+	.jelly {
+		@include animations.jelly;
+	}
+
+	&:not(.cube--solo) {
+		.face__pop {
+			@include animations.pop;
+		}
+
+		.face {
+			border-radius: map-get(theme.$radius, 'tight');
+			box-shadow: map-get(theme.$shadows, 'mirror-face');
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				box-shadow: map-get(theme.$shadows, 'mirror-face-tablet');
+			}
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+				box-shadow: map-get(theme.$shadows, 'mirror-face-desktop');
+			}
+		}
+	}
+
+	.shadow--cube {
+		// for whatever reason... a transition here just would not work
+		display: none;
+	}
+}
+
+.cube.colliding .jelly {
+	animation: shake map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
+}

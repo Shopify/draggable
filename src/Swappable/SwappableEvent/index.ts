@@ -3,9 +3,9 @@ import AbstractEvent from '../../shared/AbstractEvent';
 
 export type SwappableEventData = {
   dragEvent: DragEvent;
-  over?: Element;
-  overContainer?: Element;
-  swappedElement: Element;
+  over?: HTMLElement;
+  overContainer?: HTMLElement;
+  swappedElement: HTMLElement;
 };
 
 export class SwappableEvent extends AbstractEvent {

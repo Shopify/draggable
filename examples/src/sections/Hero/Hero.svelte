@@ -8,13 +8,14 @@
 
 	onMount(async () => {
 		if (browser) {
+			const { soundEffects } = await import('@src/utils/synth');
 			const { Swappable } = await import('@draggable');
 			const containers = document.querySelectorAll('.cubes__frame--hero .cube');
 			const draggable = new Swappable(Array.from(containers) as HTMLElement[]);
 
 			draggable.on('drag:start', (evt: DragStartEvent) => {
 				evt.sensorEvent.originalEvent.preventDefault();
-				// SoundFx.Synth.play('up');
+				soundEffects.synth.play('up');
 			});
 
 			draggable.on('drag:over', (evt: DragOverEvent) => {

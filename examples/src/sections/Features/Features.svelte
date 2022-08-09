@@ -1,5 +1,67 @@
-<script>
+<script lang="ts">
+	import { browser } from '$app/env';
+
 	import Cube from '@src/components/Cube/Cube.svelte';
+	import { onMount } from 'svelte';
+
+	let accessible: HTMLElement;
+	let extensible: HTMLElement;
+	let interaction: HTMLElement;
+	let animation: HTMLElement;
+
+	onMount(async () => {
+		if (browser) {
+			const { soundEffects } = await import('@src/utils/synth');
+
+			accessible.addEventListener('mouseenter', () => {
+				soundEffects.accessible.play();
+			});
+			accessible.addEventListener('mouseleave', () => {
+				soundEffects.accessible.pause();
+			});
+			accessible.addEventListener('mousedown', () => {
+				soundEffects.accessible.unmute(1);
+			});
+			accessible.addEventListener('mouseup', () => {
+				soundEffects.accessible.mute(1);
+			});
+
+			extensible.addEventListener('mouseenter', () => {
+				soundEffects.extensible.play();
+			});
+			extensible.addEventListener('mouseleave', () => {
+				soundEffects.extensible.pause();
+			});
+			extensible.addEventListener('mousedown', () => {
+				soundEffects.extensible.speed(1.5);
+			});
+			extensible.addEventListener('mouseup', () => {
+				soundEffects.extensible.speed(1);
+			});
+
+			interaction.addEventListener('mouseenter', () => {
+				soundEffects.single.play('interactionHover');
+			});
+			interaction.addEventListener('mouseleave', () => {
+				soundEffects.single.play('interactionHover', true);
+			});
+			interaction.addEventListener('mousedown', () => {
+				soundEffects.single.play('interactionActive');
+			});
+			interaction.addEventListener('mouseup', () => {
+				soundEffects.single.play('interactionActive', true);
+			});
+
+			Array.from(animation.getElementsByClassName('cube')).forEach((cube, index) => {
+				cube.addEventListener('mouseenter', () => {
+					soundEffects.single.play(`animationUp${index + 1}`);
+				});
+				cube.addEventListener('mousedown', () => {
+					soundEffects.single.play(`animationDown${index + 1}`);
+				});
+			});
+		}
+	});
 </script>
 
 <section class="section features">
@@ -13,7 +75,7 @@
 				focusable and provide customizable screen&nbsp;reader announcements.
 			</p>
 		</div>
-		<div class="puzzle puzzle--accessible">
+		<div bind:this={accessible} class="puzzle puzzle--accessible">
 			<div class="puzzle__interior">
 				<div class="svg-container shadow">
 					<svg class="svg" viewBox="0 0 696 358" focusable="false">
@@ -50,7 +112,7 @@
 				needs it too. Sharing is caring.
 			</p>
 		</div>
-		<div class="puzzle puzzle--extensible">
+		<div bind:this={extensible} class="puzzle puzzle--extensible">
 			<div class="puzzle__interior">
 				<div class="svg-container shadow">
 					<svg class="svg" viewBox="0 0 436 502" focusable="false">
@@ -81,7 +143,7 @@
 				touch are all available out of the box, with accessible keyboard support coming soon!
 			</p>
 		</div>
-		<div class="puzzle puzzle--interaction">
+		<div bind:this={interaction} class="puzzle puzzle--interaction">
 			<div class="puzzle__interior">
 				<div class="svg-container shadow shadow--interaction">
 					<svg class="svg" viewBox="0 0 866 302" focusable="false">
@@ -152,7 +214,7 @@
 				heart's desire.
 			</p>
 		</div>
-		<div class="puzzle puzzle--animation">
+		<div bind:this={animation} class="puzzle puzzle--animation">
 			<div class="puzzle__interior">
 				<div class="cubes__frame">
 					<Cube classes="cube--solo theme--island theme--island-alt">

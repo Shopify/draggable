@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { browser } from '$app/env';
-
+	import { debounce } from 'lodash';
 	import Cube from '@src/components/Cube/Cube.svelte';
 	import { onMount } from 'svelte';
 
@@ -9,27 +9,29 @@
 	onMount(async () => {
 		if (browser) {
 			const { Sortable } = await import('@draggable');
+			const { soundEffects } = await import('@src/utils/synth');
+
 			const draggable = new Sortable([container], {
 				mirror: {
 					appendTo: container
 				}
 			});
 
-			// // --- Drag states --- //
-			// draggable.on('drag:start', () => {
-			// 	SoundFx.Single.play('cubeUp');
-			// });
+			// --- Drag states --- //
+			draggable.on('drag:start', () => {
+				soundEffects.single.play('cubeUp');
+			});
 
-			// draggable.on(
-			// 	'sortable:sorted',
-			// 	Utils.debounce(() => {
-			// 		SoundFx.Single.play('cubeSort');
-			// 	}, 60)
-			// );
+			draggable.on(
+				'sortable:sorted',
+				debounce(() => {
+					soundEffects.single.play('cubeSort');
+				}, 60)
+			);
 
-			// draggable.on('drag:stop', () => {
-			// 	SoundFx.Single.play('cubeDown');
-			// });
+			draggable.on('drag:stop', () => {
+				soundEffects.single.play('cubeDown');
+			});
 		}
 	});
 </script>

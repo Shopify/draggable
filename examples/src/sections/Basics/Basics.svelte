@@ -10,13 +10,13 @@
 	let container: HTMLElement;
 	let justLifted = false;
 	let snappedIn = false;
-	let snappedOut = false;
 
 	let initialDropzone: HTMLElement | null;
 
 	onMount(async () => {
 		if (browser) {
 			const { Droppable, Plugins } = await import('@draggable');
+			const { soundEffects } = await import('@src/utils/synth');
 
 			const droppable = new Droppable([container], {
 				dropzone: '.cube--dropzone',
@@ -25,23 +25,21 @@
 			});
 
 			droppable.on('drag:start', (evt: DragStartEvent) => {
-				// SoundFx.Single.play('cubeUp');
+				soundEffects.single.play('cubeUp');
 				justLifted = true;
 				initialDropzone = evt.source.parentElement;
 			});
 
 			droppable.on('drag:stop', () => {
-				// if (!snappedIn) SoundFx.Single.play('cubeDown');
+				if (!snappedIn) soundEffects.single.play('cubeDown');
 				justLifted = false;
 				snappedIn = false;
-				snappedOut = false;
 			});
 
 			droppable.on('snap:out', () => {
 				if (!justLifted) {
-					// SoundFx.Single.play('cubeUp');
+					soundEffects.single.play('cubeUp');
 					snappedIn = false;
-					snappedOut = true;
 				}
 			});
 
@@ -51,7 +49,7 @@
 					return;
 				}
 
-				// SoundFx.Single.play('cubeDown');
+				soundEffects.single.play('cubeDown');
 				justLifted = false;
 				snappedIn = true;
 

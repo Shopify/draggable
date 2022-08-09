@@ -5,27 +5,28 @@
 	import Cube from '@src/components/Cube/Cube.svelte';
 	import { onMount } from 'svelte';
 
-	let swappedNode = null;
+	let swappedNode: HTMLElement | null;
 
 	onMount(async () => {
 		if (browser) {
+			const { soundEffects } = await import('@src/utils/synth');
 			const { Swappable } = await import('@draggable');
 			const containers = document.querySelectorAll('.cubes__frame--swappable .cube');
-			const draggable = new Swappable(Array.from(containers) as HTMLElement[]);
+			const swappable = new Swappable(Array.from(containers) as HTMLElement[]);
 
-			// // --- Drag states --- //
-			// draggable.on('drag:start', () => {
-			// 	SoundFx.Synth.play('up');
-			// });
-
-			draggable.on('swappable:swapped', ({ swappedElement }: SwappableSwappedEvent) => {
-				swappedNode = swappedElement;
-				// SoundFx.Synth.play('swap');
+			// --- Drag states --- //
+			swappable.on('drag:start', () => {
+				soundEffects.synth.play('up');
 			});
 
-			draggable.on('drag:stop', () => {
-				// if (swappedNode) SoundFx.Synth.play('downGood');
-				// else SoundFx.Synth.play('downBad');
+			swappable.on('swappable:swapped', ({ swappedElement }: SwappableSwappedEvent) => {
+				swappedNode = swappedElement;
+				soundEffects.synth.play('swap');
+			});
+
+			swappable.on('drag:stop', () => {
+				if (swappedNode) soundEffects.synth.play('downGood');
+				else soundEffects.synth.play('downBad');
 
 				swappedNode = null;
 			});

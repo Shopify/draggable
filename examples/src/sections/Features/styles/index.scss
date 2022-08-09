@@ -603,7 +603,7 @@
 			.cube:nth-child(7),
 			.cube:nth-child(22),
 			.cube:nth-child(23) {
-				transform: translate3d(puzzle.$cube-width / 2, calc(puzzle.$cube-height / 4), 0);
+				transform: translate3d(calc(puzzle.$cube-width / 2), calc(puzzle.$cube-height / 4), 0);
 			}
 
 			.cube:nth-child(12),

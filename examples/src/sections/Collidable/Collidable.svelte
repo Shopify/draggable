@@ -11,6 +11,7 @@
 	onMount(async () => {
 		if (browser) {
 			const { Droppable, Plugins } = await import('@draggable');
+			const { soundEffects } = await import('@src/utils/synth');
 
 			const draggable = new Droppable([container], {
 				dropzone: '.cube--dropzone',
@@ -21,29 +22,25 @@
 				plugins: [Plugins.Collidable]
 			});
 
-			// draggable.on('drag:start', () => {
-			// 	SoundFx.Single.play('cubeUp');
-			// });
+			draggable.on('drag:start', () => {
+				soundEffects.single.play('cubeUp');
+			});
 
-			// draggable.on('drag:over', () => {
-			// 	if (!canPlayOverSound) {
-			// 		return;
-			// 	}
+			draggable.on('drag:over', () => {
+				if (canPlayOverSound) soundEffects.single.play('cubeOver');
+			});
 
-			// 	SoundFx.Single.play('cubeOver');
-			// });
+			draggable.on('drag:out', () => {
+				canPlayOverSound = true;
+			});
 
-			// draggable.on('drag:out', () => {
-			// 	canPlayOverSound = true;
-			// });
-
-			// draggable.on('drag:stop', () => {
-			// 	SoundFx.Single.play('cubeDown');
-			// 	canPlayOverSound = false;
-			// });
+			draggable.on('drag:stop', () => {
+				soundEffects.single.play('cubeDown');
+				canPlayOverSound = false;
+			});
 
 			draggable.on('collidable:in', ({ collidingElement }: CollidableInEvent) => {
-				// SoundFx.Single.play('cubeCollide');
+				soundEffects.single.play('cubeCollide');
 				collidingElement.classList.add('colliding');
 			});
 

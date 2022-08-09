@@ -1,0 +1,40 @@
+@use '../../../styles/components/button';
+@use '../../../styles/theme';
+@use '../../../styles';
+
+body {
+	height: 100vh;
+	background-color: darken(map-get(theme.$colors, 'coal-dark'), 13%);
+}
+
+.error-404 {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+
+	.starfield {
+		position: absolute;
+	}
+
+	.content {
+		z-index: 1;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: 80rem;
+	}
+
+	.button {
+		color: map-get(theme.$colors, 'brand-yellow');
+		color: map-get(theme.$colors, 'brand-yellow');
+	}
+
+	.subheading {
+		color: #fff;
+		font-weight: 400;
+		margin-bottom: map-get(theme.$spacings, 'loose');
+	}
+}

@@ -1,0 +1,721 @@
+@use '../../../styles/utils/shared/animations';
+@use '../../../styles/components/puzzle/props' as puzzle;
+@use '../../../styles/theme';
+@use 'keyframes';
+@use 'props';
+
+.accessible {
+	.cube:nth-child(3),
+	.cube:nth-child(5) {
+		z-index: map-get(theme.$z-index, 'background');
+	}
+
+	.cube:nth-child(1),
+	.cube:nth-child(2),
+	.cube:nth-child(4),
+	.cube:nth-child(6) {
+		z-index: map-get(theme.$z-index, 'base');
+	}
+
+	.cube:nth-child(1) {
+		@include puzzle.cube-layout(0, 1);
+	}
+
+	.cube:nth-child(2) {
+		@include puzzle.cube-layout(1);
+	}
+
+	.cube:nth-child(3) {
+		@include puzzle.cube-layout(2, -1);
+	}
+
+	.cube:nth-child(4) {
+		@include puzzle.cube-layout(3, -2);
+	}
+
+	.cube:nth-child(5) {
+		@include puzzle.cube-layout(4, -1);
+	}
+
+	.cube:nth-child(6) {
+		@include puzzle.cube-layout(5);
+	}
+
+	.puzzle--accessible {
+		width: props.$puzzle-width-accessible;
+		height: props.$puzzle-height-accessible;
+		cursor: map-get(theme.$cursors, 'rock');
+
+		.face {
+			animation-duration: map-get(theme.$durations, 'slower');
+			animation-timing-function: map-get(theme.$easings, 'base');
+			animation-iteration-count: infinite;
+			animation-play-state: paused;
+		}
+
+		$start: 0ms;
+		$delay: map-get(theme.$durations, 'fast');
+
+		@for $i from 1 through 6 {
+			.cube:nth-child(#{$i}) {
+				.face {
+					animation-delay: $start;
+				}
+			}
+
+			$start: $start + $delay;
+		}
+
+		.face--left {
+			animation-name: accessible-wave-left;
+		}
+
+		.face--right {
+			animation-name: accessible-wave-right;
+		}
+
+		.face--top {
+			animation-name: accessible-wave-top;
+		}
+
+		&:hover {
+			.face {
+				animation-play-state: running;
+			}
+		}
+
+		&:active {
+			cursor: map-get(theme.$cursors, 'rock-active');
+
+			.face {
+				animation-duration: map-get(theme.$durations, 'slow');
+			}
+		}
+	}
+}
+
+.animation {
+	.cube:nth-child(1) {
+		@include puzzle.cube-layout(0, 1);
+	}
+
+	.cube:nth-child(2) {
+		@include puzzle.cube-layout(4, 1);
+	}
+
+	.cube:nth-child(3) {
+		@include puzzle.cube-layout(8, 1);
+	}
+
+	.puzzle--animation {
+		height: props.$puzzle-height-animation;
+
+		.shadow,
+		.jelly {
+			transition-property: opacity, transform;
+			transition-duration: map-get(theme.$durations, 'slow');
+			transition-timing-function: map-get(theme.$easings, 'bungie');
+		}
+
+		.cube {
+			cursor: map-get(theme.$cursors, 'rock-base');
+
+			.shadow {
+				z-index: -1;
+			}
+
+			&:hover {
+				.shadow {
+					opacity: calc(puzzle.$puzzle-shadow-opacity / 2.5);
+				}
+
+				.jelly__interior {
+					@include animations.jelly;
+				}
+
+				@include props.animation-hover-styles(props.$animation-cube-distance);
+
+				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+					@include props.animation-hover-styles(props.$animation-cube-distance-tablet);
+				}
+
+				@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+					@include props.animation-hover-styles(props.$animation-cube-distance-desktop);
+				}
+			}
+
+			&:active {
+				@include props.animation-active-styles;
+				cursor: map-get(theme.$cursors, 'rock-active');
+			}
+		}
+	}
+}
+
+.extensible {
+	.cube:nth-child(1) {
+		@include puzzle.cube-layout(0, -1);
+	}
+
+	.cube:nth-child(2) {
+		@include puzzle.cube-layout(0, 1);
+	}
+
+	.cube:nth-child(3) {
+		@include puzzle.cube-layout(1);
+	}
+
+	.cube:nth-child(4) {
+		@include puzzle.cube-layout(2, -1);
+	}
+
+	.cube:nth-child(5) {
+		@include puzzle.cube-layout(3, -2);
+	}
+
+	.cube:nth-child(6) {
+		@include puzzle.cube-layout(2, -3);
+	}
+
+	.cube:nth-child(7) {
+		@include puzzle.cube-layout(1, -4);
+	}
+
+	.cube:nth-child(8) {
+		@include puzzle.cube-layout(0, -5);
+	}
+
+	.cube:nth-child(9) {
+		@include puzzle.cube-layout(0, -3);
+
+		// required for the pattern to look right
+		[data-face='top'],
+		.cube__outline--top {
+			display: none;
+		}
+	}
+
+	.puzzle--extensible {
+		width: props.$puzzle-width-extensible;
+		height: props.$puzzle-height-extensible;
+		cursor: map-get(theme.$cursors, 'rock-base');
+
+		.face {
+			animation-duration: props.$extensible-total-duration;
+			animation-timing-function: map-get(theme.$easings, 'base');
+			animation-iteration-count: infinite;
+			animation-play-state: paused;
+		}
+
+		// --- :hover animation
+
+		&:hover {
+			.face {
+				animation-play-state: running;
+			}
+		}
+
+		.face--left {
+			animation-name: extensible-wave-left;
+		}
+
+		.cube:nth-child(9) {
+			.face--left {
+				animation-delay: props.$extensible-face-duration;
+			}
+		}
+
+		.cube:nth-child(1) {
+			.face--left {
+				animation-delay: props.$extensible-face-duration * 2;
+			}
+		}
+
+		.cube:nth-child(2) {
+			.face--left {
+				animation-delay: props.$extensible-face-duration * 3;
+			}
+		}
+
+		.cube:nth-child(3) {
+			.face--left {
+				animation-delay: props.$extensible-face-duration * 14;
+			}
+		}
+
+		.cube:nth-child(4) {
+			.face--left {
+				animation-delay: props.$extensible-face-duration * 15;
+			}
+		}
+
+		.face--top {
+			animation-name: extensible-wave-top;
+		}
+
+		.cube:nth-child(2) {
+			.face--top {
+				animation-delay: props.$extensible-face-duration * 4;
+			}
+		}
+
+		.cube:nth-child(3) {
+			.face--top {
+				animation-delay: props.$extensible-face-duration * 5;
+			}
+		}
+
+		.cube:nth-child(4) {
+			.face--top {
+				animation-delay: props.$extensible-face-duration * 6;
+			}
+		}
+
+		.cube:nth-child(5) {
+			.face--top {
+				animation-delay: props.$extensible-face-duration * 7;
+			}
+		}
+
+		.cube:nth-child(6) {
+			.face--top {
+				animation-delay: props.$extensible-face-duration * 16;
+			}
+		}
+
+		.cube:nth-child(7) {
+			.face--top {
+				animation-delay: props.$extensible-face-duration * 17;
+			}
+		}
+
+		.face--right {
+			animation-name: extensible-wave-right;
+		}
+
+		.cube:nth-child(5) {
+			.face--right {
+				animation-delay: props.$extensible-face-duration * 8;
+			}
+		}
+
+		.cube:nth-child(6) {
+			.face--right {
+				animation-delay: props.$extensible-face-duration * 9;
+			}
+		}
+
+		.cube:nth-child(7) {
+			.face--right {
+				animation-delay: props.$extensible-face-duration * 10;
+			}
+		}
+
+		.cube:nth-child(8) {
+			.face--right {
+				animation-delay: props.$extensible-face-duration * 11;
+			}
+		}
+
+		.cube:nth-child(9) {
+			.face--right {
+				animation-delay: props.$extensible-face-duration * 12;
+			}
+		}
+
+		.cube:nth-child(1) {
+			.face--right {
+				animation-delay: props.$extensible-face-duration * 13;
+			}
+		}
+
+		// --- :active animation
+
+		&:active {
+			cursor: map-get(theme.$cursors, 'rock-active');
+
+			.face {
+				animation-duration: props.$extensible-total-duration--active;
+			}
+
+			.face--left {
+				animation-name: extensible-wave-left--active;
+			}
+
+			.cube:nth-child(9) {
+				.face--left {
+					animation-delay: props.$extensible-face-duration-active;
+				}
+			}
+
+			.cube:nth-child(1) {
+				.face--left {
+					animation-delay: props.$extensible-face-duration-active * 2;
+				}
+			}
+
+			.cube:nth-child(2) {
+				.face--left {
+					animation-delay: props.$extensible-face-duration-active * 3;
+				}
+			}
+
+			.cube:nth-child(3) {
+				.face--left {
+					animation-delay: props.$extensible-face-duration-active * 14;
+				}
+			}
+
+			.cube:nth-child(4) {
+				.face--left {
+					animation-delay: props.$extensible-face-duration-active * 15;
+				}
+			}
+
+			.face--top {
+				animation-name: extensible-wave-top--active;
+			}
+
+			.cube:nth-child(2) {
+				.face--top {
+					animation-delay: props.$extensible-face-duration-active * 4;
+				}
+			}
+
+			.cube:nth-child(3) {
+				.face--top {
+					animation-delay: props.$extensible-face-duration-active * 5;
+				}
+			}
+
+			.cube:nth-child(4) {
+				.face--top {
+					animation-delay: props.$extensible-face-duration-active * 6;
+				}
+			}
+
+			.cube:nth-child(5) {
+				.face--top {
+					animation-delay: props.$extensible-face-duration-active * 7;
+				}
+			}
+
+			.cube:nth-child(6) {
+				.face--top {
+					animation-delay: props.$extensible-face-duration-active * 16;
+				}
+			}
+
+			.cube:nth-child(7) {
+				.face--top {
+					animation-delay: props.$extensible-face-duration-active * 17;
+				}
+			}
+
+			.face--right {
+				animation-name: extensible-wave-right--active;
+			}
+
+			.cube:nth-child(5) {
+				.face--right {
+					animation-delay: props.$extensible-face-duration-active * 8;
+				}
+			}
+
+			.cube:nth-child(6) {
+				.face--right {
+					animation-delay: props.$extensible-face-duration-active * 9;
+				}
+			}
+
+			.cube:nth-child(7) {
+				.face--right {
+					animation-delay: props.$extensible-face-duration-active * 10;
+				}
+			}
+
+			.cube:nth-child(8) {
+				.face--right {
+					animation-delay: props.$extensible-face-duration-active * 11;
+				}
+			}
+
+			.cube:nth-child(9) {
+				.face--right {
+					animation-delay: props.$extensible-face-duration-active * 12;
+				}
+			}
+
+			.cube:nth-child(1) {
+				.face--right {
+					animation-delay: props.$extensible-face-duration-active * 13;
+				}
+			}
+		}
+	}
+}
+
+///
+/// cube layout
+.interaction {
+	// right, inside, bottom
+	.cube:nth-child(6),
+	.cube:nth-child(12) {
+		top: puzzle.cube-move-y(-1);
+		left: puzzle.cube-move-x(6);
+	}
+
+	// right, inside, top
+	.cube:nth-child(7),
+	.cube:nth-child(13) {
+		top: puzzle.cube-move-y(1);
+		left: puzzle.cube-move-x(6);
+	}
+
+	// middle, bottom
+	.cube:nth-child(1),
+	.cube:nth-child(8),
+	.cube:nth-child(10),
+	.cube:nth-child(18),
+	.cube:nth-child(20),
+	.cube:nth-child(26) {
+		top: puzzle.cube-move-y(-1);
+		left: puzzle.cube-move-x(4);
+	}
+
+	// middle, top
+	.cube:nth-child(9),
+	.cube:nth-child(11),
+	.cube:nth-child(19),
+	.cube:nth-child(21),
+	.cube:nth-child(27) {
+		top: puzzle.cube-move-y(1);
+		left: puzzle.cube-move-x(4);
+	}
+
+	// right, outside, bottom
+	.cube:nth-child(2),
+	.cube:nth-child(14) {
+		top: puzzle.cube-move-y(-1);
+		left: puzzle.cube-move-x(8);
+	}
+
+	// right, outside, top
+	.cube:nth-child(3),
+	.cube:nth-child(15) {
+		top: puzzle.cube-move-y(1);
+		left: puzzle.cube-move-x(8);
+	}
+
+	// left, inside, bottom
+	.cube:nth-child(16),
+	.cube:nth-child(22) {
+		top: puzzle.cube-move-y(-1);
+		left: puzzle.cube-move-x(2);
+	}
+
+	// left, inside, top
+	.cube:nth-child(17),
+	.cube:nth-child(23) {
+		top: puzzle.cube-move-y(1);
+		left: puzzle.cube-move-x(2);
+	}
+
+	// left, outside, bottom
+	.cube:nth-child(4),
+	.cube:nth-child(24) {
+		top: puzzle.cube-move-y(-1);
+		left: puzzle.cube-move-x();
+	}
+
+	// left, outside, top
+	.cube:nth-child(5),
+	.cube:nth-child(25) {
+		top: puzzle.cube-move-y(1);
+		left: puzzle.cube-move-x();
+	}
+
+	///
+	/// cube juice
+	.puzzle--interaction {
+		height: props.$puzzle-height-interaction;
+		cursor: map-get(theme.$cursors, 'rock-base');
+
+		// --- cube
+		.shadow {
+			opacity: 1; // ensure full opacity
+			color: props.$interaction-shadow-color;
+		}
+
+		.shadow--interaction-hover {
+			transition-property: transform;
+			transition-duration: calc(
+				map-get(theme.$durations, 'base') + map-get(theme.$durations, 'faster')
+			);
+			transition-timing-function: map-get(theme.$easings, 'excite');
+		}
+
+		.shadow--interaction-active {
+			opacity: 0;
+			transition-property: opacity, transform;
+			transition-duration: calc(
+				map-get(theme.$durations, 'base') + map-get(theme.$durations, 'faster')
+			);
+			transition-timing-function: map-get(theme.$easings, 'base');
+		}
+
+		.cube {
+			transition: transform map-get(theme.$durations, 'base') map-get(theme.$easings, 'excite');
+		}
+
+		.cube:nth-child(6),
+		.cube:nth-child(7),
+		.cube:nth-child(16),
+		.cube:nth-child(17) {
+			transition-delay: map-get(theme.$durations, 'faster');
+		}
+
+		.cube:nth-child(2),
+		.cube:nth-child(3),
+		.cube:nth-child(4),
+		.cube:nth-child(5) {
+			transition-delay: get-duration(fast);
+		}
+
+		.cube:nth-child(1),
+		.cube:nth-child(8),
+		.cube:nth-child(9),
+		.cube:nth-child(10),
+		.cube:nth-child(11),
+		.cube:nth-child(18),
+		.cube:nth-child(19),
+		.cube:nth-child(20),
+		.cube:nth-child(21) {
+			transition-delay: map-get(theme.$durations, 'base');
+		}
+
+		&:hover {
+			.shadow--interaction-hover {
+				transform: translateY(calc(puzzle.$cube-height / 1.9));
+			}
+
+			.cube:nth-child(6),
+			.cube:nth-child(7),
+			.cube:nth-child(22),
+			.cube:nth-child(23) {
+				transform: translate3d(puzzle.$cube-width / 2, calc(puzzle.$cube-height / 4), 0);
+			}
+
+			.cube:nth-child(12),
+			.cube:nth-child(13),
+			.cube:nth-child(16),
+			.cube:nth-child(17) {
+				transform: translate3d(
+					calc(-1 * (puzzle.$cube-width / 2)),
+					calc(puzzle.$cube-height / 4),
+					0
+				);
+			}
+
+			.cube:nth-child(8),
+			.cube:nth-child(9),
+			.cube:nth-child(10),
+			.cube:nth-child(11) {
+				transform: translate3d(puzzle.$cube-width, calc(puzzle.$cube-height / 2), 0);
+			}
+
+			.cube:nth-child(18),
+			.cube:nth-child(19),
+			.cube:nth-child(20),
+			.cube:nth-child(21) {
+				transform: translate3d(-#{puzzle.$cube-width}, calc(puzzle.$cube-height / 2), 0);
+			}
+		}
+
+		&:active {
+			cursor: map-get(theme.$cursors, 'rock-active');
+
+			.shadow--interaction-active {
+				opacity: 1;
+				transform: translateY(calc(puzzle.$cube-height / 1.25));
+			}
+
+			// middle, right, front
+			.cube:nth-child(10),
+			.cube:nth-child(11) {
+				transform: translate3d(calc(puzzle.$cube-width * 1.5), calc(puzzle.$cube-height * 0.75), 0);
+			}
+
+			// middle, left, front
+			.cube:nth-child(20),
+			.cube:nth-child(21) {
+				transform: translate3d(
+					calc(-1 * (puzzle.$cube-width * 1.5)),
+					calc(puzzle.$cube-height * 0.75),
+					0
+				);
+			}
+
+			// right, outside, back
+			.cube:nth-child(2),
+			.cube:nth-child(3) {
+				transform: translate3d(
+					calc(-1 * (puzzle.$cube-width / 2)),
+					calc(-1 * (puzzle.$cube-height / 4)),
+					0
+				);
+			}
+
+			// left, outside, back
+			.cube:nth-child(4),
+			.cube:nth-child(5) {
+				transform: translate3d(
+					calc(puzzle.$cube-width / 2),
+					calc(-1 * (puzzle.$cube-height / 4)),
+					0
+				);
+			}
+
+			// middle, back
+			.cube:nth-child(1) {
+				transform: translateY(calc(puzzle.$cube-height / 2));
+			}
+		}
+	}
+}
+
+.features {
+	padding-top: map-get(theme.$spacings, 'fattest');
+	padding-bottom: map-get(theme.$spacings, 'base');
+	background-color: map-get(theme.$purple, 'base');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		padding-top: map-get(theme.$spacings, 'huger');
+		padding-bottom: map-get(theme.$spacings, 'fat');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		padding-top: map-get(theme.$spacings, 'jumboest');
+		padding-bottom: map-get(theme.$spacings, 'fatter');
+	}
+
+	::selection {
+		color: map-get(theme.$purple, 'base');
+	}
+
+	footer {
+		color: black;
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+		p,
+		a {
+			font-weight: 700;
+		}
+		font-size: map-get(theme.$type-scales, 'footer-base');
+		a {
+			color: black;
+			text-decoration: underline;
+		}
+	}
+}

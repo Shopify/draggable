@@ -1,0 +1,111 @@
+@use '../../../styles/theme';
+
+@keyframes accessible-wave-left {
+	0%,
+	50%,
+	100% {
+		background-color: map-get(theme.$red, 'light');
+	}
+
+	25% {
+		background-color: map-get(theme.$yellow, 'light');
+	}
+}
+
+@keyframes accessible-wave-right {
+	0%,
+	50%,
+	100% {
+		background-color: map-get(theme.$red, 'base');
+	}
+
+	25% {
+		background-color: map-get(theme.$yellow, 'base');
+	}
+}
+
+@keyframes accessible-wave-top {
+	0%,
+	50%,
+	100% {
+		background-color: map-get(theme.$yellow, 'base');
+	}
+
+	25% {
+		background-color: map-get(theme.$red, 'base');
+	}
+}
+
+@keyframes extensible-wave-left {
+	0%,
+	50%,
+	100% {
+		background-color: map-get(theme.$purple, 'light');
+	}
+
+	25% {
+		background-color: map-get(theme.$purple, 'lighter');
+	}
+}
+
+@keyframes extensible-wave-top {
+	0%,
+	50%,
+	100% {
+		background-color: map-get(theme.$blue, 'base');
+	}
+
+	25% {
+		background-color: map-get(theme.$blue, 'light');
+	}
+}
+
+@keyframes extensible-wave-right {
+	0%,
+	50%,
+	100% {
+		background-color: map-get(theme.$purple, 'base');
+	}
+
+	25% {
+		background-color: map-get(theme.$purple, 'light');
+	}
+}
+
+///
+/// :active variants
+@keyframes extensible-wave-left--active {
+	0%,
+	50%,
+	100% {
+		background-color: map-get(theme.$purple, 'light');
+	}
+
+	25% {
+		background-color: map-get(theme.$purple, 'lightest');
+	}
+}
+
+@keyframes extensible-wave-top--active {
+	0%,
+	50%,
+	100% {
+		background-color: map-get(theme.$blue, 'base');
+	}
+
+	25% {
+		background-color: map-get(theme.$blue, 'lighter');
+	}
+}
+
+@keyframes extensible-wave-right--active {
+	0%,
+	50%,
+	100% {
+		background-color: map-get(theme.$purple, 'base');
+	}
+
+	25% {
+		background-color: map-get(theme.$purple, 'lighter');
+	}
+}

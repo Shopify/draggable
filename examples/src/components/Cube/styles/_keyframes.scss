@@ -1,0 +1,39 @@
+@keyframes pop {
+	0% {
+		opacity: 0;
+		-webkit-transform: scale(1);
+		transform: scale(1);
+	}
+	75% {
+		opacity: 1;
+		-webkit-transform: scale(1.05);
+		transform: scale(1.05);
+	}
+	to {
+		-webkit-transform: scale(1.02);
+		transform: scale(1.02);
+	}
+}
+
+@keyframes shake {
+	0% {
+		-webkit-transform: translateZ(0);
+		transform: translateZ(0);
+	}
+	25% {
+		-webkit-transform: translate3d(0.6rem, 0, 0);
+		transform: translate3d(0.6rem, 0, 0);
+	}
+	50% {
+		-webkit-transform: translate3d(-1rem, 0, 0);
+		transform: translate3d(-1rem, 0, 0);
+	}
+	75% {
+		-webkit-transform: translate3d(0.4rem, 0, 0);
+		transform: translate3d(0.4rem, 0, 0);
+	}
+	to {
+		-webkit-transform: translateZ(0);
+		transform: translateZ(0);
+	}
+}

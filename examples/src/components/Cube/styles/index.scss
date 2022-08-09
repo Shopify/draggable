@@ -1,0 +1,92 @@
+@use 'keyframes';
+@use '../../../styles/theme';
+@use '../../../styles/utils/global/animations';
+@use '../../../styles/utils/shared/layout';
+@use '../../../styles/components/puzzle/props' as puzzle;
+
+.cube {
+	position: absolute;
+	top: 0;
+	left: 0;
+
+	.colliding .jelly {
+		animation: shake map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
+	}
+	&.draggable-source:hover {
+		cursor: map-get(theme.$cursors, 'drag-base');
+		& :global(.face) {
+			cursor: map-get(theme.$cursors, 'drag-base');
+		}
+		& :global(.cube__outline) {
+			cursor: map-get(theme.$cursors, 'drag-base');
+		}
+	}
+
+	&.draggable-source {
+		& :global(.face:hover) {
+			cursor: map-get(theme.$cursors, 'drag-base');
+		}
+		& :global(.cube__outline:hover) {
+			cursor: map-get(theme.$cursors, 'drag-base');
+		}
+	}
+
+	&:hover {
+		& :global(.cube__outline) {
+			cursor: map-get(theme.$cursors, 'pointer-base');
+		}
+	}
+
+	&.draggable-mirror {
+		transform: none;
+		.jelly__interior {
+			animation: jelly map-get(theme.$durations, 'slower') linear both;
+		}
+		&:not(.cube--solo) {
+			.face__pop {
+				animation: pop map-get(theme.$durations, 'base') cubic-bezier(0.18, 0.67, 0.6, 1.22) both;
+			}
+
+			.face {
+				border-radius: 0.1rem;
+				box-shadow: inset 0 0 0 0.2rem map-get(theme.$colors, 'coal-dark'),
+					0 0 0 0.2rem map-get(theme.$colors, 'coal-dark');
+
+				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+					box-shadow: inset 0 0 0 0.3rem map-get(theme.$colors, 'coal-dark'),
+						0 0 0 0.3rem map-get(theme.$colors, 'coal-dark');
+				}
+
+				@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+					box-shadow: inset 0 0 0 0.5rem map-get(theme.$colors, 'coal-dark'),
+						0 0 0 0.5rem map-get(theme.$colors, 'coal-dark');
+				}
+			}
+		}
+	}
+
+	.draggable-dropzone--occupied & {
+		-webkit-transform: none;
+		transform: none;
+	}
+
+	&__outline {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		margin: auto;
+	}
+
+	.jelly,
+	.jelly__interior {
+		width: 100%;
+		height: 100%;
+	}
+
+	&--solo {
+		width: puzzle.$cube-width;
+		height: puzzle.$cube-height;
+	}
+}

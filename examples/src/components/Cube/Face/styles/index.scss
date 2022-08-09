@@ -1,0 +1,58 @@
+@use '../../../../styles/theme';
+@use '../../../../styles/components/puzzle/props' as puzzle;
+@use 'keyframes';
+
+.face {
+	position: absolute;
+	width: puzzle.$face-size;
+	height: puzzle.$face-size;
+	transform-origin: 0 0;
+	transition: background-color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
+
+	&:hover {
+		cursor: map-get(theme.$cursors, 'pointer-base');
+	}
+
+	&--top,
+	&--right,
+	&--left {
+		top: 9.9em;
+		left: 8.6em;
+	}
+
+	&--top {
+		@include puzzle.isometric(top);
+	}
+
+	&--right {
+		@include puzzle.isometric(right);
+	}
+
+	&--left {
+		@include puzzle.isometric(left);
+	}
+}
+
+:global(.face__wrapper.draggable-source--is-dragging) {
+	.face {
+		overflow: hidden;
+		&:before {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			margin: auto;
+			content: '';
+			display: block;
+			border-radius: 50%;
+			background-color: hsla(0, 0%, 100%, 0.08);
+			box-shadow: shadow(pulse);
+			animation: pulse map-get(theme.$durations, 'slower') map-get(theme.$easings, 'base') infinite
+				both;
+		}
+		.svg {
+			opacity: 0;
+		}
+	}
+}

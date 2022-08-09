@@ -1,0 +1,5 @@
+@use '../../../styles/components/puzzle/props' as puzzle;
+
+$puzzle-offset-y-sortable: puzzle.$cube-height;
+$puzzle-width-sortable: puzzle.$cube-width * 2.5;
+$puzzle-height-sortable: puzzle.$cube-height * 3.25;

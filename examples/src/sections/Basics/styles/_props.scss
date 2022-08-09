@@ -1,0 +1,5 @@
+@use '../../../styles/components/puzzle/props' as puzzle;
+
+$puzzle-offset-y-basics: calc(puzzle.$cube-height * 0.5);
+$puzzle-height-basics: calc(puzzle.$cube-height * 3.25);
+$puzzle-supplement-width-basics: calc((puzzle.$cube-width * 2) + puzzle.$puzzle-supplement-offset);

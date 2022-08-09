@@ -1,0 +1,94 @@
+@use '../../../styles/components/puzzle/props' as puzzle;
+@use '../../../styles/theme';
+@use 'props';
+
+.swappable {
+	padding-top: map-get(theme.$spacings, 'fat');
+	background-color: map-get(theme.$aqua, 'base');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		padding-top: map-get(theme.$spacings, 'huge');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		padding-top: map-get(theme.$spacings, 'hugest');
+	}
+
+	::selection {
+		color: map-get(theme.$aqua, 'base');
+	}
+
+	.puzzle--swappable {
+		width: props.$puzzle-width-swappable;
+		height: props.$puzzle-height-swappable - puzzle.$puzzle-offset-y;
+
+		.puzzle__interior {
+			height: props.$puzzle-height-swappable;
+		}
+	}
+
+	.outline--swappable {
+		width: props.$puzzle-width-swappable + (puzzle.$puzzle-outline-width * 2);
+		height: props.$puzzle-height-swappable + (puzzle.$puzzle-outline-width * 2);
+	}
+
+	.cube:nth-child(1) {
+		top: puzzle.cube-move-y(-3);
+		left: puzzle.cube-move-x();
+	}
+
+	.cube:nth-child(2) {
+		top: puzzle.cube-move-y(-4);
+		left: puzzle.cube-move-x(1);
+	}
+
+	.cube:nth-child(3) {
+		top: puzzle.cube-move-y(-5);
+		left: puzzle.cube-move-x(2);
+	}
+
+	.cube:nth-child(4) {
+		top: puzzle.cube-move-y(-6);
+		left: puzzle.cube-move-x(3);
+	}
+
+	.cube:nth-child(5) {
+		top: puzzle.cube-move-y(-1);
+		left: puzzle.cube-move-x(2);
+	}
+
+	.cube:nth-child(6) {
+		top: puzzle.cube-move-y(-2);
+		left: puzzle.cube-move-x(3);
+	}
+
+	.cube:nth-child(7) {
+		top: puzzle.cube-move-y(-3);
+		left: puzzle.cube-move-x(4);
+	}
+
+	.cube:nth-child(8) {
+		top: puzzle.cube-move-y(-4);
+		left: puzzle.cube-move-x(5);
+	}
+
+	.cube:nth-child(9) {
+		top: puzzle.cube-move-y(1);
+		left: puzzle.cube-move-x(4);
+	}
+
+	.cube:nth-child(10) {
+		top: puzzle.cube-move-y();
+		left: puzzle.cube-move-x(5);
+	}
+
+	.cube:nth-child(11) {
+		top: puzzle.cube-move-y(-1);
+		left: puzzle.cube-move-x(6);
+	}
+
+	.cube:nth-child(12) {
+		top: puzzle.cube-move-y(-2);
+		left: puzzle.cube-move-x(7);
+	}
+}

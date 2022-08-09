@@ -1,0 +1,4 @@
+@use '../../../styles/components/puzzle/props' as puzzle;
+
+$puzzle-width-swappable: calc(puzzle.$cube-width * 4.5);
+$puzzle-height-swappable: calc(puzzle.$cube-height * 2.75);

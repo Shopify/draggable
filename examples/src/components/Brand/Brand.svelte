@@ -1,4 +1,10 @@
-<a href="/examples" class="brand" title="Return to Examples index">
+<script lang="ts">
+	export let href: string = '/examples';
+	export let title: string = 'Return to Examples index';
+	export let variant: 'large' | 'medium' = 'medium';
+</script>
+
+<a {href} {title} class:brand--large={variant === 'large'} class="brand">
 	<div class="svg-container brand__logo">
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 78" class="svg svg--logo">
 			<path

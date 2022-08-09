@@ -114,9 +114,11 @@ const defaultAnnouncements = {
 };
 
 interface SortableOptions extends Omit<DraggableOptions, 'announcements'> {
-  announcements: Record<string, (event: SortableEvent | AbstractEvent) => unknown>
+  announcements: Record<
+    string,
+    (event: SortableEvent | AbstractEvent) => unknown
+  >;
 }
-
 
 /**
  * Sortable is built on top of Draggable and allows sorting of draggable elements. Sortable will keep
@@ -126,7 +128,10 @@ export default class Sortable extends Draggable {
   startIndex: number | null;
   startContainer: Element | null;
 
-  constructor(containers: HTMLElement[] = [], options: Partial<SortableOptions> = {}) {
+  constructor(
+    containers: HTMLElement[] = [],
+    options: Partial<SortableOptions> = {}
+  ) {
     super(containers, {
       ...options,
       announcements: {
@@ -167,9 +172,9 @@ export default class Sortable extends Draggable {
    * original source element if present
    */
   getSortableElementsForContainer(container: Element): Element[] {
-    const allSortableElements = <Element[]>(
-      (<unknown>container.querySelectorAll(this.options.draggable))
-    );
+    const allSortableElements = <Element[]>[
+      ...container.querySelectorAll(this.options.draggable),
+    ];
 
     return [...allSortableElements].filter(
       (childElement) =>

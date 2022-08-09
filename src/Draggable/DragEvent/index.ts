@@ -210,6 +210,7 @@ export class DragPressureEvent extends DragEvent {
 export class DragStopEvent extends DragEvent {
   declare data: Omit<DragEventData, 'originalSource'> & {
     originalSource: HTMLElement;
+    sourceContainer: HTMLElement;
   };
 
   static type = 'drag:stop';
@@ -217,6 +218,10 @@ export class DragStopEvent extends DragEvent {
 
   get originalSource() {
     return this.data.originalSource;
+  }
+
+  get sourceContainer() {
+    return this.data.sourceContainer;
   }
 
   clone(data) {

@@ -19,6 +19,7 @@ html {
 body {
 	cursor: map-get(theme.$cursors, 'base');
 	background-color: map-get(theme.$brand, 'blue');
+	height: initial;
 
 	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		padding: map-get(theme.$spacings, 'tighter');

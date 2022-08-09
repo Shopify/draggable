@@ -316,9 +316,9 @@ export default class Draggable {
     );
 
   getDraggableElementsForContainer = (container: Element) => {
-    const allDraggableElements = <HTMLElement[]>(
-      (<unknown>container.querySelectorAll(this.options.draggable))
-    );
+    const allDraggableElements = <HTMLElement[]>[
+      ...container.querySelectorAll(this.options.draggable),
+    ];
 
     return [...allDraggableElements].filter((childElement) => {
       return (

@@ -25,7 +25,7 @@
 .puzzle.puzzle--basics {
 	height: props.$puzzle-height-basics - props.$puzzle-offset-y-basics;
 
-	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 		width: puzzle.$puzzle-width-720p;
 	}
 

@@ -85,7 +85,10 @@ export default class Droppable extends Draggable {
   lastDropzone: HTMLElement = null;
   initialDropzone: HTMLElement = null;
 
-  constructor(containers: HTMLElement[] = [], options: Partial<DroppableOptions> = {}) {
+  constructor(
+    containers: HTMLElement[] = [],
+    options: Partial<DroppableOptions> = {}
+  ) {
     super(containers, {
       ...defaultOptions,
       ...options,
@@ -244,7 +247,7 @@ export default class Droppable extends Draggable {
     const dropzone = this.options.dropzone;
 
     if (typeof dropzone === 'string')
-      return <HTMLElement[]>(<unknown>document.querySelectorAll(dropzone));
+      return <HTMLElement[]>[...document.querySelectorAll(dropzone)];
     else if (dropzone instanceof Array) return dropzone;
     else if (typeof dropzone === 'function') return [dropzone()];
     else return [dropzone];

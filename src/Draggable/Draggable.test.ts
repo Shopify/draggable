@@ -387,9 +387,9 @@ describe('Draggable', () => {
   describe('#removeContainer', () => {
     it('removes single container dynamically', () => {
       let dragOverContainerHandler = jest.fn();
-      const allContainers = <HTMLElement[]>(
-        (<unknown>document.querySelectorAll('.Container, .DynamicContainer'))
-      );
+      const allContainers = <HTMLElement[]>[
+        ...document.querySelectorAll('.Container, .DynamicContainer'),
+      ];
       const newInstance = new Draggable(allContainers, {
         draggable: 'li',
       });

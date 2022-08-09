@@ -1,0 +1,127 @@
+@use '../../styles/theme';
+@use '../../styles/utils/shared/layout';
+@use '../../styles/components/puzzle';
+@use '../../styles';
+@use 'props';
+@use 'themes';
+
+$section-padding-x-mobile: 1.3rem; // (320px - 294px) / 2
+
+html {
+	font-family: map-get(theme.$font-stacks, 'base');
+
+	::selection {
+		color: map-get(theme.$ash, 'light');
+		background-color: map-get(theme.$coal, darker);
+	}
+}
+
+body {
+	cursor: map-get(theme.$cursors, 'base');
+	background-color: map-get(theme.$brand, 'blue');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		padding: map-get(theme.$spacings, 'tighter');
+		background-color: map-get(theme.$purple, 'base');
+		background-image: linear-gradient(
+			188deg,
+			map-get(theme.$purple, 'base'),
+			map-get(theme.$blue, 'base'),
+			map-get(theme.$colors, 'brand-yellow'),
+			map-get(theme.$red, 'base'),
+			map-get(theme.$purple, 'base'),
+			map-get(theme.$blue, 'light'),
+			map-get(theme.$aqua, 'base'),
+			map-get(theme.$yellow, 'base'),
+			map-get(theme.$red, 'base')
+		);
+	}
+
+	main {
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			border: map-get(theme.$borders, 'section-tablet');
+		}
+	}
+
+	// Resolve overscroll background color
+	&::after {
+		content: '';
+		position: sticky;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		display: block;
+		height: 0;
+		box-shadow: 0 map-get(theme.$spacings, 'jumboest') 0 map-get(theme.$spacings, 'jumboest')
+			map-get(theme.$purple, 'base');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			box-shadow: 0 map-get(theme.$spacings, 'jumboest') 0 map-get(theme.$spacings, 'jumboest')
+				map-get(theme.$red, 'base');
+		}
+	}
+}
+
+main {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		border: map-get(theme.$borders, 'section-tablet');
+	}
+}
+
+.section {
+	// using custom spacing rather than `get-spacing(tighter)`
+	// to be equal to the mobile width of a puzzle
+	padding-left: $section-padding-x-mobile;
+	padding-right: $section-padding-x-mobile;
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		padding-left: map-get(theme.$spacings, 'base');
+		padding-right: map-get(theme.$spacings, 'base');
+	}
+
+	& + & {
+		border-top: map-get(theme.$borders, 'section-base');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			border-top: map-get(theme.$borders, 'section-tablet');
+		}
+	}
+}
+
+.section__interior--margin {
+	margin-bottom: map-get(theme.$spacings, 'fatter');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		margin-bottom: map-get(theme.$spacings, 'huger');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		margin-bottom: map-get(theme.$spacings, 'hugest');
+	}
+}
+
+.content {
+	@include layout.centered-width(map-get(theme.$draggable-layout-lengths, 'content'));
+	margin-bottom: map-get(theme.$spacings, 'loose');
+	text-align: center;
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		margin-bottom: map-get(theme.$spacings, 'fat');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		margin-bottom: map-get(theme.$spacings, 'fattest');
+	}
+
+	p {
+		@include props.content__paragraph;
+	}
+
+	&--small {
+		max-width: map-get(theme.$draggable-layout-lengths, 'base');
+	}
+}
+
+.cubes__frame {
+	@include layout.position-cover;
+}

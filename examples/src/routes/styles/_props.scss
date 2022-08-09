@@ -1,0 +1,31 @@
+@use '../../styles/theme';
+
+@mixin content__paragraph {
+	margin-top: map-get(theme.$spacings, 'tight');
+	font-size: 1.6rem;
+	font-weight: 700;
+	line-height: 1.6;
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		margin-top: map-get(theme.$spacings, 'base');
+		font-size: map-get(theme.$type-scales, 'paragraph-tablet');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		margin-top: map-get(theme.$spacings, 'looser');
+		font-size: map-get(theme.$type-scales, 'paragraph-desktop');
+	}
+}
+
+@mixin helper-text {
+	display: block;
+	margin-top: map-get(theme.$spacings, 'tight');
+	font-size: map-get(theme.$type-scales, 'helper');
+	font-weight: 600;
+	color: white;
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		margin-top: map-get(theme.$spacings, 'base');
+		font-size: map-get(theme.$type-scales, 'helper, tablet');
+	}
+}

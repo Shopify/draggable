@@ -81,16 +81,6 @@ $grid-columns: 4;
 				}
 			}
 		}
-
-		&--float {
-			@include layout.clearfix;
-
-			.block {
-				float: left;
-				width: 100%;
-			}
-		}
-
 		&--grid {
 			display: grid;
 			gap: map-get(theme.$borders, 'thin');

@@ -1,6 +1,6 @@
-@use '../../../styles/theme';
-@use '../../../styles/utils/shared/layout';
-@use '../../../styles/components/puzzle/props' as puzzle;
+@use '@src/styles/theme';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/components/puzzle/props' as puzzle;
 @use 'props';
 
 .basics {

@@ -1,4 +1,4 @@
-@use '../../theme';
+@use '@src/styles/theme';
 
 /// Generate a selector chain to resolve draggable source layouts
 /// @param {ArgList} $nth-children - Any number of numeric values

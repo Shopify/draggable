@@ -4,6 +4,8 @@
 	import Cube from '@src/components/Cube/Cube.svelte';
 	import { onMount } from 'svelte';
 
+	import './styles/index.scss';
+
 	let container: HTMLElement;
 
 	onMount(async () => {
@@ -122,7 +124,3 @@
 		</div>
 	</article>
 </section>
-
-<style lang="scss" global>
-	@use 'styles';
-</style>

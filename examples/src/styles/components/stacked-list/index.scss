@@ -1,8 +1,8 @@
-@use '../../../components/StackedListItem/styles/props';
-@use '../../../components/Pattern/styles/props' as pattern;
-@use '../../theme';
-@use '../../utils/shared/layout';
-@use '../../utils/shared/functions';
+@use '@src/components/StackedListItem/styles/props';
+@use '@src/components/Pattern/styles/props' as pattern;
+@use '@src/styles/theme';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/utils/shared/functions';
 @use 'variants';
 
 .stacked-list {

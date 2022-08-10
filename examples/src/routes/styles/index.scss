@@ -1,7 +1,7 @@
-@use '../../styles/theme';
-@use '../../styles/utils/shared/layout';
-@use '../../styles/components/puzzle';
-@use '../../styles';
+@use '@src/styles/theme';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/components/puzzle';
+@use '@src/styles';
 @use 'props';
 @use 'themes';
 
@@ -16,7 +16,7 @@ html {
 	}
 }
 
-body {
+.home {
 	cursor: map-get(theme.$cursors, 'base');
 	background-color: map-get(theme.$brand, 'blue');
 	height: initial;
@@ -60,12 +60,6 @@ body {
 			box-shadow: 0 map-get(theme.$spacings, 'jumboest') 0 map-get(theme.$spacings, 'jumboest')
 				map-get(theme.$red, 'base');
 		}
-	}
-}
-
-main {
-	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-		border: map-get(theme.$borders, 'section-tablet');
 	}
 }
 

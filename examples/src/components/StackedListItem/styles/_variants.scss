@@ -1,6 +1,6 @@
-@use '../../../styles/theme';
-@use '../../../styles/components/handle';
-@use '../../Pattern/styles/props' as pattern;
+@use '@src/styles/theme';
+@use '@src/styles/components/handle';
+@use '@src/components/Pattern/styles/props' as pattern;
 @use 'props';
 
 .stacked-list {

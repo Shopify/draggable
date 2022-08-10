@@ -1,8 +1,8 @@
 @use 'keyframes';
-@use '../../../styles/theme';
-@use '../../../styles/utils/global/animations';
-@use '../../../styles/utils/shared/layout';
-@use '../../../styles/components/puzzle/props' as puzzle;
+@use '@src/styles/theme';
+@use '@src/styles/utils/global/animations';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/components/puzzle/props' as puzzle;
 
 .cube {
 	position: absolute;
@@ -22,13 +22,8 @@
 		}
 	}
 
-	&.draggable-source {
-		& :global(.face:hover) {
-			cursor: map-get(theme.$cursors, 'drag-base');
-		}
-		& :global(.cube__outline:hover) {
-			cursor: map-get(theme.$cursors, 'drag-base');
-		}
+	:global(&.draggable-source:hover) {
+		cursor: map-get(theme.$cursors, 'drag-base');
 	}
 
 	&:hover {

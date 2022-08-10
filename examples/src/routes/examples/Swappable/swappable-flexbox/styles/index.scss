@@ -1,5 +1,6 @@
-@use '../../../../styles/utils/shared/functions';
-@use '../../../../styles/utils/shared/layout';
+@use '@src/styles/utils/shared/functions';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
 
 $flexbox-block-name: unquote('block');
 

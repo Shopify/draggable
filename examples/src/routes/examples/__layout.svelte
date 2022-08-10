@@ -5,12 +5,15 @@
 	import classNames from 'classnames';
 	import { page } from '$app/stores';
 
+	import '@src/styles/index.scss';
+	import './__layout.scss';
+
 	let open = false;
 
 	$: $page.url.pathname, (open = false);
 </script>
 
-<div class="content">
+<div class="examples">
 	<Sidebar {pages} classes={classNames({ open })} />
 
 	<main class="main">
@@ -23,8 +26,3 @@
 		<slot />
 	</main>
 </div>
-
-<style lang="scss" global>
-	@use '../../styles';
-	@use '__layout';
-</style>

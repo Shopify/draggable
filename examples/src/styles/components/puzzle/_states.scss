@@ -1,6 +1,6 @@
-@use '../../utils/shared/animations';
-@use '../../utils/shared/layout';
-@use '../../theme';
+@use '@src/styles/utils/shared/animations';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
 
 .puzzle--hero {
 	transition: opacity map-get(theme.$durations, 'slow') map-get(theme.$easings, 'base');
@@ -43,11 +43,6 @@
 	.cube {
 		transform: none;
 	}
-}
-
-.draggable-source {
-	cursor: map-get(theme.$cursors, 'drag-base');
-	outline: none;
 }
 
 .draggable-source--placed {

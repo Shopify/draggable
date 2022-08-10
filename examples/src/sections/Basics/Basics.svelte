@@ -7,6 +7,8 @@
 	import type { SnapInEvent } from '@draggable/Plugins/Snappable';
 	import type { DroppableDroppedEvent } from '@draggable/Droppable';
 
+	import './styles/index.scss';
+
 	let container: HTMLElement;
 	let justLifted = false;
 	let snappedIn = false;
@@ -188,7 +190,3 @@
 		</div>
 	</article>
 </section>
-
-<style lang="scss" global>
-	@use 'styles';
-</style>

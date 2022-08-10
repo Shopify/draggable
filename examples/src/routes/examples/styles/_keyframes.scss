@@ -1,5 +1,5 @@
-@forward '../../components/Plate/styles/keyframes';
-@use '../../styles/theme';
+@forward '@src/components/Plate/styles/keyframes';
+@use '@src/styles/theme';
 
 @keyframes plate-placed {
 	0%,

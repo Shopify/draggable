@@ -6,6 +6,8 @@
 	import Cube from '@src/components/Cube/Cube.svelte';
 	import { onMount } from 'svelte';
 
+	import './styles/index.scss';
+
 	onMount(async () => {
 		if (browser) {
 			const { soundEffects } = await import('@src/utils/synth');
@@ -266,7 +268,3 @@
 		</div>
 	</article>
 </section>
-
-<style lang="scss" global>
-	@use 'styles';
-</style>

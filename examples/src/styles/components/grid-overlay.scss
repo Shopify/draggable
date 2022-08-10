@@ -1,6 +1,6 @@
-@use '../utils/shared/functions';
-@use '../utils/shared/layout';
-@use '../theme';
+@use '@src/styles/utils/shared/functions';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
 @use 'main';
 
 $grid-overlay-baseline: 0.1rem;

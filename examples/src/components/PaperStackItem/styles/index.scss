@@ -1,6 +1,6 @@
-@use '../../../styles/utils/shared/layout';
-@use '../../../styles/theme';
-@use '../../Pattern/styles/props' as pattern;
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
+@use '@src/components/Pattern/styles/props' as pattern;
 
 @use 'props';
 @use 'variants';

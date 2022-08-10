@@ -5,6 +5,8 @@
 	import Face from './Face/Face.svelte';
 	import Outline from './Outline.svelte';
 
+	import './styles/index.scss';
+
 	export let id: string | undefined = undefined;
 	export let faces: Partial<Record<Side, FaceType>> = {};
 	export let classes: string | string[] = '';
@@ -24,7 +26,3 @@
 	</div>
 	<slot />
 </div>
-
-<style lang="scss" global>
-	@use 'styles';
-</style>

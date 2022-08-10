@@ -5,6 +5,8 @@
 	import { browser } from '$app/env';
 	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 
+	import './styles/index.scss';
+
 	let container: HTMLElement;
 
 	onMount(async () => {
@@ -51,7 +53,3 @@
 		</ul>
 	</article>
 </section>
-
-<style lang="scss">
-	@use 'styles';
-</style>

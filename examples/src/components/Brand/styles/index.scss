@@ -1,4 +1,4 @@
-@use '../../../styles/theme';
+@use '@src/styles/theme';
 @use 'keyframes';
 @use 'props';
 @use 'variants';
@@ -61,12 +61,11 @@
 			animation: logo-outline-bounce map-get(theme.$durations, 'slow') linear infinite;
 		}
 	}
-}
 
-.svg--wordmark {
-	fill: map-get(theme.$colors, 'brand-yellow');
-}
-
-:global(.hand) {
-	fill: map-get(theme.$colors, 'brand-yellow');
+	.svg--wordmark {
+		fill: map-get(theme.$colors, 'brand-yellow');
+	}
+	.hand {
+		fill: map-get(theme.$colors, 'brand-yellow');
+	}
 }

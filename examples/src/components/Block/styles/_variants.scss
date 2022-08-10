@@ -1,6 +1,6 @@
-@use '../../../styles/theme';
-@use '../../../styles/utils/shared/layout';
-@use '../../Pattern/styles/props' as pattern;
+@use '@src/styles/theme';
+@use '@src/styles/utils/shared/layout';
+@use '@src/components/Pattern/styles/props' as pattern;
 
 .block {
 	&--shell {

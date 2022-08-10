@@ -1,5 +1,5 @@
-@use '../../../components/StackedListItem/styles/props';
-@use '../../theme';
+@use '@src/components/StackedListItem/styles/props';
+@use '@src/styles/theme';
 
 .stacked-list__wrapper {
 	&--scroll-indicator {

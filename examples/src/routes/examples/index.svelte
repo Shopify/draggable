@@ -9,6 +9,8 @@
 	import { flipSign, offsetWithinThreshold } from '@src/utils';
 	import { onMount } from 'svelte';
 
+	import './styles/index.scss';
+
 	let container: HTMLElement;
 	let threshold = {
 		min: -27.2,
@@ -68,7 +70,3 @@
 		<Plate {position} {threshold} classes="plate--one" draggable level="top" label="hello" />
 	</article>
 </section>
-
-<style lang="scss" global>
-	@use 'styles';
-</style>

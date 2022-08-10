@@ -3,6 +3,8 @@
 	import Starfield from '@src/components/Starfield/Starfield.svelte';
 	import type { Load } from '@sveltejs/kit';
 
+	import './styles/index.scss';
+
 	export const load: Load = ({ params }) => ({
 		status: 404,
 		error: new Error(`Not found: /${params.path}`)
@@ -39,7 +41,3 @@
 		</div>
 	</div>
 </section>
-
-<style lang="scss" global>
-	@use 'styles';
-</style>

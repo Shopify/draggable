@@ -1,8 +1,8 @@
-@use '../../../../styles/utils/shared/functions';
-@use '../../../../styles/utils/shared/layout';
-@use '../../../../styles/theme';
+@use '@src/styles/utils/shared/functions';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
 
-@use '../../../components/Pattern/styles/props' as pattern;
+@use '@src/components/Pattern/styles/props' as pattern;
 
 $grid-area-names: a, b, c, d, e, f, g, h;
 $grid-rows: 6;

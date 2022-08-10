@@ -4,6 +4,8 @@
 	import Cube from '@src/components/Cube/Cube.svelte';
 	import { onMount } from 'svelte';
 
+	import './styles/index.scss';
+
 	let accessible: HTMLElement;
 	let extensible: HTMLElement;
 	let interaction: HTMLElement;
@@ -260,7 +262,3 @@
 		</div>
 	</footer>
 </section>
-
-<style lang="scss" global>
-	@use 'styles';
-</style>

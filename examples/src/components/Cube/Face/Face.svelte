@@ -42,13 +42,11 @@
 			class:face--top={side === 'top'}
 			class:face--left={side === 'left'}
 			class:face--right={side === 'right'}
+			class:svg--rotate-90={rotation === 90}
+			class:svg--rotate-180={rotation === 180}
+			class:svg--rotate-270={rotation === 270}
 		>
-			<svg
-				class="svg"
-				viewBox="0 0 80 80"
-				focusable="false"
-				style={`transform: rotate(${rotation}deg)`}
-			>
+			<svg class="svg" viewBox="0 0 80 80" focusable="false">
 				{#if piece === 'agt'}
 					<path
 						fill="none"

@@ -1,5 +1,5 @@
-@use '../utils/shared/layout';
-@use '../theme';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
 
 .main {
 	padding: map-get(theme.$spacings, 'tighter') map-get(theme.$spacings, 'tight')

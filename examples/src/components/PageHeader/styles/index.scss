@@ -1,5 +1,5 @@
-@use '../../../styles/utils/shared/layout';
-@use '../../../styles/theme';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
 
 .page-header {
 	margin-bottom: map-get(theme.$spacings, 'loose');

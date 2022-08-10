@@ -1,5 +1,5 @@
 @use 'props';
-@use '../../theme';
+@use '@src/styles/theme';
 
 .shadow {
 	pointer-events: none;

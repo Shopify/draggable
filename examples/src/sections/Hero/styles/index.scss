@@ -1,6 +1,6 @@
-@use '../../../styles/components/puzzle/props' as puzzle;
-@use '../../../styles/utils/shared/layout';
-@use '../../../styles/theme';
+@use '@src/styles/components/puzzle/props' as puzzle;
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
 @use 'props';
 
 $button-depressed-offset: 0.1rem;

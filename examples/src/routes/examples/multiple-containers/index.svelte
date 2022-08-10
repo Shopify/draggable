@@ -6,6 +6,8 @@
 	import type { SortableSortedEvent, SortableSortEvent } from '@draggable/Sortable';
 	import { browser } from '$app/env';
 
+	import './styles/index.scss';
+
 	let containers: HTMLElement[] = [];
 
 	onMount(async () => {
@@ -104,7 +106,3 @@
 		</ul>
 	</article>
 </section>
-
-<style lang="scss" global>
-	@use 'styles';
-</style>

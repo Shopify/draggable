@@ -1,7 +1,7 @@
-@use '../../../../styles/utils/shared/layout';
-@use '../../../../styles/theme';
-@use '../../../../components/StackedListItem/styles/props';
-@use '../../../../styles/components/stacked-list';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
+@use '@src/components/StackedListItem/styles/props';
+@use '@src/styles/components/stacked-list';
 
 $grid-columns: 8;
 

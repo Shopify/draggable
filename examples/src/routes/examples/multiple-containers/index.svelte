@@ -4,6 +4,7 @@
 	import StackedListItem from '@src/components/StackedListItem/StackedListItem.svelte';
 	import type { DragStartEvent, DragStopEvent } from '@draggable/Draggable';
 	import type { SortableSortedEvent, SortableSortEvent } from '@draggable/Sortable';
+	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 	import { browser } from '$app/env';
 
 	import './styles/index.scss';
@@ -15,7 +16,7 @@
 			const { Sortable, Plugins } = await import('@draggable');
 
 			const sortable = new Sortable(containers, {
-				draggable: 'stacked-list__item--draggable',
+				draggable: '.stacked-list__item--draggable',
 				mirror: { constrainDimensions: true },
 				plugins: [Plugins.ResizeMirror]
 			});
@@ -38,11 +39,6 @@
 				);
 			});
 
-			sortable.on('drag:stop', (evt: DragStopEvent) => {
-				evt.cancel();
-				evt.originalSource.remove();
-			});
-
 			sortable.on('sortable:sort', (evt: SortableSortEvent) => {
 				if (!capacityReached) return;
 				const sourceIsCapacityContainer = evt.dragEvent.sourceContainer === sortable.containers[1];
@@ -59,9 +55,16 @@
 	});
 </script>
 
+<PageHeader
+	id="MultipleContainers"
+	section="Sortable"
+	child="Multiple containers"
+	subheading="Sort elements across multiple containers. Each container can maintain its own set of rules."
+/>
+
 <section class="multiple-containers">
 	<article
-		class="stacked-list stacked-list__wrapper--large stacked-list__wrapper--horizontal container"
+		class="stacked-list__wrapper stacked-list__wrapper--large stacked-list__wrapper--horizontal container"
 	>
 		<header class="stacked-list__header">
 			<h3 class="heading heading--3 heading--white">Container one</h3>
@@ -85,8 +88,8 @@
 		</header>
 
 		<ul bind:this={containers[1]} class="stacked-list">
-			<StackedListItem label="fluorescent grey" classes="stacked-list__item--6" />
-			<StackedListItem label="rebecca purple" classes="stacked-list__item--7" />
+			<StackedListItem label="fluorescent grey" classes="stacked-list__item--6" draggable />
+			<StackedListItem label="rebecca purple" classes="stacked-list__item--7" draggable />
 		</ul>
 	</article>
 

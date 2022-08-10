@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>{section} | {child} | Draggable JS Examples</title>
+	<title>{section} {child ? `| ${child}` : ''} | Draggable JS Examples</title>
 </svelte:head>
 
 <header class="page-header">

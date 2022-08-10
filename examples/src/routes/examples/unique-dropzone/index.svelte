@@ -51,7 +51,7 @@
 	subheading="Dropzones are intended to hold only one Droppable child. This example restricts each Droppable item to a specific Dropzone identifier."
 />
 
-<section>
+<section class="unique-dropzone">
 	<article bind:this={containers[0]} class="block-layout block-layout--flex">
 		{#each wrappers as { id, label }}
 			<div

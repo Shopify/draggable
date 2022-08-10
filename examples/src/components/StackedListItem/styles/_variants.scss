@@ -3,35 +3,31 @@
 @use '@src/components/Pattern/styles/props' as pattern;
 @use 'props';
 
-.stacked-list {
-	&--scroll {
-		@include props.stacked-list-scroll-height;
-		overflow-y: scroll;
-	}
-
-	&__item {
-		&--draggable {
+.stacked-list__item {
+	&--draggable {
+		&:hover {
 			cursor: map-get(theme.$cursors, 'drag-base');
+		}
 
+		.stacked-list__item-content {
+			background-color: white;
+		}
+
+		&:focus {
+			outline: none;
+			cursor: map-get(theme.$cursors, 'drag-active');
+		}
+
+		&:focus,
+		&:hover {
 			.stacked-list__item-content {
-				background-color: white;
+				color: map-get(theme.$colors, 'brand-blue');
 			}
 
-			&:focus {
-				outline: none;
-			}
-
-			&:focus,
-			&:hover {
-				.stacked-list__item-content {
-					color: map-get(theme.$colors, 'brand-blue');
-				}
-
-				+ .stacked-list__item {
-					.stacked-list__item-content::before {
-						background-color: map-get(theme.$colors, 'brand-blue');
-						opacity: 1;
-					}
+			+ .stacked-list__item {
+				.stacked-list__item-content::before {
+					background-color: map-get(theme.$colors, 'brand-blue');
+					opacity: 1;
 				}
 			}
 		}

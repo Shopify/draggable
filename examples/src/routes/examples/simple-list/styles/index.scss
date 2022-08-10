@@ -1,10 +1,9 @@
-@use '@src/styles/components/stacked-list';
 @use '@src/styles/utils/shared/functions';
 @use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
 
-// using an arbitrary width until I have time to fix the `columns` function
-$simple-list-width: 42rem;
-
-section {
-	@include layout.centered-width(functions.columns(5));
+section.simple-list {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		@include layout.centered-width(functions.columns(5));
+	}
 }

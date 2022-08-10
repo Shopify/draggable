@@ -26,10 +26,6 @@
 	animation: fade-activator map-get(theme.$durations, 'slow') map-get(theme.$easings, 'base')
 		forwards;
 
-	@media only screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-		@include layout.visually-hidden;
-	}
-
 	&__bun-top,
 	&__bun-bottom {
 		transition: background-color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');

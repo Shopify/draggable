@@ -6,15 +6,7 @@
 
 .stacked-list__item {
 	cursor: map-get(theme.$cursors, 'base');
-
-	&:nth-child(1n + 2) {
-		margin-top: -(map-get(theme.$borders, 'thin'));
-
-		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-			margin-top: -(map-get(theme.$borders, 'base'));
-		}
-	}
-
+	height: auto;
 	&-content {
 		position: relative;
 		display: flex;
@@ -26,14 +18,6 @@
 		transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
 			background-color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
 			transform map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie');
-
-		// cannot be `min-height`, as a child's `height: 100%` will not work
-		// by using `height`, we will get visible scrollbars
-		height: map-get(props.$stacked-list-item-base, 'base');
-
-		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
-			height: map-get(props.$stacked-list-item-base, 'desktop');
-		}
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			border-width: map-get(theme.$borders, 'base');

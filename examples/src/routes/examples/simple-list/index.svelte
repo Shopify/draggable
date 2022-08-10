@@ -31,13 +31,13 @@
 	subheading="Sort elements in a single collection, maintaining order for all but the element being dragged."
 />
 
-<section>
+<section class="simple-list">
 	<article class="stacked-list__wrapper stacked-list__wrapper--scroll-indicator">
 		<header class="stacked-list__header">
 			<h3 class="heading heading--3 heading--white">Simple list</h3>
 		</header>
 
-		<ul bind:this={container} class="stacked-list stacked-list--scroll">
+		<ul bind:this={container} class="stacked-list">
 			<StackedListItem label="item one" classes="stacked-list__item--1" draggable />
 			<StackedListItem label="item two" classes="stacked-list__item--2" draggable />
 			<StackedListItem label="item three" classes="stacked-list__item--3" draggable />

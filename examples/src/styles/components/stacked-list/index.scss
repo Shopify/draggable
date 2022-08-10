@@ -9,6 +9,11 @@
 	position: relative;
 	margin-top: -(map-get(theme.$borders, 'thin'));
 
+	&--scroll {
+		@include props.stacked-list-scroll-height;
+		overflow-y: scroll;
+	}
+
 	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		margin-top: -(map-get(theme.$borders, 'base'));
 	}
@@ -30,9 +35,6 @@
 	}
 
 	&__header {
-		// cannot be `min-height`, as a child's `height: 100%` will not work
-		// by using `height`, we will get visible scrollbars
-		height: map-get(props.$stacked-list-item-base, 'base');
 		padding: map-get(theme.$spacings, 'tighter') + map-get(theme.$borders, 'thin');
 		background-color: currentColor;
 		transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
@@ -56,6 +58,16 @@
 
 			@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 				font-size: map-get(theme.$type-scales, 'paragraph-desktop');
+			}
+		}
+	}
+
+	&__item {
+		&:nth-child(1n + 2) {
+			margin-top: -(map-get(theme.$borders, 'thin'));
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				margin-top: -(map-get(theme.$borders, 'base'));
 			}
 		}
 	}

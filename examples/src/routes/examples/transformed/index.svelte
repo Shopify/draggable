@@ -29,7 +29,7 @@
 	subheading="Draggable's mirror is positioned using transform3d(). Any existing transform styles will get removed. This is solved by introducing an interior wrapper."
 />
 
-<section>
+<section class="transformed">
 	<article class="paper-stack__wrapper">
 		<ul bind:this={container} class="paper-stack">
 			<PaperStackItem label="one" classes="paper-stack__item--1" draggable />

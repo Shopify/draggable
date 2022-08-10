@@ -2,17 +2,13 @@
 @use '@src/styles/theme';
 @use '@src/styles';
 
-body {
+.error-404 {
 	height: 100vh;
 	background-color: darken(map-get(theme.$colors, 'coal-dark'), 13%);
-}
-
-.error-404 {
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 100%;
 
 	.starfield {
 		position: absolute;

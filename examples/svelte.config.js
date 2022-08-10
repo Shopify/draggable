@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
+import { fileURLToPath, URL } from 'url';
 
 const scssAliases = (aliases) => (url) => {
 	for (const [alias, aliasPath] of Object.entries(aliases)) {
@@ -20,7 +21,7 @@ const config = {
 		scss: {
 			importer: [
 				scssAliases({
-					'@src': `${process.cwd()}/src`
+					'@src': fileURLToPath(new URL('./src', import.meta.url))
 				})
 			]
 		}

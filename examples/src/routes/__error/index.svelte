@@ -11,8 +11,6 @@
 	});
 </script>
 
-<svelte:body class="404" />
-
 <section class="error-404">
 	<Starfield />
 	<div class="content">

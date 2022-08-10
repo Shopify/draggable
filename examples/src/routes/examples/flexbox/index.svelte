@@ -1,23 +1,27 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-
-	import { Swappable, Plugins } from '@draggable';
 	import Block from '@src/components/Block/Block.svelte';
+	import { browser } from '$app/env';
+
+	import './styles/index.scss';
 
 	let container: HTMLElement;
 
-	onMount(() => {
-		new Swappable([container], {
-			draggable: '.block--draggable',
-			mirror: {
-				constrainDimensions: true
-			},
-			plugins: [Plugins.ResizeMirror]
-		});
+	onMount(async () => {
+		if (browser) {
+			const { Swappable, Plugins } = await import('@draggable');
+			new Swappable([container], {
+				draggable: '.block--draggable',
+				mirror: {
+					constrainDimensions: true
+				},
+				plugins: [Plugins.ResizeMirror]
+			});
+		}
 	});
 </script>
 
-<section>
+<section class="flexbox">
 	<article bind:this={container} class="block-layout block-layout--flex">
 		<Block label="one" classes="block--1" draggable />
 		<Block label="two" classes="block--2" />
@@ -28,7 +32,3 @@
 		<Block label="seven" classes="block--7" draggable />
 	</article>
 </section>
-
-<style lang="scss">
-	@use 'styles';
-</style>

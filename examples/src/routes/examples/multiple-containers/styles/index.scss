@@ -1,7 +1,6 @@
 @use '@src/styles/utils/shared/layout';
 @use '@src/styles/theme';
 @use '@src/components/StackedListItem/styles/props';
-@use '@src/styles/components/stacked-list';
 
 $grid-columns: 8;
 
@@ -16,6 +15,7 @@ $grid-columns: 8;
 		grid-template-areas:
 			'a a a a a a a a'
 			'b b b b b c c c';
+		gap: map-get(theme.$spacings, 'tightest');
 	}
 
 	.container {

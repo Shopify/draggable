@@ -9,10 +9,7 @@ const config = {
 			'@src': fileURLToPath(new URL('./src', import.meta.url))
 		}
 	},
-	plugins: [sveltekit()],
-	experimental: {
-		useVitePreprocess: true
-	}
+	plugins: [sveltekit()]
 };
 
 export default config;

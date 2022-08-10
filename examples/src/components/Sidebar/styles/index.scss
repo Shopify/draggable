@@ -30,9 +30,9 @@ $mobile-nav-padding-top: calc(map-get(theme.$spacings, 'looser') * 2);
 		}
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
-			padding-top: map-get(theme.$spacings, 'fat');
-			padding-right: map-get(theme.$spacings, 'loose');
-			padding-left: map-get(theme.$spacings, 'loose');
+			padding-top: map-get(theme.$spacings, 'looser');
+			padding-right: map-get(theme.$spacings, 'looser');
+			padding-left: map-get(theme.$spacings, 'looser');
 		}
 	}
 

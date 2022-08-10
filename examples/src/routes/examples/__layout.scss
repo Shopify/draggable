@@ -9,6 +9,10 @@
 		flex-shrink: 0;
 		margin-top: map-get(theme.$spacings, 'tight');
 		margin-bottom: map-get(theme.$spacings, 'base');
+
+		@media only screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			@include layout.visually-hidden;
+		}
 	}
 
 	& section {

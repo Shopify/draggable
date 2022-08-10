@@ -34,9 +34,12 @@
 }
 
 :global(.face__wrapper) {
-	.draggable-source {
+	&.draggable-source {
+		&:hover {
+			cursor: map-get(theme.$cursors, 'drag-base');
+		}
 	}
-	.draggable-source--is-dragging {
+	&.draggable-source--is-dragging {
 		cursor: map-get(theme.$cursors, 'drag-active');
 		.face {
 			overflow: hidden;

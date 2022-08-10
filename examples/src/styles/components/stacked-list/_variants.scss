@@ -2,6 +2,15 @@
 @use '@src/styles/theme';
 
 .stacked-list__wrapper {
+	.stacked-list__header,
+	.stacked-list__item {
+		height: map-get(props.$stacked-list-item-base, 'base');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			height: map-get(props.$stacked-list-item-base, 'desktop');
+		}
+	}
+
 	&--scroll-indicator {
 		&::after {
 			@include props.scroll-indicator;
@@ -16,7 +25,7 @@
 
 	&--medium {
 		.stacked-list__header,
-		.stacked-list__item .stacked-list__item-content {
+		.stacked-list__item-content {
 			height: map-get(props.$stacked-list-item-medium, 'base');
 			@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 				height: map-get(props.$stacked-list-item-medium, 'desktop');
@@ -26,7 +35,7 @@
 
 	&--large {
 		.stacked-list__header,
-		.stacked-list__item .stacked-list__item-content {
+		.stacked-list__item-content {
 			height: map-get(props.$stacked-list-item-large, 'base');
 			@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
 				height: map-get(props.$stacked-list-item-large, 'desktop');
@@ -58,15 +67,6 @@
 			}
 		}
 
-		.stacked-list__header,
-		.stacked-list__item {
-			height: map-get(props.$stacked-list-item-base, 'base');
-
-			@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
-				height: map-get(props.$stacked-list-item-base, 'desktop');
-			}
-		}
-
 		.stacked-list__header {
 			flex: 0 0 14.4rem;
 		}
@@ -76,7 +76,7 @@
 			flex: 1 1 auto;
 			margin-top: 0;
 			margin-left: -(map-get(theme.$borders, 'thin'));
-			overflow-x: scroll;
+			overflow-x: auto;
 
 			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 				margin-left: -(map-get(theme.$borders, 'base'));
@@ -85,7 +85,7 @@
 
 		.stacked-list__item {
 			flex: 1 0 14.4rem;
-			max-width: 14.4rem * 2;
+			height: auto;
 
 			&:nth-child(1n + 2) {
 				margin-top: 0;

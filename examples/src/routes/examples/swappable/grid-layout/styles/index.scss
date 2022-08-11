@@ -1,4 +1,6 @@
 @use '@src/styles/utils/shared/functions';
+@use '@src/styles/components/block-layout';
+@use '@src/styles/theme';
 
 $grid-area-names: a, b, c, d, e, f, g;
 $grid-rows: 5;
@@ -6,8 +8,8 @@ $grid-rows-tablet: 6;
 $grid-columns: 5;
 $grid-columns-tablet: 8;
 
-.GridLayout {
-	.block-layout--typeGrid {
+.grid-layout {
+	.block-layout--grid {
 		grid-template-rows: repeat($grid-rows, 1fr);
 		grid-template-columns: repeat($grid-columns, 1fr);
 		grid-template-areas: 'a a a a a' 'b b c c c' 'd d c c c' 'd d e e e' 'f f f g g';
@@ -25,13 +27,19 @@ $grid-columns-tablet: 8;
 		}
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
-			grid-template-rows: repeat($grid-rows-tablet, rows(4));
+			grid-template-rows: repeat($grid-rows-tablet, functions.rows(4));
 		}
-	}
 
-	@for $i from 1 through length($grid-area-names) {
-		.block__wrapper:nth-child(#{$i}) {
-			grid-area: nth($grid-area-names, $i);
+		@for $i from 1 through length($grid-area-names) {
+			.block__wrapper:nth-child(#{$i}) {
+				grid-area: nth($grid-area-names, $i);
+			}
+		}
+
+		.block__wrapper {
+			.block {
+				height: 100%;
+			}
 		}
 	}
 }

@@ -162,6 +162,14 @@
 	}
 }
 
+@mixin clearfix {
+	&::after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+}
+
 @mixin stacking-context($z-index: base) {
 	position: relative;
 	z-index: map-get(theme.$z-index, $z-index);

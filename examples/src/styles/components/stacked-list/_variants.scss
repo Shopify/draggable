@@ -24,6 +24,9 @@
 	}
 
 	&--medium {
+		.stacked-list__item {
+			height: auto;
+		}
 		.stacked-list__header,
 		.stacked-list__item-content {
 			height: map-get(props.$stacked-list-item-medium, 'base');
@@ -117,11 +120,6 @@
 					width: map-get(theme.$borders, 'base');
 				}
 			}
-		}
-
-		.drag-handle,
-		.nope-handle {
-			margin-left: 0;
 		}
 	}
 }

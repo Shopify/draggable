@@ -49,11 +49,11 @@ const pages: Page[] = [
 		links: [
 			{
 				title: 'Collidable',
-				href: '/examples/collidable'
+				href: '/examples/plugins/collidable'
 			},
-			{ title: 'Snappable', href: '/examples/snappable' },
-			{ title: 'Swap Animation' },
-			{ title: 'Sort Animation', href: '/examples/sort-animation' }
+			{ title: 'Snappable', href: '/examples/plugins/snappable' },
+			{ title: 'Swap Animation', href: '/examples/plugins/snappable' },
+			{ title: 'Sort Animation', href: '/examples/plugins/sort-animation' }
 		]
 	}
 ];

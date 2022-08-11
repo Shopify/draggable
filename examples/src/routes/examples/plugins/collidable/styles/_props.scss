@@ -1,0 +1,41 @@
+@use '@src/styles/utils/shared/functions';
+@use '@src/styles/theme';
+
+$collidable-height: 60rem;
+$collidable-height-tablet: 64rem;
+$collidable-height-desktop: 80rem;
+
+$collidable-block-height: functions.rows(3, true);
+$collidable-block-height-tablet: functions.rows(4);
+$collidable-block-height-desktop: functions.rows(5);
+
+$collidable-container-height: (
+	base: $collidable-height,
+	tablet: $collidable-height-tablet,
+	desktop: $collidable-height-desktop
+);
+
+$collidable-container-padding: (
+	base: calc(map-get(theme.$borders, 'thin') * 2),
+	tablet: calc(map-get(theme.$borders, 'base') * 2)
+);
+
+$collidable-block-height: (
+	base: $collidable-block-height,
+	tablet: $collidable-block-height-tablet,
+	desktop: $collidable-block-height-desktop
+);
+
+$collidable-obstacle-height: (
+	base: calc($collidable-height / 3),
+	tablet:
+		calc(
+			$collidable-height-tablet - $collidable-block-height-tablet -
+				(map-get(theme.$borders, 'base') * 5)
+		),
+	desktop:
+		calc(
+			$collidable-height-desktop - $collidable-block-height-desktop -
+				(map-get(theme.$borders, 'base') * 5)
+		)
+);

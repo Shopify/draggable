@@ -11,6 +11,79 @@
 		left: 0;
 		right: 0;
 		height: 0;
+
+		&--draggable {
+			@include props.paper-stack-item-offset;
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				@include props.paper-stack-item-offset('tablet');
+			}
+
+			@for $i from 1 through props.$paper-stack-item-count {
+				&:nth-child(#{$i}) {
+					z-index: (props.$paper-stack-item-count + 1) - $i;
+				}
+			}
+
+			&:nth-child(1n + 2) {
+				.paper-stack__content:after {
+					content: '';
+					position: absolute;
+					display: block;
+					background-color: map-get(theme.$colors, 'coal-dark');
+					transition: transform map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
+
+					right: -(map-get(props.$paper-stack-shadow-offset, 'base'));
+					left: -(map-get(props.$paper-stack-shadow-offset, 'base'));
+					bottom: map-get(props.$paper-stack-shadow-bottom, 'base');
+					height: map-get(props.$paper-stack-shadow-height, 'base');
+
+					@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+						bottom: map-get(props.$paper-stack-shadow-bottom, 'tablet');
+						height: map-get(props.$paper-stack-shadow-height, 'tablet');
+					}
+				}
+			}
+
+			.draggable--original:first-child + & {
+				.paper-stack__content:after {
+					content: none;
+				}
+			}
+
+			&.draggable-source--is-dragging {
+				.paper-stack__content {
+					color: map-get(theme.$colors, 'brand-blue');
+
+					.pattern--halftone {
+						@include pattern.pattern-halftone-animated;
+					}
+				}
+			}
+
+			&.draggable-source--placed {
+				.paper-stack__content {
+					.pattern--placed {
+						@include pattern.pattern-placed-animated;
+					}
+				}
+			}
+
+			&.draggable-mirror {
+				z-index: map-get(theme.$z-index, 'overlay');
+
+				.paper-stack__content {
+					color: white;
+					background-color: map-get(theme.$colors, 'brand-blue');
+					border-color: map-get(theme.$colors, 'brand-blue');
+					transform: map-get(props.$paper-stack-item-transform, 'mirror');
+
+					&::after {
+						content: none;
+					}
+				}
+			}
+		}
 	}
 
 	&__content {
@@ -37,81 +110,6 @@
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			font-size: map-get(props.$paper-stack-heading-size, 'tablet');
-		}
-	}
-}
-
-:global {
-	.paper-stack__item.paper-stack__item--draggable {
-		@include props.paper-stack-item-offset;
-
-		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-			@include props.paper-stack-item-offset('tablet');
-		}
-
-		@for $i from 1 through props.$paper-stack-item-count {
-			&:nth-child(#{$i}) {
-				z-index: (props.$paper-stack-item-count + 1) - $i;
-			}
-		}
-
-		&:nth-child(1n + 2) {
-			.paper-stack__content::after {
-				content: '';
-				position: absolute;
-				display: block;
-				background-color: map-get(theme.$colors, 'coal-dark');
-				transition: transform map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
-
-				right: -(map-get(props.$paper-stack-shadow-offset, 'base'));
-				left: -(map-get(props.$paper-stack-shadow-offset, 'base'));
-				bottom: map-get(props.$paper-stack-shadow-bottom, 'base');
-				height: map-get(props.$paper-stack-shadow-height, 'base');
-
-				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-					bottom: map-get(props.$paper-stack-shadow-bottom, 'tablet');
-					height: map-get(props.$paper-stack-shadow-height, 'tablet');
-				}
-			}
-		}
-
-		.draggable--original:first-child + & {
-			.paper-stack__content::after {
-				content: none;
-			}
-		}
-
-		&.draggable-source--is-dragging {
-			.paper-stack__content {
-				color: map-get(theme.$colors, 'brand-blue');
-
-				.pattern--halftone {
-					@include pattern.pattern-halftone-animated;
-				}
-			}
-		}
-
-		&.draggable-source--placed {
-			.paper-stack__content {
-				.pattern--placed {
-					@include pattern.pattern-placed-animated;
-				}
-			}
-		}
-
-		&.draggable-mirror {
-			z-index: map-get(theme.$z-index, 'overlay');
-
-			.paper-stack__content {
-				color: white;
-				background-color: map-get(theme.$colors, 'brand-blue');
-				border-color: map-get(theme.$colors, 'brand-blue');
-				transform: map-get(props.$paper-stack-item-transform, 'mirror');
-
-				&::after {
-					content: none;
-				}
-			}
 		}
 	}
 }

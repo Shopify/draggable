@@ -27,12 +27,6 @@
 			flex: 1 1 auto;
 		}
 
-		.drag-handle,
-		.nope-handle {
-			flex: 0 0 handle.$handle-size;
-			margin-left: map-get(theme.$spacings, 'tight');
-		}
-
 		// top border psuedo element... solution to create a collapsed border
 		// required to make the hover style highlight each side of the element
 		&:before {

@@ -2,6 +2,8 @@
 	import classNames from 'classnames';
 	import Pattern from '../Pattern/Pattern.svelte';
 
+	import './styles/index.scss';
+
 	export let draggable: boolean = false;
 	export let classes: string | string[] | undefined;
 	export let label: string;
@@ -20,7 +22,3 @@
 		{/if}
 	</div>
 </li>
-
-<style lang="scss">
-	@use 'styles';
-</style>

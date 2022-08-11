@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
 	export let expanded: boolean = false;
 	export let onClick: () => void;
 </script>

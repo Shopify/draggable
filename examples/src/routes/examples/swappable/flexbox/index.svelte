@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import Block from '@src/components/Block/Block.svelte';
 	import { browser } from '$app/env';
+	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 
 	import './styles/index.scss';
 
@@ -20,6 +21,13 @@
 		}
 	});
 </script>
+
+<PageHeader
+	id="Flexbox"
+	section="Swappable"
+	child="Flexbox"
+	subheading="Maintaining layout while swapping direct children can be challenging. This example solves the problem using nth-child and adjacent sibling selectors."
+/>
 
 <section class="flexbox">
 	<article bind:this={container} class="block-layout block-layout--flex">

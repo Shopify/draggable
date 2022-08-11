@@ -1,6 +1,7 @@
 @use '@src/styles/utils/shared/functions';
 @use '@src/styles/utils/shared/layout';
 @use '@src/styles/theme';
+@use '@src/styles/components/block-layout';
 
 $flexbox-block-name: unquote('block');
 
@@ -65,6 +66,20 @@ $flexbox-block-name: unquote('block');
 		@include layout.draggable-source-layout($flexbox-block-name, 4, 5) {
 			.block__content {
 				height: functions.rows(5);
+			}
+		}
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		@include layout.draggable-source-layout($flexbox-block-name, 1, 2, 3, 4, 6, 7) {
+			.block__content {
+				height: functions.rows(5);
+			}
+		}
+
+		@include layout.draggable-source-layout($flexbox-block-name, 4, 5) {
+			.block__content {
+				height: functions.rows(6);
 			}
 		}
 	}

@@ -26,10 +26,10 @@ const pages: Page[] = [
 		links: [
 			{
 				title: 'Simple list',
-				href: '/examples/simple-list'
+				href: '/examples/sortable/simple-list'
 			},
-			{ title: 'Transformed', href: '/examples/transformed' },
-			{ title: 'Multiple containers', href: '/examples/multiple-containers' },
+			{ title: 'Transformed', href: '/examples/sortable/transformed' },
+			{ title: 'Multiple containers', href: '/examples/sortable/multiple-containers' },
 			{ title: 'Nested' }
 		]
 	},

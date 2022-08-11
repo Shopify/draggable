@@ -38,10 +38,10 @@ const pages: Page[] = [
 		links: [
 			{
 				title: 'Flexbox',
-				href: '/examples/flexbox'
+				href: '/examples/swappable/flexbox'
 			},
-			{ title: 'Floated', href: '/examples/floated' },
-			{ title: 'Grid layout', href: '/examples/grid-layout' }
+			{ title: 'Floated', href: '/examples/swappable/floated' },
+			{ title: 'Grid layout', href: '/examples/swappable/grid-layout' }
 		]
 	},
 	{

@@ -16,7 +16,7 @@ const pages: Page[] = [
 		links: [
 			{
 				title: 'Unique dropzone',
-				href: '/examples/unique-dropzone'
+				href: '/examples/droppable/unique-dropzone'
 			},
 			{ title: 'Capacity' }
 		]

@@ -7,7 +7,7 @@
 	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 	import { onMount } from 'svelte';
 
-	import './styles/index.scss';
+	import '@src/styles/components/block-layout.scss';
 
 	let containers: HTMLElement[] = [];
 	const wrappers = [

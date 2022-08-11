@@ -6,7 +6,7 @@ const pages: Page[] = [
 		links: [
 			{
 				title: 'Drag events',
-				href: '/examples/drag-events'
+				href: '/examples/draggable/drag-events'
 			},
 			{ title: 'Restrict axis' }
 		]

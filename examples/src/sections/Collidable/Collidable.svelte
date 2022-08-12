@@ -5,8 +5,6 @@
 	import Cube from '@src/components/Cube/Cube.svelte';
 	import { onMount } from 'svelte';
 
-	import './styles/index.scss';
-
 	let canPlayOverSound = false;
 	let container: HTMLElement;
 
@@ -53,7 +51,7 @@
 	});
 </script>
 
-<section class="section collidable">
+<section class="section section__collidable">
 	<article class="section__interior">
 		<div class="content">
 			<h3 class="heading heading--1">Collidable</h3>
@@ -163,3 +161,7 @@
 		</div>
 	</article>
 </section>
+
+<style lang="scss">
+	@use 'styles';
+</style>

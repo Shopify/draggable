@@ -1,11 +1,11 @@
 <script lang="ts">
+	import './styles/index.scss';
+
 	import classNames from 'classnames';
 
 	import type { Side, Face as FaceType } from './Face/Face.svelte';
 	import Face from './Face/Face.svelte';
 	import Outline from './Outline.svelte';
-
-	import './styles/index.scss';
 
 	export let id: string | undefined = undefined;
 	export let faces: Partial<Record<Side, FaceType>> = {};

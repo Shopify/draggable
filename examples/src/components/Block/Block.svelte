@@ -2,7 +2,9 @@
 	import classNames from 'classnames';
 	import Pattern from '../Pattern/Pattern.svelte';
 
+	export let id: string | undefined = undefined;
 	export let draggable: boolean = false;
+	export let colliding: boolean = false;
 	export let variant: 'shell' | 'hollow' | 'stripes' | undefined = undefined;
 	export let classes: string | string[] | undefined = undefined;
 
@@ -10,7 +12,9 @@
 </script>
 
 <span
+	{id}
 	class={classNames('block', classes)}
+	class:block--colliding={colliding}
 	class:block--draggable={draggable}
 	class:block--shell={variant === 'shell'}
 	class:block--hollow={variant === 'hollow'}

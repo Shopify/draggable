@@ -4,7 +4,6 @@
 	import Block from '@src/components/Block/Block.svelte';
 	import { browser } from '$app/env';
 
-	import './styles/index.scss';
 	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 
 	let container: HTMLElement;
@@ -43,3 +42,7 @@
 		<div class="block__wrapper"><Block label="seven" classes="block--7" /></div>
 	</article>
 </section>
+
+<style lang="scss">
+	@use 'styles';
+</style>

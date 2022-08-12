@@ -5,8 +5,6 @@
 	import { browser } from '$app/env';
 	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 
-	import './styles/index.scss';
-
 	let container: HTMLElement;
 
 	onMount(async () => {
@@ -32,12 +30,12 @@
 />
 
 <section class="simple-list">
-	<article class="stacked-list__wrapper stacked-list__wrapper--scroll-indicator">
+	<article class="stacked-list__wrapper ">
 		<header class="stacked-list__header">
 			<h3 class="heading heading--3 heading--white">Simple list</h3>
 		</header>
 
-		<ul bind:this={container} class="stacked-list">
+		<ul bind:this={container} class="stacked-list stacked-list--scroll">
 			<StackedListItem label="item one" classes="stacked-list__item--1" draggable />
 			<StackedListItem label="item two" classes="stacked-list__item--2" draggable />
 			<StackedListItem label="item three" classes="stacked-list__item--3" draggable />
@@ -53,3 +51,7 @@
 		</ul>
 	</article>
 </section>
+
+<style lang="scss">
+	@use 'styles';
+</style>

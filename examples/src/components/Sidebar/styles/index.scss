@@ -1,4 +1,5 @@
 @use '@src/styles/utils/shared/layout';
+@use '@src/styles/components/link';
 @use '@src/styles/theme';
 
 $mobile-nav-padding-top: calc(map-get(theme.$spacings, 'looser') * 2);

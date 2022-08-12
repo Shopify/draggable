@@ -1,13 +1,10 @@
 @use '@src/styles/theme';
 @use '@src/styles/utils/shared/layout';
-@use '@src/styles/components/puzzle';
-@use '@src/styles';
 @use 'props';
-@use 'themes';
 
 $section-padding-x-mobile: 1.3rem; // (320px - 294px) / 2
 
-html {
+:global(html) {
 	font-family: map-get(theme.$font-stacks, 'base');
 
 	::selection {
@@ -63,7 +60,7 @@ html {
 	}
 }
 
-.section {
+:global(.section) {
 	// using custom spacing rather than `get-spacing(tighter)`
 	// to be equal to the mobile width of a puzzle
 	padding-left: $section-padding-x-mobile;
@@ -74,49 +71,45 @@ html {
 		padding-right: map-get(theme.$spacings, 'base');
 	}
 
-	& + & {
+	:global(& + &) {
 		border-top: map-get(theme.$borders, 'section-base');
 
 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 			border-top: map-get(theme.$borders, 'section-tablet');
 		}
 	}
-}
 
-.section__interior--margin {
-	margin-bottom: map-get(theme.$spacings, 'fatter');
+	:global(.section__interior--margin) {
+		margin-bottom: map-get(theme.$spacings, 'fatter');
 
-	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-		margin-bottom: map-get(theme.$spacings, 'huger');
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			margin-bottom: map-get(theme.$spacings, 'huger');
+		}
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			margin-bottom: map-get(theme.$spacings, 'hugest');
+		}
 	}
 
-	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
-		margin-bottom: map-get(theme.$spacings, 'hugest');
-	}
-}
+	:global(.content) {
+		@include layout.centered-width(map-get(theme.$draggable-layout-lengths, 'content'));
+		margin-bottom: map-get(theme.$spacings, 'loose');
+		text-align: center;
 
-.content {
-	@include layout.centered-width(map-get(theme.$draggable-layout-lengths, 'content'));
-	margin-bottom: map-get(theme.$spacings, 'loose');
-	text-align: center;
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			margin-bottom: map-get(theme.$spacings, 'fat');
+		}
 
-	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-		margin-bottom: map-get(theme.$spacings, 'fat');
-	}
-
-	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
-		margin-bottom: map-get(theme.$spacings, 'fattest');
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			margin-bottom: map-get(theme.$spacings, 'fattest');
+		}
 	}
 
-	p {
+	:global(.content p) {
 		@include props.content__paragraph;
 	}
 
-	&--small {
-		max-width: map-get(theme.$draggable-layout-lengths, 'base');
+	:global(.cubes__frame) {
+		@include layout.position-cover;
 	}
-}
-
-.cubes__frame {
-	@include layout.position-cover;
 }

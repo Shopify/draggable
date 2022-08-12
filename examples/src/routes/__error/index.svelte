@@ -1,9 +1,10 @@
 <script lang="ts">
+	import '@src/styles/reset.scss';
+	import '@src/styles/components/button.scss';
+
 	import Brand from '@src/components/Brand/Brand.svelte';
 	import Starfield from '@src/components/Starfield/Starfield.svelte';
 	import type { Load } from '@sveltejs/kit';
-
-	import './styles/index.scss';
 
 	export const load: Load = ({ params }) => ({
 		status: 404,
@@ -39,3 +40,7 @@
 		</div>
 	</div>
 </section>
+
+<style lang="scss">
+	@use 'styles';
+</style>

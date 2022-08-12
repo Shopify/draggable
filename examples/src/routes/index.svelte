@@ -1,26 +1,19 @@
 <script lang="ts">
+	import '../styles/index.scss';
+	import '@src/styles/components/puzzle/index.scss';
+	import '@src/styles/components/heading.scss';
+	import './styles/_themes.scss';
+
 	import HeroSection from '@src/sections/Hero/Hero.svelte';
 	import BasicsSection from '@src/sections/Basics/Basics.svelte';
 	import SwappableSection from '@src/sections/Swappable/Swappable.svelte';
 	import SortableSection from '@src/sections/Sortable/Sortable.svelte';
 	import CollidableSection from '@src/sections/Collidable/Collidable.svelte';
 	import FeaturesSection from '@src/sections/Features/Features.svelte';
-
-	import '../styles/index.scss';
-	import './styles/index.scss';
 </script>
 
 <div class="home">
 	<main>
-		<button
-			id="sound-toggle"
-			class="visually-hidden"
-			data-enabled="true"
-			data-label-disable="Disable UI sound effects"
-			data-label-enable="Enable UI sound effects"
-		>
-			Disable UI sound effects
-		</button>
 		<HeroSection />
 		<BasicsSection />
 		<SwappableSection />
@@ -29,3 +22,7 @@
 		<FeaturesSection />
 	</main>
 </div>
+
+<style lang="scss">
+	@use 'styles';
+</style>

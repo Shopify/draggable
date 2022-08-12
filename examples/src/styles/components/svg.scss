@@ -14,13 +14,3 @@ a.svg-container {
 		height: auto;
 	}
 }
-
-.svg {
-	fill: currentColor;
-
-	@each $degree in (90, 180, 270) {
-		&--rotate-#{$degree} {
-			transform: rotate(#{$degree}deg);
-		}
-	}
-}

@@ -1,8 +1,8 @@
 <script lang="ts">
+	import './styles/index.scss';
+
 	import classNames from 'classnames';
 	import Pattern from '../Pattern/Pattern.svelte';
-
-	import './styles/index.scss';
 
 	export let draggable: boolean = false;
 	export let classes: string | string[] | undefined;

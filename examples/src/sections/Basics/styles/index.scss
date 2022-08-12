@@ -3,7 +3,7 @@
 @use '@src/styles/components/puzzle/props' as puzzle;
 @use 'props';
 
-.basics {
+.section.section__basics {
 	padding-top: map-get(theme.$spacings, 'fatter');
 	background-color: map-get(theme.$yellow, 'base');
 
@@ -20,8 +20,6 @@
 	}
 }
 
-///
-/// Puzzle layout
 .puzzle.puzzle--basics {
 	height: props.$puzzle-height-basics - props.$puzzle-offset-y-basics;
 
@@ -31,13 +29,6 @@
 
 	.puzzle__interior {
 		height: props.$puzzle-height-basics;
-	}
-
-	.draggable-source--is-dragging {
-		.face,
-		.outline--cube {
-			opacity: 0;
-		}
 	}
 
 	.shadow.shadow--basics {
@@ -59,8 +50,8 @@
 
 ///
 /// Cube layout
-.basics__cube-3,
-.basics__cube-7 {
+:global(.basics__cube-3),
+:global(.basics__cube-7) {
 	// force hide cube shadow of any element moved into this DOM order
 	// Basics Droppables have no shadow
 	.shadow {
@@ -69,21 +60,21 @@
 }
 
 // --- Left
-.basics__cube-1 {
+:global(.basics__cube-1) {
 	@include puzzle.cube-layout(0, -8);
 }
 
-.basics__cube-2 {
+:global(.basics__cube-2) {
 	@include puzzle.cube-layout(2, -8);
 }
 
-.basics__cube-3 {
+:global(.basics__cube-3) {
 	// droppable cube
 	@include puzzle.cube-layout(1, -5);
 }
 
 // --- Right
-.basics__cube-4 {
+:global(.basics__cube-4) {
 	@include puzzle.cube-layout(8, -4);
 
 	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
@@ -91,7 +82,7 @@
 	}
 }
 
-.basics__cube-5 {
+:global(.basics__cube-5) {
 	@include puzzle.cube-layout(7, -7);
 
 	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
@@ -99,7 +90,7 @@
 	}
 }
 
-.basics__cube-6 {
+:global(.basics__cube-6) {
 	@include puzzle.cube-layout(6, -8);
 
 	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
@@ -107,7 +98,7 @@
 	}
 }
 
-.basics__cube-7 {
+:global(.basics__cube-7) {
 	// droppable cube
 	@include puzzle.cube-layout(7, -5);
 
@@ -117,8 +108,8 @@
 }
 
 // --- Middle
-.basics__cube-8,
-.basics__cube-10 {
+:global(.basics__cube-8),
+:global(.basics__cube-10) {
 	@include puzzle.cube-layout(3, 1);
 
 	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
@@ -126,8 +117,8 @@
 	}
 }
 
-.basics__cube-9,
-.basics__cube-11 {
+:global(.basics__cube-9),
+:global(.basics__cube-11) {
 	@include puzzle.cube-layout(5, 1);
 
 	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {

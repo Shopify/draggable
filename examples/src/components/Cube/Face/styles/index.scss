@@ -31,36 +31,44 @@
 	&--left {
 		@include puzzle.isometric(left);
 	}
-}
 
-:global(.face__wrapper) {
-	&.draggable-source {
-		&:hover {
-			cursor: map-get(theme.$cursors, 'drag-base');
+	.svg {
+		fill: currentColor;
+
+		@each $degree in (90, 180, 270) {
+			&--rotate-#{$degree} {
+				transform: rotate(#{$degree}deg);
+			}
 		}
 	}
-	&.draggable-source--is-dragging {
-		cursor: map-get(theme.$cursors, 'drag-active');
-		.face {
-			overflow: hidden;
-			&:before {
-				position: absolute;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
-				margin: auto;
-				content: '';
-				display: block;
-				border-radius: 50%;
-				background-color: hsla(0, 0%, 100%, 0.08);
-				box-shadow: shadow(pulse);
-				animation: pulse map-get(theme.$durations, 'slower') map-get(theme.$easings, 'base')
-					infinite both;
-			}
-			.svg {
-				opacity: 0;
-			}
+}
+
+:global(.face__wrapper.draggable-source) {
+	&:hover {
+		cursor: map-get(theme.$cursors, 'drag-base');
+	}
+}
+:global(.face__wrapper.draggable-source--is-dragging) {
+	cursor: map-get(theme.$cursors, 'drag-active');
+	.face {
+		overflow: hidden;
+		&:before {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			margin: auto;
+			content: '';
+			display: block;
+			border-radius: 50%;
+			background-color: hsla(0, 0%, 100%, 0.08);
+			box-shadow: shadow(pulse);
+			animation: pulse map-get(theme.$durations, 'slower') map-get(theme.$easings, 'base') infinite
+				both;
+		}
+		.svg {
+			opacity: 0;
 		}
 	}
 }

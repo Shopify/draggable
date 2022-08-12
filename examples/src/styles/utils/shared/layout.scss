@@ -21,22 +21,6 @@
 	}
 }
 
-// Styles for (un)locking the ability to scroll the document.
-// Requires the `data-html-scroll` attribute on <html>.
-// Toggling of the attribute value is handled via JS.
-@mixin scroll-lock {
-	&[data-scroll-lock],
-	&[data-scroll-lock] body {
-		height: 100%;
-	}
-
-	&[data-scroll-lock='true'],
-	&[data-scroll-lock='true'] body {
-		overflow: hidden;
-		max-height: 100vh;
-	}
-}
-
 // Quick and easy max-width centered layout
 @mixin centered-width($max-width: null) {
 	margin-left: auto;

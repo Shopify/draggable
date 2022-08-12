@@ -1,12 +1,8 @@
 @use 'reset';
 @use 'theme';
-
-@use 'components';
-@use 'utils/global';
-@use 'utils/shared/layout';
+@use 'utils';
 
 html {
-	@include layout.scroll-lock;
 	font-family: map-get(theme.$font-stacks, 'base');
 
 	::selection {
@@ -48,7 +44,7 @@ button {
 // Set `state` cursors to never used tags only so they can be fetched on page load,
 // rather than the instance they are first requested...
 .preload-cursors {
-	@include layout.visually-hidden;
+	@include utils.visually-hidden;
 
 	b {
 		cursor: map-get(theme.$cursors, 'drag-active');

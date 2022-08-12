@@ -1,12 +1,12 @@
 <script lang="ts">
+	import './styles/index.scss';
+
 	import { browser } from '$app/env';
 	import type { DragOverEvent, DragStartEvent } from '@draggable/Draggable';
 
 	import Brand from '@src/components/Brand/Brand.svelte';
 	import Cube from '@src/components/Cube/Cube.svelte';
 	import { onMount } from 'svelte';
-
-	import './styles/index.scss';
 
 	onMount(async () => {
 		if (browser) {

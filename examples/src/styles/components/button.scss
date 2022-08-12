@@ -116,32 +116,3 @@
 		border-radius: 2.4rem;
 	}
 }
-
-///
-/// Button container
-.button__container {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: center;
-	margin-top: -(map-get(theme.$spacings, 'tightest'));
-	margin-left: -(map-get(theme.$spacings, 'tightest'));
-
-	.button {
-		@include layout.flex-item-fix;
-		display: block;
-		flex: 0 0 auto;
-		margin-top: map-get(theme.$spacings, 'tightest');
-		margin-left: map-get(theme.$spacings, 'tightest');
-	}
-
-	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-		margin-top: -(map-get(theme.$spacings, 'tight'));
-		margin-left: -(map-get(theme.$spacings, 'tight'));
-
-		.button {
-			margin-top: (map-get(theme.$spacings, 'tight'));
-			margin-left: (map-get(theme.$spacings, 'tight'));
-		}
-	}
-}

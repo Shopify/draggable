@@ -7,6 +7,7 @@
 	width: props.$hamburger-width;
 	height: props.$hamburger-height;
 	animation-name: hamburger-out;
+	position: relative;
 
 	display: flex;
 	flex-direction: column;

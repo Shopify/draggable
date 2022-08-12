@@ -1,5 +1,7 @@
 @use '@src/styles/utils/shared/layout';
 @use '@src/styles/theme';
+@use '@src/styles/components/stacked-list';
+@use 'variants';
 @use '@src/components/StackedListItem/styles/props';
 
 $grid-columns: 8;
@@ -36,7 +38,7 @@ $grid-columns: 8;
 		height: auto;
 	}
 
-	.draggable--is-dragging & .draggable-container-parent--capacity {
+	:global(.draggable--is-dragging & .draggable-container-parent--capacity) {
 		color: map-get(theme.$colors, 'brand-blue');
 	}
 }

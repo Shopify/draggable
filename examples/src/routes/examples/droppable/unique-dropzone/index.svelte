@@ -7,8 +7,6 @@
 	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 	import { onMount } from 'svelte';
 
-	import '@src/styles/components/block-layout.scss';
-
 	let containers: HTMLElement[] = [];
 	const wrappers = [
 		{ id: 1, label: 'one' },
@@ -83,3 +81,7 @@
 		</div>
 	</article>
 </section>
+
+<style lang="scss">
+	@use 'styles';
+</style>

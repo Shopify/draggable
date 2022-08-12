@@ -18,7 +18,7 @@
 		<p class="legal-text">
 			<a
 				href="https://shopify.github.io/draggable/"
-				class="Link Link--typeDark"
+				class="link link--dark"
 				title="Visit Draggable JS">draggable.js</a
 			>
 			was developed by
@@ -42,7 +42,7 @@
 			>. You are free to use the code from this library for both personal and commercial use.
 		</p>
 
-		<p class="preload-cursors">
+		<p>
 			<b>Special thanks</b> <u>to all of our</u>
 			<a
 				href="https://github.com/Shopify/draggable/graphs/contributors"

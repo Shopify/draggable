@@ -31,13 +31,13 @@ $grid-columns-tablet: 8;
 		}
 
 		@for $i from 1 through length($grid-area-names) {
-			.block__wrapper:nth-child(#{$i}) {
+			:global(.block__wrapper:nth-child(#{$i})) {
 				grid-area: nth($grid-area-names, $i);
 			}
 		}
 
 		.block__wrapper {
-			.block {
+			:global(.block) {
 				height: 100%;
 			}
 		}

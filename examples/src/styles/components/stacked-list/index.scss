@@ -47,7 +47,7 @@
 			height: map-get(props.$stacked-list-item-base, 'desktop');
 		}
 
-		p {
+		:global(p) {
 			margin-top: 0.2em;
 			font-size: map-get(theme.$type-scales, 'paragraph-base');
 			color: white;
@@ -62,13 +62,11 @@
 		}
 	}
 
-	&__item {
-		&:nth-child(1n + 2) {
-			margin-top: -(map-get(theme.$borders, 'thin'));
+	:global(.stacked-list__item:nth-child(1n + 2)) {
+		margin-top: -(map-get(theme.$borders, 'thin'));
 
-			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-				margin-top: -(map-get(theme.$borders, 'base'));
-			}
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			margin-top: -(map-get(theme.$borders, 'base'));
 		}
 	}
 }

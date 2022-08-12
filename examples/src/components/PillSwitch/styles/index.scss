@@ -107,3 +107,35 @@
 		}
 	}
 }
+
+.pill-switch {
+	&__control {
+		&:global(.draggable-mirror) {
+			background-color: white;
+			color: map-get(theme.$colors, 'brand-blue');
+		}
+		&:global(.draggable-source--is-dragging) {
+			@include layout.visible(false);
+		}
+	}
+	&--on {
+		.pill-switch__control {
+			&:global(.draggable-mirror) {
+				color: map-get(theme.$colors, 'brand-blue');
+				background-color: white;
+			}
+		}
+	}
+
+	&__track {
+		& :global(.pattern--halftone) {
+			@include pattern.pattern-halftone-animated();
+			height: map-get(props.$pill-switch-sizes, 'base');
+			transform: rotate(45deg);
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				height: map-get(props.$pill-switch-sizes, 'tablet');
+			}
+		}
+	}
+}

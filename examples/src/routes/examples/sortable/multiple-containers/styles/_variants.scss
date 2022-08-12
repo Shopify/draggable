@@ -1,0 +1,146 @@
+@use '@src/components/StackedListItem/styles/props' as stacked-list-item;
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
+@use 'props';
+
+.stacked-list__wrapper {
+	&--horizontal {
+		display: flex;
+
+		&::after {
+			@include props.scroll-indicator(false);
+		}
+
+		// does not address :focus on child elements
+		&:hover {
+			&::after {
+				opacity: 0.1;
+			}
+		}
+
+		.stacked-list__header,
+		:global(.stacked-list__item-content) {
+			height: map-get(stacked-list-item.$stacked-list-item-base, 'base');
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				height: map-get(stacked-list-item.$stacked-list-item-base, 'desktop');
+			}
+		}
+
+		.stacked-list__header {
+			flex: 0 0 map-get(stacked-list-item.$stacked-list-item-large, 'base');
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				flex-basis: map-get(stacked-list-item.$stacked-list-item-large, 'desktop');
+			}
+		}
+
+		.stacked-list {
+			display: flex;
+			flex: 1 1 auto;
+			margin-top: 0;
+			margin-left: calc(-1 * map-get(theme.$borders, 'thin'));
+			overflow-x: scroll;
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				margin-left: calc(-1 * map-get(theme.$borders, 'base'));
+			}
+		}
+
+		:global(.stacked-list__item) {
+			flex: 1 0 map-get(stacked-list-item.$stacked-list-item-large, 'base');
+			max-width: map-get(stacked-list-item.$stacked-list-item-large, 'base') * 2;
+
+			&:nth-child(1n + 2) {
+				margin-top: 0;
+				margin-left: calc(-1 * map-get(theme.$borders, 'thin'));
+
+				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+					margin-left: calc(-1 * map-get(theme.$borders, 'base'));
+				}
+			}
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				flex-basis: map-get(stacked-list-item.$stacked-list-item-large, 'desktop');
+				max-width: calc(map-get(stacked-list-item.$stacked-list-item-large, 'desktop') * 2);
+			}
+		}
+
+		:global(.draggable--original:first-child + .stacked-list__item) {
+			margin-left: 0;
+		}
+
+		:global(.stacked-list__item-content) {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			text-align: center;
+
+			&::before {
+				top: calc(-1 * map-get(theme.$borders, 'thin'));
+				right: auto;
+				bottom: calc(-1 * map-get(theme.$borders, 'thin'));
+				left: calc(-1 * map-get(theme.$borders, 'thin'));
+				width: map-get(theme.$borders, 'thin');
+				height: auto;
+
+				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+					top: calc(-1 * map-get(theme.$borders, 'base'));
+					bottom: calc(-1 * map-get(theme.$borders, 'base'));
+					left: calc(-1 * map-get(theme.$borders, 'base'));
+					width: map-get(theme.$borders, 'base');
+				}
+			}
+		}
+
+		:global(.drag-handle),
+		:global(.nope-handle) {
+			margin-left: 0;
+		}
+
+		// &.stacked-list__wrapper--medium {
+		// 	.stacked-list__header,
+		// 	:global(.stacked-list__item) {
+		// 		height: map-get(stacked-list-item.$stacked-list-item-medium, 'base');
+
+		// 		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		// 			height: map-get(stacked-list-item.$stacked-list-item-medium, 'desktop');
+		// 		}
+		// 	}
+		// }
+
+		&.stacked-list__wrapper--large {
+			.stacked-list__header,
+			:global(.stacked-list__item) {
+				height: map-get(stacked-list-item.$stacked-list-item-large, 'base');
+
+				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+					height: map-get(stacked-list-item.$stacked-list-item-large, 'desktop');
+				}
+			}
+		}
+	}
+
+	&--medium {
+		:global(.stacked-list__item) {
+			height: auto;
+		}
+		.stacked-list__header,
+		:global(.stacked-list__item-content) {
+			height: map-get(stacked-list-item.$stacked-list-item-medium, 'base');
+			@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+				height: map-get(stacked-list-item.$stacked-list-item-medium, 'desktop');
+			}
+		}
+	}
+
+	&--large {
+		.stacked-list__header,
+		:global(.stacked-list__item-content) {
+			height: map-get(stacked-list-item.$stacked-list-item-large, 'base');
+			@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+				height: map-get(stacked-list-item.$stacked-list-item-large, 'desktop');
+			}
+		}
+	}
+}

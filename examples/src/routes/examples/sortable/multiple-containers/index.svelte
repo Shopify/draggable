@@ -2,12 +2,10 @@
 	import { onMount } from 'svelte';
 
 	import StackedListItem from '@src/components/StackedListItem/StackedListItem.svelte';
-	import type { DragStartEvent, DragStopEvent } from '@draggable/Draggable';
+	import type { DragStartEvent } from '@draggable/Draggable';
 	import type { SortableSortedEvent, SortableSortEvent } from '@draggable/Sortable';
 	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 	import { browser } from '$app/env';
-
-	import './styles/index.scss';
 
 	let containers: HTMLElement[] = [];
 
@@ -109,3 +107,7 @@
 		</ul>
 	</article>
 </section>
+
+<style lang="scss">
+	@use 'styles';
+</style>

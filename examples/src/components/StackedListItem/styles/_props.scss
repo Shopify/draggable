@@ -18,32 +18,3 @@ $stacked-list-item-large: (
 @mixin stacked-list-scroll-height($size: 7.2rem, $rows: 7.6, $border-width: thin) {
 	height: ($size * $rows) - (map-get(theme.$borders, $border-width) * ($rows - 1));
 }
-
-@mixin scroll-indicator($vertical: true) {
-	content: '';
-	position: absolute;
-	display: block;
-	background-color: currentColor;
-	transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
-		opacity map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
-
-	@if $vertical {
-		right: 0;
-		bottom: 0;
-		left: 0;
-		height: map-get(theme.$borders, 'thin');
-	} @else {
-		top: 0;
-		right: 0;
-		bottom: 0;
-		width: map-get(theme.$borders, 'thin');
-	}
-
-	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-		@if $vertical {
-			height: map-get(theme.$borders, 'base');
-		} @else {
-			width: map-get(theme.$borders, 'base');
-		}
-	}
-}

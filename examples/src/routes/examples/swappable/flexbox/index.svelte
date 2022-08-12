@@ -4,8 +4,6 @@
 	import { browser } from '$app/env';
 	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 
-	import './styles/index.scss';
-
 	let container: HTMLElement;
 
 	onMount(async () => {
@@ -40,3 +38,7 @@
 		<Block label="seven" classes="block--7" draggable />
 	</article>
 </section>
+
+<style lang="scss" global>
+	@use 'styles';
+</style>

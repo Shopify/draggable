@@ -2,7 +2,6 @@
 	import { onMount } from 'svelte';
 	import Block from '@src/components/Block/Block.svelte';
 
-	import './styles/index.scss';
 	import { browser } from '$app/env';
 	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 
@@ -42,3 +41,7 @@
 		<Block label="eight" classes="block--8" draggable />
 	</article>
 </section>
+
+<style lang="scss" global>
+	@use 'styles';
+</style>

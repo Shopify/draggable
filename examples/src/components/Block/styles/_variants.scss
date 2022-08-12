@@ -74,4 +74,10 @@
 			}
 		}
 	}
+
+	&--colliding {
+		.block__content {
+			color: map-get(theme.$colors, 'brand-red');
+		}
+	}
 }

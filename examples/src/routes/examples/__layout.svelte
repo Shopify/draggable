@@ -1,12 +1,12 @@
 <script lang="ts">
+	import '@src/styles/reset.scss';
+	import './__layout.scss';
+
 	import Sidebar from '@src/components/Sidebar/Sidebar.svelte';
 	import pages from '@src/common/data/pages';
 	import Hamburger from '@src/components/Hamburger/Hamburger.svelte';
 	import classNames from 'classnames';
 	import { page } from '$app/stores';
-
-	import '@src/styles/index.scss';
-	import './__layout.scss';
 
 	let open = false;
 

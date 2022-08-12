@@ -4,12 +4,13 @@
     "module": "ESNext",
     "baseUrl": "./src",
     "moduleResolution": "node",
+    "outDir": "./dist",
     "skipLibCheck": true,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "types": ["jest", "node"]
+    "types": ["jest"]
   },
   "include": ["src/**/*", "test/**/*"],
-  "exclude": ["node_modules", "vite.config.ts", "examples"]
+  "exclude": ["node_modules", "vite.config.ts", "examples", "src/**/*.test.ts"]
 }

@@ -37,16 +37,14 @@
     ]
   },
   "types": "./dist/index.d.ts",
-  "main": "./dist/my-lib.umd.cjs",
-  "module": "./dist/my-lib.js",
+  "module": "./dist/index.js",
   "exports": {
     ".": {
-      "import": "./dist/draggable.js",
-      "require": "./dist/draggable.umd.cjs"
+      "import": "./dist/index.js"
     }
   },
   "scripts": {
-    "prepare": "vite build",
+    "build": "vite build",
     "format": "prettier --write './src/**/*.{ts,tsx}'",
     "typecheck": "tsc --noEmit",
     "lint": "eslint './src/**.{ts,tsx}' --fix",

@@ -52,7 +52,7 @@ const pages: Page[] = [
 				href: '/examples/plugins/collidable'
 			},
 			{ title: 'Snappable', href: '/examples/plugins/snappable' },
-			{ title: 'Swap Animation', href: '/examples/plugins/snappable' },
+			{ title: 'Swap Animation', href: '/examples/plugins/swap-animation' },
 			{ title: 'Sort Animation', href: '/examples/plugins/sort-animation' }
 		]
 	}

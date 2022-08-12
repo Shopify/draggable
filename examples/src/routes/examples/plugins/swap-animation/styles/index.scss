@@ -1,0 +1,22 @@
+@use '@src/styles/utils/shared/functions';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
+
+$swap-anim-block-name: unquote('block');
+
+.swap-animation {
+	.block-layout--grid {
+		display: grid;
+		gap: map-get(theme.$spacings, 'tightest');
+		grid-template-columns: repeat(2, 1fr);
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			grid-template-columns: repeat(3, 1fr);
+			grid-auto-rows: functions.rows(3);
+		}
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			grid-auto-rows: functions.rows(4);
+		}
+	}
+}

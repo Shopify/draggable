@@ -7,12 +7,12 @@ type DragEventData = {
   source: HTMLElement;
   overContainer?: HTMLElement;
   sourceContainer?: HTMLElement;
-  sensorEvent: SensorEvent;
   originalSource?: HTMLElement;
   pressure?: number;
   draggable?: string;
   detail?: SensorEvent;
-  originalEvent: Event;
+  sensorEvent?: SensorEvent;
+  originalEvent?: Event;
 };
 
 export class DragEvent extends AbstractEvent {
@@ -64,6 +64,7 @@ export class DragStartEvent extends DragEvent {
   declare data: Omit<DragEventData, 'originalSource' | 'sourceContainer'> & {
     originalSource: HTMLElement;
     sourceContainer: HTMLElement;
+    sensorEvent: SensorEvent;
   };
 
   clone(data) {
@@ -79,6 +80,10 @@ export class DragStartEvent extends DragEvent {
 
   get sourceContainer() {
     return this.data.sourceContainer;
+  }
+
+  get sensorEvent() {
+    return this.data.sensorEvent;
   }
 
   static type = 'drag:start';

@@ -66,7 +66,7 @@ describe('DragEvent', () => {
     it('initializes with originalEvent', () => {
       const originalEvent = new Event('drag');
       const event = new DragEvent({
-        sensorEvent: new SensorEvent({ originalEvent }),
+        sensorEvent: new SensorEvent({ originalEvent } as SensorEvent),
         source: document.createElement('div'),
       });
 

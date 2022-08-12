@@ -72,7 +72,7 @@ export default class Snappable extends AbstractPlugin {
     }
 
     const snapInEvent = new SnapInEvent({
-      dragEvent: event,
+      dragEvent: event instanceof DroppableEvent ? event.dragEvent : event,
       snappable:
         (<DragOverEvent>event).over ?? (<DroppableEvent>event).droppable,
     });
@@ -104,7 +104,7 @@ export default class Snappable extends AbstractPlugin {
       (<DroppableStopEvent>event).dragEvent.source;
 
     const snapOutEvent = new SnapOutEvent({
-      dragEvent: event,
+      dragEvent: event instanceof DroppableStopEvent ? event.dragEvent : event,
       snappable:
         (<DragOutEvent>event).over ?? (<DroppableStopEvent>event).droppable,
     });

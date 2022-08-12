@@ -1,6 +1,6 @@
 import { waitFor } from '@testing-library/dom';
 import Sensor from '.';
-import { SensorEvent } from '../SensorEvent';
+import { SensorEvent, SensorEventData } from '../SensorEvent';
 
 class MyEvent extends SensorEvent {
   static type = 'my:event';
@@ -120,7 +120,7 @@ describe('Sensor', () => {
 
       const expectedEvent = new MyEvent({
         value: 'value',
-      });
+      } as SensorEventData);
 
       const returnValue = await sensor.trigger(element, expectedEvent);
 

@@ -6,36 +6,24 @@ export type CollidableEventData = {
 
 export class CollidableEvent extends AbstractEvent {
   declare data: CollidableEventData;
-  static type = 'collidable';
 
   get dragEvent(): DragEvent {
     return this.data.dragEvent;
   }
 
-  clone(data: typeof this.data) {
-    return new CollidableEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  static type = 'collidable';
 }
 
 export class CollidableInEvent extends CollidableEvent {
   declare data: CollidableEventData & {
     collidingElement: HTMLElement;
   };
-  static type = 'collidable:in';
 
   get collidingElement() {
     return this.data.collidingElement;
   }
 
-  clone(data: typeof this.data) {
-    return new CollidableInEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  static type = 'collidable:in';
 }
 
 export class CollidableOutEvent extends CollidableEvent {
@@ -45,13 +33,6 @@ export class CollidableOutEvent extends CollidableEvent {
 
   get collidingElement() {
     return this.data.collidingElement;
-  }
-
-  clone(data: typeof this.data) {
-    return new CollidableOutEvent({
-      ...this.data,
-      ...data,
-    });
   }
 
   static type = 'collidable:out';

@@ -7,7 +7,7 @@ export class DroppableEvent extends AbstractEvent {
   declare data: {
     dragEvent: DragEvent;
     dropzone: HTMLElement;
-    droppable: boolean;
+    droppable: HTMLElement;
   };
 
   get droppable() {

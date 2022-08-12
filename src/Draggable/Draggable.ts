@@ -580,6 +580,7 @@ export default class Draggable {
     const dragStoppedEvent = new DragStoppedEvent({
       source: this.source,
       originalSource: this.originalSource,
+      originalEvent: event.originalEvent,
       sensorEvent: event ? event.sensorEvent : null,
       sourceContainer: this.sourceContainer,
     });
@@ -608,6 +609,7 @@ export default class Draggable {
     const dragPressureEvent = new DragPressureEvent({
       sensorEvent,
       source,
+      originalEvent: event,
       pressure: sensorEvent.pressure,
     });
 

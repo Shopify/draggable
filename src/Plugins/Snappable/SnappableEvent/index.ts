@@ -1,3 +1,5 @@
+import { DragEvent } from 'Draggable';
+
 import AbstractEvent from '../../../shared/AbstractEvent';
 
 type SnappableEventData = {

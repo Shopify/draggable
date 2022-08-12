@@ -1,31 +1,40 @@
 <script lang="ts">
-	import { Swappable, Plugins } from '@draggable';
 	import { onMount } from 'svelte';
 
 	import Block from '@src/components/Block/Block.svelte';
 	import type { DragStartEvent } from '@draggable/Draggable';
+	import { browser } from '$app/env';
+	import PageHeader from '@src/components/PageHeader/PageHeader.svelte';
 
 	let container: HTMLElement;
 
-	onMount(() => {
-		const swappable = new Swappable([container], {
-			mirror: {
-				appendTo: container,
-				constrainDimensions: true
-			},
-			plugins: [Plugins.Snappable]
-		});
+	onMount(async () => {
+		if (browser) {
+			const { Swappable, Plugins } = await import('@draggable');
 
-		// --- Draggable events --- //
-		swappable.on('drag:start', (evt: DragStartEvent) => {
-			if (evt.originalSource.classList.contains('block--stripes')) {
-				evt.cancel();
-			}
-		});
+			new Swappable([container], {
+				mirror: {
+					appendTo: container,
+					constrainDimensions: true
+				},
+				plugins: [Plugins.Snappable]
+			}).on('drag:start', (evt: DragStartEvent) => {
+				if (evt.originalSource.classList.contains('block--stripes')) {
+					evt.cancel();
+				}
+			});
+		}
 	});
 </script>
 
-<section>
+<PageHeader
+	id="Swappable"
+	section="Plugins"
+	child="Swappable"
+	subheading="Snappable turns draggable elements into suction cups. Drag an item close enough to another draggable and it will snap into place."
+/>
+
+<section class="snappable">
 	<article bind:this={container} class="block-layout block-layout--grid">
 		<div class="block__wrapper">
 			<Block label="snap" classes="block--1 draggable-source" draggable />

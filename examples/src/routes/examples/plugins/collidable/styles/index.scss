@@ -1,5 +1,5 @@
+@use '@src/styles/components/block-layout';
 @use '@src/styles/theme';
-@forward '@src/styles/components/block-layout';
 @use 'props';
 
 .collidable {
@@ -19,31 +19,43 @@
 			height: map-get(props.$collidable-container-height, 'desktop');
 		}
 
-		.block--1 {
+		.block__wrapper {
+			&.draggable-dropzone--occupied {
+				position: relative;
+				:global(.block--hollow) {
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+					margin: auto;
+				}
+			}
+			:global(.block),
+			:global(.block__content) {
+				height: 100%;
+			}
+		}
+
+		:global(.block--1) {
 			grid-area: 1 / 1;
 		}
 
-		.block--4 {
+		:global(.block--4) {
 			grid-area: 1 / 4;
 		}
 
-		.block--2 {
+		:global(.block--2) {
 			grid-area: 1 / 2 / 3 / 2;
 		}
-		.block--3 {
+		:global(.block--3) {
 			grid-area: 4 / 4 / 2 / 4;
-		}
-
-		.block.colliding {
-			.block__content {
-				color: map-get(theme.$colors, 'brand-red');
-			}
 		}
 	}
 
 	// Draggable
 	.draggable-mirror {
-		.block__content {
+		:global(.block__content) {
 			transform: scale(0.9);
 		}
 	}
@@ -52,7 +64,7 @@
 		position: absolute;
 		background-color: map-get(theme.$colors, 'coal-dark');
 		transition: background-color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
-		&.colliding {
+		&.collidable-wall--colliding {
 			background-color: map-get(theme.$colors, 'brand-red');
 		}
 	}
@@ -103,7 +115,7 @@
 
 	.draggable-container--is-dragging:not(.draggable-container--over) {
 		.block--stripes {
-			.block__content {
+			:global(.block__content) {
 				color: map-get(theme.$colors, 'brand-red');
 			}
 		}
@@ -115,7 +127,7 @@
 
 	// stylelint-disable-next-line no-duplicate-selectors
 	.collidable-wall {
-		&.colliding {
+		&.collidable-wall--colliding {
 			background-color: map-get(theme.$colors, 'brand-red');
 		}
 	}

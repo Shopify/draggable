@@ -1,3 +1,4 @@
+import { fireEvent } from '@testing-library/dom';
 import { withElementFromPoint } from './environment';
 
 export function triggerEvent(element, type, data = {}) {
@@ -15,7 +16,7 @@ export function triggerEvent(element, type, data = {}) {
   }
 
   withElementFromPoint(element, () => {
-    element.dispatchEvent(event);
+    fireEvent(element, event);
   });
 
   return event;

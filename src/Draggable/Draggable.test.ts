@@ -502,7 +502,6 @@ describe('Draggable', () => {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     const callback = jest.fn();
     newInstance.on('drag:start', callback);
@@ -525,7 +524,6 @@ describe('Draggable', () => {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     const callback = jest.fn();
     newInstance.on('drag:start', callback);
@@ -551,7 +549,6 @@ describe('Draggable', () => {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     let source;
     let originalSource;
@@ -580,7 +577,6 @@ describe('Draggable', () => {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -614,7 +610,6 @@ describe('Draggable', () => {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -639,7 +634,6 @@ describe('Draggable', () => {
     });
 
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -663,7 +657,6 @@ describe('Draggable', () => {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -687,7 +680,6 @@ describe('Draggable', () => {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -711,7 +703,6 @@ describe('Draggable', () => {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -730,7 +721,6 @@ describe('Draggable', () => {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -751,7 +741,6 @@ describe('Draggable', () => {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     newInstance.on('drag:start', (event) => {
       event.preventDefault();
@@ -775,7 +764,6 @@ describe('Draggable', () => {
         draggable: 'li',
       }))();
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -793,7 +781,6 @@ describe('Draggable', () => {
         draggable: 'li',
       }))();
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -811,7 +798,6 @@ describe('Draggable', () => {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     newInstance.on('drag:start', (event) => {
       event.preventDefault();
@@ -833,7 +819,6 @@ describe('Draggable', () => {
         draggable: 'li',
       }))();
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -851,7 +836,6 @@ describe('Draggable', () => {
         draggable: 'li',
       }))();
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -876,7 +860,6 @@ describe('Draggable', () => {
         draggable: 'li',
       }))();
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -896,7 +879,6 @@ describe('Draggable', () => {
         draggable: 'li',
       }))();
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -941,7 +923,6 @@ describe('Draggable', () => {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -972,7 +953,6 @@ describe('Draggable', () => {
       },
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -995,7 +975,6 @@ describe('Draggable', () => {
       },
     });
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -1023,7 +1002,6 @@ describe('Draggable', () => {
     });
 
     const draggableElement = sandbox.querySelector('li');
-    document.elementFromPoint = () => draggableElement;
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
 
@@ -1055,7 +1033,6 @@ describe('Draggable', () => {
         draggable: 'li',
       });
       const draggableElement = sandbox.querySelector('li');
-      document.elementFromPoint = () => draggableElement;
 
       newInstance.on('drag:stopped', (event) => {
         expect(event.source.parentNode).toBeNull();
@@ -1076,7 +1053,6 @@ describe('Draggable', () => {
         draggable: 'li',
       });
       const draggableElement = sandbox.querySelector('li');
-      document.elementFromPoint = () => draggableElement;
 
       newInstance.on('drag:out', (event) => {
         expect(event.overContainer).toBe(containers[0]);

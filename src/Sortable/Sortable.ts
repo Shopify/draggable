@@ -131,7 +131,7 @@ export default class Sortable extends Draggable {
   startContainer: HTMLElement | null;
 
   constructor(
-    containers: HTMLElement[] = [],
+    containers: NodeList | HTMLElement[] | HTMLElement = [document.body],
     options: Partial<SortableOptions> = {}
   ) {
     super(containers, {

@@ -1,4 +1,9 @@
-import Draggable, { DragEvent, DraggableOptions, DragOverEvent, DragStopEvent } from '../Draggable';
+import Draggable, {
+  DragEvent,
+  DraggableOptions,
+  DragOverEvent,
+  DragStopEvent,
+} from '../Draggable';
 import {
   SwappableStartEvent,
   SwappableSwapEvent,
@@ -62,7 +67,7 @@ export default class Swappable extends Draggable {
   lastOver: HTMLElement | null = null;
 
   constructor(
-    containers: HTMLElement[] = [],
+    containers: NodeList | HTMLElement[] | HTMLElement = [document.body],
     options: Partial<SwappableOptions> = {}
   ) {
     super(containers, {

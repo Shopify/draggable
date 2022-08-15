@@ -17,15 +17,15 @@ export interface SensorOptions {
   handle?:
     | string
     | NodeList
-    | Element[]
-    | Element
-    | ((currentElement: Element) => Element);
+    | HTMLElement[]
+    | HTMLElement
+    | ((currentElement: HTMLElement) => HTMLElement);
   draggable?:
     | string
-    | ((element: Element) => void)
+    | ((element: HTMLElement) => void)
     | NodeList
-    | Array<Element>
-    | Element;
+    | Array<HTMLElement>
+    | HTMLElement;
   distance?: number;
 }
 
@@ -54,27 +54,27 @@ function calcDelay(
  */
 export default class Sensor {
   /** Current containers */
-  containers: Element[];
+  containers: HTMLElement[];
   /** Current options */
   options: SensorOptions;
   /** Current drag state */
   dragging = false;
   /** Current container */
-  currentContainer: Element = null;
+  currentContainer: HTMLElement = null;
   /** Draggables original source element */
-  originalSource: Element = null;
+  originalSource: HTMLElement = null;
   /** The event of the initial sensor down */
   startEvent: Event = null;
   delay: SensorDelayOptions;
   lastEvent: SensorEvent;
 
   constructor(
-    containers: Element[] | NodeList | Element = [],
+    containers: NodeList | HTMLElement[] | HTMLElement = [],
     options: SensorOptions = {}
   ) {
     if (containers instanceof NodeList || containers instanceof Array)
-      this.containers = [...(<Element[]>containers)];
-    else if (containers instanceof Element) this.containers = [containers];
+      this.containers = [...(<HTMLElement[]>containers)];
+    else if (containers instanceof HTMLElement) this.containers = [containers];
 
     this.options = { ...options };
     this.delay = calcDelay(options.delay);
@@ -90,7 +90,7 @@ export default class Sensor {
 
   /**
    * Adds container to this sensor instance
-   * @param {...Element} containers - Containers you want to add to this sensor
+   * @param {...HTMLElement} containers - Containers you want to add to this sensor
    * @example draggable.addContainer(document.body)
    */
   addContainer(...containers) {
@@ -99,7 +99,7 @@ export default class Sensor {
 
   /**
    * Removes container from this sensor instance
-   * @param {...Element} containers - Containers you want to remove from this sensor
+   * @param {...HTMLElement} containers - Containers you want to remove from this sensor
    * @example draggable.removeContainer(document.body)
    */
   removeContainer(...containers) {
@@ -110,10 +110,10 @@ export default class Sensor {
 
   /**
    * Triggers event on target element
-   * @param {Element} element - Element to trigger event on
+   * @param {HTMLElement} element - HTMLElement to trigger event on
    * @param {SensorEvent} sensorEvent - Sensor event to trigger
    */
-  trigger(element: Element, sensorEvent: SensorEvent) {
+  trigger(element: HTMLElement, sensorEvent: SensorEvent) {
     element.dispatchEvent(
       new CustomEvent<SensorEvent>(sensorEvent.type, {
         detail: sensorEvent,

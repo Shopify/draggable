@@ -144,11 +144,11 @@ export default class Draggable {
   placedTimeoutID: ReturnType<typeof setTimeout>;
 
   constructor(
-    containers: HTMLElement[] = [document.body],
+    containers: NodeList | HTMLElement[] | HTMLElement = [document.body],
     options: Partial<DraggableOptions> = {}
   ) {
     if (containers instanceof NodeList || containers instanceof Array)
-      this.containers = [...containers];
+      this.containers = <HTMLElement[]>[...containers];
     else if ((containers as unknown) instanceof Element)
       this.containers = [containers];
     else
@@ -314,7 +314,7 @@ export default class Draggable {
       []
     );
 
-  getDraggableElementsForContainer = (container: Element) => {
+  getDraggableElementsForContainer = (container: HTMLElement) => {
     const allDraggableElements = <HTMLElement[]>[
       ...container.querySelectorAll(this.options.draggable),
     ];

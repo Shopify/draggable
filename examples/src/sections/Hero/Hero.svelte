@@ -22,7 +22,7 @@
 
 			draggable.on('drag:over', (evt: DragOverEvent) => {
 				if (evt.source.getAttribute('data-face') !== evt.over.getAttribute('data-face')) {
-					evt.cancel();
+					evt.preventDefault();
 				}
 			});
 		}

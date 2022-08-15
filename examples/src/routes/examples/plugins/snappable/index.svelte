@@ -20,7 +20,7 @@
 				plugins: [Plugins.Snappable]
 			}).on('drag:start', (evt: DragStartEvent) => {
 				if (evt.originalSource.classList.contains('block--stripes')) {
-					evt.cancel();
+					evt.preventDefault();
 				}
 			});
 		}

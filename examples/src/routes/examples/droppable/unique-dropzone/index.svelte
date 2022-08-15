@@ -35,7 +35,7 @@
 
 			droppable.on('droppable:dropped', (evt: DroppableDroppedEvent) => {
 				if (droppableOrigin !== evt.dropzone.dataset.dropzone) {
-					evt.cancel();
+					evt.preventDefault();
 				}
 			});
 		}

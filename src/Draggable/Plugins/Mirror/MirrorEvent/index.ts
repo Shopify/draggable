@@ -54,10 +54,14 @@ export class MirrorEvent<T extends MirrorEventDetail> extends CustomEvent<T> {
 
 export class MirrorCreateEvent extends MirrorEvent<MirrorEventDetail> {
   constructor(detail: MirrorEventDetail) {
-    super({ detail }, MirrorCreateEvent.type);
+    super(
+      { detail, cancelable: MirrorCreateEvent.cancelable },
+      MirrorCreateEvent.type
+    );
   }
 
   static type = 'mirror:create';
+  static cancelable = true;
 }
 
 export type MirrorCreatedEventDetail = MirrorEventDetail & {

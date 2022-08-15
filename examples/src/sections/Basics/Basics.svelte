@@ -45,7 +45,7 @@
 
 			droppable.on('snap:in', (evt: SnapInEvent) => {
 				if (snappedIn || evt.snappable.parentNode === initialDropzone) {
-					evt.cancel();
+					evt.preventDefault();
 					return;
 				}
 
@@ -58,21 +58,21 @@
 
 			droppable.on('drag:over', (evt: DragOverEvent) => {
 				if (evt.source.id === 'basics__cube-10' && evt.over.id === 'basics__cube-11') {
-					evt.cancel();
+					evt.preventDefault();
 				}
 
 				if (evt.source.id === 'basics__cube-11' && evt.over.id === 'basics__cube-10') {
-					evt.cancel();
+					evt.preventDefault();
 				}
 			});
 
 			droppable.on('droppable:dropped', (evt: DroppableDroppedEvent) => {
 				if (evt.dragEvent.source.id === 'basics__cube-10' && evt.dropzone.id === 'basics__cube-3') {
-					evt.cancel();
+					evt.preventDefault();
 				}
 
 				if (evt.dragEvent.source.id === 'basics__cube-11' && evt.dropzone.id === 'basics__cube-7') {
-					evt.cancel();
+					evt.preventDefault();
 				}
 			});
 		}

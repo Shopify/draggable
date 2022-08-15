@@ -40,13 +40,17 @@
 			});
 
 			draggable.on('mirror:create', (evt: MirrorCreateEvent) => {
-				evt.cancel();
+				evt.preventDefault();
 			});
 
 			draggable.on('drag:move', (evt: DragMoveEvent) => {
 				position = {
-					x: offsetWithinThreshold(initialMousePosition.x, evt.sensorEvent.clientX, threshold),
-					y: offsetWithinThreshold(initialMousePosition.y, evt.sensorEvent.clientY, threshold)
+					x: offsetWithinThreshold(
+						initialMousePosition.x,
+						evt.sensorEvent?.clientX ?? 0,
+						threshold
+					),
+					y: offsetWithinThreshold(initialMousePosition.y, evt.sensorEvent?.clientY ?? 0, threshold)
 				};
 			});
 

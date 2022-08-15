@@ -41,7 +41,7 @@
 				if (!capacityReached) return;
 				const sourceIsCapacityContainer = evt.dragEvent.sourceContainer === sortable.containers[1];
 				if (!sourceIsCapacityContainer && evt.dragEvent.overContainer === sortable.containers[1]) {
-					evt.cancel();
+					evt.preventDefault();
 				}
 			});
 

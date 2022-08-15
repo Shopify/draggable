@@ -22,7 +22,6 @@ import {
 } from './DraggableEvent';
 import { Focusable, Mirror, Scrollable, Announcement } from './Plugins';
 import { MouseSensor, TouchSensor } from './Sensors';
-import AbstractEvent from '../shared/AbstractEvent';
 
 const sampleMarkup = `
   <ul class="Container">
@@ -314,11 +313,11 @@ describe('Draggable', () => {
     it('invokes bound event', () => {
       const newInstance = new Draggable(containers);
       const handler = jest.fn();
-      const expectedEvent = new Event('my:event');
+      const expectedEvent = new CustomEvent('my:event');
 
       newInstance.on('my:event', handler);
 
-      newInstance.trigger(<AbstractEvent>(<unknown>expectedEvent));
+      newInstance.trigger(expectedEvent);
 
       expect(handler.mock.calls).toHaveLength(1);
 
@@ -559,7 +558,7 @@ describe('Draggable', () => {
     const callback = jest.fn((event) => {
       source = event.source;
       originalSource = event.originalSource;
-      event.cancel();
+      event.preventDefault();
     });
 
     newInstance.on('drag:start', callback);
@@ -597,7 +596,7 @@ describe('Draggable', () => {
     });
 
     const call = callback.mock.calls[0][0];
-    const sensorEvent = call.data.sensorEvent;
+    const sensorEvent = call.sensorEvent;
 
     expect(call.type).toBe('drag:move');
 
@@ -747,7 +746,7 @@ describe('Draggable', () => {
     expect(source.classList).not.toContain('draggable-source--is-dragging');
   });
 
-  it('removes `source:dragging` classname from draggable element on dragEvent.cancel()', () => {
+  it('removes `source:dragging` classname from draggable element on dragEvent.preventDefault()', () => {
     const newInstance = new Draggable(containers, {
       draggable: 'li',
     });
@@ -755,7 +754,7 @@ describe('Draggable', () => {
     document.elementFromPoint = () => draggableElement;
 
     newInstance.on('drag:start', (event) => {
-      event.cancel();
+      event.preventDefault();
     });
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
@@ -807,7 +806,7 @@ describe('Draggable', () => {
     expect(document.body.classList).not.toContain('draggable--is-dragging');
   });
 
-  it('removes `body:dragging` classname from body on dragEvent.cancel()', () => {
+  it('removes `body:dragging` classname from body on dragEvent.preventDefault()', () => {
     const newInstance = new Draggable(containers, {
       draggable: 'li',
     });
@@ -815,7 +814,7 @@ describe('Draggable', () => {
     document.elementFromPoint = () => draggableElement;
 
     newInstance.on('drag:start', (event) => {
-      event.cancel();
+      event.preventDefault();
     });
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });
@@ -915,14 +914,14 @@ describe('Draggable', () => {
     );
   });
 
-  it('removes `container:dragging` classname from draggable container element on dragEvent.cancel()', () => {
+  it('removes `container:dragging` classname from draggable container element on dragEvent.preventDefault()', () => {
     const newInstance = new Draggable(containers, {
       draggable: 'li',
     });
     const draggableElement = sandbox.querySelector('li');
 
     newInstance.on('drag:start', (event) => {
-      event.cancel();
+      event.preventDefault();
     });
 
     triggerEvent(draggableElement, 'mousedown', { button: 0 });

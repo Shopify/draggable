@@ -42,7 +42,7 @@
 			});
 
 			draggable.on('mirror:move', (evt: MirrorMoveEvent) => {
-				evt.cancel();
+				evt.preventDefault();
 
 				const offsetX = evt.sensorEvent.clientX - initialMousePosition.x;
 				const offsetY = initialMousePosition.y - evt.sensorEvent.clientY;

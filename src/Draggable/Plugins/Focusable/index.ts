@@ -1,3 +1,5 @@
+import Draggable from 'Draggable/Draggable';
+
 import AbstractPlugin from '../../../shared/AbstractPlugin';
 
 const onInitialize = Symbol('onInitialize');
@@ -32,7 +34,7 @@ function stripElement(element: HTMLElement) {
 export default class Focusable extends AbstractPlugin {
   options: FocusableOptions;
 
-  constructor(draggable) {
+  constructor(draggable: Draggable) {
     super(draggable);
     this.options = {
       ...defaultOptions,

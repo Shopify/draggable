@@ -68,7 +68,7 @@ export default class Collidable extends AbstractPlugin {
     );
 
     if (this.currentlyCollidingElement) {
-      event.cancel();
+      event.preventDefault();
     }
 
     const collidableInEvent = new CollidableInEvent({

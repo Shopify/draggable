@@ -5,15 +5,9 @@ import {
   waitFor,
   screen,
   fireEvent,
-  getByRole,
 } from '@testing-library/dom';
 
-import {
-  createSandbox,
-  DRAG_DELAY,
-  waitForDragDelay,
-  waitForRequestAnimationFrame,
-} from '../../../test-utils/helpers';
+import { createSandbox, DRAG_DELAY } from '../../../test-utils/helpers';
 
 import {
   MirrorCreateEvent,
@@ -77,9 +71,7 @@ describe('Mirror', () => {
     fireEvent.mouseDown(getByText(sandbox, 'First item'));
 
     waitFor(() => {
-      expect(mirrorCreateHandler).toHaveBeenCalledWithEvent(
-        <Event>(<unknown>MirrorCreateEvent)
-      );
+      expect(mirrorCreateHandler).toHaveBeenCalledWithEvent(MirrorCreateEvent);
       expect(mirrorCreateHandler).toHaveBeenCalledWithEventProperties({
         dragEvent,
         source: dragEvent.source,
@@ -99,7 +91,7 @@ describe('Mirror', () => {
     document.elementFromPoint = () => draggableElement;
 
     draggable.on('drag:start', (dragEvent) => {
-      dragEvent.cancel();
+      dragEvent.preventDefault();
     });
 
     fireEvent.mouseDown(draggableElement);
@@ -116,7 +108,7 @@ describe('Mirror', () => {
     draggable = new Draggable(container, draggableOptions);
 
     draggable.on('mirror:create', (mirrorEvent) => {
-      mirrorEvent.cancel();
+      mirrorEvent.preventDefault();
     });
 
     fireEvent.mouseDown(getByText(sandbox, 'First item'));
@@ -142,11 +134,8 @@ describe('Mirror', () => {
 
     const mirrorElement = await findByRole(sandbox, 'dragmirror');
 
-    expect(mirrorCreatedHandler).toHaveBeenCalledWithEvent(
-      <Event>(<unknown>MirrorCreatedEvent)
-    );
-
-    expect(mirrorCreatedHandler.mock.lastCall[0].data).toEqual({
+    expect(mirrorCreatedHandler).toHaveBeenCalledWithEvent(MirrorCreatedEvent);
+    expect(mirrorCreatedHandler.mock.lastCall[0].detail).toEqual({
       dragEvent,
       mirror: mirrorElement,
       source: dragEvent.source,
@@ -176,9 +165,9 @@ describe('Mirror', () => {
 
     await waitFor(() => {
       expect(mirrorAttachedHandler).toHaveBeenCalledWithEvent(
-        <Event>(<unknown>MirrorAttachedEvent)
+        MirrorAttachedEvent
       );
-      expect(mirrorAttachedHandler.mock.lastCall[0].data).toEqual({
+      expect(mirrorAttachedHandler.mock.lastCall[0].detail).toEqual({
         dragEvent,
         mirror: mirrorElement,
         source: dragEvent.source,
@@ -209,11 +198,9 @@ describe('Mirror', () => {
     fireEvent.mouseMove(mirrorElement);
 
     await waitFor(() => {
-      expect(mirrorMoveHandler).toHaveBeenCalledWithEvent(
-        <Event>(<unknown>MirrorMoveEvent)
-      );
+      expect(mirrorMoveHandler).toHaveBeenCalledWithEvent(MirrorMoveEvent);
 
-      expect(mirrorMoveHandler.mock.lastCall[0].data).toEqual({
+      expect(mirrorMoveHandler.mock.lastCall[0].detail).toEqual({
         dragEvent,
         mirror: mirrorElement,
         source: dragEvent.source,
@@ -246,10 +233,8 @@ describe('Mirror', () => {
     fireEvent.mouseMove(mirrorElement);
 
     await waitFor(() => {
-      expect(mirrorMovedHandler).toHaveBeenCalledWithEvent(
-        <Event>(<unknown>MirrorMovedEvent)
-      );
-      expect(mirrorMovedHandler.mock.lastCall[0].data).toEqual({
+      expect(mirrorMovedHandler).toHaveBeenCalledWithEvent(MirrorMovedEvent);
+      expect(mirrorMovedHandler.mock.lastCall[0].detail).toEqual({
         source: mirrorMoveEvent.source,
         originalSource: mirrorMoveEvent.originalSource,
         sourceContainer: mirrorMoveEvent.sourceContainer,
@@ -270,7 +255,7 @@ describe('Mirror', () => {
     const mirrorMoveHandler = jest.fn();
     draggable.on('mirror:move', mirrorMoveHandler);
     draggable.on('drag:move', (dragEvent) => {
-      dragEvent.cancel();
+      dragEvent.preventDefault();
     });
     const mirrorElement = getByText(sandbox, 'First item');
     document.elementFromPoint = () => mirrorElement;
@@ -279,9 +264,7 @@ describe('Mirror', () => {
     fireEvent.mouseMove(document.body, { clientX: 100, clientY: 100 });
 
     await waitFor(() => {
-      expect(mirrorMoveHandler).not.toHaveBeenCalledWithEvent(
-        <Event>(<unknown>MirrorMoveEvent)
-      );
+      expect(mirrorMoveHandler).not.toHaveBeenCalledWithEvent(MirrorMoveEvent);
     });
 
     fireEvent.mouseUp(mirrorElement);
@@ -357,7 +340,7 @@ describe('Mirror', () => {
     draggable = new Draggable(container, draggableOptions);
 
     draggable.on('mirror:move', (mirrorEvent) => {
-      mirrorEvent.cancel();
+      mirrorEvent.preventDefault();
     });
 
     const draggableElement = getByText(sandbox, 'First item');
@@ -395,9 +378,7 @@ describe('Mirror', () => {
 
     fireEvent.mouseUp(draggable.source);
 
-    expect(mirrorDestroyHandler).toHaveBeenCalledWithEvent(
-      <Event>(<unknown>MirrorDestroyEvent)
-    );
+    expect(mirrorDestroyHandler).toHaveBeenCalledWithEvent(MirrorDestroyEvent);
     expect(mirrorDestroyHandler).toHaveBeenCalledWithEventProperties({
       dragEvent,
       mirror: mirrorElement,
@@ -431,7 +412,7 @@ describe('Mirror', () => {
     let mirrorElement;
 
     draggable.on('mirror:destroy', (mirrorEvent) => {
-      mirrorEvent.cancel();
+      mirrorEvent.preventDefault();
     });
 
     fireEvent.mouseDown(getByText(sandbox, 'First item'));

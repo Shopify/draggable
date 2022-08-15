@@ -31,7 +31,7 @@ export function toHaveCanceledSensorEvent(
   let canceled = false;
 
   function callback(event) {
-    canceled = event.detail.canceled();
+    canceled = event.detail.defaultPrevented;
   }
 
   document.addEventListener(expectedEventName, callback);

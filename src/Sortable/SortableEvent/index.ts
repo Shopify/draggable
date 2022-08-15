@@ -1,146 +1,175 @@
-import { DragEvent, DragOutEvent, DragOverEvent } from '../../Draggable';
-import AbstractEvent from '../../shared/AbstractEvent';
+import {
+  DragEvent,
+  DragOverContainerEvent,
+  DragOverEvent,
+} from '../../Draggable';
 
-export type SortableEventData = {
+export type SortableEventDetail = {
   dragEvent?: DragEvent;
   over?: HTMLElement;
+  source?: HTMLElement;
   startContainer?: HTMLElement;
   oldContainer?: HTMLElement;
   newContainer?: HTMLElement;
   currentIndex?: number;
   startIndex?: number;
-  oldIndex: number;
-  newIndex: number;
+  oldIndex?: number;
+  newIndex?: number;
 };
 
-export class SortableEvent extends AbstractEvent {
-  declare data: SortableEventData;
+export class SortableEvent<
+  T extends SortableEventDetail = SortableEventDetail
+> extends CustomEvent<T> {
+  constructor(
+    eventInitDict?: CustomEventInit<T>,
+    type: string = SortableEvent.type
+  ) {
+    super(type, eventInitDict);
+  }
 
   get dragEvent() {
-    return this.data.dragEvent;
+    return this.detail.dragEvent;
   }
 
-  clone(data) {
-    return new SortableEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  clone = (detail) =>
+    new SortableEvent(
+      { detail: { ...this.detail, ...detail } },
+      SortableEvent.type
+    );
 
   static type = 'sortable';
 }
 
 export class SortableStartEvent extends SortableEvent {
+  constructor(detail: SortableEventDetail) {
+    super(
+      { detail, cancelable: SortableStartEvent.cancelable },
+      SortableStartEvent.type
+    );
+  }
+
   get startIndex() {
-    return this.data.startIndex;
+    return this.detail.startIndex;
   }
 
   get startContainer() {
-    return this.data.startContainer;
+    return this.detail.startContainer;
   }
 
-  clone(data) {
-    return new SortableStartEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  clone = (detail: SortableEventDetail) =>
+    new SortableStartEvent({ ...this.detail, ...detail });
 
   static type = 'sortable:start';
   static cancelable = true;
 }
 
-export class SortableSortEvent extends SortableEvent {
-  declare data: SortableEventData & {
-    dragEvent: DragOverEvent;
-  };
+export type SortableSortEventDetail = SortableEventDetail & {
+  dragEvent: DragOverEvent | DragOverContainerEvent;
+  currentIndex: number;
+  overContainer: HTMLElement;
+  source: HTMLElement;
+};
 
-  get currentIndex() {
-    return this.data.currentIndex;
+export class SortableSortEvent extends SortableEvent<SortableSortEventDetail> {
+  constructor(detail: SortableSortEventDetail) {
+    super(
+      { detail, cancelable: SortableSortEvent.cancelable },
+      SortableSortEvent.type
+    );
   }
 
-  get over() {
-    return this.data.over;
+  get currentIndex() {
+    return this.detail.currentIndex;
   }
 
   get overContainer() {
-    return this.data.dragEvent.overContainer;
+    return this.detail.overContainer;
   }
 
   get dragEvent() {
-    return this.data.dragEvent;
+    return this.detail.dragEvent;
   }
 
-  clone(data) {
-    return new SortableSortEvent({
-      ...this.data,
-      ...data,
-    });
+  get source() {
+    return this.detail.source;
   }
+
+  clone = (detail: SortableSortEventDetail) =>
+    new SortableSortEvent({ ...this.detail, ...detail });
 
   static type = 'sortable:sort';
   static cancelable = true;
 }
 
-export class SortableSortedEvent extends SortableEvent {
-  declare data: SortableEventData & {
-    dragEvent: DragOutEvent;
-    over: HTMLElement;
-  };
+export type SortableSortedEventDetail = SortableEventDetail & {
+  dragEvent: DragOverContainerEvent;
+  oldContainer: HTMLElement;
+  newContainer: HTMLElement;
+  oldIndex: number;
+  newIndex: number;
+};
+
+export class SortableSortedEvent extends SortableEvent<SortableSortedEventDetail> {
+  constructor(detail: SortableSortedEventDetail) {
+    super({ detail }, SortableSortedEvent.type);
+  }
 
   get dragEvent() {
-    return this.data.dragEvent;
+    return this.detail.dragEvent;
   }
 
   get oldIndex() {
-    return this.data.oldIndex;
+    return this.detail.oldIndex;
   }
 
   get newIndex() {
-    return this.data.newIndex;
+    return this.detail.newIndex;
   }
 
   get oldContainer() {
-    return this.data.oldContainer;
+    return this.detail.oldContainer;
   }
 
   get newContainer() {
-    return this.data.newContainer;
+    return this.detail.newContainer;
   }
 
-  clone(data) {
-    return new SortableSortedEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  clone = (detail: SortableSortedEventDetail) =>
+    new SortableSortedEvent({ ...this.detail, ...detail });
 
   static type = 'sortable:sorted';
 }
 
+export type SortableStopEventDetail = SortableEventDetail & {
+  oldIndex: number;
+  newIndex: number;
+  oldContainer: HTMLElement;
+  newContainer: HTMLElement;
+};
+
 export class SortableStopEvent extends SortableEvent {
+  constructor(detail: SortableStopEventDetail) {
+    super({ detail }, SortableStopEvent.type);
+  }
+
   get oldIndex() {
-    return this.data.oldIndex;
+    return this.detail.oldIndex;
   }
 
   get newIndex() {
-    return this.data.newIndex;
+    return this.detail.newIndex;
   }
 
   get oldContainer() {
-    return this.data.oldContainer;
+    return this.detail.oldContainer;
   }
 
   get newContainer() {
-    return this.data.newContainer;
+    return this.detail.newContainer;
   }
 
-  clone(data) {
-    return new SortableStopEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  clone = (detail: SortableStopEventDetail) =>
+    new SortableStopEvent({ ...this.detail, ...detail });
 
   static type = 'sortable:stop';
 }

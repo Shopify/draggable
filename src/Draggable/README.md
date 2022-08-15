@@ -53,7 +53,7 @@ also supports method chaining.
 **`draggable.off(eventName: String, listener: Function): Draggable`**  
 You can unregister listeners by using `.off()`, make sure to provide the same callback.
 
-**`draggable.trigger(event: AbstractEvent): void`**  
+**`draggable.trigger(event: CustomEvent): void`**  
 You can trigger events through draggable. This is used to fire events internally or by
 extensions of Draggable.
 
@@ -87,7 +87,7 @@ Returns true or false, depending on this draggables dragging state.
 **`draggable.getDraggableElementsForContainer(container: HTMLElement): HTMLElement[]`**  
 Returns draggable elements for given container, excluding potential mirror or original so
 urce.
-**`draggable.cancel(): void`**  
+**`draggable.preventDefault(): void`**  
 Cancel current dragging state immediately
 _NOTE_: Can't revert elements that were changed to the beginning state (e.g sorted elements)
 

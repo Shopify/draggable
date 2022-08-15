@@ -3,7 +3,6 @@ import {
   SortAnimationOptions,
   ResizeMirrorOptions,
 } from '../Plugins';
-import AbstractEvent from '../shared/AbstractEvent';
 import AbstractPlugin from '../shared/AbstractPlugin';
 import { closest } from '../shared/utils';
 import {
@@ -99,7 +98,7 @@ export interface DraggableOptions {
   plugins?: typeof AbstractPlugin[];
   sensors?: typeof Sensor[];
   classes?: { [key in keyof typeof defaultClasses]?: string | string[] };
-  announcements?: Record<string, (event: AbstractEvent) => unknown>;
+  announcements?: Record<string, (event: CustomEvent) => unknown>;
   collidables?: string | Element[] | (() => Element[]);
   mirror?: MirrorOptions;
   scrollable?: ScrollableOptions;
@@ -289,7 +288,7 @@ export default class Draggable {
     return this;
   }
 
-  trigger(event: AbstractEvent) {
+  trigger(event: CustomEvent) {
     this.emitter.trigger(event);
     return this;
   }
@@ -342,7 +341,7 @@ export default class Draggable {
       target &&
       !closest(target, this.options.handle)
     ) {
-      sensorEvent.cancel();
+      sensorEvent.preventDefault();
       return;
     }
 
@@ -376,9 +375,9 @@ export default class Draggable {
 
     this.trigger(dragStartEvent);
 
-    this.dragging = !dragStartEvent.canceled();
+    this.dragging = !dragStartEvent.defaultPrevented;
 
-    if (dragStartEvent.canceled()) {
+    if (dragStartEvent.defaultPrevented) {
       this.source.remove();
       this.originalSource.style.display = null;
       return;
@@ -422,7 +421,7 @@ export default class Draggable {
 
     this.trigger(dragMoveEvent);
 
-    if (dragMoveEvent.canceled()) sensorEvent.cancel();
+    if (dragMoveEvent.defaultPrevented) sensorEvent.preventDefault();
 
     target = closest(target, this.options.draggable);
     const withinCorrectContainer = closest(sensorEvent.target, this.containers);
@@ -523,7 +522,7 @@ export default class Draggable {
 
     this.trigger(dragStopEvent);
 
-    if (!dragStopEvent.canceled())
+    if (!dragStopEvent.defaultPrevented)
       this.source.parentNode.insertBefore(this.originalSource, this.source);
 
     this.source.remove();
@@ -580,7 +579,7 @@ export default class Draggable {
     const dragStoppedEvent = new DragStoppedEvent({
       source: this.source,
       originalSource: this.originalSource,
-      originalEvent: event.originalEvent,
+      originalEvent: event?.originalEvent,
       sensorEvent: event ? event.sensorEvent : null,
       sourceContainer: this.sourceContainer,
     });

@@ -7,6 +7,7 @@ specifiers:
   '@testing-library/dom': ^8.17.1
   '@testing-library/jest-dom': ^5.16.5
   '@types/jest': ^28.1.6
+  '@types/testing-library__jest-dom': ^5.14.5
   '@typescript-eslint/eslint-plugin': ^5.33.0
   '@typescript-eslint/parser': ^5.33.0
   codecov: ^3.8.2
@@ -34,6 +35,7 @@ devDependencies:
   '@testing-library/dom': 8.17.1
   '@testing-library/jest-dom': 5.16.5
   '@types/jest': 28.1.6
+  '@types/testing-library__jest-dom': 5.14.5
   '@typescript-eslint/eslint-plugin': 5.33.0_njno5y7ry2l2lcmiu4tywxkwnq
   '@typescript-eslint/parser': 5.33.0_qugx7qdu5zevzvxaiqyxfiwquq
   codecov: 3.8.3

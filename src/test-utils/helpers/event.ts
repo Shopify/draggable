@@ -1,7 +1,7 @@
 import { fireEvent } from '@testing-library/dom';
 import { withElementFromPoint } from './environment';
 
-export function triggerEvent(element, type, data = {}) {
+export function triggerEvent(element: HTMLElement, type: string, data = {}) {
   const event = new CustomEvent(type, {
     bubbles: true,
     cancelable: true,

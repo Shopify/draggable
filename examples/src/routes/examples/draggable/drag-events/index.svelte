@@ -66,7 +66,7 @@
 			});
 
 			const abortDragOnESC = (evt: KeyboardEvent) => {
-				if (evt.key === 'Escape') draggable.preventDefault();
+				if (evt.key === 'Escape') draggable.cancel();
 			};
 		}
 	});

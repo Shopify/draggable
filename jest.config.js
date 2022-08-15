@@ -1,6 +1,6 @@
 module.exports = {
   verbose: true,
-  testEnvironment: 'jsdom',
+  testEnvironment: 'jest-environment-jsdom',
   setupFilesAfterEnv: [
     '<rootDir>/src/test-utils/setup.ts',
     '<rootDir>/src/test-utils/environment.ts',

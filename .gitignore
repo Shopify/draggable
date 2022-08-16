@@ -20,7 +20,7 @@ example.html
 
 coverage/
 docs/
-lib/
+dist/
 coverage/
 
 # 'cause we are all yarny and stuff

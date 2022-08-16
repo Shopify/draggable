@@ -51,7 +51,7 @@ export class DragEvent<
     return this.detail.overContainer;
   }
 
-  clone = (detail?: T) =>
+  clone = (detail?: Partial<T>) =>
     new DragEvent(
       { cancelable: this.cancelable, detail: { ...this.detail, ...detail } },
       this.type

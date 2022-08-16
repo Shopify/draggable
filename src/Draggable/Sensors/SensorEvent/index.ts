@@ -48,7 +48,7 @@ export class SensorEvent<
     return this.detail.pressure;
   }
 
-  clone = (detail: SensorEventDetail) =>
+  clone = (detail: Partial<T>) =>
     new SensorEvent(
       { detail: { ...this.detail, ...detail } },
       SensorEvent.type
@@ -65,7 +65,7 @@ export class DragStartSensorEvent extends SensorEvent {
     );
   }
 
-  clone = (detail: SensorEventDetail) =>
+  clone = (detail: Partial<SensorEventDetail>) =>
     new DragStartSensorEvent({
       ...this.detail,
       ...detail,
@@ -80,7 +80,7 @@ export class DragMoveSensorEvent extends SensorEvent {
     super({ detail }, DragMoveSensorEvent.type);
   }
 
-  clone = (detail: SensorEventDetail) =>
+  clone = (detail: Partial<SensorEventDetail>) =>
     new DragMoveSensorEvent({
       ...this.detail,
       ...detail,
@@ -94,7 +94,7 @@ export class DragStopSensorEvent extends SensorEvent {
     super({ detail }, DragStopSensorEvent.type);
   }
 
-  clone = (detail: SensorEventDetail) =>
+  clone = (detail: Partial<SensorEventDetail>) =>
     new DragStopSensorEvent({
       ...this.detail,
       ...detail,
@@ -108,7 +108,7 @@ export class DragPressureSensorEvent extends SensorEvent {
     super({ detail }, DragPressureSensorEvent.type);
   }
 
-  clone = (detail: SensorEventDetail) =>
+  clone = (detail: Partial<SensorEventDetail>) =>
     new DragPressureSensorEvent({
       ...this.detail,
       ...detail,

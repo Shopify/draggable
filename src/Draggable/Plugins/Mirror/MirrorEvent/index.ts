@@ -43,7 +43,7 @@ export class MirrorEvent<T extends MirrorEventDetail> extends CustomEvent<T> {
     return this.sensorEvent ? this.sensorEvent.originalEvent : null;
   }
 
-  clone = (detail: T) =>
+  clone = (detail: Partial<T>) =>
     new MirrorEvent(
       { cancelable: this.cancelable, detail: { ...this.detail, ...detail } },
       this.type

@@ -17,18 +17,18 @@ export class DraggableEvent extends CustomEvent<DraggableEventDetail> {
     return this.detail.draggable;
   }
 
-  clone(detail: DraggableEventDetail) {
-    return new DraggableEvent(
-      { detail: { ...this.detail, ...detail } },
-      this.type
-    );
+  get source() {
+    return this.detail.source;
   }
+
+  clone = (detail: Partial<DraggableEventDetail>) =>
+    new DraggableEvent({ detail: { ...this.detail, ...detail } }, this.type);
 
   static type = 'draggable';
 }
 
 export class DraggableInitializedEvent extends DraggableEvent {
-  static type = 'draggable:initialize';
+  static type = 'draggable:initialized';
 
   constructor(detail: DraggableEventDetail) {
     super({ detail }, DraggableInitializedEvent.type);

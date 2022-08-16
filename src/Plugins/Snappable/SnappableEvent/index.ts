@@ -23,7 +23,7 @@ export class SnapEvent<
     return this.detail.snappable;
   }
 
-  clone = (detail: SnappableEventDetail) =>
+  clone = (detail: Partial<SnappableEventDetail>) =>
     new SnapEvent({ detail: { ...this.detail, ...detail } }, SnapEvent.type);
 
   static type = 'snap';
@@ -34,7 +34,7 @@ export class SnapInEvent extends SnapEvent {
     super({ detail, cancelable: SnapInEvent.cancelable }, SnapInEvent.type);
   }
 
-  clone = (detail: SnappableEventDetail) =>
+  clone = (detail: Partial<SnappableEventDetail>) =>
     new SnapInEvent({ ...this.detail, ...detail });
 
   static type = 'snap:in';
@@ -46,7 +46,7 @@ export class SnapOutEvent extends SnapEvent {
     super({ detail, cancelable: SnapOutEvent.cancelable }, SnapOutEvent.type);
   }
 
-  clone = (detail: SnappableEventDetail) =>
+  clone = (detail: Partial<SnappableEventDetail>) =>
     new SnapOutEvent({ ...this.detail, ...detail });
 
   static type = 'snap:out';

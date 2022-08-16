@@ -5,17 +5,19 @@ appreciated and encouraged.
 
 ## Table of contents
 
-1. [Code of Conduct](#code-of-conduct)
-2. [How to contribute](#how-to-contribute)
-   1. [Creating issues](#creating-issues)
-   2. [Opening pull requests](#opening-pull-requests)
-   3. [JS Docblocks](#js-docblocks)
-3. [How to run locally](#how-to-run-locally)
+- [Contributing to Draggable](#contributing-to-draggable)
+  - [Table of contents](#table-of-contents)
+  - [Code of Conduct](#code-of-conduct)
+  - [How to contribute](#how-to-contribute)
+    - [Creating issues](#creating-issues)
+    - [Opening pull requests](#opening-pull-requests)
+    - [JS Docblocks](#js-docblocks)
+  - [How to run locally](#how-to-run-locally)
 
 ## Code of Conduct
 
 This project and everyone participating in it is governed by the [Code of Conduct document](https://github.com/hnrq/draggable/blob/master/CODE_OF_CONDUCT.md).
-By participating, you are expected to uphold this code. Please report unacceptable behaviour to max.hoffmann@shopify.com or curtis.dulmage@shopify.com.
+By participating, you are expected to uphold this code. Please report unacceptable behaviour to henriquealberone@outlook.com.
 
 ## How to contribute
 

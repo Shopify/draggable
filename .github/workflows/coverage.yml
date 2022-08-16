@@ -1,4 +1,4 @@
-name: Test changes
+name: Coverage
 on:
   push:
     branches:

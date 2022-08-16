@@ -34,12 +34,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - run: pnpm ci
+      - run: pnpm install
         name: Install dependencies
+
+      - run: pnpm build
+        name: Build package
 
       - run: pnpm publish
         name: Publish package
-        with:
-          registry-url: 'https://registry.npmjs.org'
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

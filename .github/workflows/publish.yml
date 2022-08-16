@@ -1,13 +1,10 @@
-name: Test changes
+name: Publish Package to npm
 on:
-  - push
-  - pull_request
-
+  release:
+    types: [created]
 jobs:
-  cache-and-install:
+  build:
     runs-on: ubuntu-latest
-    name: Test
-
     steps:
       - uses: actions/checkout@v3
         name: Checkout
@@ -18,7 +15,7 @@ jobs:
           node-version: 16
 
       - uses: pnpm/action-setup@v2
-        name: Install dependencies
+        name: Setup pnpm
         id: pnpm-install
         with:
           version: 7
@@ -37,8 +34,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - run: pnpm install
+      - run: pnpm ci
         name: Install dependencies
 
-      - run: pnpm test
-        name: Test
+      - run: pnpm publish
+        name: Publish package
+        with:
+          registry-url: 'https://registry.npmjs.org'
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

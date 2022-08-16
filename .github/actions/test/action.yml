@@ -1,0 +1,11 @@
+name: Test
+description: Runs pnpm test
+
+runs:
+  using: composite
+  steps:
+    - uses: ./.github/actions/pnpm-install
+
+    - run: pnpm test
+      shell: bash
+      name: Test

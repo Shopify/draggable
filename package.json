@@ -5,7 +5,7 @@
   "type": "module",
   "license": "MIT",
   "description": "The JavaScript Drag & Drop library your grand-grandparents warned you about.",
-  "author": "Henrique <henriquealberone@outlook.com>",
+  "author": "Henrique Ramos <henriquealberone@outlook.com>",
   "homepage": "https://github.com/hnrq/draggable#readme",
   "repository": "https://github.com/hnrq/draggable",
   "contributors": [

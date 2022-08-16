@@ -1,0 +1,15 @@
+name: Test changes
+on:
+  - pull_request
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout
+
+      - uses: ./.github/actions/test
+        name: Run tests

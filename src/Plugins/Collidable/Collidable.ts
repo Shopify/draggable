@@ -67,9 +67,7 @@ export default class Collidable extends AbstractPlugin {
       this[onRequestAnimationFrame](target)
     );
 
-    if (this.currentlyCollidingElement) {
-      event.preventDefault();
-    }
+    if (this.currentlyCollidingElement) event.preventDefault();
 
     const collidableInEvent = new CollidableInEvent({
       dragEvent: event,

@@ -27,11 +27,11 @@ export class DraggableEvent extends CustomEvent<DraggableEventDetail> {
   static type = 'draggable';
 }
 
-export class DraggableInitializedEvent extends DraggableEvent {
-  static type = 'draggable:initialized';
+export class DraggableInitializeEvent extends DraggableEvent {
+  static type = 'draggable:initialize';
 
   constructor(detail: DraggableEventDetail) {
-    super({ detail }, DraggableInitializedEvent.type);
+    super({ detail }, DraggableInitializeEvent.type);
   }
 }
 

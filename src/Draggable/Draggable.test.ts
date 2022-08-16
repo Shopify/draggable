@@ -16,7 +16,7 @@ import {
   DragStoppedEvent,
 } from './DragEvent';
 import {
-  DraggableInitializedEvent,
+  DraggableInitializeEvent,
   DraggableDestroyEvent,
   DraggableEvent,
 } from './DraggableEvent';
@@ -168,13 +168,13 @@ describe('Draggable', () => {
       });
     });
 
-    it('triggers DraggableInitializedEvent on init', () => {
+    it('triggers DraggableInitializeEvent on init', () => {
       const spy = jest.spyOn(Draggable.prototype, 'trigger');
       const newInstance = new Draggable();
 
       expect(spy.mock.calls).toHaveLength(1);
 
-      expect(spy.mock.calls[0][0]).toBeInstanceOf(DraggableInitializedEvent);
+      expect(spy.mock.calls[0][0]).toBeInstanceOf(DraggableInitializeEvent);
 
       expect((<DraggableEvent>spy.mock.calls[0][0]).draggable).toBe(
         newInstance

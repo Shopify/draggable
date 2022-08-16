@@ -14,17 +14,17 @@ The base draggable event for all Draggable events that `Draggable` emits.
 **`draggableEvent.draggable: Draggable`**  
 Read-only property for the current draggable instance
 
-## DraggableInitializedEvent
+## DraggableInitializeEvent
 
-`DraggableInitializedEvent` gets triggered by `Draggable` when initialized.
+`DraggableInitializeEvent` gets triggered by `Draggable` when initialized.
 
-|                   |                             |
-| ----------------- | --------------------------- |
-| **Specification** | `DraggableEvent`            |
-| **Interface**     | `DraggableInitializedEvent` |
-| **Cancelable**    | false                       |
-| **Cancel action** | -                           |
-| **type**          | `draggable:initialized`     |
+|                   |                            |
+| ----------------- | -------------------------- |
+| **Specification** | `DraggableEvent`           |
+| **Interface**     | `DraggableInitializeEvent` |
+| **Cancelable**    | false                      |
+| **Cancel action** | -                          |
+| **type**          | `draggable:initialize`     |
 
 ## DraggableDestroyEvent
 

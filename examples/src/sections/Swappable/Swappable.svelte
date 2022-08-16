@@ -7,7 +7,7 @@
 
 	import './styles/index.scss';
 
-	let swappedNode: HTMLElement | null;
+	let swappedNode: HTMLElement | undefined;
 
 	onMount(async () => {
 		if (browser) {
@@ -30,7 +30,7 @@
 				if (swappedNode) soundEffects.synth.play('downGood');
 				else soundEffects.synth.play('downBad');
 
-				swappedNode = null;
+				swappedNode = undefined;
 			});
 		}
 	});

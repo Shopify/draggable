@@ -38,7 +38,7 @@ Specify a css selector for a handle element if you don't want to allow drag acti
 ### Example
 
 ```js
-import { Draggable, Sensors } from '@shopify/draggable';
+import { Draggable, Sensors } from '@hnrq/draggable';
 
 const draggable = new Draggable(containers, {
   sensors: [Sensors.ForceTouchSensor],

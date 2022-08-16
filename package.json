@@ -48,7 +48,8 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint './src/**.{ts,tsx}' --fix",
     "esdoc": "esdoc -c esdoc.json",
-    "test": "jest",
+    "test": "jest --coverage",
+    "test:watch": "jest --watchAll",
     "examples": "vite preview"
   },
   "devDependencies": {

@@ -8,9 +8,9 @@ so any draggable element that gets dragged over will be swapped with the source 
 - ES6:
 
 ```js
-import { Swappable } from '@shopify/draggable';
+import { Swappable } from '@hnrq/draggable';
 // Or
-// import Swappable from '@shopify/draggable/lib/swappable';
+// import Swappable from '@hnrq/draggable/lib/swappable';
 
 const swappable = new Swappable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -20,7 +20,7 @@ const swappable = new Swappable(document.querySelectorAll('ul'), {
 - Browser (All Bundle):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hnrq/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
 <script>
   const swappable = new Draggable.Swappable(document.querySelectorAll('ul'), {
     draggable: 'li',
@@ -31,7 +31,7 @@ const swappable = new Swappable(document.querySelectorAll('ul'), {
 - Browser (Standalone):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/swappable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hnrq/draggable@1.0.0-beta.13/lib/swappable.js"></script>
 <script>
   const swappable = new Swappable.default(document.querySelectorAll('ul'), {
     draggable: 'li',
@@ -72,7 +72,7 @@ Check out [Draggables class identifiers](../Draggable#classes)
 This sample code will make list items draggable and allows you to swap them with other draggable elements:
 
 ```js
-import { Swappable } from '@shopify/draggable';
+import { Swappable } from '@hnrq/draggable';
 
 const swappable = new Swappable(document.querySelectorAll('ul'), {
   draggable: 'li',

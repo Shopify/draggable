@@ -36,7 +36,7 @@ a mirror. This means there is less control over the mirror.
 ### Example
 
 ```js
-import { Draggable, Sensors } from '@shopify/draggable';
+import { Draggable, Sensors } from '@hnrq/draggable';
 
 const draggable = new Draggable(containers, {
   sensors: [Sensors.DragSensor],

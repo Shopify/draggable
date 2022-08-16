@@ -1,6 +1,8 @@
 name: Test changes
 on:
-  - pull_request
+  push:
+    branches:
+      - 'main'
 
 jobs:
   cache-and-install:
@@ -41,3 +43,5 @@ jobs:
 
       - run: pnpm test
         name: Test
+
+      - uses: codecov/codecov-action@v3

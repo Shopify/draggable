@@ -5,9 +5,9 @@
 - ES6:
 
 ```js
-import { Draggable } from '@shopify/draggable';
+import { Draggable } from '@hnrq/draggable';
 // Or
-// import Draggable from '@shopify/draggable/lib/draggable';
+// import Draggable from '@hnrq/draggable/lib/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -17,7 +17,7 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 - Browser (All Bundle):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hnrq/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
 <script>
   const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
     draggable: 'li',
@@ -28,7 +28,7 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 - Browser (Standalone):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hnrq/draggable@1.0.0-beta.13/lib/draggable.js"></script>
 <script>
   const draggable = new Draggable.default(document.querySelectorAll('ul'), {
     draggable: 'li',
@@ -187,7 +187,7 @@ Allow excluding default plugins and default sensors. Use with caution as it may 
 This sample code will make list items draggable:
 
 ```js
-import { Draggable } from '@shopify/draggable';
+import { Draggable } from '@hnrq/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -201,7 +201,7 @@ draggable.on('drag:stop', () => console.log('drag:stop'));
 Create draggable which excluded some default plugins and sensor:
 
 ```js
-import { Draggable } from '@shopify/draggable';
+import { Draggable } from '@hnrq/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -215,7 +215,7 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 Create draggable with specific classes:
 
 ```js
-import { Draggable } from '@shopify/draggable';
+import { Draggable } from '@hnrq/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -228,7 +228,7 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 Cancel dragging on ESC key up:
 
 ```js
-import { Draggable } from '@shopify/draggable';
+import { Draggable } from '@hnrq/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',

@@ -61,7 +61,7 @@ Defining this sets a threshold that must be exceeded by the mouse for the mirror
 #### y Axis only
 
 ```js
-import { Draggable } from '@shopify/draggable';
+import { Draggable } from '@hnrq/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -77,7 +77,7 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 #### x Axis only
 
 ```js
-import { Sortable } from '@shopify/draggable';
+import { Sortable } from '@hnrq/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -93,7 +93,7 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 #### Appending mirror
 
 ```js
-import { Sortable } from '@shopify/draggable';
+import { Sortable } from '@hnrq/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',

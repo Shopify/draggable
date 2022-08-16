@@ -10,9 +10,9 @@ so they may returned if the drag is canceled or returned.
 - ES6:
 
 ```js
-import { Droppable } from '@shopify/draggable';
+import { Droppable } from '@hnrq/draggable';
 // Or
-// import Droppable from '@shopify/draggable/lib/droppable';
+// import Droppable from '@hnrq/draggable/lib/droppable';
 
 const droppable = new Droppable(document.querySelectorAll('.container'), {
   draggable: '.item',
@@ -23,7 +23,7 @@ const droppable = new Droppable(document.querySelectorAll('.container'), {
 - Browser (All Bundle):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hnrq/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
 <script>
   const droppable = new Draggable.Droppable(
     document.querySelectorAll('.container'),
@@ -38,7 +38,7 @@ const droppable = new Droppable(document.querySelectorAll('.container'), {
 - Browser (Standalone):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/droppable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hnrq/draggable@1.0.0-beta.13/lib/droppable.js"></script>
 <script>
   const droppable = new Droppable.default(
     document.querySelectorAll('.container'),
@@ -123,7 +123,7 @@ This sample HTML and JavaScript will make `.item` elements draggable and droppab
 ```
 
 ```js
-import { Droppable } from '@shopify/draggable';
+import { Droppable } from '@hnrq/draggable';
 
 const droppable = new Droppable(document.querySelectorAll('.container'), {
   draggable: '.item',

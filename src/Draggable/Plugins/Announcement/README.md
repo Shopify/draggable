@@ -35,7 +35,7 @@ _And any other events you can think of..._
 #### Static messages
 
 ```js
-import { Sortable } from '@shopify/draggable';
+import { Sortable } from '@hnrq/draggable';
 
 const announcements = {
   'drag:start': 'Draggable element picked up',
@@ -52,7 +52,7 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 #### Dynamic messages
 
 ```js
-import { Sortable } from '@shopify/draggable';
+import { Sortable } from '@hnrq/draggable';
 
 const announcements = {
   'drag:start': (dragEvent) => {

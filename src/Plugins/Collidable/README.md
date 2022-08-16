@@ -10,10 +10,10 @@ This plugin is not included by default, so make sure to import it before using.
 - ES6:
 
 ```js
-import { Draggable, Plugins } from '@shopify/draggable';
+import { Draggable, Plugins } from '@hnrq/draggable';
 // Or
-// import Draggable from '@shopify/draggable/lib/draggable';
-// import Collidable from '@shopify/draggable/lib/plugins/collidable';
+// import Draggable from '@hnrq/draggable/lib/draggable';
+// import Collidable from '@hnrq/draggable/lib/plugins/collidable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -25,7 +25,7 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 - Browser (All bundle):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hnrq/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
 <script>
   const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
     draggable: 'li',
@@ -38,8 +38,8 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 - Browser (Standalone):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/plugins/collidable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hnrq/draggable@1.0.0-beta.13/lib/draggable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hnrq/draggable@1.0.0-beta.13/lib/plugins/collidable.js"></script>
 <script>
   const draggable = new Draggable.default(document.querySelectorAll('ul'), {
     draggable: 'li',
@@ -67,7 +67,7 @@ A css selector string, an array of elements, a NodeList, a HTMLElement or a func
 ### Example
 
 ```js
-import { Sortable, Plugins } from '@shopify/draggable';
+import { Sortable, Plugins } from '@hnrq/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',

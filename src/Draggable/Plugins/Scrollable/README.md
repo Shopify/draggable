@@ -23,7 +23,7 @@ Allows users to specify their own scrollable elements, rather than letting Dragg
 ### Examples
 
 ```js
-import { Draggable } from '@shopify/draggable';
+import { Draggable } from '@hnrq/draggable';
 
 const customScrollableElements = document.querySelectorAll(
   '.my-custom-scroll-elements'
@@ -42,7 +42,7 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 #### Removing the plugin
 
 ```js
-import { Draggable } from '@shopify/draggable';
+import { Draggable } from '@hnrq/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',

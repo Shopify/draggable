@@ -10,9 +10,9 @@ Make sure to nest draggable elements as immediate children elements to their cor
 - ES6:
 
 ```js
-import { Sortable } from '@shopify/draggable';
+import { Sortable } from '@hnrq/draggable';
 // Or
-// import Sortable from '@shopify/draggable/lib/sortable';
+// import Sortable from '@hnrq/draggable/lib/sortable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -22,7 +22,7 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 - Browser (All Bundle):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hnrq/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
 <script>
   const sortable = new Draggable.Sortable(document.querySelectorAll('ul'), {
     draggable: 'li',
@@ -33,7 +33,7 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 - Browser (Standalone):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/sortable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@hnrq/draggable@1.0.0-beta.13/lib/sortable.js"></script>
 <script>
   const sortable = new Sortable.default(document.querySelectorAll('ul'), {
     draggable: 'li',
@@ -74,7 +74,7 @@ Check out [Draggables class identifiers](../Draggable#classes)
 This sample code will make list items sortable:
 
 ```js
-import { Sortable } from '@shopify/draggable';
+import { Sortable } from '@hnrq/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',

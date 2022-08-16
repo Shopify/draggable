@@ -60,6 +60,14 @@ $section-padding-x-mobile: 1.3rem; // (320px - 294px) / 2
 	}
 }
 
+:global(.section + .section) {
+	border-top: map-get(theme.$borders, 'section-base');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		border-top: map-get(theme.$borders, 'section-tablet');
+	}
+}
+
 :global(.section) {
 	// using custom spacing rather than `get-spacing(tighter)`
 	// to be equal to the mobile width of a puzzle
@@ -69,14 +77,6 @@ $section-padding-x-mobile: 1.3rem; // (320px - 294px) / 2
 	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
 		padding-left: map-get(theme.$spacings, 'base');
 		padding-right: map-get(theme.$spacings, 'base');
-	}
-
-	:global(& + &) {
-		border-top: map-get(theme.$borders, 'section-base');
-
-		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
-			border-top: map-get(theme.$borders, 'section-tablet');
-		}
 	}
 
 	:global(.section__interior--margin) {

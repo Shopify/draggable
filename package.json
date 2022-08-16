@@ -1,6 +1,6 @@
 {
   "name": "draggable",
-  "version": "1.0.0-beta.14",
+  "version": "0.0.1",
   "private": false,
   "license": "MIT",
   "description": "The JavaScript Drag & Drop library your grand-grandparents warned you about.",

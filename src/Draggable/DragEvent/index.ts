@@ -92,10 +92,11 @@ export class DragStartEvent extends DragEvent<DragStartEventDetail> {
 
 export class DragMoveEvent extends DragEvent<DragEventDetail> {
   constructor(detail: DragEventDetail) {
-    super({ detail }, DragMoveEvent.type);
+    super({ detail, cancelable: DragMoveEvent.cancelable }, DragMoveEvent.type);
   }
 
   static type = 'drag:move';
+  static cancelable = true;
 }
 
 export type DragOverEventDetail = DragEventDetail & {

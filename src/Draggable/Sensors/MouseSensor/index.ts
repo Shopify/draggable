@@ -93,7 +93,7 @@ export default class MouseSensor extends Sensor {
 
     this.trigger(this.currentContainer, dragStartEvent);
 
-    this.dragging = !dragStartEvent.canceled();
+    this.dragging = !dragStartEvent.defaultPrevented;
 
     if (this.dragging) {
       document.addEventListener(

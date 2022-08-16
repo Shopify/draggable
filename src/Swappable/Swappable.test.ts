@@ -96,7 +96,7 @@ describe('Swappable', () => {
 
   it('prevents drag when canceling sortable start event', () => {
     swappable.on('swappable:start', (swappableEvent) => {
-      swappableEvent.cancel();
+      swappableEvent.preventDefault();
     });
 
     clickMouse(firstItem);
@@ -274,7 +274,7 @@ describe('Swappable', () => {
 
   it('prevents sorting when sortable:sort event gets canceled', () => {
     swappable.on('swappable:swap', (swappableEvent) => {
-      swappableEvent.cancel();
+      swappableEvent.preventDefault();
     });
 
     clickMouse(firstItem);

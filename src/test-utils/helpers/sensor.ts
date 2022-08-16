@@ -10,89 +10,74 @@ export function waitForDragDelay({
   restoreDateMock = true,
 } = {}) {
   const next = Date.now() + dragDelay + 1;
-  const dateMock = jest.spyOn(Date, 'now').mockImplementation(() => {
-    return next;
-  });
+  const dateMock = jest.spyOn(Date, 'now').mockReturnValue(next);
   jest.advanceTimersByTime(dragDelay + 1);
-  if (restoreDateMock) {
-    dateMock.mockRestore();
-  }
+  if (restoreDateMock) dateMock.mockRestore();
+
   return dateMock;
 }
 
-export function clickMouse(element, options = {}) {
-  return triggerEvent(element, 'mousedown', {
+export const clickMouse = (element, options = {}) =>
+  triggerEvent(element, 'mousedown', {
     ...defaultMouseEventOptions,
     ...options,
   });
-}
 
-export function moveMouse(element, options = {}) {
-  return triggerEvent(element, 'mousemove', {
+export const moveMouse = (element, options = {}) =>
+  triggerEvent(element, 'mousemove', {
     ...defaultMouseEventOptions,
     ...options,
   });
-}
 
-export function releaseMouse(element, options = {}) {
-  return triggerEvent(element, 'mouseup', {
+export const releaseMouse = (element, options = {}) =>
+  triggerEvent(element, 'mouseup', {
     ...defaultMouseEventOptions,
     ...options,
   });
-}
 
-export function touchStart(element, options?) {
-  return triggerEvent(element, 'touchstart', {
+export const touchStart = (element, options?) =>
+  triggerEvent(element, 'touchstart', {
     ...defaultTouchEventOptions,
     ...options,
   });
-}
 
-export function touchMove(element, options?) {
-  return triggerEvent(element, 'touchmove', {
+export const touchMove = (element, options?) =>
+  triggerEvent(element, 'touchmove', {
     ...defaultTouchEventOptions,
     ...options,
   });
-}
 
-export function touchRelease(element, options?) {
-  return triggerEvent(element, 'touchend', {
+export const touchRelease = (element, options?) =>
+  triggerEvent(element, 'touchend', {
     ...defaultTouchEventOptions,
     ...options,
   });
-}
 
-export function dragStart(element, options?) {
-  return triggerEvent(element, 'dragstart', {
+export const dragStart = (element, options?) =>
+  triggerEvent(element, 'dragstart', {
     dataTransfer: getDataTransferStub(),
     ...options,
   });
-}
 
-export function dragOver(element, options?) {
-  return triggerEvent(element, 'dragover', {
+export const dragOver = (element, options?) =>
+  triggerEvent(element, 'dragover', {
     dataTransfer: getDataTransferStub(),
     ...options,
   });
-}
 
-export function dragDrop(element, options?) {
-  return triggerEvent(element, 'drop', {
+export const dragDrop = (element, options?) =>
+  triggerEvent(element, 'drop', {
     dataTransfer: getDataTransferStub(),
     ...options,
   });
-}
 
-export function dragStop(element, options?) {
-  return triggerEvent(element, 'dragend', {
+export const dragStop = (element, options?) =>
+  triggerEvent(element, 'dragend', {
     dataTransfer: getDataTransferStub(),
     ...options,
   });
-}
 
-export function getDataTransferStub() {
-  return {
-    setData: jest.fn(),
-    effectAllowed: null,
-  };
-}
+export const getDataTransferStub = () => ({
+  setData: jest.fn(),
+  effectAllowed: null,
+});

@@ -1,0 +1,51 @@
+@use '@src/styles/theme';
+
+.link {
+	color: map-get(theme.$colors, 'purple-light');
+	transition: color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
+
+	&:focus,
+	&:hover {
+		color: map-get(theme.$colors, 'purple-base');
+	}
+
+	&:active {
+		color: map-get(theme.$colors, 'purple-dark');
+	}
+
+	&--dark {
+		color: map-get(theme.$colors, 'purple-base');
+
+		&:focus,
+		&:hover {
+			color: map-get(theme.$colors, 'brand-yellow');
+		}
+
+		&:active {
+			color: map-get(theme.$colors, 'brand-orange');
+		}
+	}
+
+	&--underlined {
+		display: inline-block;
+		font-size: 1.6rem;
+		font-weight: 700;
+		color: map-get(theme.$colors, 'coal-dark');
+		text-decoration: underline;
+		text-decoration-line: underline;
+		text-decoration-skip: ink;
+
+		&:focus,
+		&:hover {
+			color: map-get(theme.$colors, 'brand-blue');
+		}
+
+		&:active {
+			color: darken(map-get(theme.$colors, 'brand-blue'), 10%);
+		}
+	}
+
+	&--no-wrap {
+		white-space: nowrap;
+	}
+}

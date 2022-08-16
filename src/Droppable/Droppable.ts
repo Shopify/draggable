@@ -85,7 +85,10 @@ export default class Droppable extends Draggable {
   lastDropzone: HTMLElement = null;
   initialDropzone: HTMLElement = null;
 
-  constructor(containers: HTMLElement[] = [], options: Partial<DroppableOptions> = {}) {
+  constructor(
+    containers: NodeList | HTMLElement[] | HTMLElement = [document.body],
+    options: Partial<DroppableOptions> = {}
+  ) {
     super(containers, {
       ...defaultOptions,
       ...options,
@@ -113,13 +116,13 @@ export default class Droppable extends Draggable {
   }
 
   private [onDragStart] = (event: DragStartEvent) => {
-    if (event.canceled()) return;
+    if (event.defaultPrevented) return;
 
     this.dropzones = [...this[getDropzones]()];
     const dropzone = closest(event.sensorEvent.target, this.options.dropzone);
 
     if (!dropzone) {
-      event.cancel();
+      event.preventDefault();
       return;
     }
 
@@ -130,8 +133,8 @@ export default class Droppable extends Draggable {
 
     this.trigger(droppableStartEvent);
 
-    if (droppableStartEvent.canceled()) {
-      event.cancel();
+    if (droppableStartEvent.defaultPrevented) {
+      event.preventDefault();
       return;
     }
 
@@ -139,21 +142,19 @@ export default class Droppable extends Draggable {
 
     for (const dropzoneElement of this.dropzones) {
       if (
-        dropzoneElement.classList.contains(
+        !dropzoneElement.classList.contains(
           this.getClassNameFor('droppable:occupied')
         )
       ) {
-        continue;
+        dropzoneElement.classList.add(
+          ...this.getClassNamesFor('droppable:active')
+        );
       }
-
-      dropzoneElement.classList.add(
-        ...this.getClassNamesFor('droppable:active')
-      );
     }
   };
 
   private [onDragMove] = (event: DragMoveEvent) => {
-    if (event.canceled()) return;
+    if (event.defaultPrevented) return;
 
     const dropzone = this[closestDropzone](event.sensorEvent.target);
     const overEmptyDropzone =
@@ -205,7 +206,7 @@ export default class Droppable extends Draggable {
 
     this.trigger(droppableDroppedEvent);
 
-    if (droppableDroppedEvent.canceled()) return false;
+    if (droppableDroppedEvent.defaultPrevented) return false;
 
     const occupiedClasses = this.getClassNamesFor('droppable:occupied');
 
@@ -229,7 +230,7 @@ export default class Droppable extends Draggable {
 
     this.trigger(droppableReturnedEvent);
 
-    if (droppableReturnedEvent.canceled()) return;
+    if (droppableReturnedEvent.defaultPrevented) return;
 
     this.initialDropzone.appendChild(event.source);
     this.lastDropzone.classList.remove(
@@ -244,7 +245,7 @@ export default class Droppable extends Draggable {
     const dropzone = this.options.dropzone;
 
     if (typeof dropzone === 'string')
-      return <HTMLElement[]>(<unknown>document.querySelectorAll(dropzone));
+      return <HTMLElement[]>[...document.querySelectorAll(dropzone)];
     else if (dropzone instanceof Array) return dropzone;
     else if (typeof dropzone === 'function') return [dropzone()];
     else return [dropzone];

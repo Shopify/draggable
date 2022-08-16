@@ -1,0 +1,65 @@
+@use '@src/styles/theme';
+
+$paper-stack-block-name: unquote('paper-stack-item');
+$paper-stack-item-count: 4;
+
+$paper-stack-heading-weight: 700;
+$paper-stack-heading-leading: 1;
+$paper-stack-heading-margin: 0.5em;
+
+$paper-stack-item-spacing: (
+	base: map-get(theme.$spacings, 'base'),
+	tablet: map-get(theme.$spacings, 'loose')
+);
+
+$paper-stack-heading-size: (
+	base: 7.2rem,
+	tablet: 12rem
+);
+
+$paper-stack-item-height: (
+	base: 38rem,
+	tablet: 58rem
+);
+
+$paper-stack-item-width: (
+	base: 24rem,
+	tablet: 42rem
+);
+
+$paper-stack-item-transform: (
+	base: perspective(90rem) rotateX(60deg),
+	mirror: perspective(90rem) rotateX(58deg) scale(1.025)
+);
+
+$paper-stack-shadow-bottom: (
+	base: calc(map-get($paper-stack-item-spacing, 'base') / 2),
+	tablet: calc(map-get($paper-stack-item-spacing, 'tablet') / 1.5)
+);
+
+$paper-stack-shadow-height: (
+	base: map-get($paper-stack-item-spacing, 'base'),
+	tablet: map-get($paper-stack-item-spacing, 'tablet')
+);
+
+$paper-stack-shadow-offset: (
+	base: 0.8rem
+);
+
+@mixin paper-stack-item-offset($breakpoint: 'base') {
+	$adjusted-top-offset: -#{calc(
+			(map-get($paper-stack-item-width, $breakpoint) / $paper-stack-item-count) +
+				(map-get($paper-stack-item-spacing, $breakpoint) / 2)
+		)};
+
+	@for $i from 1 through $paper-stack-item-count {
+		&:nth-child(#{$i}),
+		&.draggable--original ~ .paper-stack__item:nth-child(#{$i + 1}) {
+			top: $adjusted-top-offset;
+		}
+
+		$adjusted-top-offset: calc(
+			$adjusted-top-offset + map-get($paper-stack-item-spacing, $breakpoint)
+		);
+	}
+}

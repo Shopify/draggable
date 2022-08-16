@@ -1,0 +1,118 @@
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
+
+.button {
+	display: inline-block;
+	padding: map-get(theme.$spacings, 'tightest');
+	font-size: map-get(theme.$type-scales, 'button-base');
+	font-weight: map-get(theme.$type-scales, 'button-weight');
+	text-align: center;
+	white-space: nowrap;
+	color: map-get(theme.$colors, 'coal-dark');
+	background-color: white;
+	border: 0.4rem solid map-get(theme.$colors, 'coal-dark');
+	transition: color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base'),
+		background-color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base'),
+		border-color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		font-size: map-get(theme.$type-scales, 'button-tablet');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		padding-right: map-get(theme.$spacings, 'tighter');
+		padding-left: map-get(theme.$spacings, 'tighter');
+	}
+
+	&:focus,
+	&:hover {
+		color: map-get(theme.$colors, 'brand-blue');
+		border-color: map-get(theme.$colors, 'brand-blue');
+	}
+
+	&:hover {
+		cursor: map-get(theme.$cursors, 'pointer-base');
+	}
+
+	&:focus {
+		cursor: map-get(theme.$cursors, 'pointer-active');
+	}
+
+	&:active {
+		color: darken(map-get(theme.$colors, 'brand-blue'), 10%);
+		border-color: map-get(theme.$colors, 'brand-blue');
+	}
+
+	&:disabled {
+		pointer-events: none;
+		color: map-get(theme.$colors, 'ash');
+		border-color: map-get(theme.$colors, 'ash');
+	}
+
+	&--active {
+		color: white;
+		background-color: map-get(theme.$colors, 'coal-dark');
+
+		&:focus,
+		&:hover {
+			color: white;
+			background-color: map-get(theme.$colors, 'brand-blue');
+			border-color: map-get(theme.$colors, 'brand-blue');
+		}
+
+		&:active {
+			color: white;
+			background-color: darken(map-get(theme.$colors, 'brand-blue'), 10%);
+			border-color: darken(map-get(theme.$colors, 'brand-blue'), 10%);
+		}
+
+		&:disabled {
+			pointer-events: none;
+			color: white;
+			background-color: map-get(theme.$colors, 'ash');
+			border-color: map-get(theme.$colors, 'ash');
+		}
+	}
+
+	&__interior {
+		transition-duration: map-get(theme.$durations, 'base');
+		font-size: 1.4rem;
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			font-size: 1.8rem;
+		}
+	}
+
+	&--cosmic {
+		background-color: map-get(theme.$colors, 'base');
+		border-color: map-get(theme.$colors, 'brand-yellow');
+
+		&:hover {
+			border-color: #fff;
+			.button__interior {
+				color: #fff;
+			}
+		}
+
+		&:before {
+			transition-duration: map-get(theme.$durations, 'slower'), map-get(theme.$durations, 'base');
+			transition-delay: map-get(theme.$durations, 'slow'), 0ms;
+			opacity: 0;
+		}
+
+		&:focus:before,
+		&:hover:before {
+			transform: none;
+		}
+
+		&:active .button__interior,
+		&:focus .button__interior,
+		&:hover .button__interior {
+			background-color: transparent;
+		}
+	}
+
+	.button--pill {
+		border-radius: 2.4rem;
+	}
+}

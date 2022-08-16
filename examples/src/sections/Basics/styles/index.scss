@@ -1,0 +1,127 @@
+@use '@src/styles/theme';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/components/puzzle/props' as puzzle;
+@use 'props';
+
+.section.section__basics {
+	padding-top: map-get(theme.$spacings, 'fatter');
+	background-color: map-get(theme.$yellow, 'base');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		padding-top: map-get(theme.$spacings, 'huger');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		padding-top: map-get(theme.$spacings, 'jumbo');
+	}
+
+	::selection {
+		color: map-get(theme.$yellow, 'base');
+	}
+}
+
+.puzzle.puzzle--basics {
+	height: props.$puzzle-height-basics - props.$puzzle-offset-y-basics;
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		width: puzzle.$puzzle-width-720p;
+	}
+
+	.puzzle__interior {
+		height: props.$puzzle-height-basics;
+	}
+
+	.shadow.shadow--basics {
+		width: props.$puzzle-supplement-width-basics;
+	}
+
+	.shadow.shadow--basics-left {
+		left: -#{puzzle.$puzzle-supplement-offset-x-multi};
+	}
+
+	.shadow.shadow--basics-right {
+		right: -#{calc(puzzle.$puzzle-supplement-offset-x-multi / 2)};
+		left: auto;
+	}
+	.shadow--cube {
+		z-index: -1;
+	}
+}
+
+///
+/// Cube layout
+:global(.basics__cube-3),
+:global(.basics__cube-7) {
+	// force hide cube shadow of any element moved into this DOM order
+	// Basics Droppables have no shadow
+	.shadow {
+		opacity: 0;
+	}
+}
+
+// --- Left
+:global(.basics__cube-1) {
+	@include puzzle.cube-layout(0, -8);
+}
+
+:global(.basics__cube-2) {
+	@include puzzle.cube-layout(2, -8);
+}
+
+:global(.basics__cube-3) {
+	// droppable cube
+	@include puzzle.cube-layout(1, -5);
+}
+
+// --- Right
+:global(.basics__cube-4) {
+	@include puzzle.cube-layout(8, -4);
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		@include puzzle.cube-layout(10, -4);
+	}
+}
+
+:global(.basics__cube-5) {
+	@include puzzle.cube-layout(7, -7);
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		@include puzzle.cube-layout(9, -7);
+	}
+}
+
+:global(.basics__cube-6) {
+	@include puzzle.cube-layout(6, -8);
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		@include puzzle.cube-layout(8, -8);
+	}
+}
+
+:global(.basics__cube-7) {
+	// droppable cube
+	@include puzzle.cube-layout(7, -5);
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		@include puzzle.cube-layout(9, -5);
+	}
+}
+
+// --- Middle
+:global(.basics__cube-8),
+:global(.basics__cube-10) {
+	@include puzzle.cube-layout(3, 1);
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		@include puzzle.cube-layout(4, 1);
+	}
+}
+
+:global(.basics__cube-9),
+:global(.basics__cube-11) {
+	@include puzzle.cube-layout(5, 1);
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		@include puzzle.cube-layout(6, 1);
+	}
+}

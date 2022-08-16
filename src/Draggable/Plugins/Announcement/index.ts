@@ -1,5 +1,4 @@
 import Draggable from '../..';
-import AbstractEvent from '../../../shared/AbstractEvent';
 import AbstractPlugin from '../../../shared/AbstractPlugin';
 
 const onInitialize = Symbol('onInitialize');
@@ -61,7 +60,7 @@ export default class Announcement extends AbstractPlugin {
   /*** Plugin options */
   options: AnnouncementOptions;
   /*** Original draggable trigger method. Hack until we have onAll or on('all') */
-  originalTriggerMethod: (event: AbstractEvent) => Draggable;
+  originalTriggerMethod: (event: CustomEvent) => Draggable;
 
   constructor(draggable) {
     super(draggable);
@@ -95,9 +94,9 @@ export default class Announcement extends AbstractPlugin {
   /**
    * Announces event
    * @private
-   * @param {AbstractEvent} event
+   * @param {CustomEvent} event
    */
-  private [announceEvent](event: AbstractEvent) {
+  private [announceEvent](event: CustomEvent) {
     const message = this.options[event.type];
 
     if (message && typeof message === 'string') this[announceMessage](message);
@@ -117,7 +116,7 @@ export default class Announcement extends AbstractPlugin {
   /*** Initialize hander */
   private [onInitialize] = () => {
     // Hack until there is an api for listening for all events
-    this.draggable.trigger = (event: AbstractEvent) => {
+    this.draggable.trigger = (event: CustomEvent) => {
       try {
         this[announceEvent](event);
       } finally {

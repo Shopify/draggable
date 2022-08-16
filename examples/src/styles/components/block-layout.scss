@@ -1,0 +1,79 @@
+@use '@src/styles/utils/shared/functions';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
+
+@use '@src/components/Pattern/styles/props' as pattern;
+
+.block {
+	&-layout {
+		&--float {
+			@include layout.clearfix;
+
+			.block {
+				float: left;
+				width: 100%;
+			}
+		}
+
+		&--flex,
+		&--float {
+			margin-top: -(map-get(theme.$borders, 'thin'));
+			margin-left: -(map-get(theme.$borders, 'thin'));
+
+			> .block__wrapper {
+				margin-top: map-get(theme.$borders, 'thin');
+				margin-left: map-get(theme.$borders, 'thin');
+			}
+
+			> .block {
+				padding-top: map-get(theme.$borders, 'thin');
+				padding-left: map-get(theme.$borders, 'thin');
+			}
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				margin-top: -(map-get(theme.$borders, 'base'));
+				margin-left: -(map-get(theme.$borders, 'base'));
+
+				> .block__wrapper {
+					margin-top: map-get(theme.$borders, 'base');
+					margin-left: map-get(theme.$borders, 'base');
+				}
+
+				> .block {
+					padding-top: map-get(theme.$borders, 'base');
+					padding-left: map-get(theme.$borders, 'base');
+				}
+			}
+		}
+
+		&--flex {
+			display: flex;
+			flex-wrap: wrap;
+		}
+		&--grid {
+			display: grid;
+			gap: map-get(theme.$borders, 'thin');
+		}
+
+		&--positioned {
+			position: relative;
+		}
+	}
+
+	&--stripes {
+		.block__content {
+			&.colliding {
+				color: map-get(theme.$colors, 'brand-red');
+			}
+		}
+	}
+}
+
+.block-layout {
+	.block__wrapper {
+		.block:nth-child(1n + 3):not(.draggable-source--is-dragging) {
+			min-height: 0;
+			height: 0;
+		}
+	}
+}

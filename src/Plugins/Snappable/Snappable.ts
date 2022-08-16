@@ -52,7 +52,7 @@ export default class Snappable extends AbstractPlugin {
   }
 
   private [onDragStart] = (event: DragStartEvent) => {
-    if (event.canceled()) return;
+    if (event.defaultPrevented) return;
     this.firstSource = event.source;
   };
 
@@ -61,7 +61,7 @@ export default class Snappable extends AbstractPlugin {
   };
 
   private [onDragOver] = (event: DragOverEvent | DroppableEvent) => {
-    if (event.canceled()) return;
+    if (event.defaultPrevented) return;
 
     const source =
       (<DragOverEvent>event).source ?? (<DroppableEvent>event).dragEvent.source;
@@ -72,14 +72,14 @@ export default class Snappable extends AbstractPlugin {
     }
 
     const snapInEvent = new SnapInEvent({
-      dragEvent: event,
+      dragEvent: event instanceof DroppableEvent ? event.dragEvent : event,
       snappable:
         (<DragOverEvent>event).over ?? (<DroppableEvent>event).droppable,
     });
 
     this.draggable.trigger(snapInEvent);
 
-    if (snapInEvent.canceled()) return;
+    if (snapInEvent.defaultPrevented) return;
 
     if (this.mirror) this.mirror.style.display = 'none';
 
@@ -97,21 +97,21 @@ export default class Snappable extends AbstractPlugin {
   };
 
   private [onDragOut] = (event: DragOutEvent | DroppableStopEvent) => {
-    if (event.canceled()) return;
+    if (event.defaultPrevented) return;
 
     const source =
       (<DragOutEvent>event).source ??
       (<DroppableStopEvent>event).dragEvent.source;
 
     const snapOutEvent = new SnapOutEvent({
-      dragEvent: event,
+      dragEvent: event instanceof DroppableStopEvent ? event.dragEvent : event,
       snappable:
         (<DragOutEvent>event).over ?? (<DroppableStopEvent>event).droppable,
     });
 
     this.draggable.trigger(snapOutEvent);
 
-    if (snapOutEvent.canceled()) return;
+    if (snapOutEvent.defaultPrevented) return;
     if (this.mirror) this.mirror.style.display = '';
 
     source.classList.add(...this.draggable.getClassNamesFor('source:dragging'));

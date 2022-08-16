@@ -1,0 +1,137 @@
+@use '@src/styles/utils/shared/functions';
+@use '@src/styles/components/block-layout';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
+
+$grid-area-names: a, b, c, d, e, f, g, h;
+$grid-rows: 6;
+$grid-columns: 4;
+
+.unique-dropzone {
+	.block__wrapper {
+		position: relative;
+
+		:global(.block) {
+			height: 100%;
+		}
+	}
+
+	:global(.block__wrapper.draggable-dropzone--occupied .block--hollow) {
+		@include layout.position-cover;
+	}
+
+	:global(.block__wrapper.draggable-dropzone--occupied .block--stripes) {
+		@include layout.position-cover;
+	}
+
+	.block-layout {
+		.block__wrapper {
+			.block:nth-child(1n + 3):not(.draggable-source--is-dragging) {
+				min-height: 0;
+				height: 0;
+			}
+		}
+	}
+
+	.block-layout--flex {
+		.block__wrapper {
+			flex: 1 1 calc(50% - #{map-get(theme.$layout-lengths, 'gutter-base')});
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'sm')) {
+				flex-basis: calc(25% - #{map-get(theme.$layout-lengths, 'gutter-base')});
+			}
+		}
+
+		:global(.block__content) {
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				min-height: functions.rows(3);
+			}
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+				min-height: functions.rows(4);
+			}
+		}
+	}
+
+	.block-layout--grid {
+		grid-template-rows: repeat($grid-rows, 1fr);
+		grid-template-columns: repeat($grid-columns, 1fr);
+		grid-template-areas:
+			'a a b b'
+			'a a d d'
+			'c c d d'
+			'e e f f'
+			'e e g g'
+			'h h h h';
+		margin-top: map-get(theme.$borders, 'thin');
+		gap: map-get(theme.$borders, 'base');
+		border: map-get(theme.$borders, 'thin') solid map-get(theme.$colors, 'coal-dark');
+		background-color: map-get(theme.$colors, 'coal-dark');
+
+		:global(.block__content) {
+			border: 0;
+		}
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			// special fractions to line up with the flexContainer
+			grid-template-columns: 1fr 1.025fr 1.025fr 1fr;
+			grid-template-areas:
+				'a c c g'
+				'a c c g'
+				'a d f g'
+				'b d f g'
+				'b e f h'
+				'b e f h';
+			margin-top: map-get(theme.$borders, 'base');
+			border-width: map-get(theme.$borders, 'base');
+		}
+
+		.block__wrapper--dropzone {
+			&:before {
+				content: '';
+				position: absolute;
+				top: calc(-1 * map-get(theme.$borders, 'thin'));
+				right: calc(-1 * map-get(theme.$borders, 'thin'));
+				bottom: calc(-1 * map-get(theme.$borders, 'thin'));
+				left: calc(-1 * map-get(theme.$borders, 'thin'));
+				display: block;
+				pointer-events: none;
+				background-color: map-get(theme.$colors, 'brand-blue');
+				opacity: 0;
+				transition: opacity map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
+
+				// stylelint-disable-next-line max-nesting-depth
+				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+					top: calc(-1 * map-get(theme.$borders, 'base'));
+					right: calc(-1 * map-get(theme.$borders, 'base'));
+					bottom: calc(-1 * map-get(theme.$borders, 'base'));
+					left: calc(-1 * map-get(theme.$borders, 'base'));
+				}
+			}
+
+			// not focusable, but, whatever... this was hard to solve
+			&.draggable-dropzone--occupied:hover {
+				// stylelint-disable-next-line max-nesting-depth
+				&::before {
+					opacity: 1;
+				}
+			}
+
+			:global(.block__content) {
+				@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+					min-height: functions.rows(3, false, true);
+				}
+
+				@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+					min-height: functions.rows(4, false, true);
+				}
+			}
+		}
+
+		@for $i from 1 through length($grid-area-names) {
+			.block__wrapper:nth-child(#{$i}) {
+				grid-area: nth($grid-area-names, $i);
+			}
+		}
+	}
+}

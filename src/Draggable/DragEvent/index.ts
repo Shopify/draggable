@@ -1,218 +1,224 @@
-import AbstractEvent from '../../shared/AbstractEvent';
 import { SensorEvent } from '../Sensors/SensorEvent';
 
-type DragEventData = {
+export type DragEventDetail = {
   mirror?: HTMLElement;
   over?: HTMLElement;
   source: HTMLElement;
   overContainer?: HTMLElement;
   sourceContainer?: HTMLElement;
-  sensorEvent?: SensorEvent;
   originalSource?: HTMLElement;
   pressure?: number;
   draggable?: string;
-  detail?: SensorEvent;
+  sensorEvent?: SensorEvent;
+  originalEvent?: Event;
 };
 
-export class DragEvent extends AbstractEvent {
-  declare data: DragEventData;
-
-  constructor(data?: DragEventData) {
-    super(data);
+export class DragEvent<
+  T extends DragEventDetail = DragEventDetail
+> extends CustomEvent<T> {
+  constructor(
+    eventInitDict?: CustomEventInit<T>,
+    type: string = DragEvent.type
+  ) {
+    super(type, eventInitDict);
   }
 
   get source() {
-    return this.data.source;
+    return this.detail.source;
   }
 
   get originalSource() {
-    return this.data.originalSource;
+    return this.detail.originalSource;
   }
 
   get mirror() {
-    return this.data.mirror;
+    return this.detail.mirror;
   }
 
   get sourceContainer() {
-    return this.data.sourceContainer;
+    return this.detail.sourceContainer;
   }
 
   get sensorEvent() {
-    return this.data.sensorEvent;
+    return this.detail.sensorEvent;
   }
 
   get originalEvent() {
     return this.sensorEvent ? this.sensorEvent.originalEvent : null;
   }
 
-  get detail() {
-    return this.detail;
+  get overContainer() {
+    return this.detail.overContainer;
   }
 
-  clone(data) {
-    return new DragEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  clone = (detail?: T) =>
+    new DragEvent(
+      { cancelable: this.cancelable, detail: { ...this.detail, ...detail } },
+      this.type
+    );
 
   static type = 'drag';
 }
 
-export class DragStartEvent extends DragEvent {
-  clone(data) {
-    return new DragStartEvent({
-      ...this.data,
-      ...data,
-    });
+export type DragStartEventDetail = DragEventDetail & {
+  originalSource: HTMLElement;
+  sourceContainer: HTMLElement;
+  sensorEvent: SensorEvent;
+};
+
+export class DragStartEvent extends DragEvent<DragStartEventDetail> {
+  constructor(detail: DragStartEventDetail) {
+    super(
+      { cancelable: DragStartEvent.cancelable, detail },
+      DragStartEvent.type
+    );
+  }
+
+  get originalSource() {
+    return this.detail.originalSource;
+  }
+
+  get sourceContainer() {
+    return this.detail.sourceContainer;
+  }
+
+  get sensorEvent() {
+    return this.detail.sensorEvent;
   }
 
   static type = 'drag:start';
   static cancelable = true;
 }
 
-export class DragMoveEvent extends DragEvent {
-  clone(data) {
-    return new DragMoveEvent({
-      ...this.data,
-      ...data,
-    });
+export class DragMoveEvent extends DragEvent<DragEventDetail> {
+  constructor(detail: DragEventDetail) {
+    super({ detail }, DragMoveEvent.type);
   }
 
   static type = 'drag:move';
 }
 
-export class DragOverEvent extends DragEvent {
-  declare data: DragEventData & {
-    overContainer: HTMLElement;
-    over: HTMLElement;
+export type DragOverEventDetail = DragEventDetail & {
+  overContainer: HTMLElement;
+  over: HTMLElement;
+};
+
+export class DragOverEvent extends DragEvent<DragOverEventDetail> {
+  constructor(detail: DragOverEventDetail) {
+    super({ cancelable: DragOverEvent.cancelable, detail }, DragOverEvent.type);
   }
 
   get overContainer() {
-    return this.data.overContainer;
+    return this.detail.overContainer;
   }
 
   get over() {
-    return this.data.over;
+    return this.detail.over;
   }
 
   static type = 'drag:over';
   static cancelable = true;
-
-  clone(data) {
-    return new DragOverEvent({
-      ...this.data,
-      ...data,
-    });
-  }
 }
 
-export class DragOutEvent extends DragEvent {
+export type DragOutEventDetail = DragEventDetail & {
+  overContainer: HTMLElement;
+  over: HTMLElement;
+};
+
+export class DragOutEvent extends DragEvent<DragOutEventDetail> {
+  constructor(detail: DragOutEventDetail) {
+    super({ detail }, DragOutEvent.type);
+  }
+
+  get overContainer() {
+    return this.detail.overContainer;
+  }
+
+  get over() {
+    return this.detail.over;
+  }
+
   static type = 'drag:out';
+}
 
-  declare data: DragEventData & {
-    overContainer: HTMLElement;
-    over: HTMLElement;
+export type DragOverContainerEventDetail = DragEventDetail & {
+  overContainer: HTMLElement;
+};
+
+export class DragOverContainerEvent extends DragEvent<DragOverContainerEventDetail> {
+  constructor(detail: DragOverContainerEventDetail) {
+    super({ detail }, DragOverContainerEvent.type);
   }
 
   get overContainer() {
-    return this.data.overContainer;
+    return this.detail.overContainer;
   }
 
   get over() {
-    return this.data.over;
+    return this.detail.overContainer;
   }
 
-  clone(data) {
-    return new DragOutEvent({
-      ...this.data,
-      ...data,
-    });
-  }
-}
-
-export class DragOverContainerEvent extends DragEvent {
   static type = 'drag:over:container';
+}
 
-  declare data: DragEventData & {
-    overContainer: HTMLElement;
-    over: HTMLElement;
+export type DragOutContainerEventDetail = DragEventDetail & {
+  overContainer: HTMLElement;
+};
+
+export class DragOutContainerEvent extends DragEvent<DragOutContainerEventDetail> {
+  constructor(detail: DragOutContainerEventDetail) {
+    super({ detail }, DragOutContainerEvent.type);
   }
 
   get overContainer() {
-    return this.data.overContainer;
+    return this.detail.overContainer;
   }
 
-  get over() {
-    return this.data.over;
-  }
-
-  clone(data) {
-    return new DragOverContainerEvent({
-      ...this.data,
-      ...data,
-    });
-  }
-}
-
-export class DragOutContainerEvent extends DragEvent {
   static type = 'drag:out:container';
-
-  declare data: DragEventData & {
-    overContainer: HTMLElement;
-  }
-
-  get overContainer() {
-    return this.data.overContainer;
-  }
-
-  clone(data) {
-    return new DragOutContainerEvent({
-      ...this.data,
-      ...data,
-    });
-  }
 }
 
-export class DragPressureEvent extends DragEvent {
-  static type = 'drag:pressure';
+export type DragPressureEventDetail = DragEventDetail & {
+  pressure?: number;
+};
 
-  declare data: DragEventData & {
-    pressure?: number;
-
+export class DragPressureEvent extends DragEvent<DragPressureEventDetail> {
+  constructor(detail: DragPressureEventDetail) {
+    super({ detail }, DragPressureEvent.type);
   }
 
   get pressure() {
-    return this.data.pressure;
+    return this.detail.pressure;
   }
 
-  clone(data) {
-    return new DragPressureEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  static type = 'drag:pressure';
 }
 
-export class DragStopEvent extends DragEvent {
+export type DragStopEventDetail = DragEventDetail & {
+  originalSource: HTMLElement;
+  sourceContainer: HTMLElement;
+};
+
+export class DragStopEvent extends DragEvent<DragStopEventDetail> {
+  constructor(detail: DragStopEventDetail) {
+    super({ cancelable: DragStopEvent.cancelable, detail }, DragStopEvent.type);
+  }
+
+  get originalSource() {
+    return this.detail.originalSource;
+  }
+
+  get sourceContainer() {
+    return this.detail.sourceContainer;
+  }
+
   static type = 'drag:stop';
   static cancelable = true;
-
-  clone(data) {
-    return new DragStopEvent({
-      ...this.data,
-      ...data,
-    });
-  }
 }
 
-export class DragStoppedEvent extends DragEvent {
-  static type = 'drag:stopped';
-
-  clone(data) {
-    return new DragStoppedEvent({
-      ...this.data,
-      ...data,
-    });
+export class DragStoppedEvent extends DragEvent<DragEventDetail> {
+  constructor(detail: DragEventDetail) {
+    super({ detail }, DragStoppedEvent.type);
   }
+
+  static type = 'drag:stopped';
 }

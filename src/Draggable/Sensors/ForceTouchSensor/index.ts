@@ -105,7 +105,7 @@ export default class ForceTouchSensor extends Sensor {
     this.trigger(container, dragStartEvent);
 
     this.currentContainer = container;
-    this.dragging = !dragStartEvent.canceled();
+    this.dragging = !dragStartEvent.defaultPrevented;
     this.mightDrag = false;
   };
 

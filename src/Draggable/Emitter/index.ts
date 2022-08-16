@@ -1,13 +1,7 @@
-import AbstractEvent from '../../shared/AbstractEvent';
-
-type EmitterEventCallback = (event?: AbstractEvent) => void;
+type EmitterEventCallback = (event?: CustomEvent) => void;
 
 export default class Emitter {
-  callbacks: Record<string, Array<EmitterEventCallback>>;
-
-  constructor() {
-    this.callbacks = {};
-  }
+  callbacks: Record<string, Array<EmitterEventCallback>> = {};
 
   on(type: string, ...callbacks: Array<EmitterEventCallback>) {
     if (!this.callbacks[type]) {
@@ -30,7 +24,7 @@ export default class Emitter {
     return this;
   }
 
-  trigger(event: AbstractEvent) {
+  trigger(event: CustomEvent) {
     if (!this.callbacks[event.type]) return null;
 
     const callbacks = [...this.callbacks[event.type]];

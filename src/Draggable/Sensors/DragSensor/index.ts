@@ -61,7 +61,7 @@ export default class DragSensor extends Sensor {
     setTimeout(() => {
       this.trigger(this.currentContainer, dragStartEvent);
 
-      if (dragStartEvent.canceled()) {
+      if (dragStartEvent.defaultPrevented) {
         this.dragging = false;
       } else {
         this.dragging = true;
@@ -87,7 +87,7 @@ export default class DragSensor extends Sensor {
 
     this.trigger(container, dragMoveEvent);
 
-    if (!dragMoveEvent.canceled()) {
+    if (!dragMoveEvent.defaultPrevented) {
       event.preventDefault();
       event.dataTransfer.dropEffect = this.options.type;
     }

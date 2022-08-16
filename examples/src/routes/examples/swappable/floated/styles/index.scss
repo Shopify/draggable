@@ -1,0 +1,70 @@
+@use '@src/styles/theme';
+@use '@src/styles/utils/shared/functions';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/components/block-layout';
+
+$floated-block-name: unquote('block');
+
+.floated {
+	.block:nth-child(7) {
+		clear: both;
+	}
+
+	@media screen and (max-width: calc(map-get(theme.$breakpoints, 'md') - 1px)) {
+		@include layout.draggable-source-layout($floated-block-name, 1, 2, 3, 4, 5, 7, 8) {
+			width: 50%;
+		}
+
+		@include layout.draggable-source-layout($floated-block-name, 6) {
+			width: 100%;
+		}
+
+		@include layout.draggable-source-layout($floated-block-name, 3) {
+			.block__content {
+				height: functions.rows(4, true);
+			}
+		}
+
+		.draggable--original ~ .block:nth-child(3) {
+			.block__content {
+				height: functions.rows(2, true);
+			}
+		}
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		@include layout.draggable-source-layout($floated-block-name, 1, 2, 3) {
+			width: 33.333%;
+		}
+
+		@include layout.draggable-source-layout($floated-block-name, 4, 5, 6, 7, 8) {
+			width: 50%;
+		}
+
+		@include layout.draggable-source-layout($floated-block-name, 1, 2, 3, 7, 8) {
+			.block__content {
+				height: functions.rows(3);
+			}
+		}
+
+		@include layout.draggable-source-layout($floated-block-name, 4) {
+			.block__content {
+				height: functions.rows(6);
+			}
+		}
+
+		@include layout.draggable-source-layout($floated-block-name, 5, 6) {
+			.block__content {
+				height: functions.rows(3);
+			}
+		}
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		@include layout.draggable-source-layout($floated-block-name, 1, 2, 3, 7, 8) {
+			.block__content {
+				height: functions.rows(4);
+			}
+		}
+	}
+}

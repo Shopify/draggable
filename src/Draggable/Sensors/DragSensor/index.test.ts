@@ -78,7 +78,7 @@ describe('DragSensor', () => {
 
     it('cancels `drag:start` event when canceling sensor event', () => {
       sandbox.addEventListener('drag:start', (event) => {
-        event.detail.cancel();
+        event.detail.preventDefault();
       });
 
       function dragFlow() {

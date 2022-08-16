@@ -1,84 +1,109 @@
 import { DragEvent } from '../../Draggable';
-import AbstractEvent from '../../shared/AbstractEvent';
 
-export type SwappableEventData = {
+export type SwappableEventDetail = {
   dragEvent: DragEvent;
-  over?: Element;
-  overContainer?: Element;
-  swappedElement: Element;
+  over?: HTMLElement;
+  overContainer?: HTMLElement;
+  swappedElement?: HTMLElement;
 };
 
-export class SwappableEvent extends AbstractEvent {
-  declare data: SwappableEventData;
+export class SwappableEvent<
+  T extends SwappableEventDetail = SwappableEventDetail
+> extends CustomEvent<T> {
+  constructor(
+    eventInitDict: CustomEventInit<T>,
+    type: string = SwappableEvent.type
+  ) {
+    super(type, eventInitDict);
+  }
 
   get dragEvent() {
-    return this.data.dragEvent;
+    return this.detail.dragEvent;
   }
 
-  clone(data) {
-    return new SwappableEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  clone = (detail: SwappableEventDetail) =>
+    new SwappableEvent(
+      { detail: { ...this.detail, ...detail } },
+      SwappableEvent.type
+    );
 
   static type = 'swappable';
 }
 
 export class SwappableStartEvent extends SwappableEvent {
-  clone(data) {
-    return new SwappableStartEvent({
-      ...this.data,
-      ...data,
-    });
+  constructor(detail: SwappableEventDetail) {
+    super(
+      { detail, cancelable: SwappableStartEvent.cancelable },
+      SwappableStartEvent.type
+    );
   }
+
+  clone = (detail: SwappableEventDetail) =>
+    new SwappableStartEvent({
+      ...this.detail,
+      ...detail,
+    });
 
   static type = 'swappable:start';
   static cancelable = true;
 }
 
-export class SwappableSwapEvent extends SwappableEvent {
+export type SwappableSwapEventDetail = SwappableEventDetail & {
+  over: HTMLElement;
+  overContainer: HTMLElement;
+};
+
+export class SwappableSwapEvent extends SwappableEvent<SwappableSwapEventDetail> {
+  constructor(detail: SwappableSwapEventDetail) {
+    super(
+      { detail, cancelable: SwappableSwapEvent.cancelable },
+      SwappableSwapEvent.type
+    );
+  }
+
   get over() {
-    return this.data.over;
+    return this.detail.over;
   }
 
   get overContainer() {
-    return this.data.overContainer;
+    return this.detail.overContainer;
   }
 
-  clone(data) {
-    return new SwappableSwapEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  clone = (detail) => new SwappableSwapEvent({ ...this.detail, ...detail });
 
   static type = 'swappable:swap';
   static cancelable = true;
 }
 
+export type SwappableSwappedEventDetail = SwappableEventDetail & {
+  swappedElement: HTMLElement;
+};
+
 export class SwappableSwappedEvent extends SwappableEvent {
-  get swappedElement() {
-    return this.data.swappedElement;
+  constructor(detail: SwappableSwappedEventDetail) {
+    super({ detail }, SwappableSwappedEvent.type);
   }
 
-  clone(data) {
-    return new SwappableSwappedEvent({
-      ...this.data,
-      ...data,
-    });
+  get swappedElement() {
+    return this.detail.swappedElement;
   }
+
+  clone = (detail: SwappableSwappedEventDetail) =>
+    new SwappableSwappedEvent({ ...this.detail, ...detail });
 
   static type = 'swappable:swapped';
 }
 
 export class SwappableStopEvent extends SwappableEvent {
-  clone(data) {
-    return new SwappableStopEvent({
-      ...this.data,
-      ...data,
-    });
+  constructor(detail: SwappableEventDetail) {
+    super({ detail }, SwappableStopEvent.type);
   }
+
+  clone = (detail: SwappableEventDetail) =>
+    new SwappableStopEvent({
+      ...this.detail,
+      ...detail,
+    });
 
   static type = 'swappable:stop';
 }

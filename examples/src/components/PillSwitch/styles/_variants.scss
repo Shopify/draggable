@@ -1,0 +1,28 @@
+@use '@src/styles/theme';
+
+.pill-switch {
+	&--on {
+		.pill-switch__track {
+			&::after {
+				opacity: 0;
+			}
+		}
+
+		.pill-switch__control {
+			top: 0;
+			right: 0;
+			bottom: auto;
+			left: auto;
+			color: white;
+			background-color: map-get(theme.$colors, 'brand-blue');
+			border-color: map-get(theme.$colors, 'brand-blue');
+
+			&:focus,
+			&:hover,
+			&:active {
+				background-color: white;
+				color: map-get(theme.$colors, 'brand-blue-dark');
+			}
+		}
+	}
+}

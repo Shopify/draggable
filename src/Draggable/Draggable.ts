@@ -3,7 +3,6 @@ import {
   SortAnimationOptions,
   ResizeMirrorOptions,
 } from '../Plugins';
-import AbstractEvent from '../shared/AbstractEvent';
 import AbstractPlugin from '../shared/AbstractPlugin';
 import { closest } from '../shared/utils';
 import {
@@ -99,7 +98,7 @@ export interface DraggableOptions {
   plugins?: typeof AbstractPlugin[];
   sensors?: typeof Sensor[];
   classes?: { [key in keyof typeof defaultClasses]?: string | string[] };
-  announcements?: Record<string, (event: AbstractEvent) => unknown>;
+  announcements?: Record<string, (event: CustomEvent) => unknown>;
   collidables?: string | Element[] | (() => Element[]);
   mirror?: MirrorOptions;
   scrollable?: ScrollableOptions;
@@ -145,11 +144,11 @@ export default class Draggable {
   placedTimeoutID: ReturnType<typeof setTimeout>;
 
   constructor(
-    containers: HTMLElement[] = [document.body],
+    containers: NodeList | HTMLElement[] | HTMLElement = [document.body],
     options: Partial<DraggableOptions> = {}
   ) {
     if (containers instanceof NodeList || containers instanceof Array)
-      this.containers = [...containers];
+      this.containers = <HTMLElement[]>[...containers];
     else if ((containers as unknown) instanceof Element)
       this.containers = [containers];
     else
@@ -289,7 +288,7 @@ export default class Draggable {
     return this;
   }
 
-  trigger(event: AbstractEvent) {
+  trigger(event: CustomEvent) {
     this.emitter.trigger(event);
     return this;
   }
@@ -315,10 +314,10 @@ export default class Draggable {
       []
     );
 
-  getDraggableElementsForContainer = (container: Element) => {
-    const allDraggableElements = <HTMLElement[]>(
-      (<unknown>container.querySelectorAll(this.options.draggable))
-    );
+  getDraggableElementsForContainer = (container: HTMLElement) => {
+    const allDraggableElements = <HTMLElement[]>[
+      ...container.querySelectorAll(this.options.draggable),
+    ];
 
     return [...allDraggableElements].filter((childElement) => {
       return (
@@ -342,7 +341,7 @@ export default class Draggable {
       target &&
       !closest(target, this.options.handle)
     ) {
-      sensorEvent.cancel();
+      sensorEvent.preventDefault();
       return;
     }
 
@@ -370,14 +369,15 @@ export default class Draggable {
       source: this.source,
       originalSource: this.originalSource,
       sourceContainer: container,
+      originalEvent: event,
       sensorEvent,
     });
 
     this.trigger(dragStartEvent);
 
-    this.dragging = !dragStartEvent.canceled();
+    this.dragging = !dragStartEvent.defaultPrevented;
 
-    if (dragStartEvent.canceled()) {
+    if (dragStartEvent.defaultPrevented) {
       this.source.remove();
       this.originalSource.style.display = null;
       return;
@@ -415,12 +415,13 @@ export default class Draggable {
       source: this.source,
       originalSource: this.originalSource,
       sourceContainer: container,
+      originalEvent: event,
       sensorEvent,
     });
 
     this.trigger(dragMoveEvent);
 
-    if (dragMoveEvent.canceled()) sensorEvent.cancel();
+    if (dragMoveEvent.defaultPrevented) sensorEvent.preventDefault();
 
     target = closest(target, this.options.draggable);
     const withinCorrectContainer = closest(sensorEvent.target, this.containers);
@@ -440,6 +441,7 @@ export default class Draggable {
         sourceContainer: container,
         sensorEvent,
         over: this.currentOver,
+        originalEvent: event,
         overContainer: this.currentOverContainer,
       });
 
@@ -455,6 +457,7 @@ export default class Draggable {
       const dragOutContainerEvent = new DragOutContainerEvent({
         source: this.source,
         originalSource: this.originalSource,
+        originalEvent: event,
         sourceContainer: container,
         sensorEvent,
         overContainer: this.currentOverContainer,
@@ -475,6 +478,7 @@ export default class Draggable {
         source: this.source,
         originalSource: this.originalSource,
         sourceContainer: container,
+        originalEvent: event,
         sensorEvent,
         overContainer,
       });
@@ -491,6 +495,7 @@ export default class Draggable {
         source: this.source,
         originalSource: this.originalSource,
         sourceContainer: container,
+        originalEvent: event,
         sensorEvent,
         overContainer,
         over: target,
@@ -510,13 +515,14 @@ export default class Draggable {
     const dragStopEvent = new DragStopEvent({
       source: this.source,
       originalSource: this.originalSource,
+      originalEvent: event,
       sensorEvent: event ? event.sensorEvent : null,
       sourceContainer: this.sourceContainer,
     });
 
     this.trigger(dragStopEvent);
 
-    if (!dragStopEvent.canceled())
+    if (!dragStopEvent.defaultPrevented)
       this.source.parentNode.insertBefore(this.originalSource, this.source);
 
     this.source.remove();
@@ -573,6 +579,7 @@ export default class Draggable {
     const dragStoppedEvent = new DragStoppedEvent({
       source: this.source,
       originalSource: this.originalSource,
+      originalEvent: event?.originalEvent,
       sensorEvent: event ? event.sensorEvent : null,
       sourceContainer: this.sourceContainer,
     });
@@ -601,6 +608,7 @@ export default class Draggable {
     const dragPressureEvent = new DragPressureEvent({
       sensorEvent,
       source,
+      originalEvent: event,
       pressure: sensorEvent.pressure,
     });
 

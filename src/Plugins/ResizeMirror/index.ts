@@ -1,8 +1,4 @@
-import {
-  DragOverContainerEvent,
-  DragOverEvent,
-  MirrorCreatedEvent,
-} from '../../Draggable';
+import { DragOverEvent, MirrorCreatedEvent } from '../../Draggable';
 import AbstractPlugin from '../../shared/AbstractPlugin';
 import { requestNextAnimationFrame } from '../../shared/utils';
 
@@ -75,16 +71,11 @@ export default class ResizeMirror extends AbstractPlugin {
     this.mirror = null;
   };
 
-  private [onDragOver] = (
-    dragEvent: DragOverEvent | DragOverContainerEvent
-  ) => {
+  private [onDragOver] = (dragEvent: DragOverEvent) => {
     this[resize](dragEvent);
   };
 
-  private [resize] = ({
-    overContainer,
-    over,
-  }: DragOverEvent | DragOverContainerEvent) => {
+  private [resize] = ({ overContainer, over }: DragOverEvent) => {
     requestAnimationFrame(() => {
       if (!this.mirror.parentNode) return;
 

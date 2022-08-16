@@ -1,0 +1,60 @@
+@use 'reset';
+@use 'theme';
+@use 'utils';
+
+html {
+	font-family: map-get(theme.$font-stacks, 'base');
+
+	::selection {
+		color: white;
+		background-color: map-get(theme.$colors, 'coal-dark');
+	}
+}
+
+body {
+	cursor: map-get(theme.$cursors, 'base');
+	position: relative;
+	background-color: white;
+}
+
+p,
+li,
+dd,
+.heading,
+.subheading {
+	cursor: map-get(theme.$cursors, 'text');
+}
+
+a,
+button {
+	cursor: map-get(theme.$cursors, 'pointer');
+
+	&:active {
+		cursor: map-get(theme.$cursors, 'pointer-active');
+	}
+}
+
+.draggable--is-dragging {
+	&,
+	* {
+		cursor: map-get(theme.$cursors, 'drag-active');
+	}
+}
+
+// Set `state` cursors to never used tags only so they can be fetched on page load,
+// rather than the instance they are first requested...
+.preload-cursors {
+	@include utils.visually-hidden;
+
+	b {
+		cursor: map-get(theme.$cursors, 'drag-active');
+	}
+
+	u {
+		cursor: map-get(theme.$cursors, 'pointer-active');
+	}
+
+	a {
+		cursor: map-get(theme.$cursors, 'rock-active');
+	}
+}

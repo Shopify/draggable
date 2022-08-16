@@ -1,0 +1,139 @@
+@use '@src/styles/components/puzzle/props' as puzzle;
+@use '@src/styles/theme';
+@use 'props';
+
+.section.section__collidable {
+	padding-top: map-get(theme.$spacings, 'fattest');
+	background-color: map-get(theme.$euca, 'base');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		padding-top: map-get(theme.$spacings, 'huger');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		padding-top: map-get(theme.$spacings, 'jumboest');
+	}
+
+	::selection {
+		color: map-get(theme.$euca, 'base');
+	}
+}
+
+.puzzle {
+	&.puzzle--collidable {
+		height: props.$puzzle-height-collidable - props.$puzzle-offset-y-collidable;
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			width: puzzle.$puzzle-width-720p;
+		}
+
+		.puzzle__interior {
+			height: props.$puzzle-height-collidable;
+		}
+
+		.shadow.shadow--collidable-left {
+			bottom: calc(puzzle.$cube-height / 3);
+			left: -#{puzzle.$puzzle-supplement-offset-x-multi};
+			width: props.$puzzle-shadow-left-width-collidable;
+		}
+
+		.shadow.shadow--collidable-right {
+			right: calc(-1 * puzzle.$puzzle-supplement-offset-x-multi / 2);
+			left: auto;
+			width: props.$puzzle-shadow-right-width-collidable;
+		}
+	}
+
+	:global(.collidable__cube-1) {
+		@include puzzle.cube-layout(3, 1);
+	}
+
+	:global(.collidable__cube-2) {
+		@include puzzle.cube-layout(4);
+	}
+
+	:global(.collidable__cube-3) {
+		@include puzzle.cube-layout(2);
+	}
+
+	:global(.collidable__cube-4) {
+		@include puzzle.cube-layout(1, -3);
+	}
+
+	:global(.collidable__cube-5) {
+		@include puzzle.cube-layout(0, -6);
+	}
+
+	:global(.collidable__cube-6) {
+		@include puzzle.cube-layout(1, -7);
+	}
+
+	:global(.collidable__cube-7) {
+		@include puzzle.cube-layout(0, -4);
+	}
+
+	// droppable +
+	// right draggable piece
+	:global(.collidable__cube-8) {
+		@include puzzle.cube-layout(1, -1);
+	}
+
+	// --- Right
+	// droppable +
+	// left draggable piece
+	:global(.collidable__cube-10) {
+		@include puzzle.cube-layout(8, -3);
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			@include puzzle.cube-layout(10, -3);
+		}
+	}
+
+	:global(.collidable__cube-12) {
+		@include puzzle.cube-layout(6, -3);
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			@include puzzle.cube-layout(8, -3);
+		}
+	}
+
+	:global(.collidable__cube-13) {
+		@include puzzle.cube-layout(7, -8);
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			@include puzzle.cube-layout(9, -8);
+		}
+	}
+
+	:global(.collidable__cube-14) {
+		@include puzzle.cube-layout(6, -9);
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			@include puzzle.cube-layout(8, -9);
+		}
+	}
+
+	:global(.collidable__cube-15) {
+		@include puzzle.cube-layout(7, -6);
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			@include puzzle.cube-layout(9, -6);
+		}
+	}
+
+	:global(.collidable__cube-16) {
+		@include puzzle.cube-layout(7, -4);
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			@include puzzle.cube-layout(9, -4);
+		}
+	}
+
+	:global(.collidable__cube-17) {
+		@include puzzle.cube-layout(4, -6);
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			@include puzzle.cube-layout(5, -6);
+		}
+	}
+}

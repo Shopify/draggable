@@ -1,0 +1,65 @@
+@use '@src/styles/theme';
+@use '@src/styles/components/heading';
+@use '@src/styles/utils/shared/layout';
+
+.error-404 {
+	height: 100vh;
+	background-color: darken(map-get(theme.$colors, 'coal-dark'), 13%);
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	:global(.starfield) {
+		position: absolute;
+	}
+
+	.content {
+		z-index: 1;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		max-width: 80rem;
+	}
+
+	.button {
+		color: map-get(theme.$colors, 'brand-yellow');
+		color: map-get(theme.$colors, 'brand-yellow');
+	}
+
+	.subheading {
+		color: #fff;
+		font-weight: 400;
+		margin-bottom: map-get(theme.$spacings, 'loose');
+	}
+
+	///
+	/// Button container
+	.button__container {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: center;
+		margin-top: -(map-get(theme.$spacings, 'tightest'));
+		margin-left: -(map-get(theme.$spacings, 'tightest'));
+
+		.button {
+			@include layout.flex-item-fix;
+			display: block;
+			flex: 0 0 auto;
+			margin-top: map-get(theme.$spacings, 'tightest');
+			margin-left: map-get(theme.$spacings, 'tightest');
+		}
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			margin-top: -(map-get(theme.$spacings, 'tight'));
+			margin-left: -(map-get(theme.$spacings, 'tight'));
+
+			.button {
+				margin-top: (map-get(theme.$spacings, 'tight'));
+				margin-left: (map-get(theme.$spacings, 'tight'));
+			}
+		}
+	}
+}

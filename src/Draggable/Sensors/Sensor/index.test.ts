@@ -1,8 +1,12 @@
 import { waitFor } from '@testing-library/dom';
 import Sensor from '.';
-import { SensorEvent } from '../SensorEvent';
+import { SensorEvent, SensorEventDetail } from '../SensorEvent';
 
 class MyEvent extends SensorEvent {
+  constructor(detail: SensorEventDetail) {
+    super({ detail }, MyEvent.type);
+  }
+
   static type = 'my:event';
 }
 
@@ -109,24 +113,21 @@ describe('Sensor', () => {
     it('dispatches event on element', async () => {
       const sensor = new Sensor();
       const element = document.createElement('button');
-      let eventDispatched: CustomEvent<SensorEvent>;
+      let eventDispatched: Event = new SensorEvent();
 
-      element.addEventListener(
-        MyEvent.type,
-        (event: CustomEvent<SensorEvent>) => {
-          eventDispatched = event;
-        }
-      );
+      element.addEventListener(MyEvent.type, (event) => {
+        eventDispatched = event;
+      });
 
       const expectedEvent = new MyEvent({
         value: 'value',
-      });
+      } as SensorEventDetail);
 
       const returnValue = await sensor.trigger(element, expectedEvent);
 
-      expect(eventDispatched.type).toBe('my:event');
-      expect(eventDispatched.detail).toBe(expectedEvent);
-      expect(eventDispatched.target).toBe(element);
+      expect((<SensorEvent>eventDispatched).type).toBe('my:event');
+      expect((<SensorEvent>eventDispatched).detail).toBe(expectedEvent);
+      expect((<SensorEvent>eventDispatched).target).toBe(element);
       expect(returnValue).toBe(expectedEvent);
       expect(sensor.lastEvent).toBe(expectedEvent);
     });

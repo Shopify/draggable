@@ -1,0 +1,83 @@
+@use '@src/styles/theme';
+@use '@src/styles/utils/shared/layout';
+@use '@src/components/Pattern/styles/props' as pattern;
+
+.block {
+	&--shell {
+		.block__content {
+			color: map-get(theme.$colors, 'coal-dark');
+			border-color: currentColor;
+			background-color: white;
+		}
+	}
+
+	&--hollow {
+		.block__content {
+			color: map-get(theme.$colors, 'ash-dark');
+			border-color: currentColor;
+			background-color: white;
+		}
+	}
+
+	&--stripes {
+		.block__content {
+			@include pattern.stripes-bg;
+			color: map-get(theme.$colors, 'coal-dark');
+			border-color: currentColor;
+			transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
+		}
+	}
+
+	&--draggable {
+		cursor: map-get(theme.$cursors, 'drag-base');
+
+		.block__content {
+			color: map-get(theme.$colors, 'coal-dark');
+			background-color: white;
+			border-color: currentColor;
+			transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+				background-color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+				transform map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie');
+		}
+
+		// interaction
+		&:focus .block__content,
+		&:hover .block__content {
+			color: map-get(theme.$colors, 'brand-blue');
+		}
+
+		&.draggable-source--is-dragging .block__content {
+			color: map-get(theme.$colors, 'brand-blue');
+
+			:global(.pattern--halftone) {
+				@include pattern.pattern-halftone-animated;
+			}
+		}
+
+		&.draggable-source--placed .block__content {
+			:global(.pattern--placed) {
+				@include pattern.pattern-placed-animated;
+			}
+		}
+
+		&.draggable-mirror {
+			z-index: map-get(theme.$z-index, 'overlay');
+			transition: width map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie'),
+				height map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie');
+
+			.block__content {
+				height: 100%;
+				color: white;
+				background-color: map-get(theme.$colors, 'brand-blue');
+				border-color: map-get(theme.$colors, 'brand-blue');
+				transform: scale(1.025);
+			}
+		}
+	}
+
+	&--colliding {
+		.block__content {
+			color: map-get(theme.$colors, 'brand-red');
+		}
+	}
+}

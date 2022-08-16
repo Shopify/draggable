@@ -1,0 +1,17 @@
+@use 'props';
+
+@keyframes placed {
+	to {
+		transform: scale(0);
+	}
+}
+
+@keyframes halftone {
+	from {
+		background-position: props.$halftone-bg-position-start;
+	}
+
+	to {
+		background-position: props.$halftone-bg-position-end;
+	}
+}

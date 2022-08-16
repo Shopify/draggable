@@ -1,0 +1,10 @@
+@use '@src/styles/components/puzzle/props' as puzzle;
+
+$puzzle-offset-y-collidable: puzzle.$cube-height;
+$puzzle-height-collidable: calc(puzzle.$cube-height * 3.5);
+$puzzle-shadow-left-width-collidable: calc(
+	(puzzle.$cube-width * 3) + puzzle.$puzzle-supplement-offset
+);
+$puzzle-shadow-right-width-collidable: calc(
+	(puzzle.$cube-width * 2) + puzzle.$puzzle-supplement-offset
+);

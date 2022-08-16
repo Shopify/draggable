@@ -1,0 +1,134 @@
+@use '@src/styles/components/block-layout';
+@use '@src/styles/theme';
+@use 'props';
+
+.collidable {
+	position: relative;
+	.block-layout--grid {
+		margin: 0;
+		padding: map-get(theme.$spacings, 'tightest');
+		width: 100%;
+		height: map-get(props.$collidable-container-height, 'base');
+		grid-template: repeat(3, 1fr) / repeat(4, 1fr);
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			height: map-get(props.$collidable-container-height, 'tablet');
+		}
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			height: map-get(props.$collidable-container-height, 'desktop');
+		}
+
+		.block__wrapper {
+			&.draggable-dropzone--occupied {
+				position: relative;
+				:global(.block--hollow) {
+					position: absolute;
+					top: 0;
+					right: 0;
+					bottom: 0;
+					left: 0;
+					margin: auto;
+				}
+			}
+			:global(.block),
+			:global(.block__content) {
+				height: 100%;
+			}
+		}
+
+		:global(.block--1) {
+			grid-area: 1 / 1;
+		}
+
+		:global(.block--4) {
+			grid-area: 1 / 4;
+		}
+
+		:global(.block--2) {
+			grid-area: 1 / 2 / 3 / 2;
+		}
+		:global(.block--3) {
+			grid-area: 4 / 4 / 2 / 4;
+		}
+	}
+
+	// Draggable
+	.draggable-mirror {
+		:global(.block__content) {
+			transform: scale(0.9);
+		}
+	}
+
+	.collidable-wall {
+		position: absolute;
+		background-color: map-get(theme.$colors, 'coal-dark');
+		transition: background-color map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
+		&.collidable-wall--colliding {
+			background-color: map-get(theme.$colors, 'brand-red');
+		}
+	}
+
+	.collidable-wall--top {
+		top: -#{map-get(theme.$borders, 'thin')};
+		right: -#{map-get(theme.$borders, 'thin')};
+		left: -#{map-get(theme.$borders, 'thin')};
+		height: map-get(theme.$borders, 'thin');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			height: map-get(theme.$borders, 'base');
+		}
+	}
+
+	.collidable-wall--right {
+		top: -#{map-get(theme.$borders, 'thin')};
+		right: -#{map-get(theme.$borders, 'thin')};
+		bottom: -#{map-get(theme.$borders, 'thin')};
+		width: map-get(theme.$borders, 'thin');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			width: map-get(theme.$borders, 'base');
+		}
+	}
+
+	.collidable-wall--bottom {
+		right: -#{map-get(theme.$borders, 'thin')};
+		bottom: -#{map-get(theme.$borders, 'thin')};
+		left: -#{map-get(theme.$borders, 'thin')};
+		height: map-get(theme.$borders, 'thin');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			height: map-get(theme.$borders, 'base');
+		}
+	}
+
+	.collidable-wall--left {
+		top: -#{map-get(theme.$borders, 'thin')};
+		bottom: -#{map-get(theme.$borders, 'thin')};
+		left: -#{map-get(theme.$borders, 'thin')};
+		width: map-get(theme.$borders, 'thin');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			width: map-get(theme.$borders, 'base');
+		}
+	}
+
+	.draggable-container--is-dragging:not(.draggable-container--over) {
+		.block--stripes {
+			:global(.block__content) {
+				color: map-get(theme.$colors, 'brand-red');
+			}
+		}
+
+		.collidable-wall {
+			background-color: map-get(theme.$colors, 'brand-red');
+		}
+	}
+
+	// stylelint-disable-next-line no-duplicate-selectors
+	.collidable-wall {
+		&.collidable-wall--colliding {
+			background-color: map-get(theme.$colors, 'brand-red');
+		}
+	}
+}

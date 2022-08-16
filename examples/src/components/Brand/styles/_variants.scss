@@ -1,0 +1,50 @@
+@use '@src/styles/theme';
+@use 'props';
+
+.wave {
+	&--mask {
+		fill: map-get(theme.$colors, 'coal-dark');
+	}
+
+	&--purple {
+		fill: map-get(theme.$colors, 'brand-purple');
+	}
+
+	&--red {
+		fill: map-get(theme.$colors, 'brand-red');
+	}
+
+	&--orange {
+		fill: map-get(theme.$colors, 'brand-orange');
+	}
+}
+
+.brand {
+	&--large {
+		display: flex;
+		flex-direction: column;
+		width: 23.4rem;
+		align-items: center;
+		margin-bottom: map-get(theme.$spacings, 'tight');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			width: 32rem;
+		}
+
+		.brand__logo {
+			width: props.$logo-width;
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				width: props.$logo-width-tablet;
+			}
+		}
+		.brand__wordmark {
+			&.svg-container {
+				flex: initial;
+				svg {
+					height: initial;
+				}
+			}
+		}
+	}
+}

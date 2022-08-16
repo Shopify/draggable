@@ -1,0 +1,13 @@
+@use '@src/styles/utils/shared/layout';
+@use 'props';
+@use 'keyframes';
+@use 'variants';
+
+:root {
+	--pattern-bg-color: white;
+}
+
+.pattern {
+	@include layout.visible(false);
+	@include layout.position-cover;
+}

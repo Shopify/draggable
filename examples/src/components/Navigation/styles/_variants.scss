@@ -1,0 +1,18 @@
+@use '@src/styles/theme';
+
+.navigation {
+	&__link {
+		font-weight: 600;
+		color: map-get(theme.$colors, 'coal-light');
+
+		&--current {
+			pointer-events: none;
+			color: map-get(theme.$colors, 'purple-base');
+		}
+
+		&--disabled {
+			pointer-events: none;
+			color: map-get(theme.$colors, 'coal-light');
+		}
+	}
+}

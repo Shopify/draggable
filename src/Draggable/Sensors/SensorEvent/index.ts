@@ -1,100 +1,118 @@
-import AbstractEvent from '../../../shared/AbstractEvent';
-
-export type SensorEventData = {
-  originalEvent?: Event;
-  clientX?: number;
-  clientY?: number;
-  target?: HTMLElement;
-  container?: HTMLElement;
+export type SensorEventDetail = {
+  originalEvent: Event;
+  clientX: number;
+  clientY: number;
+  target: HTMLElement;
+  container: HTMLElement;
   originalSource?: HTMLElement;
   type?: string;
   value?: unknown;
   pressure?: number;
 };
 
-export class SensorEvent extends AbstractEvent {
-  declare data: SensorEventData;
-
-  constructor(data?: SensorEventData) {
-    super(data);
+export class SensorEvent<
+  T extends SensorEventDetail = SensorEventDetail
+> extends CustomEvent<T> {
+  constructor(
+    eventInitDict?: CustomEventInit<T>,
+    type: string = SensorEvent.type
+  ) {
+    super(type, eventInitDict);
   }
 
   get originalEvent() {
-    return this.data.originalEvent;
+    return this.detail.originalEvent;
   }
 
   get clientX() {
-    return this.data.clientX;
+    return this.detail.clientX;
   }
 
   get clientY() {
-    return this.data.clientY;
+    return this.detail.clientY;
   }
 
   get target() {
-    return this.data.target;
+    return this.detail.target;
   }
 
   get container() {
-    return this.data.container;
+    return this.detail.container;
   }
 
   get originalSource() {
-    return this.data.originalSource;
+    return this.detail.originalSource;
   }
 
   get pressure() {
-    return this.data.pressure;
+    return this.detail.pressure;
   }
 
-  clone(data: SensorEventData) {
-    return new SensorEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  clone = (detail: SensorEventDetail) =>
+    new SensorEvent(
+      { detail: { ...this.detail, ...detail } },
+      SensorEvent.type
+    );
+
+  static type = 'sensor';
 }
 
 export class DragStartSensorEvent extends SensorEvent {
-  clone(data: SensorEventData) {
-    return new DragStartSensorEvent({
-      ...this.data,
-      ...data,
-    });
+  constructor(detail: SensorEventDetail) {
+    super(
+      { detail, cancelable: DragStartSensorEvent.cancelable },
+      DragStartSensorEvent.type
+    );
   }
 
+  clone = (detail: SensorEventDetail) =>
+    new DragStartSensorEvent({
+      ...this.detail,
+      ...detail,
+    });
+
   static type = 'drag:start';
+  static cancelable = true;
 }
 
 export class DragMoveSensorEvent extends SensorEvent {
-  clone(data: SensorEventData) {
-    return new DragMoveSensorEvent({
-      ...this.data,
-      ...data,
-    });
+  constructor(detail: SensorEventDetail) {
+    super({ detail }, DragMoveSensorEvent.type);
   }
+
+  clone = (detail: SensorEventDetail) =>
+    new DragMoveSensorEvent({
+      ...this.detail,
+      ...detail,
+    });
 
   static type = 'drag:move';
 }
 
 export class DragStopSensorEvent extends SensorEvent {
-  clone(data: SensorEventData) {
-    return new DragStopSensorEvent({
-      ...this.data,
-      ...data,
-    });
+  constructor(detail: SensorEventDetail) {
+    super({ detail }, DragStopSensorEvent.type);
   }
+
+  clone = (detail: SensorEventDetail) =>
+    new DragStopSensorEvent({
+      ...this.detail,
+      ...detail,
+    });
 
   static type = 'drag:stop';
 }
 
 export class DragPressureSensorEvent extends SensorEvent {
-  clone(data: SensorEventData) {
-    return new DragPressureSensorEvent({
-      ...this.data,
-      ...data,
-    });
+  constructor(detail: SensorEventDetail) {
+    super({ detail }, DragPressureSensorEvent.type);
   }
+
+  clone = (detail: SensorEventDetail) =>
+    new DragPressureSensorEvent({
+      ...this.detail,
+      ...detail,
+    });
 
   static type = 'drag:pressure';
 }

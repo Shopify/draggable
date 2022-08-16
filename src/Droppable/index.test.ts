@@ -119,9 +119,7 @@ describe('Droppable', () => {
         moveMouse(secondDropzone);
       });
 
-      expect(eventHandler).toHaveBeenCalledWithEvent(
-        <Event>(<unknown>DroppableReturnedEvent)
-      );
+      expect(eventHandler).toHaveBeenCalledWithEvent(DroppableReturnedEvent);
 
       expect(eventHandler).toHaveBeenCalledWithEventProperties({
         dragEvent: originalDragEvents[1],
@@ -150,7 +148,7 @@ describe('Droppable', () => {
 
   it('prevents drag when canceling sortable start event', () => {
     droppable.on('droppable:start', (droppableEvent) => {
-      droppableEvent.cancel();
+      droppableEvent.preventDefault();
     });
 
     clickMouse(draggableElement);
@@ -194,7 +192,7 @@ describe('Droppable', () => {
 
   it('prevents drop when droppable:dropped event gets canceled', () => {
     droppable.on('droppable:dropped', (droppableEvent) => {
-      droppableEvent.cancel();
+      droppableEvent.preventDefault();
     });
 
     clickMouse(draggableElement);
@@ -208,7 +206,7 @@ describe('Droppable', () => {
 
   it('prevents release when droppable:returned event gets canceled', () => {
     droppable.on('droppable:returned', (droppableEvent) => {
-      droppableEvent.cancel();
+      droppableEvent.preventDefault();
     });
 
     clickMouse(draggableElement);
@@ -239,7 +237,7 @@ describe('Droppable', () => {
         requestAnimationFrame(() => {
           // because user defined get triggered first we need to
           // wait for droppable to cancel the event
-          expect(dragEvent.canceled()).toBe(true);
+          expect(dragEvent.defaultPrevented).toBe(true);
         });
       });
 

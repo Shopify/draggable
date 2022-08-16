@@ -1,0 +1,88 @@
+@use '@src/styles/components/block-layout';
+@use '@src/styles/utils/shared/functions';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
+
+$flexbox-block-name: unquote('block');
+
+.flexbox {
+	.block-layout {
+		@include layout.draggable-source-layout($flexbox-block-name, 1, 2, 4, 5) {
+			flex-basis: 50%;
+		}
+
+		@include layout.draggable-source-layout($flexbox-block-name, 3, 6, 7) {
+			flex-basis: 100%;
+		}
+
+		@include layout.draggable-source-layout($flexbox-block-name, 1, 2, 4, 5, 7) {
+			.block__content {
+				height: functions.rows(2);
+			}
+		}
+
+		@include layout.draggable-source-layout($flexbox-block-name, 3, 6) {
+			.block__content {
+				height: functions.rows(3);
+			}
+		}
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			@include layout.draggable-source-layout($flexbox-block-name, 1, 2, 4, 5, 7) {
+				.block__content {
+					height: functions.rows(3);
+				}
+			}
+
+			@include layout.draggable-source-layout($flexbox-block-name, 3, 6) {
+				.block__content {
+					height: functions.rows(4);
+				}
+			}
+		}
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			@include layout.draggable-source-layout($flexbox-block-name, 1, 2, 3) {
+				flex-basis: 33.333%;
+			}
+
+			@include layout.draggable-source-layout($flexbox-block-name, 4) {
+				flex-basis: 25%;
+			}
+
+			@include layout.draggable-source-layout($flexbox-block-name, 5) {
+				flex-basis: 75%;
+			}
+
+			@include layout.draggable-source-layout($flexbox-block-name, 6, 7) {
+				flex-basis: 50%;
+			}
+
+			@include layout.draggable-source-layout($flexbox-block-name, 1, 2, 3, 4, 6, 7) {
+				.block__content {
+					height: functions.rows(4);
+				}
+			}
+
+			@include layout.draggable-source-layout($flexbox-block-name, 4, 5) {
+				.block__content {
+					height: functions.rows(5);
+				}
+			}
+		}
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			@include layout.draggable-source-layout($flexbox-block-name, 1, 2, 3, 4, 6, 7) {
+				.block__content {
+					height: functions.rows(5);
+				}
+			}
+
+			@include layout.draggable-source-layout($flexbox-block-name, 4, 5) {
+				.block__content {
+					height: functions.rows(6);
+				}
+			}
+		}
+	}
+}

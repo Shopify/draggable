@@ -1,0 +1,24 @@
+@use '@src/styles/utils/shared/functions';
+@use '@src/styles/theme';
+
+.snappable {
+	.block-layout--grid {
+		gap: map-get(theme.$borders, 'thin');
+
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			grid-template-rows: repeat(4, functions.rows(3));
+			grid-template-columns: repeat(4, 1fr);
+		}
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			grid-template-rows: repeat(4, functions.rows(4));
+		}
+
+		:global(.block) {
+			height: 100%;
+		}
+	}
+}

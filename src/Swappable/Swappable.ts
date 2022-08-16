@@ -1,5 +1,9 @@
-import Draggable, { DraggableOptions } from '../Draggable';
-import AbstractEvent from '../shared/AbstractEvent';
+import Draggable, {
+  DragEvent,
+  DraggableOptions,
+  DragOverEvent,
+  DragStopEvent,
+} from '../Draggable';
 import {
   SwappableStartEvent,
   SwappableSwapEvent,
@@ -53,13 +57,19 @@ const defaultAnnouncements = {
 };
 
 interface SwappableOptions extends Omit<DraggableOptions, 'announcements'> {
-  announcements: Record<string, (event: SwappableEvent | AbstractEvent) => unknown>
+  announcements: Record<
+    string,
+    (event: SwappableEvent | CustomEvent) => unknown
+  >;
 }
 
 export default class Swappable extends Draggable {
   lastOver: HTMLElement | null = null;
 
-  constructor(containers: HTMLElement[] = [], options: Partial<SwappableOptions> = {}) {
+  constructor(
+    containers: NodeList | HTMLElement[] | HTMLElement = [document.body],
+    options: Partial<SwappableOptions> = {}
+  ) {
     super(containers, {
       ...options,
       announcements: {
@@ -85,23 +95,23 @@ export default class Swappable extends Draggable {
       .off('drag:stop', this[onDragStop]);
   }
 
-  [onDragStart](event) {
+  [onDragStart](event: DragEvent) {
     const swappableStartEvent = new SwappableStartEvent({
       dragEvent: event,
     });
 
     this.trigger(swappableStartEvent);
 
-    if (swappableStartEvent.canceled()) {
-      event.cancel();
+    if (swappableStartEvent.defaultPrevented) {
+      event.preventDefault();
     }
   }
 
-  [onDragOver](event) {
+  [onDragOver](event: DragOverEvent) {
     if (
       event.over === event.originalSource ||
       event.over === event.source ||
-      event.canceled()
+      event.defaultPrevented
     ) {
       return;
     }
@@ -114,7 +124,7 @@ export default class Swappable extends Draggable {
 
     this.trigger(swappableSwapEvent);
 
-    if (swappableSwapEvent.canceled()) {
+    if (swappableSwapEvent.defaultPrevented) {
       return;
     }
 
@@ -139,7 +149,7 @@ export default class Swappable extends Draggable {
     this.trigger(swappableSwappedEvent);
   }
 
-  [onDragStop](event) {
+  [onDragStop](event: DragStopEvent) {
     const swappableStopEvent = new SwappableStopEvent({
       dragEvent: event,
     });

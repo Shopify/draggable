@@ -1,0 +1,87 @@
+@use '@src/styles/theme';
+
+.plate {
+	&--bottom {
+		padding-top: 100%;
+		width: 100%;
+
+		.plate__shadow {
+			transform: rotate(55deg);
+		}
+	}
+
+	&--middle {
+		padding-top: 75%;
+		width: 75%;
+
+		.plate__shadow {
+			transform: rotate(45deg);
+		}
+	}
+
+	&--top {
+		padding-top: 50%;
+		width: 50%;
+
+		.plate__shadow {
+			transform: rotate(35deg);
+		}
+	}
+
+	&.plate--draggable {
+		color: map-get(theme.$colors, 'coal-dark');
+		transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
+
+		&:focus,
+		&:hover {
+			color: map-get(theme.$colors, 'brand-blue');
+		}
+
+		.plate__shadow::before {
+			background-color: currentColor;
+			animation-duration: map-get(theme.$durations, 'slow');
+			animation-timing-function: map-get(theme.$easings, 'base');
+		}
+
+		.plate__content {
+			background-color: white;
+			border: map-get(theme.$borders, 'flexible') solid currentColor;
+			animation-duration: map-get(theme.$durations, 'slow');
+			animation-timing-function: map-get(theme.$easings, 'base');
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				border-width: map-get(theme.$borders, 'thick');
+			}
+		}
+
+		&.plate--bottom {
+			&:focus,
+			&:hover {
+				.plate__content,
+				.plate__shadow::before {
+					animation-name: plate-small;
+				}
+			}
+		}
+
+		&.plate--middle {
+			&:focus,
+			&:hover {
+				.plate__content,
+				.plate__shadow::before {
+					animation-name: plate-medium;
+				}
+			}
+		}
+
+		&.plate--top {
+			&:focus,
+			&:hover {
+				.plate__content,
+				.plate__shadow::before {
+					animation-name: plate-big;
+				}
+			}
+		}
+	}
+}

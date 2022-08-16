@@ -1,0 +1,64 @@
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/components/link';
+@use '@src/styles/theme';
+
+$mobile-nav-padding-top: calc(map-get(theme.$spacings, 'looser') * 2);
+
+.sidebar {
+	z-index: map-get(theme.$z-index, 'sidebar');
+	background-color: map-get(theme.$colors, 'coal-dark');
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+
+	@media screen and (max-width: calc(map-get(theme.$breakpoints, 'md') - 1px)) {
+		text-align: center;
+		transition: opacity map-get(theme.$durations, 'base') map-get(theme.$easings, 'base'),
+			visibility map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		right: auto;
+		width: map-get(theme.$layout-lengths, 'sidebar');
+	}
+
+	&__header {
+		padding: $mobile-nav-padding-top map-get(theme.$spacings, 'tight')
+			map-get(theme.$spacings, 'tight');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			padding-top: map-get(theme.$spacings, 'looser');
+		}
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			padding-top: map-get(theme.$spacings, 'looser');
+			padding-right: map-get(theme.$spacings, 'looser');
+			padding-left: map-get(theme.$spacings, 'looser');
+		}
+	}
+
+	&__footer {
+		padding: map-get(theme.$spacings, 'loose') map-get(theme.$spacings, 'tight');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			padding: map-get(theme.$spacings, 'tight') map-get(theme.$spacings, 'loose');
+		}
+	}
+}
+
+.legal-text {
+	font-size: 1.2rem;
+	font-weight: 600;
+	line-height: 1.4;
+	color: white;
+
+	& + & {
+		margin-top: map-get(theme.$spacings, 'tighter');
+	}
+
+	@media screen and (max-width: calc(map-get(theme.$breakpoints, 'md') - 1px)) {
+		margin-left: auto;
+		margin-right: auto;
+		max-width: map-get(theme.$layout-lengths, 'sidebar');
+	}
+}

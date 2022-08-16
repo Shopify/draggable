@@ -1,0 +1,23 @@
+@use 'props';
+@use '@src/styles/theme';
+
+.shadow {
+	pointer-events: none;
+	position: absolute;
+	bottom: -#{props.$puzzle-shadow-offset-y};
+	left: calc(-1 * (props.$puzzle-supplement-offset / 3));
+	width: 100%;
+	margin: auto;
+	opacity: props.$puzzle-shadow-opacity;
+}
+
+.shadow--cube {
+	top: props.$puzzle-shadow-offset-y-cube;
+	bottom: auto;
+	left: -#{props.$puzzle-outline-width};
+	width: props.$puzzle-supplement-width-cube;
+	// should this be applied to all shadows?
+	transition-property: opacity, transform;
+	transition-duration: map-get(theme.$durations, 'base');
+	transition-timing-function: map-get(theme.$easings, 'excite');
+}

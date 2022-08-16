@@ -1,0 +1,34 @@
+@use '@src/styles/theme';
+@use '@src/components/Pattern/styles/props' as pattern;
+@use 'props';
+
+.paper-stack {
+	&__item {
+		&--draggable {
+			cursor: map-get(theme.$cursors, 'drag-base');
+
+			.paper-stack__content {
+				color: map-get(theme.$colors, 'coal-dark');
+				background-color: white;
+				border-color: currentColor;
+				transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+					background-color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+					transform map-get(theme.$durations, 'base') map-get(theme.$easings, 'base');
+			}
+
+			// interaction
+			&:focus,
+			&:hover {
+				.paper-stack__content {
+					color: map-get(theme.$colors, 'brand-blue');
+					transform: perspective(90rem) rotateX(60deg)
+						translateY(map-get(theme.$spacings, 'tightest'));
+
+					&::after {
+						transform: translateY(-(map-get(theme.$spacings, 'tightest')));
+					}
+				}
+			}
+		}
+	}
+}

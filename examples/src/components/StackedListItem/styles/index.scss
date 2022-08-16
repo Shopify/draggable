@@ -1,0 +1,57 @@
+@use '@src/styles/theme';
+@use '@src/styles/components/handle';
+
+@use 'props';
+@use 'variants';
+
+.stacked-list__item {
+	cursor: map-get(theme.$cursors, 'base');
+	height: auto;
+	&-content {
+		position: relative;
+		display: flex;
+		align-items: center;
+		padding: map-get(theme.$spacings, 'tighter');
+		color: currentColor;
+		background-color: map-get(theme.$colors, 'ash-light');
+		border: map-get(theme.$borders, 'thin') solid currentColor;
+		transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+			background-color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+			transform map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			border-width: map-get(theme.$borders, 'base');
+		}
+
+		.heading {
+			flex: 1 1 auto;
+		}
+
+		// top border psuedo element... solution to create a collapsed border
+		// required to make the hover style highlight each side of the element
+		&:before {
+			content: '';
+			position: absolute;
+			top: -(map-get(theme.$borders, 'thin'));
+			right: -(map-get(theme.$borders, 'thin'));
+			left: -(map-get(theme.$borders, 'thin'));
+			display: block;
+			height: map-get(theme.$borders, 'thin');
+			background-color: currentColor;
+			opacity: 0;
+			transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base'),
+				opacity map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				top: -(map-get(theme.$borders, 'base'));
+				right: -(map-get(theme.$borders, 'base'));
+				left: -(map-get(theme.$borders, 'base'));
+				height: map-get(theme.$borders, 'base');
+			}
+		}
+	}
+
+	:global(.draggable--original:first-child + &) {
+		margin-top: 0;
+	}
+}

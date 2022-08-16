@@ -5,7 +5,6 @@ import Draggable, {
   DragStopEvent,
   DraggableOptions,
 } from '../Draggable';
-import AbstractEvent from '../shared/AbstractEvent';
 import {
   SortableStartEvent,
   SortableSortEvent,
@@ -48,42 +47,45 @@ function onSortableSortedDefaultAnnouncement({
   }
 }
 
-const index = (element: Element) =>
-  Array.prototype.indexOf.call(element.parentNode?.children, element);
+const index = (element: HTMLElement) =>
+  Array.prototype.indexOf.call(element.parentElement?.children, element);
 
-function moveInsideEmptyContainer(source: Element, overContainer: Element) {
-  const oldContainer = <Element>source.parentNode;
+function moveInsideEmptyContainer(
+  source: HTMLElement,
+  overContainer: HTMLElement
+) {
+  const oldContainer = source.parentElement;
 
   overContainer.appendChild(source);
 
   return { oldContainer, newContainer: overContainer };
 }
 
-function moveWithinContainer(source: Element, over: Element) {
+function moveWithinContainer(source: HTMLElement, over: HTMLElement) {
   const oldIndex = index(source);
   const newIndex = index(over);
 
   if (oldIndex < newIndex)
-    source.parentNode?.insertBefore(source, over.nextElementSibling);
-  else source.parentNode?.insertBefore(source, over);
+    source.parentElement?.insertBefore(source, over.nextElementSibling);
+  else source.parentElement?.insertBefore(source, over);
 
   return {
-    oldContainer: <Element>source.parentNode,
-    newContainer: <Element>source.parentNode,
+    oldContainer: source.parentElement,
+    newContainer: source.parentElement,
   };
 }
 
 function moveOutsideContainer(
-  source: Element,
-  over: Element,
-  overContainer: Element
+  source: HTMLElement,
+  over: HTMLElement,
+  overContainer: HTMLElement
 ) {
-  const oldContainer = source.parentNode;
+  const oldContainer = source.parentElement;
 
-  if (over) over.parentNode?.insertBefore(source, over);
+  if (over) over.parentElement?.insertBefore(source, over);
   else overContainer.appendChild(source);
 
-  return { oldContainer, newContainer: source.parentNode };
+  return { oldContainer, newContainer: source.parentElement };
 }
 
 function move({
@@ -92,14 +94,14 @@ function move({
   overContainer,
   children,
 }: {
-  source: Element;
-  over: Element;
-  overContainer: Element;
-  children: Element[];
+  source: HTMLElement;
+  over: HTMLElement;
+  overContainer: HTMLElement;
+  children: HTMLElement[];
 }) {
   const emptyOverContainer = !children.length;
-  const differentContainer = source.parentNode !== overContainer;
-  const sameContainer = over && source.parentNode === over.parentNode;
+  const differentContainer = source.parentElement !== overContainer;
+  const sameContainer = over && source.parentElement === over.parentElement;
 
   if (emptyOverContainer)
     return moveInsideEmptyContainer(source, overContainer);
@@ -114,9 +116,11 @@ const defaultAnnouncements = {
 };
 
 interface SortableOptions extends Omit<DraggableOptions, 'announcements'> {
-  announcements: Record<string, (event: SortableEvent | AbstractEvent) => unknown>
+  announcements: Record<
+    string,
+    (event: SortableEvent | CustomEvent) => unknown
+  >;
 }
-
 
 /**
  * Sortable is built on top of Draggable and allows sorting of draggable elements. Sortable will keep
@@ -124,9 +128,12 @@ interface SortableOptions extends Omit<DraggableOptions, 'announcements'> {
  */
 export default class Sortable extends Draggable {
   startIndex: number | null;
-  startContainer: Element | null;
+  startContainer: HTMLElement | null;
 
-  constructor(containers: HTMLElement[] = [], options: Partial<SortableOptions> = {}) {
+  constructor(
+    containers: NodeList | HTMLElement[] | HTMLElement = [document.body],
+    options: Partial<SortableOptions> = {}
+  ) {
     super(containers, {
       ...options,
       announcements: {
@@ -156,31 +163,31 @@ export default class Sortable extends Draggable {
   /**
    * Returns true index of element within its container during drag operation, i.e. excluding mirror and original source
    */
-  index(element: Element): number {
-    return this.getSortableElementsForContainer(
-      <Element>element.parentNode
-    ).indexOf(element);
+  index(element: HTMLElement): number {
+    return this.getSortableElementsForContainer(element.parentElement).indexOf(
+      element
+    );
   }
 
   /**
    * Returns sortable elements for a given container, excluding the mirror and
    * original source element if present
    */
-  getSortableElementsForContainer(container: Element): Element[] {
-    const allSortableElements = <Element[]>(
-      (<unknown>container.querySelectorAll(this.options.draggable))
-    );
+  getSortableElementsForContainer(container: HTMLElement): HTMLElement[] {
+    const allSortableElements = <HTMLElement[]>[
+      ...container.querySelectorAll(this.options.draggable),
+    ];
 
     return [...allSortableElements].filter(
       (childElement) =>
         childElement !== this.originalSource &&
         childElement !== this.mirror &&
-        childElement.parentNode === container
+        childElement.parentElement === container
     );
   }
 
   private [onDragStart] = (event: DragStartEvent) => {
-    this.startContainer = <Element>event.source.parentNode;
+    this.startContainer = event.source.parentElement;
     this.startIndex = this.index(event.source);
 
     const sortableStartEvent = new SortableStartEvent({
@@ -191,28 +198,28 @@ export default class Sortable extends Draggable {
 
     this.trigger(sortableStartEvent);
 
-    if (sortableStartEvent.canceled()) event.cancel();
+    if (sortableStartEvent.defaultPrevented) event.preventDefault();
   };
 
   private [onDragOverContainer] = (event: DragOverContainerEvent) => {
-    if (event.canceled()) return;
+    if (event.defaultPrevented) return;
 
-    const { source, over, overContainer } = event;
+    const { source, overContainer } = event;
     const oldIndex = this.index(source);
 
     const sortableSortEvent = new SortableSortEvent({
       dragEvent: event,
       currentIndex: oldIndex,
       source,
-      over,
+      overContainer: event.overContainer,
     });
 
     this.trigger(sortableSortEvent);
 
-    if (sortableSortEvent.canceled()) return;
+    if (sortableSortEvent.defaultPrevented) return;
 
     const children = this.getSortableElementsForContainer(overContainer);
-    const moves = move({ source, over, overContainer, children });
+    const moves = move({ source, over: event.over, overContainer, children });
 
     if (!moves) return;
 
@@ -240,13 +247,14 @@ export default class Sortable extends Draggable {
     const sortableSortEvent = new SortableSortEvent({
       dragEvent: event,
       currentIndex: oldIndex,
-      source,
+      overContainer,
       over,
+      source,
     });
 
     this.trigger(sortableSortEvent);
 
-    if (sortableSortEvent.canceled()) return;
+    if (sortableSortEvent.defaultPrevented) return;
 
     const children = this.getDraggableElementsForContainer(overContainer);
     const moves = move({ source, over, overContainer, children });
@@ -273,7 +281,7 @@ export default class Sortable extends Draggable {
       oldIndex: this.startIndex,
       newIndex: this.index(event.source),
       oldContainer: this.startContainer,
-      newContainer: event.source.parentNode,
+      newContainer: event.source.parentElement,
     });
 
     this.trigger(sortableStopEvent);

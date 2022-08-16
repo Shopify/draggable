@@ -1,132 +1,132 @@
-import AbstractEvent from '../../../../shared/AbstractEvent';
+import { DragEvent } from 'Draggable/DragEvent';
+
 import { SensorEvent } from '../../../Sensors';
 
-export type MirrorEventData = {
-  dragEvent?: DragEvent;
-  sensorEvent?: SensorEvent;
+export type MirrorEventDetail = {
+  dragEvent: DragEvent;
+  sensorEvent: SensorEvent;
   originalEvent?: Event;
   target?: HTMLElement;
   container?: HTMLElement;
-  source?: HTMLElement;
-  sourceContainer?: HTMLElement;
+  source: HTMLElement;
+  sourceContainer: HTMLElement;
   originalSource?: HTMLElement;
   pressure?: number;
 };
 
-export class MirrorEvent extends AbstractEvent {
-  declare data: MirrorEventData;
+export class MirrorEvent<T extends MirrorEventDetail> extends CustomEvent<T> {
+  constructor(eventInitDict?: CustomEventInit<T>, type = MirrorEvent.type) {
+    super(type, eventInitDict);
+  }
 
   get source() {
-    return this.data.source;
+    return this.detail.source;
   }
 
   get originalSource() {
-    return this.data.originalSource;
+    return this.detail.originalSource;
   }
 
   get sourceContainer() {
-    return this.data.sourceContainer;
+    return this.detail.sourceContainer;
   }
 
   get sensorEvent() {
-    return this.data.sensorEvent;
+    return this.detail.sensorEvent;
   }
 
   get dragEvent() {
-    return this.data.dragEvent;
+    return this.detail.dragEvent;
   }
 
   get originalEvent() {
     return this.sensorEvent ? this.sensorEvent.originalEvent : null;
   }
 
-  clone(data) {
-    return new MirrorEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  clone = (detail: T) =>
+    new MirrorEvent(
+      { cancelable: this.cancelable, detail: { ...this.detail, ...detail } },
+      this.type
+    );
+
+  static type = 'mirror';
 }
 
-export class MirrorCreateEvent extends MirrorEvent {
+export class MirrorCreateEvent extends MirrorEvent<MirrorEventDetail> {
+  constructor(detail: MirrorEventDetail) {
+    super(
+      { detail, cancelable: MirrorCreateEvent.cancelable },
+      MirrorCreateEvent.type
+    );
+  }
+
   static type = 'mirror:create';
-
-  clone(data) {
-    return new MirrorCreateEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  static cancelable = true;
 }
 
-export class MirrorCreatedEvent extends MirrorEvent {
-  static type = 'mirror:created';
-  declare data: MirrorEventData & {
-    mirror: HTMLElement;
-  };
+export type MirrorCreatedEventDetail = MirrorEventDetail & {
+  mirror: HTMLElement;
+};
+
+export class MirrorCreatedEvent extends MirrorEvent<MirrorCreatedEventDetail> {
+  constructor(detail: MirrorCreatedEventDetail) {
+    super({ detail }, MirrorCreatedEvent.type);
+  }
 
   /*** Draggables mirror element */
   get mirror() {
-    return this.data.mirror;
+    return this.detail.mirror;
   }
 
-  clone(data) {
-    return new MirrorCreatedEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  static type = 'mirror:created';
 }
 
-export class MirrorAttachedEvent extends MirrorEvent {
+export type MirrorAttachedEventDetail = MirrorEventDetail & {
+  mirror: HTMLElement;
+};
+
+export class MirrorAttachedEvent extends MirrorEvent<MirrorAttachedEventDetail> {
+  constructor(detail: MirrorAttachedEventDetail) {
+    super({ detail }, MirrorAttachedEvent.type);
+  }
+
+  get mirror() {
+    return this.detail.mirror;
+  }
+
   static type = 'mirror:attached';
-
-  declare data: MirrorEventData & {
-    mirror: HTMLElement;
-  };
-
-  get mirror() {
-    return this.data.mirror;
-  }
-
-  clone(data) {
-    return new MirrorAttachedEvent({
-      ...this.data,
-      ...data,
-    });
-  }
 }
 
-export class MirrorMoveEvent extends MirrorEvent {
-  declare data: MirrorEventData & {
-    mirror: HTMLElement;
-    passedThreshX: boolean;
-    passedThreshY: boolean;
-  };
+export type MirrorMoveEventDetail = MirrorEventDetail & {
+  mirror: HTMLElement;
+  passedThreshX: boolean;
+  passedThreshY: boolean;
+};
+
+export class MirrorMoveEvent extends MirrorEvent<MirrorMoveEventDetail> {
+  constructor(detail: MirrorMoveEventDetail) {
+    super(
+      { detail, cancelable: MirrorMoveEvent.cancelable },
+      MirrorMoveEvent.type
+    );
+  }
 
   get mirror() {
-    return this.data.mirror;
+    return this.detail.mirror;
   }
 
   /*** Sensor has exceeded mirror's threshold on x axis */
   get passedThreshX() {
-    return this.data.passedThreshX;
+    return this.detail.passedThreshX;
   }
 
   /*** Sensor has exceeded mirror's threshold on y axis */
   get passedThreshY() {
-    return this.data.passedThreshY;
+    return this.detail.passedThreshY;
   }
 
   static type = 'mirror:move';
   static cancelable = true;
-
-  clone(data) {
-    return new MirrorMoveEvent({
-      ...this.data,
-      ...data,
-    });
-  }
 }
 
 /**
@@ -137,36 +137,34 @@ export class MirrorMoveEvent extends MirrorEvent {
  * @module MirrorMovedEvent
  * @extends MirrorEvent
  */
-export class MirrorMovedEvent extends MirrorEvent {
-  static type = 'mirror:moved';
 
-  declare data: MirrorEventData & {
-    mirror: HTMLElement;
-    passedThreshX: boolean;
-    passedThreshY: boolean;
-  };
+export type MirrorMovedEventDetail = MirrorEventDetail & {
+  mirror: HTMLElement;
+  passedThreshX: boolean;
+  passedThreshY: boolean;
+};
+
+export class MirrorMovedEvent extends MirrorEvent<MirrorMovedEventDetail> {
+  constructor(detail: MirrorMovedEventDetail) {
+    super({ detail }, MirrorMovedEvent.type);
+  }
 
   /*** Draggables mirror element */
   get mirror() {
-    return this.data.mirror;
+    return this.detail.mirror;
   }
 
   /*** Sensor has exceeded mirror's threshold on x axis */
   get passedThreshX() {
-    return this.data.passedThreshX;
+    return this.detail.passedThreshX;
   }
 
   /*** Sensor has exceeded mirror's threshold on y axis */
   get passedThreshY() {
-    return this.data.passedThreshY;
+    return this.detail.passedThreshY;
   }
 
-  clone(data) {
-    return new MirrorMovedEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  static type = 'mirror:moved';
 }
 
 /**
@@ -175,23 +173,24 @@ export class MirrorMovedEvent extends MirrorEvent {
  * @module MirrorDestroyEvent
  * @extends MirrorEvent
  */
-export class MirrorDestroyEvent extends MirrorEvent {
-  static type = 'mirror:destroy';
-  static cancelable = true;
 
-  declare data: MirrorEventData & {
-    mirror: HTMLElement;
-  };
+export type MirrorDestroyEventDetail = MirrorEventDetail & {
+  mirror: HTMLElement;
+};
+
+export class MirrorDestroyEvent extends MirrorEvent<MirrorDestroyEventDetail> {
+  constructor(detail: MirrorDestroyEventDetail) {
+    super(
+      { detail, cancelable: MirrorDestroyEvent.cancelable },
+      MirrorDestroyEvent.type
+    );
+  }
 
   /*** Draggables mirror element */
   get mirror() {
-    return this.data.mirror;
+    return this.detail.mirror;
   }
 
-  clone(data) {
-    return new MirrorDestroyEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  static type = 'mirror:destroy';
+  static cancelable = true;
 }

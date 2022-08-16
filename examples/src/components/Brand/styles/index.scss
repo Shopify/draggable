@@ -1,0 +1,72 @@
+@use '@src/styles/theme';
+@use '@src/styles/components/svg';
+@use 'keyframes';
+@use 'props';
+@use 'variants';
+
+.brand {
+	cursor: map-get(theme.$cursors, 'rock-base');
+	display: flex;
+
+	&:active {
+		cursor: map-get(theme.$cursors, 'rock-active');
+
+		.wave--mask,
+		.wave--purple,
+		.wave--red,
+		.wave--orange,
+		.hand {
+			animation-duration: map-get(theme.$durations, 'base');
+		}
+	}
+
+	@media screen and (max-width: calc(map-get(theme.$breakpoints, 'md') - 1px)) {
+		justify-content: center;
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		margin-left: -(map-get(theme.$spacings, 'tightest'));
+	}
+
+	&__logo {
+		flex: 0 0 props.$logo-width;
+	}
+
+	&__wordmark {
+		flex: 0 0 props.$wordmark-width;
+		margin-left: map-get(theme.$spacings, 'tighter');
+	}
+
+	&:hover {
+		.wave--mask {
+			animation: logo-rainbow-mask map-get(theme.$durations, 'slow') map-get(theme.$easings, 'base')
+				infinite;
+		}
+
+		.wave--purple {
+			animation: logo-rainbow-purple map-get(theme.$durations, 'slow')
+				map-get(theme.$easings, 'base') infinite;
+		}
+
+		.wave--red {
+			animation: logo-rainbow-red map-get(theme.$durations, 'slow') map-get(theme.$easings, 'base')
+				infinite;
+		}
+
+		.wave--orange {
+			animation: logo-rainbow-orange map-get(theme.$durations, 'slow')
+				map-get(theme.$easings, 'base') infinite;
+		}
+
+		.hand {
+			animation: logo-outline-bounce map-get(theme.$durations, 'slow') linear infinite;
+		}
+	}
+
+	.svg--wordmark {
+		fill: map-get(theme.$colors, 'brand-yellow');
+	}
+	.hand {
+		fill: map-get(theme.$colors, 'brand-yellow');
+	}
+}

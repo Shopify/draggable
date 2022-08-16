@@ -1,0 +1,8 @@
+$shadows: (
+	base: 0 1rem 4rem rgba(black, 0.6),
+	subtle: 0 0.3rem 0.4rem 0.1rem rgba(black, 0.4),
+	pulse: 0 0 1.2rem 0.6rem rgba(white, 0.08),
+	mirror-face-base: unquote('inset 0 0 0 0.2rem black, 0 0 0 0.2rem black'),
+	mirror-face-tablet: unquote('inset 0 0 0 0.3rem black, 0 0 0 0.3rem black'),
+	mirror-face-desktop: unquote('inset 0 0 0 0.5rem black, 0 0 0 0.5rem black')
+);

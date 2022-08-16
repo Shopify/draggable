@@ -96,7 +96,7 @@ describe('Sortable', () => {
 
   it('prevents drag when canceling sortable start event', () => {
     sortable.on('sortable:start', (sortableEvent) => {
-      sortableEvent.cancel();
+      sortableEvent.preventDefault();
     });
 
     clickMouse(firstItem);
@@ -262,7 +262,7 @@ describe('Sortable', () => {
 
   it('prevents sorting when sortable:sort event gets canceled', () => {
     sortable.on('sortable:sort', (sortableEvent) => {
-      sortableEvent.cancel();
+      sortableEvent.preventDefault();
     });
 
     clickMouse(firstItem);

@@ -1,9 +1,8 @@
-import AbstractEvent from '../../shared/AbstractEvent';
 import expectation from './utils';
 
 export function toHaveBeenCalledWithEvent(
   jestFunction?: jest.Mock,
-  expectedEventConstructor?: typeof AbstractEvent
+  expectedEventConstructor?: CustomEvent
 ) {
   const mockFunction = jestFunction.mock;
   const mockCalls = mockFunction.calls;
@@ -46,7 +45,7 @@ export function toHaveBeenCalledWithEvent(
     pass,
     message: () =>
       `Expected ${event.type} event ${expectation(pass)} triggered with ${
-        expectedEventConstructor.name
+        expectedEventConstructor.type
       } instance`,
   };
 }
@@ -55,9 +54,7 @@ export function toHaveBeenCalledWithEventProperties(
   jestFunction: jest.Mock,
   expectedProperties: Record<string, unknown>
 ) {
-  const mockFunction = jestFunction.mock;
-  const mockCalls = mockFunction.calls;
-  const event = mockCalls[0][0];
+  const event = jestFunction.mock.calls[0][0];
   const expectedPropertyEntries = Object.entries(expectedProperties);
 
   const badMatches = expectedPropertyEntries

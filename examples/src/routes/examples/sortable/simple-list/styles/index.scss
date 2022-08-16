@@ -1,0 +1,10 @@
+@use '@src/styles/utils/shared/functions';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/components/stacked-list';
+@use '@src/styles/theme';
+
+section.simple-list {
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		@include layout.centered-width(functions.columns(5));
+	}
+}

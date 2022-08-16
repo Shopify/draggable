@@ -1,0 +1,141 @@
+@use '@src/styles/theme';
+@use '@src/styles/utils/shared/layout';
+@use '@src/components/Pattern/styles/props' as pattern;
+@use 'props';
+@use 'variants';
+
+.pill-switch {
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+	width: map-get(props.$pill-switch-sizes, 'base');
+	height: map-get(props.$pill-switch-sizes, 'base');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		width: map-get(props.$pill-switch-sizes, 'tablet');
+		height: map-get(props.$pill-switch-sizes, 'tablet');
+	}
+
+	&__track {
+		@include props.pill-switch-track-layout;
+		@include props.pill-switch-border(map-get(theme.$borders, 'base'));
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		color: map-get(theme.$colors, 'brand-blue');
+		background-color: white;
+		transform: rotate(-45deg);
+		overflow: hidden;
+
+		&::after {
+			content: '';
+			position: absolute;
+			top: -(map-get(theme.$borders, 'base'));
+			right: -(map-get(theme.$borders, 'base'));
+			bottom: -(map-get(theme.$borders, 'base'));
+			left: -(map-get(theme.$borders, 'base'));
+			display: block;
+			background-color: map-get(theme.$colors, 'coal-dark');
+			transition: opacity map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
+		}
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			@include props.pill-switch-track-layout('tablet');
+			@include props.pill-switch-border(map-get(theme.$borders, 'thick'));
+		}
+	}
+
+	&__control {
+		@include layout.flex-center;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: map-get(props.$pill-switch-control-sizes, 'base');
+		height: map-get(props.$pill-switch-control-sizes, 'base');
+		color: map-get(theme.$colors, 'coal-dark');
+		background-color: white;
+		border: map-get(theme.$borders, 'base') solid currentColor;
+		border-radius: 50%;
+		transition: color map-get(theme.$durations, 'fast') map-get(theme.$easings, 'base');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			width: map-get(props.$pill-switch-control-sizes, tablet);
+			height: map-get(props.$pill-switch-control-sizes, tablet);
+			border-width: get-border(thick);
+		}
+
+		// visually center
+		.heading {
+			margin-top: -0.1em;
+			margin-left: -0.05em;
+		}
+
+		&:focus,
+		&:hover,
+		&:active {
+			color: map-get(theme.$colors, 'brand-blue-dark');
+		}
+	}
+
+	&__control {
+		&:global(.draggable-mirror) {
+			background-color: white;
+			color: map-get(theme.$colors, 'brand-blue');
+		}
+		&:global(.draggable-source--is-dragging) {
+			@include layout.visible(false);
+		}
+	}
+	&--on {
+		.pill-switch__control {
+			&:global(.draggable-mirror) {
+				color: map-get(theme.$colors, 'brand-blue');
+				background-color: white;
+			}
+		}
+	}
+
+	&__track {
+		& :global(.pattern--halftone) {
+			@include pattern.pattern-halftone-animated();
+			height: map-get(props.$pill-switch-sizes, 'base');
+			transform: rotate(45deg);
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				height: map-get(props.$pill-switch-sizes, 'tablet');
+			}
+		}
+	}
+}
+
+.pill-switch {
+	&__control {
+		&:global(.draggable-mirror) {
+			background-color: white;
+			color: map-get(theme.$colors, 'brand-blue');
+		}
+		&:global(.draggable-source--is-dragging) {
+			@include layout.visible(false);
+		}
+	}
+	&--on {
+		.pill-switch__control {
+			&:global(.draggable-mirror) {
+				color: map-get(theme.$colors, 'brand-blue');
+				background-color: white;
+			}
+		}
+	}
+
+	&__track {
+		& :global(.pattern--halftone) {
+			@include pattern.pattern-halftone-animated();
+			height: map-get(props.$pill-switch-sizes, 'base');
+			transform: rotate(45deg);
+
+			@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+				height: map-get(props.$pill-switch-sizes, 'tablet');
+			}
+		}
+	}
+}

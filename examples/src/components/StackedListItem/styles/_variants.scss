@@ -1,0 +1,73 @@
+@use '@src/styles/theme';
+@use '@src/styles/components/handle';
+@use '@src/components/Pattern/styles/props' as pattern;
+@use 'props';
+
+.stacked-list__item {
+	&--draggable {
+		&:hover {
+			cursor: map-get(theme.$cursors, 'drag-base');
+		}
+
+		.stacked-list__item-content {
+			background-color: white;
+		}
+
+		&:focus {
+			outline: none;
+			cursor: map-get(theme.$cursors, 'drag-active');
+		}
+
+		&:focus,
+		&:hover {
+			.stacked-list__item-content {
+				color: map-get(theme.$colors, 'brand-blue');
+			}
+
+			+ .stacked-list__item {
+				.stacked-list__item-content::before {
+					background-color: map-get(theme.$colors, 'brand-blue');
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	&.draggable-source--placed {
+		.stacked-list__item-content {
+			.pattern--placed {
+				@include pattern.pattern-placed-animated;
+			}
+		}
+	}
+
+	&.stacked-list__item--draggable.draggable-mirror {
+		z-index: map-get(theme.$z-index, 'overlay');
+		transition: width map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie'),
+			height map-get(theme.$durations, 'base') map-get(theme.$easings, 'bungie');
+
+		.stacked-list__item-content {
+			height: 100%;
+			color: white;
+			background-color: map-get(theme.$colors, 'brand-blue');
+			border-color: map-get(theme.$colors, 'brand-blue');
+			transform: scale(1.025);
+		}
+
+		.drag-handle {
+			@include handle.drag-handle-dragging;
+			color: red;
+		}
+	}
+
+	&.draggable-source--is-dragging {
+		z-index: 2;
+		.stacked-list__item-content {
+			color: map-get(theme.$colors, 'brand-blue');
+
+			.pattern--halftone {
+				@include pattern.pattern-halftone-animated;
+			}
+		}
+	}
+}

@@ -1,0 +1,21 @@
+@use '@src/styles/theme';
+@use 'props';
+@use 'keyframes';
+
+.pattern {
+	&--stripes {
+		@include props.stripes-bg;
+	}
+
+	&--halftone {
+		background-image: radial-gradient(currentColor 24%, transparent 25%),
+			radial-gradient(currentColor 24%, transparent 25%);
+		background-position: props.$halftone-bg-position-start;
+		background-size: props.$halftone-bg-size props.$halftone-bg-size;
+		animation: halftone map-get(theme.$durations, 'slow') steps(3) infinite both paused;
+	}
+
+	&--placed {
+		background-color: map-get(theme.$colors, 'brand-blue');
+	}
+}

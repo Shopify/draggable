@@ -1,0 +1,97 @@
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/components/puzzle/props' as puzzle;
+@use '@src/styles/theme';
+@use 'props';
+
+.sortable {
+	padding-top: map-get(theme.$spacings, 'fat');
+	background-color: map-get(theme.$red, 'base');
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		padding-top: map-get(theme.$spacings, 'huger');
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		padding-top: map-get(theme.$spacings, 'hugest');
+	}
+
+	::selection {
+		color: map-get(theme.$red, 'base');
+	}
+
+	.puzzle--sortable {
+		width: props.$puzzle-width-sortable;
+		height: props.$puzzle-height-sortable - props.$puzzle-offset-y-sortable;
+
+		.puzzle__interior {
+			height: props.$puzzle-height-sortable;
+		}
+
+		.draggable-source {
+			transition: transform map-get(theme.$durations, 'base') map-get(theme.$easings, 'excite');
+
+			// required to reset, otherwise it affects the mouse movement
+			&.draggable-mirror {
+				transition: none;
+			}
+		}
+
+		.draggable-source--is-dragging {
+			.face {
+				background-color: transparent;
+
+				.svg {
+					opacity: 0;
+				}
+			}
+		}
+	}
+
+	@include layout.draggable-source-layout('cube', 1) {
+		@include puzzle.cube-layout(3, -5);
+	}
+
+	@include layout.draggable-source-layout('cube', 2) {
+		@include puzzle.cube-layout(2, -6);
+	}
+
+	@include layout.draggable-source-layout('cube', 3) {
+		@include puzzle.cube-layout(1, -7);
+	}
+
+	@include layout.draggable-source-layout('cube', 4) {
+		@include puzzle.cube-layout(0, -8);
+	}
+
+	@include layout.draggable-source-layout('cube', 5) {
+		@include puzzle.cube-layout(3, -3);
+	}
+
+	@include layout.draggable-source-layout('cube', 6) {
+		@include puzzle.cube-layout(3, -1);
+	}
+
+	@include layout.draggable-source-layout('cube', 7) {
+		@include puzzle.cube-layout(3, 1);
+	}
+
+	@include layout.draggable-source-layout('cube', 8) {
+		@include puzzle.cube-layout(2);
+	}
+
+	@include layout.draggable-source-layout('cube', 9) {
+		@include puzzle.cube-layout(1, -1);
+	}
+
+	@include layout.draggable-source-layout('cube', 10) {
+		@include puzzle.cube-layout(0, -6);
+	}
+
+	@include layout.draggable-source-layout('cube', 11) {
+		@include puzzle.cube-layout(0, -4);
+	}
+
+	@include layout.draggable-source-layout('cube', 12) {
+		@include puzzle.cube-layout(0, -2);
+	}
+}

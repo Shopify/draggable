@@ -1,0 +1,64 @@
+@use '@src/styles/utils/shared/functions';
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
+@use 'main';
+
+$grid-overlay-baseline: 0.1rem;
+
+.grid-overlay {
+	--columns: 4;
+	--repeating-width: calc(100% / var(--columns));
+	--gutter-size: map-get(theme.$layout-lengths, 'gutter-mobile');
+	--column-width: calc((100% / var(--columns)) - var(--gutter-size));
+	--baseline-stop: calc(var(--gutter-size) - #{$grid-overlay-baseline});
+	--row-height: calc(#{rows(1, true)} + var(--gutter-size));
+	--bg-width: calc(100% + var(--gutter-size));
+	--bg-baseline: repeating-linear-gradient(
+		to bottom,
+		map-get(theme.$colors, 'purple-base'),
+		map-get(theme.$colors, 'purple-base') $grid-overlay-baseline,
+		transparent $grid-overlay-baseline,
+		transparent var(--baseline-stop),
+		map-get(theme.$colors, 'purple-base') var(--baseline-stop),
+		map-get(theme.$colors, 'purple-base') var(--gutter-size),
+		transparent var(--gutter-size),
+		transparent var(--row-height)
+	);
+	--bg-columns: repeating-linear-gradient(
+		to right,
+		map-get(theme.$colors, 'purple-light'),
+		map-get(theme.$colors, 'purple-light') var(--column-width),
+		transparent var(--column-width),
+		transparent var(--repeating-width)
+	);
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+		--columns: 6;
+		--gutter-size: map-get(theme.$layout-lengths, 'gutter-base');
+		--row-height: calc(#{rows()} + var(--gutter-size));
+	}
+
+	@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+		--columns: 8;
+	}
+
+	// positioned parent will be `body`
+	@include layout.centered-width(map-get(theme.$layout-lengths, 'main-interior'));
+	z-index: 1;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: map-get(theme.$spacings, 'tight');
+	right: map-get(theme.$spacings, 'tight');
+	min-height: 100vh;
+	background-image: var(--bg-baseline), var(--bg-columns);
+	background-size: var(--bg-width) 100%;
+	background-position: 0 calc(-1 * var(--gutter-size));
+	mix-blend-mode: multiply;
+	opacity: 0.8;
+	pointer-events: none;
+
+	&--hidden {
+		display: none;
+	}
+}

@@ -1,0 +1,14 @@
+@use '@src/styles/components/puzzle/props' as puzzle;
+@use '@src/styles/theme';
+
+$secret-stroke-width: 8;
+
+$secret-fade-delay-vier: calc(map-get(theme.$completed-puzzle, 'delay') * 5);
+$secret-fade-delay-agt: calc(map-get(theme.$completed-puzzle, 'delay') * 6);
+$secret-fade-delay-drie: calc(map-get(theme.$completed-puzzle, 'delay') * 7);
+
+$secret-key-length-vier: 130; // rounded up from: 129.25025939941406
+$secret-ley-length-agt: 175; // rounded up from: 174.8414306640625
+$secret-key-length-drie: 127; // rounded up from: 127.12556457519531
+
+$puzzle-height-hero: calc(puzzle.$cube-height * 4);

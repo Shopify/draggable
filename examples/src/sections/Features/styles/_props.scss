@@ -1,0 +1,47 @@
+@use '@src/styles/theme';
+@use '@src/styles/components/puzzle/props' as puzzle;
+
+$puzzle-width-accessible: calc(puzzle.$cube-width * 4);
+$puzzle-height-accessible: calc(puzzle.$cube-height * 1.75);
+
+$puzzle-height-animation: puzzle.$cube-height;
+$animation-shadow-scale: 0.6;
+$animation-cube-distance: map-get(theme.$spacings, 'tight');
+$animation-cube-distance-tablet: map-get(theme.$spacings, 'base');
+$animation-cube-distance-desktop: map-get(theme.$spacings, 'looser');
+
+$puzzle-width-extensible: calc(puzzle.$cube-width * 2.5);
+$puzzle-height-extensible: calc(puzzle.$cube-height * 2.5);
+
+$extensible-face-duration: map-get(theme.$durations, 'faster');
+$extensible-total-duration: calc($extensible-face-duration * 18);
+
+$extensible-face-duration-active: calc(map-get(theme.$durations, 'faster') - 20ms);
+$extensible-total-duration--active: calc($extensible-face-duration-active * 18);
+
+$puzzle-height-interaction: calc(puzzle.$cube-height * 1.5);
+$interaction-shadow-color: #924ecc;
+
+@mixin animation-hover-styles($distance) {
+	.shadow {
+		transform: scale($animation-shadow-scale) rotateX(puzzle.$isometric-skew)
+			translateY(calc($distance * 1.5));
+	}
+
+	.jelly {
+		transform: translateY(-$distance);
+	}
+}
+
+@mixin animation-active-styles {
+	.shadow {
+		transition-duration: map-get(theme.$durations, 'base');
+		opacity: puzzle.$puzzle-shadow-opacity;
+		transform: scale(0.9) rotateX(0) translateY(0);
+	}
+
+	.jelly {
+		transition-duration: map-get(theme.$durations, 'base');
+		transform: scale(0.9, 0.85) translateY(1em);
+	}
+}

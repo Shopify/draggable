@@ -227,7 +227,7 @@ export default class Mirror extends AbstractPlugin {
   getOptions = () => this.draggable.options.mirror ?? {};
 
   [onDragStart] = (dragEvent: DragStartEvent) => {
-    if (dragEvent.canceled()) return;
+    if (dragEvent.defaultPrevented) return;
 
     if ('ontouchstart' in window) {
       document.addEventListener('scroll', this[onScroll], true);
@@ -256,7 +256,7 @@ export default class Mirror extends AbstractPlugin {
 
     this.draggable.trigger(mirrorCreateEvent);
 
-    if (isNativeDragEvent(sensorEvent) || mirrorCreateEvent.canceled()) {
+    if (isNativeDragEvent(sensorEvent) || mirrorCreateEvent.defaultPrevented) {
       return;
     }
 
@@ -291,7 +291,7 @@ export default class Mirror extends AbstractPlugin {
   };
 
   [onDragMove] = (dragEvent: DragMoveEvent) => {
-    if (!this.mirror || dragEvent.canceled()) return;
+    if (!this.mirror || dragEvent.defaultPrevented) return;
 
     const {
       source,
@@ -355,7 +355,7 @@ export default class Mirror extends AbstractPlugin {
 
     this.draggable.trigger(mirrorDestroyEvent);
 
-    if (!mirrorDestroyEvent.canceled()) {
+    if (!mirrorDestroyEvent.defaultPrevented) {
       this.mirror.remove();
     }
   };
@@ -409,7 +409,7 @@ export default class Mirror extends AbstractPlugin {
   };
 
   private [onMirrorMove] = (mirrorEvent: MirrorMoveEvent) => {
-    if (mirrorEvent.canceled()) return null;
+    if (mirrorEvent.defaultPrevented) return null;
 
     const setState = ({ lastMovedX, lastMovedY, ...args }) => {
       this.lastMovedX = lastMovedX;

@@ -9,11 +9,11 @@ declare global {
     interface Matchers<R = void> {
       toHaveDefaultPrevented: () => R;
       toHaveStoppedPropagation: () => R;
-      toHaveBeenCalledWithEvent: (expectedEvent: Event) => R;
+      toHaveBeenCalledWithEvent: (expectedEvent: CustomEvent) => R;
       toHaveBeenCalledWithEventProperties: (
         expectedEvent: Record<string, unknown>
       ) => R;
-      toHaveOrder: (expectedOrder: Element[]) => R;
+      toHaveOrder: (expectedOrder: HTMLElement[]) => R;
       toHaveTriggeredSensorEvent: (
         expectedEventName: string,
         expectedCount?: number

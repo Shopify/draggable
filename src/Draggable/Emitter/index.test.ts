@@ -1,7 +1,10 @@
-import AbstractEvent from '../../shared/AbstractEvent';
 import Emitter from '.';
 
-class TestEvent extends AbstractEvent {}
+class TestEvent extends CustomEvent<unknown> {
+  constructor(detail?: unknown) {
+    super('event', { detail });
+  }
+}
 
 describe('Emitter', () => {
   let emitter;
@@ -45,7 +48,7 @@ describe('Emitter', () => {
 
   describe('#trigger', () => {
     it('triggers callbacks on event with test event', () => {
-      const testEvent = new TestEvent({});
+      const testEvent = new TestEvent();
       const callback = jest.fn();
 
       emitter.on('event', callback);
@@ -58,7 +61,7 @@ describe('Emitter', () => {
     it('catches errors from listeners and re-throws at the end of the trigger phase', () => {
       const consoleErrorSpy = jest.fn();
 
-      const testEvent = new TestEvent({});
+      const testEvent = new TestEvent();
       const error = new Error('Error');
       const callbacks = [
         jest.fn(),

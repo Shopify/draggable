@@ -1,43 +1,44 @@
 import Draggable from '..';
-import AbstractEvent from '../../shared/AbstractEvent';
 
-export class DraggableEvent extends AbstractEvent {
-  static type = 'draggable';
-  declare data: {
-    draggable: Draggable;
-    source: HTMLElement;
-  };
+export type DraggableEventDetail = {
+  draggable: Draggable;
+  source?: HTMLElement;
+};
+
+export class DraggableEvent extends CustomEvent<DraggableEventDetail> {
+  constructor(
+    eventInitDict?: CustomEventInit<DraggableEventDetail>,
+    type: string = DraggableEvent.type
+  ) {
+    super(type, eventInitDict);
+  }
 
   get draggable() {
-    return this.data.draggable;
+    return this.detail.draggable;
   }
 
-  clone(data) {
-    return new DraggableEvent({
-      ...this.data,
-      ...data,
-    });
+  clone(detail: DraggableEventDetail) {
+    return new DraggableEvent(
+      { detail: { ...this.detail, ...detail } },
+      this.type
+    );
   }
+
+  static type = 'draggable';
 }
 
 export class DraggableInitializedEvent extends DraggableEvent {
   static type = 'draggable:initialize';
 
-  clone(data) {
-    return new DraggableInitializedEvent({
-      ...this.data,
-      ...data,
-    });
+  constructor(detail: DraggableEventDetail) {
+    super({ detail }, DraggableInitializedEvent.type);
   }
 }
 
 export class DraggableDestroyEvent extends DraggableEvent {
   static type = 'draggable:destroy';
 
-  clone(data) {
-    return new DraggableDestroyEvent({
-      ...this.data,
-      ...data,
-    });
+  constructor(detail: DraggableEventDetail) {
+    super({ detail }, DraggableDestroyEvent.type);
   }
 }

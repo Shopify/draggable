@@ -1,22 +1,13 @@
-////
-/// Global Utilities
-/// Layout
-////
-
-@import 'utils/shared/layout';
+@use '../shared/layout';
 
 .flex-item-fix {
-  @include flex-item-fix;
+	@include layout.flex-item-fix;
 }
 
 .visually-hidden {
-  @include visually-hidden;
-}
-
-.clearfix {
-  @include clearfix;
+	@include layout.visually-hidden;
 }
 
 .hidden {
-  display: none !important; /* stylelint-disable-line declaration-no-important */
+	display: none !important; /* stylelint-disable-line declaration-no-important */
 }

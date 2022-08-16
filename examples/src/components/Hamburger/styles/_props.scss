@@ -1,0 +1,7 @@
+@use '@src/styles/theme';
+
+$hamburger-width: 2.4rem;
+$hamburger-height: 2.1rem;
+$hamburger-line-height: 0.3rem;
+$hamburger-after-y: calc($hamburger-height - $hamburger-line-height);
+$hamburger-vertical-center: calc(($hamburger-height / 2) - ($hamburger-line-height / 2));

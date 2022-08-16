@@ -1,0 +1,42 @@
+@use '@src/styles/utils/shared/layout';
+@use '@src/styles/theme';
+
+@keyframes placed {
+	to {
+		transform: scale(0);
+	}
+}
+
+$stripes-bg-size: 0.8rem;
+$halftone-bg-size: 1.2rem;
+$halftone-bg-position-start: 0 0, calc($halftone-bg-size / 2) calc($halftone-bg-size / 2);
+$halftone-bg-position-end: calc($halftone-bg-size / 2) calc($halftone-bg-size / 2),
+	$halftone-bg-size $halftone-bg-size;
+
+@mixin stripes-bg {
+	background-image: repeating-linear-gradient(
+		-45deg,
+		var(--pattern-bg-color) 0%,
+		var(--pattern-bg-color) 40%,
+		currentColor 40%,
+		currentColor 50%,
+		var(--pattern-bg-color) 50%
+	);
+	background-size: $stripes-bg-size $stripes-bg-size;
+}
+
+@mixin pattern-bg-reset {
+	background-image: none;
+	background-color: transparent;
+	background-size: auto auto;
+}
+
+@mixin pattern-halftone-animated {
+	@include layout.visible;
+	animation-play-state: running;
+}
+
+@mixin pattern-placed-animated {
+	@include layout.visible;
+	animation: placed map-get(theme.$durations, 'base') map-get(theme.$easings, 'base') both;
+}

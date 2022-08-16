@@ -1,44 +1,54 @@
-import AbstractEvent from '../../../shared/AbstractEvent';
+import { DragEvent } from 'Draggable';
 
-export class SnapEvent extends AbstractEvent {
-  static type = 'snap';
+type SnappableEventDetail = {
+  dragEvent: DragEvent;
+  snappable: HTMLElement;
+};
+
+export class SnapEvent<
+  T extends SnappableEventDetail = SnappableEventDetail
+> extends CustomEvent<T> {
+  constructor(
+    eventInitDict?: CustomEventInit<T>,
+    type: string = SnapEvent.type
+  ) {
+    super(type, eventInitDict);
+  }
 
   get dragEvent() {
-    return this.data.dragEvent;
+    return this.detail.dragEvent;
   }
 
   get snappable() {
-    return this.data.snappable;
+    return this.detail.snappable;
   }
 
-  clone(data) {
-    return new SnapEvent({
-      ...this.data,
-      ...data,
-    });
-  }
+  clone = (detail: SnappableEventDetail) =>
+    new SnapEvent({ detail: { ...this.detail, ...detail } }, SnapEvent.type);
+
+  static type = 'snap';
 }
 
 export class SnapInEvent extends SnapEvent {
+  constructor(detail: SnappableEventDetail) {
+    super({ detail, cancelable: SnapInEvent.cancelable }, SnapInEvent.type);
+  }
+
+  clone = (detail: SnappableEventDetail) =>
+    new SnapInEvent({ ...this.detail, ...detail });
+
   static type = 'snap:in';
   static cancelable = true;
-
-  clone(data) {
-    return new SnapInEvent({
-      ...this.data,
-      ...data,
-    });
-  }
 }
 
 export class SnapOutEvent extends SnapEvent {
+  constructor(detail: SnappableEventDetail) {
+    super({ detail, cancelable: SnapOutEvent.cancelable }, SnapOutEvent.type);
+  }
+
+  clone = (detail: SnappableEventDetail) =>
+    new SnapOutEvent({ ...this.detail, ...detail });
+
   static type = 'snap:out';
   static cancelable = true;
-
-  clone(data) {
-    return new SnapOutEvent({
-      ...this.data,
-      ...data,
-    });
-  }
 }

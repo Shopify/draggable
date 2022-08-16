@@ -1,0 +1,84 @@
+@use 'props';
+@use '@src/styles/theme';
+
+@keyframes logo-outline-bounce {
+	25% {
+		transform: translate(-#{props.$logo-bounce-offset}, props.$logo-bounce-offset);
+	}
+
+	75% {
+		transform: translate(props.$logo-bounce-offset, -#{props.$logo-bounce-offset});
+	}
+}
+
+@keyframes logo-rainbow-mask {
+	0% {
+		fill: map-get(theme.$colors, 'coal-dark');
+	}
+
+	25% {
+		fill: map-get(theme.$colors, 'brand-purple');
+	}
+
+	50% {
+		fill: map-get(theme.$colors, 'brand-red');
+	}
+
+	75% {
+		fill: map-get(theme.$colors, 'brand-orange');
+	}
+}
+
+@keyframes logo-rainbow-purple {
+	0% {
+		fill: map-get(theme.$colors, 'brand-purple');
+	}
+
+	25% {
+		fill: map-get(theme.$colors, 'brand-red');
+	}
+
+	50% {
+		fill: map-get(theme.$colors, 'brand-orange');
+	}
+
+	75% {
+		fill: map-get(theme.$colors, 'coal-dark');
+	}
+}
+
+@keyframes logo-rainbow-red {
+	0% {
+		fill: map-get(theme.$colors, 'brand-red');
+	}
+
+	25% {
+		fill: map-get(theme.$colors, 'brand-orange');
+	}
+
+	50% {
+		fill: map-get(theme.$colors, 'coal-dark');
+	}
+
+	75% {
+		fill: map-get(theme.$colors, 'brand-purple');
+	}
+}
+
+@keyframes logo-rainbow-orange {
+	0% {
+		fill: map-get(theme.$colors, 'brand-orange');
+	}
+
+	25% {
+		fill: map-get(theme.$colors, 'coal-dark');
+	}
+
+	50% {
+		fill: map-get(theme.$colors, 'brand-purple');
+	}
+
+	75% {
+		fill: map-get(theme.$colors, 'brand-red');
+	}
+}

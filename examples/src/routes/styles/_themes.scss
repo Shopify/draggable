@@ -1,0 +1,676 @@
+@use '@src/styles/theme';
+
+.theme {
+	&--aquaman {
+		.face--top {
+			background-color: map-get(theme.$purple, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$purple, 'dark');
+			}
+		}
+
+		.face--right {
+			background-color: map-get(theme.$brand-muted, 'blue-light');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$blue, 'base');
+			}
+		}
+
+		.face--left {
+			background-color: map-get(theme.$brand-muted, 'blue-lighter');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$brand-muted, 'blue-light');
+			}
+		}
+
+		&.colliding,
+		&.draggable-source:focus,
+		&.draggable-source:hover {
+			.face--top {
+				background-color: map-get(theme.$purple, 'dark');
+			}
+
+			.face--right {
+				background-color: map-get(theme.$blue, 'base');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$brand-muted, 'blue-light');
+			}
+		}
+	}
+
+	&--aurora {
+		.face--top {
+			background-color: map-get(theme.$aqua, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$aqua, 'dark');
+			}
+		}
+
+		.face--right {
+			background-color: map-get(theme.$purple, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$purple, 'dark');
+			}
+		}
+
+		.face--left {
+			background-color: map-get(theme.$purple, 'light');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$purple, 'base');
+			}
+		}
+
+		&.draggable-source:focus,
+		&.draggable-source:hover {
+			.face--top {
+				background-color: map-get(theme.$aqua, 'dark');
+			}
+
+			.face--right {
+				background-color: map-get(theme.$purple, 'dark');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$purple, 'base');
+			}
+		}
+	}
+
+	&--basics {
+		> .jelly .face {
+			background-color: map-get(theme.$yellow, 'base');
+		}
+	}
+
+	&--berry {
+		.face--top {
+			background-color: map-get(theme.$red, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$red, 'dark');
+			}
+		}
+
+		.face--right {
+			background-color: map-get(theme.$purple, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$purple, 'dark');
+			}
+		}
+
+		.face--left {
+			background-color: map-get(theme.$purple, 'light');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$purple, 'base');
+			}
+		}
+
+		&.draggable-source:focus,
+		&.draggable-source:hover {
+			.face--top {
+				background-color: map-get(theme.$red, 'dark');
+			}
+
+			.face--right {
+				background-color: map-get(theme.$purple, 'dark');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$purple, 'base');
+			}
+		}
+	}
+
+	&--candy {
+		.face--top {
+			background-color: map-get(theme.$yellow, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$yellow, dark);
+			}
+		}
+
+		.face--right {
+			background-color: map-get(theme.$red, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$red, 'dark');
+			}
+		}
+
+		.face--left {
+			background-color: map-get(theme.$red, light);
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$red, 'base');
+			}
+		}
+
+		&.iscolliding,
+		&.draggable-source:focus,
+		&.draggable-source:hover {
+			.face--top {
+				background-color: map-get(theme.$yellow, dark);
+			}
+
+			.face--right {
+				background-color: map-get(theme.$red, 'dark');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$red, 'base');
+			}
+		}
+	}
+
+	&--collidable {
+		> .jelly .face {
+			background-color: map-get(theme.$euca, 'base');
+		}
+	}
+
+	&--eggplant {
+		.face--top {
+			background-color: map-get(theme.$purple, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$purple, 'dark');
+			}
+		}
+
+		.face--right {
+			background-color: map-get(theme.$green, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$green, 'dark');
+			}
+		}
+
+		.face--left {
+			background-color: map-get(theme.$green, light);
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$green, 'base');
+			}
+		}
+
+		&.draggable-source:focus,
+		&.draggable-source:hover {
+			.face--top {
+				background-color: map-get(theme.$purple, 'dark');
+			}
+
+			.face--right {
+				background-color: map-get(theme.$green, 'dark');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$green, 'base');
+			}
+		}
+	}
+
+	&--hero {
+		.face--top {
+			background-color: map-get(theme.$purple, 'light');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$purple, 'base');
+			}
+		}
+
+		.face--right {
+			background-color: map-get(theme.$brand-muted, 'blue-light');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$blue, 'base');
+			}
+		}
+
+		.face--left {
+			background-color: map-get(theme.$brand-muted, 'blue-lighter');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$brand-muted, 'blue-light');
+			}
+		}
+
+		&.draggable-source:focus,
+		&.draggable-source:hover {
+			.face--top {
+				background-color: map-get(theme.$purple, 'base');
+			}
+
+			.face--right {
+				background-color: map-get(theme.$blue, 'base');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$brand-muted, 'blue-light');
+			}
+		}
+
+		// specific to hero puzzle, previous styles are not used
+		.draggable-source:focus .face--top,
+		.draggable-source:hover .face--top,
+		.draggable-source--is-dragging .face--top {
+			background-color: map-get(theme.$purple, 'base');
+		}
+
+		.draggable-source:focus .face--right,
+		.draggable-source:hover .face--right,
+		.draggable-source--is-dragging .face--right {
+			background-color: map-get(theme.$blue, 'base');
+		}
+
+		.draggable-source:focus .face--left,
+		.draggable-source:hover .face--left,
+		.draggable-source--is-dragging .face--left {
+			background-color: map-get(theme.$brand-muted, 'blue-light');
+		}
+
+		// prevent color change on `:hover` while dragging...
+		// unavoidable nasty selectors
+		.draggable--is-dragging & .face__wrapper:not(.draggable-source--is-dragging):hover {
+			.face--top {
+				background-color: map-get(theme.$purple, 'light');
+			}
+
+			.face--right {
+				background-color: map-get(theme.$brand-muted, 'blue-light');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$brand-muted, 'blue-lighter');
+			}
+		}
+	}
+
+	&--island {
+		.face--top {
+			background-color: map-get(theme.$yellow, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$yellow, dark);
+			}
+		}
+
+		.face--right {
+			background-color: map-get(theme.$aqua, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$aqua, 'dark');
+			}
+		}
+
+		.face--left {
+			background-color: map-get(theme.$aqua, lighter);
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$aqua, 'base');
+			}
+		}
+
+		&.draggable-source:focus,
+		&.draggable-source:hover {
+			.face--top {
+				background-color: map-get(theme.$yellow, dark);
+			}
+
+			.face--right {
+				background-color: map-get(theme.$aqua, 'dark');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$aqua, 'base');
+			}
+		}
+	}
+
+	&--island--alt {
+		&:focus,
+		&:hover {
+			.face--top {
+				background-color: map-get(theme.$aqua, 'base');
+			}
+
+			.face--right {
+				background-color: map-get(theme.$yellow, 'base');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$yellow, light);
+			}
+		}
+
+		&:active {
+			.face--top {
+				background-color: map-get(theme.$aqua, 'dark');
+			}
+
+			.face--right {
+				background-color: map-get(theme.$yellow, dark);
+			}
+
+			.face--left {
+				background-color: map-get(theme.$yellow, 'base');
+			}
+		}
+	}
+
+	&--mana {
+		.face--top {
+			background-color: map-get(theme.$blue, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$blue, dark);
+			}
+		}
+
+		.face--right {
+			background-color: map-get(theme.$purple, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$purple, 'dark');
+			}
+		}
+
+		.face--left {
+			background-color: map-get(theme.$purple, 'light');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$purple, 'base');
+			}
+		}
+
+		&.draggable-source:focus,
+		&.draggable-source:hover {
+			.face--top {
+				background-color: map-get(theme.$blue, dark);
+			}
+
+			.face--right {
+				background-color: map-get(theme.$purple, 'dark');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$purple, 'base');
+			}
+		}
+	}
+
+	&--swappable {
+		.face--right,
+		.face--left {
+			background-color: map-get(theme.$aqua, 'base');
+		}
+	}
+
+	&--swappable-yellow {
+		.face--top {
+			background-color: map-get(theme.$yellow, 'base');
+		}
+
+		.draggable-source:focus,
+		.draggable-source:hover {
+			.face--top {
+				// normal shift is too dark, so we use the sass function instead
+				background-color: darken(map-get(theme.$yellow, 'base'), 8%);
+			}
+		}
+	}
+
+	&--swappable-red {
+		.face--top {
+			background-color: map-get(theme.$red, 'base');
+		}
+
+		.draggable-source:focus,
+		.draggable-source:hover {
+			.face--top {
+				background-color: map-get(theme.$red, 'dark');
+			}
+		}
+	}
+
+	&--swappable-purple {
+		.face--top {
+			background-color: map-get(theme.$purple, 'base');
+		}
+
+		.draggable-source:focus,
+		.draggable-source:hover {
+			.face--top {
+				background-color: map-get(theme.$purple, 'dark');
+			}
+		}
+	}
+
+	&--toybox {
+		.face--top {
+			background-color: map-get(theme.$blue, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$blue, dark);
+			}
+		}
+
+		.face--right {
+			background-color: map-get(theme.$yellow, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$yellow, dark);
+			}
+		}
+
+		.face--left {
+			background-color: map-get(theme.$yellow, light);
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$yellow, 'base');
+			}
+		}
+
+		&.draggable-source:focus,
+		&.draggable-source:hover {
+			.face--top {
+				background-color: map-get(theme.$blue, dark);
+			}
+
+			.face--right {
+				background-color: map-get(theme.$yellow, dark);
+			}
+
+			.face--left {
+				background-color: map-get(theme.$yellow, 'base');
+			}
+		}
+	}
+
+	&--toybox--alt {
+		&:focus,
+		&:hover {
+			.face--top {
+				background-color: map-get(theme.$yellow, 'base');
+			}
+
+			.face--right {
+				background-color: map-get(theme.$blue, 'base');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$blue, lighter);
+			}
+		}
+
+		&:active {
+			.face--top {
+				background-color: map-get(theme.$yellow, dark);
+			}
+
+			.face--right {
+				background-color: map-get(theme.$blue, dark);
+			}
+
+			.face--left {
+				background-color: map-get(theme.$blue, light);
+			}
+		}
+	}
+
+	&--tropic {
+		.face--top {
+			background-color: map-get(theme.$red, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$red, 'dark');
+			}
+		}
+
+		.face--right {
+			background-color: map-get(theme.$blue, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$blue, dark);
+			}
+		}
+
+		.face--left {
+			background-color: map-get(theme.$blue, lightest);
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$blue, lighter);
+			}
+		}
+
+		&.draggable-source:focus,
+		&.draggable-source:hover {
+			.face--top {
+				background-color: map-get(theme.$red, 'dark');
+			}
+
+			.face--right {
+				background-color: map-get(theme.$blue, dark);
+			}
+
+			.face--left {
+				background-color: map-get(theme.$blue, lighter);
+			}
+		}
+	}
+
+	&--tropic--alt {
+		&:focus,
+		&:hover {
+			.face--top {
+				background-color: map-get(theme.$blue, 'base');
+			}
+
+			.face--right {
+				background-color: map-get(theme.$red, 'base');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$red, light);
+			}
+		}
+
+		&:active {
+			.face--top {
+				background-color: map-get(theme.$blue, dark);
+			}
+
+			.face--right {
+				background-color: map-get(theme.$red, 'dark');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$red, 'base');
+			}
+		}
+	}
+
+	&--watermelon {
+		.face--top {
+			background-color: map-get(theme.$euca, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$euca, dark);
+			}
+		}
+
+		.face--right {
+			background-color: map-get(theme.$red, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$red, 'dark');
+			}
+		}
+
+		.face--left {
+			background-color: map-get(theme.$euca, 'base');
+
+			&.draggable-source:focus,
+			&.draggable-source:hover {
+				background-color: map-get(theme.$euca, dark);
+			}
+		}
+
+		&.draggable-source:focus,
+		&.draggable-source:hover {
+			.face--top {
+				background-color: map-get(theme.$euca, dark);
+			}
+
+			.face--right {
+				background-color: map-get(theme.$red, 'dark');
+			}
+
+			.face--left {
+				background-color: map-get(theme.$euca, dark);
+			}
+		}
+	}
+}

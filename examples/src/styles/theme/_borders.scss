@@ -1,0 +1,11 @@
+$border-section-width: 0.6rem;
+$border-section-width-tablet: 1rem;
+
+$borders: (
+	thin: 0.6rem,
+	base: 0.8rem,
+	thick: 1.6rem,
+	flexible: 2.5vw,
+	section-base: $border-section-width solid black,
+	section-tablet: $border-section-width-tablet solid black
+);

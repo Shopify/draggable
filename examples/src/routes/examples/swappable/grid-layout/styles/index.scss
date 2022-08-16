@@ -1,0 +1,45 @@
+@use '@src/styles/utils/shared/functions';
+@use '@src/styles/components/block-layout';
+@use '@src/styles/theme';
+
+$grid-area-names: a, b, c, d, e, f, g;
+$grid-rows: 5;
+$grid-rows-tablet: 6;
+$grid-columns: 5;
+$grid-columns-tablet: 8;
+
+.grid-layout {
+	.block-layout--grid {
+		grid-template-rows: repeat($grid-rows, 1fr);
+		grid-template-columns: repeat($grid-columns, 1fr);
+		grid-template-areas: 'a a a a a' 'b b c c c' 'd d c c c' 'd d e e e' 'f f f g g';
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'md')) {
+			grid-template-rows: repeat($grid-rows-tablet, functions.rows(3));
+			grid-template-columns: repeat($grid-columns-tablet, 1fr);
+			grid-template-areas:
+				'a a a a b b b b'
+				'a a a a d d d d'
+				'c c c c d d d d'
+				'e e e e e e e e'
+				'f f f g g g g g'
+				'f f f g g g g g';
+		}
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			grid-template-rows: repeat($grid-rows-tablet, functions.rows(4));
+		}
+
+		@for $i from 1 through length($grid-area-names) {
+			:global(.block__wrapper:nth-child(#{$i})) {
+				grid-area: nth($grid-area-names, $i);
+			}
+		}
+
+		.block__wrapper {
+			:global(.block) {
+				height: 100%;
+			}
+		}
+	}
+}

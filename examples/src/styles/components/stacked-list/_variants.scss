@@ -1,0 +1,35 @@
+@use '@src/components/StackedListItem/styles/props';
+@use '@src/styles/theme';
+
+.stacked-list__wrapper {
+	.stacked-list__header,
+	:global(.stacked-list__item) {
+		height: map-get(props.$stacked-list-item-base, 'base');
+
+		@media screen and (min-width: map-get(theme.$breakpoints, 'lg')) {
+			height: map-get(props.$stacked-list-item-base, 'desktop');
+		}
+	}
+
+	// &--scroll-indicator {
+	// 	&::after {
+	// 		@include props.scroll-indicator;
+	// 	}
+
+	// 	&:hover {
+	// 		&::after {
+	// 			opacity: 0.1;
+	// 		}
+	// 	}
+	// }
+
+	// &--scroll-indicator {
+	// 	.stacked-list__wrapper--medium & {
+	// 		@include props.stacked-list-scroll-height(10rem, 3);
+	// 	}
+
+	// 	.stacked-list__wrapper--large & {
+	// 		@include props.stacked-list-scroll-height(14.4rem, 3);
+	// 	}
+	// }
+}

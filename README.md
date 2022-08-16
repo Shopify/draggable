@@ -151,11 +151,11 @@ changes from both `src/` and `examples/src` and reloads the browser.
 
 Contributions are more than welcome, the code base is still new and needs more love.
 
-For more information, please checkout the [contributing document](https://github.com/Shopify/draggable/blob/master/CONTRIBUTING.md).
+For more information, please checkout the [contributing document](https://github.com/hnrq/draggable/blob/master/CONTRIBUTING.md).
 
 ## Roadmap
 
-We are currently working on `v1.0.0-beta.12`. Check out the [project board](https://github.com/Shopify/draggable/projects/3) to see tasks and follow progress on the release. Any Pull Requests should be pointed against the feature branch `v1.0.0-beta.12`.
+We are currently working on `v1.0.0-beta.12`. Check out the [project board](https://github.com/hnrq/draggable/projects/3) to see tasks and follow progress on the release. Any Pull Requests should be pointed against the feature branch `v1.0.0-beta.12`.
 
 ## Related resources
 

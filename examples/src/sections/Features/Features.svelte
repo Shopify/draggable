@@ -105,7 +105,7 @@
 				Draggable is easy to extend. Write a custom module that provides the functionality you need,
 				then
 				<a
-					href="https://github.com/Shopify/draggable"
+					href="https://github.com/hnrq/draggable"
 					class="Link"
 					title="Contribute to this open-source project"
 					data-gtag-category="Secondary CTA">submit it to our Github repo</a
@@ -251,7 +251,7 @@
 			<p>
 				Draggable is released under the
 				<a
-					href="https://github.com/Shopify/shopify.github.com/blob/master/LICENSE.md"
+					href="https://github.com/hnrq/shopify.github.com/blob/master/LICENSE.md"
 					class="Link"
 					title="View MIT License"
 					target="_blank"

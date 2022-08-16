@@ -39,7 +39,7 @@
 			</h2>
 			<div class="button__container">
 				<a
-					href="https://github.com/Shopify/draggable/archive/v1.0.0-beta.11.zip"
+					href="https://github.com/hnrq/draggable/archive/v1.0.0-beta.11.zip"
 					class="button"
 					title="Download the full library"
 					data-gtag-category="Primary CTA"
@@ -58,7 +58,7 @@
 			</div>
 			<span class="helper-text"
 				><a
-					href="https://github.com/Shopify/draggable"
+					href="https://github.com/hnrq/draggable"
 					class="link"
 					title="Contribute to this open-source project"
 					data-gtag-category="Secondary CTA">Contribute on Github</a

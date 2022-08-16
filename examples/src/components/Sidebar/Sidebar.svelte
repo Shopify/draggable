@@ -34,7 +34,7 @@
 		<p class="legal-text">
 			Draggable is released under the
 			<a
-				href="https://github.com/Shopify/shopify.github.com/blob/master/LICENSE.md"
+				href="https://github.com/hnrq/shopify.github.com/blob/master/LICENSE.md"
 				class="link link--no-wrap"
 				title="View MIT License"
 				target="_blank"
@@ -45,7 +45,7 @@
 		<p>
 			<b>Special thanks</b> <u>to all of our</u>
 			<a
-				href="https://github.com/Shopify/draggable/graphs/contributors"
+				href="https://github.com/hnrq/draggable/graphs/contributors"
 				title="We love our contributors!">amazing contributors</a
 			>.
 		</p>

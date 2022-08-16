@@ -29,7 +29,7 @@
 					<span class="button__text">reboot</span>
 				</div></a
 			><a
-				href="https://github.com/Shopify/draggable"
+				href="https://github.com/hnrq/draggable"
 				class="button button--cosmic"
 				title="Contribute to this open-source project"
 				data-gtag-category="Secondary CTA"

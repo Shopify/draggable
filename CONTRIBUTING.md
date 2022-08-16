@@ -7,21 +7,21 @@ appreciated and encouraged.
 
 1. [Code of Conduct](#code-of-conduct)
 2. [How to contribute](#how-to-contribute)
-    1. [Creating issues](#creating-issues)
-    2. [Opening pull requests](#opening-pull-requests)
-    3. [JS Docblocks](#js-docblocks)
-4. [How to run locally](#how-to-run-locally)
+   1. [Creating issues](#creating-issues)
+   2. [Opening pull requests](#opening-pull-requests)
+   3. [JS Docblocks](#js-docblocks)
+3. [How to run locally](#how-to-run-locally)
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Code of Conduct document](https://github.com/Shopify/draggable/blob/master/CODE_OF_CONDUCT.md).
+This project and everyone participating in it is governed by the [Code of Conduct document](https://github.com/hnrq/draggable/blob/master/CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. Please report unacceptable behaviour to max.hoffmann@shopify.com or curtis.dulmage@shopify.com.
 
 ## How to contribute
 
 ### Creating issues
 
-Before submitting issues, please have a quick look if there is an existing open issue here: [Issues](https://github.com/Shopify/draggable/issues). If no related issue can be found,
+Before submitting issues, please have a quick look if there is an existing open issue here: [Issues](https://github.com/hnrq/draggable/issues). If no related issue can be found,
 please open a new issue with labels: `bug`, `documentation`, `feature-request` or `question`.
 
 ### Opening pull requests

@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   verbose: true,
   testEnvironment: 'jest-environment-jsdom',
   setupFilesAfterEnv: [
@@ -9,3 +9,5 @@ module.exports = {
   modulePathIgnorePatterns: ['<rootDir>/lib/'],
   moduleDirectories: ['node_modules', 'src'],
 };
+
+export default config;

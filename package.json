@@ -2,6 +2,7 @@
   "name": "@hnrq/draggable",
   "version": "0.0.1",
   "private": false,
+  "type": "module",
   "license": "MIT",
   "description": "The JavaScript Drag & Drop library your grand-grandparents warned you about.",
   "author": "Henrique <henriquealberone@outlook.com>",
@@ -36,12 +37,7 @@
     ]
   },
   "types": "./dist/index.d.ts",
-  "module": "./dist/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js"
-    }
-  },
+  "exports": "./dist/index.js",
   "scripts": {
     "build": "vite build",
     "format": "prettier --write './src/**/*.{ts,tsx}'",

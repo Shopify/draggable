@@ -57,7 +57,7 @@ describe('utils/closest', () => {
     expect(closest(element, callback)).toBe(element);
   });
 
-  [
+  it.each([
     '.twig',
     'ul',
     '.branch',
@@ -66,12 +66,13 @@ describe('utils/closest', () => {
     'div',
     'body',
     'document',
-  ].forEach((expectedMatchingSelector) => {
-    it(`returns matched element when selector targets parent element matching selector ${expectedMatchingSelector}`, () => {
+  ])(
+    `returns matched element when selector targets parent element matching selector %s`,
+    (expectedMatchingSelector) => {
       const element = sandbox.querySelector('.leaf');
       const expected = sandbox.querySelector(expectedMatchingSelector);
 
       expect(closest(element, expectedMatchingSelector)).toBe(expected);
-    });
-  });
+    }
+  );
 });

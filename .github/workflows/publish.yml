@@ -13,6 +13,7 @@ jobs:
         name: Install Node.js
         with:
           node-version: 16
+          registry-url: 'https://registry.npmjs.org'
 
       - uses: pnpm/action-setup@v2
         name: Setup pnpm
@@ -40,7 +41,7 @@ jobs:
       - run: pnpm build
         name: Build package
 
-      - run: pnpm publish --no-git-checks
+      - run: npm publish
         name: Publish package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

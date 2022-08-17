@@ -8,6 +8,7 @@ runs:
       name: Install Node.js
       with:
         node-version: 16
+        registry-url: 'https://registry.npmjs.org'
 
     - uses: pnpm/action-setup@v2
       name: Install dependencies

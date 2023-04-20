@@ -59,7 +59,7 @@
     "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6.5",
     "install": "^0.13.0",
-    "nunjucks": "^3.2.2",
+    "nunjucks": "^3.2.4",
     "prettier": "^2.1.2",
     "prettier-stylelint": "^0.4.2",
     "rimraf": "^3.0.2",

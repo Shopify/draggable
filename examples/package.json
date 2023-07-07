@@ -63,7 +63,7 @@
     "prettier": "^2.1.2",
     "prettier-stylelint": "^0.4.2",
     "rimraf": "^3.0.2",
-    "stylelint": "^13.7.2",
+    "stylelint": "^15.10.1",
     "stylelint-config-shopify": "^7.4.0",
     "webpack": "^4.44.2",
     "webpack-bundle-analyzer": "^3.9.0"

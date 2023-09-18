@@ -1,4 +1,4 @@
-const defaultDealy = {
+const defaultDelay = {
   mouse: 0,
   drag: 0,
   touch: 100,
@@ -126,22 +126,22 @@ function calcDelay(optionsDelay) {
   const delay = {};
 
   if (optionsDelay === undefined) {
-    return {...defaultDealy};
+    return {...defaultDelay};
   }
 
   if (typeof optionsDelay === 'number') {
-    for (const key in defaultDealy) {
-      if (defaultDealy.hasOwnProperty(key)) {
+    for (const key in defaultDelay) {
+      if (Object.prototype.hasOwnProperty.call(defaultDelay, key)) {
         delay[key] = optionsDelay;
       }
     }
     return delay;
   }
 
-  for (const key in defaultDealy) {
-    if (defaultDealy.hasOwnProperty(key)) {
+  for (const key in defaultDelay) {
+    if (Object.prototype.hasOwnProperty.call(defaultDelay, key)) {
       if (optionsDelay[key] === undefined) {
-        delay[key] = defaultDealy[key];
+        delay[key] = defaultDelay[key];
       } else {
         delay[key] = optionsDelay[key];
       }

@@ -1,11 +1,9 @@
 import {closest} from 'shared/utils';
 
 import {Announcement, Focusable, Mirror, Scrollable} from './Plugins';
-
 import Emitter from './Emitter';
 import {MouseSensor, TouchSensor} from './Sensors';
 import {DraggableInitializedEvent, DraggableDestroyEvent} from './DraggableEvent';
-
 import {
   DragStartEvent,
   DragMoveEvent,

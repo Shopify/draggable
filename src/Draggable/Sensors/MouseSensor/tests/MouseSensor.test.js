@@ -1,4 +1,5 @@
 import {createSandbox, triggerEvent, waitForDragDelay, DRAG_DELAY, clickMouse, moveMouse, releaseMouse} from 'helper';
+
 import MouseSensor from '..';
 
 const sampleMarkup = `
@@ -346,7 +347,7 @@ describe('MouseSensor', () => {
           return next;
         });
         moveMouse(draggableElement, {pageY: 1, pageX: 0});
-        jest.runTimersToTime(DRAG_DELAY);
+        jest.advanceTimersByTime(DRAG_DELAY);
         releaseMouse(document.body);
         dateMock.mockRestore();
       }
@@ -360,7 +361,7 @@ describe('MouseSensor', () => {
         const dateMock = jest.spyOn(Date, 'now').mockImplementation(() => {
           return next;
         });
-        jest.runTimersToTime(DRAG_DELAY + 1);
+        jest.advanceTimersByTime(DRAG_DELAY + 1);
         moveMouse(draggableElement, {pageY: 1, pageX: 0});
         releaseMouse(document.body);
         dateMock.mockRestore();

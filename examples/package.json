@@ -22,17 +22,17 @@
   },
   "scripts": {
     "clean": "rimraf dist bundle-report.html",
-    "views": "gulp views $npm_package_config_tools",
-    "scripts": "gulp scripts $npm_package_config_tools",
-    "styles": "gulp styles $npm_package_config_tools",
-    "start": "gulp start $npm_package_config_tools",
-    "build": "yarn run clean && gulp build $npm_package_config_tools",
-    "build:prod": "NODE_ENV=production yarn run build",
+    "views": "NODE_OPTIONS=--openssl-legacy-provider gulp views $npm_package_config_tools",
+    "scripts": "NODE_OPTIONS=--openssl-legacy-provider gulp scripts $npm_package_config_tools",
+    "styles": "NODE_OPTIONS=--openssl-legacy-provider gulp styles $npm_package_config_tools",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider gulp start $npm_package_config_tools",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider yarn run clean && gulp build $npm_package_config_tools",
+    "build:prod": "NODE_OPTIONS=--openssl-legacy-provider NODE_ENV=production yarn run build",
     "lint:scss": "stylelint './src/**/*.scss'",
     "prettier:scss": "prettier-stylelint './src/**/*.scss' --write -q",
     "lint:js": "eslint './src/**/*.js' './tools/**/*.js' --max-warnings 0",
     "prettier:js": "yarn run lint:js --fix",
-    "prepublish": "yarn run build"
+    "prepublish": "NODE_OPTIONS=--openssl-legacy-provider yarn run build"
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -67,5 +67,8 @@
     "stylelint-config-shopify": "^7.4.0",
     "webpack": "^4.44.2",
     "webpack-bundle-analyzer": "^3.9.0"
+  },
+  "resolutions": {
+    "node-sass": "8.0.0"
   }
 }

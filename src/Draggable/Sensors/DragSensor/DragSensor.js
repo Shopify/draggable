@@ -1,4 +1,5 @@
 import {closest} from 'shared/utils';
+
 import Sensor from '../Sensor';
 import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
 
@@ -173,7 +174,6 @@ export default class DragSensor extends Sensor {
    * @param {Event} event - Drop event
    */
   [onDrop](event) {
-    // eslint-disable-line class-methods-use-this
     event.preventDefault();
   }
 

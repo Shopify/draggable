@@ -6,6 +6,6 @@ describe('Package', () => {
     const realExports = Object.keys(RealBundle);
     const legacyExports = Object.keys(LegacyBundle);
 
-    expect(legacyExports).toEqual(realExports);
+    expect(legacyExports).toStrictEqual(realExports);
   });
 });

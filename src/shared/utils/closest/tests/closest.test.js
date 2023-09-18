@@ -1,4 +1,5 @@
 import {createSandbox} from 'helper';
+
 import closest from '../closest';
 
 const sampleMarkup = `

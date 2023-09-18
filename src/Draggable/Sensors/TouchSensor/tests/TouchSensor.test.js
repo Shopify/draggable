@@ -273,7 +273,7 @@ describe('TouchSensor', () => {
           return next;
         });
         touchMove(draggableElement, {touches: [{pageX: 1, pageY: 0}]});
-        jest.runTimersToTime(DRAG_DELAY);
+        jest.advanceTimersByTime(DRAG_DELAY);
         touchRelease(draggableElement);
         dateMock.mockRestore();
       }
@@ -289,7 +289,7 @@ describe('TouchSensor', () => {
         const dateMock = jest.spyOn(Date, 'now').mockImplementation(() => {
           return next;
         });
-        jest.runTimersToTime(DRAG_DELAY + 1);
+        jest.advanceTimersByTime(DRAG_DELAY + 1);
         touchMove(draggableElement, {touches: [{pageX: 1, pageY: 1}]});
         dateMock.mockRestore();
         touchRelease(draggableElement);

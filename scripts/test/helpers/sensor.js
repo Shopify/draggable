@@ -6,7 +6,7 @@ export function waitForDragDelay({dragDelay = DRAG_DELAY, restoreDateMock = true
   const dateMock = jest.spyOn(Date, 'now').mockImplementation(() => {
     return next;
   });
-  jest.runTimersToTime(dragDelay + 1);
+  jest.advanceTimersByTime(dragDelay + 1);
   if (restoreDateMock) {
     dateMock.mockRestore();
   }

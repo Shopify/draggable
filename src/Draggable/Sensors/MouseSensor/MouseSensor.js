@@ -1,4 +1,5 @@
 import {closest, distance as euclideanDistance} from 'shared/utils';
+
 import Sensor from '../Sensor';
 import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
 

@@ -1,4 +1,5 @@
 import {createSandbox, clickMouse, moveMouse, releaseMouse, waitForDragDelay, DRAG_DELAY} from 'helper';
+
 import Sortable from '..';
 
 const sampleMarkup = `
@@ -41,9 +42,7 @@ describe('Sortable', () => {
       draggable: 'li',
       delay: DRAG_DELAY,
     });
-  });
 
-  beforeEach(() => {
     firstContainer = containers[0];
     secondContainer = containers[1];
     firstItem = draggableElements[0];

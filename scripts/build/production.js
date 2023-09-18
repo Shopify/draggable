@@ -1,4 +1,5 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 const {targetPath, resolveModules} = require('./config');
 const {bundles} = require('./bundles');
 
@@ -77,7 +78,7 @@ function createBundleConfig(bundle, {analyser}) {
           loader: 'babel-loader',
           exclude: /node_modules/,
           options: {
-            presets: [['shopify/web']],
+            presets: [['@shopify/babel-preset']],
           },
         },
       ],

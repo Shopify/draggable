@@ -1,5 +1,3 @@
-/* eslint-disable no-process-env */
-
 const args = process.argv.filter((value, index) => index >= 2);
 const useAnalyser = args.find((value) => value === '--analyser');
 const isProd = args.find((value) => value === '--production');
@@ -15,5 +13,3 @@ module.exports = {
   resolveModules,
   useAnalyser,
 };
-
-/* eslint-enable no-process-env */

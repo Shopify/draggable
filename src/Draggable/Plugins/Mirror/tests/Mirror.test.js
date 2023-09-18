@@ -17,7 +17,6 @@ import {
   MirrorMovedEvent,
   MirrorDestroyEvent,
 } from '../MirrorEvent';
-
 import Draggable from '../../..';
 
 const sampleMarkup = `

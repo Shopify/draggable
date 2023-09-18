@@ -6,7 +6,7 @@ function toHaveBeenCalledWithEvent(jestFunction, expectedEventConstructor) {
   let pass;
   let message;
 
-  // eslint-disable-next-line babel/no-invalid-this
+  // eslint-disable-next-line @babel/no-invalid-this
   pass = this.isNot && mockCalls.length === 0;
   if (pass) {
     message = () => `Expected ${expectedEventConstructor.type} event ${expectation(!pass)} triggered`;

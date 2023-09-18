@@ -77,7 +77,7 @@ function createBundleConfig(bundle, {analyser}) {
           loader: 'babel-loader',
           exclude: /node_modules/,
           options: {
-            presets: [['shopify/web']],
+            presets: [['@shopify/babel-preset']],
           },
         },
       ],

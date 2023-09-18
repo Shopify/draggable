@@ -1,7 +1,8 @@
 {
+  "testEnvironment": "jsdom",
   "testMatch": ["<rootDir>/src/**/*.test.js"],
   "setupFiles": ["<rootDir>/scripts/test/environment.js"],
-  "setupTestFrameworkScriptFile": "<rootDir>/scripts/test/setup.js",
+  "setupFilesAfterEnv": ["<rootDir>/scripts/test/setup.js"],
   "transform": {".*": "<rootDir>/node_modules/babel-jest"},
   "moduleFileExtensions": ["js"],
   "collectCoverageFrom": [

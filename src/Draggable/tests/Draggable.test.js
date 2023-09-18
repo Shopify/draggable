@@ -8,6 +8,7 @@ import {
   waitForDragDelay,
   waitForRequestAnimationFrame,
 } from 'helper';
+
 import Draggable, {defaultOptions} from '../Draggable';
 import {DragStartEvent, DragMoveEvent, DragStopEvent, DragStoppedEvent} from '../DragEvent';
 import {DraggableInitializedEvent, DraggableDestroyEvent} from '../DraggableEvent';
@@ -43,9 +44,9 @@ describe('Draggable', () => {
   describe('.Plugins', () => {
     it('should be available statically', () => {
       expect(Draggable.Plugins).toBeDefined();
-      expect(Draggable.Plugins.Mirror).toEqual(Mirror);
-      expect(Draggable.Plugins.Focusable).toEqual(Focusable);
-      expect(Draggable.Plugins.Scrollable).toEqual(Scrollable);
+      expect(Draggable.Plugins.Mirror).toStrictEqual(Mirror);
+      expect(Draggable.Plugins.Focusable).toStrictEqual(Focusable);
+      expect(Draggable.Plugins.Scrollable).toStrictEqual(Scrollable);
     });
   });
 
@@ -62,13 +63,12 @@ describe('Draggable', () => {
     it('should initialize with default options', () => {
       const newInstance = new Draggable(containers);
 
-      for (const key in defaultOptions) {
-        if (defaultOptions.hasOwnProperty(key)) {
-          expect(newInstance.options[key]).toEqual(defaultOptions[key]);
-        }
-      }
+      Object.keys(defaultOptions).forEach((key) => {
+        expect(newInstance.options[key]).toStrictEqual(defaultOptions[key]);
+      });
     });
 
+    /* eslint-disable jest/no-disabled-tests */
     it.skip('should set containers', () => {
       const newInstance = new Draggable(containers);
 
@@ -80,15 +80,16 @@ describe('Draggable', () => {
 
       expect(newInstance.containers).toMatchObject([containers[0]]);
     });
+    /* eslint-enable jest/no-disabled-tests */
 
     it('should throw error if `containers` argument is wrong type', () => {
       expect(() => {
         return new Draggable({});
-      }).toThrow();
+      }).toThrow('Draggable containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`');
 
       expect(() => {
         return new Draggable('.li');
-      }).toThrow();
+      }).toThrow('Draggable containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`');
     });
 
     it('should attach default plugins', () => {
@@ -217,7 +218,7 @@ describe('Draggable', () => {
     });
 
     it('should remove all sensor event listeners', () => {
-      document.removeEventListener = jest.fn();
+      jest.spyOn(document, 'removeEventListener').mockImplementation();
 
       const newInstance = new Draggable();
 
@@ -225,10 +226,10 @@ describe('Draggable', () => {
 
       const mockCalls = document.removeEventListener.mock.calls;
 
-      expect(mockCalls[0][0]).toEqual('drag:start');
-      expect(mockCalls[1][0]).toEqual('drag:move');
-      expect(mockCalls[2][0]).toEqual('drag:stop');
-      expect(mockCalls[3][0]).toEqual('drag:pressure');
+      expect(mockCalls[0][0]).toBe('drag:start');
+      expect(mockCalls[1][0]).toBe('drag:move');
+      expect(mockCalls[2][0]).toBe('drag:stop');
+      expect(mockCalls[3][0]).toBe('drag:pressure');
 
       document.removeEventListener.mockRestore();
     });
@@ -359,7 +360,7 @@ describe('Draggable', () => {
 
       newInstance.addContainer(dynamicContainer);
 
-      expect(newInstance.containers).toEqual([...containers, dynamicContainer]);
+      expect(newInstance.containers).toStrictEqual([...containers, dynamicContainer]);
 
       clickMouse(draggableElement);
       waitForDragDelay();
@@ -393,7 +394,7 @@ describe('Draggable', () => {
 
       newInstance.removeContainer(dynamicContainer);
 
-      expect(newInstance.containers).toEqual([...containers]);
+      expect(newInstance.containers).toStrictEqual([...containers]);
 
       dragOverContainerHandler = jest.fn();
       newInstance.on('drag:over:container', dragOverContainerHandler);
@@ -414,7 +415,7 @@ describe('Draggable', () => {
         draggable: 'li',
       });
 
-      expect(draggable.getDraggableElements()).toEqual([...document.querySelectorAll('.Container li')]);
+      expect(draggable.getDraggableElements()).toStrictEqual([...document.querySelectorAll('.Container li')]);
     });
 
     it('returns draggable elements after adding a container', () => {
@@ -423,15 +424,15 @@ describe('Draggable', () => {
         draggable: 'li',
       });
 
-      expect(draggable.getDraggableElements()).toEqual([...document.querySelectorAll('.Container li')]);
+      expect(draggable.getDraggableElements()).toStrictEqual([...document.querySelectorAll('.Container li')]);
 
       draggable.addContainer(dynamicContainer);
 
-      expect(draggable.getDraggableElements()).toEqual([...document.querySelectorAll('li')]);
+      expect(draggable.getDraggableElements()).toStrictEqual([...document.querySelectorAll('li')]);
 
       draggable.removeContainer(dynamicContainer);
 
-      expect(draggable.getDraggableElements()).toEqual([...document.querySelectorAll('.Container li')]);
+      expect(draggable.getDraggableElements()).toStrictEqual([...document.querySelectorAll('.Container li')]);
     });
   });
 
@@ -465,7 +466,7 @@ describe('Draggable', () => {
     expect(dragStartHandler).toHaveBeenCalledTimes(1);
     expect(dragMoveHandler).toHaveBeenCalledTimes(1);
 
-    expect(draggableElement).not.toEqual(draggable.source);
+    expect(draggableElement).not.toStrictEqual(draggable.source);
     expect(dragStartTarget).toBe(draggableElement);
     expect(dragMoveTarget).toBe(draggable.source);
 
@@ -545,9 +546,9 @@ describe('Draggable', () => {
 
     triggerEvent(draggableElement, 'dragstart', {button: 0});
 
-    expect(newInstance.dragging).toBeFalsy();
+    expect(newInstance.dragging).toBe(false);
     expect(source.parentNode).toBeNull();
-    expect(originalSource.style.display).toEqual('');
+    expect(originalSource.style.display).toBe('');
   });
 
   it('triggers `drag:move` drag event on mousedown', () => {
@@ -911,11 +912,11 @@ describe('Draggable', () => {
     // Wait for delay
     waitForDragDelay();
 
-    expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBeTruthy();
+    expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBe(true);
 
     triggerEvent(document.body, 'mouseup', {button: 0});
 
-    expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBeFalsy();
+    expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBe(false);
   });
 
   it('should have multiple classes for `source:original` on start', () => {
@@ -934,7 +935,7 @@ describe('Draggable', () => {
     // Wait for delay
     waitForDragDelay();
 
-    expect(newInstance.getClassNamesFor('source:original')).toEqual(sourceOriginalClasses);
+    expect(newInstance.getClassNamesFor('source:original')).toStrictEqual(sourceOriginalClasses);
 
     triggerEvent(document.body, 'mouseup', {button: 0});
   });
@@ -968,11 +969,11 @@ describe('Draggable', () => {
     });
 
     newInstance.on('drag:over:container', (dragEvent) => {
-      expect(dragEvent.overContainer).toEqual(containers[0]);
+      expect(dragEvent.overContainer).toStrictEqual(containers[0]);
     });
 
     newInstance.on('drag:out:container', (dragEvent) => {
-      expect(dragEvent.overContainer).toEqual(containers[0]);
+      expect(dragEvent.overContainer).toStrictEqual(containers[0]);
     });
 
     const draggableElement = sandbox.querySelector('li');

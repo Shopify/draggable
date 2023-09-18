@@ -6,7 +6,6 @@ import AbstractPlugin from 'shared/AbstractPlugin';
 
 import * as Sensors from './Draggable/Sensors';
 import * as Plugins from './Plugins';
-
 import Draggable from './Draggable';
 import Droppable from './Droppable';
 import Swappable from './Swappable';

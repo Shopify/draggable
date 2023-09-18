@@ -1,4 +1,5 @@
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 const {targetPath, resolveModules} = require('./config');
 const {bundles} = require('./bundles');
 

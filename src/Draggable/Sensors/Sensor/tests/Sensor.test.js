@@ -14,15 +14,15 @@ describe('Sensor', () => {
       const expectedOptions = {expectedOptions: true};
       const sensor = new Sensor(expectedContainers, expectedOptions);
 
-      expect(sensor.containers).toEqual(expectedContainers);
-      expect(sensor.options).toEqual(expectedOptions);
+      expect(sensor.containers).toStrictEqual(expectedContainers);
+      expect(sensor.options).toStrictEqual(expectedOptions);
     });
 
     describe('should initialize with correct delay', () => {
       it('unset', () => {
         const sensor = new Sensor(undefined, {});
 
-        expect(sensor.delay).toEqual({
+        expect(sensor.delay).toStrictEqual({
           mouse: 0,
           drag: 0,
           touch: 100,
@@ -32,7 +32,7 @@ describe('Sensor', () => {
       it('number', () => {
         const sensor = new Sensor(undefined, {delay: 42});
 
-        expect(sensor.delay).toEqual({
+        expect(sensor.delay).toStrictEqual({
           mouse: 42,
           drag: 42,
           touch: 42,
@@ -42,7 +42,7 @@ describe('Sensor', () => {
       it('object', () => {
         const sensor = new Sensor(undefined, {delay: {mouse: 42, drag: 142}});
 
-        expect(sensor.delay).toEqual({
+        expect(sensor.delay).toStrictEqual({
           mouse: 42,
           drag: 142,
           touch: 100,
@@ -74,11 +74,11 @@ describe('Sensor', () => {
       const containers = [document.documentElement, document.body];
       const sensor = new Sensor();
 
-      expect(sensor.containers).toEqual([]);
+      expect(sensor.containers).toStrictEqual([]);
 
       sensor.addContainer(...containers);
 
-      expect(sensor.containers).toEqual(containers);
+      expect(sensor.containers).toStrictEqual(containers);
     });
   });
 
@@ -87,11 +87,11 @@ describe('Sensor', () => {
       const containers = [document.documentElement, document.body];
       const sensor = new Sensor(containers);
 
-      expect(sensor.containers).toEqual(containers);
+      expect(sensor.containers).toStrictEqual(containers);
 
       sensor.removeContainer(...containers);
 
-      expect(sensor.containers).toEqual([]);
+      expect(sensor.containers).toStrictEqual([]);
     });
   });
 

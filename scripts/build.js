@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+
 const {isProd, useAnalyser} = require('./build/config');
 const {createConfig: createDevelopmentConfig} = require('./build/development');
 const {createConfig: createProductionConfig} = require('./build/production');

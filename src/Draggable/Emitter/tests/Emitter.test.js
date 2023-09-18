@@ -1,4 +1,5 @@
 import AbstractEvent from 'shared/AbstractEvent';
+
 import Emitter from '../Emitter';
 
 class TestEvent extends AbstractEvent {}
@@ -24,8 +25,8 @@ describe('Emitter', () => {
 
       emitter.on('event', ...callbacks);
 
-      expect(emitter.callbacks.event[0]).toEqual(callbacks[0]);
-      expect(emitter.callbacks.event[1]).toEqual(callbacks[1]);
+      expect(emitter.callbacks.event[0]).toStrictEqual(callbacks[0]);
+      expect(emitter.callbacks.event[1]).toStrictEqual(callbacks[1]);
     });
   });
 

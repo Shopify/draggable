@@ -1,5 +1,6 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
 import {closest} from 'shared/utils';
+
 import {CollidableInEvent, CollidableOutEvent} from './CollidableEvent';
 
 const onDragMove = Symbol('onDragMove');

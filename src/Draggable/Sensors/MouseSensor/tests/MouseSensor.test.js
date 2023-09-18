@@ -1,4 +1,5 @@
 import {createSandbox, triggerEvent, waitForDragDelay, DRAG_DELAY, clickMouse, moveMouse, releaseMouse} from 'helper';
+
 import MouseSensor from '..';
 
 const sampleMarkup = `

@@ -1,4 +1,5 @@
 import {closest} from 'shared/utils';
+
 import Sensor from '../Sensor';
 import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent, DragPressureSensorEvent} from '../SensorEvent';
 

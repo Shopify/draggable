@@ -51,6 +51,7 @@ describe('DragSensor', () => {
 
     afterEach(teardown);
 
+    /* eslint-disable jest/no-disabled-tests */
     it.skip('mousedown handler adds draggable attribute', () => {
       expect(draggableElement.draggable).toBeUndefined();
 
@@ -63,6 +64,7 @@ describe('DragSensor', () => {
 
       expect(draggableElement.draggable).toBe(false);
     });
+    /* eslint-enable jest/no-disabled-tests */
 
     it('triggers `drag:start` sensor event on dragstart', () => {
       function dragFlow() {

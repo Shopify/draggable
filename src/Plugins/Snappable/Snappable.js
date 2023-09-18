@@ -1,4 +1,5 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
+
 import {SnapInEvent, SnapOutEvent} from './SnappableEvent';
 
 const onDragStart = Symbol('onDragStart');

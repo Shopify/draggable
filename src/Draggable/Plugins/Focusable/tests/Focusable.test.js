@@ -1,4 +1,5 @@
 import {createSandbox, waitForRequestAnimationFrame} from 'helper';
+
 import Draggable from '../../..';
 import Focusable from '..';
 
@@ -50,7 +51,7 @@ describe('Focusable', () => {
     waitForRequestAnimationFrame();
 
     elements.forEach((element) => {
-      expect(element.tabIndex).toEqual(0);
+      expect(element.tabIndex).toBe(0);
     });
   });
 
@@ -68,7 +69,7 @@ describe('Focusable', () => {
     waitForRequestAnimationFrame();
 
     elements.forEach((element) => {
-      expect(element.tabIndex).toEqual(-1);
+      expect(element.tabIndex).toBe(-1);
     });
   });
 
@@ -85,7 +86,7 @@ describe('Focusable', () => {
 
     waitForRequestAnimationFrame();
 
-    expect(nativelyFocusableElement.tabIndex).toEqual(0);
+    expect(nativelyFocusableElement.tabIndex).toBe(0);
   });
 
   it('does not remove tabindex properties for element with tabindex attribute', () => {
@@ -102,6 +103,6 @@ describe('Focusable', () => {
 
     waitForRequestAnimationFrame();
 
-    expect(elementWithTabIndexAttribute.tabIndex).toEqual(originalTabIndex);
+    expect(elementWithTabIndexAttribute.tabIndex).toStrictEqual(originalTabIndex);
   });
 });

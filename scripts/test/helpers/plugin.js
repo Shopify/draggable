@@ -4,8 +4,8 @@ export class TestPlugin extends AbstractPlugin {
   constructor(draggable) {
     super(draggable);
 
-    this.attachFunction = jest.fn();
-    this.detachFunction = jest.fn();
+    jest.spyOn(this, 'attachFunction').mockImplementation();
+    jest.spyOn(this, 'detachFunction').mockImplementation();
   }
 
   attach() {
@@ -15,4 +15,9 @@ export class TestPlugin extends AbstractPlugin {
   detach() {
     this.detachFunction();
   }
+
+  /* eslint-disable no-empty-function */
+  attachFunction() {}
+  detachFunction() {}
+  /* eslint-enable no-empty-function */
 }

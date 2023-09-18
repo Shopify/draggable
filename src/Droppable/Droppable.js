@@ -1,4 +1,5 @@
 import {closest} from 'shared/utils';
+
 import Draggable from '../Draggable';
 
 import {DroppableStartEvent, DroppableDroppedEvent, DroppableReturnedEvent, DroppableStopEvent} from './DroppableEvent';
@@ -107,9 +108,7 @@ export default class Droppable extends Draggable {
     this[onDragMove] = this[onDragMove].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
 
-    this.on('drag:start', this[onDragStart])
-      .on('drag:move', this[onDragMove])
-      .on('drag:stop', this[onDragStop]);
+    this.on('drag:start', this[onDragStart]).on('drag:move', this[onDragMove]).on('drag:stop', this[onDragStop]);
   }
 
   /**
@@ -118,9 +117,7 @@ export default class Droppable extends Draggable {
   destroy() {
     super.destroy();
 
-    this.off('drag:start', this[onDragStart])
-      .off('drag:move', this[onDragMove])
-      .off('drag:stop', this[onDragStop]);
+    this.off('drag:start', this[onDragStart]).off('drag:move', this[onDragMove]).off('drag:stop', this[onDragStop]);
   }
 
   /**

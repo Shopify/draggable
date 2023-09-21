@@ -1,6 +1,11 @@
 import Draggable from '../Draggable';
 
-import {SortableStartEvent, SortableSortEvent, SortableSortedEvent, SortableStopEvent} from './SortableEvent';
+import {
+  SortableStartEvent,
+  SortableSortEvent,
+  SortableSortedEvent,
+  SortableStopEvent,
+} from './SortableEvent';
 
 const onDragStart = Symbol('onDragStart');
 const onDragOverContainer = Symbol('onDragOverContainer');
@@ -14,11 +19,19 @@ const onDragStop = Symbol('onDragStop');
  * @return {String}
  */
 function onSortableSortedDefaultAnnouncement({dragEvent}) {
-  const sourceText = dragEvent.source.textContent.trim() || dragEvent.source.id || 'sortable element';
+  const sourceText =
+    dragEvent.source.textContent.trim() ||
+    dragEvent.source.id ||
+    'sortable element';
 
   if (dragEvent.over) {
-    const overText = dragEvent.over.textContent.trim() || dragEvent.over.id || 'sortable element';
-    const isFollowing = dragEvent.source.compareDocumentPosition(dragEvent.over) & Node.DOCUMENT_POSITION_FOLLOWING;
+    const overText =
+      dragEvent.over.textContent.trim() ||
+      dragEvent.over.id ||
+      'sortable element';
+    const isFollowing =
+      dragEvent.source.compareDocumentPosition(dragEvent.over) &
+      Node.DOCUMENT_POSITION_FOLLOWING;
 
     if (isFollowing) {
       return `Placed ${sourceText} after ${overText}`;
@@ -106,7 +119,9 @@ export default class Sortable extends Draggable {
    * @return {Number}
    */
   index(element) {
-    return this.getSortableElementsForContainer(element.parentNode).indexOf(element);
+    return this.getSortableElementsForContainer(element.parentNode).indexOf(
+      element,
+    );
   }
 
   /**
@@ -116,11 +131,15 @@ export default class Sortable extends Draggable {
    * @return {HTMLElement[]}
    */
   getSortableElementsForContainer(container) {
-    const allSortableElements = container.querySelectorAll(this.options.draggable);
+    const allSortableElements = container.querySelectorAll(
+      this.options.draggable,
+    );
 
     return [...allSortableElements].filter((childElement) => {
       return (
-        childElement !== this.originalSource && childElement !== this.mirror && childElement.parentNode === container
+        childElement !== this.originalSource &&
+        childElement !== this.mirror &&
+        childElement.parentNode === container
       );
     });
   }

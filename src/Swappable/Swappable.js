@@ -1,6 +1,11 @@
 import Draggable from '../Draggable';
 
-import {SwappableStartEvent, SwappableSwapEvent, SwappableSwappedEvent, SwappableStopEvent} from './SwappableEvent';
+import {
+  SwappableStartEvent,
+  SwappableSwapEvent,
+  SwappableSwappedEvent,
+  SwappableStopEvent,
+} from './SwappableEvent';
 
 const onDragStart = Symbol('onDragStart');
 const onDragOver = Symbol('onDragOver');
@@ -12,8 +17,14 @@ const onDragStop = Symbol('onDragStop');
  * @return {String}
  */
 function onSwappableSwappedDefaultAnnouncement({dragEvent, swappedElement}) {
-  const sourceText = dragEvent.source.textContent.trim() || dragEvent.source.id || 'swappable element';
-  const overText = swappedElement.textContent.trim() || swappedElement.id || 'swappable element';
+  const sourceText =
+    dragEvent.source.textContent.trim() ||
+    dragEvent.source.id ||
+    'swappable element';
+  const overText =
+    swappedElement.textContent.trim() ||
+    swappedElement.id ||
+    'swappable element';
 
   return `Swapped ${sourceText} with ${overText}`;
 }
@@ -60,7 +71,9 @@ export default class Swappable extends Draggable {
     this[onDragOver] = this[onDragOver].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
 
-    this.on('drag:start', this[onDragStart]).on('drag:over', this[onDragOver]).on('drag:stop', this[onDragStop]);
+    this.on('drag:start', this[onDragStart])
+      .on('drag:over', this[onDragOver])
+      .on('drag:stop', this[onDragStop]);
   }
 
   /**
@@ -69,7 +82,9 @@ export default class Swappable extends Draggable {
   destroy() {
     super.destroy();
 
-    this.off('drag:start', this._onDragStart).off('drag:over', this._onDragOver).off('drag:stop', this._onDragStop);
+    this.off('drag:start', this._onDragStart)
+      .off('drag:over', this._onDragOver)
+      .off('drag:stop', this._onDragStop);
   }
 
   /**
@@ -95,7 +110,11 @@ export default class Swappable extends Draggable {
    * @param {DragOverEvent} event - Drag over event
    */
   [onDragOver](event) {
-    if (event.over === event.originalSource || event.over === event.source || event.canceled()) {
+    if (
+      event.over === event.originalSource ||
+      event.over === event.source ||
+      event.canceled()
+    ) {
       return;
     }
 

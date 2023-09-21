@@ -69,7 +69,10 @@ describe('Mirror', () => {
     let dragEvent;
 
     draggable.on('mirror:create', mirrorCreateHandler);
-    draggable.on('drag:start', (dragStartEvent) => (dragEvent = dragStartEvent));
+    draggable.on(
+      'drag:start',
+      (dragStartEvent) => (dragEvent = dragStartEvent),
+    );
 
     clickMouse(draggableElement);
     waitForDragDelay();
@@ -128,7 +131,10 @@ describe('Mirror', () => {
     let dragEvent;
 
     draggable.on('mirror:created', mirrorCreatedHandler);
-    draggable.on('drag:start', (dragStartEvent) => (dragEvent = dragStartEvent));
+    draggable.on(
+      'drag:start',
+      (dragStartEvent) => (dragEvent = dragStartEvent),
+    );
 
     clickMouse(draggableElement);
     waitForDragDelay();
@@ -158,7 +164,10 @@ describe('Mirror', () => {
     let dragEvent;
 
     draggable.on('mirror:attached', mirrorAttachedHandler);
-    draggable.on('drag:start', (dragStartEvent) => (dragEvent = dragStartEvent));
+    draggable.on(
+      'drag:start',
+      (dragStartEvent) => (dragEvent = dragStartEvent),
+    );
 
     clickMouse(draggableElement);
     waitForDragDelay();
@@ -167,7 +176,9 @@ describe('Mirror', () => {
 
     const mirrorElement = document.querySelector('.draggable-mirror');
 
-    expect(mirrorAttachedHandler).toHaveBeenCalledWithEvent(MirrorAttachedEvent);
+    expect(mirrorAttachedHandler).toHaveBeenCalledWithEvent(
+      MirrorAttachedEvent,
+    );
     expect(mirrorAttachedHandler).toHaveBeenCalledWithEventProperties({
       dragEvent,
       mirror: mirrorElement,

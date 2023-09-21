@@ -7,10 +7,10 @@ appreciated and encouraged.
 
 1. [Code of Conduct](#code-of-conduct)
 2. [How to contribute](#how-to-contribute)
-    1. [Creating issues](#creating-issues)
-    2. [Opening pull requests](#opening-pull-requests)
-    3. [JS Docblocks](#js-docblocks)
-4. [How to run locally](#how-to-run-locally)
+   1. [Creating issues](#creating-issues)
+   2. [Opening pull requests](#opening-pull-requests)
+   3. [JS Docblocks](#js-docblocks)
+3. [How to run locally](#how-to-run-locally)
 
 ## Code of Conduct
 

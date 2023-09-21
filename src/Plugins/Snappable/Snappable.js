@@ -128,12 +128,16 @@ export default class Snappable extends AbstractPlugin {
       this.mirror.style.display = 'none';
     }
 
-    source.classList.remove(...this.draggable.getClassNamesFor('source:dragging'));
+    source.classList.remove(
+      ...this.draggable.getClassNamesFor('source:dragging'),
+    );
     source.classList.add(...this.draggable.getClassNamesFor('source:placed'));
 
     // Need to cancel this in drag out
     setTimeout(() => {
-      source.classList.remove(...this.draggable.getClassNamesFor('source:placed'));
+      source.classList.remove(
+        ...this.draggable.getClassNamesFor('source:placed'),
+      );
     }, this.draggable.options.placedTimeout);
   }
 

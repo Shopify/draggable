@@ -43,14 +43,18 @@ export default class Focusable extends AbstractPlugin {
    * Attaches listeners to draggable
    */
   attach() {
-    this.draggable.on('draggable:initialize', this[onInitialize]).on('draggable:destroy', this[onDestroy]);
+    this.draggable
+      .on('draggable:initialize', this[onInitialize])
+      .on('draggable:destroy', this[onDestroy]);
   }
 
   /**
    * Detaches listeners from draggable
    */
   detach() {
-    this.draggable.off('draggable:initialize', this[onInitialize]).off('draggable:destroy', this[onDestroy]);
+    this.draggable
+      .off('draggable:initialize', this[onInitialize])
+      .off('draggable:destroy', this[onDestroy]);
 
     // Remove modified elements when detach
     this[onDestroy]();
@@ -69,7 +73,10 @@ export default class Focusable extends AbstractPlugin {
    * @return {HTMLElement[]}
    */
   getElements() {
-    return [...this.draggable.containers, ...this.draggable.getDraggableElements()];
+    return [
+      ...this.draggable.containers,
+      ...this.draggable.getDraggableElements(),
+    ];
   }
 
   /**
@@ -109,7 +116,9 @@ const elementsWithMissingTabIndex = [];
  * @private
  */
 function decorateElement(element) {
-  const hasMissingTabIndex = Boolean(!element.getAttribute('tabindex') && element.tabIndex === -1);
+  const hasMissingTabIndex = Boolean(
+    !element.getAttribute('tabindex') && element.tabIndex === -1,
+  );
 
   if (hasMissingTabIndex) {
     elementsWithMissingTabIndex.push(element);

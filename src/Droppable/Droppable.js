@@ -2,7 +2,12 @@ import {closest} from 'shared/utils';
 
 import Draggable from '../Draggable';
 
-import {DroppableStartEvent, DroppableDroppedEvent, DroppableReturnedEvent, DroppableStopEvent} from './DroppableEvent';
+import {
+  DroppableStartEvent,
+  DroppableDroppedEvent,
+  DroppableReturnedEvent,
+  DroppableStopEvent,
+} from './DroppableEvent';
 
 const onDragStart = Symbol('onDragStart');
 const onDragMove = Symbol('onDragMove');
@@ -18,8 +23,12 @@ const getDropzones = Symbol('getDropzones');
  * @return {String}
  */
 function onDroppableDroppedDefaultAnnouncement({dragEvent, dropzone}) {
-  const sourceText = dragEvent.source.textContent.trim() || dragEvent.source.id || 'draggable element';
-  const dropzoneText = dropzone.textContent.trim() || dropzone.id || 'droppable element';
+  const sourceText =
+    dragEvent.source.textContent.trim() ||
+    dragEvent.source.id ||
+    'draggable element';
+  const dropzoneText =
+    dropzone.textContent.trim() || dropzone.id || 'droppable element';
 
   return `Dropped ${sourceText} into ${dropzoneText}`;
 }
@@ -30,8 +39,12 @@ function onDroppableDroppedDefaultAnnouncement({dragEvent, dropzone}) {
  * @return {String}
  */
 function onDroppableReturnedDefaultAnnouncement({dragEvent, dropzone}) {
-  const sourceText = dragEvent.source.textContent.trim() || dragEvent.source.id || 'draggable element';
-  const dropzoneText = dropzone.textContent.trim() || dropzone.id || 'droppable element';
+  const sourceText =
+    dragEvent.source.textContent.trim() ||
+    dragEvent.source.id ||
+    'draggable element';
+  const dropzoneText =
+    dropzone.textContent.trim() || dropzone.id || 'droppable element';
 
   return `Returned ${sourceText} from ${dropzoneText}`;
 }
@@ -108,7 +121,9 @@ export default class Droppable extends Draggable {
     this[onDragMove] = this[onDragMove].bind(this);
     this[onDragStop] = this[onDragStop].bind(this);
 
-    this.on('drag:start', this[onDragStart]).on('drag:move', this[onDragMove]).on('drag:stop', this[onDragStop]);
+    this.on('drag:start', this[onDragStart])
+      .on('drag:move', this[onDragMove])
+      .on('drag:stop', this[onDragStop]);
   }
 
   /**
@@ -117,7 +132,9 @@ export default class Droppable extends Draggable {
   destroy() {
     super.destroy();
 
-    this.off('drag:start', this[onDragStart]).off('drag:move', this[onDragMove]).off('drag:stop', this[onDragStop]);
+    this.off('drag:start', this[onDragStart])
+      .off('drag:move', this[onDragMove])
+      .off('drag:stop', this[onDragStop]);
   }
 
   /**
@@ -153,11 +170,17 @@ export default class Droppable extends Draggable {
     this.initialDropzone = dropzone;
 
     for (const dropzoneElement of this.dropzones) {
-      if (dropzoneElement.classList.contains(this.getClassNameFor('droppable:occupied'))) {
+      if (
+        dropzoneElement.classList.contains(
+          this.getClassNameFor('droppable:occupied'),
+        )
+      ) {
         continue;
       }
 
-      dropzoneElement.classList.add(...this.getClassNamesFor('droppable:active'));
+      dropzoneElement.classList.add(
+        ...this.getClassNamesFor('droppable:active'),
+      );
     }
   }
 
@@ -172,11 +195,16 @@ export default class Droppable extends Draggable {
     }
 
     const dropzone = this[closestDropzone](event.sensorEvent.target);
-    const overEmptyDropzone = dropzone && !dropzone.classList.contains(this.getClassNameFor('droppable:occupied'));
+    const overEmptyDropzone =
+      dropzone &&
+      !dropzone.classList.contains(this.getClassNameFor('droppable:occupied'));
 
     if (overEmptyDropzone && this[dropInDropzone](event, dropzone)) {
       this.lastDropzone = dropzone;
-    } else if ((!dropzone || dropzone === this.initialDropzone) && this.lastDropzone) {
+    } else if (
+      (!dropzone || dropzone === this.initialDropzone) &&
+      this.lastDropzone
+    ) {
       this[returnToOriginalDropzone](event);
       this.lastDropzone = null;
     }
@@ -258,7 +286,9 @@ export default class Droppable extends Draggable {
     }
 
     this.initialDropzone.appendChild(event.source);
-    this.lastDropzone.classList.remove(...this.getClassNamesFor('droppable:occupied'));
+    this.lastDropzone.classList.remove(
+      ...this.getClassNamesFor('droppable:occupied'),
+    );
   }
 
   /**

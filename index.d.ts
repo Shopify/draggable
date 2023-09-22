@@ -397,6 +397,7 @@ declare module '@shopify/draggable' {
     export interface DroppableOptions extends DraggableOptions {
         dropzone: string | NodeList | HTMLElement[] | (() => NodeList | HTMLElement[]);
         classes?: { [key in DroppableClassNames]: string };
+        insertBy: 'prepend' | 'append';
     }
 
     export class Droppable<T = DroppableEventNames> extends Draggable<T> {

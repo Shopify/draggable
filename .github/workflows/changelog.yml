@@ -1,0 +1,30 @@
+name: Changelog
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - opened
+      - synchronize
+      - reopened
+
+jobs:
+  check:
+    if: |
+      !contains(github.event.pull_request.head.ref, 'changeset-release') &&
+      !contains(github.event.pull_request.labels.*.name, '🤖Skip Changelog')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.17.1
+
+      - name: Check for Changeset
+        run: npx @changesets/cli status --since="origin/main"

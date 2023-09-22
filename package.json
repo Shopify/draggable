@@ -28,8 +28,7 @@
     "start": "concurrently \"yarn watch\" \"cd examples && yarn && yarn start\"",
     "build": "yarn build:production",
     "watch": "ts-node --project='./scripts/tsconfig.json' ./scripts/watch.ts",
-    "prepare": "yarn build:development",
-    "prepublishOnly": "yarn build:production",
+    "release": "yarn run build:production && changeset publish",
     "lint": "eslint ./src ./scripts ./test --max-warnings 0",
     "type-check": "tsc --noEmit",
     "type-check:scripts": "tsc --noEmit --project scripts",
@@ -46,6 +45,8 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.22.20",
+    "@changesets/changelog-github": "^0.4.8",
+    "@changesets/cli": "^2.26.2",
     "@microsoft/tsdoc": "^0.14.2",
     "@shopify/babel-preset": "^25.0.0",
     "@shopify/eslint-plugin": "^43.0.0",

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0
+
+### Patch Changes
+
+- Adds changeset dependency for version management
+
 ## v1.0.0-beta.13 - 2021-05-17
 
 ### Added

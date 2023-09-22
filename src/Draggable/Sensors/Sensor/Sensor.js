@@ -98,7 +98,9 @@ export default class Sensor {
    * @example draggable.removeContainer(document.body)
    */
   removeContainer(...containers) {
-    this.containers = this.containers.filter((container) => !containers.includes(container));
+    this.containers = this.containers.filter(
+      (container) => !containers.includes(container),
+    );
   }
 
   /**

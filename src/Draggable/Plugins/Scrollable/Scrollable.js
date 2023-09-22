@@ -119,7 +119,10 @@ export default class Scrollable extends AbstractPlugin {
    */
   getScrollableElement(target) {
     if (this.hasDefinedScrollableElements()) {
-      return closest(target, this.options.scrollableElements) || document.documentElement;
+      return (
+        closest(target, this.options.scrollableElements) ||
+        document.documentElement
+      );
     } else {
       return closestScrollableElement(target);
     }
@@ -152,7 +155,9 @@ export default class Scrollable extends AbstractPlugin {
    */
   [onDragMove](dragEvent) {
     this.findScrollableElementFrame = requestAnimationFrame(() => {
-      this.scrollableElement = this.getScrollableElement(dragEvent.sensorEvent.target);
+      this.scrollableElement = this.getScrollableElement(
+        dragEvent.sensorEvent.target,
+      );
     });
 
     if (!this.scrollableElement) {
@@ -163,8 +168,16 @@ export default class Scrollable extends AbstractPlugin {
     const scrollOffset = {x: 0, y: 0};
 
     if ('ontouchstart' in window) {
-      scrollOffset.y = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      scrollOffset.x = window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+      scrollOffset.y =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0;
+      scrollOffset.x =
+        window.pageXOffset ||
+        document.documentElement.scrollLeft ||
+        document.body.scrollLeft ||
+        0;
     }
 
     this.currentMousePosition = {
@@ -212,7 +225,11 @@ export default class Scrollable extends AbstractPlugin {
     const clientX = this.currentMousePosition.clientX;
     const clientY = this.currentMousePosition.clientY;
 
-    if (scrollableElement !== document.body && scrollableElement !== document.documentElement && !cutOff) {
+    if (
+      scrollableElement !== document.body &&
+      scrollableElement !== document.documentElement &&
+      !cutOff
+    ) {
       const {offsetHeight, offsetWidth} = scrollableElement;
 
       if (rect.top + offsetHeight - clientY < sensitivity) {

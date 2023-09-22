@@ -1,7 +1,12 @@
 import {closest} from 'shared/utils';
 
 import Sensor from '../Sensor';
-import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent, DragPressureSensorEvent} from '../SensorEvent';
+import {
+  DragStartSensorEvent,
+  DragMoveSensorEvent,
+  DragStopSensorEvent,
+  DragPressureSensorEvent,
+} from '../SensorEvent';
 
 const onMouseForceWillBegin = Symbol('onMouseForceWillBegin');
 const onMouseForceDown = Symbol('onMouseForceDown');
@@ -47,10 +52,22 @@ export default class ForceTouchSensor extends Sensor {
    */
   attach() {
     for (const container of this.containers) {
-      container.addEventListener('webkitmouseforcewillbegin', this[onMouseForceWillBegin], false);
-      container.addEventListener('webkitmouseforcedown', this[onMouseForceDown], false);
+      container.addEventListener(
+        'webkitmouseforcewillbegin',
+        this[onMouseForceWillBegin],
+        false,
+      );
+      container.addEventListener(
+        'webkitmouseforcedown',
+        this[onMouseForceDown],
+        false,
+      );
       container.addEventListener('mousedown', this[onMouseDown], true);
-      container.addEventListener('webkitmouseforcechanged', this[onMouseForceChange], false);
+      container.addEventListener(
+        'webkitmouseforcechanged',
+        this[onMouseForceChange],
+        false,
+      );
     }
 
     document.addEventListener('mousemove', this[onMouseMove]);
@@ -62,10 +79,22 @@ export default class ForceTouchSensor extends Sensor {
    */
   detach() {
     for (const container of this.containers) {
-      container.removeEventListener('webkitmouseforcewillbegin', this[onMouseForceWillBegin], false);
-      container.removeEventListener('webkitmouseforcedown', this[onMouseForceDown], false);
+      container.removeEventListener(
+        'webkitmouseforcewillbegin',
+        this[onMouseForceWillBegin],
+        false,
+      );
+      container.removeEventListener(
+        'webkitmouseforcedown',
+        this[onMouseForceDown],
+        false,
+      );
       container.removeEventListener('mousedown', this[onMouseDown], true);
-      container.removeEventListener('webkitmouseforcechanged', this[onMouseForceChange], false);
+      container.removeEventListener(
+        'webkitmouseforcechanged',
+        this[onMouseForceChange],
+        false,
+      );
     }
 
     document.removeEventListener('mousemove', this[onMouseMove]);
@@ -95,7 +124,11 @@ export default class ForceTouchSensor extends Sensor {
     const target = document.elementFromPoint(event.clientX, event.clientY);
     const container = event.currentTarget;
 
-    if (this.options.handle && target && !closest(target, this.options.handle)) {
+    if (
+      this.options.handle &&
+      target &&
+      !closest(target, this.options.handle)
+    ) {
       return;
     }
 

@@ -1,4 +1,12 @@
-import {createSandbox, triggerEvent, waitForDragDelay, DRAG_DELAY, clickMouse, moveMouse, releaseMouse} from 'helper';
+import {
+  createSandbox,
+  triggerEvent,
+  waitForDragDelay,
+  DRAG_DELAY,
+  clickMouse,
+  moveMouse,
+  releaseMouse,
+} from 'helper';
 
 import MouseSensor from '..';
 
@@ -47,7 +55,9 @@ describe('MouseSensor', () => {
   }
 
   describe('common', () => {
-    beforeEach(setup);
+    beforeEach(() => {
+      setup();
+    });
 
     afterEach(teardown);
 
@@ -138,7 +148,11 @@ describe('MouseSensor', () => {
         releaseMouse(document.body);
       }
 
-      [dragFlowWithRightClick, dragFlowWithCtrlKey, dragFlowWithMetaKey].forEach((dragFlow) => {
+      [
+        dragFlowWithRightClick,
+        dragFlowWithCtrlKey,
+        dragFlowWithMetaKey,
+      ].forEach((dragFlow) => {
         expect(dragFlow).not.toHaveTriggeredSensorEvent('drag:start');
       });
     });
@@ -165,7 +179,9 @@ describe('MouseSensor', () => {
     beforeEach(() => {
       setup({handle: '.handle'});
       handleInDraggableElement = sandbox.querySelector('.draggable .handle');
-      handleInNonDraggableElement = sandbox.querySelector('.non-draggable .handle');
+      handleInNonDraggableElement = sandbox.querySelector(
+        '.non-draggable .handle',
+      );
     });
 
     afterEach(teardown);
@@ -173,7 +189,10 @@ describe('MouseSensor', () => {
     it('does not prevent `dragstart` event when attempting to drag handle in non draggable element', () => {
       clickMouse(handleInNonDraggableElement);
       moveMouse(document, {pageX: 1, pageY: 1});
-      const nativeDragEvent = triggerEvent(handleInNonDraggableElement, 'dragstart');
+      const nativeDragEvent = triggerEvent(
+        handleInNonDraggableElement,
+        'dragstart',
+      );
 
       expect(nativeDragEvent).not.toHaveDefaultPrevented();
 
@@ -183,7 +202,10 @@ describe('MouseSensor', () => {
     it('prevent `dragstart` event when attempting to drag handle in draggable element', () => {
       clickMouse(handleInDraggableElement);
       moveMouse(document, {pageX: 1, pageY: 1});
-      const nativeDragEvent = triggerEvent(handleInDraggableElement, 'dragstart');
+      const nativeDragEvent = triggerEvent(
+        handleInDraggableElement,
+        'dragstart',
+      );
 
       expect(nativeDragEvent).toHaveDefaultPrevented();
 

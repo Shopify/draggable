@@ -1,0 +1,19 @@
+{
+  "extends": "@shopify/typescript-configs/library",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "rootDir": ".",
+    "lib": ["es2023"],
+    "resolveJsonModule": false,
+    "verbatimModuleSyntax": true,
+    "useUnknownInCatchVariables": false,
+    "paths": {
+      "shared/*": ["./src/shared/*"],
+      "helper": ["./test/helper.ts"]
+    }
+  },
+  "include": [
+    "./src/**/*",
+    "./test/**/*"
+  ]
+}

@@ -134,7 +134,9 @@ export default class ResizeMirror extends AbstractPlugin {
         overContainer.appendChild(this.mirror);
       }
 
-      const overElement = over || this.draggable.getDraggableElementsForContainer(overContainer)[0];
+      const overElement =
+        over ||
+        this.draggable.getDraggableElementsForContainer(overContainer)[0];
 
       if (!overElement) {
         return;
@@ -143,7 +145,10 @@ export default class ResizeMirror extends AbstractPlugin {
       requestNextAnimationFrame(() => {
         const overRect = overElement.getBoundingClientRect();
 
-        if (this.lastHeight === overRect.height && this.lastWidth === overRect.width) {
+        if (
+          this.lastHeight === overRect.height &&
+          this.lastWidth === overRect.width
+        ) {
           return;
         }
 

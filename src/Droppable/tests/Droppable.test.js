@@ -1,6 +1,18 @@
-import {createSandbox, clickMouse, moveMouse, releaseMouse, waitForDragDelay, DRAG_DELAY} from 'helper';
+import {
+  createSandbox,
+  clickMouse,
+  moveMouse,
+  releaseMouse,
+  waitForDragDelay,
+  DRAG_DELAY,
+} from 'helper';
 
-import Droppable, {DroppableStartEvent, DroppableDroppedEvent, DroppableReturnedEvent, DroppableStopEvent} from '..';
+import Droppable, {
+  DroppableStartEvent,
+  DroppableDroppedEvent,
+  DroppableReturnedEvent,
+  DroppableStopEvent,
+} from '..';
 
 const sampleMarkup = `
   <div class="Container">
@@ -60,7 +72,9 @@ describe('Droppable', () => {
     });
 
     it('droppable:start event', () => {
-      droppable.on('drag:start', (dragEvent) => originalDragEvents.push(dragEvent));
+      droppable.on('drag:start', (dragEvent) =>
+        originalDragEvents.push(dragEvent),
+      );
       droppable.on('droppable:start', eventHandler);
 
       move();
@@ -74,7 +88,9 @@ describe('Droppable', () => {
     });
 
     it('droppable:dropped event', () => {
-      droppable.on('drag:move', (dragEvent) => originalDragEvents.push(dragEvent));
+      droppable.on('drag:move', (dragEvent) =>
+        originalDragEvents.push(dragEvent),
+      );
       droppable.on('droppable:dropped', eventHandler);
 
       move();
@@ -88,7 +104,9 @@ describe('Droppable', () => {
     });
 
     it('droppable:returned event', () => {
-      droppable.on('drag:move', (dragEvent) => originalDragEvents.push(dragEvent));
+      droppable.on('drag:move', (dragEvent) =>
+        originalDragEvents.push(dragEvent),
+      );
       droppable.on('droppable:returned', eventHandler);
 
       move(() => {
@@ -105,7 +123,9 @@ describe('Droppable', () => {
     });
 
     it('droppable:stop event', () => {
-      droppable.on('drag:stop', (dragEvent) => originalDragEvents.push(dragEvent));
+      droppable.on('drag:stop', (dragEvent) =>
+        originalDragEvents.push(dragEvent),
+      );
       droppable.on('droppable:stop', eventHandler);
 
       move();

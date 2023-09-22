@@ -1,7 +1,11 @@
 import {closest} from 'shared/utils';
 
 import Sensor from '../Sensor';
-import {DragStartSensorEvent, DragMoveSensorEvent, DragStopSensorEvent} from '../SensorEvent';
+import {
+  DragStartSensorEvent,
+  DragMoveSensorEvent,
+  DragStopSensorEvent,
+} from '../SensorEvent';
 
 const onMouseDown = Symbol('onMouseDown');
 const onMouseUp = Symbol('onMouseUp');
@@ -195,7 +199,11 @@ export default class DragSensor extends Sensor {
       return;
     }
 
-    if (this.options.handle && target && !closest(target, this.options.handle)) {
+    if (
+      this.options.handle &&
+      target &&
+      !closest(target, this.options.handle)
+    ) {
       return;
     }
 
@@ -205,7 +213,10 @@ export default class DragSensor extends Sensor {
       return;
     }
 
-    const nativeDraggableElement = closest(event.target, (element) => element.draggable);
+    const nativeDraggableElement = closest(
+      event.target,
+      (element) => element.draggable,
+    );
 
     if (nativeDraggableElement) {
       nativeDraggableElement.draggable = false;

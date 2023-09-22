@@ -163,7 +163,8 @@ export default class Mirror extends AbstractPlugin {
       return;
     }
 
-    const appendableContainer = this[getAppendableContainer](source) || sourceContainer;
+    const appendableContainer =
+      this[getAppendableContainer](source) || sourceContainer;
     this.mirror = source.cloneNode(true);
 
     const mirrorCreatedEvent = new MirrorCreatedEvent({
@@ -415,8 +416,14 @@ function computeMirrorDimensions({source, ...args}) {
  */
 function calculateMirrorOffset({sensorEvent, sourceRect, options, ...args}) {
   return withPromise((resolve) => {
-    const top = options.cursorOffsetY === null ? sensorEvent.clientY - sourceRect.top : options.cursorOffsetY;
-    const left = options.cursorOffsetX === null ? sensorEvent.clientX - sourceRect.left : options.cursorOffsetX;
+    const top =
+      options.cursorOffsetY === null
+        ? sensorEvent.clientY - sourceRect.top
+        : options.cursorOffsetY;
+    const left =
+      options.cursorOffsetX === null
+        ? sensorEvent.clientX - sourceRect.left
+        : options.cursorOffsetX;
 
     const mirrorOffset = {top, left};
 
@@ -529,12 +536,16 @@ function positionMirror({withFrame = false, initial = false} = {}) {
 
         if (mirrorOffset) {
           const x = passedThreshX
-            ? Math.round((sensorEvent.clientX - mirrorOffset.left - scrollOffset.x) / (options.thresholdX || 1)) *
-              (options.thresholdX || 1)
+            ? Math.round(
+                (sensorEvent.clientX - mirrorOffset.left - scrollOffset.x) /
+                  (options.thresholdX || 1),
+              ) * (options.thresholdX || 1)
             : Math.round(lastMovedX);
           const y = passedThreshY
-            ? Math.round((sensorEvent.clientY - mirrorOffset.top - scrollOffset.y) / (options.thresholdY || 1)) *
-              (options.thresholdY || 1)
+            ? Math.round(
+                (sensorEvent.clientY - mirrorOffset.top - scrollOffset.y) /
+                  (options.thresholdY || 1),
+              ) * (options.thresholdY || 1)
             : Math.round(lastMovedY);
 
           if ((options.xAxis && options.yAxis) || initial) {

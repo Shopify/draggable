@@ -87,7 +87,8 @@ export default class SortAnimation extends AbstractPlugin {
    */
   [onSortableSort]({dragEvent}) {
     const {sourceContainer} = dragEvent;
-    const elements = this.draggable.getDraggableElementsForContainer(sourceContainer);
+    const elements =
+      this.draggable.getDraggableElementsForContainer(sourceContainer);
     this.lastElements = Array.from(elements).map((el) => {
       return {
         domEl: el,
@@ -168,5 +169,8 @@ function animate({from, to}, {duration, easingFunction}) {
 function resetElementOnTransitionEnd(event) {
   event.target.style.transition = '';
   event.target.style.pointerEvents = '';
-  event.target.removeEventListener('transitionend', resetElementOnTransitionEnd);
+  event.target.removeEventListener(
+    'transitionend',
+    resetElementOnTransitionEnd,
+  );
 }

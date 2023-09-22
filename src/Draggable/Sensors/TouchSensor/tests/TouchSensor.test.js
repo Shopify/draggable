@@ -1,4 +1,12 @@
-import {createSandbox, triggerEvent, waitForDragDelay, DRAG_DELAY, touchStart, touchMove, touchRelease} from 'helper';
+import {
+  createSandbox,
+  triggerEvent,
+  waitForDragDelay,
+  DRAG_DELAY,
+  touchStart,
+  touchMove,
+  touchRelease,
+} from 'helper';
 
 import TouchSensor from '..';
 
@@ -38,7 +46,9 @@ describe('TouchSensor', () => {
   }
 
   describe('common', () => {
-    beforeEach(setup);
+    beforeEach(() => {
+      setup();
+    });
 
     afterEach(teardown);
 

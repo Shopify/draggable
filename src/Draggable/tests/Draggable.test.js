@@ -10,8 +10,16 @@ import {
 } from 'helper';
 
 import Draggable, {defaultOptions} from '../Draggable';
-import {DragStartEvent, DragMoveEvent, DragStopEvent, DragStoppedEvent} from '../DragEvent';
-import {DraggableInitializedEvent, DraggableDestroyEvent} from '../DraggableEvent';
+import {
+  DragStartEvent,
+  DragMoveEvent,
+  DragStopEvent,
+  DragStoppedEvent,
+} from '../DragEvent';
+import {
+  DraggableInitializedEvent,
+  DraggableDestroyEvent,
+} from '../DraggableEvent';
 import {Focusable, Mirror, Scrollable, Announcement} from '../Plugins';
 import {MouseSensor, TouchSensor} from '../Sensors';
 
@@ -72,7 +80,9 @@ describe('Draggable', () => {
     it.skip('should set containers', () => {
       const newInstance = new Draggable(containers);
 
-      expect(newInstance.containers).toMatchObject(Array.prototype.slice.call(containers));
+      expect(newInstance.containers).toMatchObject(
+        Array.prototype.slice.call(containers),
+      );
     });
 
     it.skip('should set single container if a list is not passed', () => {
@@ -85,11 +95,15 @@ describe('Draggable', () => {
     it('should throw error if `containers` argument is wrong type', () => {
       expect(() => {
         return new Draggable({});
-      }).toThrow('Draggable containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`');
+      }).toThrow(
+        'Draggable containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`',
+      );
 
       expect(() => {
         return new Draggable('.li');
-      }).toThrow('Draggable containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`');
+      }).toThrow(
+        'Draggable containers are expected to be of type `NodeList`, `HTMLElement[]` or `HTMLElement`',
+      );
     });
 
     it('should attach default plugins', () => {
@@ -131,9 +145,9 @@ describe('Draggable', () => {
 
       expect(customPlugin.draggable).toBe(newInstance);
 
-      expect(customPlugin.attachFunction).toHaveBeenCalled();
+      expect(customPlugin.attach).toHaveBeenCalled();
 
-      expect(customPlugin.detachFunction).not.toHaveBeenCalled();
+      expect(customPlugin.detach).not.toHaveBeenCalled();
     });
 
     it('should attach sensors', () => {
@@ -204,17 +218,17 @@ describe('Draggable', () => {
 
       newInstance.destroy();
 
-      expect(expectedPlugins[4].detachFunction).toHaveBeenCalled();
+      expect(expectedPlugins[4].detach).toHaveBeenCalled();
 
-      expect(expectedPlugins[4].detachFunction).toHaveBeenCalledTimes(1);
+      expect(expectedPlugins[4].detach).toHaveBeenCalledTimes(1);
 
-      expect(expectedPlugins[5].detachFunction).toHaveBeenCalled();
+      expect(expectedPlugins[5].detach).toHaveBeenCalled();
 
-      expect(expectedPlugins[5].detachFunction).toHaveBeenCalledTimes(1);
+      expect(expectedPlugins[5].detach).toHaveBeenCalledTimes(1);
 
-      expect(expectedPlugins[6].detachFunction).toHaveBeenCalled();
+      expect(expectedPlugins[6].detach).toHaveBeenCalled();
 
-      expect(expectedPlugins[6].detachFunction).toHaveBeenCalledTimes(1);
+      expect(expectedPlugins[6].detach).toHaveBeenCalledTimes(1);
     });
 
     it('should remove all sensor event listeners', () => {
@@ -248,7 +262,9 @@ describe('Draggable', () => {
 
       expect('my:event' in newInstance.emitter.callbacks).toBe(true);
 
-      expect(newInstance.emitter.callbacks['my:event']).toMatchObject([stubHandler]);
+      expect(newInstance.emitter.callbacks['my:event']).toMatchObject([
+        stubHandler,
+      ]);
     });
 
     it('should return draggable instance', () => {
@@ -329,7 +345,9 @@ describe('Draggable', () => {
       // Wait for delay
       waitForDragDelay();
 
-      const containerChildren = newInstance.getDraggableElementsForContainer(draggableElement.parentNode);
+      const containerChildren = newInstance.getDraggableElementsForContainer(
+        draggableElement.parentNode,
+      );
 
       expect(containerChildren).toHaveLength(2);
 
@@ -360,7 +378,10 @@ describe('Draggable', () => {
 
       newInstance.addContainer(dynamicContainer);
 
-      expect(newInstance.containers).toStrictEqual([...containers, dynamicContainer]);
+      expect(newInstance.containers).toStrictEqual([
+        ...containers,
+        dynamicContainer,
+      ]);
 
       clickMouse(draggableElement);
       waitForDragDelay();
@@ -374,7 +395,9 @@ describe('Draggable', () => {
   describe('#removeContainer', () => {
     it('removes single container dynamically', () => {
       let dragOverContainerHandler = jest.fn();
-      const allContainers = document.querySelectorAll('.Container, .DynamicContainer');
+      const allContainers = document.querySelectorAll(
+        '.Container, .DynamicContainer',
+      );
       const newInstance = new Draggable(allContainers, {
         draggable: 'li',
       });
@@ -415,7 +438,9 @@ describe('Draggable', () => {
         draggable: 'li',
       });
 
-      expect(draggable.getDraggableElements()).toStrictEqual([...document.querySelectorAll('.Container li')]);
+      expect(draggable.getDraggableElements()).toStrictEqual([
+        ...document.querySelectorAll('.Container li'),
+      ]);
     });
 
     it('returns draggable elements after adding a container', () => {
@@ -424,15 +449,21 @@ describe('Draggable', () => {
         draggable: 'li',
       });
 
-      expect(draggable.getDraggableElements()).toStrictEqual([...document.querySelectorAll('.Container li')]);
+      expect(draggable.getDraggableElements()).toStrictEqual([
+        ...document.querySelectorAll('.Container li'),
+      ]);
 
       draggable.addContainer(dynamicContainer);
 
-      expect(draggable.getDraggableElements()).toStrictEqual([...document.querySelectorAll('li')]);
+      expect(draggable.getDraggableElements()).toStrictEqual([
+        ...document.querySelectorAll('li'),
+      ]);
 
       draggable.removeContainer(dynamicContainer);
 
-      expect(draggable.getDraggableElements()).toStrictEqual([...document.querySelectorAll('.Container li')]);
+      expect(draggable.getDraggableElements()).toStrictEqual([
+        ...document.querySelectorAll('.Container li'),
+      ]);
     });
   });
 
@@ -694,7 +725,9 @@ describe('Draggable', () => {
     // Wait for delay
     waitForDragDelay();
 
-    expect(newInstance.source.classList).toContain('draggable-source--is-dragging');
+    expect(newInstance.source.classList).toContain(
+      'draggable-source--is-dragging',
+    );
 
     triggerEvent(draggableElement, 'mouseup', {button: 0});
   });
@@ -839,7 +872,9 @@ describe('Draggable', () => {
     // Wait for default draggable.options.placedTimeout delay
     jest.advanceTimersByTime(800);
 
-    expect(containers[0].classList).not.toContain('draggable-container--placed');
+    expect(containers[0].classList).not.toContain(
+      'draggable-container--placed',
+    );
   });
 
   it('adds `container:dragging` classname to draggable container element on mousedown', () => {
@@ -855,7 +890,9 @@ describe('Draggable', () => {
     // Wait for delay
     waitForDragDelay();
 
-    expect(containers[0].classList).toContain('draggable-container--is-dragging');
+    expect(containers[0].classList).toContain(
+      'draggable-container--is-dragging',
+    );
 
     triggerEvent(draggableElement, 'mouseup', {button: 0});
   });
@@ -873,11 +910,15 @@ describe('Draggable', () => {
     // Wait for delay
     waitForDragDelay();
 
-    expect(containers[0].classList).toContain('draggable-container--is-dragging');
+    expect(containers[0].classList).toContain(
+      'draggable-container--is-dragging',
+    );
 
     triggerEvent(document.body, 'mouseup', {button: 0});
 
-    expect(containers[0].classList).not.toContain('draggable-container--is-dragging');
+    expect(containers[0].classList).not.toContain(
+      'draggable-container--is-dragging',
+    );
   });
 
   it('removes `container:dragging` classname from draggable container element on dragEvent.cancel()', () => {
@@ -895,7 +936,9 @@ describe('Draggable', () => {
     // Wait for delay
     waitForDragDelay();
 
-    expect(containers[0].classList).not.toContain('draggable-container--is-dragging');
+    expect(containers[0].classList).not.toContain(
+      'draggable-container--is-dragging',
+    );
 
     triggerEvent(draggableElement, 'mouseup', {button: 0});
   });
@@ -912,11 +955,19 @@ describe('Draggable', () => {
     // Wait for delay
     waitForDragDelay();
 
-    expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBe(true);
+    expect(
+      draggableElement.classList.contains(
+        newInstance.getClassNameFor('source:original'),
+      ),
+    ).toBe(true);
 
     triggerEvent(document.body, 'mouseup', {button: 0});
 
-    expect(draggableElement.classList.contains(newInstance.getClassNameFor('source:original'))).toBe(false);
+    expect(
+      draggableElement.classList.contains(
+        newInstance.getClassNameFor('source:original'),
+      ),
+    ).toBe(false);
   });
 
   it('should have multiple classes for `source:original` on start', () => {
@@ -935,7 +986,9 @@ describe('Draggable', () => {
     // Wait for delay
     waitForDragDelay();
 
-    expect(newInstance.getClassNamesFor('source:original')).toStrictEqual(sourceOriginalClasses);
+    expect(newInstance.getClassNamesFor('source:original')).toStrictEqual(
+      sourceOriginalClasses,
+    );
 
     triggerEvent(document.body, 'mouseup', {button: 0});
   });

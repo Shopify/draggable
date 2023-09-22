@@ -1,4 +1,11 @@
-import {createSandbox, clickMouse, moveMouse, releaseMouse, waitForDragDelay, DRAG_DELAY} from 'helper';
+import {
+  createSandbox,
+  clickMouse,
+  moveMouse,
+  releaseMouse,
+  waitForDragDelay,
+  DRAG_DELAY,
+} from 'helper';
 
 import Sortable from '..';
 
@@ -119,14 +126,22 @@ describe('Sortable', () => {
   });
 
   it('sorts elements as you drag within a single container', () => {
-    draggableElements = sortable.getDraggableElementsForContainer(containers[0]);
-    expect(draggableElements).toHaveOrder([firstItem, secondItem, thirdItem, forthItem]);
+    draggableElements = sortable.getDraggableElementsForContainer(
+      containers[0],
+    );
+    expect(draggableElements).toHaveOrder([
+      firstItem,
+      secondItem,
+      thirdItem,
+      forthItem,
+    ]);
 
     clickMouse(firstItem);
     waitForDragDelay();
     moveMouse(secondItem);
 
-    draggableElements = sortable.getDraggableElementsForContainer(firstContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(firstContainer);
     expect(draggableElements).toHaveOrder([
       secondItem,
       // original firstItem
@@ -137,7 +152,8 @@ describe('Sortable', () => {
 
     moveMouse(thirdItem);
 
-    draggableElements = sortable.getDraggableElementsForContainer(firstContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(firstContainer);
     expect(draggableElements).toHaveOrder([
       secondItem,
       thirdItem,
@@ -148,7 +164,8 @@ describe('Sortable', () => {
 
     moveMouse(forthItem);
 
-    draggableElements = sortable.getDraggableElementsForContainer(firstContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(firstContainer);
     expect(draggableElements).toHaveOrder([
       secondItem,
       thirdItem,
@@ -159,25 +176,45 @@ describe('Sortable', () => {
 
     releaseMouse(sortable.source);
 
-    draggableElements = sortable.getDraggableElementsForContainer(firstContainer);
-    expect(draggableElements).toHaveOrder([secondItem, thirdItem, forthItem, firstItem]);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(firstContainer);
+    expect(draggableElements).toHaveOrder([
+      secondItem,
+      thirdItem,
+      forthItem,
+      firstItem,
+    ]);
   });
 
   it('sorts elements as you drag between multiple containers', () => {
-    draggableElements = sortable.getDraggableElementsForContainer(firstContainer);
-    expect(draggableElements).toHaveOrder([firstItem, secondItem, thirdItem, forthItem]);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(firstContainer);
+    expect(draggableElements).toHaveOrder([
+      firstItem,
+      secondItem,
+      thirdItem,
+      forthItem,
+    ]);
 
-    draggableElements = sortable.getDraggableElementsForContainer(secondContainer);
-    expect(draggableElements).toHaveOrder([fifthItem, sixthItem, seventhItem, eighthItem]);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(secondContainer);
+    expect(draggableElements).toHaveOrder([
+      fifthItem,
+      sixthItem,
+      seventhItem,
+      eighthItem,
+    ]);
 
     clickMouse(firstItem);
     waitForDragDelay();
     moveMouse(fifthItem);
 
-    draggableElements = sortable.getDraggableElementsForContainer(firstContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(firstContainer);
     expect(draggableElements).toHaveOrder([secondItem, thirdItem, forthItem]);
 
-    draggableElements = sortable.getDraggableElementsForContainer(secondContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(secondContainer);
     expect(draggableElements).toHaveOrder([
       // original firstItem
       sortable.source,
@@ -189,10 +226,12 @@ describe('Sortable', () => {
 
     moveMouse(eighthItem);
 
-    draggableElements = sortable.getDraggableElementsForContainer(firstContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(firstContainer);
     expect(draggableElements).toHaveOrder([secondItem, thirdItem, forthItem]);
 
-    draggableElements = sortable.getDraggableElementsForContainer(secondContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(secondContainer);
     expect(draggableElements).toHaveOrder([
       fifthItem,
       sixthItem,
@@ -204,11 +243,19 @@ describe('Sortable', () => {
 
     releaseMouse(sortable.source);
 
-    draggableElements = sortable.getDraggableElementsForContainer(firstContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(firstContainer);
     expect(draggableElements).toHaveOrder([secondItem, thirdItem, forthItem]);
 
-    draggableElements = sortable.getDraggableElementsForContainer(secondContainer);
-    expect(draggableElements).toHaveOrder([fifthItem, sixthItem, seventhItem, eighthItem, firstItem]);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(secondContainer);
+    expect(draggableElements).toHaveOrder([
+      fifthItem,
+      sixthItem,
+      seventhItem,
+      eighthItem,
+      firstItem,
+    ]);
   });
 
   it('prevents sorting when sortable:sort event gets canceled', () => {
@@ -220,13 +267,25 @@ describe('Sortable', () => {
     waitForDragDelay();
     moveMouse(secondItem);
 
-    draggableElements = sortable.getDraggableElementsForContainer(firstContainer);
-    expect(draggableElements).toHaveOrder([sortable.source, secondItem, thirdItem, forthItem]);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(firstContainer);
+    expect(draggableElements).toHaveOrder([
+      sortable.source,
+      secondItem,
+      thirdItem,
+      forthItem,
+    ]);
 
     releaseMouse(sortable.source);
 
-    draggableElements = sortable.getDraggableElementsForContainer(firstContainer);
-    expect(draggableElements).toHaveOrder([firstItem, secondItem, thirdItem, forthItem]);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(firstContainer);
+    expect(draggableElements).toHaveOrder([
+      firstItem,
+      secondItem,
+      thirdItem,
+      forthItem,
+    ]);
   });
 
   it('sorts elements into empty container', () => {
@@ -237,7 +296,8 @@ describe('Sortable', () => {
       releaseMouse(sortable.source);
     });
 
-    draggableElements = sortable.getDraggableElementsForContainer(firstContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(firstContainer);
     expect(draggableElements).toHaveOrder([
       fifthItem,
       sixthItem,
@@ -249,14 +309,16 @@ describe('Sortable', () => {
       forthItem,
     ]);
 
-    draggableElements = sortable.getDraggableElementsForContainer(secondContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(secondContainer);
     expect(draggableElements).toHaveOrder([]);
 
     clickMouse(firstItem);
     waitForDragDelay();
     moveMouse(secondContainer);
 
-    draggableElements = sortable.getDraggableElementsForContainer(firstContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(firstContainer);
     expect(draggableElements).toHaveOrder([
       fifthItem,
       sixthItem,
@@ -267,12 +329,14 @@ describe('Sortable', () => {
       forthItem,
     ]);
 
-    draggableElements = sortable.getDraggableElementsForContainer(secondContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(secondContainer);
     expect(draggableElements).toHaveOrder([sortable.source]);
 
     releaseMouse(sortable.source);
 
-    draggableElements = sortable.getDraggableElementsForContainer(firstContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(firstContainer);
     expect(draggableElements).toHaveOrder([
       fifthItem,
       sixthItem,
@@ -283,7 +347,8 @@ describe('Sortable', () => {
       forthItem,
     ]);
 
-    draggableElements = sortable.getDraggableElementsForContainer(secondContainer);
+    draggableElements =
+      sortable.getDraggableElementsForContainer(secondContainer);
     expect(draggableElements).toHaveOrder([firstItem]);
   });
 });

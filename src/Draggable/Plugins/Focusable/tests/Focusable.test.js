@@ -36,7 +36,9 @@ describe('Focusable', () => {
       draggable: 'li',
     });
 
-    const focusablePlugin = draggable.plugins.find((plugin) => plugin.constructor === Focusable);
+    const focusablePlugin = draggable.plugins.find(
+      (plugin) => plugin.constructor === Focusable,
+    );
 
     expect(focusablePlugin).toBeInstanceOf(Focusable);
   });
@@ -46,7 +48,10 @@ describe('Focusable', () => {
       draggable: 'li',
     });
 
-    const elements = [...draggable.containers, ...draggable.getDraggableElements()];
+    const elements = [
+      ...draggable.containers,
+      ...draggable.getDraggableElements(),
+    ];
 
     waitForRequestAnimationFrame();
 
@@ -60,7 +65,10 @@ describe('Focusable', () => {
       draggable: 'li',
     });
 
-    const elements = [...draggable.containers, ...draggable.getDraggableElements()];
+    const elements = [
+      ...draggable.containers,
+      ...draggable.getDraggableElements(),
+    ];
 
     waitForRequestAnimationFrame();
 
@@ -103,6 +111,8 @@ describe('Focusable', () => {
 
     waitForRequestAnimationFrame();
 
-    expect(elementWithTabIndexAttribute.tabIndex).toStrictEqual(originalTabIndex);
+    expect(elementWithTabIndexAttribute.tabIndex).toStrictEqual(
+      originalTabIndex,
+    );
   });
 });

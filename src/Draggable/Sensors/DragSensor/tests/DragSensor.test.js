@@ -47,7 +47,9 @@ describe('DragSensor', () => {
   }
 
   describe('common', () => {
-    beforeEach(setup);
+    beforeEach(() => {
+      setup();
+    });
 
     afterEach(teardown);
 

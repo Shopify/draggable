@@ -101,9 +101,9 @@ jobs:
           script: |
             const execa = require('execa')
 
-            console.log('test')
+            await execa.command('yarn changeset version --snapshot snapshot-release', { stdio: 'inherit' })
 
-            const releaseProcess = execa.command('yarn release -- --no-git-tags --snapshot --tag snapshot-release')
+            const releaseProcess = execa.command('yarn release --no-git-tags --snapshot --tag snapshot-release')
             releaseProcess.stdout.pipe(process.stdout)
 
             const {stdout} = await releaseProcess

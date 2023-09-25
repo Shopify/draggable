@@ -27,7 +27,7 @@ function createBundleConfig(bundle: Bundle, {analyser}: Options) {
 
   const config: Configuration = {
     mode: 'production',
-    entry: `./src/${bundle.source}.js`,
+    entry: `./src/${bundle.source}`,
     output: {
       path: `${targetPath}${outputPath}`,
       filename: `${bundle.filename}.js`,

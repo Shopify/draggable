@@ -158,6 +158,12 @@ export class DragOverEvent extends DragEvent<DragOverEventData> {
   }
 }
 
+export function isDragOverEvent(
+  event: AbstractEvent<unknown>,
+): event is DragOverEvent {
+  return event.type === DragOverEvent.type;
+}
+
 /**
  * DragOutEventData
  * @interface DragOutEventData
@@ -203,7 +209,6 @@ export class DragOutEvent extends DragEvent<DragOutEventData> {
  */
 interface DragOverContainerEventData extends DragEventData {
   overContainer: HTMLElement;
-  over: HTMLElement;
 }
 
 /**

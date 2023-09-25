@@ -26,18 +26,16 @@ Defining this sets the offset from cursor to mirror manually on the x axis. Defa
 **`cursorOffsetY {Number|null}`**  
 Defining this sets the offset from cursor to mirror manually on the y axis. Default: `null`
 
-**`appendTo {String|HTMLElement|Function}`**  
+**`appendTo {String|HTMLElement|Function}`**
 The mirror plugin allows you to specify where the mirror should be appended to. For clarification,
 this is not where the source will be placed, only the temporary mirror element, which is the element
 that follows your cursor as you drag. You can specify a css selector, a HTMLElement or a function
 that returns a HTMLElement. Default is the source parent element.
 
-**`thresholdX {Number|null}`**  
-(Added in: v1.0.0-beta.9)  
+**`thresholdX {Number|null}`**
 Defining this sets a threshold that must be exceeded by the mouse for the mirror to move on the x axis. Default: `null`
 
-**`thresholdY {Number|null}`**  
-(Added in: v1.0.0-beta.9)  
+**`thresholdY {Number|null}`**
 Defining this sets a threshold that must be exceeded by the mouse for the mirror to move on the y axis. Default: `null`
 
 ### Events
@@ -61,7 +59,7 @@ Defining this sets a threshold that must be exceeded by the mouse for the mirror
 #### y Axis only
 
 ```js
-import { Draggable } from '@shopify/draggable';
+import {Draggable} from '@shopify/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -69,15 +67,15 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
     constrainDimensions: true,
     cursorOffsetX: 10,
     cursorOffsetY: 10,
-    xAxis: false
-  }
+    xAxis: false,
+  },
 });
 ```
 
 #### x Axis only
 
 ```js
-import { Sortable } from '@shopify/draggable';
+import {Sortable} from '@shopify/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -85,20 +83,20 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
     constrainDimensions: true,
     cursorOffsetX: 10,
     cursorOffsetY: 10,
-    yAxis: false
-  }
+    yAxis: false,
+  },
 });
 ```
 
 #### Appending mirror
 
 ```js
-import { Sortable } from '@shopify/draggable';
+import {Sortable} from '@shopify/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
   mirror: {
-    appendTo: '.some-other-element'
-  }
+    appendTo: '.some-other-element',
+  },
 });
 ```

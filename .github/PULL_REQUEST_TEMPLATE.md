@@ -1,4 +1,4 @@
-<!-- Thank you for submitting a pull request! Please make sure you have read the [contribution guidelines](https://github.com/Shopify/draggable/blob/master/CONTRIBUTING.md) before proceeding. -->
+<!-- Thank you for submitting a pull request! Please make sure you have read the [contribution guidelines](https://github.com/Shopify/draggable/blob/main/CONTRIBUTING.md) before proceeding. -->
 
 ### This PR implements or fixes...
 

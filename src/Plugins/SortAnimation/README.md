@@ -4,20 +4,21 @@ The sort animation plugin currently only works with `Sortable`. It adds sort ani
 and animates all sorted elements via `translate3d`. It is currently possible to change the duration and
 the easing function of the animation.
 
-It different with [SwapAnimation](https://github.com/Shopify/draggable/tree/master/src/Plugins/SwapAnimation) plugin because SwapAnimation only support horizontal or vertical layout.
+It different with [SwapAnimation](https://github.com/Shopify/draggable/tree/main/src/Plugins/SwapAnimation) plugin because SwapAnimation only support horizontal or vertical layout.
 
 This plugin is not included by default, so make sure to import it before using.
 
-**NOTE**: Don't use this plugin with [SwapAnimation](https://github.com/Shopify/draggable/tree/master/src/Plugins/SwapAnimation) plugin to avoid conflict.
+**NOTE**: Don't use this plugin with [SwapAnimation](https://github.com/Shopify/draggable/tree/main/src/Plugins/SwapAnimation) plugin to avoid conflict.
 
 ### Usage
 
-- ES6:
+- NPM:
+
 ```js
-import { Sortable, Plugins } from "@shopify/draggable";
+import {Sortable, Plugins} from '@shopify/draggable';
 // Or
-// import Sortable from '@shopify/draggable/lib/sortable';
-// import SortAnimation from '@shopify/draggable/lib/plugins/sort-animation';
+import Sortable from '@shopify/draggable/build/esm/Sortable/Sortable';
+import SortAnimation from '@shopify/draggable/build/esm/Plugins/SortAnimation';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -25,38 +26,41 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
     duration: 200,
     easingFunction: 'ease-in-out',
   },
-  plugins: [Plugins.SortAnimation] // Or [SortAnimation]
+  plugins: [Plugins.SortAnimation], // Or [SortAnimation]
 });
 ```
 
-- Browser (All plugins bundle):
+- Browser (as a module):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
-<script>
-    const sortable = new Draggable.Sortable(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      sortAnimation: {
-        duration: 200,
-        easingFunction: 'ease-in-out',
-      },
-      plugins: [Draggable.Plugins.SortAnimation]
-    });
+<script type="module">
+  import Sortable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Sortable/Sortable.js';
+  import Snappable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/Snappable.js';
+
+  const sortable = new Sortable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    sortAnimation: {
+      duration: 200,
+      easingFunction: 'ease-in-out',
+    },
+    plugins: [Snappable],
+  });
 </script>
 ```
 
 - Browser (Standalone):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/sortable.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/plugins/sort-animation.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable/build/umd/index.min.js"></script>
 <script>
-    const sortable = new Sortable.default(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      sortAnimation: {
-        duration: 200,
-        easingFunction: 'ease-in-out',
-      },
-      plugins: [SortAnimation.default]
-    });
+  const sortable = new Draggable.Sortable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    sortAnimation: {
+      duration: 200,
+      easingFunction: 'ease-in-out',
+    },
+    plugins: [Draggable.Plugins.SortAnimation],
+  });
 </script>
 ```
 
@@ -76,7 +80,7 @@ The easing option allows you to specify an animation easing function. Default: `
 ### Examples
 
 ```js
-import { Sortable, Plugins } from '@shopify/draggable';
+import {Sortable, Plugins} from '@shopify/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -84,7 +88,7 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
     duration: 200,
     easingFunction: 'ease-in-out',
   },
-  plugins: [Plugins.SortAnimation]
+  plugins: [Plugins.SortAnimation],
 });
 ```
 

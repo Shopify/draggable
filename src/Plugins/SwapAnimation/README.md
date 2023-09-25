@@ -8,55 +8,58 @@ This plugin is not included by default, so make sure to import it before using.
 
 ### Usage
 
-- ES6:
-```js
-import { Sortable, Plugins } from "@shopify/draggable";
-// Or
-// import Sortable from '@shopify/draggable/lib/sortable';
-// import SwapAnimation from '@shopify/draggable/lib/plugins/swap-animation';
+- NPM:
 
+```js
+import {Sortable, Plugins} from '@shopify/draggable';
+// Or
+import Sortable from '@shopify/draggable/build/esm/Sortable/Sortable';
+import SwapAnimation from '@shopify/draggable/build/esm/Plugins/SwapAnimation';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
   swapAnimation: {
     duration: 200,
     easingFunction: 'ease-in-out',
-    horizontal: true
+    horizontal: true,
   },
-  plugins: [Plugins.SwapAnimation] // Or [SwapAnimation]
+  plugins: [Plugins.SwapAnimation], // Or [SwapAnimation]
 });
 ```
 
-- Browser (All plugins bundle):
+- Browser (as a module):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
-<script>
-    const sortable = new Draggable.Sortable(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      swapAnimation: {
-        duration: 200,
-        easingFunction: 'ease-in-out',
-        horizontal: true
-      },
-      plugins: [Draggable.Plugins.SwapAnimation]
-    });
+<script type="module">
+  import Sortable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Sortable/Sortable.js';
+  import SwapAnimation from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/SwapAnimation.js';
+
+  const sortable = new Sortable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    swapAnimation: {
+      duration: 200,
+      easingFunction: 'ease-in-out',
+      horizontal: true,
+    },
+    plugins: [SwapAnimation],
+  });
 </script>
 ```
 
 - Browser (Standalone):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/sortable.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/plugins/swap-animation.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable/build/umd/index.min.js"></script>
 <script>
-    const sortable = new Sortable.default(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      swapAnimation: {
-        duration: 200,
-        easingFunction: 'ease-in-out',
-        horizontal: true
-      },
-      plugins: [SwapAnimation.default]
-    });
+  const sortable = new Draggable.Sortable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    swapAnimation: {
+      duration: 200,
+      easingFunction: 'ease-in-out',
+      horizontal: true,
+    },
+    plugins: [Draggable.Plugins.SwapAnimation],
+  });
 </script>
 ```
 
@@ -79,16 +82,16 @@ The horizontal option allows you to set the elements to animate horizontally. De
 ### Examples
 
 ```js
-import { Sortable, Plugins } from '@shopify/draggable';
+import {Sortable, Plugins} from '@shopify/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
   swapAnimation: {
     duration: 200,
     easingFunction: 'ease-in-out',
-    horizontal: true
+    horizontal: true,
   },
-  plugins: [Plugins.SwapAnimation]
+  plugins: [Plugins.SwapAnimation],
 });
 ```
 

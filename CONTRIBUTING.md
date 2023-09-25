@@ -14,7 +14,7 @@ appreciated and encouraged.
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Code of Conduct document](https://github.com/Shopify/draggable/blob/master/CODE_OF_CONDUCT.md).
+This project and everyone participating in it is governed by the [Code of Conduct document](https://github.com/Shopify/draggable/blob/main/CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. Please report unacceptable behaviour to max.hoffmann@shopify.com or curtis.dulmage@shopify.com.
 
 ## How to contribute
@@ -29,11 +29,11 @@ please open a new issue with labels: `bug`, `documentation`, `feature-request` o
 Pull requests are more than welcome! Just make sure that to include a description of the problem and how you are attempting to fix the issue, or
 simply follow the Pull Request description template.
 
-We also require Pull Requests to sync with master via rebase (not merge). So when you need to sync up your branch with master use: `git pull --rebase origin master`,
+We also require Pull Requests to sync with main via rebase (not merge). So when you need to sync up your branch with main use: `git pull --rebase origin main`,
 or if you need to sync up with another branch `git pull --rebase origin some-other-branch-name`. Doing so will remove of an extra merge commit in the git history.
 This will also require a force push to the branch, e.g. `git push -u origin +some-branch`. The `+` in the last command indicates that you are force pushing changes.
 
-Additionally we require commits to be atomic and squashed where needed. This will keep the git history clean on master. To squash commits use the `git rebase -i @~2`
+Additionally we require commits to be atomic and squashed where needed. This will keep the git history clean on main. To squash commits use the `git rebase -i @~2`
 command to do an interactive rebase. This will allow you to merge multiple commits into one. To read up more on this please visit: [Git Tools Rewriting History](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History)
 
 ### JS Docblocks

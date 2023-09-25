@@ -17,8 +17,8 @@ example.html
 
 coverage/
 docs/
-lib/
-coverage/
+build/
+.rollup.cache/
 
 # 'cause we are all yarny and stuff
 package-lock.json

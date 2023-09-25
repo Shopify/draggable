@@ -1,6 +1,4 @@
-[![npm version](https://badge.fury.io/js/%40shopify%2Fdraggable.svg)](https://badge.fury.io/js/%40shopify%2Fdraggable)
-[![codecov](https://codecov.io/gh/Shopify/draggable/branch/master/graph/badge.svg)](https://codecov.io/gh/Shopify/draggable)
-[![Greenkeeper badge](https://badges.greenkeeper.io/Shopify/draggable.svg)](https://greenkeeper.io/)
+[![npm version](https://img.shields.io/npm/v/@shopify/draggable.svg?label=@shopify/draggable)](https://www.npmjs.com/package/@shopify/draggable) [![CI](https://github.com/shopify/draggable/workflows/CI/badge.svg)](https://github.com/Shopify/draggable/actions?query=branch%3Amain) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/Shopify/draggable/blob/main/CONTRIBUTING.md) ![Bundle size](https://img.shields.io/badge/Bundle%20size-16.2kB-red.svg)
 
 <a href="https://shopify.github.io/draggable" title="Visit Draggable website">
   <img src="https://user-images.githubusercontent.com/643944/35602291-99e2c56e-0605-11e8-847f-95f1f6be1610.jpg" alt="">
@@ -40,17 +38,15 @@ interface, for more information read the documentation below.
 
 ## Install
 
-**NOTE**: When installing with npm or yarn, `@shopify/draggable@1.0.0-beta.8` will be installed by default. If you want to install the latest version, please install `@shopify/draggable@1.0.0-beta.13` or `@shopify/draggable@next`.
-
 You can install the library via npm.
 
-```
+```bash
 npm install @shopify/draggable --save
 ```
 
 or via yarn:
 
-```
+```bash
 yarn add @shopify/draggable
 ```
 
@@ -58,41 +54,48 @@ or via CDN
 
 ```html
 <!-- Entire bundle -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
-<!-- legacy bundle for older browsers (IE11) -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.legacy.js"></script>
+<script type="module">
+  import {
+    Draggable,
+    Sortable,
+    Droppable,
+    Swappable,
+  } from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/index.js';
+</script>
 <!-- Draggable only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.js"></script>
+<script type="module">
+  import Draggable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Draggable/Draggable.js';
+</script>
 <!-- Sortable only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/sortable.js"></script>
+<script type="module">
+  import Sortable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Sortable/Sortable.js';
+</script>
 <!-- Droppable only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/droppable.js"></script>
+<script type="module">
+  import Droppable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Droppable/Droppable.js';
+</script>
 <!-- Swappable only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/swappable.js"></script>
+<script type="module">
+  import Swappable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Swappable/Swappable.js';
+</script>
 <!-- Plugins only -->
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/plugins.js"></script>
+<script type="module">
+  import * as Plugins from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/index.js';
+</script>
+<!-- UMD browser -->
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable/build/umd/index.min.js"></script>
+<script>
+  console.log(window.Draggable);
+</script>
 ```
 
 ## Browser Compatibility
 
-| ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) |
-| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| Latest ✔                                                                                 | Latest ✔                                                                                    | 11+ ✔                                                                                                                        | Latest ✔                                                                              | Latest ✔                                                                                 | Latest ✔                                                                           |
+Check the "browserlist" property in [package.json](https://github.com/Shopify/draggable/blob/main/package.json#L88) for more info
 
-## Bundle sizes
-
-| Package name               | ES6 bundle sizes | ES5 bundle sizes |
-| -------------------------- | ---------------- | ---------------- |
-| draggable.bundle.js        | ~11kb            | ~19.2kb          |
-| draggable.bundle.legacy.js | ~19.2kb          | ~25.63kb         |
-| draggable.js               | ~8.06kb          | ~15.36kb         |
-| sortable.js                | ~8.93kb          | ~16.51kb         |
-| swappable.js               | ~8.56kb          | ~16.14kb         |
-| droppable.js               | ~8.8kb           | ~16.55kb         |
-| plugins.js                 | ~2.37kb          | ~8.76kb          |
-| plugins/collidable.js      | ~1.45kb          | ~7.81kb          |
-| plugins/snappable.js       | ~1.19kb          | ~6.94kb          |
-| plugins/swap-animation.js  | ~1kb             | ~6.65kb          |
+| ![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) |
+| ---------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Last 3 versions ✔                                                                       | Last 3 versions ✔                                                                          | Last 3 versions ✔                                                                    | Last 3 versions ✔                                                                       | Last 3 versions ✔                                                                 |
 
 ## Documentation
 
@@ -121,15 +124,13 @@ You can find the documentation for each module within their respective directori
   - [ResizeMirror](src/Plugins/ResizeMirror)
   - [Snappable](src/Plugins/Snappable)
   - [SwapAnimation](src/Plugins/SwapAnimation)
-  - [SortAnimation](src/Plugins/SortAnimation) (Added in: v1.0.0-beta.10)
+  - [SortAnimation](src/Plugins/SortAnimation)
 - [Sortable](src/Sortable)
   - [SortableEvent](src/Sortable/SortableEvent)
 - [Swappable](src/Swappable)
   - [SwappableEvent](src/Swappable/SwappableEvent)
 
-## TypeScript
-
-(Added in: v1.0.0-beta.9)
+### TypeScript
 
 Draggable includes [TypeScript](http://typescriptlang.org) definitions.
 
@@ -139,7 +140,7 @@ Draggable includes [TypeScript](http://typescriptlang.org) definitions.
 
 To run the `examples` project locally, simply run the following from the `draggable` root:
 
-```
+```bash
 yarn && yarn start
 ```
 
@@ -150,11 +151,7 @@ changes from both `src/` and `examples/src` and reloads the browser.
 
 Contributions are more than welcome, the code base is still new and needs more love.
 
-For more information, please checkout the [contributing document](https://github.com/Shopify/draggable/blob/master/CONTRIBUTING.md).
-
-## Roadmap
-
-We are currently working on `v1.0.0-beta.12`. Check out the [project board](https://github.com/Shopify/draggable/projects/3) to see tasks and follow progress on the release. Any Pull Requests should be pointed against the feature branch `v1.0.0-beta.12`.
+For more information, please checkout the [contributing document](https://github.com/Shopify/draggable/blob/main/CONTRIBUTING.md).
 
 ## Related resources
 
@@ -163,4 +160,4 @@ We are currently working on `v1.0.0-beta.12`. Check out the [project board](http
 
 ## Copyright
 
-Copyright (c) 2018 Shopify. See LICENSE.md for further details.
+Copyright (c) 2018-present Shopify. See LICENSE.md for further details.

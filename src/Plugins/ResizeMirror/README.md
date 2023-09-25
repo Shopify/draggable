@@ -13,39 +13,43 @@ This plugin is not included in the default Draggable bundle, so you'll need to i
 
 ### Usage
 
-- ES6:
+- NPM:
+
 ```js
-import { Draggable, Plugins } from "@shopify/draggable";
+import {Draggable, Plugins} from '@shopify/draggable';
 // Or
-// import Draggable from '@shopify/draggable/lib/draggable';
-// import ResizeMirror from '@shopify/draggable/lib/plugins/resize-mirror';
+import Draggable from '@shopify/draggable/build/esm/Draggable/Draggable';
+import ResizeMirror from '@shopify/draggable/build/esm/Plugins/ResizeMirror';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
-  plugins: [Plugins.ResizeMirror] // Or [ResizeMirror]
+  plugins: [Plugins.ResizeMirror], // Or [ResizeMirror]
 });
 ```
 
-- Browser (All bundle):
+- Browser (as a module):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
-<script>
-    const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      plugins: [Draggable.Plugins.ResizeMirror]
-    });
+<script type="module">
+  import Draggable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Draggable/Draggable.js';
+  import ResizeMirror from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/ResizeMirror.js';
+
+  const draggable = new Draggable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    plugins: [ResizeMirror],
+  });
 </script>
 ```
 
 - Browser (Standalone):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/plugins/resize-mirror.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable/build/umd/index.min.js"></script>
 <script>
-    const draggable = new Draggable.default(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      plugins: [ResizeMirror.default]
-    });
+  const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    plugins: [Draggable.Plugins.ResizeMirror],
+  });
 </script>
 ```
 
@@ -61,11 +65,11 @@ _No options_
 ### Examples
 
 ```js
-import { Sortable, Plugins } from '@shopify/draggable';
+import {Sortable, Plugins} from '@shopify/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
-  plugins: [Plugins.ResizeMirror]
+  plugins: [Plugins.ResizeMirror],
 });
 ```
 

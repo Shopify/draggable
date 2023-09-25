@@ -1,19 +1,21 @@
 {
   "extends": "@shopify/typescript-configs/library",
   "compilerOptions": {
-    "baseUrl": ".",
-    "rootDir": ".",
-    "lib": ["es2023"],
-    "resolveJsonModule": false,
-    "verbatimModuleSyntax": true,
-    "useUnknownInCatchVariables": false,
+    "composite": true,
+    "emitDeclarationOnly": true,
+    "outDir": "build/ts",
+    "rootDir": "./",
+    "strictFunctionTypes": false,
     "paths": {
       "shared/*": ["./src/shared/*"],
       "helper": ["./test/helper.ts"]
     }
   },
   "include": [
+    "./config/typescript/**/*",
     "./src/**/*",
-    "./test/**/*"
+    "./test/**/*",
+    "./rollup.config.ts",
+    "./rollup.development.config.ts"
   ]
 }

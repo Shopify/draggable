@@ -7,42 +7,46 @@ This plugin is not included by default, so make sure to import it before using.
 
 ### Usage
 
-- ES6:
-```js
-import { Draggable, Plugins } from "@shopify/draggable";
-// Or
-// import Draggable from '@shopify/draggable/lib/draggable';
-// import Collidable from '@shopify/draggable/lib/plugins/collidable';
+- NPM:
 
-const draggable = new Draggable(document.querySelectorAll("ul"), {
-  draggable: "li",
-  collidables: ".other-list",
+```js
+import {Draggable, Plugins} from '@shopify/draggable';
+// Or
+import Draggable from '@shopify/draggable/build/esm/Draggable/Draggable';
+import Collidable from '@shopify/draggable/build/esm/Plugins/Collidable';
+
+const draggable = new Draggable(document.querySelectorAll('ul'), {
+  draggable: 'li',
+  collidables: '.other-list',
   plugins: [Plugins.Collidable], // Or [Collidable]
 });
 ```
 
-- Browser (All bundle):
+- Browser (as a module):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
-<script>
-    const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      collidables: '.other-list',
-      plugins: [Draggable.Plugins.Collidable]
-    });
+<script type="module">
+  import Draggable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Draggable/Draggable.js';
+  import Collidable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/Collidable.js';
+
+  const draggable = new Draggable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    collidables: '.other-list',
+    plugins: [Collidable],
+  });
 </script>
 ```
 
 - Browser (Standalone):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/plugins/collidable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable/build/umd/index.min.js"></script>
 <script>
-    const draggable = new Draggable.default(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      collidables: '.other-list',
-      plugins: [Collidable.default]
-    });
+  const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    collidables: '.other-list',
+    plugins: [Draggable.Plugins.Collidable],
+  });
 </script>
 ```
 
@@ -64,12 +68,12 @@ A css selector string, an array of elements, a NodeList, a HTMLElement or a func
 ### Example
 
 ```js
-import { Sortable, Plugins } from '@shopify/draggable';
+import {Sortable, Plugins} from '@shopify/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
   collidables: '.other-list',
-  plugins: [Plugins.Collidable]
+  plugins: [Plugins.Collidable],
 });
 
 sortable.on('collidable:in', () => console.log('collidable:in'));

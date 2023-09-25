@@ -16,7 +16,7 @@ _Please remember that with sample code it's easier to reproduce the bug and it's
 
 ### 4. Please tell us about your environment:
 
-* **Library version:** [1.0.0-beta.X | v1 stable | etc...]
-* **Browsers:** [all | Chrome vX | Firefox vX | Safari vX | Edge vX | iOS vX | Android vX | etc...]
-* **Tech stack:** [all | TypeScript vX | ES6/7 | ES5 | React | etc...]
-* **Other information:** [Detailed explanation | Stacktraces | Related issues | Suggestions how to fix | Links for us to have context | etc...]
+- **Library version:** [1.X.X | v1 stable | etc...]
+- **Browsers:** [all | Chrome vX | Firefox vX | Safari vX | Edge vX | iOS vX | Android vX | etc...]
+- **Tech stack:** [all | TypeScript vX | ES6/7 | ES5 | React | etc...]
+- **Other information:** [Detailed explanation | Stacktraces | Related issues | Suggestions how to fix | Links for us to have context | etc...]

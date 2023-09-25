@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1
+
+### Patch Changes
+
+- [#572](https://github.com/Shopify/draggable/pull/572) [`2a8ae0b`](https://github.com/Shopify/draggable/commit/2a8ae0b219beceb3338764afe25c2d6a9fe4f495) Thanks [@tsov](https://github.com/tsov)! - Converts ResizeMirror to typescript
+
 ## 1.0.0
 
 ### Patch Changes

@@ -2,6 +2,7 @@
   "name": "@shopify/draggable-github-actions",
   "version": "1.0.0",
   "description": "Github actions for @shopify/draggable",
+  "type": "module",
   "main": "index.ts",
   "scripts": {
     "build": "tsc"

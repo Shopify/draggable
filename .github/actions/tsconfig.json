@@ -1,9 +1,26 @@
 {
-  "extends": "@shopify/typescript-configs/node-library",
   "compilerOptions": {
-    "lib": ["es2023"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "scripthost",
+      "es2023"
+    ],
     "declaration": false,
     "declarationMap": false,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "module": "esnext",
+    "target": "es2020",
+    "noEmit": false,
+    "noEmitHelpers": true
   },
   "include": [
     "./**/*.ts"

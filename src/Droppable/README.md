@@ -7,37 +7,44 @@ so they may returned if the drag is canceled or returned.
 
 ### Usage
 
-- ES6:
+- NPM:
+
 ```js
-import { Droppable } from '@shopify/draggable';
+import {Droppable} from '@shopify/draggable';
 // Or
-// import Droppable from '@shopify/draggable/lib/droppable';
+import Droppable from '@shopify/draggable/build/esm/Droppable/Droppable';
 
 const droppable = new Droppable(document.querySelectorAll('.container'), {
   draggable: '.item',
-  dropzone: '.dropzone'
+  dropzone: '.dropzone',
 });
 ```
 
-- Browser (All Bundle):
+- Browser (as a module):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
-<script>
-    const droppable = new Draggable.Droppable(document.querySelectorAll('.container'), {
-      draggable: '.item',
-      dropzone: '.dropzone'
-    });
+<script type="module">
+  import Droppable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Droppable/Droppable.js';
+
+  const droppable = new Droppable(document.querySelectorAll('.container'), {
+    draggable: '.item',
+    dropzone: '.dropzone',
+  });
 </script>
 ```
 
 - Browser (Standalone):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/droppable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable/build/umd/index.min.js"></script>
 <script>
-    const droppable = new Droppable.default(document.querySelectorAll('.container'), {
+  const droppable = new Draggable.Droppable(
+    document.querySelectorAll('.container'),
+    {
       draggable: '.item',
-      dropzone: '.dropzone'
-    });
+      dropzone: '.dropzone',
+    },
+  );
 </script>
 ```
 
@@ -57,12 +64,12 @@ elements within the `containers`.
 
 Check out [Draggable events](../Draggable#events) for the base events
 
-| Name                                      | Description                                                               | Cancelable | Cancelable action |
-| ----------------------------------------- | ------------------------------------------------------------------------- | ---------- | ----------------- |
-| [`droppable:start`][droppablestart]       | Gets fired before dropping the draggable element into a dropzone          | true       | Prevents drag     |
-| [`droppable:dropped`][droppabledropped]   | Gets fired when dropping draggable element into a dropzone                | true       | Prevents drop     |
-| [`droppable:returned`][droppablereturned] | Gets fired when draggable elements returns to original dropzone           | true       | Prevents return   |
-| [`droppable:stop`][droppablestop]         | Gets fired before dropping the draggable element into a dropzone element  | false      | -                 |
+| Name                                      | Description                                                              | Cancelable | Cancelable action |
+| ----------------------------------------- | ------------------------------------------------------------------------ | ---------- | ----------------- |
+| [`droppable:start`][droppablestart]       | Gets fired before dropping the draggable element into a dropzone         | true       | Prevents drag     |
+| [`droppable:dropped`][droppabledropped]   | Gets fired when dropping draggable element into a dropzone               | true       | Prevents drop     |
+| [`droppable:returned`][droppablereturned] | Gets fired when draggable elements returns to original dropzone          | true       | Prevents return   |
+| [`droppable:stop`][droppablestop]         | Gets fired before dropping the draggable element into a dropzone element | false      | -                 |
 
 [droppablestart]: DroppableEvent#droppablestartevent
 [droppabledropped]: DroppableEvent#droppabledroppedevent
@@ -73,10 +80,10 @@ Check out [Draggable events](../Draggable#events) for the base events
 
 Check out [Draggable class identifiers](../Draggable#classes) for the base class identifiers
 
-| Name                 | Description                                                                    | Default                         |
-| -------------------- | ------------------------------------------------------------------------------ | ------------------------------- |
-| `droppable:active`   | Class added to the unoccupied dropzone elements when drag starts               | `draggable-droppable--active`   |
-| `droppable:occupied` | Class added to the dropzone element when it contains a draggable element       | `draggable-droppable--occupied` |
+| Name                 | Description                                                              | Default                         |
+| -------------------- | ------------------------------------------------------------------------ | ------------------------------- |
+| `droppable:active`   | Class added to the unoccupied dropzone elements when drag starts         | `draggable-droppable--active`   |
+| `droppable:occupied` | Class added to the dropzone element when it contains a draggable element | `draggable-droppable--occupied` |
 
 ### Example
 
@@ -84,9 +91,15 @@ This sample HTML and JavaScript will make `.item` elements draggable and droppab
 
 ```html
 <div class="container">
-  <div class="dropzone draggable-dropzone--occupied"><div class="item">A</div></div>
-  <div class="dropzone draggable-dropzone--occupied"><div class="item">B</div></div>
-  <div class="dropzone draggable-dropzone--occupied"><div class="item">C</div></div>
+  <div class="dropzone draggable-dropzone--occupied">
+    <div class="item">A</div>
+  </div>
+  <div class="dropzone draggable-dropzone--occupied">
+    <div class="item">B</div>
+  </div>
+  <div class="dropzone draggable-dropzone--occupied">
+    <div class="item">C</div>
+  </div>
 </div>
 
 <div class="container">
@@ -94,18 +107,25 @@ This sample HTML and JavaScript will make `.item` elements draggable and droppab
 </div>
 
 <style>
-  .item { height: 100%; }
-  .dropzone { outline: solid 1px; height: 50px; }
-  .draggable-dropzone--occupied { background: lightgreen; }
+  .item {
+    height: 100%;
+  }
+  .dropzone {
+    outline: solid 1px;
+    height: 50px;
+  }
+  .draggable-dropzone--occupied {
+    background: lightgreen;
+  }
 </style>
 ```
 
 ```js
-import { Droppable } from '@shopify/draggable';
+import {Droppable} from '@shopify/draggable';
 
 const droppable = new Droppable(document.querySelectorAll('.container'), {
   draggable: '.item',
-  dropzone: '.dropzone'
+  dropzone: '.dropzone',
 });
 
 droppable.on('droppable:dropped', () => console.log('droppable:dropped'));

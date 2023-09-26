@@ -88,7 +88,7 @@ The mirror follows your mouse/touch movements.
 | **Interface**     | `MirrorMoveEvent`     |
 | **Cancelable**    | true                  |
 | **Cancel action** | Stops mirror movement |
-| **type**          | `mirror:move`           |
+| **type**          | `mirror:move`         |
 
 ### API
 
@@ -104,17 +104,15 @@ Read-only property for whether or not the mirror's threshold has been exceeded i
 
 ## MirrorMovedEvent
 
-(Added in: v1.0.0-beta.13)
-
 `MirrorMovedEvent` gets triggered when the **mirror:move** event was done.
 
-|                   |                       |
-| ----------------- | --------------------- |
-| **Specification** | `MirrorEvent`         |
-| **Interface**     | `MirrorMovedEvent`     |
-| **Cancelable**    | false                 |
-| **Cancel action** | -                     |
-| **type**          | `mirror:moved`           |
+|                   |                    |
+| ----------------- | ------------------ |
+| **Specification** | `MirrorEvent`      |
+| **Interface**     | `MirrorMovedEvent` |
+| **Cancelable**    | false              |
+| **Cancel action** | -                  |
+| **type**          | `mirror:moved`     |
 
 ### API
 
@@ -127,7 +125,6 @@ Read-only property for whether or not the mirror's threshold has been exceeded i
 
 **`mirrorEvent.passedThreshY: Booolean`**  
 Read-only property for whether or not the mirror's threshold has been exceeded in the y axis.
-
 
 ## MirrorDestroyEvent
 

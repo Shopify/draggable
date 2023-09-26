@@ -16,8 +16,6 @@ export const defaultOptions = {
 };
 
 /**
- * (Added in: v1.0.0-beta.10)
- *
  * SortAnimation plugin adds sort animation for sortable
  * @class SortAnimation
  * @module SortAnimation

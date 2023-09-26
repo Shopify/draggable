@@ -2,12 +2,11 @@
   "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true,
-    "**/node_modules": true,
-    "lib": true
+    "**/node_modules": true
   },
   "search.exclude": {
     "**/node_modules": true,
-    "lib": true
+    "build": true
   },
   "[typescript]": {
     "editor.formatOnSave": false,

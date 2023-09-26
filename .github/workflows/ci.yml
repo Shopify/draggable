@@ -28,8 +28,8 @@ jobs:
       - name: Library typecheck
         run: yarn type-check
 
-      - name: Scripts typecheck
-        run: yarn type-check:scripts
+      - name: Build
+        run: yarn build
 
       - name: Test
         run: yarn test

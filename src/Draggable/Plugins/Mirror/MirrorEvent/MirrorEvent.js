@@ -162,8 +162,6 @@ export class MirrorMoveEvent extends MirrorEvent {
 }
 
 /**
- * (Added in: v1.0.0-beta.13)
- *
  * Mirror moved event
  * @class MirrorMovedEvent
  * @module MirrorMovedEvent

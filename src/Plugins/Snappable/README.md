@@ -7,40 +7,43 @@ This plugin is not included by default, so make sure to import it before using.
 
 ### Usage
 
-- ES6:
-```js
-import { Draggable, Plugins } from "@shopify/draggable";
-// Or
-// import Draggable from '@shopify/draggable/lib/draggable';
-// import Snappable from '@shopify/draggable/lib/plugins/snappable';
+- NPM:
 
+```js
+import {Draggable, Plugins} from '@shopify/draggable';
+// Or
+import Draggable from '@shopify/draggable/build/esm/Draggable/Draggable';
+import Snappable from '@shopify/draggable/build/esm/Plugins/Snappable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
-  plugins: [Plugins.Snappable] // Or [Snappable]
+  plugins: [Plugins.Snappable], // Or [Snappable]
 });
 ```
 
-- Browser (All bundle):
+- Browser (as a module):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
-<script>
-    const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      plugins: [Draggable.Plugins.Snappable]
-    });
+<script type="module">
+  import Draggable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Draggable/Draggable.js';
+  import Snappable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/Snappable.js';
+
+  const draggable = new Draggable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    plugins: [Snappable],
+  });
 </script>
 ```
 
 - Browser (Standalone):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/plugins/snappable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable/build/umd/index.min.js"></script>
 <script>
-    const draggable = new Draggable.default(document.querySelectorAll('ul'), {
-      draggable: 'li',
-      plugins: [Snappable.default]
-    });
+  const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+    plugins: [Draggable.Plugins.Snappable],
+  });
 </script>
 ```
 
@@ -61,11 +64,11 @@ _No options_
 ### Example
 
 ```js
-import { Sortable, Plugins } from '@shopify/draggable';
+import {Sortable, Plugins} from '@shopify/draggable';
 
 const sortable = new Sortable(document.querySelectorAll('ul'), {
   draggable: 'li',
-  plugins: [Plugins.Snappable]
+  plugins: [Plugins.Snappable],
 });
 
 sortable.on('snap:in', () => console.log('snap:in'));

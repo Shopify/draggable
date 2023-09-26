@@ -2,34 +2,38 @@
 
 ### Usage
 
-- ES6:
+- NPM:
+
 ```js
-import { Draggable } from '@shopify/draggable';
+import {Draggable} from '@shopify/draggable';
 // Or
-// import Draggable from '@shopify/draggable/lib/draggable';
+import Draggable from '@shopify/draggable/build/esm/Draggable/Draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
-  draggable: 'li'
+  draggable: 'li',
 });
 ```
 
-- Browser (All Bundle):
+- Browser (as a module):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.bundle.js"></script>
-<script>
-    const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
-      draggable: 'li'
-    });
+<script type="module">
+  import Draggable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Draggable/Draggable.js';
+
+  const draggable = new Draggable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+  });
 </script>
 ```
 
 - Browser (Standalone):
+
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.13/lib/draggable.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@shopify/draggable/build/umd/index.min.js"></script>
 <script>
-    const draggable = new Draggable.default(document.querySelectorAll('ul'), {
-      draggable: 'li'
-    });
+  const draggable = new Draggable.Draggable(document.querySelectorAll('ul'), {
+    draggable: 'li',
+  });
 </script>
 ```
 
@@ -86,7 +90,7 @@ Returns draggable elements for given container, excluding potential mirror or or
 urce.
 **`draggable.cancel(): void`**  
 Cancel current dragging state immediately
-*NOTE*: Can't revert elements that were changed to the beginning state (e.g sorted elements)
+_NOTE_: Can't revert elements that were changed to the beginning state (e.g sorted elements)
 
 ### Options
 
@@ -99,7 +103,6 @@ Specify a css selector for a handle element if you don't want to allow drag acti
 on the entire element. Default: `null`
 
 **`delay {Number|Object}`**  
-(Support set object in: v1.0.0-beta.12)  
 If you want to delay a drag start you can specify delay in milliseconds. This can be useful
 for draggable elements within scrollable containers. To allow touch scrolling, we set 100ms delay for TouchSensor by default. Default:
 
@@ -114,7 +117,6 @@ for draggable elements within scrollable containers. To allow touch scrolling, w
 You can set the same delay for all sensors by setting a number, or set an object to set the delay for each sensor separately.
 
 **`distance {Number}`**  
-(Added in: v1.0.0-beta.9)  
 The distance you want the pointer to have moved before drag starts. This can be useful
 for clickable draggable elements, such as links. Default: `0`
 
@@ -127,14 +129,12 @@ Sensors dictate how drag operations get triggered, by listening to native browse
 By default draggable includes the `MouseSensor` & `TouchSensor`. Default: `[]`
 
 **`classes {{String: String|String[]}}`**  
-(Support multiple classes in: v1.0.0-beta.12)  
 Draggable adds classes to elements to indicate state. These classes can be used to add styling
 on elements in certain states. Accept String or Array of strings.
 
 **NOTE**: When specifying multiple classes to an indicate state, the first class MUST be unique for that state to avoid duplicate classes for other states. IE doesn't support add or remove multiple classes. If you want to use multiple classes in IE, you need to add a classList polyfill to your project first.
 
 **`exclude {plugins: Plugin[], sensors: Sensor[]}`**  
-(Added in: v1.0.0-beta.11)  
 Allow excluding default plugins and default sensors. Use with caution as it may create strange behavior.
 
 ### Events
@@ -150,7 +150,7 @@ Allow excluding default plugins and default sensors. Use with caution as it may 
 | [`drag:out`][dragout]                      | Gets fired when dragging out of other draggable           | false      | -                   |
 | [`drag:out:container`][dragoutcontainer]   | Gets fired when dragging out of other draggable container | false      | -                   |
 | [`drag:stop`][dragstop]                    | Gets fired when draggable has been released               | false      | -                   |
-| [`drag:stopped`][dragstopped]              | Gets fired when draggable finished (Added in: v1.0.0-beta.12)                       | false      | -                   |
+| [`drag:stopped`][dragstopped]              | Gets fired when draggable finished                        | false      | -                   |
 | [`drag:pressure`][dragpressure]            | Gets fired when using force touch on draggable element    | false      | -                   |
 
 [draggableinit]: DraggableEvent#draggableinitializedevent
@@ -167,8 +167,8 @@ Allow excluding default plugins and default sensors. Use with caution as it may 
 
 ### Classes
 
-| Name                 | Description                                                         | Default                            |
-| -------------------- | ------------------------------------------------------------------- | ---------------------------------- |
+| Name                 | Description                                                           | Default                            |
+| -------------------- | --------------------------------------------------------------------- | ---------------------------------- |
 | `body:dragging`      | Classes added on the document body while dragging                     | `draggable--is-dragging`           |
 | `container:dragging` | Classes added on the container where the draggable was picked up from | `draggable-container--is-dragging` |
 | `source:dragging`    | Classes added on the draggable element that has been picked up        | `draggable-source--is-dragging`    |
@@ -179,15 +179,15 @@ Allow excluding default plugins and default sensors. Use with caution as it may 
 | `source:original`    | Classes added on the original source element, which is hidden on drag | `draggable--original`              |
 | `mirror`             | Classes added on the mirror element                                   | `draggable-mirror`                 |
 
-### Example
+### Examples
 
 This sample code will make list items draggable:
 
 ```js
-import { Draggable } from '@shopify/draggable';
+import {Draggable} from '@shopify/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
-  draggable: 'li'
+  draggable: 'li',
 });
 
 draggable.on('drag:start', () => console.log('drag:start'));
@@ -198,21 +198,21 @@ draggable.on('drag:stop', () => console.log('drag:stop'));
 Create draggable which excluded some default plugins and sensor:
 
 ```js
-import { Draggable } from '@shopify/draggable';
+import {Draggable} from '@shopify/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
   exclude: {
     plugins: [Draggable.Plugins.Focusable],
     sensors: [Draggable.Sensors.TouchSensor],
-  }
+  },
 });
 ```
 
 Create draggable with specific classes:
 
 ```js
-import { Draggable } from '@shopify/draggable';
+import {Draggable} from '@shopify/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
@@ -223,8 +223,9 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 ```
 
 Cancel dragging on ESC key up:
+
 ```js
-import { Draggable } from '@shopify/draggable';
+import {Draggable} from '@shopify/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',

@@ -10,5 +10,4 @@ inputs:
     required: true
 
 runs:
-  using: 'node18'
   main: 'index.js'

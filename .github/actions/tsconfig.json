@@ -1,0 +1,11 @@
+{
+  "extends": "@shopify/typescript-configs/node-library",
+  "compilerOptions": {
+    "lib": ["es2023"],
+    "declaration": false,
+    "declarationMap": false,
+  },
+  "include": [
+    "./**/*.ts"
+  ]
+}

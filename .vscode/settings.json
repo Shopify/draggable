@@ -16,5 +16,6 @@
     "source.fixAll.eslint": true
   },
   "javascript.validate.enable": false,
-  "eslint.validate": ["javascript"]
+  "eslint.validate": ["javascript"],
+  "eslint.workingDirectories": [{ "mode": "auto" }]
 }

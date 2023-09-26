@@ -1,0 +1,14 @@
+name: 'Test Action'
+description: ''
+
+inputs:
+  token:
+    description: 'GitHub access token'
+    required: true
+  test:
+    description: 'Test variable'
+    required: true
+
+runs:
+  using: 'node18'
+  main: 'index.js'

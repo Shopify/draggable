@@ -32,7 +32,7 @@
     "build": "yarn build:production",
     "watch": "yarn build:development --watch",
     "release": "yarn run build:production && changeset publish",
-    "lint": "eslint ./src ./test --max-warnings 0",
+    "lint": "eslint ./src ./test ./.github/actions --max-warnings 0",
     "type-check": "tsc -b",
     "esdoc": "esdoc -c esdoc.json",
     "test": "jest",

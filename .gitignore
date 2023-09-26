@@ -20,5 +20,7 @@ docs/
 build/
 .rollup.cache/
 
+.github/actions/**/*.js
+
 # 'cause we are all yarny and stuff
 package-lock.json

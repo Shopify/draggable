@@ -1,0 +1,16 @@
+{
+  "name": "@shopify/draggable-github-actions",
+  "version": "1.0.0",
+  "description": "Github actions for @shopify/draggable",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Shopify",
+  "license": "MIT",
+  "devDependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^5.1.1",
+    "typescript": "^5.2.2"
+  }
+}

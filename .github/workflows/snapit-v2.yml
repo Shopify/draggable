@@ -37,18 +37,21 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           status: pending
 
+      - name: Checkout default branch
+        uses: actions/checkout@v3
+
       - name: Checks pwd and ls
         run: |
           pwd
           ls -la
 
-      # - name: Install Dependencies for @shopify/draggable-github-actions
-      #   working-directory: ./.github/actions
-      #   run: yarn install --frozen-lockfile
+      - name: Install Dependencies for @shopify/draggable-github-actions
+        working-directory: ./.github/actions
+        run: yarn install --frozen-lockfile
 
-      # - name: Run tsc
-      #   working-directory: ./.github/actions
-      #   run: yarn build
+      - name: Run tsc
+        working-directory: ./.github/actions
+        run: yarn build
 
       - name: Test Action
         id: test-action

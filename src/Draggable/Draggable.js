@@ -103,7 +103,7 @@ export default class Draggable {
    */
   constructor(containers = [document.body], options = {}) {
     /**
-     * Draggable containers
+     * Draggable containers, which are used to find draggable elements
      * @property containers
      * @type {HTMLElement[]}
      */

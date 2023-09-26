@@ -54,7 +54,7 @@ jobs:
         run: yarn build
 
       - name: Check for forked repo
-        uses: .github/actions/check-for-forked-repo
+        uses: ./.github/actions/check-for-forked-repo
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           pull_request: ${{ github.event.issue.number }}
@@ -83,7 +83,7 @@ jobs:
 
       - name: Create and publish snapshot release
         id: create-and-publish-snapshot-release
-        uses: .github/actions/create-and-publish-snapshot-release
+        uses: ./.github/actions/create-and-publish-snapshot-release
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 

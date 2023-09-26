@@ -4,7 +4,7 @@
       "dom",
       "dom.iterable",
       "scripthost",
-      "es2022"
+      "es2023"
     ],
     "declaration": false,
     "declarationMap": false,
@@ -18,7 +18,7 @@
     "skipLibCheck": true,
     "strict": true,
     "module": "esnext",
-    "target": "es2022",
+    "target": "es2020",
     "noEmit": false,
     "noEmitHelpers": true
   },

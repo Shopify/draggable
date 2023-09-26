@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0
+
+### Minor Changes
+
+- [#574](https://github.com/Shopify/draggable/pull/574) [`b81e8f6`](https://github.com/Shopify/draggable/commit/b81e8f678f8e5b27392b6c56b6bb2684a48c0fe8) Thanks [@tsov](https://github.com/tsov)! - Converted build from webpack to rollout. Import paths have changed
+
 ## 1.0.1
 
 ### Patch Changes

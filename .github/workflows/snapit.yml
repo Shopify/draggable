@@ -26,6 +26,17 @@ jobs:
           comment-id: ${{ github.event.comment.id }}
           reactions: eyes
 
+      - name: Get PR branch
+        uses: xt0rted/pull-request-comment-branch@v1
+        id: comment-branch
+
+      - name: Set latest commit status as pending
+        uses: myrotvorets/set-commit-status-action@master
+        with:
+          sha: ${{ steps.comment-branch.outputs.head_sha }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: pending
+
       - name: Validate pull request
         uses: actions/github-script@v6
         id: pr_data
@@ -60,17 +71,11 @@ jobs:
       - name: Checkout default branch
         uses: actions/checkout@v3
 
-      # issue_comment requires us to checkout the branch
-      # https://github.com/actions/checkout/issues/331#issuecomment-1120113003
       - name: Checkout pull request branch
         run: hub pr checkout ${{ github.event.issue.number }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Because changeset entries are consumed and removed on the
-      # 'changeset-release/main' branch, we need to reset the files
-      # so the following 'changeset version --snapshot' command will
-      # regenerate the package version bumps with the snapshot releases
       - name: Reset changeset entries on changeset-release/main branch
         run: |
           if [[ $(git branch --show-current) == 'changeset-release/main' ]]; then
@@ -95,6 +100,7 @@ jobs:
 
       - name: Create and publish snapshot release
         uses: actions/github-script@v6
+        id: snapshot-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -132,10 +138,45 @@ jobs:
                 repo: context.repo.repo,
                 body,
               })
+              core.setOutput('succeeded', 'true')
+            } else {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `💥 Snapshot release unsuccessful! No tags have been found. ` +
+                      'Did you run `yarn changeset` and committed your changes?',
+              })
+              core.setOutput('succeeded', 'false')
+              core.setFailed('No snapshot tags have been found')
             }
 
       - name: Add final reaction
         uses: peter-evans/create-or-update-comment@v2
+        if: ${{ steps.snapshot-release.outputs.succeeded == 'true' }}
         with:
           comment-id: ${{ github.event.comment.id }}
           reactions: rocket
+
+      - name: Add final reaction
+        uses: peter-evans/create-or-update-comment@v2
+        if: ${{ steps.snapshot-release.outputs.succeeded == 'false' }}
+        with:
+          comment-id: ${{ github.event.comment.id }}
+          reactions: confused
+
+      - name: Create and publish snapshot release
+        uses: actions/github-script@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          script: |
+            const execa = require('execa')
+
+      - name: Set latest commit status as ${{ job.status }}
+        uses: myrotvorets/set-commit-status-action@master
+        if: always()
+        with:
+          sha: ${{ steps.comment-branch.outputs.head_sha }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}

@@ -1,0 +1,5 @@
+---
+'@shopify/draggable': patch
+---
+
+test

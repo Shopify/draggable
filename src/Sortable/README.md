@@ -23,7 +23,7 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 
 ```html
 <script type="module">
-  import Sortable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Sortable/Sortable.js';
+  import Sortable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Sortable/Sortable.mjs';
 
   const sortable = new Sortable(document.querySelectorAll('ul'), {
     draggable: 'li',

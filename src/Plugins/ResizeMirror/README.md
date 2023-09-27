@@ -31,8 +31,8 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 
 ```html
 <script type="module">
-  import Draggable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Draggable/Draggable.js';
-  import ResizeMirror from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/ResizeMirror.js';
+  import Draggable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Draggable/Draggable.mjs';
+  import ResizeMirror from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/ResizeMirror.mjs';
 
   const draggable = new Draggable(document.querySelectorAll('ul'), {
     draggable: 'li',

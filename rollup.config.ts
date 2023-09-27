@@ -6,6 +6,7 @@ import {babel, RollupBabelInputPluginOptions} from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import {nodeResolve} from '@rollup/plugin-node-resolve';
 import includePaths from 'rollup-plugin-includepaths';
+import cleanupPlugin from 'rollup-plugin-cleanup';
 
 const packageJSON = readFileSync(
   new URL('./package.json', import.meta.url).pathname,
@@ -29,9 +30,9 @@ export function generateConfig({
           shared: 'src/shared',
         },
         paths: ['src/'],
-        extensions: ['.js', '.ts'],
+        extensions: [...extensions],
       }),
-      nodeResolve({extensions}),
+      nodeResolve({extensions: [...extensions]}),
       commonjs(),
       babel({
         extensions,
@@ -39,6 +40,10 @@ export function generateConfig({
         babelHelpers: 'bundled',
         envName: 'production',
         targets,
+      }),
+      cleanupPlugin({
+        extensions: [...extensions],
+        maxEmptyLines: 1,
       }),
     ],
     output,
@@ -53,14 +58,14 @@ const config = [
         format: 'cjs',
         dir: path.dirname(pkg.main),
         preserveModules: true,
-        entryFileNames: '[name].js',
+        entryFileNames: '[name].cjs',
         exports: 'named',
       },
       {
         format: 'esm',
         dir: path.dirname(pkg.module),
         preserveModules: true,
-        entryFileNames: '[name].js',
+        entryFileNames: '[name].mjs',
       },
       {
         format: 'umd',
@@ -76,7 +81,7 @@ const config = [
         format: 'esm',
         dir: path.dirname(pkg.esnext),
         preserveModules: true,
-        entryFileNames: '[name].esnext',
+        entryFileNames: '[name].mjs',
       },
     ],
   }),

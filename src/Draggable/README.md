@@ -18,7 +18,7 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 
 ```html
 <script type="module">
-  import Draggable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Draggable/Draggable.js';
+  import Draggable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Draggable/Draggable.mjs';
 
   const draggable = new Draggable(document.querySelectorAll('ul'), {
     draggable: 'li',

@@ -26,8 +26,8 @@ const draggable = new Draggable(document.querySelectorAll('ul'), {
 
 ```html
 <script type="module">
-  import Draggable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Draggable/Draggable.js';
-  import Collidable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/Collidable.js';
+  import Draggable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Draggable/Draggable.mjs';
+  import Collidable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/Collidable.mjs';
 
   const draggable = new Draggable(document.querySelectorAll('ul'), {
     draggable: 'li',

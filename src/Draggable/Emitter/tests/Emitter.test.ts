@@ -2,10 +2,10 @@ import AbstractEvent from 'shared/AbstractEvent';
 
 import Emitter from '../Emitter';
 
-class TestEvent extends AbstractEvent {}
+class TestEvent extends AbstractEvent<unknown> {}
 
 describe('Emitter', () => {
-  let emitter;
+  let emitter: Emitter;
 
   beforeEach(() => {
     emitter = new Emitter();

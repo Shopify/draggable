@@ -1,19 +1,25 @@
+import AbstractEvent from 'shared/AbstractEvent';
+
+type CallbackFunction = (event: AbstractEvent<unknown>) => void;
+
+interface Callback {
+  [key: string]: CallbackFunction[];
+}
+
 /**
  * The Emitter is a simple emitter class that provides you with `on()`, `off()` and `trigger()` methods
  * @class Emitter
  * @module Emitter
  */
 export default class Emitter {
-  constructor() {
-    this.callbacks = {};
-  }
+  public callbacks: Callback = {};
 
   /**
    * Registers callbacks by event name
    * @param {String} type
    * @param {...Function} callbacks
    */
-  on(type, ...callbacks) {
+  on(type: string, ...callbacks: CallbackFunction[]) {
     if (!this.callbacks[type]) {
       this.callbacks[type] = [];
     }
@@ -28,7 +34,7 @@ export default class Emitter {
    * @param {String} type
    * @param {Function} callback
    */
-  off(type, callback) {
+  off(type: string, callback: CallbackFunction) {
     if (!this.callbacks[type]) {
       return null;
     }
@@ -48,7 +54,7 @@ export default class Emitter {
    * Triggers event callbacks by event object
    * @param {AbstractEvent} event
    */
-  trigger(event) {
+  trigger(event: AbstractEvent<unknown>) {
     if (!this.callbacks[event.type]) {
       return null;
     }

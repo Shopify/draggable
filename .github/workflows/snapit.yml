@@ -145,7 +145,7 @@ jobs:
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 body: `💥 **Snapshot release unsuccessful!** No tags have been found.\n\n` +
-                      'Try running the command below and committing your changes.' +
+                      'Try running the command below and committing your changes.\n\n' +
                       '```sh\n' +
                       'yarn changeset\n' +
                       '```',

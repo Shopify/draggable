@@ -144,34 +144,37 @@ jobs:
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                body: `💥 Snapshot release unsuccessful! No tags have been found. ` +
-                      'Did you run `yarn changeset` and committed your changes?',
+                body: `💥 **Snapshot release unsuccessful!** No tags have been found.\n\n` +
+                      'Try running the command below and committing your changes.' +
+                      '```sh\n' +
+                      'yarn changeset\n' +
+                      '```',
               })
               core.setOutput('succeeded', 'false')
-              core.setFailed('No snapshot tags have been found')
             }
 
-      - name: Add final reaction
+      - name: Add success reaction
         uses: peter-evans/create-or-update-comment@v2
         if: ${{ steps.snapshot-release.outputs.succeeded == 'true' }}
         with:
           comment-id: ${{ github.event.comment.id }}
           reactions: rocket
 
-      - name: Add final reaction
+      - name: Add failure reaction
         uses: peter-evans/create-or-update-comment@v2
         if: ${{ steps.snapshot-release.outputs.succeeded == 'false' }}
         with:
           comment-id: ${{ github.event.comment.id }}
           reactions: confused
 
-      - name: Create and publish snapshot release
+      - name: Fail workflow if snapshot failed
         uses: actions/github-script@v6
+        if: ${{ steps.snapshot-release.outputs.succeeded == 'false' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
-            const execa = require('execa')
+            core.setFailed('No snapshot tags have been found')
 
       - name: Set latest commit status as ${{ job.status }}
         uses: myrotvorets/set-commit-status-action@master

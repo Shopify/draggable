@@ -1,4 +1,5 @@
 import AbstractEvent from 'shared/AbstractEvent';
+import {FixMeAny} from 'shared/types';
 
 /**
  * DragEventData
@@ -9,7 +10,7 @@ interface DragEventData {
   originalSource: HTMLElement;
   mirror: HTMLElement;
   sourceContainer: HTMLElement;
-  sensorEvent: any;
+  sensorEvent: FixMeAny;
 }
 
 /**

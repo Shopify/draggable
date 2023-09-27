@@ -1,4 +1,5 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
+import {FixMeAny} from 'shared/types';
 
 interface Options {
   duration: number;
@@ -34,7 +35,7 @@ export default class SwapAnimation extends AbstractPlugin {
    * @constructs SwapAnimation
    * @param {Draggable} draggable - Draggable instance
    */
-  constructor(draggable: any) {
+  constructor(draggable: FixMeAny) {
     super(draggable);
 
     /**
@@ -86,7 +87,7 @@ export default class SwapAnimation extends AbstractPlugin {
    * @param {SortableSortedEvent} sortableEvent
    * @private
    */
-  onSortableSorted({oldIndex, newIndex, dragEvent}: any) {
+  onSortableSorted({oldIndex, newIndex, dragEvent}: FixMeAny) {
     const {source, over} = dragEvent;
 
     if (this.lastAnimationFrame) {
@@ -117,7 +118,7 @@ export default class SwapAnimation extends AbstractPlugin {
 function animate(
   from: HTMLElement,
   to: HTMLElement,
-  {duration, easingFunction, horizontal}: any,
+  {duration, easingFunction, horizontal}: Options,
 ) {
   for (const element of [from, to]) {
     element.style.pointerEvents = 'none';

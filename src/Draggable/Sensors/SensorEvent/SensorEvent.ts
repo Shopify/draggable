@@ -1,12 +1,22 @@
 import AbstractEvent from 'shared/AbstractEvent';
 
+interface SensorEventData {
+  originalEvent: Event;
+  clientX: number;
+  clientY: number;
+  target: HTMLElement;
+  container: HTMLElement;
+  originalSource: HTMLElement;
+  pressure?: number;
+}
+
 /**
  * Base sensor event
  * @class SensorEvent
  * @module SensorEvent
  * @extends AbstractEvent
  */
-export class SensorEvent extends AbstractEvent {
+export class SensorEvent extends AbstractEvent<SensorEventData> {
   /**
    * Original browser event that triggered a sensor
    * @property originalEvent

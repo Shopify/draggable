@@ -1,13 +1,13 @@
 import AbstractEvent from 'shared/AbstractEvent';
-import {FixMeAny} from 'shared/types';
 
 import {DragEvent, DragEventData} from '../../../DragEvent';
+import {SensorEvent} from '../../../Sensors/SensorEvent';
 
 interface MirrorEventData {
   source: HTMLElement;
   originalSource: HTMLElement;
   sourceContainer: HTMLElement;
-  sensorEvent: FixMeAny;
+  sensorEvent: SensorEvent;
   dragEvent: DragEvent<DragEventData>;
 }
 

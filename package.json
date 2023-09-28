@@ -1,6 +1,6 @@
 {
   "name": "@shopify/draggable",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": false,
   "license": "MIT",
   "description": "The JavaScript Drag & Drop library your grandparents warned you about.",

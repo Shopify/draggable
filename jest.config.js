@@ -4,16 +4,7 @@ module.exports = {
   setupFiles: ['<rootDir>/test/environment.ts'],
   setupFilesAfterEnv: ['<rootDir>/test/setup.ts'],
   transform: {
-    '\\.(ts|js)': [
-      'babel-jest',
-      {
-        babelrc: false,
-        presets: [
-          ['@shopify/babel-preset', {typescript: true, isWebpack5: true}],
-        ],
-        sourceMaps: 'inline',
-      },
-    ],
+    '\\.(ts|js)': ['babel-jest'],
   },
   moduleFileExtensions: ['js', 'ts'],
   collectCoverageFrom: [

@@ -2,11 +2,16 @@
   "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true,
-    "**/node_modules": true
+    "**/node_modules": true,
+    ".rollup.cache": true,
+    "coverage": true
   },
   "search.exclude": {
     "**/node_modules": true,
-    "build": true
+    ".rollup.cache": true,
+    "coverage": true,
+    "build": true,
+    "docs": true
   },
   "[typescript]": {
     "editor.formatOnSave": false,

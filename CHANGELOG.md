@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.1
+
+### Patch Changes
+
+- [#580](https://github.com/Shopify/draggable/pull/580) [`873ef2b`](https://github.com/Shopify/draggable/commit/873ef2b59a10361ba4a0e885aaea51d2b2b5c298) Thanks [@tsov](https://github.com/tsov)! - Removes unused packages dependencies
+
+- [#582](https://github.com/Shopify/draggable/pull/582) [`762ffbf`](https://github.com/Shopify/draggable/commit/762ffbf70d018fee101852c186e8d887d1127ce8) Thanks [@tsov](https://github.com/tsov)! - - Cleans up code comments from build folder
+  - Also resolves absolute paths for ts build declarations
+  - Renames build files with .cjs and .mjs
+
 ## 1.1.0
 
 ### Minor Changes

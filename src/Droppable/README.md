@@ -24,7 +24,7 @@ const droppable = new Droppable(document.querySelectorAll('.container'), {
 
 ```html
 <script type="module">
-  import Droppable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Droppable/Droppable.js';
+  import Droppable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Droppable/Droppable.mjs';
 
   const droppable = new Droppable(document.querySelectorAll('.container'), {
     draggable: '.item',

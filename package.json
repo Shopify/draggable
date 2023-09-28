@@ -22,9 +22,9 @@
     "drag-and-drop",
     "es6"
   ],
-  "main": "build/cjs/index.js",
-  "module": "build/esm/index.js",
-  "esnext": "build/esnext/index.esnext",
+  "main": "build/cjs/index.cjs",
+  "module": "build/esm/index.mjs",
+  "esnext": "build/esnext/index.mjs",
   "umd": "build/umd/index.js",
   "types": "./index.d.ts",
   "scripts": {
@@ -37,11 +37,14 @@
     "esdoc": "esdoc -c esdoc.json",
     "test": "jest",
     "build:development": "yarn rollup --config rollup.development.config.ts --configPlugin @rollup/plugin-typescript",
-    "build:production": "tsc && yarn rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript && yarn uglifyjs --compress --mangle -- build/umd/index.js -o build/umd/index.min.js",
+    "build:production": "tsc && tsc-alias && yarn rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript && yarn uglifyjs --compress --mangle -- build/umd/index.js -o build/umd/index.min.js",
     "verify": "yarn lint && yarn type-check && yarn build && yarn test"
   },
   "files": [
     "build/**/*",
+    "!build/ts/**/*.tsbuildinfo",
+    "!build/ts/**/tests/",
+    "!build/ts/**/test/",
     "index.d.ts"
   ],
   "devDependencies": {
@@ -68,9 +71,11 @@
     "jest-environment-jsdom": "^29.7.0",
     "prettier": "^3.0.3",
     "rollup": "^3.29.3",
+    "rollup-plugin-cleanup": "^3.2.1",
     "rollup-plugin-includepaths": "^0.2.4",
     "rollup-plugin-node-externals": "^6.1.1",
     "timers": "^0.1.1",
+    "tsc-alias": "^1.8.8",
     "typescript": "^5.2.2",
     "uglify-js": "^3.17.4"
   },

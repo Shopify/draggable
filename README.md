@@ -60,27 +60,27 @@ or via CDN
     Sortable,
     Droppable,
     Swappable,
-  } from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/index.js';
+  } from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/index.mjs';
 </script>
 <!-- Draggable only -->
 <script type="module">
-  import Draggable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Draggable/Draggable.js';
+  import Draggable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Draggable/Draggable.mjs';
 </script>
 <!-- Sortable only -->
 <script type="module">
-  import Sortable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Sortable/Sortable.js';
+  import Sortable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Sortable/Sortable.mjs';
 </script>
 <!-- Droppable only -->
 <script type="module">
-  import Droppable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Droppable/Droppable.js';
+  import Droppable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Droppable/Droppable.mjs';
 </script>
 <!-- Swappable only -->
 <script type="module">
-  import Swappable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Swappable/Swappable.js';
+  import Swappable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Swappable/Swappable.mjs';
 </script>
 <!-- Plugins only -->
 <script type="module">
-  import * as Plugins from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/index.js';
+  import * as Plugins from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/index.mjs';
 </script>
 <!-- UMD browser -->
 <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable/build/umd/index.min.js"></script>

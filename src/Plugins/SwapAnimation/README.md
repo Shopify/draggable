@@ -31,8 +31,8 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 
 ```html
 <script type="module">
-  import Sortable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Sortable/Sortable.js';
-  import SwapAnimation from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/SwapAnimation.js';
+  import Sortable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Sortable/Sortable.mjs';
+  import SwapAnimation from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/SwapAnimation.mjs';
 
   const sortable = new Sortable(document.querySelectorAll('ul'), {
     draggable: 'li',

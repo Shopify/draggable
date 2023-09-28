@@ -13,7 +13,9 @@ module.exports = {
   },
   rules: {
     'jest/valid-title': 'off',
+    'tsdoc/syntax': 'warn',
   },
+  plugins: ['eslint-plugin-tsdoc'],
   settings: {
     'import/resolver': {
       node: {
@@ -24,4 +26,24 @@ module.exports = {
       },
     },
   },
+  overrides: [
+    {
+      files: ['src/**/*.js', 'src/**/*.ts'],
+      excludedFiles: ['src/**/*.test.js', 'src/**/*.test.ts'],
+      rules: {
+        'require-jsdoc': [
+          'error',
+          {
+            require: {
+              FunctionDeclaration: false,
+              MethodDefinition: true,
+              ClassDeclaration: true,
+              ArrowFunctionExpression: true,
+              FunctionExpression: true,
+            },
+          },
+        ],
+      },
+    },
+  ],
 };

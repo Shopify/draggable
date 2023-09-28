@@ -1,83 +1,128 @@
+export class EventNotCancelable extends Error {
+  constructor(className: string) {
+    super(`${className} cannot be canceled`);
+  }
+}
+
+export function testMe() {}
+
+export interface Hmm {}
+
+export enum Enum {}
+
+export type AnotherTest = any;
+
+export const test = {};
+
 /**
  * All events fired by draggable inherit this class. You can call `cancel()` to
  * cancel a specific event or you can check if an event has been canceled by
  * calling `canceled()`.
- * @abstract
- * @class AbstractEvent
- * @module AbstractEvent
+ *
+ * @typeParam T - Describes the event data used in `this.data`
+ *
+ * @example **Creating a new custom event for Draggable**
+ * ```ts
+ * import {AbstractEvent} from '@shopify/draggable';
+ *
+ * interface CustomEventData {}
+ *
+ * class MyCustomEvent extends AbstractEvent<CustomEventData> {
+ *   static type = 'custom:event';
+ * }
+ * ```
+ *
+ * @example **Triggering event via Draggable**
+ * ```ts
+ * import {Draggable, AbstractEvent} from '@shopify/draggable';
+ *
+ * interface CustomEventData {}
+ *
+ * class MyCustomEvent extends AbstractEvent<CustomEventData> {
+ *   static type = 'custom:event';
+ * }
+ *
+ * const draggable = new Draggable({draggable: 'li'});
+ *
+ * draggable.on('custom:event', (event) => {
+ *   console.log(event);
+ * })
+ *
+ * draggable.trigger(new MyCustomEvent({}));
+ * ```
  */
 export class AbstractEvent<T> {
   /**
-   * Event type
-   * @static
-   * @abstract
-   * @property type
-   * @type {String}
+   * Event type name which is used for triggering and listening to events
+   * Override this so you can
+   * @virtual
    */
   static type = 'event';
   /**
    * Event cancelable
-   * @static
-   * @abstract
-   * @property cancelable
-   * @type {Boolean}
+   * @virtual
    */
   static cancelable = false;
 
   /**
    * Private instance variable to track canceled state
-   * @private
-   * @type {Boolean}
+   * @internal
    */
-  private _canceled = false;
+  #canceled = false;
 
   /**
-   * AbstractEvent constructor.
-   * @constructs AbstractEvent
-   * @param {T} data - Event data
+   * Creates an `AbstractEvent` instance.
+   * @public
+   * @sealed
+   * @param data - Event data for this even instance
+   * @typeParam T - Describes the event data used in `this.data`
    */
   constructor(public data: T) {}
 
   /**
-   * Read-only type
-   * @abstract
-   * @return {String}
+   * Read-only property to find out event type
+   * @readonly
+   * @sealed
    */
   get type() {
     return (this.constructor as typeof AbstractEvent).type;
   }
 
   /**
-   * Read-only cancelable
-   * @abstract
-   * @return {Boolean}
+   * Read-only property to check if event is cancelable
+   * @readonly
+   * @sealed
    */
   get cancelable() {
     return (this.constructor as typeof AbstractEvent).cancelable;
   }
 
   /**
-   * Cancels the event instance
-   * @abstract
+   * Marks the event instance as canceled
+   * @throws {@link EventNotCancelable}
+   * This exception is thrown if the event is not cancelable
    */
   cancel() {
-    this._canceled = true;
+    if (!this.cancelable) {
+      throw new EventNotCancelable(this.constructor.name);
+    }
+
+    this.#canceled = true;
   }
 
   /**
-   * Check if event has been canceled
-   * @abstract
-   * @return {Boolean}
+   * Checks if event has been canceled
+   * @returns True if `cancel()` has been called
    */
   canceled() {
-    return this._canceled;
+    return this.#canceled;
   }
 
   /**
    * Returns new event instance with existing event data.
    * This method allows for overriding of event data.
-   * @param {T} data
-   * @return {AbstractEvent}
+   * @param T -
+   * @returns A new event instance
    */
   clone(data: T) {
     return new (this.constructor as typeof AbstractEvent)({
@@ -86,3 +131,9 @@ export class AbstractEvent<T> {
     });
   }
 }
+
+const event = new AbstractEvent<{[key: string]: any}>({});
+
+event.clone({
+  tst: 'a',
+});

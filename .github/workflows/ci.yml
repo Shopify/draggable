@@ -31,5 +31,16 @@ jobs:
       - name: Build
         run: yarn build
 
+      - name: Build Development
+        run: yarn build:development
+
       - name: Test
         run: yarn test
+
+      - name: Install dependencies
+        working-directory: examples/
+        run: yarn --frozen-lockfile
+
+      - name: Build examples
+        working-directory: examples/
+        run: yarn build

@@ -5,7 +5,7 @@ import {FixMeAny} from 'shared/types';
  * DragEventData
  * @interface DragEventData
  */
-interface DragEventData {
+export interface DragEventData {
   source: HTMLElement;
   originalSource: HTMLElement;
   mirror: HTMLElement;

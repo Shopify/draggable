@@ -1,12 +1,12 @@
 import AbstractEvent from 'shared/AbstractEvent';
 
 interface SensorEventData {
-  originalEvent: Event;
   clientX: number;
   clientY: number;
   target: HTMLElement;
   container: HTMLElement;
   originalSource: HTMLElement;
+  originalEvent?: Event;
   pressure?: number;
 }
 

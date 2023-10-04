@@ -124,7 +124,7 @@ export class DragMoveEvent extends DragEvent<DragEventData> {
  * DragOverEventData
  * @interface DragOverEventData
  */
-interface DragOverEventData extends DragEventData {
+export interface DragOverEventData extends DragEventData {
   overContainer: HTMLElement;
   over: HTMLElement;
 }

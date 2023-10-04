@@ -1,13 +1,30 @@
 import AbstractEvent from 'shared/AbstractEvent';
 
+import {DragEvent, DragEventData} from '../../Draggable/DragEvent';
+
+interface SwappableEventData {
+  dragEvent: DragEvent<DragEventData>;
+}
+
 /**
  * Base swappable event
  * @class SwappableEvent
  * @module SwappableEvent
  * @extends AbstractEvent
  */
-export class SwappableEvent extends AbstractEvent {
+export class SwappableEvent<
+  T extends SwappableEventData,
+> extends AbstractEvent<SwappableEventData> {
   static type = 'swappable';
+
+  /**
+   * SwappableEvent constructor.
+   * @constructs SwappableEvent
+   * @param {SwappableEventData} data - Event data
+   */
+  constructor(public data: T) {
+    super(data);
+  }
 
   /**
    * Original drag event that triggered this swappable event
@@ -26,9 +43,14 @@ export class SwappableEvent extends AbstractEvent {
  * @module SwappableStartEvent
  * @extends SwappableEvent
  */
-export class SwappableStartEvent extends SwappableEvent {
+export class SwappableStartEvent extends SwappableEvent<SwappableEventData> {
   static type = 'swappable:start';
   static cancelable = true;
+}
+
+interface SwappableSwapEventData extends SwappableEventData {
+  over: HTMLElement;
+  overContainer: HTMLElement;
 }
 
 /**
@@ -37,7 +59,7 @@ export class SwappableStartEvent extends SwappableEvent {
  * @module SwappableSwapEvent
  * @extends SwappableEvent
  */
-export class SwappableSwapEvent extends SwappableEvent {
+export class SwappableSwapEvent extends SwappableEvent<SwappableSwapEventData> {
   static type = 'swappable:swap';
   static cancelable = true;
 
@@ -62,13 +84,17 @@ export class SwappableSwapEvent extends SwappableEvent {
   }
 }
 
+interface SwappableSwappedEventData extends SwappableEventData {
+  swappedElement: HTMLElement;
+}
+
 /**
  * Swappable swapped event
  * @class SwappableSwappedEvent
  * @module SwappableSwappedEvent
  * @extends SwappableEvent
  */
-export class SwappableSwappedEvent extends SwappableEvent {
+export class SwappableSwappedEvent extends SwappableEvent<SwappableSwappedEventData> {
   static type = 'swappable:swapped';
 
   /**
@@ -88,6 +114,6 @@ export class SwappableSwappedEvent extends SwappableEvent {
  * @module SwappableStopEvent
  * @extends SwappableEvent
  */
-export class SwappableStopEvent extends SwappableEvent {
+export class SwappableStopEvent extends SwappableEvent<SwappableEventData> {
   static type = 'swappable:stop';
 }

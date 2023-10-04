@@ -1,4 +1,13 @@
 import AbstractEvent from 'shared/AbstractEvent';
+import {FixMeAny} from 'shared/types';
+
+/**
+ * DraggableEventData
+ * @interface DraggableEventData
+ */
+interface DraggableEventData {
+  draggable: FixMeAny;
+}
 
 /**
  * Base draggable event
@@ -6,7 +15,7 @@ import AbstractEvent from 'shared/AbstractEvent';
  * @module DraggableEvent
  * @extends AbstractEvent
  */
-export class DraggableEvent extends AbstractEvent {
+export class DraggableEvent extends AbstractEvent<DraggableEventData> {
   static type = 'draggable';
 
   /**

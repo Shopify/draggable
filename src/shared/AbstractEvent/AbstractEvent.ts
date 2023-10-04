@@ -79,7 +79,7 @@ export class AbstractEvent<T> {
    * @param {T} data
    * @return {AbstractEvent}
    */
-  clone(data: T) {
+  clone(data: Partial<T>): AbstractEvent<T> {
     return new (this.constructor as typeof AbstractEvent)({
       ...this.data,
       ...data,

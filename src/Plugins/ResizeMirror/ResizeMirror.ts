@@ -2,6 +2,7 @@ import AbstractPlugin from 'shared/AbstractPlugin';
 import {requestNextAnimationFrame} from 'shared/utils';
 import {FixMeAny} from 'shared/types';
 
+import {MirrorCreatedEvent} from '../../Draggable/Plugins/Mirror/MirrorEvent';
 import {
   DragOverEvent,
   DragOverContainerEvent,
@@ -92,7 +93,7 @@ export default class ResizeMirror extends AbstractPlugin {
    * @param {MirrorCreatedEvent} mirrorEvent
    * @private
    */
-  private onMirrorCreated({mirror}: FixMeAny) {
+  private onMirrorCreated({mirror}: MirrorCreatedEvent) {
     this.mirror = mirror;
   }
 

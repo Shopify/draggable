@@ -8,10 +8,9 @@ module.exports = {
   },
   moduleFileExtensions: ['js', 'ts'],
   collectCoverageFrom: [
-    'src/**/*.js',
-    '!src/**/*/index.js',
-    '!src/index.js',
-    '!src/index.legacy.js',
+    'src/**/*.{js,ts}',
+    '!src/**/*/index.{js,ts}',
+    '!src/index.{js,ts}',
   ],
   moduleNameMapper: {
     'shared/(.*)': '<rootDir>/src/shared/$1',

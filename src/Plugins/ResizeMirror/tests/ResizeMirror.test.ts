@@ -9,8 +9,12 @@ import {
   DRAG_DELAY,
   drag,
 } from 'helper';
+import {FixMeAny} from 'shared/types';
 
-import {Draggable} from '../../..';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+// @ts-ignore
+import Draggable from '../../../Draggable';
+/* eslint-enable @typescript-eslint/ban-ts-comment */
 import ResizeMirror from '..';
 
 const sampleMarkup = `
@@ -36,17 +40,17 @@ describe('ResizeMirror', () => {
     height: smallerDraggableDimensions.height * 2,
   };
 
-  let sandbox;
-  let containers;
-  let draggable;
-  let draggables;
-  let smallerDraggable;
-  let largerDraggable;
+  let sandbox: HTMLDivElement;
+  let containers: HTMLElement[];
+  let draggable: FixMeAny;
+  let draggables: HTMLElement[];
+  let smallerDraggable: HTMLElement;
+  let largerDraggable: HTMLElement;
 
   beforeEach(() => {
     sandbox = createSandbox(sampleMarkup);
-    containers = sandbox.querySelectorAll('.Container');
-    draggables = sandbox.querySelectorAll('li');
+    containers = [...sandbox.querySelectorAll<HTMLElement>('.Container')];
+    draggables = [...sandbox.querySelectorAll<HTMLElement>('li')];
 
     smallerDraggable = draggables[0];
     largerDraggable = draggables[1];
@@ -71,7 +75,7 @@ describe('ResizeMirror', () => {
     waitForDragDelay();
     await waitForPromisesToResolve();
 
-    const mirror = document.querySelector('.draggable-mirror');
+    const mirror = document.querySelector<HTMLElement>('.draggable-mirror')!;
 
     expect(mirror.style).toMatchObject({
       width: `${smallerDraggableDimensions.width}px`,
@@ -104,7 +108,7 @@ describe('ResizeMirror', () => {
     waitForDragDelay();
     await waitForPromisesToResolve();
 
-    const mirror = document.querySelector('.draggable-mirror');
+    const mirror = document.querySelector<HTMLElement>('.draggable-mirror')!;
 
     moveMouse(largerDraggable);
     waitForRequestAnimationFrame();
@@ -119,7 +123,7 @@ describe('ResizeMirror', () => {
     waitForDragDelay();
     await waitForPromisesToResolve();
 
-    const mirror = document.querySelector('.draggable-mirror');
+    const mirror = document.querySelector<HTMLElement>('.draggable-mirror')!;
 
     const mockedAppendChild = withMockedAppendChild(() => {
       moveMouse(smallerDraggable);
@@ -145,19 +149,28 @@ describe('ResizeMirror', () => {
   });
 });
 
-function mockDimensions(element, {width = 0, height = 0}) {
+function mockDimensions(element: HTMLElement, {width = 0, height = 0}) {
   Object.assign(element.style, {
     width: `${width}px`,
     height: `${height}px`,
   });
 
-  element.getBoundingClientRect = () => ({
+  const properties = {
     width,
     height,
     top: 0,
     left: 0,
     right: width,
     bottom: height,
+    x: 0,
+    y: 0,
+  };
+
+  element.getBoundingClientRect = () => ({
+    ...properties,
+    toJSON() {
+      return {...properties};
+    },
   });
 
   return element;
@@ -168,13 +181,16 @@ function waitForNextRequestAnimationFrame() {
   waitForRequestAnimationFrame();
 }
 
-function withMockedAppendChild(callback) {
+function withMockedAppendChild(callback: () => void) {
   const mock = jest.fn();
   const appendChild = Node.prototype.appendChild;
-  Node.prototype.appendChild = function (...args) {
+  /* eslint-disable @typescript-eslint/ban-ts-comment */
+  // @ts-ignore
+  Node.prototype.appendChild = function (this: Node, ...args) {
     mock(...args);
     return appendChild.call(this, ...args);
   };
+  /* eslint-enable @typescript-eslint/ban-ts-comment */
   callback();
   Node.prototype.appendChild = appendChild;
   return mock;

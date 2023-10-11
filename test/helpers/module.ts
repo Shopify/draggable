@@ -15,7 +15,7 @@ import {
 interface Options {
   from: HTMLElement;
   to: HTMLElement;
-  sensor: 'mouse' | 'touch' | 'drag';
+  sensor?: 'mouse' | 'touch' | 'drag';
 }
 
 export function drag({from, to, sensor = 'mouse'}: Options) {

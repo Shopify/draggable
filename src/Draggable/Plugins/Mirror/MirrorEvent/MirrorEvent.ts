@@ -1,12 +1,34 @@
 import AbstractEvent from 'shared/AbstractEvent';
 
+import {DragEvent, DragEventData} from '../../../DragEvent';
+import {SensorEvent} from '../../../Sensors/SensorEvent';
+
+interface MirrorEventData {
+  source: HTMLElement;
+  originalSource: HTMLElement;
+  sourceContainer: HTMLElement;
+  sensorEvent: SensorEvent;
+  dragEvent: DragEvent<DragEventData>;
+}
+
 /**
  * Base mirror event
  * @class MirrorEvent
  * @module MirrorEvent
  * @extends AbstractEvent
  */
-export class MirrorEvent extends AbstractEvent {
+export class MirrorEvent<
+  T extends MirrorEventData,
+> extends AbstractEvent<MirrorEventData> {
+  /**
+   * MirrorEvent constructor.
+   * @constructs MirrorEvent
+   * @param {MirrorEventData} data - Event data
+   */
+  constructor(public data: T) {
+    super(data);
+  }
+
   /**
    * Draggables source element
    * @property source
@@ -78,8 +100,12 @@ export class MirrorEvent extends AbstractEvent {
  * @module MirrorCreateEvent
  * @extends MirrorEvent
  */
-export class MirrorCreateEvent extends MirrorEvent {
+export class MirrorCreateEvent extends MirrorEvent<MirrorEventData> {
   static type = 'mirror:create';
+}
+
+interface MirrorCreatedEventData extends MirrorEventData {
+  mirror: HTMLElement;
 }
 
 /**
@@ -88,7 +114,7 @@ export class MirrorCreateEvent extends MirrorEvent {
  * @module MirrorCreatedEvent
  * @extends MirrorEvent
  */
-export class MirrorCreatedEvent extends MirrorEvent {
+export class MirrorCreatedEvent extends MirrorEvent<MirrorCreatedEventData> {
   static type = 'mirror:created';
 
   /**
@@ -102,13 +128,17 @@ export class MirrorCreatedEvent extends MirrorEvent {
   }
 }
 
+interface MirrorAttachedEventData extends MirrorEventData {
+  mirror: HTMLElement;
+}
+
 /**
  * Mirror attached event
  * @class MirrorAttachedEvent
  * @module MirrorAttachedEvent
  * @extends MirrorEvent
  */
-export class MirrorAttachedEvent extends MirrorEvent {
+export class MirrorAttachedEvent extends MirrorEvent<MirrorAttachedEventData> {
   static type = 'mirror:attached';
 
   /**
@@ -122,13 +152,19 @@ export class MirrorAttachedEvent extends MirrorEvent {
   }
 }
 
+interface MirrorMoveEventData extends MirrorEventData {
+  mirror: HTMLElement;
+  passedThreshX: boolean;
+  passedThreshY: boolean;
+}
+
 /**
  * Mirror move event
  * @class MirrorMoveEvent
  * @module MirrorMoveEvent
  * @extends MirrorEvent
  */
-export class MirrorMoveEvent extends MirrorEvent {
+export class MirrorMoveEvent extends MirrorEvent<MirrorMoveEventData> {
   static type = 'mirror:move';
   static cancelable = true;
 
@@ -161,13 +197,19 @@ export class MirrorMoveEvent extends MirrorEvent {
   }
 }
 
+interface MirrorMovedEventData extends MirrorEventData {
+  mirror: HTMLElement;
+  passedThreshX: boolean;
+  passedThreshY: boolean;
+}
+
 /**
  * Mirror moved event
  * @class MirrorMovedEvent
  * @module MirrorMovedEvent
  * @extends MirrorEvent
  */
-export class MirrorMovedEvent extends MirrorEvent {
+export class MirrorMovedEvent extends MirrorEvent<MirrorMovedEventData> {
   static type = 'mirror:moved';
 
   /**
@@ -199,13 +241,17 @@ export class MirrorMovedEvent extends MirrorEvent {
   }
 }
 
+interface MirrorDestroyEventData extends MirrorEventData {
+  mirror: HTMLElement;
+}
+
 /**
  * Mirror destroy event
  * @class MirrorDestroyEvent
  * @module MirrorDestroyEvent
  * @extends MirrorEvent
  */
-export class MirrorDestroyEvent extends MirrorEvent {
+export class MirrorDestroyEvent extends MirrorEvent<MirrorDestroyEventData> {
   static type = 'mirror:destroy';
   static cancelable = true;
 

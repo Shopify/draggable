@@ -1,13 +1,37 @@
 import AbstractEvent from 'shared/AbstractEvent';
 
+import {
+  DragEvent,
+  DragEventData,
+  DragOverEvent,
+  DragOutEvent,
+  DragOverContainerEvent,
+  DragOutContainerEvent,
+} from '../../Draggable/DragEvent';
+
+interface SortableEventData {
+  dragEvent: DragEvent<DragEventData>;
+}
+
 /**
  * Base sortable event
  * @class SortableEvent
  * @module SortableEvent
  * @extends AbstractEvent
  */
-export class SortableEvent extends AbstractEvent {
+export class SortableEvent<
+  T extends SortableEventData,
+> extends AbstractEvent<SortableEventData> {
   static type = 'sortable';
+
+  /**
+   * SortableEvent constructor.
+   * @constructs SortableEvent
+   * @param {SortableEventData} data - Event data
+   */
+  constructor(public data: T) {
+    super(data);
+  }
 
   /**
    * Original drag event that triggered this sortable event
@@ -20,13 +44,18 @@ export class SortableEvent extends AbstractEvent {
   }
 }
 
+interface SortableStartEventData extends SortableEventData {
+  startIndex: number;
+  startContainer: HTMLElement;
+}
+
 /**
  * Sortable start event
  * @class SortableStartEvent
  * @module SortableStartEvent
  * @extends SortableEvent
  */
-export class SortableStartEvent extends SortableEvent {
+export class SortableStartEvent extends SortableEvent<SortableStartEventData> {
   static type = 'sortable:start';
   static cancelable = true;
 
@@ -51,13 +80,23 @@ export class SortableStartEvent extends SortableEvent {
   }
 }
 
+interface SortableSortEventData extends SortableEventData {
+  dragEvent:
+    | DragOverEvent
+    | DragOutEvent
+    | DragOverContainerEvent
+    | DragOutContainerEvent;
+  currentIndex: number;
+  over: HTMLElement;
+}
+
 /**
  * Sortable sort event
  * @class SortableSortEvent
  * @module SortableSortEvent
  * @extends SortableEvent
  */
-export class SortableSortEvent extends SortableEvent {
+export class SortableSortEvent extends SortableEvent<SortableSortEventData> {
   static type = 'sortable:sort';
   static cancelable = true;
 
@@ -92,13 +131,20 @@ export class SortableSortEvent extends SortableEvent {
   }
 }
 
+interface SortableSortedEventData extends SortableEventData {
+  oldIndex: number;
+  newIndex: number;
+  oldContainer: HTMLElement;
+  newContainer: HTMLElement;
+}
+
 /**
  * Sortable sorted event
  * @class SortableSortedEvent
  * @module SortableSortedEvent
  * @extends SortableEvent
  */
-export class SortableSortedEvent extends SortableEvent {
+export class SortableSortedEvent extends SortableEvent<SortableSortedEventData> {
   static type = 'sortable:sorted';
 
   /**
@@ -142,13 +188,20 @@ export class SortableSortedEvent extends SortableEvent {
   }
 }
 
+interface SortableStopEventData extends SortableEventData {
+  oldIndex: number;
+  newIndex: number;
+  oldContainer: HTMLElement;
+  newContainer: HTMLElement;
+}
+
 /**
  * Sortable stop event
  * @class SortableStopEvent
  * @module SortableStopEvent
  * @extends SortableEvent
  */
-export class SortableStopEvent extends SortableEvent {
+export class SortableStopEvent extends SortableEvent<SortableStopEventData> {
   static type = 'sortable:stop';
 
   /**

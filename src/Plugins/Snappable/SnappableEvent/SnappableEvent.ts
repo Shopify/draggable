@@ -1,12 +1,19 @@
 import AbstractEvent from 'shared/AbstractEvent';
 
+import {DragEvent, DragEventData} from '../../../Draggable/DragEvent';
+
+interface SnapEventData {
+  dragEvent: DragEvent<DragEventData>;
+  snappable: HTMLElement;
+}
+
 /**
  * Base snap event
  * @class SnapEvent
  * @module SnapEvent
  * @extends AbstractEvent
  */
-export class SnapEvent extends AbstractEvent {
+export class SnapEvent extends AbstractEvent<SnapEventData> {
   static type = 'snap';
 
   /**

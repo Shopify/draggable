@@ -1,15 +1,17 @@
 import AbstractEvent from 'shared/AbstractEvent';
 
+import {SensorEvent} from '../Sensors/SensorEvent';
+
 /**
  * DragEventData
  * @interface DragEventData
  */
-interface DragEventData {
+export interface DragEventData {
   source: HTMLElement;
   originalSource: HTMLElement;
   mirror: HTMLElement;
   sourceContainer: HTMLElement;
-  sensorEvent: any;
+  sensorEvent: SensorEvent;
 }
 
 /**
@@ -122,7 +124,7 @@ export class DragMoveEvent extends DragEvent<DragEventData> {
  * DragOverEventData
  * @interface DragOverEventData
  */
-interface DragOverEventData extends DragEventData {
+export interface DragOverEventData extends DragEventData {
   overContainer: HTMLElement;
   over: HTMLElement;
 }

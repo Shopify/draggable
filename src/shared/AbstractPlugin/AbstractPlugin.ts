@@ -1,3 +1,5 @@
+import {FixMeAny} from 'shared/types';
+
 /**
  * All draggable plugins inherit from this class.
  * @abstract
@@ -10,7 +12,7 @@ export abstract class AbstractPlugin {
    * @constructs AbstractPlugin
    * @param {Draggable} draggable - Draggable instance
    */
-  constructor(protected draggable: any) {}
+  constructor(protected draggable: FixMeAny) {}
 
   /**
    * Override to add listeners

@@ -6,6 +6,8 @@
     "outDir": "build/ts",
     "rootDir": "./",
     "strictFunctionTypes": false,
+    "emitDecoratorMetadata": false,
+    "experimentalDecorators": false,
     "paths": {
       "shared/*": ["./src/shared/*"],
       "helper": ["./test/helper.ts"]

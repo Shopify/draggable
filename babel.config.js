@@ -1,6 +1,3 @@
-/**
- * @type {import('@babel/core').TransformOptions}
- */
 module.exports = function (api) {
   api.cache(true);
 
@@ -12,6 +9,7 @@ module.exports = function (api) {
       ],
       ['@babel/preset-typescript'],
     ],
+    plugins: [['@babel/plugin-proposal-decorators', {version: '2023-05'}]],
     assumptions: {
       setPublicClassFields: true,
       privateFieldsAsProperties: true,

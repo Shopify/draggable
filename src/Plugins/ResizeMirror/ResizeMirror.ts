@@ -1,5 +1,5 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
-import {requestNextAnimationFrame} from 'shared/utils';
+import {requestNextAnimationFrame, AutoBind} from 'shared/utils';
 import {FixMeAny} from 'shared/types';
 
 import {MirrorCreatedEvent} from '../../Draggable/Plugins/Mirror/MirrorEvent';
@@ -53,10 +53,6 @@ export default class ResizeMirror extends AbstractPlugin {
      * @property {HTMLElement} mirror
      */
     this.mirror = null;
-
-    this.onMirrorCreated = this.onMirrorCreated.bind(this);
-    this.onMirrorDestroy = this.onMirrorDestroy.bind(this);
-    this.onDragOver = this.onDragOver.bind(this);
   }
 
   /**
@@ -93,6 +89,7 @@ export default class ResizeMirror extends AbstractPlugin {
    * @param {MirrorCreatedEvent} mirrorEvent
    * @private
    */
+  @AutoBind
   private onMirrorCreated({mirror}: MirrorCreatedEvent) {
     this.mirror = mirror;
   }
@@ -102,6 +99,7 @@ export default class ResizeMirror extends AbstractPlugin {
    * @param {MirrorDestroyEvent} mirrorEvent
    * @private
    */
+  @AutoBind
   private onMirrorDestroy() {
     this.mirror = null;
   }
@@ -111,6 +109,7 @@ export default class ResizeMirror extends AbstractPlugin {
    * @param {DragOverEvent | DragOverContainer} dragEvent
    * @private
    */
+  @AutoBind
   private onDragOver(dragEvent: DragOverEvent | DragOverContainerEvent) {
     this.resize(dragEvent);
   }

@@ -49,6 +49,7 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.22.20",
+    "@babel/plugin-proposal-decorators": "^7.23.0",
     "@babel/preset-env": "^7.22.20",
     "@babel/preset-typescript": "^7.23.0",
     "@changesets/changelog-github": "^0.4.8",

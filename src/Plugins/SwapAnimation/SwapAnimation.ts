@@ -1,5 +1,6 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
 import {FixMeAny} from 'shared/types';
+import {AutoBind} from 'shared/utils';
 
 interface Options {
   duration: number;
@@ -56,8 +57,6 @@ export default class SwapAnimation extends AbstractPlugin {
      * @type {Number}
      */
     this.lastAnimationFrame = null;
-
-    this.onSortableSorted = this.onSortableSorted.bind(this);
   }
 
   /**
@@ -87,6 +86,7 @@ export default class SwapAnimation extends AbstractPlugin {
    * @param {SortableSortedEvent} sortableEvent
    * @private
    */
+  @AutoBind
   onSortableSorted({oldIndex, newIndex, dragEvent}: FixMeAny) {
     const {source, over} = dragEvent;
 

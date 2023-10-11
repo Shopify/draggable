@@ -56,6 +56,17 @@ describe('Emitter', () => {
       expect(callback).toHaveBeenCalledWith(testEvent);
     });
 
+    it('triggers callbacks on event with wildcard', () => {
+      const testEvent = new TestEvent({});
+      const callback = jest.fn();
+
+      emitter.on('*', callback);
+      emitter.trigger(testEvent);
+
+      expect(callback).toHaveBeenCalled();
+      expect(callback).toHaveBeenCalledWith(testEvent);
+    });
+
     it('catches errors from listeners and re-throws at the end of the trigger phase', () => {
       const consoleErrorSpy = jest.fn();
 

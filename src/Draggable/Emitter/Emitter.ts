@@ -55,11 +55,14 @@ export default class Emitter {
    * @param {AbstractEvent} event
    */
   trigger(event: AbstractEvent<unknown>) {
-    if (!this.callbacks[event.type]) {
+    if (!this.callbacks[event.type] && !this.callbacks['*']) {
       return null;
     }
 
-    const callbacks = [...this.callbacks[event.type]];
+    const callbacks = [
+      ...(this.callbacks[event.type] || []),
+      ...(this.callbacks['*'] || []),
+    ];
     const caughtErrors = [];
 
     for (let i = callbacks.length - 1; i >= 0; i--) {

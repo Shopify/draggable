@@ -1,4 +1,5 @@
 import AbstractPlugin from 'shared/AbstractPlugin';
+import {AutoBind} from 'shared/utils';
 
 const onInitialize = Symbol('onInitialize');
 const onDestroy = Symbol('onDestroy');
@@ -50,24 +51,23 @@ export default class Announcement extends AbstractPlugin {
      * @property originalTriggerMethod
      * @type {Function}
      */
-    this.originalTriggerMethod = this.draggable.trigger;
-
-    this[onInitialize] = this[onInitialize].bind(this);
-    this[onDestroy] = this[onDestroy].bind(this);
+    // this.originalTriggerMethod = this.draggable.trigger;
   }
 
   /**
    * Attaches listeners to draggable
    */
   attach() {
-    this.draggable.on('draggable:initialize', this[onInitialize]);
+    // this.draggable.on('draggable:initialize', this[onInitialize]);
+    this.draggable.on('*', this[announceEvent]);
   }
 
   /**
    * Detaches listeners from draggable
    */
   detach() {
-    this.draggable.off('draggable:destroy', this[onDestroy]);
+    // this.draggable.off('draggable:destroy', this[onDestroy]);
+    this.draggable.off('*', this[announceEvent]);
   }
 
   /**
@@ -82,6 +82,7 @@ export default class Announcement extends AbstractPlugin {
    * @private
    * @param {AbstractEvent} event
    */
+  @AutoBind
   [announceEvent](event) {
     const message = this.options[event.type];
 
@@ -107,6 +108,7 @@ export default class Announcement extends AbstractPlugin {
    * Initialize hander
    * @private
    */
+  @AutoBind
   [onInitialize]() {
     // Hack until there is an api for listening for all events
     this.draggable.trigger = (event) => {
@@ -123,6 +125,7 @@ export default class Announcement extends AbstractPlugin {
    * Destroy hander
    * @private
    */
+  @AutoBind
   [onDestroy]() {
     this.draggable.trigger = this.originalTriggerMethod;
   }

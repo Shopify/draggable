@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.1.2
+
+### Patch Changes
+
+- [#579](https://github.com/Shopify/draggable/pull/579) [`bb23ff2`](https://github.com/Shopify/draggable/commit/bb23ff21f693b623e76c935d8ea4fb58ac57d36c) Thanks [@tsov](https://github.com/tsov)! - Convert CollidableEvent to typescript
+
+- [#579](https://github.com/Shopify/draggable/pull/579) [`9154a96`](https://github.com/Shopify/draggable/commit/9154a9683a0fecfdc4a4759319221ca59c43421a) Thanks [@tsov](https://github.com/tsov)! - Convert SensorEvent to typescript
+
+- [#579](https://github.com/Shopify/draggable/pull/579) [`74c35e5`](https://github.com/Shopify/draggable/commit/74c35e5aa4bd5c3bb7dcaf8cc432c4d5d932ee3f) Thanks [@tsov](https://github.com/tsov)! - Convert SwappableEvent to typescript
+
+- [#579](https://github.com/Shopify/draggable/pull/579) [`fb5354f`](https://github.com/Shopify/draggable/commit/fb5354ffc7688433ef12bcf8ca1b9f473f78cf06) Thanks [@tsov](https://github.com/tsov)! - Convert SortableEvent to typescript
+
+- [#579](https://github.com/Shopify/draggable/pull/579) [`7734961`](https://github.com/Shopify/draggable/commit/773496192fc9a56f6cd24ec7a45f34c79aec4a6d) Thanks [@tsov](https://github.com/tsov)! - Converts DragEvent tests to typescript
+
+- [#579](https://github.com/Shopify/draggable/pull/579) [`a0c3c90`](https://github.com/Shopify/draggable/commit/a0c3c90d8e93ac8ac0e19e5d37e271e6d97c4fa6) Thanks [@tsov](https://github.com/tsov)! - Convert DroppableEvent to typescript
+
+- [#579](https://github.com/Shopify/draggable/pull/579) [`527dcb6`](https://github.com/Shopify/draggable/commit/527dcb67d50978ac81576603a57e42d77fff1eec) Thanks [@tsov](https://github.com/tsov)! - Converts MirrorEvent to typescript
+
+- [#579](https://github.com/Shopify/draggable/pull/579) [`7219781`](https://github.com/Shopify/draggable/commit/721978147cef7f3cc5971fa0cbd636c87ddbe2c7) Thanks [@tsov](https://github.com/tsov)! - Convert SnappableEvent to typescript
+
+- [#579](https://github.com/Shopify/draggable/pull/579) [`cc42520`](https://github.com/Shopify/draggable/commit/cc42520a2731191ae6459a22892d9c1da605b80d) Thanks [@tsov](https://github.com/tsov)! - Converts DraggableEvent to typescript
+
 ## 1.1.1
 
 ### Patch Changes

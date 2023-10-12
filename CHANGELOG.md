@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.3
+
+### Patch Changes
+
+- [#586](https://github.com/Shopify/draggable/pull/586) [`c1df3a5`](https://github.com/Shopify/draggable/commit/c1df3a559ebd959a1054503ee423c6d76243fd0d) Thanks [@tsov](https://github.com/tsov)! - Adds AutoBind decorator
+
+- [#590](https://github.com/Shopify/draggable/pull/590) [`f05efb3`](https://github.com/Shopify/draggable/commit/f05efb3850eb44d83a4de5c03f1ee526ea5e318b) Thanks [@tsov](https://github.com/tsov)! - Fixes VSCode search to exclude generated files/folders
+
+- [#590](https://github.com/Shopify/draggable/pull/590) [`36e61b6`](https://github.com/Shopify/draggable/commit/36e61b6825c9c9911ce3ef5eb2ff962b091fd831) Thanks [@tsov](https://github.com/tsov)! - Converts ResizeMirror test to typescript
+
 ## 1.1.2
 
 ### Patch Changes

@@ -7,11 +7,11 @@
     "coverage": true
   },
   "search.exclude": {
-    "**/node_modules": true,
-    ".rollup.cache": true,
-    "coverage": true,
-    "build": true,
-    "docs": true
+    "node_modules/**/*": true,
+    ".rollup.cache/**/*": true,
+    "coverage/**/*": true,
+    "build/**/*": true,
+    "docs/**/*": true
   },
   "[typescript]": {
     "editor.formatOnSave": false,

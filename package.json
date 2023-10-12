@@ -38,7 +38,7 @@
     "test": "jest",
     "build:development": "yarn rollup --config rollup.development.config.ts --configPlugin @rollup/plugin-typescript",
     "build:production": "tsc && tsc-alias && yarn rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript && yarn uglifyjs --compress --mangle -- build/umd/index.js -o build/umd/index.min.js",
-    "verify": "yarn lint && yarn type-check && yarn build && yarn test"
+    "verify": "yarn lint && yarn type-check && yarn build && yarn build:development && yarn test && yarn --cwd ./examples build"
   },
   "files": [
     "build/**/*",

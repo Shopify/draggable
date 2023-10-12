@@ -1,4 +1,5 @@
 import Sensor from '../Sensor';
+import {DragStartSensorEvent} from '../../SensorEvent';
 
 describe('Sensor', () => {
   describe('#constructor', () => {
@@ -10,8 +11,8 @@ describe('Sensor', () => {
     });
 
     it('should initialize with containers and options', () => {
-      const expectedContainers = ['expectedContainer'];
-      const expectedOptions = {expectedOptions: true};
+      const expectedContainers = [document.body];
+      const expectedOptions = {delay: 0};
       const sensor = new Sensor(expectedContainers, expectedOptions);
 
       expect(sensor.containers).toStrictEqual(expectedContainers);
@@ -99,26 +100,31 @@ describe('Sensor', () => {
     it('should dispatch event on element', () => {
       const sensor = new Sensor();
       const element = document.createElement('div');
-      const expectedEvent = {
-        type: 'my:event',
-        value: 'some value',
-      };
 
       let eventDispatched;
 
       element.addEventListener(
-        'my:event',
+        'drag:start',
         (event) => {
           eventDispatched = event;
         },
         true,
       );
 
+      const expectedEvent = new DragStartSensorEvent({
+        clientX: 0,
+        clientY: 0,
+        target: element,
+        container: document.body,
+        originalSource: element,
+        originalEvent: eventDispatched,
+      });
+
       const returnValue = sensor.trigger(element, expectedEvent);
 
-      expect(eventDispatched.detail).toBe(expectedEvent);
-      expect(eventDispatched.type).toBe('my:event');
-      expect(eventDispatched.target).toBe(element);
+      expect(eventDispatched!.detail).toBe(expectedEvent);
+      expect(eventDispatched!.type).toBe('drag:start');
+      expect(eventDispatched!.target).toBe(element);
       expect(returnValue).toBe(expectedEvent);
       expect(sensor.lastEvent).toBe(expectedEvent);
     });

@@ -28,10 +28,10 @@ const sampleMarkup = `
 `;
 
 describe('MouseSensor', () => {
-  let sandbox;
-  let mouseSensor;
-  let draggableElement;
-  let nonDraggableElement;
+  let sandbox: HTMLDivElement;
+  let mouseSensor: MouseSensor;
+  let draggableElement: HTMLLIElement;
+  let nonDraggableElement: HTMLLIElement;
 
   function setup(optionsParam = {}) {
     const options = {
@@ -42,9 +42,9 @@ describe('MouseSensor', () => {
     };
 
     sandbox = createSandbox(sampleMarkup);
-    const containers = sandbox.querySelectorAll('ul');
-    draggableElement = sandbox.querySelector('.draggable');
-    nonDraggableElement = sandbox.querySelector('.non-draggable');
+    const containers = [...sandbox.querySelectorAll<HTMLElement>('ul')];
+    draggableElement = sandbox.querySelector('.draggable')!;
+    nonDraggableElement = sandbox.querySelector('.non-draggable')!;
     mouseSensor = new MouseSensor(containers, options);
     mouseSensor.attach();
   }
@@ -101,7 +101,7 @@ describe('MouseSensor', () => {
 
     it('does not prevent `dragstart` event when attempting to drag outside of draggable container', () => {
       clickMouse(document.body);
-      moveMouse(document, {pageX: 1, pageY: 1});
+      moveMouse(document.body, {pageX: 1, pageY: 1});
       const nativeDragEvent = triggerEvent(draggableElement, 'dragstart');
 
       expect(nativeDragEvent).not.toHaveDefaultPrevented();
@@ -111,7 +111,7 @@ describe('MouseSensor', () => {
 
     it('does not prevent `dragstart` event when attempting to drag non draggable element', () => {
       clickMouse(nonDraggableElement);
-      moveMouse(document, {pageX: 1, pageY: 1});
+      moveMouse(document.body, {pageX: 1, pageY: 1});
       const nativeDragEvent = triggerEvent(nonDraggableElement, 'dragstart');
 
       expect(nativeDragEvent).not.toHaveDefaultPrevented();
@@ -159,7 +159,7 @@ describe('MouseSensor', () => {
 
     it('cancels `drag:start` event when canceling sensor event', () => {
       sandbox.addEventListener('drag:start', (event) => {
-        event.detail.cancel();
+        (event as any).detail.cancel();
       });
 
       function dragFlow() {
@@ -173,22 +173,23 @@ describe('MouseSensor', () => {
   });
 
   describe('using handle', () => {
-    let handleInDraggableElement;
-    let handleInNonDraggableElement;
+    let handleInDraggableElement: HTMLElement;
+    let handleInNonDraggableElement: HTMLElement;
 
     beforeEach(() => {
       setup({handle: '.handle'});
-      handleInDraggableElement = sandbox.querySelector('.draggable .handle');
-      handleInNonDraggableElement = sandbox.querySelector(
+      handleInDraggableElement =
+        sandbox.querySelector<HTMLElement>('.draggable .handle')!;
+      handleInNonDraggableElement = sandbox.querySelector<HTMLElement>(
         '.non-draggable .handle',
-      );
+      )!;
     });
 
     afterEach(teardown);
 
     it('does not prevent `dragstart` event when attempting to drag handle in non draggable element', () => {
       clickMouse(handleInNonDraggableElement);
-      moveMouse(document, {pageX: 1, pageY: 1});
+      moveMouse(document.body, {pageX: 1, pageY: 1});
       const nativeDragEvent = triggerEvent(
         handleInNonDraggableElement,
         'dragstart',
@@ -201,7 +202,7 @@ describe('MouseSensor', () => {
 
     it('prevent `dragstart` event when attempting to drag handle in draggable element', () => {
       clickMouse(handleInDraggableElement);
-      moveMouse(document, {pageX: 1, pageY: 1});
+      moveMouse(document.body, {pageX: 1, pageY: 1});
       const nativeDragEvent = triggerEvent(
         handleInDraggableElement,
         'dragstart',
@@ -214,7 +215,7 @@ describe('MouseSensor', () => {
 
     it('does not prevent `dragstart` event when attempting to drag outside of handle inside of draggable', () => {
       clickMouse(draggableElement);
-      moveMouse(document, {pageX: 1, pageY: 1});
+      moveMouse(document.body, {pageX: 1, pageY: 1});
       const nativeDragEvent = triggerEvent(draggableElement, 'dragstart');
 
       expect(nativeDragEvent).not.toHaveDefaultPrevented();

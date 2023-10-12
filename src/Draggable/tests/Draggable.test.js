@@ -514,7 +514,12 @@ describe('Draggable', () => {
     const callback = jest.fn();
     newInstance.on('drag:start', callback);
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
+
     // Wait for delay
     waitForDragDelay();
 
@@ -537,7 +542,11 @@ describe('Draggable', () => {
     const callback = jest.fn();
     newInstance.on('drag:start', callback);
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -570,7 +579,11 @@ describe('Draggable', () => {
 
     newInstance.on('drag:start', callback);
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -589,7 +602,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -623,7 +640,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -648,7 +669,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -672,7 +697,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -696,7 +725,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -720,7 +753,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -739,7 +776,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -764,7 +805,11 @@ describe('Draggable', () => {
       event.cancel();
     });
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -784,7 +829,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -802,7 +851,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -842,7 +895,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -860,7 +917,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -885,7 +946,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -905,7 +970,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -950,7 +1019,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();
@@ -1032,7 +1105,11 @@ describe('Draggable', () => {
     const draggableElement = sandbox.querySelector('li');
     document.elementFromPoint = () => draggableElement;
 
-    triggerEvent(draggableElement, 'mousedown', {button: 0});
+    triggerEvent(draggableElement, 'mousedown', {
+      button: 0,
+      pageX: 0,
+      pageY: 0,
+    });
 
     // Wait for delay
     waitForDragDelay();

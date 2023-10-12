@@ -1,7 +1,7 @@
 function toHaveTriggeredSensorEvent(
   received: () => void,
   expectedEventName: string,
-  count: number,
+  count?: number,
 ) {
   let triggered = false;
   let callCount = 0;

@@ -13,6 +13,7 @@ module.exports = {
   },
   rules: {
     'jest/valid-title': 'off',
+    '@typescript-eslint/no-namespace': [2, {allowDeclarations: true}],
   },
   settings: {
     'import/resolver': {

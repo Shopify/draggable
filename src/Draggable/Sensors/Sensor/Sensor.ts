@@ -1,4 +1,19 @@
-const defaultDelay = {
+import {SensorEvent} from '../SensorEvent';
+
+export interface DelayOptions {
+  mouse: number;
+  drag: number;
+  touch: number;
+}
+
+interface Options {
+  handle?: string;
+  draggable?: string;
+  delay?: Partial<DelayOptions> | number;
+  distance?: number;
+}
+
+const defaultDelay: DelayOptions = {
   mouse: 0,
   drag: 0,
   touch: 100,
@@ -10,13 +25,22 @@ const defaultDelay = {
  * @module Sensor
  */
 export default class Sensor {
+  public containers: HTMLElement[];
+  public options: Options;
+  public delay: DelayOptions;
+  public dragging = false;
+  public currentContainer: HTMLElement | null = null;
+  public originalSource: HTMLElement | null = null;
+  public startEvent: Event | null = null;
+  public lastEvent: SensorEvent | null = null;
+
   /**
    * Sensor constructor.
    * @constructs Sensor
    * @param {HTMLElement[]|NodeList|HTMLElement} containers - Containers
    * @param {Object} options - Options
    */
-  constructor(containers = [], options = {}) {
+  constructor(containers: HTMLElement[] = [], options?: Options) {
     /**
      * Current containers
      * @property containers
@@ -29,42 +53,14 @@ export default class Sensor {
      * @property options
      * @type {Object}
      */
-    this.options = {...options};
-
-    /**
-     * Current drag state
-     * @property dragging
-     * @type {Boolean}
-     */
-    this.dragging = false;
-
-    /**
-     * Current container
-     * @property currentContainer
-     * @type {HTMLElement}
-     */
-    this.currentContainer = null;
-
-    /**
-     * Draggables original source element
-     * @property originalSource
-     * @type {HTMLElement}
-     */
-    this.originalSource = null;
-
-    /**
-     * The event of the initial sensor down
-     * @property startEvent
-     * @type {Event}
-     */
-    this.startEvent = null;
+    this.options = options || {};
 
     /**
      * The delay of each sensor
      * @property delay
      * @type {Object}
      */
-    this.delay = calcDelay(options.delay);
+    this.delay = calcDelay(options ? options.delay : undefined);
   }
 
   /**
@@ -88,7 +84,7 @@ export default class Sensor {
    * @param {...HTMLElement} containers - Containers you want to add to this sensor
    * @example draggable.addContainer(document.body)
    */
-  addContainer(...containers) {
+  addContainer(...containers: HTMLElement[]) {
     this.containers = [...this.containers, ...containers];
   }
 
@@ -97,7 +93,7 @@ export default class Sensor {
    * @param {...HTMLElement} containers - Containers you want to remove from this sensor
    * @example draggable.removeContainer(document.body)
    */
-  removeContainer(...containers) {
+  removeContainer(...containers: HTMLElement[]) {
     this.containers = this.containers.filter(
       (container) => !containers.includes(container),
     );
@@ -108,9 +104,9 @@ export default class Sensor {
    * @param {HTMLElement} element - Element to trigger event on
    * @param {SensorEvent} sensorEvent - Sensor event to trigger
    */
-  trigger(element, sensorEvent) {
+  trigger(element: HTMLElement, sensorEvent: SensorEvent) {
     const event = document.createEvent('Event');
-    event.detail = sensorEvent;
+    (event as any).detail = sensorEvent;
     event.initEvent(sensorEvent.type, true, true);
     element.dispatchEvent(event);
     this.lastEvent = sensorEvent;
@@ -124,31 +120,36 @@ export default class Sensor {
  * @param {undefined|Number|Object} optionsDelay - the delay in the options
  * @return {Object}
  */
-function calcDelay(optionsDelay) {
-  const delay = {};
-
-  if (optionsDelay === undefined) {
+function calcDelay(
+  optionsDelay?: Partial<DelayOptions> | number,
+): DelayOptions {
+  if (optionsDelay == null) {
     return {...defaultDelay};
   }
 
   if (typeof optionsDelay === 'number') {
-    for (const key in defaultDelay) {
-      if (Object.prototype.hasOwnProperty.call(defaultDelay, key)) {
-        delay[key] = optionsDelay;
-      }
-    }
-    return delay;
+    return Object.keys(defaultDelay).reduce<DelayOptions>(
+      (options, key) => {
+        return {
+          ...options,
+          [key]: optionsDelay,
+        };
+      },
+      {...defaultDelay},
+    );
   }
 
-  for (const key in defaultDelay) {
-    if (Object.prototype.hasOwnProperty.call(defaultDelay, key)) {
-      if (optionsDelay[key] === undefined) {
-        delay[key] = defaultDelay[key];
-      } else {
-        delay[key] = optionsDelay[key];
+  return Object.keys(defaultDelay).reduce<DelayOptions>(
+    (options, key: keyof DelayOptions) => {
+      if (optionsDelay[key] == null) {
+        return options;
       }
-    }
-  }
 
-  return delay;
+      return {
+        ...options,
+        [key]: optionsDelay[key],
+      };
+    },
+    {...defaultDelay},
+  );
 }

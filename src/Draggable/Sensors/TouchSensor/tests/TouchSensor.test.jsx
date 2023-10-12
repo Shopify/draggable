@@ -10,13 +10,13 @@ import {
 
 import TouchSensor from '..';
 
-const sampleMarkup = `
+const sampleMarkup = (
   <ul>
-    <li class="draggable">First item</li>
-    <li class="draggable">Second item</li>
-    <li class="non-draggable">Non draggable item</li>
+    <li className="draggable">First item</li>
+    <li className="draggable">Second item</li>
+    <li className="non-draggable">Non draggable item</li>
   </ul>
-`;
+);
 
 describe('TouchSensor', () => {
   let sandbox;

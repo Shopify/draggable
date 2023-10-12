@@ -1,16 +1,20 @@
+const {TextEncoder} = require('util');
+
+const extensions = ['js', 'jsx', 'ts', 'tsx'];
+
 module.exports = {
   testEnvironment: 'jsdom',
-  testMatch: ['<rootDir>/src/**/*.test.(js|ts)'],
+  testMatch: [`<rootDir>/src/**/*.test.(${extensions.join('|')})`],
   setupFiles: ['<rootDir>/test/environment.ts'],
   setupFilesAfterEnv: ['<rootDir>/test/setup.ts'],
   transform: {
-    '\\.(ts|js)': ['babel-jest'],
+    [`\\.(${extensions.join('|')})`]: ['babel-jest'],
   },
-  moduleFileExtensions: ['js', 'ts'],
+  moduleFileExtensions: [...extensions],
   collectCoverageFrom: [
-    'src/**/*.{js,ts}',
-    '!src/**/*/index.{js,ts}',
-    '!src/index.{js,ts}',
+    `src/**/*.{${extensions.join(',')}}`,
+    `!src/**/*/index.{${extensions.join(',')}}`,
+    `!src/index.{${extensions.join(',')}}`,
   ],
   moduleNameMapper: {
     'shared/(.*)': '<rootDir>/src/shared/$1',
@@ -18,4 +22,7 @@ module.exports = {
   coverageDirectory: './coverage/',
   collectCoverage: true,
   moduleDirectories: ['node_modules', 'src', 'test'],
+  globals: {
+    TextEncoder,
+  },
 };

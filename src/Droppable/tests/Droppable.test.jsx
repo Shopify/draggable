@@ -14,18 +14,18 @@ import Droppable, {
   DroppableStopEvent,
 } from '..';
 
-const sampleMarkup = `
-  <div class="Container">
-    <div class="Dropzone isOccupied">
-      <div class="Draggable"></div>
+const sampleMarkup = (
+  <div className="Container">
+    <div className="Dropzone isOccupied">
+      <div className="Draggable" />
     </div>
-    <div class="Dropzone"></div>
-    <div class="Dropzone isOccupied">
-      <div class="Draggable"></div>
+    <div className="Dropzone" />
+    <div className="Dropzone isOccupied">
+      <div className="Draggable" />
     </div>
-    <div class="Draggable"></div>
+    <div className="Draggable" />
   </div>
-`;
+);
 
 describe('Droppable', () => {
   let sandbox;

@@ -2,15 +2,15 @@ import {createSandbox} from 'helper';
 
 import closest from '../closest';
 
-const sampleMarkup = `
-  <div class="tree">
-    <section class="branch">
-      <ul class="twig">
-        <li class="leaf"></li>
+const sampleMarkup = (
+  <div className="tree">
+    <section className="branch">
+      <ul className="twig">
+        <li className="leaf" />
       </ul>
     </section>
   </div>
-`;
+);
 
 describe('utils', () => {
   let sandbox: HTMLDivElement;

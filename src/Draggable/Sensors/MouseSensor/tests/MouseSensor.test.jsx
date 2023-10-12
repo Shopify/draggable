@@ -10,22 +10,22 @@ import {
 
 import MouseSensor from '..';
 
-const sampleMarkup = `
+const sampleMarkup = (
   <ul>
-    <li class="draggable">
-      <div class="handle">First handle</div>
+    <li className="draggable">
+      <div className="handle">First handle</div>
       First item
     </li>
-    <li class="draggable">
-      <div class="handle">Second handle</div>
+    <li className="draggable">
+      <div className="handle">Second handle</div>
       Second item
     </li>
-    <li class="non-draggable">
-      <div class="handle">Non draggable handle</div>
+    <li className="non-draggable">
+      <div className="handle">Non draggable handle</div>
       Non draggable item
     </li>
   </ul>
-`;
+);
 
 describe('MouseSensor', () => {
   let sandbox;

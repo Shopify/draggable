@@ -19,11 +19,11 @@ import {
 } from '../MirrorEvent';
 import Draggable from '../../..';
 
-const sampleMarkup = `
+const sampleMarkup = (
   <ul>
     <li>First item</li>
   </ul>
-`;
+);
 
 describe('Mirror', () => {
   let sandbox;

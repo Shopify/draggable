@@ -1,4 +1,7 @@
 module.exports = function (api) {
+  const envName = api.env();
+  const development = envName === 'development' || envName === 'test';
+
   api.cache(true);
 
   return {
@@ -8,6 +11,10 @@ module.exports = function (api) {
         {useBuiltIns: 'entry', corejs: '3.0', bugfixes: true},
       ],
       ['@babel/preset-typescript'],
+      [
+        '@babel/preset-react',
+        {runtime: 'automatic', development, useBuiltIns: true},
+      ],
     ],
     plugins: [['@babel/plugin-proposal-decorators', {version: '2023-05'}]],
     assumptions: {

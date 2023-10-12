@@ -3,18 +3,20 @@ import {createSandbox, waitForRequestAnimationFrame} from 'helper';
 import Draggable from '../../..';
 import Focusable from '..';
 
-const sampleMarkup = `
-  <ul class="Container">
-    <li>First item</li>
-    <li>Second item</li>
-    <li>Third item</li>
-    <li>Forth item</li>
-    <button>Fifth item</button>
-  </ul>
-  <div class="Container">
-    <div tabindex="1"></div>
-  </div>
-`;
+const sampleMarkup = (
+  <>
+    <ul className="Container">
+      <li>First item</li>
+      <li>Second item</li>
+      <li>Third item</li>
+      <li>Forth item</li>
+      <button type="button">Fifth item</button>
+    </ul>
+    <div className="Container">
+      <div tabIndex="-1" />
+    </div>
+  </>
+);
 
 describe('Focusable', () => {
   let sandbox;

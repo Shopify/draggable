@@ -9,20 +9,22 @@ import {
 
 import Swappable from '..';
 
-const sampleMarkup = `
-  <ul>
-    <li>First item</li>
-    <li>Second item</li>
-    <li>Third item</li>
-    <li>Forth item</li>
-  </ul>
-  <ul>
-    <li>Fith item</li>
-    <li>Sixth item</li>
-    <li>Seventh item</li>
-    <li>Eighth item</li>
-  </ul>
-`;
+const sampleMarkup = (
+  <>
+    <ul>
+      <li>First item</li>
+      <li>Second item</li>
+      <li>Third item</li>
+      <li>Forth item</li>
+    </ul>
+    <ul>
+      <li>Fith item</li>
+      <li>Sixth item</li>
+      <li>Seventh item</li>
+      <li>Eighth item</li>
+    </ul>
+  </>
+);
 
 describe('Swappable', () => {
   let sandbox;

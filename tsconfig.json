@@ -8,6 +8,7 @@
     "strictFunctionTypes": false,
     "emitDecoratorMetadata": false,
     "experimentalDecorators": false,
+    "jsx": "react-jsx",
     "paths": {
       "shared/*": ["./src/shared/*"],
       "helper": ["./test/helper.ts"]

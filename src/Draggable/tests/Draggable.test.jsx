@@ -23,16 +23,18 @@ import {
 import {Focusable, Mirror, Scrollable, Announcement} from '../Plugins';
 import {MouseSensor, TouchSensor} from '../Sensors';
 
-const sampleMarkup = `
-  <ul class="Container">
-    <li>First item</li>
-    <li>Second item</li>
-  </ul>
-  <ul class="DynamicContainer">
-    <li>First item</li>
-    <li>Second item</li>
-  </ul>
-`;
+const sampleMarkup = (
+  <>
+    <ul className="Container">
+      <li>First item</li>
+      <li>Second item</li>
+    </ul>
+    <ul className="DynamicContainer">
+      <li>First item</li>
+      <li>Second item</li>
+    </ul>
+  </>
+);
 
 describe('Draggable', () => {
   let sandbox;

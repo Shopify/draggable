@@ -1,8 +1,11 @@
 import {setImmediate} from 'timers';
 
-export function createSandbox(content: string) {
+import {ReactElement} from 'react';
+import {renderToStaticMarkup} from 'react-dom/server';
+
+export function createSandbox(content: ReactElement) {
   const sandbox = document.createElement('div');
-  sandbox.innerHTML = content;
+  sandbox.innerHTML = renderToStaticMarkup(content);
   document.body.appendChild(sandbox);
 
   return sandbox;

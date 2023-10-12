@@ -17,17 +17,17 @@ import Draggable from '../../../Draggable';
 /* eslint-enable @typescript-eslint/ban-ts-comment */
 import ResizeMirror from '..';
 
-const sampleMarkup = `
-  <ul class="Container">
-    <li>Smaller item</li>
-  </ul>
-  <ul class="Container">
-    <li>Larger item</li>
-  </ul>
-  <ul class="Container">
-    <!-- Empty -->
-  </ul>
-`;
+const sampleMarkup = (
+  <>
+    <ul className="Container">
+      <li>Smaller item</li>
+    </ul>
+    <ul className="Container">
+      <li>Larger item</li>
+    </ul>
+    <ul className="Container">{/* Empty line */}</ul>
+  </>
+);
 
 describe('ResizeMirror', () => {
   const smallerDraggableDimensions = {

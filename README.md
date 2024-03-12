@@ -4,7 +4,7 @@
   <img src="https://user-images.githubusercontent.com/643944/35602291-99e2c56e-0605-11e8-847f-95f1f6be1610.jpg" alt="">
 </a>
 
-# Development
+# Development!
 
 **Draggable is no longer maintained by its original authors.** Maintenance of this repo has been passed on to new collaborators and is no longer worked on by anyone at Shopify.
 

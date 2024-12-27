@@ -36,7 +36,7 @@ interface, for more information read the documentation below.
 - [Roadmap](#roadmap)
 - [Copyright](#copyright)
 
-## Install
+## Install2
 
 You can install the library via npm.
 

@@ -121,24 +121,33 @@ function animate(
   {duration, easingFunction, horizontal}: Options,
 ) {
   for (const element of [from, to]) {
-    element.style.pointerEvents = 'none';
+    if (!element || !element.style) {
+      // eslint-disable-next-line no-console
+      console.warn('Element is not HTMLElement', element);
+    }
+    if (element && element.style) {
+      element.style.pointerEvents = 'none';
+    }
   }
-
-  if (horizontal) {
-    const width = from.offsetWidth;
-    from.style.transform = `translate3d(${width}px, 0, 0)`;
-    to.style.transform = `translate3d(-${width}px, 0, 0)`;
-  } else {
-    const height = from.offsetHeight;
-    from.style.transform = `translate3d(0, ${height}px, 0)`;
-    to.style.transform = `translate3d(0, -${height}px, 0)`;
+  if (from && to && from.style && to.style) {
+    if (horizontal) {
+      const width = from.offsetWidth;
+      from.style.transform = `translate3d(${width}px, 0, 0)`;
+      to.style.transform = `translate3d(-${width}px, 0, 0)`;
+    } else {
+      const height = from.offsetHeight;
+      from.style.transform = `translate3d(0, ${height}px, 0)`;
+      to.style.transform = `translate3d(0, -${height}px, 0)`;
+    }
   }
 
   requestAnimationFrame(() => {
     for (const element of [from, to]) {
-      element.addEventListener('transitionend', resetElementOnTransitionEnd);
-      element.style.transition = `transform ${duration}ms ${easingFunction}`;
-      element.style.transform = '';
+      if (element && element.style && element.addEventListener) {
+        element.addEventListener('transitionend', resetElementOnTransitionEnd);
+        element.style.transition = `transform ${duration}ms ${easingFunction}`;
+        element.style.transform = '';
+      }
     }
   });
 }

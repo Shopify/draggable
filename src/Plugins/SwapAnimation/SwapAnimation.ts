@@ -120,8 +120,9 @@ function animate(
   to: HTMLElement,
   {duration, easingFunction, horizontal}: Options,
 ) {
+ 
   for (const element of [from, to]) {
-    element.style.pointerEvents = 'none';
+    element?.style.pointerEvents = 'none';
   }
 
   if (horizontal) {
@@ -136,9 +137,9 @@ function animate(
 
   requestAnimationFrame(() => {
     for (const element of [from, to]) {
-      element.addEventListener('transitionend', resetElementOnTransitionEnd);
-      element.style.transition = `transform ${duration}ms ${easingFunction}`;
-      element.style.transform = '';
+      element?.addEventListener('transitionend', resetElementOnTransitionEnd);
+      element?.style.transition = `transform ${duration}ms ${easingFunction}`;
+      element?.style.transform = '';
     }
   });
 }

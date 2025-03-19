@@ -229,8 +229,13 @@ import {Draggable} from '@shopify/draggable';
 
 const draggable = new Draggable(document.querySelectorAll('ul'), {
   draggable: 'li',
-  classes: {
-    'draggable:over': ['draggable--over', 'bg-red-200', 'bg-opacity-25'],
-  },
+});
+
+draggable.on('drag:start', () => {
+  document.addEventListener('keyup', (evt) => {
+    if (evt.key === 'Escape') {
+      draggable.cancel();
+    }
+  });
 });
 ```

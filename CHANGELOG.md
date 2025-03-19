@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.4
+
+### Patch Changes
+
+- [#621](https://github.com/Shopify/draggable/pull/621) [`a14a290`](https://github.com/Shopify/draggable/commit/a14a2903032a02d160958d3e557ba8d09180c382) Thanks [@tsov](https://github.com/tsov)! - Add provenance statement
+
 ## 1.1.3
 
 ### Patch Changes

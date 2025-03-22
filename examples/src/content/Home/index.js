@@ -33,5 +33,8 @@ export default function Home() {
     plates.resetWarp();
   });
 
+  // suppress mirror creation
+  draggable.on('mirror:create', (evt) => evt.cancel());
+
   return draggable;
 }

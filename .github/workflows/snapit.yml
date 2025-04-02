@@ -71,10 +71,10 @@ jobs:
       - name: Checkout default branch
         uses: actions/checkout@v3
 
-      - name: Checkout pull request branch
-        run: hub pr checkout ${{ github.event.issue.number }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Checkout pull request branch
+      #   run: hub pr checkout ${{ github.event.issue.number }}
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Reset changeset entries on changeset-release/main branch
         run: |

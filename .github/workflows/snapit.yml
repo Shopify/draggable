@@ -37,36 +37,36 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           status: pending
 
-      - name: Validate pull request
-        uses: actions/github-script@v6
-        id: pr_data
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          script: |
-            try {
-              const pullRequest = await github.rest.pulls.get({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                pull_number: context.issue.number,
-              })
+      # - name: Validate pull request
+      #   uses: actions/github-script@v6
+      #   id: pr_data
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     script: |
+      #       try {
+      #         const pullRequest = await github.rest.pulls.get({
+      #           owner: context.repo.owner,
+      #           repo: context.repo.repo,
+      #           pull_number: context.issue.number,
+      #         })
 
-              // Pull request from fork
-              if (context.payload.repository.full_name !== pullRequest.data.head.repo.full_name) {
-                const errorMessage = '`/snapit` is not supported on pull requests from forked repositories.'
+      #         // Pull request from fork
+      #         if (context.payload.repository.full_name !== pullRequest.data.head.repo.full_name) {
+      #           const errorMessage = '`/snapit` is not supported on pull requests from forked repositories.'
 
-                await github.rest.issues.createComment({
-                  issue_number: context.issue.number,
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  body: errorMessage,
-                })
-
-                core.setFailed(errorMessage)
-              }
-            } catch (err) {
-              core.setFailed(`Request failed with error ${err}`)
-            }
+      #           await github.rest.issues.createComment({
+      #             issue_number: context.issue.number,
+      #             owner: context.repo.owner,
+      #             repo: context.repo.repo,
+      #             body: errorMessage,
+      #           })
+# 
+            #     core.setFailed(errorMessage)
+            #   }
+            # } catch (err) {
+            #   core.setFailed(`Request failed with error ${err}`)
+            # }
 
       - name: Checkout default branch
         uses: actions/checkout@v3

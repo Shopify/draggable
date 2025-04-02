@@ -15,10 +15,10 @@ jobs:
       (startsWith(github.event.comment.body, '/snapit') || startsWith(github.event.comment.body, '/snapshot-release'))
     runs-on: ubuntu-latest
     steps:
-      - name: Enforce permission requirement
-        uses: prince-chrismc/check-actor-permissions-action@v1
-        with:
-          permission: write
+      # - name: Enforce permission requirement
+      #   uses: prince-chrismc/check-actor-permissions-action@v1
+      #   with:
+      #     permission: write
 
       - name: Add initial reaction
         uses: peter-evans/create-or-update-comment@v2

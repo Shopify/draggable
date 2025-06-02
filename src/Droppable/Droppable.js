@@ -143,7 +143,7 @@ export default class Droppable extends Draggable {
    * @param {DragStartEvent} event - Drag start event
    */
   [onDragStart](event) {
-    if (event.canceled()) {
+    if (event.canceled() || this.isDragging()) {
       return;
     }
 

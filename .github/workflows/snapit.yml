@@ -31,7 +31,7 @@ jobs:
         id: comment-branch
 
       - name: Set latest commit status as pending
-        uses: myrotvorets/set-commit-status-action@7b093ccbb10e14939b7a4ae2630fe4cbc67c0651 # v2.0.1
+        uses: myrotvorets/set-commit-status-action@3730c0a348a2ace3c110851bed53331bc6406e9f # v2.0.1
         with:
           sha: ${{ steps.comment-branch.outputs.head_sha }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -177,7 +177,7 @@ jobs:
             core.setFailed('No snapshot tags have been found')
 
       - name: Set latest commit status as ${{ job.status }}
-        uses: myrotvorets/set-commit-status-action@7b093ccbb10e14939b7a4ae2630fe4cbc67c0651 # v2.0.1
+        uses: myrotvorets/set-commit-status-action@3730c0a348a2ace3c110851bed53331bc6406e9f # v2.0.1
         if: always()
         with:
           sha: ${{ steps.comment-branch.outputs.head_sha }}

@@ -27,7 +27,7 @@ jobs:
           reactions: eyes
 
       - name: Get PR branch
-        uses: xt0rted/pull-request-comment-branch@653a7d5ca8bd91d3c5cb83286063314d0b063b8e # v1.4.0
+        uses: xt0rted/pull-request-comment-branch@e8b8daa837e8ea7331c0003c9c316a64c6d8b0b1 # v3.0.0
         id: comment-branch
 
       - name: Set latest commit status as pending

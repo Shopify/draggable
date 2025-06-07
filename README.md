@@ -156,7 +156,7 @@ For more information, please checkout the [contributing document](https://github
 ## Related resources
 
 - [Ember CLI Shim](https://github.com/timrourke/ember-cli-shopify-draggable-shim) on Github by [@timrourke](https://github.com/timrourke)
-- [Ember CLI Shim](https://www.npmjs.com/package/ember-cli-shopify-draggable-shim) on NPM by [@timrourke](https://github.com/timrourke)
+- [Ember CLI Shim](https://www.npmjs.com/package/ember-cli-shopify-draggable-shim) on NPM by [@timrourke](https://www.npmjs.com/~timrourke)
 
 ## Copyright
 

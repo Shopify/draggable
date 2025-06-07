@@ -44,6 +44,7 @@ export default function DragEvents() {
     };
   });
 
+  // consider not using a mirror and translating the cloned source instead
   draggable.on('mirror:created', (evt) => {
     containerRect = evt.sourceContainer.getBoundingClientRect();
     dragRect = evt.source.getBoundingClientRect();

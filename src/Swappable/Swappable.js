@@ -93,6 +93,10 @@ export default class Swappable extends Draggable {
    * @param {DragStartEvent} event - Drag start event
    */
   [onDragStart](event) {
+    if (this.isDragging()) {
+      return;
+    }
+
     const swappableStartEvent = new SwappableStartEvent({
       dragEvent: event,
     });

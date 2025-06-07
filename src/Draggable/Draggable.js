@@ -420,6 +420,10 @@ export default class Draggable {
    * @param {Event} event - DOM Drag event
    */
   [onDragStart](event) {
+    if (this.dragging) {
+      return;
+    }
+
     const sensorEvent = getSensorEvent(event);
     const {target, container, originalSource} = sensorEvent;
 

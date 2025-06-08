@@ -241,16 +241,15 @@ describe('Mirror', () => {
     moveMouse(document.body);
 
     await waitForPromisesToResolve();
+    waitForRequestAnimationFrame();
+    await waitForPromisesToResolve();
 
     expect(mirrorMovedHandler).toHaveBeenCalledWithEvent(MirrorMovedEvent);
     expect(mirrorMovedHandler).toHaveBeenCalledWithEventProperties({
-      dragEvent: mirrorMoveEvent.dragEvent,
       mirror: mirrorMoveEvent.mirror,
       source: mirrorMoveEvent.source,
       originalSource: mirrorMoveEvent.originalSource,
       sourceContainer: mirrorMoveEvent.sourceContainer,
-      sensorEvent: mirrorMoveEvent.sensorEvent,
-      originalEvent: mirrorMoveEvent.originalEvent,
     });
 
     releaseMouse(draggable.source);

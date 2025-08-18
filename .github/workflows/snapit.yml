@@ -69,7 +69,7 @@ jobs:
             }
 
       - name: Checkout default branch
-        uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Checkout pull request branch
         run: hub pr checkout ${{ github.event.issue.number }}

@@ -14,7 +14,7 @@
     "docs/**/*": true
   },
   "[typescript]": {
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": false
   },
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {

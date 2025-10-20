@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.0
+
+### Minor Changes
+
+- [#658](https://github.com/Shopify/draggable/pull/658) [`bb778a4`](https://github.com/Shopify/draggable/commit/bb778a47a52c50e35fd20425e7e82280745a1e85) Thanks [@tsov](https://github.com/tsov)! - Upgrade to node version v20
+
 ## 1.1.4
 
 ### Patch Changes

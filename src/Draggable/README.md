@@ -86,8 +86,8 @@ Returns array of class name for class identifier, useful when working with atomi
 Returns true or false, depending on this draggables dragging state.
 
 **`draggable.getDraggableElementsForContainer(container: HTMLElement): HTMLElement[]`**  
-Returns draggable elements for given container, excluding potential mirror or original so
-urce.
+Returns draggable elements for given container, excluding potential mirror or original source.
+
 **`draggable.cancel(): void`**  
 Cancel current dragging state immediately
 _NOTE_: Can't revert elements that were changed to the beginning state (e.g sorted elements)

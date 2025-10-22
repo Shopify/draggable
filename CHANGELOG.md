@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.1
+
+### Patch Changes
+
+- [#661](https://github.com/Shopify/draggable/pull/661) [`f0194c4`](https://github.com/Shopify/draggable/commit/f0194c493f2e9dabd4267f3316995c153ed3d3eb) Thanks [@tsov](https://github.com/tsov)! - Removes npm token from release workflow
+
 ## 1.2.0
 
 ### Minor Changes

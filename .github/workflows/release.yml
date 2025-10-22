@@ -25,7 +25,11 @@ jobs:
         uses: actions/setup-node@3235b876344d2a9aa001b8d1453c930bba69e610 # v3.9.1
         with:
           node-version: '20.17.0'
+          registry-url: 'https://registry.npmjs.org'
           cache: 'yarn'
+
+      - name: Update NPM
+        run: npm install -g npm@11.5.1
 
       - name: Install dependencies
         run: yarn --frozen-lockfile

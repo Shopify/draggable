@@ -82,7 +82,8 @@
   },
   "publishConfig": {
     "access": "public",
-    "@shopify:registry": "https://registry.npmjs.org"
+    "@shopify:registry": "https://registry.npmjs.org",
+    "provenance": false
   },
   "browserslist": [
     "last 3 chrome versions",

@@ -150,6 +150,10 @@ export default class Sortable extends Draggable {
    * @param {DragStartEvent} event - Drag start event
    */
   [onDragStart](event) {
+    if (this.isDragging()) {
+      return;
+    }
+
     this.startContainer = event.source.parentNode;
     this.startIndex = this.index(event.source);
 

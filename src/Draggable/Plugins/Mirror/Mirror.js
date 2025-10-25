@@ -509,7 +509,7 @@ function removeMirrorID({mirror, ...args}) {
  * @return {Promise}
  * @private
  */
-function positionMirror({withFrame = false, initial = false} = {}) {
+function positionMirror({raf = false, initial = false} = {}) {
   return ({
     mirror,
     sensorEvent,
@@ -567,7 +567,7 @@ function positionMirror({withFrame = false, initial = false} = {}) {
 
         resolve(result);
       },
-      {frame: withFrame},
+      {raf},
     );
   };
 }

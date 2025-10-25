@@ -1,0 +1,21 @@
+////
+/// Content
+/// DrawingBoard
+////
+
+@import 'utils/shared/layout';
+
+.DrawingBoard {
+  .BlockLayout--typePositioned {
+    min-height: 50vh;
+  }
+
+  // .Block--typeShape {}
+}
+
+// The invisible canvas we use to "draw" our shapes with.
+// Must be an index below our "shapes".
+.DrawingBoardCanvas {
+  @include position-cover;
+  box-shadow: inset 0 0 0 get-border(thin) get-color(ash);
+}

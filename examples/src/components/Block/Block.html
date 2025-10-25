@@ -3,9 +3,7 @@
 
   {% set classes = (classes.push('Block--typeShell') if options.shell, classes) %}
 
-  {% if options.type and (
-    options.type === 'Shell' or options.type === 'Hollow' or options.type === 'Stripes'
-  ) %}
+  {% if options.type %}
     {% set classes = (classes.push('Block--type' + options.type), classes) %}
   {% endif %}
 

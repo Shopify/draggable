@@ -97,6 +97,18 @@
   }
 }
 
+.Block--typeShape {
+  position: absolute;
+
+  .BlockContent {
+    min-height: 0;
+
+    @media screen and (min-width: get-breakpoint(tablet)) {
+      min-height: 0;
+    }
+  }
+}
+
 ///
 /// Draggable Blocks
 .Block--isDraggable {

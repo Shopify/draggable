@@ -4,7 +4,7 @@ module.exports = {
   extends: [
     'plugin:@shopify/typescript',
     'plugin:@shopify/jest',
-    'plugin:@shopify/prettier',
+    'plugin:@shopify/prettier', 
   ],
   parser: '@typescript-eslint/parser',
   env: {

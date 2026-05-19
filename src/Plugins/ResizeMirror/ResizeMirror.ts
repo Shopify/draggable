@@ -61,6 +61,7 @@ export default class ResizeMirror extends AbstractPlugin {
   attach() {
     this.draggable
       .on('mirror:created', this.onMirrorCreated)
+      .on('mirror:destroy', this.onMirrorDestroy)
       .on('drag:over', this.onDragOver)
       .on('drag:over:container', this.onDragOver);
   }

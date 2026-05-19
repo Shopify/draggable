@@ -19,7 +19,7 @@ itself does not perform any sorting behaviour while dragging, but does the heavy
 creates mirror, emits events, manages sensor events, makes elements draggable.
 
 The additional modules are built on top of `Draggable` and therefore provide a similar API
-interface, for more information read the documentation below.
+interface, for more information please read the documentation below.
 
 **Features**
 

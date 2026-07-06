@@ -117,7 +117,7 @@
 
 - Fixes drag start concurrency (`delay` and `distance` options)
 - Fixes text in mirror blurry
-- Fixes accidently append mirror
+- Fixes accidentally append mirror
 
 ## v1.0.0-beta.10 - 2020-06-18
 

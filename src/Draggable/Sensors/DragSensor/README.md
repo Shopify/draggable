@@ -30,7 +30,7 @@ This value will delay touch start
 
 ### Known issues
 
-The drag sensor uses the native Drag and Drop API and therefor Draggable does not create
+The drag sensor uses the native Drag and Drop API and therefore Draggable does not create
 a mirror. This means there is less control over the mirror.
 
 ### Example

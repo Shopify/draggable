@@ -83,8 +83,11 @@ export default class SortAnimation extends AbstractPlugin {
    * @param {SortableSortEvent} sortableEvent
    * @private
    */
-  [onSortableSort]({dragEvent}) {
-    const {sourceContainer} = dragEvent;
+  [onSortableSort]({dragEvent} = {}) {
+    const {sourceContainer} = dragEvent || {};
+    if (!sourceContainer) {
+      return;
+    }
     const elements =
       this.draggable.getDraggableElementsForContainer(sourceContainer);
     this.lastElements = Array.from(elements).map((el) => {
@@ -102,7 +105,11 @@ export default class SortAnimation extends AbstractPlugin {
    * @private
    */
   [onSortableSorted]({oldIndex, newIndex}) {
-    if (oldIndex === newIndex) {
+    if (
+      oldIndex === newIndex ||
+      !this.lastElements ||
+      this.lastElements.length === 0
+    ) {
       return;
     }
 
@@ -123,9 +130,15 @@ export default class SortAnimation extends AbstractPlugin {
     for (let i = start; i <= end; i++) {
       const from = this.lastElements[i];
       const to = this.lastElements[i + num];
-      effectedElements.push({from, to});
+      if (from && to) {
+        effectedElements.push({from, to});
+      }
     }
     cancelAnimationFrame(this.lastAnimationFrame);
+
+    if (effectedElements.length === 0) {
+      return;
+    }
 
     // Can be done in a separate frame
     this.lastAnimationFrame = requestAnimationFrame(() => {
@@ -144,7 +157,11 @@ export default class SortAnimation extends AbstractPlugin {
  * @param {String} options.easingFunction
  * @private
  */
-function animate({from, to}, {duration, easingFunction}) {
+function animate({from, to} = {}, {duration, easingFunction}) {
+  if (!from || !to || !from.domEl || !to.domEl) {
+    return;
+  }
+
   const domEl = from.domEl;
   const x = from.offsetLeft - to.offsetLeft;
   const y = from.offsetTop - to.offsetTop;
@@ -165,6 +182,10 @@ function animate({from, to}, {duration, easingFunction}) {
  * @private
  */
 function resetElementOnTransitionEnd(event) {
+  if (!event.target || !event.target.style) {
+    return;
+  }
+
   event.target.style.transition = '';
   event.target.style.pointerEvents = '';
   event.target.removeEventListener(

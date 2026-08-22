@@ -88,7 +88,15 @@ export default class SwapAnimation extends AbstractPlugin {
    */
   @AutoBind
   onSortableSorted({oldIndex, newIndex, dragEvent}: FixMeAny) {
+    if (!dragEvent) {
+      return;
+    }
+
     const {source, over} = dragEvent;
+
+    if (!source || !over) {
+      return;
+    }
 
     if (this.lastAnimationFrame) {
       cancelAnimationFrame(this.lastAnimationFrame);
@@ -120,6 +128,10 @@ function animate(
   to: HTMLElement,
   {duration, easingFunction, horizontal}: Options,
 ) {
+  if (!from || !to || !isHTMLElement(from) || !isHTMLElement(to)) {
+    return;
+  }
+
   for (const element of [from, to]) {
     element.style.pointerEvents = 'none';
   }
@@ -161,6 +173,8 @@ function resetElementOnTransitionEnd(event: Event) {
   );
 }
 
-function isHTMLElement(eventTarget: EventTarget): eventTarget is HTMLElement {
-  return Boolean('style' in eventTarget);
+function isHTMLElement(
+  eventTarget: EventTarget | null | undefined,
+): eventTarget is HTMLElement {
+  return Boolean(eventTarget && 'style' in eventTarget);
 }

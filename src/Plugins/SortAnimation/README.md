@@ -35,7 +35,7 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
 ```html
 <script type="module">
   import Sortable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Sortable/Sortable.mjs';
-  import Snappable from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/Snappable.mjs';
+  import SortAnimation from 'https://cdn.jsdelivr.net/npm/@shopify/draggable/build/esm/Plugins/SortAnimation.mjs';
 
   const sortable = new Sortable(document.querySelectorAll('ul'), {
     draggable: 'li',
@@ -43,7 +43,7 @@ const sortable = new Sortable(document.querySelectorAll('ul'), {
       duration: 200,
       easingFunction: 'ease-in-out',
     },
-    plugins: [Snappable],
+    plugins: [SortAnimation],
   });
 </script>
 ```

@@ -82,8 +82,8 @@ Check out [Draggable class identifiers](../Draggable#classes) for the base class
 
 | Name                 | Description                                                              | Default                         |
 | -------------------- | ------------------------------------------------------------------------ | ------------------------------- |
-| `droppable:active`   | Class added to the unoccupied dropzone elements when drag starts         | `draggable-droppable--active`   |
-| `droppable:occupied` | Class added to the dropzone element when it contains a draggable element | `draggable-droppable--occupied` |
+| `droppable:active`   | Class added to the unoccupied dropzone elements when drag starts         | `draggable-dropzone--active`    |
+| `droppable:occupied` | Class added to the dropzone element when it contains a draggable element | `draggable-dropzone--occupied`  |
 
 ### Example
 
